@@ -1,0 +1,13 @@
+43
+4
+y
+a b c d
+4
+a^2 + a b - b^2
+a c + c^2
+a d + d^2
+b c d - 1
+d
+skel
+h
+y
