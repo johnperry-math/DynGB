@@ -52,17 +52,17 @@ public:
   ///@}
   /** @name Iteration */
   ///@{
-  virtual void restart_iteration();
-  virtual void moveRight();
-  virtual void moveLeft();
-  virtual bool canMoveRight() const;
-  virtual bool canMoveLeft() const;
-  virtual bool fellOff() const;
+  virtual void restart_iteration() override;
+  virtual void moveRight() override;
+  virtual void moveLeft() override;
+  virtual bool canMoveRight() const override;
+  virtual bool canMoveLeft() const override;
+  virtual bool fellOff() const override;
   ///@}
   /** @name Data access */
   ///@{
-  virtual const Monomial & currMonomial() const;
-  virtual const Prime_Field_Element & currCoeff() const;
+  virtual const Monomial & currMonomial() const override;
+  virtual const Prime_Field_Element & currCoeff() const override;
   ///@}
 protected:
   /** @brief the polynomial we iterate on */
@@ -161,47 +161,47 @@ public:
   */
   virtual void set_monomial_ordering(
       const Monomial_Ordering * order, bool sort_anew = true
-  );
+  ) override;
   /**
     @brief sort by order
     @details currently uses insertion sort
   */
-  virtual void sort_by_order();
+  virtual void sort_by_order() override;
   /** @return leading monomial -- call after sort_by_order()! */
-  virtual Monomial & leading_monomial() const;
+  virtual Monomial & leading_monomial() const override;
   /** @return leading coefficient -- call after sort_by_order()! */
-  virtual Prime_Field_Element leading_coefficient() const;
+  virtual Prime_Field_Element leading_coefficient() const override;
   /** @return number of monomials */
-  virtual unsigned length() const;
+  virtual unsigned length() const override;
   /** @return is this polynomial zero? */
-  virtual bool is_zero() const;
+  virtual bool is_zero() const override;
   ///@}
   /** @name Computation */
   ///@{
   /**
     @return zero constant polynomial: one entry, and it&rsquo;s zero!
   */
-  virtual Constant_Polynomial * zero_polynomial() const;
+  virtual Constant_Polynomial * zero_polynomial() const override;
   /**
     @return multiple of @c this and @p u
     @param t a Monomial in the same ring
   */
-  virtual Constant_Polynomial * monomial_multiple(const Monomial &t) const;
+  virtual Constant_Polynomial * monomial_multiple(const Monomial &t) const override;
   /**
     @return multiple of @c this and @p c
     @param c a scalar in the same prime field
   */
   virtual Constant_Polynomial * scalar_multiple(const Prime_Field_Element &c)
-  const;
+      const override;
   ///@}
   /** @name Iteration */
   ///@{
   /** @brief an iterator that poses no risk of modifying the polynomial */
-  virtual Constant_Polynomial_Iterator * new_iterator() const;
+  virtual Constant_Polynomial_Iterator * new_iterator() const override;
   /** @brief iterator to the first element */
-  virtual Polynomial_Iterator * begin() const;
+  virtual Polynomial_Iterator * begin() const override;
   /** @brief iterator to the last element */
-  virtual Polynomial_Iterator * end() const;
+  virtual Polynomial_Iterator * end() const override;
   ///@}
   /** @name Serialization */
   ///@{
@@ -268,20 +268,20 @@ public:
   ///@}
   /** @name Iteration */
   ///@{
-  virtual void restart_iteration();
-  virtual void moveRight();
-  virtual void moveLeft();
-  virtual bool fellOff() const;
+  virtual void restart_iteration() override;
+  virtual void moveRight() override;
+  virtual void moveLeft() override;
+  virtual bool fellOff() const override;
   ///@}
   /** @name Data access */
   ///@{
-  virtual const Monomial & currMonomial() const;
-  virtual const Prime_Field_Element & currCoeff() const;
+  virtual const Monomial & currMonomial() const override;
+  virtual const Prime_Field_Element & currCoeff() const override;
   ///@}
   /** @name Data modification */
   ///@{
-  virtual void set_currCoeff(const Prime_Field_Element & a);
-  virtual void set_currMonomial(const Monomial & t);
+  virtual void set_currCoeff(const Prime_Field_Element & a) override;
+  virtual void set_currMonomial(const Monomial & t) override;
   ///@}
 protected:
   /** @brief the polynomial over which we iterate */

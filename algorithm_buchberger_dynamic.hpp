@@ -125,8 +125,8 @@ void initial_analysis(
 */
 list<Constant_Polynomial *> buchberger_dynamic(
     const list<Abstract_Polynomial *> &F,
-    SPolyCreationFlags method = GEOBUCKETS,
-    StrategyFlags strategy = SUGAR_STRATEGY,
+    SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS,
+    StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY,
     WT_TYPE * strategy_weights = nullptr,
     DynamicHeuristic heuristic = DynamicHeuristic::ORD_HILBERT_THEN_DEG,
     DynamicSolver solver = SKELETON_SOLVER,

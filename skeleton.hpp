@@ -272,7 +272,7 @@ public:
   {
     bool inconsistent = true;
     for (
-          set<ray>::iterator riter = rays.begin();
+          auto riter = rays.begin();
           inconsistent and riter != rays.end();
           ++riter
     ) {

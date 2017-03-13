@@ -87,9 +87,9 @@ int main(int argc, char *argv[]) {
   list<Abstract_Polynomial *> F;
   F.push_back(&f1); F.push_back(&f2); F.push_back(&f3); F.push_back(&f4);
   list<Constant_Polynomial *> G;
-  if (static_algorithm) G = buchberger(F, method, SUGAR_STRATEGY);
+  if (static_algorithm) G = buchberger(F, method, StrategyFlags::SUGAR_STRATEGY);
   else G = buchberger_dynamic(
-        F, method, SUGAR_STRATEGY, nullptr,
+        F, method, StrategyFlags::SUGAR_STRATEGY, nullptr,
         DynamicHeuristic::ORD_HILBERT_THEN_DEG
   );
   cout << "Basis:\n";

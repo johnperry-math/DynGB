@@ -5,7 +5,7 @@ CXX = g++
 #CXX = g++-mp-5
 cxxflags.build = -Ofast -std=c++11 -I/usr/local/include -L/usr/local/lib
 cxxflags.debug = -g -O0 -std=c++11 -I/usr/local/include -L/usr/local/lib
-cxxflags.profile = -pg -O2 -std=c++11 -I/usr/local/include -L/usr/local/lib
+cxxflags.profile = -g -fno-inline -pg -O2 -std=c++11 -I/usr/local/include -L/usr/local/lib
 CXXFLAGS = $(cxxflags.${BUILD})
 
 MONOMIALS = monomial.o monomial_ordering.o particular_orderings.o monomial_ideal.o
@@ -16,11 +16,11 @@ GBSUPPORT = critical_pair.o reduction_support.o $(STRATEGIES)
 DYNAMIC = lp_solver.o skeleton.o glpk_solver.o dynamic_buchberger.o dynamic_engine.o ppl_solver.o
 COMMALG = hilbert_functions.o betti.o
 F4 = f4.o
-NONDYNAMIC_OS = fields.o $(MONOMIALS) $(POLYNOMIALS) $(POLYNOMIAL_REPS) $(GBSUPPORT) $(COMMALG) $(F4)
+NONDYNAMIC_OS = fields.o buchberger.o $(MONOMIALS) $(POLYNOMIALS) $(POLYNOMIAL_REPS) $(GBSUPPORT) $(COMMALG) $(F4)
 ALL_OS = fields.o $(MONOMIALS) $(POLYNOMIALS) $(POLYNOMIAL_REPS) $(GBSUPPORT) $(COMMALG) $(DYNAMIC) $(F4)
 EXPLORER = buchberger_explorer.o $(NONDYNAMIC_OS)
 
-default: test_cyclicn test_hilbert test_incremental_betti test_dynamic test_monomials test_4by4 cab_es test_cyclicn_mpi test_glpk_solver test_initial_analysis user_interface
+default: test_cyclicn test_hilbert test_incremental_betti test_dynamic test_monomials test_4by4 cab_es test_cyclicn_mpi test_glpk_solver test_initial_analysis user_interface test_f4
 
 debug:
 	make clean
@@ -34,38 +34,38 @@ clean:
 	rm *.o *.gch*
 	rm -rf *.dSYM
 	rm test_glpk_solver test_monomials test_hilbert test_incremental_betti
-	rm test_cyclicn test_cyclicn_mpi test_4by4 test_dynamic test_cab_es?
+	rm test_cyclicn test_cyclicn_mpi test_4by4 test_dynamic test_cab_es? test_f4
 	rm user_interface test_initial_analysis
 
-cyclic4: $(ALL_OS) buchberger.o
-	$(CXX) $(CXXFLAGS) -o test_cyclic4 $(NONDYNAMIC_OS) buchberger.o test_cyclic4.cpp
+cyclic4: $(ALL_OS)
+	$(CXX) $(CXXFLAGS) -o test_cyclic4 $(NONDYNAMIC_OS) test_cyclic4.cpp
 
 test_cyclicn: $(ALL_OS) buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o buchberger_explorer_serial.o
-	$(CXX) $(CXXFLAGS) -o test_cyclicn -lgmpxx -lgmp $(NONDYNAMIC_OS) buchberger.o buchberger_explorer_serial.o test_cyclicn.cpp
+	$(CXX) $(CXXFLAGS) -o test_cyclicn -lgmpxx -lgmp $(NONDYNAMIC_OS) buchberger_explorer_serial.o test_cyclicn.cpp
 
 test_cyclicn_mpi: $(ALL_OS) buchberger_explorer.o
 	#mpicxx $(CXXFLAGS) -o test_cyclicn_mpi $(EXPLORER) buchberger.o -lmpiP -lm -lbfd -liberty -lunwind test_cyclicn_mpi.cpp
-	mpicxx $(CXXFLAGS) -o test_cyclicn_mpi -lgmp -lgmpxx $(EXPLORER) buchberger.o test_cyclicn_mpi.cpp
+	mpicxx $(CXXFLAGS) -o test_cyclicn_mpi -lgmp -lgmpxx $(EXPLORER) test_cyclicn_mpi.cpp
 
 test_4by4: $(ALL_OS) buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_4by4.cpp
-	$(CXX) $(CXXFLAGS) -o test_4by4 -lglpk -lm -lgmpxx -lgmp -lppl $(ALL_OS) buchberger.o test_4by4.cpp
+	$(CXX) $(CXXFLAGS) -o test_4by4 -lglpk -lm -lgmpxx -lgmp -lppl $(ALL_OS) test_4by4.cpp buchberger.o
 
 cab_es: $(ALL_OS) buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es1 test_cab_es2 test_cab_es4 test_cab_es5 test_cab_es6 test_cab_es9
 
 test_cab_es1: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es1.cpp
-	$(CXX) $(CXXFLAGS) -o test_cab_es1 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es1.cpp
+	$(CXX) $(CXXFLAGS) -o test_cab_es1 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) test_cab_es1.cpp buchberger.o
 
 test_cab_es2: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es2.cpp                                              
-	$(CXX) $(CXXFLAGS) -o test_cab_es2 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es2.cpp
+	$(CXX) $(CXXFLAGS) -o test_cab_es2 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) test_cab_es2.cpp buchberger.o
 
 test_cab_es4: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es4.cpp
-	$(CXX) $(CXXFLAGS) -o test_cab_es4 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es4.cpp
+	$(CXX) $(CXXFLAGS) -o test_cab_es4 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) test_cab_es4.cpp buchberger.o
 
 test_cab_es5: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es5.cpp
-	$(CXX) $(CXXFLAGS) -o test_cab_es5 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es5.cpp
+	$(CXX) $(CXXFLAGS) -o test_cab_es5 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) test_cab_es5.cpp buchberger.o
                                      
 test_cab_es6: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es6.cpp
-	$(CXX) $(CXXFLAGS) -o test_cab_es6 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es6.cpp
+	$(CXX) $(CXXFLAGS) -o test_cab_es6 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) test_cab_es6.cpp buchberger.o
 
 test_cab_es9: buchberger.o dynamic_buchberger.o dynamic_engine.o skeleton.o test_cab_es9.cpp
 	$(CXX) $(CXXFLAGS) -o test_cab_es9 -lglpk -lm -lppl -lgmp -lgmpxx $(ALL_OS) buchberger.o test_cab_es9.cpp
@@ -200,22 +200,25 @@ betti.o: system_constants.hpp betti.hpp betti.cpp monomial.o
 	$(CXX) $(CXXFLAGS) -c betti.cpp
 
 test_hilbert: test_hilbert_functions.cpp hilbert_functions.o particular_orderings.o monomial.o monomial_ordering.o dense_univariate_integer_poly.o dense_univariate_rational_poly.o monomial_ideal.o
-	$(CXX) $(CXXFLAGS) -o test_hilbert -lgmpxx -lgmp test_hilbert_functions.cpp $(NONDYNAMIC_OS) buchberger.o
+	$(CXX) $(CXXFLAGS) -o test_hilbert -lgmpxx -lgmp test_hilbert_functions.cpp $(NONDYNAMIC_OS)
 
-test_incremental_betti: test_incremental_betti.cpp betti.o particular_orderings.o monomial.o monomial_ordering.o
-	$(CXX) $(CXXFLAGS) -o test_incremental_betti -lgmp -lgmpxx test_incremental_betti.cpp $(NONDYNAMIC_OS) buchberger.o
+test_incremental_betti: test_incremental_betti.cpp betti.o particular_orderings.o monomial.o monomial_ordering.o monomial_ideal.o hilbert_functions.o
+	$(CXX) $(CXXFLAGS) -o test_incremental_betti -lgmp -lgmpxx test_incremental_betti.cpp $(NONDYNAMIC_OS)
 
 test_dynamic: $(ALL_OS) monomial_ideal.o dynamic_engine.o dynamic_buchberger.o test_dynamic.cpp
 	$(CXX) $(CXXFLAGS) -o test_dynamic -lglpk -lm -lgmp -lgmpxx -lppl test_dynamic.cpp  $(ALL_OS) buchberger.o
 
+test_f4: $(ALL_OS) test_f4.cpp f4.o
+	$(CXX) $(CXXFLAGS) -o test_f4 test_f4.cpp critical_pair.o fields.o strategies.o polynomial.o polynomial_array.o polynomial_linked_list.o particular_orderings.o monomial.o monomial_ordering.o polynomial_ring.o sugar_strategy.o buchberger.o wsugar_strategy.o reduction_support.o indeterminate.o polynomial_geobucket.o normal_strategy.o polynomial_double_buffered.o
+
 test_monomials: monomial.o monomial_ordering.o particular_orderings.o test_monomials.cpp polynomial_ring.o
 	$(CXX) $(CXXFLAGS) -o test_monomials test_monomials.cpp monomial.o monomial_ordering.o particular_orderings.o fields.o polynomial_ring.o indeterminate.o
 
-test_glpk_solver: test_glpk_solver.cxx lp_solver.o glpk_solver.o
+test_glpk_solver: test_glpk_solver.cxx lp_solver.o glpk_solver.o monomial.o
 	$(CXX) $(CXXFLAGS) -o test_glpk_solver -lglpk -lm -lgmp -lgmpxx -lppl lp_solver.o glpk_solver.o monomial.o particular_orderings.o monomial_ordering.o test_glpk_solver.cxx
 
 test_initial_analysis: test_initial_analysis.cpp dynamic_buchberger.o monomial.o
-	$(CXX) $(CXXFLAGS) -o test_initial_analysis -lglpk -lm -lgmp -lgmpxx -lppl lp_solver.o glpk_solver.o monomial.o particular_orderings.o monomial_ordering.o dynamic_buchberger.o hilbert_functions.o dynamic_engine.o polynomial_ring.o reduction_support.o ppl_solver.o buchberger.o betti.o fields.o strategies.o sugar_strategy.o monomial_ideal.o critical_pair.o polynomial_array.o indeterminate.o normal_strategy.o wsugar_strategy.o polynomial.o polynomial_geobucket.o dense_univariate_integer_poly.o dense_univariate_rational_poly.o polynomial_double_buffered.o polynomial_linked_list.o skeleton.o test_initial_analysis.cpp
+	$(CXX) $(CXXFLAGS) -o test_initial_analysis -lglpk -lm -lgmp -lgmpxx -lppl buchberger.o lp_solver.o glpk_solver.o monomial.o particular_orderings.o monomial_ordering.o dynamic_buchberger.o hilbert_functions.o dynamic_engine.o polynomial_ring.o reduction_support.o ppl_solver.o betti.o fields.o strategies.o sugar_strategy.o monomial_ideal.o critical_pair.o polynomial_array.o indeterminate.o normal_strategy.o wsugar_strategy.o polynomial.o polynomial_geobucket.o dense_univariate_integer_poly.o dense_univariate_rational_poly.o polynomial_double_buffered.o polynomial_linked_list.o skeleton.o test_initial_analysis.cpp
 
 user_interface: $(ALL_OS) user_interface.cpp
-	$(CXX) $(CXXFLAGS) -o user_interface -g -std=c++11 -lppl -lgmp -lgmpxx -lglpk fields.o polynomial_ring.o monomial.o polynomial.o polynomial_array.o strategies.o indeterminate.o buchberger.o reduction_support.o lp_solver.o ppl_solver.o glpk_solver.o skeleton.o dynamic_engine.o hilbert_functions.o sugar_strategy.o monomial_ordering.o particular_orderings.o betti.o dense_univariate_rational_poly.o dense_univariate_integer_poly.o monomial_ideal.o wsugar_strategy.o critical_pair.o normal_strategy.o polynomial_geobucket.o polynomial_double_buffered.o polynomial_linked_list.o dynamic_buchberger.o user_interface.cpp
+	$(CXX) $(CXXFLAGS) -o user_interface -g -std=c++11 -lppl -lgmp -lgmpxx -lglpk fields.o polynomial_ring.o monomial.o polynomial.o polynomial_array.o strategies.o indeterminate.o reduction_support.o lp_solver.o ppl_solver.o glpk_solver.o skeleton.o dynamic_engine.o hilbert_functions.o sugar_strategy.o monomial_ordering.o particular_orderings.o betti.o dense_univariate_rational_poly.o dense_univariate_integer_poly.o monomial_ideal.o wsugar_strategy.o critical_pair.o normal_strategy.o polynomial_geobucket.o polynomial_double_buffered.o polynomial_linked_list.o dynamic_buchberger.o user_interface.cpp buchberger.o

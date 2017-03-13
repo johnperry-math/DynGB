@@ -282,7 +282,7 @@ ray ray_sum(const set<ray> &rs)
 {
   NVAR_TYPE d = 0;
   RAYENT_TYPE *coords = nullptr;
-  for (set<ray>::iterator riter = rs.begin(); riter != rs.end(); ++riter)
+  for (auto riter = rs.begin(); riter != rs.end(); ++riter)
   {
     ray r = *riter;
     if (coords == nullptr)

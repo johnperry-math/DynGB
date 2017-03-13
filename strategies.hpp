@@ -31,7 +31,7 @@ class Abstract_Polynomial;
   @brief flag indicating which strategy to use for computation
   @ingroup strategygroup
 */
-enum StrategyFlags {
+enum class StrategyFlags {
   NORMAL_STRATEGY = 1,
   SUGAR_STRATEGY,
   WSUGAR_STRATEGY

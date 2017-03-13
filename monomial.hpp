@@ -66,8 +66,7 @@ using std::string;
   check to make sure that any monomial arithmetic involves monomials
   with the same number of variables. 
 */
-class Monomial
-{
+class Monomial {
 public:
   /** @name Construction */
   ///@{
@@ -128,7 +127,7 @@ public:
   */
   ///@{
   /** \brief number of variables */
-  NVAR_TYPE num_vars() const;
+  inline NVAR_TYPE num_vars() const { return n; }
   /** \brief all exponents 0? */
   bool is_one() const;
   /** \brief Degree of \f$i\f$th variable. */
@@ -163,13 +162,19 @@ public:
   */
   ///@{
   /** @brief the Monomial_Ordering associated with this Monomial */
-  const Monomial_Ordering * monomial_ordering() const;
+  inline const Monomial_Ordering * monomial_ordering() const { return ordering; }
   /** @brief the Monomial_Order_Data associated with this Monomial */
-  Monomial_Order_Data * monomial_ordering_data() const;
+  inline Monomial_Order_Data * monomial_ordering_data() const {
+    return ordering_data;
+  }
   /** @brief sets the Monomial_Ordering associated with this Monomial */
   void set_monomial_ordering(const Monomial_Ordering * mord);
   /** @brief sets the Monomial_Order_Data associated with this Monomial */
   void set_ordering_data(Monomial_Order_Data * mordat);
+  /** @brief sets the ordering degree for this Monomial */
+  inline void set_ordering_degree(DEG_TYPE d) { ord_degree = d; }
+  /** @brief returns the ordering degree for this Monomial */
+  inline DEG_TYPE ordering_degree() const { return ord_degree; }
   /** \brief equal/alike? */
   bool operator ==(const Monomial &other) const;
   /** \brief unequal/unlike? */
@@ -180,9 +185,6 @@ public:
   bool is_coprime(const Monomial &other) const;
   /** @brief Returns 0 if like, negative if smaller */
   int cmp(const Monomial & u) const {
-    //cout << "comparing " << *this << ',' << u << ":\n";
-    //int result = monomial_ordering()->cmp(*this, u);
-    //cout << '\t' << result << endl;
     return monomial_ordering()->cmp(*this, u);
   }
   /** \brief Have same variables, same powers? Synonymous with operator==(). */
@@ -282,6 +284,10 @@ protected:
   NVAR_TYPE n;
   /** @brief has size n */
   EXP_TYPE * exponents;
+  /**
+    @brief degree associated with monomial ordering (used for faster comparisons)
+  */
+  DEG_TYPE ord_degree;
   /** @brief Monomial_Ordering associated with this polynomial */
   const Monomial_Ordering * ordering;
   /** @brief optional data for a monomial ordering */

@@ -68,22 +68,22 @@ public:
   ///@}
   /** @name Iteration */
   ///@{
-  virtual void restart_iteration();
-  virtual void moveRight();
-  virtual void moveLeft();
-  virtual bool canMoveRight() const;
-  virtual bool canMoveLeft() const;
-  virtual bool fellOff() const;
+  virtual void restart_iteration() override;
+  virtual void moveRight() override;
+  virtual void moveLeft() override;
+  virtual bool canMoveRight() const override;
+  virtual bool canMoveLeft() const override;
+  virtual bool fellOff() const override;
   ///@}
   /** @name Data access */
   ///@{
-  virtual const Monomial & currMonomial() const;
-  virtual const Prime_Field_Element & currCoeff() const;
+  virtual const Monomial & currMonomial() const override;
+  virtual const Prime_Field_Element & currCoeff() const override;
   ///@}
   /** @name Data modification */
   ///@{
-  virtual void set_currCoeff(const Prime_Field_Element & a);
-  virtual void set_currMonomial(const Monomial & t);
+  virtual void set_currCoeff(const Prime_Field_Element & a) override;
+  virtual void set_currMonomial(const Monomial & t) override;
   ///@}
 protected:
   /**
@@ -140,7 +140,7 @@ public:
     @brief sorts each geobucket
     @warning This performs no simplification between buckets.
   */
-  virtual void sort_by_order();
+  virtual void sort_by_order() override;
   /**
     @brief sets the monomial ordering for each bucket
     @warning This performs no simplification bewteen buckets.
@@ -149,7 +149,7 @@ public:
   */
   virtual void set_monomial_ordering(
       const Monomial_Ordering * order, bool sort_anew = true
-  );
+  ) override;
   /**
     @brief returns the leading monomial
     @return the leading monomial
@@ -161,7 +161,7 @@ public:
       The class&rsquo;s own functions for arithmetic do this automatically
       (or should).
   */
-  virtual Monomial & leading_monomial() const;
+  virtual Monomial & leading_monomial() const override;
   /**
     @brief returns the leading coefficient
     @return the leading coefficient
@@ -173,35 +173,35 @@ public:
       The class&rsquo;s own functions for arithmetic do this automatically
       (or should).
   */
-  virtual Prime_Field_Element leading_coefficient() const;
+  virtual Prime_Field_Element leading_coefficient() const override;
   /**
     @brief how long is this polynomial?
     @return number of monomials in this polynomial
     @warning This will not include potential simplification of monomials.
       A geobucket does not simplify non-leading terms until canonicalization.
   */
-  virtual unsigned length() const;
+  virtual unsigned length() const override;
   /**
     @brief creates and returns a geobucket initialized to zero
     @return a geobucket initialized to zero
   */
-  virtual Polynomial_Linked_List * zero_polynomial() const;
+  virtual Polynomial_Linked_List * zero_polynomial() const override;
   /**
     @brief is this polynomial zero?
     @return <c>true</c> iff all the buckets are <c>nullptr</c> or themselves zero
     @see Fixed_Length_Polynomial
   */
-  virtual bool is_zero() const;
+  virtual bool is_zero() const override;
   /**
     @brief Whether <c>this</c> can reduce <c>other</c>.
       A geobucket should not generally be used to reduce other polynomials,
       so avoid this like the plague.
   */
-  virtual bool can_reduce(Abstract_Polynomial & other) const;
-  virtual Geobucket_Iterator * new_iterator() const;
-  virtual Polynomial_Iterator * begin() const;
-  virtual Polynomial_Iterator * end() const;
-  virtual Geobucket_Iterator * new_mutable_iterator();
+  virtual bool can_reduce(Abstract_Polynomial & other) const override;
+  virtual Geobucket_Iterator * new_iterator() const override;
+  virtual Polynomial_Iterator * begin() const override;
+  virtual Polynomial_Iterator * end() const override;
+  virtual Geobucket_Iterator * new_mutable_iterator() override;
   ///@}
   /** @brief to iterate over @c this and possibly change it */
   friend class Geobucket_Iterator;
@@ -215,35 +215,35 @@ public:
     a valid leading term, so we skip it and try to extract from a later one.
     If the other buckets are all zero, we indicate this.
   */
-  virtual void recompute_leading_monomial();
+  void recompute_leading_monomial();
   /**
     @brief Returns \f$\texttt{this}\times t\f$.
   */
-  virtual Polynomial_Geobucket * monomial_multiple(const Monomial &t) const;
+  virtual Polynomial_Geobucket * monomial_multiple(const Monomial &t) const override;
   /**
     @brief Returns \f$\texttt{this}\times a\f$.
   */
   virtual Polynomial_Geobucket * scalar_multiple(const Prime_Field_Element & a)
-  const;
+      const override;
   /**
     @brief Adds \f$g\f$ to <c>this</c>. Recomputes leading monomial.
   */
-  virtual Polynomial_Geobucket & operator +=(const Abstract_Polynomial & g);
+  virtual Polynomial_Geobucket & operator +=(const Abstract_Polynomial & g) override;
   /**
     @brief Subtracts \f$g\f$ from <c>this</c>. Recomputes leading monomial.
   */
-  virtual Polynomial_Geobucket & operator -=(const Abstract_Polynomial & g);
+  virtual Polynomial_Geobucket & operator -=(const Abstract_Polynomial & g) override;
   /**
     @brief Adds \f$bug\f$ to <c>this</c>. Recomputes leading monomial.
   */
   virtual void add_polynomial_multiple(
        const Prime_Field_Element & b, const Monomial & u,
        const Abstract_Polynomial & g, bool subtract=false
-      );
+      ) override;
   /**
     @brief Detaches the head and recomputes leading monomial.
   */
-  virtual Polynomial_Linked_List * detach_head();
+  virtual Polynomial_Linked_List * detach_head() override;
   /**
     @brief Adds \f$at\f$ as a monomial of <c>this</c>.
       (Not necessarily the last!)
@@ -255,7 +255,7 @@ public:
     be used. As in the usual case, we do assume it belongs at the tail;
     we simply add it to a tail bucket (i.e., not <c>bucket[0]</c>).
   */
-  virtual void add_last(const Prime_Field_Element & a, const Monomial & t);
+  virtual void add_last(const Prime_Field_Element & a, const Monomial & t) override;
   /**
     @brief returns a copy of <c>this</c> in a simplified linear form
     @param constant_result whether you want a Constant_Polynomial
@@ -267,7 +267,7 @@ public:
       (Geobuckets by default do not reduce lower-order terms.)
     @return a copy of <c>this</c> in a simplified linear form
   */
-  virtual Abstract_Polynomial * canonicalize(bool constant_result=false);
+  Abstract_Polynomial * canonicalize(bool constant_result=false);
   ///@}
   /** @name I/O */
   ///@{
@@ -280,7 +280,7 @@ public:
     as printing the contents of the buckets, but the more general function
     can be misleading on account of the un-simplified nature of the polynomial.
   */
-  virtual void print(unsigned i, ostream & os=cout) const;
+  void print(unsigned i, ostream & os=cout) const;
   /**
     @brief prints the polynomial with an explicitly bucket form
     @param os where to print the polynomial
@@ -289,7 +289,7 @@ public:
     Parentheses separate buckets, whose sums have not (yet) been simplified.
     Uninitiated and nonzero buckets are not printed.
   */
-  virtual void print(ostream & os=cout) const;
+  virtual void print(ostream & os=cout) const override;
   inline friend ostream & operator << (ostream &, const Polynomial_Geobucket &);
   ///@}
 protected:
@@ -300,8 +300,8 @@ protected:
     @return the smallest power of 2 larger than i
   */
   inline unsigned lglen(unsigned i) {
-    unsigned result = 0;
-    do { ++result; } while ((i >>= 1));
+    unsigned result = 1;
+    while ((i >>= BUCKET_SHIFT)) { ++result; }
     return result;
   }
   /**

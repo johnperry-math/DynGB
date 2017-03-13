@@ -112,7 +112,7 @@ void gm_update(
     list<Critical_Pair_Basic *> & P,
     list<Abstract_Polynomial *> & G,
     Abstract_Polynomial * r,
-    unsigned strategy
+    StrategyFlags strategy
 );
 
 /**
@@ -176,7 +176,7 @@ void report_basis(
   @brief gives a summary of information in \c p, with additional information
       depending on \c strategy
 */
-void report_front_pair(Critical_Pair_Basic *p, unsigned strategy);
+void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy);
 
 /**
   @brief Implementation of Buchberger&rsquo;s algorithm.
@@ -193,8 +193,8 @@ void report_front_pair(Critical_Pair_Basic *p, unsigned strategy);
 */
 list<Constant_Polynomial *> buchberger(
     const list<Abstract_Polynomial *> &F,
-    SPolyCreationFlags rep = GEOBUCKETS,
-    StrategyFlags strategy = SUGAR_STRATEGY,
+    SPolyCreationFlags rep = SPolyCreationFlags::GEOBUCKETS,
+    StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY,
     WT_TYPE * strategy_weights = nullptr
 );
 

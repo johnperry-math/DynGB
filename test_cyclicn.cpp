@@ -49,8 +49,8 @@ int main(int argc, char *argv[]) {
   bool f4 = false;
   bool xplor = false;
   int modulus, numvars;
-  SPolyCreationFlags method = GEOBUCKETS;
-  StrategyFlags strategy = NORMAL_STRATEGY;
+  SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS;
+  StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY;
   WT_TYPE *grading;
   Monomial_Ordering * mord = generic_grevlex_ptr;
   if (not meaningful_arguments(
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     //set<Constant_Polynomial *, smaller_lm> G = buchberger(F, method);
     list<Constant_Polynomial *> G;
     if (f4)
-      G = f4_control(F, method, strategy, grading);
+      G = f4_control(F);
     else if (xplor)
       G = buchberger_explorer(F, method, strategy, grading);
     else
@@ -105,7 +105,7 @@ bool meaningful_arguments(int argc, char *argv[], bool & homogeneous,
                          )
 {
   modulus = 43;
-  method = LINKED_LST;
+  method = SPolyCreationFlags::LINKED_LST;
   homogeneous = false;
   WT_TYPE * weights = nullptr;
   unsigned int order_flag = 0;
@@ -149,7 +149,10 @@ bool meaningful_arguments(int argc, char *argv[], bool & homogeneous,
                    or !strcmp(argv[i], "representation"))
           {
             method = (SPolyCreationFlags )atoi(&(argv[i][j+1]));
-            if (method < 1 or method > 3) {
+            if (
+                method <= SPolyCreationFlags::MIN_SPCREATE_FLAG or
+                method >= SPolyCreationFlags::MAX_SPCREATE_FLAG
+            ) {
               good_args = false;
               cout << "Invalid method; must be at least 1 and at most 3.\n";
             }
@@ -187,11 +190,11 @@ bool meaningful_arguments(int argc, char *argv[], bool & homogeneous,
           else if (!strcmp(argv[i],"strat") or !strcmp(argv[i],"strategy")) {
             char * request = &(argv[i][j+1]);
             if (!strcmp(request, "normal") or !strcmp(request, "norm"))
-              strategy = NORMAL_STRATEGY;
+              strategy = StrategyFlags::NORMAL_STRATEGY;
             else if (!strcmp(request, "sugar") or !strcmp(request, "sug"))
-              strategy = SUGAR_STRATEGY;
+              strategy = StrategyFlags::SUGAR_STRATEGY;
             else if (!strcmp(request, "wsugar") or !strcmp(request, "wsug")) {
-              strategy = WSUGAR_STRATEGY;
+              strategy = StrategyFlags::WSUGAR_STRATEGY;
               unsigned n = (homogeneous) ? numvars + 1 : numvars;
               *grading = new WT_TYPE [n];
               unsigned k = ++i;

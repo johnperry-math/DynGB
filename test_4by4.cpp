@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     heuristic = (DynamicHeuristic )atoi(&(argv[heur_opt_location][5]));
   }
  // set up the field
-  Prime_Field F17 = Prime_Field(17);
+  Prime_Field F17 = Prime_Field(32003);
   Polynomial_Ring R(32, F17);
   Prime_Field_Element a = F17.unity();
   // set up our polynomials
@@ -186,8 +186,10 @@ int main(int argc, char *argv[]) {
   F.push_back(&f1); F.push_back(&f2); F.push_back(&f3); F.push_back(&f4);
   F.push_back(&f5); F.push_back(&f6); F.push_back(&f7); F.push_back(&f8);
   list<Constant_Polynomial *> G;
-  if (static_algorithm) G = buchberger(F, method, SUGAR_STRATEGY);
-  else G = buchberger_dynamic(F, method, SUGAR_STRATEGY, nullptr, heuristic, solver, true);
+  if (static_algorithm) G = buchberger(F, method, StrategyFlags::SUGAR_STRATEGY);
+  else G = buchberger_dynamic(
+      F, method, StrategyFlags::SUGAR_STRATEGY, nullptr, heuristic, solver, true
+  );
   auto ordering = static_cast<const CachedWGrevlex_Ordering *>(
       G.front()->monomial_ordering()
   );

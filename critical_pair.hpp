@@ -52,10 +52,12 @@ class Poly_Sugar_Data;
     - DOUBLE_BUF polynomials are created and manipulated in a novel,
       doubled-buffered format
 */
-enum SPolyCreationFlags {
-  LINKED_LST = 1,
+enum class SPolyCreationFlags {
+  MIN_SPCREATE_FLAG = 0,
+  LINKED_LST,
   GEOBUCKETS,
-  DOUBLE_BUF
+  DOUBLE_BUF,
+  MAX_SPCREATE_FLAG
 };
 
 /**
@@ -74,10 +76,10 @@ public:
   /** @name Construction */
   ///@{
   /** @brief create critical pair (f,0) for initial polynomial */
-  Critical_Pair_Basic(Abstract_Polynomial * f, unsigned strategy);
+  Critical_Pair_Basic(Abstract_Polynomial * f, StrategyFlags strategy);
   /** @brief create critical pair (f,g) for two polynomials */
   Critical_Pair_Basic(
-      Abstract_Polynomial * f, Abstract_Polynomial * g, unsigned strategy
+      Abstract_Polynomial * f, Abstract_Polynomial * g, StrategyFlags strategy
   );
   ///@}
   /** @name Destruction */
@@ -114,7 +116,7 @@ public:
   ///@{
   /** @brief creates the s-polynomial for first() and second() */
   virtual Mutable_Polynomial * s_polynomial(
-      SPolyCreationFlags method, int strategy
+      SPolyCreationFlags method, StrategyFlags strategy
   ) ;
   ///@}
   /** @name Modification */
@@ -166,7 +168,7 @@ public:
     with given ordering
   */
   Critical_Pair_Dynamic(
-      Abstract_Polynomial * f, unsigned strategy,
+      Abstract_Polynomial * f, StrategyFlags strategy,
       Weighted_Ordering * how_to_order
   ) : Critical_Pair_Basic(f, strategy) {
     ordering = how_to_order;
@@ -175,7 +177,7 @@ public:
     @brief create critical pair (f,g) for two polynomials, with given ordering
   */
   Critical_Pair_Dynamic(
-      Abstract_Polynomial * f, Abstract_Polynomial * g, unsigned strategy,
+      Abstract_Polynomial * f, Abstract_Polynomial * g, StrategyFlags strategy,
       Weighted_Ordering * how_to_order
   ) : Critical_Pair_Basic(f, g, strategy) {
     ordering = how_to_order;
@@ -184,9 +186,15 @@ public:
     tp.set_monomial_ordering(ordering);
     delete key;
     switch(strategy) {
-    case NORMAL_STRATEGY: key = new Normal_Strategy(*this); break;
-    case SUGAR_STRATEGY : key = new Pair_Sugar_Data(*this); break;
-    case WSUGAR_STRATEGY: key = new Pair_WSugar_Strategy(*this); break;
+    case StrategyFlags::NORMAL_STRATEGY:
+      key = new Normal_Strategy(*this);
+      break;
+    case StrategyFlags::SUGAR_STRATEGY :
+      key = new Pair_Sugar_Data(*this);
+      break;
+    case StrategyFlags::WSUGAR_STRATEGY:
+      key = new Pair_WSugar_Strategy(*this);
+      break;
     default: key = new Normal_Strategy(*this); break;
     }
   }

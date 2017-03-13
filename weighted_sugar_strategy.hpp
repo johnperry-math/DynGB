@@ -84,7 +84,7 @@ public:
   /** @name Basic properties */
   ///@{
   /** @brief type of strategy */
-  StrategyFlags type() { return WSUGAR_STRATEGY; }
+  StrategyFlags type() { return StrategyFlags::WSUGAR_STRATEGY; }
   /** @brief the sugar itself */
   DEG_TYPE poly_sugar() const;
   /** @brief the weights used to compute the sugar */

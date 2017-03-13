@@ -222,7 +222,8 @@ void user_interface() {
     }
     if (not whether_analysis.compare("y")) analyze_first = true;
     B = buchberger_dynamic(
-        I, GEOBUCKETS, SUGAR_STRATEGY, nullptr, heuristic, solver, analyze_first
+        I, SPolyCreationFlags::GEOBUCKETS, StrategyFlags::SUGAR_STRATEGY,
+        nullptr, heuristic, solver, analyze_first
     );
   }
   cout << "have basis with " << B.size() << " elements:\n";

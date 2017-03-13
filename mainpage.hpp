@@ -31,8 +31,15 @@
     - <a href="http://bugseng.com/products/ppl" target="_blank">PPL</a>,
       the Parma Polyhedra Library \cite BagnaraHZ08SCP.
 
+  The codebase also contains some unrelated forays into parallel programming,
+  which are probably of no interest to the average user, but require:
+    - the <a href="https://www.open-mpi.org/" target="_blank">OpenMPI</a>
+      toolchain.
+  If you do not have OpenMPI and are not interested in these (and I don&rsquo;t
+  see why you should be) just comment out any line that involves <tt>mpicxx</tt>.
+
   On a Linux system you can install these very easily (in Fedora I used `Apper`).
-  All three should build without difficulty on a Macintosh.
+  All dependencies should build without difficulty on a Macintosh.
   I have not tried to build on Windows, but I don&rsquo;t use hardware magic,
   so it @em ought to build.
 
@@ -97,7 +104,8 @@
   - Optimize length() in Polynomial_Linked_List.
   - Add Fukuda and Prodon&rsquo;s cdd as an LP_Solver. \cite Fukuda_DoubleDescriptionRevisited
   - Bring polynomial iterators in line with C++ convention.
-  - Implement other C++11 modernizations.
+  - Implement other C++11 modernizations (<tt>auto</tt>, <tt>noexcept</tt>,
+    <tt>override</tt>, &hellip;).
   - Generalize/improve the memory manager.
   - <span style="text-decoration:line-through;">Add PPL as an LP_Solver. \cite BagnaraHZ08SCP</span>
   - <span style="text-decoration:line-through;">Implement Caboara&rsquo;s examples.</span>
@@ -173,7 +181,7 @@
 
   I originally implemented this in Sage.
   That was purely a proof-of-concept product;
-  it was very slow, and I discovered later that it had a number of bugs.
+  it was very slow, and I wanted to improve on it. Unfortunately:
 
   \li It is not easy to use the guts of
   <span style="font-variant:small-caps;">Singular</span> from Sage.

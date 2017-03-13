@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
   bool homog;
   int modulus, numvars;
   SPolyCreationFlags method;
-  StrategyFlags strategy = NORMAL_STRATEGY;
+  StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY;
   DynamicHeuristic heuristic = DynamicHeuristic::ORD_HILBERT_THEN_DEG;
   DynamicSolver solver = SKELETON_SOLVER;
   WT_TYPE * grading = nullptr;
@@ -129,7 +129,7 @@ bool meaningful_arguments(
     DynamicHeuristic & heuristic, DynamicSolver & solver
 ) {
   modulus = 43;
-  method = GEOBUCKETS;
+  method = SPolyCreationFlags::GEOBUCKETS;
   homogeneous = false;
   WT_TYPE * weights = nullptr;
   unsigned int order_flag = 0;
@@ -169,7 +169,10 @@ bool meaningful_arguments(
                    or !strcmp(argv[i], "representation"))
           {
             method = (SPolyCreationFlags )atoi(&(argv[i][j+1]));
-            if (method < 1 or method > 3) {
+            if (
+                method <= SPolyCreationFlags::MIN_SPCREATE_FLAG or
+                method >= SPolyCreationFlags::MAX_SPCREATE_FLAG
+            ) {
               good_args = false;
               cout << "Invalid method; must be at least 1 and at most 3.\n";
             }
@@ -187,11 +190,11 @@ bool meaningful_arguments(
           else if (!strcmp(argv[i],"strat") or !strcmp(argv[i],"strategy")) {
             char * request = &(argv[i][j+1]);
             if (!strcmp(request, "normal") or !strcmp(request, "norm"))
-              strategy = NORMAL_STRATEGY;
+              strategy = StrategyFlags::NORMAL_STRATEGY;
             else if (!strcmp(request, "sugar") or !strcmp(request, "sug"))
-              strategy = SUGAR_STRATEGY;
+              strategy = StrategyFlags::SUGAR_STRATEGY;
             else if (!strcmp(request, "wsugar") or !strcmp(request, "wsug")) {
-              strategy = WSUGAR_STRATEGY;
+              strategy = StrategyFlags::WSUGAR_STRATEGY;
               unsigned n = (homogeneous) ? numvars + 1 : numvars;
             }
             else {

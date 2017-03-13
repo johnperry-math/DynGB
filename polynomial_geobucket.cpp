@@ -151,7 +151,7 @@ Polynomial_Geobucket::Polynomial_Geobucket(Abstract_Polynomial & p)
       NUM_BUCKETS*sizeof(Polynomial_Linked_List *));
   for (unsigned i = 1; i < NUM_BUCKETS; ++i)
     buckets[i] = nullptr;
-  unsigned i = lglen(p.length() - 1);
+  unsigned i = lglen(p.length());
   buckets[i] = new Polynomial_Linked_List(p);
   if (i > 0) {
     buckets[0] = buckets[i]->detach_head();

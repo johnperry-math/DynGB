@@ -50,14 +50,6 @@ Monomial & Monomial_Node::monomial() { return t; }
 
 Prime_Field_Element & Monomial_Node::coefficient() { return c; }
 
-void LLPolynomial_Iterator::moveRight() {
-  if (iter_curr != nullptr) iter_curr = iter_curr->next;
-}
-
-void LLPolynomial_Iterator::moveLeft() {
-  if (iter_curr != nullptr) iter_curr = iter_curr->prev;
-}
-
 bool LLPolynomial_Iterator::canMoveRight() const {
   return iter_curr != nullptr and iter_curr->next != nullptr;
 }
@@ -281,22 +273,17 @@ Polynomial_Linked_List & Polynomial_Linked_List::operator +=(
           and (p != nullptr and !(p->c.is_zero()));
       )
   {
-    // can we skip a few terms? (typically we add a polynomial w/fewer terms)
-    unsigned fast_foward = 0;
-    while (fast_foward < 4 and p->next != nullptr and !(p->c.is_zero())) {
-      p = p->next;
-      fast_foward += 1;
+    DEG_TYPE a = p->t.ordering_degree();
+    while (not oi->fellOff() and a < oi->currMonomial().ordering_degree()){
+      Monomial_Node *r = new Monomial_Node(oi->currCoeff(), oi->currMonomial());
+      r->prev = p->prev;
+      if (p->prev != nullptr) p->prev->next = r;
+      if (head == p) head = r;
+      p->prev = r;
+      r->next = p;
+      oi->moveRight();
     }
-    const Monomial & t = p->t;
-    for (unsigned i = 0; i < fast_foward; ++i)
-      p = p->prev;
-    if (fast_foward > 0 and t > oi->currMonomial()) {
-      for (unsigned i = 0; i < fast_foward; ++i)
-        p = p->next;
-    } else {
-      // the cmp optimization does not optimize :-( pointer indirection perhaps?
-      //int test_result = p->t.cmp(oi->currMonomial());
-      //if (test_result == 0) {
+    if (not oi->fellOff()) {
       if (p->t.is_like(oi->currMonomial())) {
         p->c += oi->currCoeff();
         oi->moveRight();
@@ -311,7 +298,6 @@ Polynomial_Linked_List & Polynomial_Linked_List::operator +=(
           p = r;
         }
       } else if (p->t > oi->currMonomial())
-      //} else if (test_result > 0)
         p = p->next;
       else {
         Monomial_Node *r = new Monomial_Node(oi->currCoeff(), oi->currMonomial());

@@ -48,7 +48,7 @@ public:
   ///@}
   /** @name Basic properties */
   ///@{
-  virtual StrategyFlags type() { return NORMAL_STRATEGY; }
+  virtual StrategyFlags type() { return StrategyFlags::NORMAL_STRATEGY; }
   ///@}
   /** @name I/O */
   ///@{

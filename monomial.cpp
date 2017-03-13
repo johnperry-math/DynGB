@@ -114,6 +114,7 @@ Monomial::Monomial(const Monomial &other) {
   memcpy(exponents, other.exponents, n*sizeof(EXP_TYPE));
   ordering_data = (other.ordering_data == nullptr) ? nullptr
       : ordering_data = other.monomial_ordering_data()->clone();
+  ord_degree = other.ord_degree;
 }
 
 Monomial::Monomial(
@@ -127,7 +128,7 @@ Monomial::Monomial(
   initialize_exponents(powers.size());
   NVAR_TYPE i = 0;
   for (
-       initializer_list<EXP_TYPE>::iterator pi = powers.begin();
+       auto pi = powers.begin();
        pi != powers.end();
        ++pi
   ) {
@@ -172,8 +173,6 @@ Monomial::~Monomial() {
     delete ordering_data; 
 }
 
-NVAR_TYPE Monomial::num_vars() const { return n; }
-
 bool Monomial::is_one() const {
   bool result = true;
   for (NVAR_TYPE i = 0; result and i < n; ++i)
@@ -207,14 +206,6 @@ const {
     for (NVAR_TYPE i = 0; i < m; ++i)
       result += weights[i]*exponents[i];
   return result;
-}
-
-const Monomial_Ordering * Monomial::monomial_ordering() const {
-  return ordering;
-}
-
-Monomial_Order_Data * Monomial::monomial_ordering_data() const {
-  return ordering_data;
 }
 
 void Monomial::set_monomial_ordering(const Monomial_Ordering * mord) {
@@ -340,9 +331,12 @@ Monomial & Monomial::operator *=(const Monomial &other) {
   #if EPACK
   emask += other.emask;
   #endif
-  if (n == other.n)
-    for (NVAR_TYPE i = 0; i < n; ++i)
-      exponents[i] += other.exponents[i];
+  NVAR_TYPE i;
+  for (i = 0; i + 1 < n; i += 2) {
+    exponents[i] += other.exponents[i];
+    exponents[i + 1] += other.exponents[i + 1];
+  }
+  if (n % 2) exponents[i] += other.exponents[i];
   ordering->set_data(*this);
   return *this;
 }

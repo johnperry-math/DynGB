@@ -20,6 +20,11 @@
 
 #include "monomial_ordering.hpp"
 
+/*
+  set_data, first_larger_or_equal, first_larger_or_equal_than_multiple
+  defined in monomial.cpp to avoid a compiler error
+*/
+
 Monomial_Ordering::~Monomial_Ordering() { }
 
 bool Monomial_Ordering::first_smaller_or_equal(

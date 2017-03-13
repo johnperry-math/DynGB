@@ -46,7 +46,7 @@ ostream & operator<<(ostream & os, const Critical_Pair_Dynamic & p) {
 
 Critical_Pair_Basic::Critical_Pair_Basic(
     Abstract_Polynomial * f,
-    unsigned strategy
+    StrategyFlags strategy
 ) : tpq(f->leading_monomial()), p(f), q(nullptr), s(nullptr),
   tp(tpq.num_vars()), tq(tpq.num_vars())
 {
@@ -54,9 +54,15 @@ Critical_Pair_Basic::Critical_Pair_Basic(
   tp.set_monomial_ordering(f->monomial_ordering());
   tp.set_monomial_ordering(f->monomial_ordering());
   switch(strategy) {
-  case NORMAL_STRATEGY: key = new Normal_Strategy(*this); break;
-  case SUGAR_STRATEGY : key = new Pair_Sugar_Data(*this); break;
-  case WSUGAR_STRATEGY: key = new Pair_WSugar_Strategy(*this); break;
+  case StrategyFlags::NORMAL_STRATEGY:
+    key = new Normal_Strategy(*this);
+    break;
+  case StrategyFlags::SUGAR_STRATEGY :
+    key = new Pair_Sugar_Data(*this);
+    break;
+  case StrategyFlags::WSUGAR_STRATEGY:
+    key = new Pair_WSugar_Strategy(*this);
+    break;
   default: key = new Normal_Strategy(*this); break;
   }
 }
@@ -64,7 +70,7 @@ Critical_Pair_Basic::Critical_Pair_Basic(
 Critical_Pair_Basic::Critical_Pair_Basic(
     Abstract_Polynomial * f,
     Abstract_Polynomial * g,
-    unsigned strategy
+    StrategyFlags strategy
 ) : tpq(f->leading_monomial().lcm(g->leading_monomial())),
     p((f->leading_monomial().larger_than(g->leading_monomial())) ? f : g ),
     q((f->leading_monomial().larger_than(g->leading_monomial())) ? g : f ),
@@ -78,35 +84,46 @@ Critical_Pair_Basic::Critical_Pair_Basic(
   tp /= p->leading_monomial();
   tq /= q->leading_monomial();
   switch(strategy) {
-  case NORMAL_STRATEGY: key = new Normal_Strategy(*this); break;
-  case SUGAR_STRATEGY : key = new Pair_Sugar_Data(*this); break;
-  case WSUGAR_STRATEGY: key = new Pair_WSugar_Strategy(*this); break;
+  case StrategyFlags::NORMAL_STRATEGY:
+    key = new Normal_Strategy(*this);
+    break;
+  case StrategyFlags::SUGAR_STRATEGY :
+    key = new Pair_Sugar_Data(*this);
+    break;
+  case StrategyFlags::WSUGAR_STRATEGY:
+    key = new Pair_WSugar_Strategy(*this);
+    break;
   default: key = new Normal_Strategy(*this); break;
   }
 }
 
 Mutable_Polynomial * Critical_Pair_Basic::s_polynomial(
-    SPolyCreationFlags method, int strategy
+    SPolyCreationFlags method, StrategyFlags strategy
 ) {
   if (s != nullptr) return s;
   if (key != nullptr) key->pre_spolynomial_tasks();
   // create multiple of first() according to the indicated method
   switch (method) {
-  case LINKED_LST:
+  case SPolyCreationFlags::LINKED_LST:
     s = new Polynomial_Linked_List(*p);
     break;
-  case GEOBUCKETS:
+  case SPolyCreationFlags::GEOBUCKETS:
     s = new Polynomial_Geobucket(*p);
     break;
-  case DOUBLE_BUF:
+  case SPolyCreationFlags::DOUBLE_BUF:
     s = new Double_Buffered_Polynomial(*p);
+    break;
+  default:
+    s = new Polynomial_Geobucket(*p);
     break;
   }
   //cout << "s-poly: " << *s << endl;
   switch(strategy) {
-  case NORMAL_STRATEGY: break; /* nothing to do */
-  case SUGAR_STRATEGY : s->set_strategy(new Poly_Sugar_Data(s)); break;
-  case WSUGAR_STRATEGY: {
+  case StrategyFlags::NORMAL_STRATEGY:
+    break; /* nothing to do */
+  case StrategyFlags::SUGAR_STRATEGY :
+    s->set_strategy(new Poly_Sugar_Data(s)); break;
+  case StrategyFlags::WSUGAR_STRATEGY: {
     Poly_WSugar_Data * sd = static_cast<Poly_WSugar_Data *>(p->strategy());
     const WT_TYPE * w;
     if (sd == nullptr) w = nullptr;
@@ -141,9 +158,9 @@ Mutable_Polynomial * Critical_Pair_Dynamic::s_polynomial(
   if (q != nullptr and q->monomial_ordering() != ordering)
     q->set_monomial_ordering(ordering);
   switch(strategy) {
-    case NORMAL_STRATEGY: break; /* nothing to do */
-    case SUGAR_STRATEGY: break; /* nothing to do? */
-    case WSUGAR_STRATEGY: {
+    case StrategyFlags::NORMAL_STRATEGY: break; /* nothing to do */
+    case StrategyFlags::SUGAR_STRATEGY: break; /* nothing to do? */
+    case StrategyFlags::WSUGAR_STRATEGY: {
       if (p->strategy() == nullptr)
         p->set_strategy(new Poly_WSugar_Data(p, ordering->order_weights()));
       else {

@@ -72,7 +72,9 @@ void check_correctness(list<Constant_Polynomial *>G, StrategyFlags strategy) {
     for (auto gi = next(fi); gi != G.end(); ++gi)
     {
       Critical_Pair_Basic * p = new Critical_Pair_Basic(*fi, *gi, strategy);
-      Mutable_Polynomial * s = p->s_polynomial(LINKED_LST, strategy);
+      Mutable_Polynomial * s = p->s_polynomial(
+          SPolyCreationFlags::LINKED_LST, strategy
+      );
       reduce_over_basis<list<Constant_Polynomial *>>(&s, G);
       if (not s->is_zero())
         cout << "\tfailure with " << p->first()->leading_monomial() << ','
@@ -86,7 +88,7 @@ void gm_update(
     list<Critical_Pair_Basic *> & P,
     list<Abstract_Polynomial *> & G,
     Abstract_Polynomial * r,
-    unsigned strategy
+    StrategyFlags strategy
 ) {
   //cout << "----------------------\n";
   list<Critical_Pair_Basic *> C;
@@ -143,7 +145,7 @@ void gm_update(
   for (Critical_Pair_Basic * e : E)
     P.push_back(e);
   /*cout << "All pairs:\n";
-  for (list<Critical_Pair_Basic *>::iterator pi = P.begin(); pi != P.end(); ++pi)
+  for (auto pi = P.begin(); pi != P.end(); ++pi)
     cout << '\t' << **pi << endl;
   cout << "----------------------\n";*/
   // add new poly to basis
@@ -165,11 +167,15 @@ void report_basis(
   }
 }
 
-void report_front_pair(Critical_Pair_Basic *p, unsigned strategy) {
+void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy) {
   cout << "processing pair: " << *p << endl;
-  if (strategy == SUGAR_STRATEGY or strategy == WSUGAR_STRATEGY)
+  if (
+      strategy == StrategyFlags::SUGAR_STRATEGY or
+      strategy == StrategyFlags::WSUGAR_STRATEGY
+  ) {
     cout << "\tsugar: "
          << ((Pair_Sugar_Data *)(p->pair_key()))->pair_sugar() << endl;
+  }
 }
 
 list<Constant_Polynomial *> buchberger(
@@ -186,11 +192,11 @@ list<Constant_Polynomial *> buchberger(
   {
     Constant_Polynomial * f = new Constant_Polynomial(*fo);
     switch(strategy) {
-      case NORMAL_STRATEGY: break; // don't need polynomial data
-      case SUGAR_STRATEGY:
+      case StrategyFlags::NORMAL_STRATEGY: break; // don't need polynomial data
+      case StrategyFlags::SUGAR_STRATEGY:
         f->set_strategy(new Poly_Sugar_Data(f));
         break;
-      case WSUGAR_STRATEGY:
+      case StrategyFlags::WSUGAR_STRATEGY:
         f->set_strategy(new Poly_WSugar_Data(f, strategy_weights));
         break;
       default: break; // assume normal strategy

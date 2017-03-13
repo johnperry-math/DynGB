@@ -105,9 +105,9 @@ int main(int argc, char *argv[]) {
   F.push_back(&f4); F.push_back(&f5); F.push_back(&f6);
   F.sort();
   list<Constant_Polynomial *> G;
-  if (static_algorithm) G = buchberger(F, method, SUGAR_STRATEGY);
+  if (static_algorithm) G = buchberger(F, method, StrategyFlags::SUGAR_STRATEGY);
   else G = buchberger_dynamic(
-      F, method, SUGAR_STRATEGY, nullptr,
+      F, method, StrategyFlags::SUGAR_STRATEGY, nullptr,
       DynamicHeuristic::ORD_HILBERT_THEN_DEG, SKELETON_SOLVER, false
   );
   cout << "Basis:\n";

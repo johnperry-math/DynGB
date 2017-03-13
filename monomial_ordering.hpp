@@ -85,6 +85,10 @@ public:
   ///@{
   /**
     @brief sets monomial ordering&rsquo;s data; default is to do nothing
+    @details Child classes that override this function are strongly recommended
+      to use set_ordering_degree() of the Monomial class to set a primary
+      degree. For weighted/graded degree orderings, this typically improves
+      performance nontrivially.
   */
   virtual void set_data(Monomial &) const;
   ///@}

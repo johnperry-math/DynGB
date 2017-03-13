@@ -51,29 +51,29 @@ public:
 
   /** @name Iteration */
   ///@{
-  virtual void restart_iteration();
+  virtual void restart_iteration() override;
 
-  virtual void moveRight();
+  virtual void moveRight() override;
 
-  virtual void moveLeft();
+  virtual void moveLeft() override;
 
-  virtual bool fellOff() const;
-  virtual bool canMoveLeft() const;
-  virtual bool canMoveRight() const;
+  virtual bool fellOff() const override;
+  virtual bool canMoveLeft() const override;
+  virtual bool canMoveRight() const override;
   ///@}
 
   /** @name Data access */
   ///@{
-  virtual const Monomial & currMonomial() const;
+  virtual const Monomial & currMonomial() const override;
 
-  virtual const Prime_Field_Element & currCoeff() const;
+  virtual const Prime_Field_Element & currCoeff() const override;
   ///@}
 
   /** @name Data modification */
   ///@{
-  virtual void set_currCoeff(const Prime_Field_Element & a);
+  virtual void set_currCoeff(const Prime_Field_Element & a) override;
 
-  virtual void set_currMonomial(const Monomial & t);
+  virtual void set_currMonomial(const Monomial & t) override;
   ///@}
 
 protected:
@@ -132,21 +132,21 @@ public:
   /** @name Basic properties */
   ///@{
 
-  virtual Monomial & leading_monomial() const;
+  virtual Monomial & leading_monomial() const override;
 
-  virtual Prime_Field_Element leading_coefficient() const;
+  virtual Prime_Field_Element leading_coefficient() const override;
 
-  virtual unsigned length() const;
+  virtual unsigned length() const override;
 
-  virtual bool is_zero() const;
+  virtual bool is_zero() const override;
 
-  virtual bool can_reduce(Abstract_Polynomial &other) const;
+  virtual bool can_reduce(Abstract_Polynomial &other) const override;
 
-  virtual Double_Buffered_Polynomial * zero_polynomial() const;
+  virtual Double_Buffered_Polynomial * zero_polynomial() const override;
 
   virtual void set_monomial_ordering(
       const Monomial_Ordering * order, bool sort_anew=true
-  );
+  ) override;
 
   ///@}
   /** @name Computation */
@@ -154,43 +154,43 @@ public:
 
   virtual Double_Buffered_Polynomial * monomial_multiple(
       const Monomial & t
-  ) const;
+  ) const override;
 
   virtual Double_Buffered_Polynomial * scalar_multiple(
       const Prime_Field_Element & c)
-  const;
+  const override;
 
-  virtual Mutable_Polynomial & operator += (const Abstract_Polynomial & p);
+  virtual Mutable_Polynomial & operator += (const Abstract_Polynomial & p) override;
 
-  virtual Mutable_Polynomial & operator -= (const Abstract_Polynomial & p);
+  virtual Mutable_Polynomial & operator -= (const Abstract_Polynomial & p) override;
 
   virtual void add_polynomial_multiple(
       const Prime_Field_Element & a,
       const Monomial & u,
       const Abstract_Polynomial & p,
       bool subtract
-    );
+    ) override;
 
-  virtual void sort_by_order();
+  virtual void sort_by_order() override;
 
   ///@}
   /** @name Iteration */
   ///@{
 
-  virtual DB_Polynomial_Iterator * new_iterator() const;
+  virtual DB_Polynomial_Iterator * new_iterator() const override;
 
-  virtual DB_Polynomial_Iterator * new_mutable_iterator();
+  virtual DB_Polynomial_Iterator * new_mutable_iterator() override;
 
-  virtual Polynomial_Iterator * begin() const;
-  virtual Polynomial_Iterator * end() const;
+  virtual Polynomial_Iterator * begin() const override;
+  virtual Polynomial_Iterator * end() const override;
 
   ///@}
   /** @name Modification */
   ///@{
 
-  virtual void add_last(const Prime_Field_Element & a, const Monomial & t);
+  virtual void add_last(const Prime_Field_Element & a, const Monomial & t) override;
 
-  virtual Polynomial_Linked_List * detach_head();
+  virtual Polynomial_Linked_List * detach_head() override;
 
   ///@}
 

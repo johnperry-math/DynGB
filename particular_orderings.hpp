@@ -45,28 +45,39 @@ public:
   /** @name Comparison */
   ///@{
   /** @brief returns \c true iff the first Monomial is larger than the second */
-  virtual bool first_larger(const Monomial &, const Monomial &) const;
+  virtual bool first_larger(const Monomial &, const Monomial &) const override;
   /** @brief returns \c true iff the first Monomial is smaller than the second */
-  virtual bool first_smaller(const Monomial &, const Monomial &) const;
+  virtual bool first_smaller(const Monomial &, const Monomial &) const override;
   /**
     @brief returns \c true iff the first Monomial is larger than the product
       of the second and the third
   */
   virtual bool first_larger_than_multiple(
       const Monomial &, const Monomial &, const Monomial &
-  ) const;
+  ) const override;
   /**
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
     @return 1 if \f$ t > u \f$ , -1 if \f$ t < u \f$ , and 0 otherwise
   **/
-  virtual int cmp(const Monomial & t, const Monomial & u) const {
+  virtual int cmp(const Monomial & t, const Monomial & u) const override {
     int result = 0;
-    if (first_larger(t, u)) result = 1;
+    DEG_TYPE a = t.ordering_degree();
+    DEG_TYPE b = u.ordering_degree();
+    if (a > b) result = 1;
+    else if (a < b) result = -1;
+    else if (first_larger(t, u)) result = 1;
     else if (first_larger(u, t)) result = -1;
     else result = 0;
     return result;
   }
+  /**
+    @brief sets the Monomial&rsquo;s \c monomial_ordering_data
+  */
+  ///@}
+  /** @name Utility */
+  ///@{
+  virtual void set_data(Monomial & t) const override;
   ///@}
 };
 
@@ -95,7 +106,7 @@ public:
   /** @brief copy constructor */
   Grevlex_Order_Data(const Grevlex_Order_Data &);
   /** @brief clone &ldquo;constructor&rdquo; */
-  virtual Grevlex_Order_Data * clone();
+  virtual Grevlex_Order_Data * clone() override;
   ///@}
   /** @name Destruction */
   ///@{
@@ -107,7 +118,7 @@ public:
   ///@{
   /** @brief returns the sum of the first \f$i\f$ variables&rsquo; exponents */
   DEG_TYPE operator [] (NVAR_TYPE i) const;
-  virtual DEG_TYPE grading(NVAR_TYPE i) const { return gradings[i]; }
+  virtual DEG_TYPE grading(NVAR_TYPE i) const override { return gradings[i]; }
   ///@}
   /** @name Computation */
   ///@{
@@ -150,11 +161,11 @@ public:
   /**
     @brief returns \c true iff \f$t>u\f$ by sums of successively fewer exponents
   */
-  virtual bool first_larger(const Monomial & t, const Monomial & u) const;
+  virtual bool first_larger(const Monomial & t, const Monomial & u) const override;
   /**
     @brief returns \c true iff \f$t< u\f$ by sums of successively fewer exponents
   */
-  virtual bool first_smaller(const Monomial & t, const Monomial & u) const;
+  virtual bool first_smaller(const Monomial & t, const Monomial & u) const override;
   /**
     @param t a Monomial, to compare to \f$ uv \f$
     @param u a Monomial, to multiply to \f$ v \f$
@@ -163,7 +174,7 @@ public:
   */
   virtual bool first_larger_than_multiple(
       const Monomial & t, const Monomial & u, const Monomial & v
-  ) const;
+  ) const override;
   /**
     @return the weighted sum of the first i exponents
     @warning Be sure that \c t has the correct ordering!
@@ -176,7 +187,7 @@ public:
     @param u a Monomial, to compare to \f$ t \f$
     @return 1 if \f$ t > u \f$ , -1 if \f$ t < u \f$ , and 0 otherwise
   **/
-  virtual int cmp(const Monomial & t, const Monomial & u) const {
+  virtual int cmp(const Monomial & t, const Monomial & u) const override {
     int result = 0;
     if (first_larger(t, u)) result = 1;
     else if (first_larger(u, t)) result = -1;
@@ -193,7 +204,7 @@ public:
   /**
     @brief sets the Monomial&rsquo;s \c monomial_ordering_data
   */
-  virtual void set_data(Monomial & t) const;
+  virtual void set_data(Monomial & t) const override;
   ///@}
 protected:
   /** @brief the number of variables, which should remain constant */
@@ -226,7 +237,7 @@ public:
   /** @name Basic properties */
   ///@{
   /** @brief this weighted ordering&rsquo;s weights */
-  virtual const WT_TYPE * order_weights() const { return weights; }
+  virtual const WT_TYPE * order_weights() const override { return weights; }
   ///@}
   /** @name Comparison */
   ///@{
@@ -234,19 +245,19 @@ public:
     @brief returns \c true iff \f$t>u\f$ by weighted sums of
         successively fewer exponents
   */
-  virtual bool first_larger(const Monomial & t, const Monomial & u) const;
+  virtual bool first_larger(const Monomial & t, const Monomial & u) const override;
   /**
     @brief returns \c true iff \f$t< u\f$ by weighted sums of
         successively fewer exponents
   */
-  virtual bool first_smaller(const Monomial & t, const Monomial & u) const;
+  virtual bool first_smaller(const Monomial & t, const Monomial & u) const override;
   /**
     @brief returns \c true iff \f$t>uv\f$ by weighted sums of
         successively fewer exponents
   */
   virtual bool first_larger_than_multiple(
       const Monomial & t, const Monomial & u, const Monomial & v
-  ) const;
+  ) const override;
   /**
     @return the weighted sum of the first i exponents
     @warning Be sure that \c t has the correct ordering!
@@ -259,9 +270,13 @@ public:
     @param u a Monomial, to compare to \f$ t \f$
     @return 1 if \f$ t > u \f$ , -1 if \f$ t < u \f$ , and 0 otherwise
   **/
-  virtual int cmp(const Monomial & t, const Monomial & u) const {
+  virtual int cmp(const Monomial & t, const Monomial & u) const override {
     int result = 0;
-    if (first_larger(t, u)) result = 1;
+    DEG_TYPE a = t.ordering_degree();
+    DEG_TYPE b = u.ordering_degree();
+    if (a > b) result = 1;
+    else if (a < b) result = -1;
+    else if (first_larger(t, u)) result = 1;
     else if (first_larger(u, t)) result = -1;
     else result = 0;
     return result;
@@ -276,7 +291,7 @@ public:
   /**
     @brief sets the Monomial&rsquo;s \c monomial_ordering_data
   */
-  virtual void set_data(Monomial & t) const;
+  virtual void set_data(Monomial & t) const override;
   ///@}
   /** @name I/O */
   ///@{
@@ -327,13 +342,13 @@ public:
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
   */
-  virtual bool first_larger(const Monomial & t, const Monomial & u) const;
+  virtual bool first_larger(const Monomial & t, const Monomial & u) const override;
   /**
     @return \c true iff \f$t< u\f$
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
   */
-  virtual bool first_smaller(const Monomial & t, const Monomial & u) const;
+  virtual bool first_smaller(const Monomial & t, const Monomial & u) const override;
   /**
     @param t a Monomial, to compare to \f$ uv \f$
     @param u a Monomial, to multiply to \f$ v \f$
@@ -342,13 +357,13 @@ public:
   */
   virtual bool first_larger_than_multiple(
       const Monomial & t, const Monomial & u, const Monomial & v
-  ) const;
+  ) const override;
   /**
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
     @return 1 if \f$ t>u \f$ , -1 if \f$ t < u \f$ , and 0 otherwise
   */
-  virtual int cmp(const Monomial & t, const Monomial & u) const {
+  virtual int cmp(const Monomial & t, const Monomial & u) const override {
     int result = 0;
     if (first_larger(t, u)) result = 1;
     else if (first_larger(u, t)) result = -1;
@@ -381,11 +396,11 @@ public:
     @warning Assign the correct ordering to \c t first!
     @param t a Monomial whose weights @c this will cache
   */
-  WGrevlex_Order_Data(const Monomial & t);
+  WGrevlex_Order_Data(Monomial & t);
   /** @brief copy constructor */
   WGrevlex_Order_Data(const WGrevlex_Order_Data &);
   /** @brief clone constructor */
-  WGrevlex_Order_Data * clone();
+  virtual WGrevlex_Order_Data * clone() override;
   ///@}
   /** @name Destruction */
   ///@{
@@ -396,7 +411,7 @@ public:
   ///@{
   /** @name returns the weighted sum of the first \f$i\f$ variables */
   DEG_TYPE operator [] (NVAR_TYPE i) const;
-  inline virtual DEG_TYPE grading(NVAR_TYPE i) const { return gradings[i]; }
+  inline virtual DEG_TYPE grading(NVAR_TYPE i) const override { return gradings[i]; }
   ///@}
   /** @name Computation */
   ///@{
@@ -405,7 +420,7 @@ public:
     @warning This does not create the array if it does not exist already!
     @param t a Monomial whose gradings we want
   */
-  void assign_gradings(const Monomial &t);
+  void assign_gradings(Monomial &t);
   ///@}
   /** @name Memory management */
   ///@{
@@ -457,26 +472,26 @@ public:
   /** @name Basic properties */
   ///@{
   /** @brief the weights that define this ordering */
-  const WT_TYPE * order_weights() const;
+  virtual const WT_TYPE * order_weights() const override;
   ///@}
   /** @name Comparison */
   ///@{
   /** @brief resturns 0 if they are alike; positive if first larger; negative otherwise */
-  virtual int cmp(const Monomial &, const Monomial &) const;
+  virtual int cmp(const Monomial &, const Monomial &) const override;
   /**
     @brief returns \c true iff \f$t>u\f$ by sums of successively fewer exponents
   */
-  virtual bool first_larger(const Monomial & t, const Monomial & u) const;
+  virtual bool first_larger(const Monomial & t, const Monomial & u) const override;
   /**
     @brief returns \c true iff \f$t< u\f$ by sums of successively fewer exponents
   */
-  virtual bool first_smaller(const Monomial & t, const Monomial & u) const;
+  virtual bool first_smaller(const Monomial & t, const Monomial & u) const override;
   /**
     @brief returns \c true iff \f$t>u\f$ by sums of successively fewer exponents
   */
   virtual bool first_larger_than_multiple(
       const Monomial & t, const Monomial & u, const Monomial & v
-  ) const;
+  ) const override;
   ///@}
   /** @name Utility */
   ///@{
@@ -486,7 +501,9 @@ public:
     @param i index to an exponent
     @warning Be sure that \c t has the correct ordering!
   */
-  DEG_TYPE partial_degree(const Monomial & t, NVAR_TYPE i) const;
+  inline DEG_TYPE partial_degree(const Monomial & t, NVAR_TYPE i) const {
+    return t.monomial_ordering_data()->grading(i);
+  }
   /**
     @return the sum of the first i exponents
     @param t a Monomial whose degree we want
@@ -496,7 +513,7 @@ public:
   /**
     @brief sets the Monomial&rsquo;s \c monomial_ordering_data
   */
-  virtual void set_data(Monomial & t) const;
+  virtual void set_data(Monomial & t) const override;
   ///@}
   /** @name I/O */
   ///@{
@@ -526,7 +543,7 @@ protected:
   @brief exceptions for Matrix_Ordering
 */
 class Nonsingular_Matrix_Ordering_Exception : public std::exception {
-  virtual const char * what() const throw();
+  virtual const char * what() const throw() override;
 };
 
 /**
@@ -550,13 +567,13 @@ public:
     @param u a Monomial, to compare to \f$ t \f$
     @return \c true iff first Monomial is larger than second
   */
-  virtual bool first_larger(const Monomial & t, const Monomial & u) const;
+  virtual bool first_larger(const Monomial & t, const Monomial & u) const override;
   /**
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
     @return \c true iff first Monomial is smaller than second
   */
-  virtual bool first_smaller(const Monomial & t, const Monomial & u) const;
+  virtual bool first_smaller(const Monomial & t, const Monomial & u) const override;
   /**
     @param t a Monomial, to compare to \f$ uv \f$
     @param u a Monomial, to multiply to \f$ v \f$
@@ -566,13 +583,13 @@ public:
   */
   virtual bool first_larger_than_multiple(
       const Monomial & t, const Monomial & u, const Monomial & v
-  ) const;
+  ) const override;
   /**
     @param t a Monomial, to compare to \f$ u \f$
     @param u a Monomial, to compare to \f$ t \f$
     @return 1 if \f$ t>u \f$ , -1 if \f$ t < u \f$ , and 0 otherwise
   */
-  virtual int cmp(const Monomial & t, const Monomial & u) const {
+  virtual int cmp(const Monomial & t, const Monomial & u) const override {
     int result = 0;
     if (first_larger(t, u)) result = 1;
     else if (first_larger(u, t)) result = -1;

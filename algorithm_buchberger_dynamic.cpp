@@ -100,7 +100,7 @@ void gm_update_dynamic(
     list<Critical_Pair_Dynamic *> & P,
     list<Abstract_Polynomial *> & G,
     Abstract_Polynomial * r,
-    unsigned strategy,
+    StrategyFlags strategy,
     ORDERING_TYPE * ordering
 ) {
   //cout << "----------------------\n";
@@ -156,7 +156,7 @@ void gm_update_dynamic(
   for (Critical_Pair_Dynamic * e : E)
     P.push_back(e);
   /*cout << "All pairs:\n";
-  for (list<Critical_Pair_Dynamic *>::iterator pi = P.begin(); pi != P.end(); ++pi)
+  for (auto pi = P.begin(); pi != P.end(); ++pi)
     cout << '\t' << **pi << endl;
   cout << "----------------------\n";*/
   // add new poly to basis
@@ -325,8 +325,10 @@ list<Constant_Polynomial *> buchberger_dynamic(
   Abstract_Polynomial * g = new Constant_Polynomial(**(F.begin()));
   cout << "Working with " << g->leading_monomial() << endl;
   switch (strategy) {
-  case SUGAR_STRATEGY: g->set_strategy(new Poly_Sugar_Data(g)); break;
-  case WSUGAR_STRATEGY:
+  case StrategyFlags::SUGAR_STRATEGY:
+    g->set_strategy(new Poly_Sugar_Data(g));
+    break;
+  case StrategyFlags::WSUGAR_STRATEGY:
     g->set_strategy(new Poly_WSugar_Data(g, strategy_weights));
     break;
   default: break; // includes NORMAL_STRATEGY 
@@ -403,8 +405,8 @@ list<Constant_Polynomial *> buchberger_dynamic(
         cout << "new ordering from " << solver->get_rays().size() << " rays: ";
         ::ray interior_ray = ray_sum(solver->get_rays());
         cout << interior_ray << endl;
-        for (auto r: solver->get_rays()) cout << '\t' << r << endl;
-        cout << endl;
+        //for (auto r: solver->get_rays()) cout << '\t' << r << endl;
+        //cout << endl;
         wt_ptr = interior_ray.weights();
         weights = new WT_TYPE [n];
         for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
@@ -444,8 +446,8 @@ list<Constant_Polynomial *> buchberger_dynamic(
     B.push_back(b);
     delete g;
   }
-  cout << "tot # monomials: " << num_mons;
-  cout << "max # monomials: " << max_mons;
+  cout << "tot # monomials: " << num_mons << endl;
+  cout << "max # monomials: " << max_mons << endl;
   cout << "avg # monomials: " << num_mons / B.size() << endl;
   // eliminate old orderings
   all_orderings_used.pop_front();

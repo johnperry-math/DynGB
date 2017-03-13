@@ -118,41 +118,41 @@ public:
   /**
     @brief Initializes at the leading monomial.
   */
-  virtual void restart_iteration();
+  virtual void restart_iteration() override;
   /**
     @brief Returns the monomial the iterator currently points to. 
   */
   /**
     @brief Moves the iterator right: to the next smaller monomial.
   */
-  virtual void moveRight();
+  virtual void moveRight() override { iter_curr = iter_curr->next; }
   /**
     @brief Moves the iterator left: to the next larger monomial.
   */
-  virtual void moveLeft();
+  virtual void moveLeft() override { iter_curr = iter_curr->prev; }
   /** @brief Can this iterator move left, or would it fall off? */
-  virtual bool canMoveLeft() const;
+  virtual bool canMoveLeft() const override;
   /** @brief Can this iterator move right, or would it fall off? */
-  virtual bool canMoveRight() const;
+  virtual bool canMoveRight() const override;
   /**
     @brief true iff the iterator no longer points to a valid monomial.
   */
-  virtual bool fellOff() const;
+  virtual bool fellOff() const override;
   ///@}
   /** @name Data access */
   ///@{
-  virtual const Monomial & currMonomial() const;
+  virtual const Monomial & currMonomial() const override;
   /**
     @brief Returns the coefficient of the monomial the iterator currently points to.
   */
-  virtual const Prime_Field_Element & currCoeff() const;
+  virtual const Prime_Field_Element & currCoeff() const override;
   ///@}
   /** @name Data modification */
   ///@{
   /** @brief change coefficient in current position */
-  virtual void set_currCoeff(const Prime_Field_Element & a);
+  virtual void set_currCoeff(const Prime_Field_Element & a) override;
   /** @brief change monomial in current position */
-  virtual void set_currMonomial(const Monomial & t);
+  virtual void set_currMonomial(const Monomial & t) override;
   ///@
 protected:
   /** @brief the polynomial over which we iterate */
@@ -212,21 +212,21 @@ public:
     @brief true iff the first node in the list is <c>nullptr</c>
       or has zero coeff
   */
-  bool is_zero() const;
+  virtual bool is_zero() const override;
   /**
     @brief Returns the leading monomial &mdash;
       call sort_by_order() first!
   */
-  Monomial & leading_monomial() const;
+  virtual Monomial & leading_monomial() const override;
   /**
     @brief Returns the leading coefficient &mdash; call sort_by_order first!
   */
-  Prime_Field_Element leading_coefficient() const;
+  virtual Prime_Field_Element leading_coefficient() const override;
   /** @brief Returns the number of polynomials in the list. */
-  unsigned length() const;
+  virtual unsigned length() const override;
   virtual void set_monomial_ordering(
       const Monomial_Ordering * ord, bool sort_anew = true
-  );
+  ) override;
   ///@}
   /** @name Computation */
   ///@{
@@ -234,24 +234,24 @@ public:
     @brief Returns as simple a zero polynomial as I can muster,
     short of this being <c>nullptr</c>.
   */
-  virtual Polynomial_Linked_List * zero_polynomial() const;
+  virtual Polynomial_Linked_List * zero_polynomial() const override;
   /**
     @brief Returns a new polynomial whose value is \f$\textit{this}\times u\f$.
   */
-  virtual Polynomial_Linked_List * monomial_multiple(const Monomial &u) const;
+  virtual Polynomial_Linked_List * monomial_multiple(const Monomial &u) const override;
   /**
     @brief Returns a new polynomial whose value is \f$\textit{this}\times c\f$.
   */
   virtual Polynomial_Linked_List * scalar_multiple(const Prime_Field_Element &c)
-    const;
+      const override;
   /**
     @brief Adds <c>other</c> to <c>this</c>, and returns the result.
   */
-  virtual Polynomial_Linked_List & operator +=(const Abstract_Polynomial &other);
+  virtual Polynomial_Linked_List & operator +=(const Abstract_Polynomial &other) override;
   /**
     @brief Subtracts <c>other</c> from <c>this</c>, and returns the result.
   */
-  virtual Polynomial_Linked_List & operator -=(const Abstract_Polynomial &other);
+  virtual Polynomial_Linked_List & operator -=(const Abstract_Polynomial &other) override;
   /**
     @brief "Fast" addition of \f$atq\f$ to <c>this</c>.
     @details If <c>subtract==true</c>, subtract instead.
@@ -265,29 +265,29 @@ public:
       const Monomial &t,
       const Abstract_Polynomial &q,
       bool subtract
-  );
+  ) override;
   /**
     @brief Sort by specified weight order.
   */
-  virtual void sort_by_order();
+  virtual void sort_by_order() override;
   ///@}
   /** @name Iteration */
   ///@{
   /** @brief an iterator that poses no risk of modifying the polynomial */
-  virtual LLPolynomial_Iterator * new_iterator() const;
+  virtual LLPolynomial_Iterator * new_iterator() const override;
   /** @brief an iterator that poses no risk of modifying the polynomial */
-  virtual Polynomial_Iterator * begin() const;
+  virtual Polynomial_Iterator * begin() const override;
   /** @brief an iterator that poses no risk of modifying the polynomial */
-  virtual Polynomial_Iterator * end() const;
+  virtual Polynomial_Iterator * end() const override;
   /** @brief An iterator that may modify the current position */
-  virtual LLPolynomial_Iterator * new_mutable_iterator();
+  virtual LLPolynomial_Iterator * new_mutable_iterator() override;
   ///@}
   /** @name Modification */
   ///@{
   /** @brief Detach and return leading term */
-  virtual Polynomial_Linked_List * detach_head();
+  virtual Polynomial_Linked_List * detach_head() override;
   /** @brief Add this monomial as the last leading term */
-  virtual void add_last(const Prime_Field_Element & c, const Monomial & t);
+  virtual void add_last(const Prime_Field_Element & c, const Monomial & t) override;
   ///@}
   /** @brief to iterate over @c this and possibly change it */
   friend class LLPolynomial_Iterator;

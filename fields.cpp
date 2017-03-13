@@ -24,6 +24,21 @@ Prime_Field::Prime_Field(UCOEF_TYPE modulus, bool show_modulus) {
   m = modulus;
   Fi = new COEF_TYPE [m] {0};
   Fi[1] = 1;
+  Fi[m-1] = m - 1;
+  for (UCOEF_TYPE a = 2; a < m - 1; ++a) {
+    bool negative = true;
+    COEF_TYPE s = 1; COEF_TYPE t = 0;
+    COEF_TYPE u = 0; COEF_TYPE v = 1;
+    COEF_TYPE c = (COEF_TYPE )m; COEF_TYPE d = a;
+    while (d != 0) {
+      COEF_TYPE q = c / d;   COEF_TYPE r = c - q*d;
+      COEF_TYPE w = u*q + s; COEF_TYPE x = v*q + t;
+      s = u; t = v; u = w; v = x;
+      c = d; d = r;
+      negative = not negative;
+    }
+    if (negative) Fi[a] = m - t; else Fi[a] = t;
+  }
   print_modulus = show_modulus;
 }
 
@@ -38,20 +53,6 @@ Prime_Field::Prime_Field(const Prime_Field & F) {
 Prime_Field::~Prime_Field() { delete [] Fi; }
 
 COEF_TYPE Prime_Field::inverse(COEF_TYPE a) {
-  if (a != 0 and  Fi[a] == 0) {
-    bool negative = true;
-    COEF_TYPE s = 1; COEF_TYPE t =0;
-    COEF_TYPE u = 0; COEF_TYPE v = 1;
-    COEF_TYPE c = (COEF_TYPE )m; COEF_TYPE d = a;
-    while (d != 0) {
-      COEF_TYPE q = c / d;   COEF_TYPE r = c - q*d;
-      COEF_TYPE w = u*q + s; COEF_TYPE x = v*q + t;
-      s = u; t = v; u = w; v = x;
-      c = d; d = r;
-      negative = not negative;
-    }
-    if (negative) Fi[a] = m - t; else Fi[a] = t;
-  }
   return Fi[a];
 }
 
