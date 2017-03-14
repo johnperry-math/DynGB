@@ -1,0 +1,111 @@
+\hypertarget{test_cab_es9_8cpp-example}{}\section{test\+\_\+cab\+\_\+es9.\+cpp}
+This illustrates how to compute a Gr\"{o}bner basis of the second example in \cite{CaboaraDynAlg}, \[ 32002 x^2 y z^4 + t ,\\ 32002 x^5 y^7 + u z^2 ,\\ v x^3 z + 32002 y^2 ,\\ w z^5 + 32002 x y^3 \]
+
+
+\begin{DoxyCodeInclude}
+\textcolor{comment}{/*****************************************************************************\(\backslash\)}
+\textcolor{comment}{* This file is part of DynGB.                                                 *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* DynGB is free software: you can redistribute it and/or modify               *}
+\textcolor{comment}{* it under the terms of the GNU General Public License as published by        *}
+\textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
+\textcolor{comment}{* (at your option) any later version.                                         *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
+\textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
+\textcolor{comment}{* GNU General Public License for more details.                                *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* You should have received a copy of the GNU General Public License           *}
+\textcolor{comment}{* along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *}
+\textcolor{comment}{\(\backslash\)*****************************************************************************/}
+
+\textcolor{preprocessor}{#include <set>}
+\textcolor{preprocessor}{#include <cstdlib>}
+\textcolor{preprocessor}{#include <cstring>}
+\textcolor{preprocessor}{#include <iostream>}
+
+\textcolor{keyword}{using} std::set;
+\textcolor{keyword}{using} std::cout; \textcolor{keyword}{using} std::endl;
+
+\textcolor{preprocessor}{#include "system\_constants.hpp"}
+
+\textcolor{preprocessor}{#include "fields.hpp"}
+\textcolor{preprocessor}{#include "monomial.hpp"}
+\textcolor{preprocessor}{#include "polynomial.hpp"}
+
+\textcolor{preprocessor}{#include "dynamic\_engine.hpp"}
+
+\textcolor{preprocessor}{#include "algorithm\_buchberger\_basic.hpp"}
+\textcolor{preprocessor}{#include "algorithm\_buchberger\_dynamic.hpp"}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+  \textcolor{keywordflow}{if} (argc != 3 or (strcmp(argv[2],\textcolor{stringliteral}{"stat"}) and strcmp(argv[2],\textcolor{stringliteral}{"dyn"}))) \{
+    cout << \textcolor{stringliteral}{"need to know method (usually 2) and then if dynamic (stat or dyn)\(\backslash\)n"};
+    \textcolor{keywordflow}{return} 1;
+  \}
+  \textcolor{comment}{// obtain method -- don't screw it up b/c we don't check it}
+  \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} method = (\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} )atoi(argv[1]);
+  \textcolor{keywordtype}{bool} static\_algorithm = \textcolor{keyword}{true};
+  \textcolor{keywordflow}{if} (!strcmp(argv[2],\textcolor{stringliteral}{"dyn"})) static\_algorithm = \textcolor{keyword}{false};
+  \textcolor{comment}{// set up the field}
+  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} FF = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(32003);
+  \textcolor{keywordtype}{string} X [9] = \{ \textcolor{stringliteral}{"t"}, \textcolor{stringliteral}{"u"}, \textcolor{stringliteral}{"v"}, \textcolor{stringliteral}{"w"}, \textcolor{stringliteral}{"x"}, \textcolor{stringliteral}{"y"}, \textcolor{stringliteral}{"z"} \} ;
+  \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R(7, FF, X );
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = FF.\hyperlink{group___fields_group_ad9e3622a14de40faa75056ed40d67bb2}{unity}();
+  \hyperlink{group__polygroup_class_monomial}{Monomial} one \{ 0, 0, 0, 0, 0, 0, 0 \};
+  \textcolor{comment}{// set up our polynomials}
+  \textcolor{comment}{// first poly}
+  \hyperlink{group__polygroup_class_monomial}{Monomial} x2y1z4 \{ 0, 0, 0, 0, 2, 1, 4 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} t1 \{ 1, 0, 0, 0, 0, 0, 0 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M1 [] \{ x2y1z4, t1 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C1 [] \{ -a, a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f1(2, R, M1, C1);
+  f1.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// second poly}
+  \hyperlink{group__polygroup_class_monomial}{Monomial} x5y7 \{ 0, 0, 0, 0, 5, 7, 0 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} u1z2 \{ 0, 1, 0, 0, 0, 0, 2 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M2 [] \{ x5y7, u1z2 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C2 [] \{ -a, a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f2(2, R, M2, C2);
+  f2.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// third poly}
+  \hyperlink{group__polygroup_class_monomial}{Monomial} v1x3z1 \{ 0, 0, 1, 0, 3, 0, 1 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} y2 \{ 0, 0, 0, 0, 0, 2, 0 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M3 [] \{ v1x3z1, y2 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C3 [] \{ a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f3(2, R, M3, C3);
+  f3.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// fourth poly}
+  \hyperlink{group__polygroup_class_monomial}{Monomial} w1z5 \{ 0, 0, 0, 1, 0, 0, 5 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} x1y3 \{ 0, 0, 0, 0, 1, 3, 0 \};
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M4 [] \{ w1z5, x1y3 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C4 [] \{ a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f4(2, R, M4, C4);
+  f4.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// message}
+  cout << \textcolor{stringliteral}{"Computing a Groebner basis for\(\backslash\)n\(\backslash\)t"} << f1
+       << \textcolor{stringliteral}{",\(\backslash\)n\(\backslash\)t"} << f2
+       << \textcolor{stringliteral}{",\(\backslash\)n\(\backslash\)t"} << f3
+       << \textcolor{stringliteral}{",\(\backslash\)n\(\backslash\)t"} << f4
+       << endl;
+  \textcolor{comment}{// compute basis}
+  list<Abstract\_Polynomial *> F;
+  F.push\_back(&f1); F.push\_back(&f2); F.push\_back(&f3);
+  F.push\_back(&f4);
+  list<Constant\_Polynomial *> G;
+  \textcolor{keywordflow}{if} (static\_algorithm) G = \hyperlink{group___g_b_computation_ga37aa7e2fec96fac6c914934a4243f603}{buchberger}(F, method, StrategyFlags::SUGAR\_STRATEGY);
+  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+      F, method, StrategyFlags::SUGAR\_STRATEGY, \textcolor{keyword}{nullptr},
+      DynamicHeuristic::ORD\_HILBERT\_THEN\_DEG
+  );
+  cout << \textcolor{stringliteral}{"Basis:\(\backslash\)n"};
+  \textcolor{keywordflow}{for} (\hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} * g : G) \{
+    cout << \textcolor{charliteral}{'\(\backslash\)t'};
+    g->leading\_monomial().print(\textcolor{keyword}{true}, cout, R.\hyperlink{group__polygroup_aef9c6745956393863080422ddb8da48c}{name\_list}());
+    \textcolor{keyword}{delete} g;
+  \}
+  cout << \textcolor{stringliteral}{"bye\(\backslash\)n"};
+\}
+\end{DoxyCodeInclude}
+ 

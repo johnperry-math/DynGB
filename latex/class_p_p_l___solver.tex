@@ -1,0 +1,181 @@
+\hypertarget{class_p_p_l___solver}{}\section{P\+P\+L\+\_\+\+Solver Class Reference}
+\label{class_p_p_l___solver}\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+
+
+approximate skeleton of a polyhedral cone, using P\+PL linear solver  
+
+
+
+
+{\ttfamily \#include $<$ppl\+\_\+solver.\+hpp$>$}
+
+Inheritance diagram for P\+P\+L\+\_\+\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_p_p_l___solver}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a7484421e15572f77d014b2feb9d79f04}\label{class_p_p_l___solver_a7484421e15572f77d014b2feb9d79f04}} 
+\hyperlink{class_p_p_l___solver_a7484421e15572f77d014b2feb9d79f04}{P\+P\+L\+\_\+\+Solver} (N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_p_p_l___solver_aa70891def9af366c47e01acf952bbdba}{n})
+\begin{DoxyCompactList}\small\item\em initializes solver for $ n $ variables \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a7aa1c2c02e059f35f9d9faca9e94f859}\label{class_p_p_l___solver_a7aa1c2c02e059f35f9d9faca9e94f859}} 
+\hyperlink{class_p_p_l___solver_a7aa1c2c02e059f35f9d9faca9e94f859}{P\+P\+L\+\_\+\+Solver} (const \hyperlink{class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \&)
+\begin{DoxyCompactList}\small\item\em copy constructor (deep copy) \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_p_p_l___solver_a67408174d2260de5ae5f070a70f27e9d}{copy} (const \hyperlink{class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+\begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_p_p_l___solver_aecb2caed09777ca3b6d5e285540abe56}\label{class_p_p_l___solver_aecb2caed09777ca3b6d5e285540abe56}} 
+{\bfseries $\sim$\+P\+P\+L\+\_\+\+Solver} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a40b49fb3bb0b14cc66cabf54ef17e437}\label{class_p_p_l___solver_a40b49fb3bb0b14cc66cabf54ef17e437}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_p_p_l___solver_a40b49fb3bb0b14cc66cabf54ef17e437}{get\+\_\+dimension} () const
+\begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a7d09fe31148950d46219df67719aef3f}\label{class_p_p_l___solver_a7d09fe31148950d46219df67719aef3f}} 
+virtual unsigned long {\bfseries get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{class_p_p_l___solver_a1ff16def22c734348c626b65437dd1e3}{solve} (\hyperlink{classconstraint}{constraint} \&)
+\begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_p_p_l___solver_a5000b8c5bee37029276ce63a3568bfb7}{solve} (vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a00076ee1e8ef90f7d162f02372529666}\label{class_p_p_l___solver_a00076ee1e8ef90f7d162f02372529666}} 
+virtual void \hyperlink{class_p_p_l___solver_a00076ee1e8ef90f7d162f02372529666}{setup\+\_\+rays} ()
+\begin{DoxyCompactList}\small\item\em clear the current set of rays and extracts the ones contained in lp \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a6abc19f36a28ed91b4ebc4d3a1e32dc6}\label{class_p_p_l___solver_a6abc19f36a28ed91b4ebc4d3a1e32dc6}} 
+P\+P\+L\+::\+N\+N\+C\+\_\+\+Polyhedron $\ast$ \hyperlink{class_p_p_l___solver_a6abc19f36a28ed91b4ebc4d3a1e32dc6}{lp}
+\begin{DoxyCompactList}\small\item\em P\+PL problem interface. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a6e3852b048b35faf96d8a12155b0547e}\label{class_p_p_l___solver_a6e3852b048b35faf96d8a12155b0547e}} 
+unsigned \hyperlink{class_p_p_l___solver_a6e3852b048b35faf96d8a12155b0547e}{m}
+\begin{DoxyCompactList}\small\item\em number of constraints \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_aa70891def9af366c47e01acf952bbdba}\label{class_p_p_l___solver_aa70891def9af366c47e01acf952bbdba}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_p_p_l___solver_aa70891def9af366c47e01acf952bbdba}{n}
+\begin{DoxyCompactList}\small\item\em number of variables \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a90bb9152de9b1260cdbf938010cd48b2}\label{class_p_p_l___solver_a90bb9152de9b1260cdbf938010cd48b2}} 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_p_p_l___solver_a90bb9152de9b1260cdbf938010cd48b2}{ray\+\_\+data}
+\begin{DoxyCompactList}\small\item\em used to retrieve rays \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a157a18ab31b415a615bca9845248bfcc}\label{class_p_p_l___solver_a157a18ab31b415a615bca9845248bfcc}} 
+P\+P\+L\+::\+Variable $\ast$$\ast$ \hyperlink{class_p_p_l___solver_a157a18ab31b415a615bca9845248bfcc}{X}
+\begin{DoxyCompactList}\small\item\em array of variables \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_p_p_l___solver_a346402cddefaa715291dfb7f243073a2}\label{class_p_p_l___solver_a346402cddefaa715291dfb7f243073a2}} 
+static unsigned \hyperlink{class_p_p_l___solver_a346402cddefaa715291dfb7f243073a2}{instances} = 0
+\begin{DoxyCompactList}\small\item\em number of P\+PL instances \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+approximate skeleton of a polyhedral cone, using P\+PL linear solver 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+January 2017 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+The University of Southern Mississippi
+\end{DoxyCopyright}
+This class serves as an interface to P\+PL \cite{BagnaraHZ08SCP}, which we can use to find the skeleton to a polyhedral cone. 
+
+Definition at line 21 of file ppl\+\_\+solver.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_p_p_l___solver_a67408174d2260de5ae5f070a70f27e9d}\label{class_p_p_l___solver_a67408174d2260de5ae5f070a70f27e9d}} 
+\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!copy@{copy}}
+\index{copy@{copy}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+performs a deep copy, similar to a copy constructor 
+
+\begin{DoxyWarning}{Warning}
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_a442ad4ad67ee2feff0df49e9201d61ca}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 65 of file ppl\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{class_p_p_l___solver_a1ff16def22c734348c626b65437dd1e3}\label{class_p_p_l___solver_a1ff16def22c734348c626b65437dd1e3}} 
+\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\subsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{classconstraint}{constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds the indicated constraint (singular!) and re-\/computes the solution. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the new constraint is consistent with the current constraints
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Checking the return value is crucial! If the function returns {\ttfamily false}, you have an inconsistent system! While the {\itshape present} cone will remain consistent, {\bfseries the function will not roll back previous changes you have made}, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_abd84374c52124116becc8924dc74e12d}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 91 of file ppl\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{class_p_p_l___solver_a5000b8c5bee37029276ce63a3568bfb7}\label{class_p_p_l___solver_a5000b8c5bee37029276ce63a3568bfb7}} 
+\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\subsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds the indicated constraints (plural!) and re-\/computes the solution. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the new constraints are consistent with the current constraints
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Checking the return value is crucial! If the function returns {\ttfamily false}, you have an inconsistent system! While the {\itshape present} cone will remain consistent, {\bfseries the function will not roll back previous changes you have made}, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_a35da4bdf5db971c445f495b6eaab072d}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 103 of file ppl\+\_\+solver.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ppl\+\_\+solver.\+hpp\item 
+ppl\+\_\+solver.\+cpp\end{DoxyCompactItemize}

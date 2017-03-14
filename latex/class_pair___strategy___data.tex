@@ -1,0 +1,94 @@
+\hypertarget{class_pair___strategy___data}{}\section{Pair\+\_\+\+Strategy\+\_\+\+Data Class Reference}
+\label{class_pair___strategy___data}\index{Pair\+\_\+\+Strategy\+\_\+\+Data@{Pair\+\_\+\+Strategy\+\_\+\+Data}}
+
+
+Structure for sorting critical pairs.  
+
+
+
+
+{\ttfamily \#include $<$strategies.\+hpp$>$}
+
+Inheritance diagram for Pair\+\_\+\+Strategy\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pair___strategy___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_pair___strategy___data_a177d4749902d7c94d8e48340a64d87b7}\label{class_pair___strategy___data_a177d4749902d7c94d8e48340a64d87b7}} 
+virtual {\bfseries $\sim$\+Pair\+\_\+\+Strategy\+\_\+\+Data} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_pair___strategy___data_ae29822eaf584f1f9654c4ec821734279}\label{class_pair___strategy___data_ae29822eaf584f1f9654c4ec821734279}} 
+virtual bool \hyperlink{class_pair___strategy___data_ae29822eaf584f1f9654c4ec821734279}{equivalent} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&) const =0
+\begin{DoxyCompactList}\small\item\em should return {\ttfamily true} iff {\ttfamily this} and other are equivalent \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_a41f03829d564520427fb9405aefe41be}\label{class_pair___strategy___data_a41f03829d564520427fb9405aefe41be}} 
+bool \hyperlink{class_pair___strategy___data_a41f03829d564520427fb9405aefe41be}{operator==} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em alias for \hyperlink{class_pair___strategy___data_ae29822eaf584f1f9654c4ec821734279}{equivalent()} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_a272edeb1893af886b4449d7bcb799cdb}\label{class_pair___strategy___data_a272edeb1893af886b4449d7bcb799cdb}} 
+virtual bool \hyperlink{class_pair___strategy___data_a272edeb1893af886b4449d7bcb799cdb}{first\+\_\+larger} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&) const =0
+\begin{DoxyCompactList}\small\item\em should return {\ttfamily true} iff {\ttfamily this} is larger than other \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_aed30bba9721f2497fc80393ca2d26930}\label{class_pair___strategy___data_aed30bba9721f2497fc80393ca2d26930}} 
+bool \hyperlink{class_pair___strategy___data_aed30bba9721f2497fc80393ca2d26930}{operator$>$} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em alias for \hyperlink{class_pair___strategy___data_a272edeb1893af886b4449d7bcb799cdb}{first\+\_\+larger()} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_ac72e2a5cef6f9a6dafdb82f97495fd8b}\label{class_pair___strategy___data_ac72e2a5cef6f9a6dafdb82f97495fd8b}} 
+bool \hyperlink{class_pair___strategy___data_ac72e2a5cef6f9a6dafdb82f97495fd8b}{operator$>$=} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} larger than or equivalent to other? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_a5d5459ea25db09d848ab616c395fc209}\label{class_pair___strategy___data_a5d5459ea25db09d848ab616c395fc209}} 
+bool \hyperlink{class_pair___strategy___data_a5d5459ea25db09d848ab616c395fc209}{operator$<$} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} smaller than other? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_pair___strategy___data_a19030cdc7b1f92c5941a78276e298f67}\label{class_pair___strategy___data_a19030cdc7b1f92c5941a78276e298f67}} 
+bool \hyperlink{class_pair___strategy___data_a19030cdc7b1f92c5941a78276e298f67}{operator$<$=} (const \hyperlink{class_pair___strategy___data}{Pair\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} smaller than or equivalent to other? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_pair___strategy___data_a15fdaa9fa3cc0a259e7dd29df1940819}{pre\+\_\+spolynomial\+\_\+tasks} () const
+\begin{DoxyCompactList}\small\item\em hook called immediately before computing a new s-\/polynomiald \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Structure for sorting critical pairs. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016 
+\end{DoxyDate}
+
+
+Definition at line 126 of file strategies.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pair___strategy___data_a15fdaa9fa3cc0a259e7dd29df1940819}\label{class_pair___strategy___data_a15fdaa9fa3cc0a259e7dd29df1940819}} 
+\index{Pair\+\_\+\+Strategy\+\_\+\+Data@{Pair\+\_\+\+Strategy\+\_\+\+Data}!pre\+\_\+spolynomial\+\_\+tasks@{pre\+\_\+spolynomial\+\_\+tasks}}
+\index{pre\+\_\+spolynomial\+\_\+tasks@{pre\+\_\+spolynomial\+\_\+tasks}!Pair\+\_\+\+Strategy\+\_\+\+Data@{Pair\+\_\+\+Strategy\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{pre\+\_\+spolynomial\+\_\+tasks()}{pre\_spolynomial\_tasks()}}
+{\footnotesize\ttfamily void Pair\+\_\+\+Strategy\+\_\+\+Data\+::pre\+\_\+spolynomial\+\_\+tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+hook called immediately before computing a new s-\/polynomiald 
+
+The default is to do nothing, which is good for the normal strategy. Other strategies, however, may require some processing before reduction; the sugar strategy is an example, as an s-\/polynomial needs to record a new polynomial's sugar 
+
+Definition at line 57 of file strategies.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+strategies.\+hpp\item 
+strategies.\+cpp\end{DoxyCompactItemize}

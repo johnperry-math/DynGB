@@ -1,0 +1,133 @@
+\hypertarget{class_geobucket___iterator}{}\section{Geobucket\+\_\+\+Iterator Class Reference}
+\label{class_geobucket___iterator}\index{Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}}
+
+
+Iterates through polynomials using a geobucket representation. See \hyperlink{class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} for details on methods.  
+
+
+
+
+{\ttfamily \#include $<$polynomial\+\_\+geobucket.\+hpp$>$}
+
+Inheritance diagram for Geobucket\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_geobucket___iterator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a1cf41a066244e2f0b6919f8e1b3d799d}\label{class_geobucket___iterator_a1cf41a066244e2f0b6919f8e1b3d799d}} 
+{\bfseries Geobucket\+\_\+\+Iterator} (const \hyperlink{class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$, bool at\+\_\+end=false)
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a9aef2105e723b8c2d52f5030d437f005}\label{class_geobucket___iterator_a9aef2105e723b8c2d52f5030d437f005}} 
+{\bfseries Geobucket\+\_\+\+Iterator} (\hyperlink{class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$, bool at\+\_\+end=false)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a474cb782876a334af8a4cd6c3f9f989c}\label{class_geobucket___iterator_a474cb782876a334af8a4cd6c3f9f989c}} 
+{\bfseries $\sim$\+Geobucket\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_aff0aac3cfbbd04463dca544ee01044b7}\label{class_geobucket___iterator_aff0aac3cfbbd04463dca544ee01044b7}} 
+virtual void \hyperlink{class_geobucket___iterator_aff0aac3cfbbd04463dca544ee01044b7}{restart\+\_\+iteration} ()
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a938e11814077e4ea017e56f1d669ce09}\label{class_geobucket___iterator_a938e11814077e4ea017e56f1d669ce09}} 
+virtual void \hyperlink{class_geobucket___iterator_a938e11814077e4ea017e56f1d669ce09}{move\+Right} ()
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a4514572004e314ad8f85a4e59df67a79}\label{class_geobucket___iterator_a4514572004e314ad8f85a4e59df67a79}} 
+virtual void \hyperlink{class_geobucket___iterator_a4514572004e314ad8f85a4e59df67a79}{move\+Left} ()
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a401e923a3296905653159246715695ad}\label{class_geobucket___iterator_a401e923a3296905653159246715695ad}} 
+virtual bool \hyperlink{class_geobucket___iterator_a401e923a3296905653159246715695ad}{can\+Move\+Right} () const
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a3b261590c1478e548791f3695003d093}\label{class_geobucket___iterator_a3b261590c1478e548791f3695003d093}} 
+virtual bool \hyperlink{class_geobucket___iterator_a3b261590c1478e548791f3695003d093}{can\+Move\+Left} () const
+\begin{DoxyCompactList}\small\item\em Can this iterator move left, or would it fall off? \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_geobucket___iterator_a5845016f7b9cb2c7538cef310af0b102}{fell\+Off} () const
+\begin{DoxyCompactList}\small\item\em Reports true iff the iterator no longer points to a valid monomial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_ae885964ae542a38776b001df362da429}\label{class_geobucket___iterator_ae885964ae542a38776b001df362da429}} 
+virtual const \hyperlink{class_monomial}{Monomial} \& \hyperlink{class_geobucket___iterator_ae885964ae542a38776b001df362da429}{curr\+Monomial} () const
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_acba414051c5cc043d4d7eea3be5f051c}\label{class_geobucket___iterator_acba414051c5cc043d4d7eea3be5f051c}} 
+virtual const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{class_geobucket___iterator_acba414051c5cc043d4d7eea3be5f051c}{curr\+Coeff} () const
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a473e1b52ca92a5534d1138f1387119d8}\label{class_geobucket___iterator_a473e1b52ca92a5534d1138f1387119d8}} 
+virtual void \hyperlink{class_geobucket___iterator_a473e1b52ca92a5534d1138f1387119d8}{set\+\_\+curr\+Coeff} (const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a)
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a54ec0fb6493ec4b703fda8433c0f6937}\label{class_geobucket___iterator_a54ec0fb6493ec4b703fda8433c0f6937}} 
+virtual void \hyperlink{class_geobucket___iterator_a54ec0fb6493ec4b703fda8433c0f6937}{set\+\_\+curr\+Monomial} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a3a32af8a6cb4d462a3b325721bd2a11b}\label{class_geobucket___iterator_a3a32af8a6cb4d462a3b325721bd2a11b}} 
+unsigned \hyperlink{class_geobucket___iterator_a3a32af8a6cb4d462a3b325721bd2a11b}{bucket\+\_\+number}
+\begin{DoxyCompactList}\small\item\em the bucket number at which we're stopped \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a17836580130b78ffc1fb62b9bf67c286}\label{class_geobucket___iterator_a17836580130b78ffc1fb62b9bf67c286}} 
+\hyperlink{class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$ \hyperlink{class_geobucket___iterator_a17836580130b78ffc1fb62b9bf67c286}{g}
+\begin{DoxyCompactList}\small\item\em to save myself the hassle of {\ttfamily static\+\_\+cast$<$const Polynomial\+\_\+\+Geobucket $\ast$$>$(p)} every time I turn around \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_geobucket___iterator_a484bb97ad82643d5b82733f6cbee8e8c}\label{class_geobucket___iterator_a484bb97ad82643d5b82733f6cbee8e8c}} 
+\hyperlink{class_l_l_polynomial___iterator}{L\+L\+Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{class_geobucket___iterator_a484bb97ad82643d5b82733f6cbee8e8c}{pi}
+\begin{DoxyCompactList}\small\item\em an iterator for the current bucket \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Iterates through polynomials using a geobucket representation. See \hyperlink{class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} for details on methods. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+Implementation based on \cite{YanGeobuckets}. \begin{DoxyWarning}{Warning}
+A polynomial in geobucket representation may not be fully simplified. Clients must not expect the monomials to be in any sort of order, and multiple instances of a monomial are possible. Geobuckets collapse only at canonicalization. 
+\end{DoxyWarning}
+
+
+Definition at line 41 of file polynomial\+\_\+geobucket.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_geobucket___iterator_a5845016f7b9cb2c7538cef310af0b102}\label{class_geobucket___iterator_a5845016f7b9cb2c7538cef310af0b102}} 
+\index{Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}}
+\subsubsection{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool Geobucket\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reports true iff the iterator no longer points to a valid monomial. 
+
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{class_polynomial___iterator_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 14 of file polynomial\+\_\+geobucket.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial\+\_\+geobucket.\+hpp\item 
+polynomial\+\_\+geobucket.\+cpp\end{DoxyCompactItemize}

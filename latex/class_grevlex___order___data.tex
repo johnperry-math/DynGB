@@ -1,0 +1,116 @@
+\hypertarget{class_grevlex___order___data}{}\section{Grevlex\+\_\+\+Order\+\_\+\+Data Class Reference}
+\label{class_grevlex___order___data}\index{Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}}
+
+
+data for the grevlex monomial ordering  
+
+
+
+
+{\ttfamily \#include $<$particular\+\_\+orderings.\+hpp$>$}
+
+Inheritance diagram for Grevlex\+\_\+\+Order\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_grevlex___order___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grevlex___order___data_a61000659db1597c1fb7f149deb0d952c}{Grevlex\+\_\+\+Order\+\_\+\+Data} (const \hyperlink{class_monomial}{Monomial} \&t)
+\item 
+\mbox{\Hypertarget{class_grevlex___order___data_a53b3cafb2c36cea8c58aba05eeb422ea}\label{class_grevlex___order___data_a53b3cafb2c36cea8c58aba05eeb422ea}} 
+\hyperlink{class_grevlex___order___data_a53b3cafb2c36cea8c58aba05eeb422ea}{Grevlex\+\_\+\+Order\+\_\+\+Data} (const \hyperlink{class_grevlex___order___data}{Grevlex\+\_\+\+Order\+\_\+\+Data} \&)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___order___data_a60129a9652bd0733ec61db63f8a878b5}\label{class_grevlex___order___data_a60129a9652bd0733ec61db63f8a878b5}} 
+virtual \hyperlink{class_grevlex___order___data}{Grevlex\+\_\+\+Order\+\_\+\+Data} $\ast$ \hyperlink{class_grevlex___order___data_a60129a9652bd0733ec61db63f8a878b5}{clone} ()
+\begin{DoxyCompactList}\small\item\em clone ``constructor'' \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___order___data_a275afe22c3514d5602eda962402821c3}\label{class_grevlex___order___data_a275afe22c3514d5602eda962402821c3}} 
+\hyperlink{class_grevlex___order___data_a275afe22c3514d5602eda962402821c3}{$\sim$\+Grevlex\+\_\+\+Order\+\_\+\+Data} ()
+\begin{DoxyCompactList}\small\item\em deletes the array creates by the constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___order___data_aa493ca0ff50ec991894bb95de918e12b}\label{class_grevlex___order___data_aa493ca0ff50ec991894bb95de918e12b}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___order___data_aa493ca0ff50ec991894bb95de918e12b}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em returns the sum of the first $i$ variables' exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___order___data_a0dc7b7051db1e8314dec67d40d79c275}\label{class_grevlex___order___data_a0dc7b7051db1e8314dec67d40d79c275}} 
+virtual D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___order___data_a0dc7b7051db1e8314dec67d40d79c275}{grading} (N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em default value is useless; orderings that supply gradings should redefine \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_grevlex___order___data_aeaf81375ec0b27a6e9c047b1d63c6d55}{assign\+\_\+gradings} (const \hyperlink{class_monomial}{Monomial} \&)
+\begin{DoxyCompactList}\small\item\em assigns gradings to a pre-\/allocated array \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___order___data_a0a4ccd9abf8d598bdb64b015f127bf4e}\label{class_grevlex___order___data_a0a4ccd9abf8d598bdb64b015f127bf4e}} 
+D\+E\+G\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_grevlex___order___data_a0a4ccd9abf8d598bdb64b015f127bf4e}{gradings}
+\begin{DoxyCompactList}\small\item\em list of partial sums of exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___order___data_afaddc36a549cd365d5f10bd817ddbef5}\label{class_grevlex___order___data_afaddc36a549cd365d5f10bd817ddbef5}} 
+const N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___order___data_afaddc36a549cd365d5f10bd817ddbef5}{number\+\_\+of\+\_\+gradings}
+\begin{DoxyCompactList}\small\item\em length of {\ttfamily gradings} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+data for the grevlex monomial ordering 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+The data involves an array of $n$ {\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE}, where the first entry is the sum of the first $n$ variables, the second entry is the sum of all but the last variable, etc. 
+
+Definition at line 64 of file particular\+\_\+orderings.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grevlex___order___data_a61000659db1597c1fb7f149deb0d952c}\label{class_grevlex___order___data_a61000659db1597c1fb7f149deb0d952c}} 
+\index{Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}!Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\index{Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}!Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{Grevlex\+\_\+\+Order\+\_\+\+Data()}{Grevlex\_Order\_Data()}}
+{\footnotesize\ttfamily Grevlex\+\_\+\+Order\+\_\+\+Data\+::\+Grevlex\+\_\+\+Order\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})}
+
+creates an array of partial weights of {\ttfamily } 
+
+Definition at line 201 of file particular\+\_\+orderings.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grevlex___order___data_aeaf81375ec0b27a6e9c047b1d63c6d55}\label{class_grevlex___order___data_aeaf81375ec0b27a6e9c047b1d63c6d55}} 
+\index{Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}!assign\+\_\+gradings@{assign\+\_\+gradings}}
+\index{assign\+\_\+gradings@{assign\+\_\+gradings}!Grevlex\+\_\+\+Order\+\_\+\+Data@{Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{assign\+\_\+gradings()}{assign\_gradings()}}
+{\footnotesize\ttfamily void Grevlex\+\_\+\+Order\+\_\+\+Data\+::assign\+\_\+gradings (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+assigns gradings to a pre-\/allocated array 
+
+\begin{DoxyWarning}{Warning}
+This does not create the array if it does not exist already! 
+\end{DoxyWarning}
+
+
+Definition at line 193 of file particular\+\_\+orderings.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+particular\+\_\+orderings.\+hpp\item 
+particular\+\_\+orderings.\+cpp\end{DoxyCompactItemize}

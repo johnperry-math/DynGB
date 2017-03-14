@@ -1,0 +1,171 @@
+\hypertarget{class_dense___univariate___integer___polynomial}{}\section{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial Class Reference}
+\label{class_dense___univariate___integer___polynomial}\index{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}}
+
+
+quick-\/'n-\/dirty Dense\+\_\+\+Univariate integer polynomial class  
+
+
+
+
+{\ttfamily \#include $<$dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_aefc915a9455b4f1512415c2a31a78eb5}\label{class_dense___univariate___integer___polynomial_aefc915a9455b4f1512415c2a31a78eb5}} 
+\hyperlink{class_dense___univariate___integer___polynomial_aefc915a9455b4f1512415c2a31a78eb5}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} (D\+E\+G\+\_\+\+T\+Y\+PE)
+\begin{DoxyCompactList}\small\item\em construct with the number of expected terms \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a412c4aac4dbcf8512294e3ec1c7dd32f}\label{class_dense___univariate___integer___polynomial_a412c4aac4dbcf8512294e3ec1c7dd32f}} 
+\hyperlink{class_dense___univariate___integer___polynomial_a412c4aac4dbcf8512294e3ec1c7dd32f}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} (const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a7791b2856ef361875ba1a9f08700dcad}\label{class_dense___univariate___integer___polynomial_a7791b2856ef361875ba1a9f08700dcad}} 
+\hyperlink{class_dense___univariate___integer___polynomial_a7791b2856ef361875ba1a9f08700dcad}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} (D\+E\+G\+\_\+\+T\+Y\+PE, int64\+\_\+t $\ast$)
+\begin{DoxyCompactList}\small\item\em from serialized data \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a9fb7da639b0155c4b6c5b2ee4e3f89fa}\label{class_dense___univariate___integer___polynomial_a9fb7da639b0155c4b6c5b2ee4e3f89fa}} 
+{\bfseries $\sim$\+Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_dense___univariate___integer___polynomial_a58fc0f5eefa5d11cdd17d3453eb9ac0d}{expand\+\_\+poly} (D\+E\+G\+\_\+\+T\+Y\+PE)
+\begin{DoxyCompactList}\small\item\em expand to allow for higher-\/degree monomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a132de1284f006ae6e943c50e8fdee973}\label{class_dense___univariate___integer___polynomial_a132de1284f006ae6e943c50e8fdee973}} 
+void \hyperlink{class_dense___univariate___integer___polynomial_a132de1284f006ae6e943c50e8fdee973}{set\+\_\+coefficient} (D\+E\+G\+\_\+\+T\+Y\+PE k, C\+O\+E\+F\+\_\+\+T\+Y\+PE a)
+\begin{DoxyCompactList}\small\item\em set the coefficient of $x^k$ to $\frac{a}{b}$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a0e56525a2b24c37a6a43c2175b9b6178}\label{class_dense___univariate___integer___polynomial_a0e56525a2b24c37a6a43c2175b9b6178}} 
+void \hyperlink{class_dense___univariate___integer___polynomial_a0e56525a2b24c37a6a43c2175b9b6178}{scale\+\_\+by} (C\+O\+E\+F\+\_\+\+T\+Y\+PE a)
+\begin{DoxyCompactList}\small\item\em multiplies every monomial by a constant \end{DoxyCompactList}\item 
+void \hyperlink{class_dense___univariate___integer___polynomial_a984a6d80cc0182348e20c60f20e4e180}{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree} (D\+E\+G\+\_\+\+T\+Y\+PE)
+\begin{DoxyCompactList}\small\item\em a hopefully efficient multiplication algorithm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a8c06ba1749b4197a9e1676cfeb87134e}\label{class_dense___univariate___integer___polynomial_a8c06ba1749b4197a9e1676cfeb87134e}} 
+void \hyperlink{class_dense___univariate___integer___polynomial_a8c06ba1749b4197a9e1676cfeb87134e}{multiply\+\_\+by} (const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&)
+\begin{DoxyCompactList}\small\item\em highly inefficient polynomial multiplication ( $O(mn)$) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_ab3fd69e979b7b369064a3188e6b8a650}\label{class_dense___univariate___integer___polynomial_ab3fd69e979b7b369064a3188e6b8a650}} 
+void \hyperlink{class_dense___univariate___integer___polynomial_ab3fd69e979b7b369064a3188e6b8a650}{negate} ()
+\begin{DoxyCompactList}\small\item\em negates the coefficients \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a9aed4c0d2f30a93f79a11f8ab102601f}\label{class_dense___univariate___integer___polynomial_a9aed4c0d2f30a93f79a11f8ab102601f}} 
+void \hyperlink{class_dense___univariate___integer___polynomial_a9aed4c0d2f30a93f79a11f8ab102601f}{add} (const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&q)
+\begin{DoxyCompactList}\small\item\em reasonably efficient, given our dense representation \end{DoxyCompactList}\item 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \& \hyperlink{class_dense___univariate___integer___polynomial_ad3fcc4a1885e52b7c6c1814aac13b7b0}{operator+=} (const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&q)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_acd4d8a0d3e9e6704a6ea91e9c29cfea0}\label{class_dense___univariate___integer___polynomial_acd4d8a0d3e9e6704a6ea91e9c29cfea0}} 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \hyperlink{class_dense___univariate___integer___polynomial_acd4d8a0d3e9e6704a6ea91e9c29cfea0}{operator-\/} (const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&) const
+\begin{DoxyCompactList}\small\item\em returns the result of subtracting the other from {\ttfamily this} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_add45ee2cac1598b8069d0375190461dc}\label{class_dense___univariate___integer___polynomial_add45ee2cac1598b8069d0375190461dc}} 
+C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{class_dense___univariate___integer___polynomial_add45ee2cac1598b8069d0375190461dc}{coeff} (D\+E\+G\+\_\+\+T\+Y\+PE k) const
+\begin{DoxyCompactList}\small\item\em the $k$th coefficient \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_af39a736de8d5640ac943d358396f1f85}\label{class_dense___univariate___integer___polynomial_af39a736de8d5640ac943d358396f1f85}} 
+C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{class_dense___univariate___integer___polynomial_af39a736de8d5640ac943d358396f1f85}{operator\mbox{[}$\,$\mbox{]}} (D\+E\+G\+\_\+\+T\+Y\+PE k) const
+\begin{DoxyCompactList}\small\item\em synonym for {\ttfamily coeff(k)} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a5099a83e73b6b86f310a9ef56ffd5689}\label{class_dense___univariate___integer___polynomial_a5099a83e73b6b86f310a9ef56ffd5689}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_dense___univariate___integer___polynomial_a5099a83e73b6b86f310a9ef56ffd5689}{degree} () const
+\begin{DoxyCompactList}\small\item\em the polynomial's degree (exponent of largest nonzero term) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_ac5251f81aaecea090443ed6cff755da4}\label{class_dense___univariate___integer___polynomial_ac5251f81aaecea090443ed6cff755da4}} 
+bool \hyperlink{class_dense___univariate___integer___polynomial_ac5251f81aaecea090443ed6cff755da4}{is\+\_\+zero} () const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily True} if and only if every valid coefficient is zero \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_ae10c30e8f3b0702d6ec0c90b2feedb23}\label{class_dense___univariate___integer___polynomial_ae10c30e8f3b0702d6ec0c90b2feedb23}} 
+const C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_dense___univariate___integer___polynomial_ae10c30e8f3b0702d6ec0c90b2feedb23}{coefficient\+\_\+array} ()
+\begin{DoxyCompactList}\small\item\em all the coefficients \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_ac980954e486906d80d08f4155254d186}\label{class_dense___univariate___integer___polynomial_ac980954e486906d80d08f4155254d186}} 
+C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_dense___univariate___integer___polynomial_ac980954e486906d80d08f4155254d186}{coeffs}
+\begin{DoxyCompactList}\small\item\em list of numerators; index 0 is the constant's \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a2dc3d8ec3b25f3a17417883c890fbdce}\label{class_dense___univariate___integer___polynomial_a2dc3d8ec3b25f3a17417883c890fbdce}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_dense___univariate___integer___polynomial_a2dc3d8ec3b25f3a17417883c890fbdce}{deg}
+\begin{DoxyCompactList}\small\item\em degree of the polynomial (largest nonzero exponent) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a7691962e41ebc91eb18c270f0d11845a}\label{class_dense___univariate___integer___polynomial_a7691962e41ebc91eb18c270f0d11845a}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_dense___univariate___integer___polynomial_a7691962e41ebc91eb18c270f0d11845a}{size}
+\begin{DoxyCompactList}\small\item\em number of slots for coefficients \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a73b460b2b57fc554551b92dfc818d45d}\label{class_dense___univariate___integer___polynomial_a73b460b2b57fc554551b92dfc818d45d}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&p)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+quick-\/'n-\/dirty Dense\+\_\+\+Univariate integer polynomial class 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016 
+\end{DoxyDate}
+\begin{DoxyWarning}{Warning}
+You must have {\ttfamily deg} smaller than {\ttfamily size}, as {\ttfamily deg} indexes the monomial of largest degree, which can be at most {\ttfamily size~-\/~1}. 
+\end{DoxyWarning}
+
+
+Definition at line 20 of file dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a58fc0f5eefa5d11cdd17d3453eb9ac0d}\label{class_dense___univariate___integer___polynomial_a58fc0f5eefa5d11cdd17d3453eb9ac0d}} 
+\index{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}!expand\+\_\+poly@{expand\+\_\+poly}}
+\index{expand\+\_\+poly@{expand\+\_\+poly}!Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{expand\+\_\+poly()}{expand\_poly()}}
+{\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial\+::expand\+\_\+poly (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{n }\end{DoxyParamCaption})}
+
+
+
+expand to allow for higher-\/degree monomials 
+
+Do this at the beginning of any computation that could expand the size of the polynomial. 
+
+Definition at line 38 of file dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+cpp.
+
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_a984a6d80cc0182348e20c60f20e4e180}\label{class_dense___univariate___integer___polynomial_a984a6d80cc0182348e20c60f20e4e180}} 
+\index{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}!multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}}
+\index{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}!Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree()}{multiply\_by\_monomial\_of\_degree()}}
+{\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial\+::multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{k }\end{DoxyParamCaption})}
+
+
+
+a hopefully efficient multiplication algorithm 
+
+Moves exponents from higher degrees to even higher degrees, freeing up space for smaller exponents. 
+
+Definition at line 67 of file dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+cpp.
+
+\mbox{\Hypertarget{class_dense___univariate___integer___polynomial_ad3fcc4a1885e52b7c6c1814aac13b7b0}\label{class_dense___univariate___integer___polynomial_ad3fcc4a1885e52b7c6c1814aac13b7b0}} 
+\index{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}\& Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial\+::operator+= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} \&}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_dense___univariate___integer___polynomial_a9aed4c0d2f30a93f79a11f8ab102601f}{add()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 66 of file dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+hpp\item 
+dense\+\_\+univariate\+\_\+integer\+\_\+poly.\+cpp\end{DoxyCompactItemize}

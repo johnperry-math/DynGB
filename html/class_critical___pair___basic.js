@@ -1,0 +1,25 @@
+var class_critical___pair___basic =
+[
+    [ "Critical_Pair_Basic", "class_critical___pair___basic.html#a31b6d04b646c0910442bb07eb21dbaad", null ],
+    [ "Critical_Pair_Basic", "class_critical___pair___basic.html#ac15d26699497686d0b0cfa5b9aa1f7ef", null ],
+    [ "~Critical_Pair_Basic", "class_critical___pair___basic.html#a5a3c9fa67ec45e8f9891d667c1ff43ec", null ],
+    [ "first", "class_critical___pair___basic.html#a6e251e3724fde2c610d921f93889eb67", null ],
+    [ "first_multiplier", "class_critical___pair___basic.html#a714e1ea76b993148dd55b05979b4b874", null ],
+    [ "is_generator", "class_critical___pair___basic.html#a621825e77a7f79234307be09d2fcf036", null ],
+    [ "lcm", "class_critical___pair___basic.html#a336387d4ddd4f184399212599dbcb130", null ],
+    [ "lcm_degree", "class_critical___pair___basic.html#a4b9daf511d0ae94c24a5a0b8aa07588b", null ],
+    [ "pair_key", "class_critical___pair___basic.html#a8fa18f909cc3b88af41a5796bd6c2424", null ],
+    [ "s_polynomial", "class_critical___pair___basic.html#ab2dbac89b07b2acfad633a9de8f56fab", null ],
+    [ "s_polynomial", "class_critical___pair___basic.html#a1bcad730e0bfcf9c833b5fcf0ded468e", null ],
+    [ "second", "class_critical___pair___basic.html#a06da1cbbe1451962b68f2bbf90855fae", null ],
+    [ "second_multiplier", "class_critical___pair___basic.html#abb08fb4bfc80732a92438cc6856503a1", null ],
+    [ "set_spoly", "class_critical___pair___basic.html#ad3ba8ead12784e3133eedf75e7601326", null ],
+    [ "operator<<", "class_critical___pair___basic.html#a142698d76b6358faf451f21bf929c993", null ],
+    [ "key", "class_critical___pair___basic.html#a638c1db1878db2e677986637f0b73d54", null ],
+    [ "p", "class_critical___pair___basic.html#ac80ca2c599a7c234e01e5377292d9a5a", null ],
+    [ "q", "class_critical___pair___basic.html#a038d8389aa28cdbc63a3e132bd226cfc", null ],
+    [ "s", "class_critical___pair___basic.html#aa7ac66f9f3cceafd55a1fd0061335afc", null ],
+    [ "tp", "class_critical___pair___basic.html#a9b232e6359525154a6d7865e607964bb", null ],
+    [ "tpq", "class_critical___pair___basic.html#a91d6dc4856d8fb137faf8ffe2b823ae8", null ],
+    [ "tq", "class_critical___pair___basic.html#a7e67ffb4af6c13830c95253e464bc3a3", null ]
+];

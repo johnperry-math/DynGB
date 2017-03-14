@@ -1,0 +1,90 @@
+\hypertarget{class_poly___sugar___data}{}\section{Poly\+\_\+\+Sugar\+\_\+\+Data Class Reference}
+\label{class_poly___sugar___data}\index{Poly\+\_\+\+Sugar\+\_\+\+Data@{Poly\+\_\+\+Sugar\+\_\+\+Data}}
+
+
+polynomial-\/related data for a sugar strategy  
+
+
+
+
+{\ttfamily \#include $<$sugar\+\_\+strategy.\+hpp$>$}
+
+Inheritance diagram for Poly\+\_\+\+Sugar\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_poly___sugar___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a0d9e2f66a44f2e10d26b977c55650f7f}\label{class_poly___sugar___data_a0d9e2f66a44f2e10d26b977c55650f7f}} 
+\hyperlink{class_poly___sugar___data_a0d9e2f66a44f2e10d26b977c55650f7f}{Poly\+\_\+\+Sugar\+\_\+\+Data} (const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$poly)
+\begin{DoxyCompactList}\small\item\em records {\ttfamily poly} as the reference for {\ttfamily this} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_ada533e5c56d7f53207a5e8093414dfb3}\label{class_poly___sugar___data_ada533e5c56d7f53207a5e8093414dfb3}} 
+virtual void \hyperlink{class_poly___sugar___data_ada533e5c56d7f53207a5e8093414dfb3}{at\+\_\+generation\+\_\+tasks} ()
+\begin{DoxyCompactList}\small\item\em sets the sugar to the largest total degree of a monomial in the assigned previously polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_aa80c660f10b1c5d0dd2a305d598685f5}\label{class_poly___sugar___data_aa80c660f10b1c5d0dd2a305d598685f5}} 
+virtual void \hyperlink{class_poly___sugar___data_aa80c660f10b1c5d0dd2a305d598685f5}{at\+\_\+generation\+\_\+tasks} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em sets the sugar to the largest total degree of a monomial in the product of the monomial and the previously assigned polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a73df53a8da9e4cfaf66202a1451d5b2e}\label{class_poly___sugar___data_a73df53a8da9e4cfaf66202a1451d5b2e}} 
+virtual bool \hyperlink{class_poly___sugar___data_a73df53a8da9e4cfaf66202a1451d5b2e}{equivalent} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff the sugars are equal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a9ccb90a43591e465479258bdf10b5b20}\label{class_poly___sugar___data_a9ccb90a43591e465479258bdf10b5b20}} 
+virtual bool \hyperlink{class_poly___sugar___data_a9ccb90a43591e465479258bdf10b5b20}{first\+\_\+larger} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff {\ttfamily this} sugar is larger than {\ttfamily sd} 's \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a1b2e8a7fe4fcd57555fa58e48620b2bf}\label{class_poly___sugar___data_a1b2e8a7fe4fcd57555fa58e48620b2bf}} 
+virtual void \hyperlink{class_poly___sugar___data_a1b2e8a7fe4fcd57555fa58e48620b2bf}{pre\+\_\+reduction\+\_\+tasks} (const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$u, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&g)
+\begin{DoxyCompactList}\small\item\em re-\/evaluates the sugar, if need be \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a3b6ef678b640a3138e43882b9d2dca5f}\label{class_poly___sugar___data_a3b6ef678b640a3138e43882b9d2dca5f}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_poly___sugar___data_a3b6ef678b640a3138e43882b9d2dca5f}{poly\+\_\+sugar} () const
+\begin{DoxyCompactList}\small\item\em the sugar itself \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a36704dfc77b9007bf5f249e55bfde0ef}\label{class_poly___sugar___data_a36704dfc77b9007bf5f249e55bfde0ef}} 
+virtual \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} \hyperlink{class_poly___sugar___data_a36704dfc77b9007bf5f249e55bfde0ef}{type} ()
+\begin{DoxyCompactList}\small\item\em the strategy type \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a945416871509370e2222c8c7abe01759}\label{class_poly___sugar___data_a945416871509370e2222c8c7abe01759}} 
+void \hyperlink{class_poly___sugar___data_a945416871509370e2222c8c7abe01759}{force\+\_\+sugar} (D\+E\+G\+\_\+\+T\+Y\+PE new\+\_\+sugar)
+\begin{DoxyCompactList}\small\item\em for those times when a different sugar is appropriate \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___sugar___data_a125902ea0a800d9545937930e4537040}\label{class_poly___sugar___data_a125902ea0a800d9545937930e4537040}} 
+unsigned long long \hyperlink{class_poly___sugar___data_a125902ea0a800d9545937930e4537040}{sugar}
+\begin{DoxyCompactList}\small\item\em the polynomial's sugar \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___sugar___data_ade466c9119513ef40b2b6220a98a72e6}\label{class_poly___sugar___data_ade466c9119513ef40b2b6220a98a72e6}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&, const \hyperlink{class_poly___sugar___data}{Poly\+\_\+\+Sugar\+\_\+\+Data} \&)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+polynomial-\/related data for a sugar strategy 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016 
+\end{DoxyDate}
+
+
+Definition at line 16 of file sugar\+\_\+strategy.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+sugar\+\_\+strategy.\+hpp\item 
+sugar\+\_\+strategy.\+cpp\end{DoxyCompactItemize}

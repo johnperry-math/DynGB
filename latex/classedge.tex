@@ -1,0 +1,137 @@
+\hypertarget{classedge}{}\section{edge Class Reference}
+\label{classedge}\index{edge@{edge}}
+
+
+an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $  
+
+
+
+
+{\ttfamily \#include $<$skeleton.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classedge_a80e74eefbaf1864ae1297fe2cea223ad}\label{classedge_a80e74eefbaf1864ae1297fe2cea223ad}} 
+\hyperlink{classedge_a80e74eefbaf1864ae1297fe2cea223ad}{edge} (const \hyperlink{classray}{ray} \&, const \hyperlink{classray}{ray} \&)
+\begin{DoxyCompactList}\small\item\em Creates a new edge that joins the two rays. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classedge_a93cf571922e2c7609ddeccaa24df1b59}\label{classedge_a93cf571922e2c7609ddeccaa24df1b59}} 
+\hyperlink{classedge_a93cf571922e2c7609ddeccaa24df1b59}{edge} (const \hyperlink{classedge}{edge} \&)
+\begin{DoxyCompactList}\small\item\em Copies the rays in {\ttfamily other} to two new rays. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classedge_a6295b7f8e62fa95cd887fb78d64347f5}{$\sim$edge} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classedge_a7c35e5555bd71f1e9f6231216b8c882e}\label{classedge_a7c35e5555bd71f1e9f6231216b8c882e}} 
+\hyperlink{classray}{ray} \hyperlink{classedge_a7c35e5555bd71f1e9f6231216b8c882e}{get\+\_\+first\+\_\+ray} () const
+\begin{DoxyCompactList}\small\item\em Returns the first ray listed in this edge. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classedge_a2baca8d9ca7f40edfb9364df3ec4c4a8}\label{classedge_a2baca8d9ca7f40edfb9364df3ec4c4a8}} 
+\hyperlink{classray}{ray} \hyperlink{classedge_a2baca8d9ca7f40edfb9364df3ec4c4a8}{get\+\_\+second\+\_\+ray} () const
+\begin{DoxyCompactList}\small\item\em Returns the second ray listed in this edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classedge_acd5e308a604773f2d414732b6a873032}\label{classedge_acd5e308a604773f2d414732b6a873032}} 
+\hyperlink{classedge}{edge} \& \hyperlink{classedge_acd5e308a604773f2d414732b6a873032}{operator=} (const \hyperlink{classedge}{edge} \&)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classedge_a87086330455166d1fe4bb71be060fbcc}{operator==} (const \hyperlink{classedge}{edge} \&e1, const \hyperlink{classedge}{edge} \&e2)
+\begin{DoxyCompactList}\small\item\em Equal if and only if the first and second rays are true. \end{DoxyCompactList}\item 
+bool \hyperlink{classedge_a983f5438e6720d3bc1d7763c0c04fcae}{operator$<$} (const \hyperlink{classedge}{edge} \&, const \hyperlink{classedge}{edge} \&)
+\begin{DoxyCompactList}\small\item\em Compares two edges lexicographically. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classedge_aad6bb96213a9839cb6b32592a4105f53}\label{classedge_aad6bb96213a9839cb6b32592a4105f53}} 
+ostream \& \hyperlink{classedge_aad6bb96213a9839cb6b32592a4105f53}{operator$<$$<$} (ostream \&, const \hyperlink{classedge}{edge} \&)
+\begin{DoxyCompactList}\small\item\em Output has the form $ \{ \mathbf{r}_1, \mathbf{r}_2 \} $ where $ \mathbf{r}_1 $ is the first ray in this edge, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $ 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+October 2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+The University of Southern Mississippi
+\end{DoxyCopyright}
+This class encapsulates an edge, the other major part of a skeleton. Edges describe how the rays of the skeleton are connected. Edges are ordered, so that the smaller ray always comes first.
+
+\begin{DoxyWarning}{Warning}
+An edge\textquotesingle{}s rays should have the same dimension. To start with, it doesn\textquotesingle{}t make mathematical sense to ``join'' two rays of different dimension. Moreover, comparison of edges requires comparison of rays,which requires that the rays have the same dimension. (But you wouldn\textquotesingle{}t be dumb enough to do this in the first place.) 
+\end{DoxyWarning}
+
+
+Definition at line 41 of file skeleton.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classedge_a6295b7f8e62fa95cd887fb78d64347f5}\label{classedge_a6295b7f8e62fa95cd887fb78d64347f5}} 
+\index{edge@{edge}!````~edge@{$\sim$edge}}
+\index{````~edge@{$\sim$edge}!edge@{edge}}
+\subsubsection{\texorpdfstring{$\sim$edge()}{~edge()}}
+{\footnotesize\ttfamily edge\+::$\sim$edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Does nothing beyond what the compiler would do. 
+
+Definition at line 59 of file skeleton.\+hpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classedge_a983f5438e6720d3bc1d7763c0c04fcae}\label{classedge_a983f5438e6720d3bc1d7763c0c04fcae}} 
+\index{edge@{edge}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!edge@{edge}}
+\subsubsection{\texorpdfstring{operator$<$}{operator<}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classedge}{edge} \&}]{first,  }\item[{const \hyperlink{classedge}{edge} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Compares two edges lexicographically. 
+
+If the first ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. Otherwise, if the first rays are equal, and the second ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. 
+
+Definition at line 41 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{classedge_a87086330455166d1fe4bb71be060fbcc}\label{classedge_a87086330455166d1fe4bb71be060fbcc}} 
+\index{edge@{edge}!operator==@{operator==}}
+\index{operator==@{operator==}!edge@{edge}}
+\subsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classedge}{edge} \&}]{e1,  }\item[{const \hyperlink{classedge}{edge} \&}]{e2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Equal if and only if the first and second rays are true. 
+
+(We can restrict ourselves to this because we have ordered the rays.) 
+
+Definition at line 82 of file skeleton.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+skeleton.\+hpp\item 
+skeleton.\+cpp\end{DoxyCompactItemize}

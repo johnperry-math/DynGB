@@ -1,0 +1,849 @@
+\hypertarget{group___iterator_group}{}\section{Iterators over polynomials}
+\label{group___iterator_group}\index{Iterators over polynomials@{Iterators over polynomials}}
+
+
+classes related to iterating over polynomials  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group___iterator_group_class_constant___polynomial___iterator}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em Iterates through a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}.  \hyperlink{group___iterator_group_class_constant___polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_d_b___polynomial___iterator}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em Iterator over double-\/buffered polynomials.  \hyperlink{group___iterator_group_class_d_b___polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_geobucket___iterator}{Geobucket\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em Iterates through polynomials using a geobucket representation. See \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} for details on methods.  \hyperlink{group___iterator_group_class_geobucket___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_l_l_polynomial___iterator}{L\+L\+Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em Iterator over linked list polynomials.  \hyperlink{group___iterator_group_class_l_l_polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_mutable___constant___polynomial___iterator}{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em An iterator to modify monomials and coefficients of a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}.  \hyperlink{group___iterator_group_class_mutable___constant___polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em A \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} allows one to modify the terms of a polynomial.  \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator}
+\begin{DoxyCompactList}\small\item\em Used to iterate through a polynomial.  \hyperlink{group___iterator_group_class_polynomial___iterator}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___iterator_group_class_polynomial___term}{Polynomial\+\_\+\+Term}
+\begin{DoxyCompactList}\small\item\em convenience class to help iterate through polynomials  \hyperlink{group___iterator_group_class_polynomial___term}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+classes related to iterating over polynomials 
+
+
+
+\subsection{Class Documentation}
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}\label{class_constant___polynomial___iterator}
+\Hypertarget{group___iterator_group_class_constant___polynomial___iterator}
+\subsubsection{class Constant\+\_\+\+Polynomial\+\_\+\+Iterator}
+Iterates through a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 37 of file polynomial\+\_\+array.\+hpp.
+
+Inheritance diagram for Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___iterator_group_ab2e59cf23f80448b3b2be7573181c1b7}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator} (const \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$q, bool at\+\_\+end=false)
+\begin{DoxyCompactList}\small\item\em Creates an iterator for {\ttfamily poly} and starts at the leading term. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a929c0ee12daaa99dc7961825507434fb}\label{group___iterator_group_a929c0ee12daaa99dc7961825507434fb}} 
+{\bfseries $\sim$\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a897042008adc0e4db52f27616fe30115}\label{group___iterator_group_a897042008adc0e4db52f27616fe30115}} 
+virtual void \hyperlink{group___iterator_group_a897042008adc0e4db52f27616fe30115}{restart\+\_\+iteration} () override
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a2a9dfd3f6a8520fd3b045f32b12f7ac9}\label{group___iterator_group_a2a9dfd3f6a8520fd3b045f32b12f7ac9}} 
+virtual void \hyperlink{group___iterator_group_a2a9dfd3f6a8520fd3b045f32b12f7ac9}{move\+Right} () override
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ad7ff9576d9d9576acb2776ce42a5dde3}\label{group___iterator_group_ad7ff9576d9d9576acb2776ce42a5dde3}} 
+virtual void \hyperlink{group___iterator_group_ad7ff9576d9d9576acb2776ce42a5dde3}{move\+Left} () override
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ad0518860ffbda4026f68495abbaeeba9}\label{group___iterator_group_ad0518860ffbda4026f68495abbaeeba9}} 
+virtual bool \hyperlink{group___iterator_group_ad0518860ffbda4026f68495abbaeeba9}{can\+Move\+Right} () const override
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}{can\+Move\+Left} () const override
+\item 
+virtual bool \hyperlink{group___iterator_group_a1b87a857220a97fe403c5164a51f86eb}{fell\+Off} () const override
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a0c010f1e921bc6180a29bb48abf34888}\label{group___iterator_group_a0c010f1e921bc6180a29bb48abf34888}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a0c010f1e921bc6180a29bb48abf34888}{curr\+Monomial} () const override
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a6b26740b4c82a20ebe4dba5226fc0072}\label{group___iterator_group_a6b26740b4c82a20ebe4dba5226fc0072}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_a6b26740b4c82a20ebe4dba5226fc0072}{curr\+Coeff} () const override
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_ab321ce25d6477f96450100cdc41090a6}\label{group___iterator_group_ab321ce25d6477f96450100cdc41090a6}} 
+long \hyperlink{group___iterator_group_ab321ce25d6477f96450100cdc41090a6}{i}
+\begin{DoxyCompactList}\small\item\em current position in p's array \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a5eb1e51bcc01a9da6dffd950a3e1b1ca}\label{group___iterator_group_a5eb1e51bcc01a9da6dffd950a3e1b1ca}} 
+const \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ \hyperlink{group___iterator_group_a5eb1e51bcc01a9da6dffd950a3e1b1ca}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial we iterate on \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group___iterator_group_ab2e59cf23f80448b3b2be7573181c1b7}\label{group___iterator_group_ab2e59cf23f80448b3b2be7573181c1b7}} 
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial\+\_\+\+Iterator()}{Constant\_Polynomial\_Iterator()}}
+{\footnotesize\ttfamily Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$}]{q,  }\item[{bool}]{at\+\_\+end = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Creates an iterator for {\ttfamily poly} and starts at the leading term. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em at\+\_\+end} & whether to start at the end of the polynomial \\
+\hline
+{\em q} & polynomial to iterate over \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 23 of file polynomial\+\_\+array.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}\label{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}} 
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!can\+Move\+Left@{can\+Move\+Left}}
+\index{can\+Move\+Left@{can\+Move\+Left}!Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{can\+Move\+Left()}{canMoveLeft()}}
+{\footnotesize\ttfamily bool Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::can\+Move\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+Can this iterator move left, or would it fall off? 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{group___iterator_group_a7ab348897446bc182500f84df8a9e590}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 49 of file polynomial\+\_\+array.\+cpp.
+
+\mbox{\Hypertarget{group___iterator_group_a1b87a857220a97fe403c5164a51f86eb}\label{group___iterator_group_a1b87a857220a97fe403c5164a51f86eb}} 
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true iff the iterator no longer points to a valid monomial.
+\end{DoxyReturn}
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 51 of file polynomial\+\_\+array.\+cpp.
+
+\index{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator@{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}}\label{class_d_b___polynomial___iterator}
+\Hypertarget{group___iterator_group_class_d_b___polynomial___iterator}
+\subsubsection{class D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}
+Iterator over double-\/buffered polynomials. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 38 of file polynomial\+\_\+double\+\_\+buffered.\+hpp.
+
+Inheritance diagram for D\+B\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_aa35fe56e92b8c5a866a4f503f3c9a587}\label{group___iterator_group_aa35fe56e92b8c5a866a4f503f3c9a587}} 
+{\bfseries D\+B\+\_\+\+Polynomial\+\_\+\+Iterator} (const \hyperlink{group__polygroup_class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} $\ast$f, bool at\+\_\+end=false)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_af8892a1128109ce22d4b6c57ce5e5398}\label{group___iterator_group_af8892a1128109ce22d4b6c57ce5e5398}} 
+{\bfseries $\sim$\+D\+B\+\_\+\+Polynomial\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a801bfca094868e78f20b94ced6373acc}\label{group___iterator_group_a801bfca094868e78f20b94ced6373acc}} 
+virtual void \hyperlink{group___iterator_group_a801bfca094868e78f20b94ced6373acc}{restart\+\_\+iteration} () override
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a2617831ba7da31b67993a8c93d2cabbd}\label{group___iterator_group_a2617831ba7da31b67993a8c93d2cabbd}} 
+virtual void \hyperlink{group___iterator_group_a2617831ba7da31b67993a8c93d2cabbd}{move\+Right} () override
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a193d1a443318e64107378c26eff0a876}\label{group___iterator_group_a193d1a443318e64107378c26eff0a876}} 
+virtual void \hyperlink{group___iterator_group_a193d1a443318e64107378c26eff0a876}{move\+Left} () override
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___iterator_group_aa5ee700b0d03a9e333f55a87b2439920}{fell\+Off} () const override
+\item 
+virtual bool \hyperlink{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}{can\+Move\+Left} () const override
+\item 
+\mbox{\Hypertarget{group___iterator_group_a428bdd3ef2ca939404abddd357c4790a}\label{group___iterator_group_a428bdd3ef2ca939404abddd357c4790a}} 
+virtual bool \hyperlink{group___iterator_group_a428bdd3ef2ca939404abddd357c4790a}{can\+Move\+Right} () const override
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_af9b50ef9d8a421be8ca81e1797a4d48e}\label{group___iterator_group_af9b50ef9d8a421be8ca81e1797a4d48e}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_af9b50ef9d8a421be8ca81e1797a4d48e}{curr\+Monomial} () const override
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ae9458ac44c64c9cb7537dee3b39f66d1}\label{group___iterator_group_ae9458ac44c64c9cb7537dee3b39f66d1}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_ae9458ac44c64c9cb7537dee3b39f66d1}{curr\+Coeff} () const override
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a2a4349f00960601a5e300fdbd45f6a93}\label{group___iterator_group_a2a4349f00960601a5e300fdbd45f6a93}} 
+virtual void \hyperlink{group___iterator_group_a2a4349f00960601a5e300fdbd45f6a93}{set\+\_\+curr\+Coeff} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a) override
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_aa5c637091134c2bc47cca2208a43e6e8}\label{group___iterator_group_aa5c637091134c2bc47cca2208a43e6e8}} 
+virtual void \hyperlink{group___iterator_group_aa5c637091134c2bc47cca2208a43e6e8}{set\+\_\+curr\+Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t) override
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a4fef20479db4c9bc1434ddacdbb67590}\label{group___iterator_group_a4fef20479db4c9bc1434ddacdbb67590}} 
+\hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} $\ast$ \hyperlink{group___iterator_group_a4fef20479db4c9bc1434ddacdbb67590}{A}
+\begin{DoxyCompactList}\small\item\em pointer to coefficients \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a3f81b1022526da1586eec443e4846ae2}\label{group___iterator_group_a3f81b1022526da1586eec443e4846ae2}} 
+long long \hyperlink{group___iterator_group_a3f81b1022526da1586eec443e4846ae2}{current\+\_\+position}
+\begin{DoxyCompactList}\small\item\em current position in the list \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a6d2f1a91150d12a8835395a678260968}\label{group___iterator_group_a6d2f1a91150d12a8835395a678260968}} 
+unsigned \hyperlink{group___iterator_group_a6d2f1a91150d12a8835395a678260968}{head}
+\begin{DoxyCompactList}\small\item\em position of first monomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_aba055182673176b6390aecd4a5bb31d4}\label{group___iterator_group_aba055182673176b6390aecd4a5bb31d4}} 
+\hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ \hyperlink{group___iterator_group_aba055182673176b6390aecd4a5bb31d4}{T}
+\begin{DoxyCompactList}\small\item\em pointer to monomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a57a302fde5b37005fc52d8d022d7284f}\label{group___iterator_group_a57a302fde5b37005fc52d8d022d7284f}} 
+unsigned \hyperlink{group___iterator_group_a57a302fde5b37005fc52d8d022d7284f}{tail}
+\begin{DoxyCompactList}\small\item\em position of last monomial \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}\label{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}} 
+\index{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator@{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}!can\+Move\+Left@{can\+Move\+Left}}
+\index{can\+Move\+Left@{can\+Move\+Left}!D\+B\+\_\+\+Polynomial\+\_\+\+Iterator@{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{can\+Move\+Left()}{canMoveLeft()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Polynomial\+\_\+\+Iterator\+::can\+Move\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+Can this iterator move left, or would it fall off? 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{group___iterator_group_a7ab348897446bc182500f84df8a9e590}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 35 of file polynomial\+\_\+double\+\_\+buffered.\+cpp.
+
+\mbox{\Hypertarget{group___iterator_group_aa5ee700b0d03a9e333f55a87b2439920}\label{group___iterator_group_aa5ee700b0d03a9e333f55a87b2439920}} 
+\index{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator@{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!D\+B\+\_\+\+Polynomial\+\_\+\+Iterator@{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true iff the iterator no longer points to a valid monomial.
+\end{DoxyReturn}
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 31 of file polynomial\+\_\+double\+\_\+buffered.\+cpp.
+
+\index{Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}}\label{class_geobucket___iterator}
+\Hypertarget{group___iterator_group_class_geobucket___iterator}
+\subsubsection{class Geobucket\+\_\+\+Iterator}
+Iterates through polynomials using a geobucket representation. See \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} for details on methods. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+Implementation based on \cite{YanGeobuckets}. \begin{DoxyWarning}{Warning}
+A polynomial in geobucket representation may not be fully simplified. Clients must not expect the monomials to be in any sort of order, and multiple instances of a monomial are possible. Geobuckets collapse only at canonicalization. 
+\end{DoxyWarning}
+
+
+Definition at line 58 of file polynomial\+\_\+geobucket.\+hpp.
+
+Inheritance diagram for Geobucket\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a1cf41a066244e2f0b6919f8e1b3d799d}\label{group___iterator_group_a1cf41a066244e2f0b6919f8e1b3d799d}} 
+{\bfseries Geobucket\+\_\+\+Iterator} (const \hyperlink{group__polygroup_class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$, bool at\+\_\+end=false)
+\item 
+\mbox{\Hypertarget{group___iterator_group_a9aef2105e723b8c2d52f5030d437f005}\label{group___iterator_group_a9aef2105e723b8c2d52f5030d437f005}} 
+{\bfseries Geobucket\+\_\+\+Iterator} (\hyperlink{group__polygroup_class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$, bool at\+\_\+end=false)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a474cb782876a334af8a4cd6c3f9f989c}\label{group___iterator_group_a474cb782876a334af8a4cd6c3f9f989c}} 
+{\bfseries $\sim$\+Geobucket\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a2acbad922f8fdd33300e49979773ba00}\label{group___iterator_group_a2acbad922f8fdd33300e49979773ba00}} 
+virtual void \hyperlink{group___iterator_group_a2acbad922f8fdd33300e49979773ba00}{restart\+\_\+iteration} () override
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a1124336f77c6d4dffdc6d3da4d6078ed}\label{group___iterator_group_a1124336f77c6d4dffdc6d3da4d6078ed}} 
+virtual void \hyperlink{group___iterator_group_a1124336f77c6d4dffdc6d3da4d6078ed}{move\+Right} () override
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ae94baa36d6b096c1144068dc21108c23}\label{group___iterator_group_ae94baa36d6b096c1144068dc21108c23}} 
+virtual void \hyperlink{group___iterator_group_ae94baa36d6b096c1144068dc21108c23}{move\+Left} () override
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ad24c1412a9027a2d02faf946c8471985}\label{group___iterator_group_ad24c1412a9027a2d02faf946c8471985}} 
+virtual bool \hyperlink{group___iterator_group_ad24c1412a9027a2d02faf946c8471985}{can\+Move\+Right} () const override
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}{can\+Move\+Left} () const override
+\item 
+virtual bool \hyperlink{group___iterator_group_a44ac71c5f71fc2830c74c4d289c9aec8}{fell\+Off} () const override
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a56793799db6e9db7bfc2a85c9d9c6849}\label{group___iterator_group_a56793799db6e9db7bfc2a85c9d9c6849}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a56793799db6e9db7bfc2a85c9d9c6849}{curr\+Monomial} () const override
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a9c8021b6917f21f3b240759fd6e31b4e}\label{group___iterator_group_a9c8021b6917f21f3b240759fd6e31b4e}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_a9c8021b6917f21f3b240759fd6e31b4e}{curr\+Coeff} () const override
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_ab425503b966e0d129e55bb44ea84ca5c}\label{group___iterator_group_ab425503b966e0d129e55bb44ea84ca5c}} 
+virtual void \hyperlink{group___iterator_group_ab425503b966e0d129e55bb44ea84ca5c}{set\+\_\+curr\+Coeff} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a) override
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_adc1c1425e4eba02105c27f9fadc76d7b}\label{group___iterator_group_adc1c1425e4eba02105c27f9fadc76d7b}} 
+virtual void \hyperlink{group___iterator_group_adc1c1425e4eba02105c27f9fadc76d7b}{set\+\_\+curr\+Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t) override
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a3a32af8a6cb4d462a3b325721bd2a11b}\label{group___iterator_group_a3a32af8a6cb4d462a3b325721bd2a11b}} 
+unsigned \hyperlink{group___iterator_group_a3a32af8a6cb4d462a3b325721bd2a11b}{bucket\+\_\+number}
+\begin{DoxyCompactList}\small\item\em the bucket number at which we're stopped \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a17836580130b78ffc1fb62b9bf67c286}\label{group___iterator_group_a17836580130b78ffc1fb62b9bf67c286}} 
+\hyperlink{group__polygroup_class_polynomial___geobucket}{Polynomial\+\_\+\+Geobucket} $\ast$ \hyperlink{group___iterator_group_a17836580130b78ffc1fb62b9bf67c286}{g}
+\begin{DoxyCompactList}\small\item\em to save myself the hassle of {\ttfamily static\+\_\+cast$<$const Polynomial\+\_\+\+Geobucket $\ast$$>$(p)} every time I turn around \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a484bb97ad82643d5b82733f6cbee8e8c}\label{group___iterator_group_a484bb97ad82643d5b82733f6cbee8e8c}} 
+\hyperlink{group___iterator_group_class_l_l_polynomial___iterator}{L\+L\+Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group___iterator_group_a484bb97ad82643d5b82733f6cbee8e8c}{pi}
+\begin{DoxyCompactList}\small\item\em an iterator for the current bucket \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}\label{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}} 
+\index{Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}!can\+Move\+Left@{can\+Move\+Left}}
+\index{can\+Move\+Left@{can\+Move\+Left}!Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{can\+Move\+Left()}{canMoveLeft()}}
+{\footnotesize\ttfamily bool Geobucket\+\_\+\+Iterator\+::can\+Move\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+Can this iterator move left, or would it fall off? 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{group___iterator_group_a7ab348897446bc182500f84df8a9e590}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 23 of file polynomial\+\_\+geobucket.\+cpp.
+
+\mbox{\Hypertarget{group___iterator_group_a44ac71c5f71fc2830c74c4d289c9aec8}\label{group___iterator_group_a44ac71c5f71fc2830c74c4d289c9aec8}} 
+\index{Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Geobucket\+\_\+\+Iterator@{Geobucket\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool Geobucket\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true iff the iterator no longer points to a valid monomial.
+\end{DoxyReturn}
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 31 of file polynomial\+\_\+geobucket.\+cpp.
+
+\index{L\+L\+Polynomial\+\_\+\+Iterator@{L\+L\+Polynomial\+\_\+\+Iterator}}\label{class_l_l_polynomial___iterator}
+\Hypertarget{group___iterator_group_class_l_l_polynomial___iterator}
+\subsubsection{class L\+L\+Polynomial\+\_\+\+Iterator}
+Iterator over linked list polynomials. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 102 of file polynomial\+\_\+linked\+\_\+list.\+hpp.
+
+Inheritance diagram for L\+L\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_aef49d7f26dd804b0ab0affbe1567fd07}\label{group___iterator_group_aef49d7f26dd804b0ab0affbe1567fd07}} 
+\hyperlink{group___iterator_group_aef49d7f26dd804b0ab0affbe1567fd07}{L\+L\+Polynomial\+\_\+\+Iterator} (\hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List} $\ast$poly, bool at\+\_\+end=false)
+\begin{DoxyCompactList}\small\item\em Initializes at the leading monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a957ab5441b10a681f647fe4417b2d373}\label{group___iterator_group_a957ab5441b10a681f647fe4417b2d373}} 
+\hyperlink{group___iterator_group_a957ab5441b10a681f647fe4417b2d373}{L\+L\+Polynomial\+\_\+\+Iterator} (const \hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List} $\ast$poly, bool at\+\_\+end=false)
+\begin{DoxyCompactList}\small\item\em Initializes at the leading monomial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_ab369923171f62e5f0cdb83ef7dd6f6e8}\label{group___iterator_group_ab369923171f62e5f0cdb83ef7dd6f6e8}} 
+virtual void \hyperlink{group___iterator_group_ab369923171f62e5f0cdb83ef7dd6f6e8}{restart\+\_\+iteration} () override
+\begin{DoxyCompactList}\small\item\em Initializes at the leading monomial. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group___iterator_group_a2bb830c4e310d91b39e55b05ce86840c}{move\+Right} () override
+\begin{DoxyCompactList}\small\item\em Returns the monomial the iterator currently points to. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a5ede434de909b2391d83b3bca4fdc4d7}\label{group___iterator_group_a5ede434de909b2391d83b3bca4fdc4d7}} 
+virtual void \hyperlink{group___iterator_group_a5ede434de909b2391d83b3bca4fdc4d7}{move\+Left} () override
+\begin{DoxyCompactList}\small\item\em Moves the iterator left\+: to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}\label{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}} 
+virtual bool \hyperlink{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}{can\+Move\+Left} () const override
+\begin{DoxyCompactList}\small\item\em Can this iterator move left, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_adbd438dcd2aafa61eb2c07873b90f751}\label{group___iterator_group_adbd438dcd2aafa61eb2c07873b90f751}} 
+virtual bool \hyperlink{group___iterator_group_adbd438dcd2aafa61eb2c07873b90f751}{can\+Move\+Right} () const override
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ab6471b426bf5645dacd2369c0ab441f5}\label{group___iterator_group_ab6471b426bf5645dacd2369c0ab441f5}} 
+virtual bool \hyperlink{group___iterator_group_ab6471b426bf5645dacd2369c0ab441f5}{fell\+Off} () const override
+\begin{DoxyCompactList}\small\item\em true iff the iterator no longer points to a valid monomial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a0a8c14daf501f3ab4a6f708aabf21f08}\label{group___iterator_group_a0a8c14daf501f3ab4a6f708aabf21f08}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a0a8c14daf501f3ab4a6f708aabf21f08}{curr\+Monomial} () const override
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a1ae954211a895e0a73ffd51e569161dc}\label{group___iterator_group_a1ae954211a895e0a73ffd51e569161dc}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_a1ae954211a895e0a73ffd51e569161dc}{curr\+Coeff} () const override
+\begin{DoxyCompactList}\small\item\em Returns the coefficient of the monomial the iterator currently points to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Data modification}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List} $\ast$ \hyperlink{group___iterator_group_a50151664e42e30b845a0a0d11577cfff}{p}
+\begin{DoxyCompactList}\small\item\em @ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a750f8f8dd1e33b8a7107aa1b717eec72}\label{group___iterator_group_a750f8f8dd1e33b8a7107aa1b717eec72}} 
+\hyperlink{group__polygroup_class_monomial___node}{Monomial\+\_\+\+Node} $\ast$ \hyperlink{group___iterator_group_a750f8f8dd1e33b8a7107aa1b717eec72}{iter\+\_\+curr}
+\begin{DoxyCompactList}\small\item\em the node at which we have stopped \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a4768fb7fbe060737c964e4179e9102c6}\label{group___iterator_group_a4768fb7fbe060737c964e4179e9102c6}} 
+virtual void \hyperlink{group___iterator_group_a4768fb7fbe060737c964e4179e9102c6}{set\+\_\+curr\+Coeff} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a) override
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_abb1e45baaf38bc96bcae22a512135fda}\label{group___iterator_group_abb1e45baaf38bc96bcae22a512135fda}} 
+virtual void \hyperlink{group___iterator_group_abb1e45baaf38bc96bcae22a512135fda}{set\+\_\+curr\+Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t) override
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_a2bb830c4e310d91b39e55b05ce86840c}\label{group___iterator_group_a2bb830c4e310d91b39e55b05ce86840c}} 
+\index{L\+L\+Polynomial\+\_\+\+Iterator@{L\+L\+Polynomial\+\_\+\+Iterator}!move\+Right@{move\+Right}}
+\index{move\+Right@{move\+Right}!L\+L\+Polynomial\+\_\+\+Iterator@{L\+L\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{move\+Right()}{moveRight()}}
+{\footnotesize\ttfamily virtual void L\+L\+Polynomial\+\_\+\+Iterator\+::move\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the monomial the iterator currently points to. 
+
+Moves the iterator right\+: to the next smaller monomial. 
+
+Implements \hyperlink{group___iterator_group_ad7adb26df3077c6c7dec39e066436ce9}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 128 of file polynomial\+\_\+linked\+\_\+list.\+hpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group___iterator_group_a50151664e42e30b845a0a0d11577cfff}\label{group___iterator_group_a50151664e42e30b845a0a0d11577cfff}} 
+\index{L\+L\+Polynomial\+\_\+\+Iterator@{L\+L\+Polynomial\+\_\+\+Iterator}!p@{p}}
+\index{p@{p}!L\+L\+Polynomial\+\_\+\+Iterator@{L\+L\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{p}{p}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List}$\ast$ L\+L\+Polynomial\+\_\+\+Iterator\+::p\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+@ 
+
+the polynomial over which we iterate 
+
+Definition at line 159 of file polynomial\+\_\+linked\+\_\+list.\+hpp.
+
+\index{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}\label{class_mutable___constant___polynomial___iterator}
+\Hypertarget{group___iterator_group_class_mutable___constant___polynomial___iterator}
+\subsubsection{class Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}
+An iterator to modify monomials and coefficients of a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+Sometimes we want to be able to change particular monomials in a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. This a bit naughty, since it violates the spirit of a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. I guess I need a different name for the latter. This generally mimics a \hyperlink{group___iterator_group_class_constant___polynomial___iterator}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, but cannot inherit from it due to issues with the {\ttfamily const} keyword. This may reflect bad design. 
+
+Definition at line 253 of file polynomial\+\_\+array.\+hpp.
+
+Inheritance diagram for Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___iterator_group_ac443c5f24675fc7c8fb69bbd167b634b}{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator} (\hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$poly)
+\begin{DoxyCompactList}\small\item\em Creates an iterator for {\ttfamily poly} and starts at its leading term. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a7a4ed35d8a8429bfaf395b034643941b}\label{group___iterator_group_a7a4ed35d8a8429bfaf395b034643941b}} 
+{\bfseries $\sim$\+Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a039b9076a97e27d93c2393509024c6a3}\label{group___iterator_group_a039b9076a97e27d93c2393509024c6a3}} 
+virtual void \hyperlink{group___iterator_group_a039b9076a97e27d93c2393509024c6a3}{restart\+\_\+iteration} () override
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ae7570f0ac60c11fe8cddc6ba6e1028a9}\label{group___iterator_group_ae7570f0ac60c11fe8cddc6ba6e1028a9}} 
+virtual void \hyperlink{group___iterator_group_ae7570f0ac60c11fe8cddc6ba6e1028a9}{move\+Right} () override
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a7a2a49f383c6a7c466c107648940bfcf}\label{group___iterator_group_a7a2a49f383c6a7c466c107648940bfcf}} 
+virtual void \hyperlink{group___iterator_group_a7a2a49f383c6a7c466c107648940bfcf}{move\+Left} () override
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___iterator_group_a4c7718296e7be3e5c2b942fa71dd69f2}{fell\+Off} () const override
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a81fa964c3459c2bcefb47e7cd6c8c676}\label{group___iterator_group_a81fa964c3459c2bcefb47e7cd6c8c676}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a81fa964c3459c2bcefb47e7cd6c8c676}{curr\+Monomial} () const override
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a5dcae638d3526d75b69fd53c9e50c22d}\label{group___iterator_group_a5dcae638d3526d75b69fd53c9e50c22d}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_a5dcae638d3526d75b69fd53c9e50c22d}{curr\+Coeff} () const override
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_ad5735f8b3c49c632ea7e93956876fed4}\label{group___iterator_group_ad5735f8b3c49c632ea7e93956876fed4}} 
+virtual void \hyperlink{group___iterator_group_ad5735f8b3c49c632ea7e93956876fed4}{set\+\_\+curr\+Coeff} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a) override
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_aec343a01bd5e134dba01f4acffb0dd45}\label{group___iterator_group_aec343a01bd5e134dba01f4acffb0dd45}} 
+virtual void \hyperlink{group___iterator_group_aec343a01bd5e134dba01f4acffb0dd45}{set\+\_\+curr\+Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t) override
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a7f2a05f25113363d7bb763d579aad653}\label{group___iterator_group_a7f2a05f25113363d7bb763d579aad653}} 
+long long \hyperlink{group___iterator_group_a7f2a05f25113363d7bb763d579aad653}{i}
+\begin{DoxyCompactList}\small\item\em the monomial we currently point to \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a9a9959010a5e8dc6cfdbef7c65ea26da}\label{group___iterator_group_a9a9959010a5e8dc6cfdbef7c65ea26da}} 
+\hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ \hyperlink{group___iterator_group_a9a9959010a5e8dc6cfdbef7c65ea26da}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial over which we iterate \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group___iterator_group_ac443c5f24675fc7c8fb69bbd167b634b}\label{group___iterator_group_ac443c5f24675fc7c8fb69bbd167b634b}} 
+\index{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\index{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator()}{Mutable\_Constant\_Polynomial\_Iterator()}}
+{\footnotesize\ttfamily Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::\+Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator (\begin{DoxyParamCaption}\item[{\hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$}]{poly }\end{DoxyParamCaption})}
+
+
+
+Creates an iterator for {\ttfamily poly} and starts at its leading term. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em poly} & the polynomial {\ttfamily this} will iterate over \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 267 of file polynomial\+\_\+array.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_a4c7718296e7be3e5c2b942fa71dd69f2}\label{group___iterator_group_a4c7718296e7be3e5c2b942fa71dd69f2}} 
+\index{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true iff the iterator no longer points to a valid monomial.
+\end{DoxyReturn}
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 282 of file polynomial\+\_\+array.\+cpp.
+
+\index{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}}\label{class_mutable___polynomial___iterator}
+\Hypertarget{group___iterator_group_class_mutable___polynomial___iterator}
+\subsubsection{class Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}
+A \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator} allows one to modify the terms of a polynomial. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 283 of file polynomial.\+hpp.
+
+Inheritance diagram for Mutable\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.779661cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Data modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a68d273d038b81b687559cf3e7f2c6df3}\label{group___iterator_group_a68d273d038b81b687559cf3e7f2c6df3}} 
+virtual void \hyperlink{group___iterator_group_a68d273d038b81b687559cf3e7f2c6df3}{set\+\_\+curr\+Coeff} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&)=0
+\begin{DoxyCompactList}\small\item\em change coefficient in current position \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_aeb3668fd81e4284a84c8be4cd2416009}\label{group___iterator_group_aeb3668fd81e4284a84c8be4cd2416009}} 
+virtual void \hyperlink{group___iterator_group_aeb3668fd81e4284a84c8be4cd2416009}{set\+\_\+curr\+Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&)=0
+\begin{DoxyCompactList}\small\item\em change monomial in current position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Additional Inherited Members}
+\index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}}\label{class_polynomial___iterator}
+\Hypertarget{group___iterator_group_class_polynomial___iterator}
+\subsubsection{class Polynomial\+\_\+\+Iterator}
+Used to iterate through a polynomial. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+This class encapsulates the basic functionality needed to iterate through the monomials of a polynomial. A \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} cannot modify a polynomial, however; to do that, you need a \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}. 
+
+Definition at line 224 of file polynomial.\+hpp.
+
+Inheritance diagram for Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.779661cm]{group___iterator_group}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a20e700b363cc17d2f8c015f4eca1030f}\label{group___iterator_group_a20e700b363cc17d2f8c015f4eca1030f}} 
+virtual \hyperlink{group___iterator_group_a20e700b363cc17d2f8c015f4eca1030f}{$\sim$\+Polynomial\+\_\+\+Iterator} ()=0
+\begin{DoxyCompactList}\small\item\em needed to avoid undefined behavior when disposing \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a7135fd6c3a90134741abc2da51467a43}\label{group___iterator_group_a7135fd6c3a90134741abc2da51467a43}} 
+virtual void \hyperlink{group___iterator_group_a7135fd6c3a90134741abc2da51467a43}{restart\+\_\+iteration} ()=0
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ad7adb26df3077c6c7dec39e066436ce9}\label{group___iterator_group_ad7adb26df3077c6c7dec39e066436ce9}} 
+virtual void \hyperlink{group___iterator_group_ad7adb26df3077c6c7dec39e066436ce9}{move\+Right} ()=0
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a934c291b780f91efefea23880827d5dc}\label{group___iterator_group_a934c291b780f91efefea23880827d5dc}} 
+const \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} \& \hyperlink{group___iterator_group_a934c291b780f91efefea23880827d5dc}{operator++} ()
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_ae800f42d78fae005b9d9600b00946026}\label{group___iterator_group_ae800f42d78fae005b9d9600b00946026}} 
+virtual bool \hyperlink{group___iterator_group_ae800f42d78fae005b9d9600b00946026}{can\+Move\+Right} () const =0
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a47683fc8085c51bd14c5647a7e9e7e87}\label{group___iterator_group_a47683fc8085c51bd14c5647a7e9e7e87}} 
+virtual void \hyperlink{group___iterator_group_a47683fc8085c51bd14c5647a7e9e7e87}{move\+Left} ()=0
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group___iterator_group_a7ab348897446bc182500f84df8a9e590}{can\+Move\+Left} () const =0
+\item 
+virtual bool \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{fell\+Off} () const =0
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a7c21bc208d7a71c4a806c4abd1dcf05f}\label{group___iterator_group_a7c21bc208d7a71c4a806c4abd1dcf05f}} 
+virtual const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ \hyperlink{group___iterator_group_a7c21bc208d7a71c4a806c4abd1dcf05f}{my\+\_\+poly} () const
+\begin{DoxyCompactList}\small\item\em Reports the polynomial on which {\ttfamily this} is iterating. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a95408f0c39ca1cec17dd7802337fe028}\label{group___iterator_group_a95408f0c39ca1cec17dd7802337fe028}} 
+virtual const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a95408f0c39ca1cec17dd7802337fe028}{curr\+Monomial} () const =0
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a92a7e8c4e0054153a2554c8009536405}\label{group___iterator_group_a92a7e8c4e0054153a2554c8009536405}} 
+virtual const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_a92a7e8c4e0054153a2554c8009536405}{curr\+Coeff} () const =0
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a119cd2937a0cacd43585dee8dc95505f}\label{group___iterator_group_a119cd2937a0cacd43585dee8dc95505f}} 
+const \hyperlink{group___iterator_group_class_polynomial___term}{Polynomial\+\_\+\+Term} \hyperlink{group___iterator_group_a119cd2937a0cacd43585dee8dc95505f}{operator$\ast$} () const
+\begin{DoxyCompactList}\small\item\em C++11 iteration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a55bdf643502d14fc6d59df65465d21cd}\label{group___iterator_group_a55bdf643502d14fc6d59df65465d21cd}} 
+virtual bool {\bfseries operator!=} (const \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} \&other) const
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_ab35e9b9c4d7ed12dabce5057a4c2a1b5}\label{group___iterator_group_ab35e9b9c4d7ed12dabce5057a4c2a1b5}} 
+const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ \hyperlink{group___iterator_group_ab35e9b9c4d7ed12dabce5057a4c2a1b5}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial {\ttfamily this} points to \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___iterator_group_a7ab348897446bc182500f84df8a9e590}\label{group___iterator_group_a7ab348897446bc182500f84df8a9e590}} 
+\index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}!can\+Move\+Left@{can\+Move\+Left}}
+\index{can\+Move\+Left@{can\+Move\+Left}!Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{can\+Move\+Left()}{canMoveLeft()}}
+{\footnotesize\ttfamily virtual bool Polynomial\+\_\+\+Iterator\+::can\+Move\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+Can this iterator move left, or would it fall off? 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}{L\+L\+Polynomial\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}{Geobucket\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}, and \hyperlink{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}.
+
+\mbox{\Hypertarget{group___iterator_group_ac571e120134088d6067718bbad513e2d}\label{group___iterator_group_ac571e120134088d6067718bbad513e2d}} 
+\index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}}
+\subparagraph{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily virtual bool Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+true iff the iterator no longer points to a valid monomial.
+\end{DoxyReturn}
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implemented in \hyperlink{group___iterator_group_a4c7718296e7be3e5c2b942fa71dd69f2}{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, \hyperlink{group___iterator_group_ab6471b426bf5645dacd2369c0ab441f5}{L\+L\+Polynomial\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a44ac71c5f71fc2830c74c4d289c9aec8}{Geobucket\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a1b87a857220a97fe403c5164a51f86eb}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, and \hyperlink{group___iterator_group_aa5ee700b0d03a9e333f55a87b2439920}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}.
+
+\index{Polynomial\+\_\+\+Term@{Polynomial\+\_\+\+Term}}\label{class_polynomial___term}
+\Hypertarget{group___iterator_group_class_polynomial___term}
+\subsubsection{class Polynomial\+\_\+\+Term}
+convenience class to help iterate through polynomials 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016 
+\end{DoxyDate}
+
+
+Definition at line 60 of file polynomial.\+hpp.
+
+\subsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_a62dc1c5f38a989c0bfe40520ebc76d74}\label{group___iterator_group_a62dc1c5f38a989c0bfe40520ebc76d74}} 
+{\bfseries Polynomial\+\_\+\+Term} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&m, const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_aeca1117b51f1326a8c4db38837c84f61}\label{group___iterator_group_aeca1117b51f1326a8c4db38837c84f61}} 
+const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_aeca1117b51f1326a8c4db38837c84f61}{monomial} ()
+\begin{DoxyCompactList}\small\item\em the monomial of this term \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_afc61ecc1cd633fd0f758bace614711d1}\label{group___iterator_group_afc61ecc1cd633fd0f758bace614711d1}} 
+const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_afc61ecc1cd633fd0f758bace614711d1}{coefficient} ()
+\begin{DoxyCompactList}\small\item\em the coefficient for this term \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___iterator_group_aacc7304520c8664217e7ce403a82d280}\label{group___iterator_group_aacc7304520c8664217e7ce403a82d280}} 
+const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___iterator_group_aacc7304520c8664217e7ce403a82d280}{c}
+\begin{DoxyCompactList}\small\item\em the coefficient of this term \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___iterator_group_a39c6314ec57dce98f2208d02d78e3402}\label{group___iterator_group_a39c6314ec57dce98f2208d02d78e3402}} 
+const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group___iterator_group_a39c6314ec57dce98f2208d02d78e3402}{t}
+\begin{DoxyCompactList}\small\item\em the monomial part of this term \end{DoxyCompactList}\end{DoxyCompactItemize}

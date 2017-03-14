@@ -1,0 +1,120 @@
+\hypertarget{class_grevlex___ordering}{}\section{Grevlex\+\_\+\+Ordering Class Reference}
+\label{class_grevlex___ordering}\index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}}
+
+
+the grevlex ordering for a specified number of variables  
+
+
+
+
+{\ttfamily \#include $<$particular\+\_\+orderings.\+hpp$>$}
+
+Inheritance diagram for Grevlex\+\_\+\+Ordering\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_grevlex___ordering}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a73efa1ac5de7104f4de26d6b2c1246ba}\label{class_grevlex___ordering_a73efa1ac5de7104f4de26d6b2c1246ba}} 
+\hyperlink{class_grevlex___ordering_a73efa1ac5de7104f4de26d6b2c1246ba}{Grevlex\+\_\+\+Ordering} (N\+V\+A\+R\+\_\+\+T\+Y\+PE number\+\_\+of\+\_\+variables)
+\begin{DoxyCompactList}\small\item\em creates a grevlex ordering specific to the specified number of variables \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a28a27f533af22e75236476b843c07517}\label{class_grevlex___ordering_a28a27f533af22e75236476b843c07517}} 
+virtual bool \hyperlink{class_grevlex___ordering_a28a27f533af22e75236476b843c07517}{first\+\_\+larger} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t>u$ by sums of successively fewer exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___ordering_af2780cccdbe6e89eafefb6bca6088916}\label{class_grevlex___ordering_af2780cccdbe6e89eafefb6bca6088916}} 
+virtual bool \hyperlink{class_grevlex___ordering_af2780cccdbe6e89eafefb6bca6088916}{first\+\_\+smaller} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t< u$ by sums of successively fewer exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a0bdc627c3fbb59c28fcf8cbc1503c0ad}\label{class_grevlex___ordering_a0bdc627c3fbb59c28fcf8cbc1503c0ad}} 
+virtual bool \hyperlink{class_grevlex___ordering_a0bdc627c3fbb59c28fcf8cbc1503c0ad}{first\+\_\+larger\+\_\+than\+\_\+multiple} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u, const \hyperlink{class_monomial}{Monomial} \&v) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t>uv$ by sums of successively fewer exponents \end{DoxyCompactList}\item 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___ordering_a24d2e7bf28ecab1d8a6c703147f48341}{partial\+\_\+degree} (const \hyperlink{class_monomial}{Monomial} \&t, N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em compares the sum of the first i exponents \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_grevlex___ordering_a0a8893d7c44f5d902c9ac5ed426621db}{cmp} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em \{@ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Utility}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a8c65377ef8f3015a6c03ef933b37550a}\label{class_grevlex___ordering_a8c65377ef8f3015a6c03ef933b37550a}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___ordering_a8c65377ef8f3015a6c03ef933b37550a}{compute\+\_\+ith\+\_\+weight} (const \hyperlink{class_monomial}{Monomial} \&t, N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em computes the sum of the first i exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a293b981c2cc9f4f4a58d3af1a02f796b}\label{class_grevlex___ordering_a293b981c2cc9f4f4a58d3af1a02f796b}} 
+virtual void \hyperlink{class_grevlex___ordering_a293b981c2cc9f4f4a58d3af1a02f796b}{set\+\_\+data} (\hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em sets the \hyperlink{class_monomial}{Monomial}'s {\ttfamily monomial\+\_\+ordering\+\_\+data} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grevlex___ordering_a3fa495befedef829c12097e239fea97f}\label{class_grevlex___ordering_a3fa495befedef829c12097e239fea97f}} 
+const N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_grevlex___ordering_a3fa495befedef829c12097e239fea97f}{n}
+\begin{DoxyCompactList}\small\item\em the number of variables, which should remain constant \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the grevlex ordering for a specified number of variables 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+The grevlex ordering first compares the sums of the exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. \begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}.\end{Desc}
+
+
+Definition at line 114 of file particular\+\_\+orderings.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grevlex___ordering_a0a8893d7c44f5d902c9ac5ed426621db}\label{class_grevlex___ordering_a0a8893d7c44f5d902c9ac5ed426621db}} 
+\index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}!cmp@{cmp}}
+\index{cmp@{cmp}!Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}}
+\subsubsection{\texorpdfstring{cmp()}{cmp()}}
+{\footnotesize\ttfamily virtual int Grevlex\+\_\+\+Ordering\+::cmp (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\{@ 
+
+returns 0 if the Monomials are like; negative if smaller, positive if larger -- for efficiency, you probably want to redefine this 
+
+Implements \hyperlink{class_monomial___ordering_a9bc3155fc98b4d40c26118fa2114b827}{Monomial\+\_\+\+Ordering}.
+
+
+
+Definition at line 144 of file particular\+\_\+orderings.\+hpp.
+
+\mbox{\Hypertarget{class_grevlex___ordering_a24d2e7bf28ecab1d8a6c703147f48341}\label{class_grevlex___ordering_a24d2e7bf28ecab1d8a6c703147f48341}} 
+\index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}!partial\+\_\+degree@{partial\+\_\+degree}}
+\index{partial\+\_\+degree@{partial\+\_\+degree}!Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}}
+\subsubsection{\texorpdfstring{partial\+\_\+degree()}{partial\_degree()}}
+{\footnotesize\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE Grevlex\+\_\+\+Ordering\+::partial\+\_\+degree (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t,  }\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{i }\end{DoxyParamCaption}) const}
+
+
+
+compares the sum of the first i exponents 
+
+\begin{DoxyWarning}{Warning}
+Be sure that {\ttfamily t} has the correct ordering! 
+\end{DoxyWarning}
+
+
+Definition at line 284 of file particular\+\_\+orderings.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+particular\+\_\+orderings.\+hpp\item 
+particular\+\_\+orderings.\+cpp\end{DoxyCompactItemize}

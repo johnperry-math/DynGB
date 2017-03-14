@@ -1,0 +1,23 @@
+\hypertarget{test_user_interface_8cpp-example}{}\section{test\+\_\+user\+\_\+interface.\+cpp}
+This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial ideal (within the bounds this system can handle). The program is suitable for running stand-\/alone, as it prompts the user for all information, but it is probably better to pipe as input a file formatted similarly to the directory \hyperlink{}{example\+\_\+systems\+\_\+for\+\_\+user\+\_\+interface}. The basic format is\+: 
+\begin{DoxyEnumerate}
+\item field characteristic (should be prime) 
+\item number of indeterminates 
+\item whether to specify the indeterminates' names ({\ttfamily y} or {\ttfamily n}) 
+\begin{DoxyEnumerate}
+\item If {\ttfamily y}, follow this with the list of names 
+\end{DoxyEnumerate}
+\item number of generators supplied 
+\item the generators, one per line, specified in expanded format (no parentheses, grouping, etc.)  
+\item dynamic ({\ttfamily d}) or static ({\ttfamily s}) algorithm; if dynamic, add in this order\+: 
+\begin{DoxyEnumerate}
+\item which solver to use ({\ttfamily skel}, {\ttfamily ppl}, {\ttfamily glpk}) 
+\item which heuristic to use ({\ttfamily h} for hilbert, {\ttfamily c} for minimal critical pairs, {\ttfamily b} for graded Betti) 
+\item whether to perform a global analysis of the generators at the outset ({\ttfamily y} or {\ttfamily n}) 
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+ 

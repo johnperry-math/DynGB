@@ -1,0 +1,106 @@
+\hypertarget{class_indeterminate}{}\section{Indeterminate Class Reference}
+\label{class_indeterminate}\index{Indeterminate@{Indeterminate}}
+
+
+Implementation of indeterminates, for easier building of polynomials.  
+
+
+
+
+{\ttfamily \#include $<$indeterminate.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_indeterminate_a69cacbaf1f95b735ae1126de93f1da5c}\label{class_indeterminate_a69cacbaf1f95b735ae1126de93f1da5c}} 
+\hyperlink{class_indeterminate_a69cacbaf1f95b735ae1126de93f1da5c}{Indeterminate} (\hyperlink{class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&P, N\+V\+A\+R\+\_\+\+T\+Y\+PE xi)
+\begin{DoxyCompactList}\small\item\em {\ttfamily this} will correspond to the {\ttfamily xi}th indeterminate of {\ttfamily P}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_affe3146cd68726d8a7f7cb1e70bc19fb}\label{class_indeterminate_affe3146cd68726d8a7f7cb1e70bc19fb}} 
+\hyperlink{class_indeterminate_affe3146cd68726d8a7f7cb1e70bc19fb}{Indeterminate} (const \hyperlink{class_indeterminate}{Indeterminate} \&other)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_ac2540ce0eecc8b82afd5d6742e27d6e4}\label{class_indeterminate_ac2540ce0eecc8b82afd5d6742e27d6e4}} 
+\hyperlink{class_indeterminate}{Indeterminate} \& {\bfseries operator=} (const \hyperlink{class_indeterminate}{Indeterminate} \&other)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_indeterminate_ab3e27b16e7da9518ccba7f91969cd88f}\label{class_indeterminate_ab3e27b16e7da9518ccba7f91969cd88f}} 
+\hyperlink{class_polynomial___ring}{Polynomial\+\_\+\+Ring} \& \hyperlink{class_indeterminate_ab3e27b16e7da9518ccba7f91969cd88f}{base\+\_\+ring} ()
+\begin{DoxyCompactList}\small\item\em the \hyperlink{class_polynomial___ring}{Polynomial\+\_\+\+Ring} {\ttfamily this} lives in \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_acb2070ec4ddcaca8ded1ff14856cf966}\label{class_indeterminate_acb2070ec4ddcaca8ded1ff14856cf966}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_indeterminate_acb2070ec4ddcaca8ded1ff14856cf966}{index\+\_\+in\+\_\+ring} ()
+\begin{DoxyCompactList}\small\item\em which variable in \hyperlink{class_indeterminate_ab3e27b16e7da9518ccba7f91969cd88f}{base\+\_\+ring()} {\ttfamily this} is \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_indeterminate_a91dbca8f634ff05a13a168b5cd2e258e}\label{class_indeterminate_a91dbca8f634ff05a13a168b5cd2e258e}} 
+\hyperlink{class_monomial}{Monomial} \hyperlink{class_indeterminate_a91dbca8f634ff05a13a168b5cd2e258e}{operator$^\wedge$} (E\+X\+P\+\_\+\+T\+Y\+PE a)
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily this} to the {\ttfamily a}th power \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_a969b2a98b105e719d83e3036f8872653}\label{class_indeterminate_a969b2a98b105e719d83e3036f8872653}} 
+\hyperlink{class_monomial}{Monomial} \hyperlink{class_indeterminate_a969b2a98b105e719d83e3036f8872653}{operator$\ast$} (\hyperlink{class_indeterminate}{Indeterminate} y)
+\begin{DoxyCompactList}\small\item\em returns the product of {\ttfamily this} and {\ttfamily y} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_a936f26303c8f00f0cfe1251a29432550}\label{class_indeterminate_a936f26303c8f00f0cfe1251a29432550}} 
+\hyperlink{class_monomial}{Monomial} \hyperlink{class_indeterminate_a936f26303c8f00f0cfe1251a29432550}{operator$\ast$} (\hyperlink{class_monomial}{Monomial} t)
+\begin{DoxyCompactList}\small\item\em returns the product of {\ttfamily this} and {\ttfamily t} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_indeterminate_aab06276a83206026ef44fb6249971796}\label{class_indeterminate_aab06276a83206026ef44fb6249971796}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_indeterminate_aab06276a83206026ef44fb6249971796}{i}
+\begin{DoxyCompactList}\small\item\em which indeterminate in {\ttfamily R} {\ttfamily this} is \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_indeterminate_a78f5339712602f11e29a091d228032c4}\label{class_indeterminate_a78f5339712602f11e29a091d228032c4}} 
+\hyperlink{class_polynomial___ring}{Polynomial\+\_\+\+Ring} $\ast$ \hyperlink{class_indeterminate_a78f5339712602f11e29a091d228032c4}{R}
+\begin{DoxyCompactList}\small\item\em the ring {\ttfamily this} lives in \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_indeterminate_a0fbbf892bdfabc97b41ec7e486e83125}\label{class_indeterminate_a0fbbf892bdfabc97b41ec7e486e83125}} 
+ostream \& \hyperlink{class_indeterminate_a0fbbf892bdfabc97b41ec7e486e83125}{operator$<$$<$} (ostream \&, \hyperlink{class_indeterminate}{Indeterminate} \&)
+\begin{DoxyCompactList}\small\item\em prints {\ttfamily this} with the appropriate name \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Implementation of indeterminates, for easier building of polynomials. 
+
+\begin{DoxyAuthor}{Author}
+John Perry
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+The main purpose of this class is to help make it easier to build polynomials. It is not especially useful otherwise, and is highly efficient. However, it makes the following possible\+: 
+\begin{DoxyCode}
+\hyperlink{class_prime___field}{Prime\_Field} F = \hyperlink{class_prime___field}{Prime\_Field}(43);
+\textcolor{keywordtype}{string} var\_names [] = \{ \textcolor{stringliteral}{"x"}, \textcolor{stringliteral}{"y"} \};
+P = \hyperlink{class_polynomial___ring}{Polynomial\_Ring}(2, F, var\_names);
+\hyperlink{class_indeterminate}{Indeterminate} x(\hyperlink{class_indeterminate_a78f5339712602f11e29a091d228032c4}{R}, 0);
+\hyperlink{class_indeterminate}{Indeterminate} y(\hyperlink{class_indeterminate_a78f5339712602f11e29a091d228032c4}{R}, 1);
+\hyperlink{class_monomial}{Monomial} x3y = (x^3) * (x*y);
+x3y.\hyperlink{class_monomial_a339f1927077ab6d92b050d222d945f72}{printlncout}();
+\end{DoxyCode}
+ {$\dots$}and the result should be $x^3y$. Alternately, you could do\+: 
+\begin{DoxyCode}
+\hyperlink{class_indeterminate}{Indeterminate} * X = P.indeterminates();
+\hyperlink{class_monomial}{Monomial} x3y = (X[0]^3) * (X[0]*X[1]);
+x3y.\hyperlink{class_monomial_a339f1927077ab6d92b050d222d945f72}{printlncout}();
+free(X);
+\end{DoxyCode}
+ {$\dots$}with the same result. Just be careful in the second case to destroy the evidence. \begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{test_monomials_8cpp-example}{test\+\_\+monomials.\+cpp}.\end{Desc}
+
+
+Definition at line 46 of file indeterminate.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+indeterminate.\+hpp\item 
+indeterminate.\+cpp\end{DoxyCompactItemize}

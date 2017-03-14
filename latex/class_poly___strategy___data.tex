@@ -1,0 +1,192 @@
+\hypertarget{class_poly___strategy___data}{}\section{Poly\+\_\+\+Strategy\+\_\+\+Data Class Reference}
+\label{class_poly___strategy___data}\index{Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}}
+
+
+polynomial-\/related strategy data  
+
+
+
+
+{\ttfamily \#include $<$strategies.\+hpp$>$}
+
+Inheritance diagram for Poly\+\_\+\+Strategy\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_poly___strategy___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___strategy___data_acdbc88a35a960f6f2934947de32b1f20}\label{class_poly___strategy___data_acdbc88a35a960f6f2934947de32b1f20}} 
+virtual {\bfseries $\sim$\+Poly\+\_\+\+Strategy\+\_\+\+Data} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a305ffff282203eaccd7f1709634bc5d4}\label{class_poly___strategy___data_a305ffff282203eaccd7f1709634bc5d4}} 
+virtual \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} {\bfseries type} ()=0
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___strategy___data_aa82a57a8bf9b3c14fd65a573fd78a4a5}\label{class_poly___strategy___data_aa82a57a8bf9b3c14fd65a573fd78a4a5}} 
+virtual bool \hyperlink{class_poly___strategy___data_aa82a57a8bf9b3c14fd65a573fd78a4a5}{equivalent} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&) const =0
+\begin{DoxyCompactList}\small\item\em should return {\ttfamily true} iff strategy considers {\ttfamily this} and other equivalent \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a5c88b8a0a17d4175bf43ccab5d7ded4f}\label{class_poly___strategy___data_a5c88b8a0a17d4175bf43ccab5d7ded4f}} 
+bool \hyperlink{class_poly___strategy___data_a5c88b8a0a17d4175bf43ccab5d7ded4f}{operator==} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&other) const
+\begin{DoxyCompactList}\small\item\em alias for \hyperlink{class_poly___strategy___data_aa82a57a8bf9b3c14fd65a573fd78a4a5}{equivalent()} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a6cd4608015a6b0f06141b9b73b0d4137}\label{class_poly___strategy___data_a6cd4608015a6b0f06141b9b73b0d4137}} 
+virtual bool \hyperlink{class_poly___strategy___data_a6cd4608015a6b0f06141b9b73b0d4137}{first\+\_\+larger} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&) const =0
+\begin{DoxyCompactList}\small\item\em should return {\ttfamily true} iff strategy considers {\ttfamily this} larger than other \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a4100b95343145b454dca2978545dd791}\label{class_poly___strategy___data_a4100b95343145b454dca2978545dd791}} 
+bool \hyperlink{class_poly___strategy___data_a4100b95343145b454dca2978545dd791}{operator$>$} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&other) const
+\begin{DoxyCompactList}\small\item\em alias for \hyperlink{class_poly___strategy___data_a6cd4608015a6b0f06141b9b73b0d4137}{first\+\_\+larger()} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a10eaa72d8dd9d02be47c7450d0358911}\label{class_poly___strategy___data_a10eaa72d8dd9d02be47c7450d0358911}} 
+bool \hyperlink{class_poly___strategy___data_a10eaa72d8dd9d02be47c7450d0358911}{operator$>$=} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&other) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} larger than or equivalent to other? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a77f188486ec685a0848eb8ff21d9c1cc}\label{class_poly___strategy___data_a77f188486ec685a0848eb8ff21d9c1cc}} 
+bool \hyperlink{class_poly___strategy___data_a77f188486ec685a0848eb8ff21d9c1cc}{operator$<$} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&other) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} smaller than other? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a861774f75e0585613a250483728a7ed2}\label{class_poly___strategy___data_a861774f75e0585613a250483728a7ed2}} 
+bool \hyperlink{class_poly___strategy___data_a861774f75e0585613a250483728a7ed2}{operator$<$=} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&other) const
+\begin{DoxyCompactList}\small\item\em is {\ttfamily this} smaller than or equivalent to other? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_poly___strategy___data_a3c2e31f0e3323da59564edc6ee3557af}{at\+\_\+generation\+\_\+tasks} ()
+\begin{DoxyCompactList}\small\item\em hook called while first generating polynomial \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_poly___strategy___data_a6683749a5fb30b6f91075a28899fbfe7}{at\+\_\+generation\+\_\+tasks} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em hook called while first generating a polynomial {\itshape multiple} \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_poly___strategy___data_a996754ff163b0ff32d783ec723ac35be}{valid\+\_\+reduction} (const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&r, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&g) const
+\begin{DoxyCompactList}\small\item\em hook called while finding a reducer \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a27fb1565f1c569ca28f01021551a1353}\label{class_poly___strategy___data_a27fb1565f1c569ca28f01021551a1353}} 
+void {\bfseries pre\+\_\+reduction\+\_\+tasks} (const \hyperlink{class_monomial}{Monomial} \&u, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&g)
+\item 
+virtual void \hyperlink{class_poly___strategy___data_a0d71db50c58a24f48f94eae6a48c2149}{pre\+\_\+reduction\+\_\+tasks} (const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$u, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&g)
+\begin{DoxyCompactList}\small\item\em hook called immediately before performing reduction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a2fdcdbe5f8ea3ae93c5a55a9775e6e6f}\label{class_poly___strategy___data_a2fdcdbe5f8ea3ae93c5a55a9775e6e6f}} 
+const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ \hyperlink{class_poly___strategy___data_a2fdcdbe5f8ea3ae93c5a55a9775e6e6f}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial to which this strategy applies \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___strategy___data_a10f553f550739a68fe90fa3318942134}\label{class_poly___strategy___data_a10f553f550739a68fe90fa3318942134}} 
+ostream \& \hyperlink{class_poly___strategy___data_a10f553f550739a68fe90fa3318942134}{operator$<$$<$} (ostream \&, const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&)
+\begin{DoxyCompactList}\small\item\em print strategy-\/related data in the polynomial \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+polynomial-\/related strategy data 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+Some strategies will not need this class, but others will, such as sugar (to store a polynomial's sugar). 
+
+Definition at line 32 of file strategies.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_poly___strategy___data_a3c2e31f0e3323da59564edc6ee3557af}\label{class_poly___strategy___data_a3c2e31f0e3323da59564edc6ee3557af}} 
+\index{Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}!at\+\_\+generation\+\_\+tasks@{at\+\_\+generation\+\_\+tasks}}
+\index{at\+\_\+generation\+\_\+tasks@{at\+\_\+generation\+\_\+tasks}!Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{at\+\_\+generation\+\_\+tasks()}{at\_generation\_tasks()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Poly\+\_\+\+Strategy\+\_\+\+Data\+::at\+\_\+generation\+\_\+tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+hook called while first generating polynomial 
+
+The default is to do nothing, which is good for the normal strategy. Other strategies, however, may perform some record-\/keeping; the sugar strategy, for instance, will compute the polynomial's sugar. 
+
+Reimplemented in \hyperlink{class_poly___w_sugar___data_ac07ee9ee15bd97e5e8befb3f6cec3929}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}, and \hyperlink{class_poly___sugar___data_ada533e5c56d7f53207a5e8093414dfb3}{Poly\+\_\+\+Sugar\+\_\+\+Data}.
+
+
+
+Definition at line 71 of file strategies.\+hpp.
+
+\mbox{\Hypertarget{class_poly___strategy___data_a6683749a5fb30b6f91075a28899fbfe7}\label{class_poly___strategy___data_a6683749a5fb30b6f91075a28899fbfe7}} 
+\index{Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}!at\+\_\+generation\+\_\+tasks@{at\+\_\+generation\+\_\+tasks}}
+\index{at\+\_\+generation\+\_\+tasks@{at\+\_\+generation\+\_\+tasks}!Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{at\+\_\+generation\+\_\+tasks()}{at\_generation\_tasks()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Poly\+\_\+\+Strategy\+\_\+\+Data\+::at\+\_\+generation\+\_\+tasks (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+hook called while first generating a polynomial {\itshape multiple} 
+
+The default is to do nothing, which is good for the normal strategy. Other strategies, however, may perform some record-\/keeping; the sugar strategy, for instance, will compute the polynomial's sugar. 
+
+Reimplemented in \hyperlink{class_poly___w_sugar___data_ac58bd8d30e7e10dbbe8e86b1d9d04376}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}, and \hyperlink{class_poly___sugar___data_aa80c660f10b1c5d0dd2a305d598685f5}{Poly\+\_\+\+Sugar\+\_\+\+Data}.
+
+
+
+Definition at line 78 of file strategies.\+hpp.
+
+\mbox{\Hypertarget{class_poly___strategy___data_a0d71db50c58a24f48f94eae6a48c2149}\label{class_poly___strategy___data_a0d71db50c58a24f48f94eae6a48c2149}} 
+\index{Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}!pre\+\_\+reduction\+\_\+tasks@{pre\+\_\+reduction\+\_\+tasks}}
+\index{pre\+\_\+reduction\+\_\+tasks@{pre\+\_\+reduction\+\_\+tasks}!Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{pre\+\_\+reduction\+\_\+tasks()}{pre\_reduction\_tasks()}}
+{\footnotesize\ttfamily virtual void Poly\+\_\+\+Strategy\+\_\+\+Data\+::pre\+\_\+reduction\+\_\+tasks (\begin{DoxyParamCaption}\item[{const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$}]{u,  }\item[{const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+hook called immediately before performing reduction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & polynomial that reduces {\ttfamily r} (where {\ttfamily r} is {\ttfamily this}) \\
+\hline
+{\em u} & exponents of monomial satisfying $u\textrm{lm}(g)=\textrm{lm}(r)$\\
+\hline
+\end{DoxyParams}
+The default is to do nothing, which is good for the normal strategy. Other strategies, however, may require some processing before reduction; the sugar strategy is an example, as reduction may increase a polynomial's sugar 
+
+Reimplemented in \hyperlink{class_poly___w_sugar___data_a4a34039eb50a2294d2aaf6245c1833b8}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}, and \hyperlink{class_poly___sugar___data_a1b2e8a7fe4fcd57555fa58e48620b2bf}{Poly\+\_\+\+Sugar\+\_\+\+Data}.
+
+
+
+Definition at line 105 of file strategies.\+hpp.
+
+\mbox{\Hypertarget{class_poly___strategy___data_a996754ff163b0ff32d783ec723ac35be}\label{class_poly___strategy___data_a996754ff163b0ff32d783ec723ac35be}} 
+\index{Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}!valid\+\_\+reduction@{valid\+\_\+reduction}}
+\index{valid\+\_\+reduction@{valid\+\_\+reduction}!Poly\+\_\+\+Strategy\+\_\+\+Data@{Poly\+\_\+\+Strategy\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{valid\+\_\+reduction()}{valid\_reduction()}}
+{\footnotesize\ttfamily bool Poly\+\_\+\+Strategy\+\_\+\+Data\+::valid\+\_\+reduction (\begin{DoxyParamCaption}\item[{const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&}]{r,  }\item[{const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&}]{g }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+hook called while finding a reducer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & polynomial that is to be reduced \\
+\hline
+{\em g} & polynomial that reduces {\ttfamily r} \\
+\hline
+\end{DoxyParams}
+The default is to do nothing, which is good for the normal and sugar strategies. Other strategies, however, may impose constraints on the reduction; involutive and signature-\/based reduction, for instance, both forbid certain reductions. 
+
+Definition at line 26 of file strategies.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+strategies.\+hpp\item 
+strategies.\+cpp\end{DoxyCompactItemize}

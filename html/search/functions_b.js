@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['name',['name',['../group__polygroup.html#a657caa3e9c277ca34d20cb69eed7fe05',1,'Polynomial_Ring']]],
+  ['name_5flist',['name_list',['../group__polygroup.html#aef9c6745956393863080422ddb8da48c',1,'Polynomial_Ring']]],
+  ['negate',['negate',['../group__polygroup.html#ab3fd69e979b7b369064a3188e6b8a650',1,'Dense_Univariate_Integer_Polynomial::negate()'],['../group__polygroup.html#a4086e22f45503e348985f120b3c0a79c',1,'Dense_Univariate_Rational_Polynomial::negate()'],['../group___fields_group.html#ab64fb1e850fb81bcf03345e11f5b6fb7',1,'Prime_Field_Element::negate()']]],
+  ['new_5fiterator',['new_iterator',['../group__polygroup.html#a9cb8460694b7fceaa5a22ae58c73ebe7',1,'Abstract_Polynomial::new_iterator()'],['../group__polygroup.html#ab69dc9c6fcea390d0ab3c36379a3ee9c',1,'Constant_Polynomial::new_iterator()'],['../group__polygroup.html#a224ae300d1789243ca05e4413c473a6f',1,'Double_Buffered_Polynomial::new_iterator()'],['../group__polygroup.html#a08a6bd3fd143c05e1b2762a7f239b371',1,'Polynomial_Geobucket::new_iterator()'],['../group__polygroup.html#ac17e14ceb70ee8862e044ad6b44a78a5',1,'Polynomial_Linked_List::new_iterator()']]],
+  ['new_5fmutable_5fiterator',['new_mutable_iterator',['../group__polygroup.html#a803892196221e618214c80987cec191a',1,'Mutable_Polynomial::new_mutable_iterator()'],['../group__polygroup.html#aabbde4f088511cb480e959eaac056784',1,'Double_Buffered_Polynomial::new_mutable_iterator()'],['../group__polygroup.html#a630c245914a9235dd84af2b34deb778d',1,'Polynomial_Geobucket::new_mutable_iterator()'],['../group__polygroup.html#a9a661c20acf3bedbecbb2acdce2598ab',1,'Polynomial_Linked_List::new_mutable_iterator()']]],
+  ['no_5ftriplet',['no_triplet',['../group___g_b_computation.html#ga8ea11a89240d420c46bcad752aeb0f6a',1,'algorithm_buchberger_basic.hpp']]],
+  ['nonsingular',['nonsingular',['../group__orderinggroup.html#ga22e2d4b10cd30468c9e67351ab78aa27',1,'particular_orderings.cpp']]],
+  ['normal_5fstrategy',['Normal_Strategy',['../group__strategygroup.html#a6aa0afb9976f32afc9ae55d54d0ff9d4',1,'Normal_Strategy']]],
+  ['num_5fvars',['num_vars',['../group__polygroup.html#a4ade87fb2cae33669c66c7b23819ba57',1,'Monomial']]],
+  ['number_5fof_5fcommon_5fconstraints',['number_of_common_constraints',['../group___c_l_s_solvers.html#ga33829eddeaa7be000404e4d281d90973',1,'number_of_common_constraints(bool *a, bool *b, unsigned m):&#160;skeleton.cpp'],['../group___c_l_s_solvers.html#ga33829eddeaa7be000404e4d281d90973',1,'number_of_common_constraints(bool *, bool *, unsigned):&#160;skeleton.cpp']]],
+  ['number_5fof_5fvariables',['number_of_variables',['../group__polygroup.html#a606b7dd86fedd848182e6a4a6d18c77d',1,'Monomial_Ideal::number_of_variables()'],['../group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af',1,'Abstract_Polynomial::number_of_variables()'],['../group__polygroup.html#a79e7dd821659e9d4b6862487963f7352',1,'Polynomial_Ring::number_of_variables()']]],
+  ['numerator',['numerator',['../group__polygroup.html#a2301bb5e91284d51b7c7a49951f8c2d8',1,'Dense_Univariate_Rational_Polynomial']]]
+];

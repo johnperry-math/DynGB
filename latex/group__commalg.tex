@@ -1,0 +1,391 @@
+\hypertarget{group__commalg}{}\section{Commutative Algebra}
+\label{group__commalg}\index{Commutative Algebra@{Commutative Algebra}}
+
+
+Classes useful for computational Commutative Algebra.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__polygroup_class_monomial}{Monomial} \hyperlink{group__commalg_ga052ae2e711aaf6d332a8aed218ce9ef9}{choose\+\_\+hilbert\+\_\+pivot} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T)
+\begin{DoxyCompactList}\small\item\em chooses a pivot for the Bigatti algorithm \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_ga7ea0076f04ca9380641ff2af7c9a6e42}{hilbert\+\_\+numerator\+\_\+bigatti} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em the Bigatti algorithm to compute the Hilbert numerator \cite{Bigatti97} \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_ga717dcd7b189f83e0b60e2257d23c6bb9}{hilbert\+\_\+polynomial} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n, unsigned int dim, const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ T, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$hn=nullptr, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$hn2=nullptr)
+\begin{DoxyCompactList}\small\item\em computes the Hilbert polynomial for an ideal \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_ga572e81ac2dce2e17ab459e9a0b687084}{hilbert\+\_\+second\+\_\+numerator} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$hn, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em computes the second Hilbert numerator (after reduction by $(1-t)^{\deg I}$) \end{DoxyCompactList}\item 
+unsigned \hyperlink{group__commalg_ga53635c7ec7374da275c21eeb04c1e574}{ideal\+\_\+dimension} (N\+V\+A\+R\+\_\+\+T\+Y\+PE nvars, const \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$first\+\_\+numerator, const \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$second\+\_\+numerator)
+\begin{DoxyCompactList}\small\item\em computes the dimension of the ideal by subtracting the Hilbert numerators \end{DoxyCompactList}\item 
+map$<$ D\+E\+G\+\_\+\+T\+Y\+PE, unsigned long $>$ \hyperlink{group__commalg_gac808392f45282e90eb6ecfb5c14b5392}{incremental\+\_\+betti} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em Incremental Betti numbers for monomial ideals. \end{DoxyCompactList}\item 
+map$<$ D\+E\+G\+\_\+\+T\+Y\+PE, unsigned long $>$ \hyperlink{group__commalg_ga0c0869fddcdc6498993507e6b4f88658}{incremental\+\_\+betti} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em Incremental Betti numbers for monomial ideals. \end{DoxyCompactList}\item 
+list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator \hyperlink{group__commalg_gaed5cfd21d305dfc0d912bab347a82f65}{is\+\_\+one\+\_\+base\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&)
+\begin{DoxyCompactList}\small\item\em test for the 1-\/base case \cite{Bigatti97} \end{DoxyCompactList}\item 
+list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator \hyperlink{group__commalg_ga26c5ece1df1c4db4873925f41ed8ee9c}{is\+\_\+splitting\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T)
+\begin{DoxyCompactList}\small\item\em test for the ``splitting case'' \cite{Bigatti97} \end{DoxyCompactList}\item 
+bool \hyperlink{group__commalg_gabf201296cecf6c31675c7e23bb58dbb4}{is\+\_\+zero\+\_\+base\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&)
+\begin{DoxyCompactList}\small\item\em test for the 0-\/base case \cite{Bigatti97} \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_ga185ac534295dffe04f9af3e235e1d44a}{polynomial\+\_\+binomial} (long long a, long long b)
+\begin{DoxyCompactList}\small\item\em computes the number of combinations $C(t+a,b)$ \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_ga806777263a7836e3dabc0349440c47db}{solve\+\_\+one\+\_\+base\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator ti, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading)
+\begin{DoxyCompactList}\small\item\em applies Bigatti's algorithm for the 1-\/base case \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_gaf0830e37f5adaa15eb30b562acf31076}{solve\+\_\+splitting\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator ti, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading)
+\begin{DoxyCompactList}\small\item\em applies Bigatti's algorithm for the 1-\/base case \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group__commalg_gab4cfb96e87e5dd698f56498bb6ba5472}{solve\+\_\+zero\+\_\+base\+\_\+case} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const W\+T\+\_\+\+T\+Y\+PE $\ast$grading)
+\begin{DoxyCompactList}\small\item\em computes Hilbert numerator when the 0-\/base case applies \cite{Bigatti97} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classes useful for computational Commutative Algebra. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__commalg_ga052ae2e711aaf6d332a8aed218ce9ef9}\label{group__commalg_ga052ae2e711aaf6d332a8aed218ce9ef9}} 
+\index{Commutative Algebra@{Commutative Algebra}!choose\+\_\+hilbert\+\_\+pivot@{choose\+\_\+hilbert\+\_\+pivot}}
+\index{choose\+\_\+hilbert\+\_\+pivot@{choose\+\_\+hilbert\+\_\+pivot}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{choose\+\_\+hilbert\+\_\+pivot()}{choose\_hilbert\_pivot()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial} choose\+\_\+hilbert\+\_\+pivot (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T }\end{DoxyParamCaption})}
+
+
+
+chooses a pivot for the Bigatti algorithm 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of monomial ideal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a monomial used to pivot in the Bigatti algorithm \cite{Bigatti97}
+\end{DoxyReturn}
+This uses the strategy described by \cite{RouneHilbert2010} and due to \cite{Bigatti97} \+: select $x_i^e$ such that $i$ maximizes the number of terms divisible by that variable, and $e$ is the median of the powers of $x_i$ appearing in $T$. 
+
+Definition at line 220 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga7ea0076f04ca9380641ff2af7c9a6e42}\label{group__commalg_ga7ea0076f04ca9380641ff2af7c9a6e42}} 
+\index{Commutative Algebra@{Commutative Algebra}!hilbert\+\_\+numerator\+\_\+bigatti@{hilbert\+\_\+numerator\+\_\+bigatti}}
+\index{hilbert\+\_\+numerator\+\_\+bigatti@{hilbert\+\_\+numerator\+\_\+bigatti}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{hilbert\+\_\+numerator\+\_\+bigatti()}{hilbert\_numerator\_bigatti()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ hilbert\+\_\+numerator\+\_\+bigatti (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+the Bigatti algorithm to compute the Hilbert numerator \cite{Bigatti97} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of a monomial ideal \\
+\hline
+{\em grading} & use for a graded polynomial ring \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the basic, unreduced Hilbert numerator of the ideal generated by $ T $ .
+\end{DoxyReturn}
+This computes the first Hilbert numerator. If you do not want to use a grading, set it to {\ttfamily nullptr}. \begin{DoxyWarning}{Warning}
+{\ttfamily T} needs to be non-\/redundant; i.\+e., $\forall t,u\in T$ $t\not\mid u$. 
+\end{DoxyWarning}
+
+
+Definition at line 246 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga717dcd7b189f83e0b60e2257d23c6bb9}\label{group__commalg_ga717dcd7b189f83e0b60e2257d23c6bb9}} 
+\index{Commutative Algebra@{Commutative Algebra}!hilbert\+\_\+polynomial@{hilbert\+\_\+polynomial}}
+\index{hilbert\+\_\+polynomial@{hilbert\+\_\+polynomial}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{hilbert\+\_\+polynomial()}{hilbert\_polynomial()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}$\ast$ hilbert\+\_\+polynomial (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{n,  }\item[{unsigned int}]{dim,  }\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$}]{T,  }\item[{\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$}]{hn = {\ttfamily nullptr},  }\item[{\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$}]{hn2 = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+computes the Hilbert polynomial for an ideal 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of variables in ideal \\
+\hline
+{\em dim} & dimension of ideal (if known) \\
+\hline
+{\em T} & ideal's generators \\
+\hline
+{\em hn} & Hilbert numerator (if known) \\
+\hline
+{\em hn2} & reduced Hilbert numerator (if known) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the Hilbert polynomial of the ideal generated by {\ttfamily T} 
+\end{DoxyReturn}
+
+
+Definition at line 425 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga572e81ac2dce2e17ab459e9a0b687084}\label{group__commalg_ga572e81ac2dce2e17ab459e9a0b687084}} 
+\index{Commutative Algebra@{Commutative Algebra}!hilbert\+\_\+second\+\_\+numerator@{hilbert\+\_\+second\+\_\+numerator}}
+\index{hilbert\+\_\+second\+\_\+numerator@{hilbert\+\_\+second\+\_\+numerator}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{hilbert\+\_\+second\+\_\+numerator()}{hilbert\_second\_numerator()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ hilbert\+\_\+second\+\_\+numerator (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{n,  }\item[{\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$}]{hn,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+computes the second Hilbert numerator (after reduction by $(1-t)^{\deg I}$) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of variables (used to bound computation) \\
+\hline
+{\em hn} & the first Hilbert numerator (before reduction) \\
+\hline
+{\em grading} & the grading of the ideal (if {\ttfamily N\+U\+L\+L\+P\+TR} , the standard grading) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reduced Hilbert numerator of the specified Hilbert numerator 
+\end{DoxyReturn}
+
+
+Definition at line 307 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga53635c7ec7374da275c21eeb04c1e574}\label{group__commalg_ga53635c7ec7374da275c21eeb04c1e574}} 
+\index{Commutative Algebra@{Commutative Algebra}!ideal\+\_\+dimension@{ideal\+\_\+dimension}}
+\index{ideal\+\_\+dimension@{ideal\+\_\+dimension}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{ideal\+\_\+dimension()}{ideal\_dimension()}}
+{\footnotesize\ttfamily unsigned ideal\+\_\+dimension (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{nvars,  }\item[{const \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$}]{first\+\_\+numerator,  }\item[{const \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$}]{second\+\_\+numerator }\end{DoxyParamCaption})}
+
+
+
+computes the dimension of the ideal by subtracting the Hilbert numerators 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nvars} & number of variables in ring \\
+\hline
+{\em first\+\_\+numerator} & the unreduced Hilbert numerator \\
+\hline
+{\em second\+\_\+numerator} & the reduced Hilbert numerator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+dimension of the ideal whose Hilbert numerators are given 
+\end{DoxyReturn}
+
+
+Definition at line 388 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_gac808392f45282e90eb6ecfb5c14b5392}\label{group__commalg_gac808392f45282e90eb6ecfb5c14b5392}} 
+\index{Commutative Algebra@{Commutative Algebra}!incremental\+\_\+betti@{incremental\+\_\+betti}}
+\index{incremental\+\_\+betti@{incremental\+\_\+betti}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{incremental\+\_\+betti()}{incremental\_betti()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily map$<$D\+E\+G\+\_\+\+T\+Y\+PE, unsigned long$>$ incremental\+\_\+betti (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Incremental Betti numbers for monomial ideals. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017
+\end{DoxyDate}
+Computes the 1st ``incremental Betti'' numbers obtained when adding to the ideal generated by a set $ T $ its last monomial $ u $. (These are the degrees of the generators' syzygies \cite{KR05}.) It does not compute the full list of Betti numbers of $ T $; rather, it computes the ones that involve {\ttfamily u} itself. To use the weighted degrees rather than the standard degrees, give a valid array of weights to {\ttfamily grading}. 
+\begin{DoxyParams}{Parameters}
+{\em T} & a list of \hyperlink{group__polygroup_class_monomial}{Monomial} that generate a monomial ideal \\
+\hline
+{\em grading} & an optional list of weights, to use the weighted degrees of exponents, rather than the standard degrees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a map wherein the key of any element is the degree of a syzygy, and the value $ d $ is the number of $ t\in T $ whose lcm with {\ttfamily u} has degree $ d $. 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file betti.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga0c0869fddcdc6498993507e6b4f88658}\label{group__commalg_ga0c0869fddcdc6498993507e6b4f88658}} 
+\index{Commutative Algebra@{Commutative Algebra}!incremental\+\_\+betti@{incremental\+\_\+betti}}
+\index{incremental\+\_\+betti@{incremental\+\_\+betti}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{incremental\+\_\+betti()}{incremental\_betti()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily map$<$D\+E\+G\+\_\+\+T\+Y\+PE, unsigned long$>$ incremental\+\_\+betti (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Incremental Betti numbers for monomial ideals. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017
+\end{DoxyDate}
+Computes the 1st ``incremental Betti'' numbers obtained when adding {\ttfamily u} to the ideal generated by a set $ T $ defined by the Monomials in the range from {\ttfamily start} to {\ttfamily end}. (These are the degrees of the generators' syzygies \cite{KR05}.) It does not compute the full list of Betti numbers of $ T\cup \{u\}$; rather, it computes the ones that involve {\ttfamily u} itself. To use the weighted degrees rather than the standard degrees, give a valid array of weights to {\ttfamily grading}. 
+\begin{DoxyParams}{Parameters}
+{\em T} & a list of \hyperlink{group__polygroup_class_monomial}{Monomial} that generate a monomial ideal \\
+\hline
+{\em u} & a \hyperlink{group__polygroup_class_monomial}{Monomial} not in {\ttfamily T} (you can probably use one that is in {\ttfamily T}, but this is an odd thing to do) \\
+\hline
+{\em grading} & an optional list of weights, to use the weighted degrees of exponents, rather than the standard degrees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a map wherein the key of any element is the degree of a syzygy, and the value $ d $ is the number of $ t\in T $ whose lcm with {\ttfamily u} has degree $ d $. 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file betti.\+hpp.
+
+\mbox{\Hypertarget{group__commalg_gaed5cfd21d305dfc0d912bab347a82f65}\label{group__commalg_gaed5cfd21d305dfc0d912bab347a82f65}} 
+\index{Commutative Algebra@{Commutative Algebra}!is\+\_\+one\+\_\+base\+\_\+case@{is\+\_\+one\+\_\+base\+\_\+case}}
+\index{is\+\_\+one\+\_\+base\+\_\+case@{is\+\_\+one\+\_\+base\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{is\+\_\+one\+\_\+base\+\_\+case()}{is\_one\_base\_case()}}
+{\footnotesize\ttfamily list$<$\hyperlink{group__polygroup_class_monomial}{Monomial}$>$\+::const\+\_\+iterator is\+\_\+one\+\_\+base\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+test for the 1-\/base case \cite{Bigatti97} 
+
+If result is {\ttfamily T.\+end()}, this is not a 1-\/base case. \begin{DoxyReturn}{Returns}
+index to an element of {\ttfamily T} that makes the 0-\/base case. 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga26c5ece1df1c4db4873925f41ed8ee9c}\label{group__commalg_ga26c5ece1df1c4db4873925f41ed8ee9c}} 
+\index{Commutative Algebra@{Commutative Algebra}!is\+\_\+splitting\+\_\+case@{is\+\_\+splitting\+\_\+case}}
+\index{is\+\_\+splitting\+\_\+case@{is\+\_\+splitting\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{is\+\_\+splitting\+\_\+case()}{is\_splitting\_case()}}
+{\footnotesize\ttfamily list$<$\hyperlink{group__polygroup_class_monomial}{Monomial}$>$\+::const\+\_\+iterator is\+\_\+splitting\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T }\end{DoxyParamCaption})}
+
+
+
+test for the ``splitting case'' \cite{Bigatti97} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of monomial ideal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index of an entry of {\ttfamily T} that is coprime to the rest
+\end{DoxyReturn}
+If result is {\ttfamily T.\+end()}, this is not a splitting case. 
+
+Definition at line 180 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_gabf201296cecf6c31675c7e23bb58dbb4}\label{group__commalg_gabf201296cecf6c31675c7e23bb58dbb4}} 
+\index{Commutative Algebra@{Commutative Algebra}!is\+\_\+zero\+\_\+base\+\_\+case@{is\+\_\+zero\+\_\+base\+\_\+case}}
+\index{is\+\_\+zero\+\_\+base\+\_\+case@{is\+\_\+zero\+\_\+base\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{is\+\_\+zero\+\_\+base\+\_\+case()}{is\_zero\_base\_case()}}
+{\footnotesize\ttfamily bool is\+\_\+zero\+\_\+base\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+test for the 0-\/base case \cite{Bigatti97} 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the zero base case applies 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_ga185ac534295dffe04f9af3e235e1d44a}\label{group__commalg_ga185ac534295dffe04f9af3e235e1d44a}} 
+\index{Commutative Algebra@{Commutative Algebra}!polynomial\+\_\+binomial@{polynomial\+\_\+binomial}}
+\index{polynomial\+\_\+binomial@{polynomial\+\_\+binomial}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{polynomial\+\_\+binomial()}{polynomial\_binomial()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}$\ast$ polynomial\+\_\+binomial (\begin{DoxyParamCaption}\item[{long long}]{a,  }\item[{long long}]{b }\end{DoxyParamCaption})}
+
+
+
+computes the number of combinations $C(t+a,b)$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & an integer \\
+\hline
+{\em b} & an integer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the polynomial $C(t+a,b)$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__commalg_ga806777263a7836e3dabc0349440c47db}\label{group__commalg_ga806777263a7836e3dabc0349440c47db}} 
+\index{Commutative Algebra@{Commutative Algebra}!solve\+\_\+one\+\_\+base\+\_\+case@{solve\+\_\+one\+\_\+base\+\_\+case}}
+\index{solve\+\_\+one\+\_\+base\+\_\+case@{solve\+\_\+one\+\_\+base\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{solve\+\_\+one\+\_\+base\+\_\+case()}{solve\_one\_base\_case()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ solve\+\_\+one\+\_\+base\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator}]{ti,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading }\end{DoxyParamCaption})}
+
+
+
+applies Bigatti's algorithm for the 1-\/base case 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of monomial ideal \\
+\hline
+{\em ti} & index of the one term in {\ttfamily T} which is {\itshape not} a simple power \\
+\hline
+{\em grading} & use for a graded polynomial ring \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hilbert numerator for a 1-\/base case
+\end{DoxyReturn}
+If you do not want to use a grading, set it to {\ttfamily nullptr}. 
+
+Definition at line 123 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_gaf0830e37f5adaa15eb30b562acf31076}\label{group__commalg_gaf0830e37f5adaa15eb30b562acf31076}} 
+\index{Commutative Algebra@{Commutative Algebra}!solve\+\_\+splitting\+\_\+case@{solve\+\_\+splitting\+\_\+case}}
+\index{solve\+\_\+splitting\+\_\+case@{solve\+\_\+splitting\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{solve\+\_\+splitting\+\_\+case()}{solve\_splitting\_case()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ solve\+\_\+splitting\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$\+::const\+\_\+iterator}]{ti,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading }\end{DoxyParamCaption})}
+
+
+
+applies Bigatti's algorithm for the 1-\/base case 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of monomial ideal \\
+\hline
+{\em ti} & index of a term in {\ttfamily T} which is coprime to the rest \\
+\hline
+{\em grading} & use for a graded polynomial ring \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the Hilbert numerator for the splitting case \cite{Bigatti97}
+\end{DoxyReturn}
+If you do not want to use a grading, set it to {\ttfamily nullptr}. 
+
+Definition at line 203 of file hilbert\+\_\+functions.\+cpp.
+
+\mbox{\Hypertarget{group__commalg_gab4cfb96e87e5dd698f56498bb6ba5472}\label{group__commalg_gab4cfb96e87e5dd698f56498bb6ba5472}} 
+\index{Commutative Algebra@{Commutative Algebra}!solve\+\_\+zero\+\_\+base\+\_\+case@{solve\+\_\+zero\+\_\+base\+\_\+case}}
+\index{solve\+\_\+zero\+\_\+base\+\_\+case@{solve\+\_\+zero\+\_\+base\+\_\+case}!Commutative Algebra@{Commutative Algebra}}
+\subsubsection{\texorpdfstring{solve\+\_\+zero\+\_\+base\+\_\+case()}{solve\_zero\_base\_case()}}
+{\footnotesize\ttfamily \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ solve\+\_\+zero\+\_\+base\+\_\+case (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading }\end{DoxyParamCaption})}
+
+
+
+computes Hilbert numerator when the 0-\/base case applies \cite{Bigatti97} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of generators of monomial ideal \\
+\hline
+{\em grading} & use for a graded polynomial ring \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the Hilbert polynomial for the 0-\/base case
+\end{DoxyReturn}
+If you do not want to use a grading, set it to {\ttfamily nullptr}. 
+
+Definition at line 78 of file hilbert\+\_\+functions.\+cpp.
+

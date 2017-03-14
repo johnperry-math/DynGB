@@ -1,0 +1,117 @@
+\hypertarget{class_critical___pair___dynamic}{}\section{Critical\+\_\+\+Pair\+\_\+\+Dynamic Class Reference}
+\label{class_critical___pair___dynamic}\index{Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}}
+
+
+Controls the creation of s-\/polynomials, specialized for the dynamic algorithm.  
+
+
+
+
+{\ttfamily \#include $<$critical\+\_\+pair.\+hpp$>$}
+
+Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+Dynamic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_critical___pair___dynamic}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_critical___pair___dynamic_a15c39a5bfb77e3a8ba8572cadfbe35d6}\label{class_critical___pair___dynamic_a15c39a5bfb77e3a8ba8572cadfbe35d6}} 
+\hyperlink{class_critical___pair___dynamic_a15c39a5bfb77e3a8ba8572cadfbe35d6}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} (\hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f, unsigned strategy, \hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$how\+\_\+to\+\_\+order)
+\begin{DoxyCompactList}\small\item\em create critical pair (f,0) for initial polynomial, with given ordering \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_critical___pair___dynamic_a102de04e499da77fcae6072cab2cc45e}\label{class_critical___pair___dynamic_a102de04e499da77fcae6072cab2cc45e}} 
+\hyperlink{class_critical___pair___dynamic_a102de04e499da77fcae6072cab2cc45e}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} (\hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f, \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, unsigned strategy, \hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$how\+\_\+to\+\_\+order)
+\begin{DoxyCompactList}\small\item\em create critical pair (f,g) for two polynomials, with given ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_mutable___polynomial}{Mutable\+\_\+\+Polynomial} $\ast$ \hyperlink{class_critical___pair___dynamic_acaeda6e006f9d9785e28fa5b6bbf49e9}{s\+\_\+polynomial} (\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{S\+Poly\+Creation\+Flags} method, int strategy)
+\begin{DoxyCompactList}\small\item\em creates the s-\/polynomial for \hyperlink{class_critical___pair___basic_a6e251e3724fde2c610d921f93889eb67}{first()} and \hyperlink{class_critical___pair___basic_a06da1cbbe1451962b68f2bbf90855fae}{second()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_critical___pair___dynamic_afbdf7f7bc0d9332c3df08858b0803aed}\label{class_critical___pair___dynamic_afbdf7f7bc0d9332c3df08858b0803aed}} 
+\hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$ \hyperlink{class_critical___pair___dynamic_afbdf7f7bc0d9332c3df08858b0803aed}{how\+\_\+ordered} () const
+\begin{DoxyCompactList}\small\item\em the ordering associated with this pair \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_critical___pair___dynamic_aa9001ca49b2c2fd7d39384e4e70c5a6b}{change\+\_\+ordering} (\hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$new\+\_\+order)
+\begin{DoxyCompactList}\small\item\em change the ordering associated with this pair \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_critical___pair___dynamic_a29d3c615e66d3840c3aeb8ad9bc51647}\label{class_critical___pair___dynamic_a29d3c615e66d3840c3aeb8ad9bc51647}} 
+\hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$ \hyperlink{class_critical___pair___dynamic_a29d3c615e66d3840c3aeb8ad9bc51647}{ordering}
+\begin{DoxyCompactList}\small\item\em the {\ttfamily \hyperlink{class_monomial___ordering}{Monomial\+\_\+\+Ordering}} assigned to this pair --- might disagree with that of polynomials; they must be updated immediately if this is a generator; otherwise, update can wait until the critical pair is computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_critical___pair___dynamic_a3c0c965ed52ffe0faf759023605adaf2}\label{class_critical___pair___dynamic_a3c0c965ed52ffe0faf759023605adaf2}} 
+ostream \& \hyperlink{class_critical___pair___dynamic_a3c0c965ed52ffe0faf759023605adaf2}{operator$<$$<$} (ostream \&, const \hyperlink{class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} \&)
+\begin{DoxyCompactList}\small\item\em outputs the pair, and the ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Controls the creation of s-\/polynomials, specialized for the dynamic algorithm. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+This class encapsulates the information necessary to create an $S$-\/polynomial, including the actual generation of an $S$-\/polynomial, though it does not retain that information. The main difference with {\ttfamily \hyperlink{class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic}} is the enabling of late re-\/sorting. 
+
+Definition at line 142 of file critical\+\_\+pair.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_critical___pair___dynamic_aa9001ca49b2c2fd7d39384e4e70c5a6b}\label{class_critical___pair___dynamic_aa9001ca49b2c2fd7d39384e4e70c5a6b}} 
+\index{Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}!change\+\_\+ordering@{change\+\_\+ordering}}
+\index{change\+\_\+ordering@{change\+\_\+ordering}!Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}}
+\subsubsection{\texorpdfstring{change\+\_\+ordering()}{change\_ordering()}}
+{\footnotesize\ttfamily void Critical\+\_\+\+Pair\+\_\+\+Dynamic\+::change\+\_\+ordering (\begin{DoxyParamCaption}\item[{\hyperlink{class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$}]{new\+\_\+order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+change the ordering associated with this pair 
+
+This is necessary at least for critical pairs where one polynomial is a generator that we have not yet computed. We delay re-\/sorting the polynomial until the s-\/polynomial's computation. 
+
+Definition at line 202 of file critical\+\_\+pair.\+hpp.
+
+\mbox{\Hypertarget{class_critical___pair___dynamic_acaeda6e006f9d9785e28fa5b6bbf49e9}\label{class_critical___pair___dynamic_acaeda6e006f9d9785e28fa5b6bbf49e9}} 
+\index{Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}!s\+\_\+polynomial@{s\+\_\+polynomial}}
+\index{s\+\_\+polynomial@{s\+\_\+polynomial}!Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}}
+\subsubsection{\texorpdfstring{s\+\_\+polynomial()}{s\_polynomial()}}
+{\footnotesize\ttfamily \hyperlink{class_mutable___polynomial}{Mutable\+\_\+\+Polynomial} $\ast$ Critical\+\_\+\+Pair\+\_\+\+Dynamic\+::s\+\_\+polynomial (\begin{DoxyParamCaption}\item[{\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{S\+Poly\+Creation\+Flags}}]{method,  }\item[{int}]{strategy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+creates the s-\/polynomial for \hyperlink{class_critical___pair___basic_a6e251e3724fde2c610d921f93889eb67}{first()} and \hyperlink{class_critical___pair___basic_a06da1cbbe1451962b68f2bbf90855fae}{second()} 
+
+If either \hyperlink{class_critical___pair___basic_a6e251e3724fde2c610d921f93889eb67}{first()} or \hyperlink{class_critical___pair___basic_a06da1cbbe1451962b68f2bbf90855fae}{second()} was sorted using an ordering different from the one assigned the pair, it is sorted anew. 
+
+Reimplemented from \hyperlink{class_critical___pair___basic_a1bcad730e0bfcf9c833b5fcf0ded468e}{Critical\+\_\+\+Pair\+\_\+\+Basic}.
+
+
+
+Definition at line 118 of file critical\+\_\+pair.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+critical\+\_\+pair.\+hpp\item 
+critical\+\_\+pair.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,79 @@
+\hypertarget{group__utils}{}\section{Utilities}
+\label{group__utils}\index{Utilities@{Utilities}}
+
+
+Useful functions and classes that don\textquotesingle{}t fit in easily elsewhere.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__utils_gaefe33f79de88accbc6f455e91dab9288}{divide\+\_\+by\+\_\+common\+\_\+term} (C\+O\+E\+F\+\_\+\+T\+Y\+PE \&, U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE \&)
+\begin{DoxyCompactList}\small\item\em divides out the common term of the two given numbers \end{DoxyCompactList}\item 
+void \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface} ()
+\begin{DoxyCompactList}\small\item\em reads ideal definition from {\ttfamily cin}, then reads options for computation, writes Gr\"{o}bner basis to {\ttfamily cout} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Useful functions and classes that don\textquotesingle{}t fit in easily elsewhere. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__utils_gaefe33f79de88accbc6f455e91dab9288}\label{group__utils_gaefe33f79de88accbc6f455e91dab9288}} 
+\index{Utilities@{Utilities}!divide\+\_\+by\+\_\+common\+\_\+term@{divide\+\_\+by\+\_\+common\+\_\+term}}
+\index{divide\+\_\+by\+\_\+common\+\_\+term@{divide\+\_\+by\+\_\+common\+\_\+term}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{divide\+\_\+by\+\_\+common\+\_\+term()}{divide\_by\_common\_term()}}
+{\footnotesize\ttfamily void divide\+\_\+by\+\_\+common\+\_\+term (\begin{DoxyParamCaption}\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE \&}]{,  }\item[{U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE \&}]{ }\end{DoxyParamCaption})}
+
+
+
+divides out the common term of the two given numbers 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+Useful for simplifying terms of \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}. Uses the (simple) Euclidean Algorithm to determine the gcd. \mbox{\Hypertarget{group__utils_ga72d205e8226d578b892515edc527cc83}\label{group__utils_ga72d205e8226d578b892515edc527cc83}} 
+\index{Utilities@{Utilities}!user\+\_\+interface@{user\+\_\+interface}}
+\index{user\+\_\+interface@{user\+\_\+interface}!Utilities@{Utilities}}
+\subsubsection{\texorpdfstring{user\+\_\+interface()}{user\_interface()}}
+{\footnotesize\ttfamily void user\+\_\+interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+reads ideal definition from {\ttfamily cin}, then reads options for computation, writes Gr\"{o}bner basis to {\ttfamily cout} 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2017 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+0 if success, nonzero otherwise
+\end{DoxyReturn}
+The definition of the ideal should take place as follows, {\bfseries in this order}. Bad Things Will Happen\textsuperscript{TM} if you do not heed. The good news is that the program prompts the user.
+\begin{DoxyEnumerate}
+\item a prime number, which defines the base field
+\item the number of indeterminates
+\item whether to specify the indeterminates' names
+\item if so, the indeterminates' names
+\item the number of polynomials
+\item the definition of the polynomials (each terminated by a new line)
+\item static or dynamic computation
+\item if dynamic,
+\begin{DoxyEnumerate}
+\item which solver (\hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver})
+\item which heuristic (Dynamic\+Heuristic)
+\item whether to perform a global analysis of the input The code has some other options, but they are mere curiosities for the time being. 
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}\begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{user_interface_8cpp-example}{user\+\_\+interface.\+cpp}.\end{Desc}
+
+
+Definition at line 58 of file user\+\_\+interface.\+cpp.
+

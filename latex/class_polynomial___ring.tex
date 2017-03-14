@@ -1,0 +1,142 @@
+\hypertarget{class_polynomial___ring}{}\section{Polynomial\+\_\+\+Ring Class Reference}
+\label{class_polynomial___ring}\index{Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}}
+
+
+Encapsulates information about a polynomial ring for easy access\+: ground field, number of variables, {$\dots$}.  
+
+
+
+
+{\ttfamily \#include $<$polynomial\+\_\+ring.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_polynomial___ring_af62688669a31cb720bb1e90a724daa4f}{Polynomial\+\_\+\+Ring} (N\+V\+A\+R\+\_\+\+T\+Y\+PE num\+\_\+vars, \hyperlink{class_prime___field}{Prime\+\_\+\+Field} \&field, string $\ast$var\+\_\+names=nullptr)
+\begin{DoxyCompactList}\small\item\em Initialize the ring for the given field and number of variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___ring_ac4952692f32f57ccd3a7e68e20cb3662}\label{class_polynomial___ring_ac4952692f32f57ccd3a7e68e20cb3662}} 
+\hyperlink{class_polynomial___ring_ac4952692f32f57ccd3a7e68e20cb3662}{$\sim$\+Polynomial\+\_\+\+Ring} ()
+\begin{DoxyCompactList}\small\item\em Deletes the names. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_polynomial___ring_ae59dcd21a16ffccc7b32e3c2f898b6f3}{set\+\_\+names} (string $\ast$new\+\_\+names, N\+V\+A\+R\+\_\+\+T\+Y\+PE length)
+\begin{DoxyCompactList}\small\item\em sets the names of the variables, if you do not want the default \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___ring_a79e7dd821659e9d4b6862487963f7352}\label{class_polynomial___ring_a79e7dd821659e9d4b6862487963f7352}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_polynomial___ring_a79e7dd821659e9d4b6862487963f7352}{number\+\_\+of\+\_\+variables} () const
+\begin{DoxyCompactList}\small\item\em number of indeterminates (variables) in the ring \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___ring_afea6c3a4fd9f3f04f312579a94a3cc1b}\label{class_polynomial___ring_afea6c3a4fd9f3f04f312579a94a3cc1b}} 
+virtual \hyperlink{class_indeterminate}{Indeterminate} $\ast$ \hyperlink{class_polynomial___ring_afea6c3a4fd9f3f04f312579a94a3cc1b}{indeterminates} ()
+\begin{DoxyCompactList}\small\item\em an array of the ring's indeterminates; use only to biuld polynomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___ring_a643bd55dbe8686b2dd1341503a67aace}\label{class_polynomial___ring_a643bd55dbe8686b2dd1341503a67aace}} 
+virtual \hyperlink{class_prime___field}{Prime\+\_\+\+Field} \& \hyperlink{class_polynomial___ring_a643bd55dbe8686b2dd1341503a67aace}{ground\+\_\+field} () const
+\begin{DoxyCompactList}\small\item\em ground field \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___ring_a657caa3e9c277ca34d20cb69eed7fe05}\label{class_polynomial___ring_a657caa3e9c277ca34d20cb69eed7fe05}} 
+virtual const string \hyperlink{class_polynomial___ring_a657caa3e9c277ca34d20cb69eed7fe05}{name} (N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em name of the $i$th variable \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___ring_aef9c6745956393863080422ddb8da48c}\label{class_polynomial___ring_aef9c6745956393863080422ddb8da48c}} 
+virtual const string $\ast$ \hyperlink{class_polynomial___ring_aef9c6745956393863080422ddb8da48c}{name\+\_\+list} () const
+\begin{DoxyCompactList}\small\item\em names of all the variabiles \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___ring_a99cdb13a26bf70032c19fe01a3cea1d8}\label{class_polynomial___ring_a99cdb13a26bf70032c19fe01a3cea1d8}} 
+\hyperlink{class_prime___field}{Prime\+\_\+\+Field} \& \hyperlink{class_polynomial___ring_a99cdb13a26bf70032c19fe01a3cea1d8}{F}
+\begin{DoxyCompactList}\small\item\em the ring\textquotesingle{}s ground field \end{DoxyCompactList}\item 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_polynomial___ring_abf753b41b3e84bd8e32de314f15f7826}{n}
+\begin{DoxyCompactList}\small\item\em the number of variables for every monomial in the ring \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___ring_ad7634678157b109f713da3a712f2af35}\label{class_polynomial___ring_ad7634678157b109f713da3a712f2af35}} 
+string $\ast$ \hyperlink{class_polynomial___ring_ad7634678157b109f713da3a712f2af35}{names}
+\begin{DoxyCompactList}\small\item\em optional names for the variables \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Encapsulates information about a polynomial ring for easy access\+: ground field, number of variables, {$\dots$}. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+\begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}, \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}, and \hyperlink{test_monomials_8cpp-example}{test\+\_\+monomials.\+cpp}.\end{Desc}
+
+
+Definition at line 25 of file polynomial\+\_\+ring.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_polynomial___ring_af62688669a31cb720bb1e90a724daa4f}\label{class_polynomial___ring_af62688669a31cb720bb1e90a724daa4f}} 
+\index{Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}!Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}}
+\index{Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}!Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}}
+\subsubsection{\texorpdfstring{Polynomial\+\_\+\+Ring()}{Polynomial\_Ring()}}
+{\footnotesize\ttfamily Polynomial\+\_\+\+Ring\+::\+Polynomial\+\_\+\+Ring (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+vars,  }\item[{\hyperlink{class_prime___field}{Prime\+\_\+\+Field} \&}]{field,  }\item[{string $\ast$}]{var\+\_\+names = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Initialize the ring for the given field and number of variables. 
+
+The array of names is copied, so you can reuse or discard the memory as you prefer. 
+
+Definition at line 8 of file polynomial\+\_\+ring.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_polynomial___ring_ae59dcd21a16ffccc7b32e3c2f898b6f3}\label{class_polynomial___ring_ae59dcd21a16ffccc7b32e3c2f898b6f3}} 
+\index{Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}!set\+\_\+names@{set\+\_\+names}}
+\index{set\+\_\+names@{set\+\_\+names}!Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}}
+\subsubsection{\texorpdfstring{set\+\_\+names()}{set\_names()}}
+{\footnotesize\ttfamily bool Polynomial\+\_\+\+Ring\+::set\+\_\+names (\begin{DoxyParamCaption}\item[{string $\ast$}]{new\+\_\+names,  }\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{length }\end{DoxyParamCaption})}
+
+
+
+sets the names of the variables, if you do not want the default 
+
+Returns {\ttfamily True} if and only if successful. The array is copied, so you can reuse or discard the memory as you prefer. \begin{DoxyWarning}{Warning}
+If {\ttfamily length} is not the same as the number of variables, this will fail immediately. 
+\end{DoxyWarning}
+
+
+Definition at line 23 of file polynomial\+\_\+ring.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_polynomial___ring_abf753b41b3e84bd8e32de314f15f7826}\label{class_polynomial___ring_abf753b41b3e84bd8e32de314f15f7826}} 
+\index{Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}!n@{n}}
+\index{n@{n}!Polynomial\+\_\+\+Ring@{Polynomial\+\_\+\+Ring}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily N\+V\+A\+R\+\_\+\+T\+Y\+PE Polynomial\+\_\+\+Ring\+::n\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+the number of variables for every monomial in the ring 
+
+\begin{DoxyWarning}{Warning}
+The system does not verify that the number of variables in a monomial agrees with the number specified in this ring. This information is easily available through the \hyperlink{class_polynomial___ring_a79e7dd821659e9d4b6862487963f7352}{number\+\_\+of\+\_\+variables()} command. 
+\end{DoxyWarning}
+
+
+Definition at line 77 of file polynomial\+\_\+ring.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial\+\_\+ring.\+hpp\item 
+polynomial\+\_\+ring.\+cpp\end{DoxyCompactItemize}

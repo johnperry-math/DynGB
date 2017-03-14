@@ -1,0 +1,241 @@
+\hypertarget{classskeleton}{}\section{skeleton Class Reference}
+\label{classskeleton}\index{skeleton@{skeleton}}
+
+
+skeleton of a polyhedral cone, with methods allowing definition and refinement  
+
+
+
+
+{\ttfamily \#include $<$skeleton.\+hpp$>$}
+
+Inheritance diagram for skeleton\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classskeleton}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classskeleton_a7a9181253fc3b9f7b61871047b2b31cc}\label{classskeleton_a7a9181253fc3b9f7b61871047b2b31cc}} 
+void \hyperlink{classskeleton_a7a9181253fc3b9f7b61871047b2b31cc}{common\+\_\+initialization} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
+\begin{DoxyCompactList}\small\item\em Initialization common to all constructors. \end{DoxyCompactList}\item 
+\hyperlink{classskeleton_a60f5818e984abe589ea8298d189cd9c6}{skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
+\begin{DoxyCompactList}\small\item\em Constructs a basic skeleton in the given number of dimensions, initialized to the axes, or (equivalently) to the set of constraints $ x_i \geq 0 $. \end{DoxyCompactList}\item 
+\hyperlink{classskeleton_a5d0ebc69ae4ff20afd3096e36b31ab1f}{skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Constructs a skeleton described by the given system of constraints. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_abbb0828dc5cd38edf09093e738510d7a}\label{classskeleton_abbb0828dc5cd38edf09093e738510d7a}} 
+\hyperlink{classskeleton_abbb0828dc5cd38edf09093e738510d7a}{skeleton} (\hyperlink{classskeleton}{skeleton} \&)
+\begin{DoxyCompactList}\small\item\em Performs a deep copy of {\ttfamily other}. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classskeleton_a42d30b92f27936eab11d0fa4f0cc10b4}{copy} (const \hyperlink{class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+\begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classskeleton_ae8874234344e5e51f9b81f6199ee2aa6}\label{classskeleton_ae8874234344e5e51f9b81f6199ee2aa6}} 
+\hyperlink{classskeleton_ae8874234344e5e51f9b81f6199ee2aa6}{$\sim$skeleton} ()
+\begin{DoxyCompactList}\small\item\em Currently does nothing the compiler wouldn\textquotesingle{}t do. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classskeleton_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}\label{classskeleton_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{classskeleton_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}{get\+\_\+dimension} () const
+\begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_a3e2662e9f9e6a0dde0459dee0b27fd1c}\label{classskeleton_a3e2662e9f9e6a0dde0459dee0b27fd1c}} 
+unsigned long \hyperlink{classskeleton_a3e2662e9f9e6a0dde0459dee0b27fd1c}{get\+\_\+number\+\_\+of\+\_\+edges} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of edges defining the skeleton. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_adc4557716509bfeeae99f99b93953cf8}\label{classskeleton_adc4557716509bfeeae99f99b93953cf8}} 
+set$<$ \hyperlink{classedge}{edge} $>$ \hyperlink{classskeleton_adc4557716509bfeeae99f99b93953cf8}{get\+\_\+edges} ()
+\begin{DoxyCompactList}\small\item\em Returns the edges that define the skeleton. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_a0b75f0ce54e512673169b193955fc58f}\label{classskeleton_a0b75f0ce54e512673169b193955fc58f}} 
+unsigned long \hyperlink{classskeleton_a0b75f0ce54e512673169b193955fc58f}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of constraints defining the skeleton. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_a29665cf3b04694b349f224e54f93f2db}\label{classskeleton_a29665cf3b04694b349f224e54f93f2db}} 
+const vector$<$ \hyperlink{classconstraint}{constraint} $>$ \& \hyperlink{classskeleton_a29665cf3b04694b349f224e54f93f2db}{get\+\_\+constraints} ()
+\begin{DoxyCompactList}\small\item\em Returns the constraints that define the skeleton. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_a8c0ceb21b570a4a4084902a497de79a0}\label{classskeleton_a8c0ceb21b570a4a4084902a497de79a0}} 
+\hyperlink{classconstraint}{constraint} \hyperlink{classskeleton_a8c0ceb21b570a4a4084902a497de79a0}{get\+\_\+constraint} (int index)
+\begin{DoxyCompactList}\small\item\em Returns the indicated constraint. Numbering starts at 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classskeleton_a6b48120d11e7b244c14c748d990d2ade}\label{classskeleton_a6b48120d11e7b244c14c748d990d2ade}} 
+void \hyperlink{classskeleton_a6b48120d11e7b244c14c748d990d2ade}{which\+\_\+constraints\+\_\+active\+\_\+at} (const \hyperlink{classray}{ray} \&u, bool $\ast$result) const
+\begin{DoxyCompactList}\small\item\em returns the set of constraints in the skeleton active at {\ttfamily u} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_aca399adccf69ea8f9df6cf557526032b}\label{classskeleton_aca399adccf69ea8f9df6cf557526032b}} 
+bool \hyperlink{classskeleton_aca399adccf69ea8f9df6cf557526032b}{is\+\_\+consistent} (const \hyperlink{classconstraint}{constraint} \&c) const
+\begin{DoxyCompactList}\small\item\em tests for consistency of a potentially new constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classskeleton_ac366952c2b0908159255916a1e37f9b3}{solve} (vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classskeleton_a8add1433d3bc6b1a8588f0f88134599f}{solve} (\hyperlink{classconstraint}{constraint} \&)
+\begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_a1af8c607a3dc93633e0d395e73cb1c97}\label{classskeleton_a1af8c607a3dc93633e0d395e73cb1c97}} 
+set$<$ \hyperlink{classedge}{edge} $>$ \hyperlink{classskeleton_a1af8c607a3dc93633e0d395e73cb1c97}{adjacencies\+\_\+by\+\_\+graphs} (set$<$ \hyperlink{classray}{ray} $>$)
+\begin{DoxyCompactList}\small\item\em Re-\/computes the edges in the skeleton using Zolotych\textquotesingle{}s {\ttfamily Graph\+Adj} algorithm and returns the result. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classskeleton_aa5991e7e25783c2b8cfd772f41f7b99b}\label{classskeleton_aa5991e7e25783c2b8cfd772f41f7b99b}} 
+\hyperlink{classskeleton}{skeleton} \& \hyperlink{classskeleton_aa5991e7e25783c2b8cfd772f41f7b99b}{operator=} (const \hyperlink{classskeleton}{skeleton} \&)
+\begin{DoxyCompactList}\small\item\em Assignment operator; empties current set \& copies from other. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classskeleton_a5732209c39488881acfc0fb5831e513b}\label{classskeleton_a5732209c39488881acfc0fb5831e513b}} 
+ostream \& \hyperlink{classskeleton_a5732209c39488881acfc0fb5831e513b}{operator$<$$<$} (ostream \&, const \hyperlink{classskeleton}{skeleton} \&)
+\begin{DoxyCompactList}\small\item\em prints out the constraints, then the rays, then the edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+skeleton of a polyhedral cone, with methods allowing definition and refinement 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+October 2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+The University of Southern Mississippi
+\end{DoxyCopyright}
+This class implements the Double Description Method, an iterative algorithm for computing the skeleton of a cone. This particular version uses Zolotykh\textquotesingle{}s Graph\+Adj criterion \cite{Zolotych_DoubleDescription}. The iterative nature means that the cone can be updated with new constraints, passed to that algorithm, and the skeleton will be automatically recomputed. 
+
+Definition at line 169 of file skeleton.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classskeleton_a60f5818e984abe589ea8298d189cd9c6}\label{classskeleton_a60f5818e984abe589ea8298d189cd9c6}} 
+\index{skeleton@{skeleton}!skeleton@{skeleton}}
+\index{skeleton@{skeleton}!skeleton@{skeleton}}
+\subsubsection{\texorpdfstring{skeleton()}{skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily skeleton\+::skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension }\end{DoxyParamCaption})}
+
+
+
+Constructs a basic skeleton in the given number of dimensions, initialized to the axes, or (equivalently) to the set of constraints $ x_i \geq 0 $. 
+
+The rays are informed of their active constraints. \begin{DoxyPrecond}{Precondition}
+the argument should be at least two 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+the skeleton of the positive orthant 
+\end{DoxyPostcond}
+
+
+Definition at line 102 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{classskeleton_a5d0ebc69ae4ff20afd3096e36b31ab1f}\label{classskeleton_a5d0ebc69ae4ff20afd3096e36b31ab1f}} 
+\index{skeleton@{skeleton}!skeleton@{skeleton}}
+\index{skeleton@{skeleton}!skeleton@{skeleton}}
+\subsubsection{\texorpdfstring{skeleton()}{skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily skeleton\+::skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&}]{constraints }\end{DoxyParamCaption})}
+
+
+
+Constructs a skeleton described by the given system of constraints. 
+
+Practically speaking, it first generates a basic skeleton, then iterates on the given constraints. \begin{DoxyPrecond}{Precondition}
+{\ttfamily u.\+size() == v.\+size()} for all {\ttfamily u}, {\ttfamily v} in the vector 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+unless the system supplied was inconsistent, a valid skeleton of the corresponding polyhedral cone 
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+Your program will almost certainly fail if you do not respect the precondition. 
+\end{DoxyWarning}
+
+
+Definition at line 107 of file skeleton.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classskeleton_a42d30b92f27936eab11d0fa4f0cc10b4}\label{classskeleton_a42d30b92f27936eab11d0fa4f0cc10b4}} 
+\index{skeleton@{skeleton}!copy@{copy}}
+\index{copy@{copy}!skeleton@{skeleton}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily bool skeleton\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+performs a deep copy, similar to a copy constructor 
+
+\begin{DoxyWarning}{Warning}
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_a442ad4ad67ee2feff0df49e9201d61ca}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 123 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{classskeleton_ac366952c2b0908159255916a1e37f9b3}\label{classskeleton_ac366952c2b0908159255916a1e37f9b3}} 
+\index{skeleton@{skeleton}!solve@{solve}}
+\index{solve@{solve}!skeleton@{skeleton}}
+\subsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool skeleton\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{classconstraint}{constraint} $>$ \&}]{new\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds the indicated constraints (plural!) and re-\/computes the skeleton. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the new constraints are consistent with the current constraints
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Checking the return value is crucial! If the function returns {\ttfamily false}, you have an inconsistent system! While the {\itshape present} cone will remain consistent, {\bfseries the function will not roll back previous changes you have made}, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_a35da4bdf5db971c445f495b6eaab072d}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 246 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{classskeleton_a8add1433d3bc6b1a8588f0f88134599f}\label{classskeleton_a8add1433d3bc6b1a8588f0f88134599f}} 
+\index{skeleton@{skeleton}!solve@{solve}}
+\index{solve@{solve}!skeleton@{skeleton}}
+\subsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool skeleton\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{classconstraint}{constraint} \&}]{constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds the indicated constraint (singular!) and re-\/computes the skeleton. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the new constraint is consistent with the current constraints
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Checking the return value is crucial! If the function returns {\ttfamily false}, you have an inconsistent system! While the {\itshape present} cone will remain consistent, {\bfseries the function will not roll back previous changes you have made}, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_l_p___solver_abd84374c52124116becc8924dc74e12d}{L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 138 of file skeleton.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+skeleton.\+hpp\item 
+skeleton.\+cpp\end{DoxyCompactItemize}

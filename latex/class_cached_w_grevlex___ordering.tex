@@ -1,0 +1,149 @@
+\hypertarget{class_cached_w_grevlex___ordering}{}\section{Cached\+W\+Grevlex\+\_\+\+Ordering Class Reference}
+\label{class_cached_w_grevlex___ordering}\index{Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}}
+
+
+the weighted grevlex ordering for a specified number of variables, with cached weights for each monomial  
+
+
+
+
+{\ttfamily \#include $<$particular\+\_\+orderings.\+hpp$>$}
+
+Inheritance diagram for Cached\+W\+Grevlex\+\_\+\+Ordering\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_cached_w_grevlex___ordering}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_cached_w_grevlex___ordering_a107617c77aaebe5ba74973af66ab75b6}{Cached\+W\+Grevlex\+\_\+\+Ordering} (N\+V\+A\+R\+\_\+\+T\+Y\+PE number\+\_\+of\+\_\+variables, W\+T\+\_\+\+T\+Y\+PE $\ast$w, bool thorough=true)
+\begin{DoxyCompactList}\small\item\em creates a weighted grevlex ordering specific to $n$ variables, using the weights specified by $w$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a845bb3c810fd284346de246f895ba763}\label{class_cached_w_grevlex___ordering_a845bb3c810fd284346de246f895ba763}} 
+const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_cached_w_grevlex___ordering_a845bb3c810fd284346de246f895ba763}{order\+\_\+weights} ()
+\begin{DoxyCompactList}\small\item\em the weights that define this ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_ad45e0d824f910059185ff5b63a8e2add}\label{class_cached_w_grevlex___ordering_ad45e0d824f910059185ff5b63a8e2add}} 
+virtual int \hyperlink{class_cached_w_grevlex___ordering_ad45e0d824f910059185ff5b63a8e2add}{cmp} (const \hyperlink{class_monomial}{Monomial} \&, const \hyperlink{class_monomial}{Monomial} \&) const
+\begin{DoxyCompactList}\small\item\em resturns 0 if they are alike; positive if first larger; negative otherwise \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a2a82044a58fc3594975726072243b51a}\label{class_cached_w_grevlex___ordering_a2a82044a58fc3594975726072243b51a}} 
+virtual bool \hyperlink{class_cached_w_grevlex___ordering_a2a82044a58fc3594975726072243b51a}{first\+\_\+larger} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t>u$ by sums of successively fewer exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_abcb7c620cce85cc4b94bf742fc1cafc3}\label{class_cached_w_grevlex___ordering_abcb7c620cce85cc4b94bf742fc1cafc3}} 
+virtual bool \hyperlink{class_cached_w_grevlex___ordering_abcb7c620cce85cc4b94bf742fc1cafc3}{first\+\_\+smaller} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t< u$ by sums of successively fewer exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a61786473b35507f0862f72fb0926c001}\label{class_cached_w_grevlex___ordering_a61786473b35507f0862f72fb0926c001}} 
+virtual bool \hyperlink{class_cached_w_grevlex___ordering_a61786473b35507f0862f72fb0926c001}{first\+\_\+larger\+\_\+than\+\_\+multiple} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u, const \hyperlink{class_monomial}{Monomial} \&v) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff $t>u$ by sums of successively fewer exponents \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Utility}\par
+\begin{DoxyCompactItemize}
+\item 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_cached_w_grevlex___ordering_af04f39af33cba2c1c4f985e57ea8d136}{partial\+\_\+degree} (const \hyperlink{class_monomial}{Monomial} \&t, N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em reports the weighted sum of the first i exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a960a5b3460c4cab0dfd89bc0663c6ee0}\label{class_cached_w_grevlex___ordering_a960a5b3460c4cab0dfd89bc0663c6ee0}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_cached_w_grevlex___ordering_a960a5b3460c4cab0dfd89bc0663c6ee0}{compute\+\_\+ith\+\_\+weight} (const \hyperlink{class_monomial}{Monomial} \&t, N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em computes the sum of the first i exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_abd2277e6f073730cdd29c5e4d4c72d2c}\label{class_cached_w_grevlex___ordering_abd2277e6f073730cdd29c5e4d4c72d2c}} 
+virtual void \hyperlink{class_cached_w_grevlex___ordering_abd2277e6f073730cdd29c5e4d4c72d2c}{set\+\_\+data} (\hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em sets the \hyperlink{class_monomial}{Monomial}'s {\ttfamily monomial\+\_\+ordering\+\_\+data} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a1673ac75841fe8203941c73030621579}\label{class_cached_w_grevlex___ordering_a1673ac75841fe8203941c73030621579}} 
+const bool \hyperlink{class_cached_w_grevlex___ordering_a1673ac75841fe8203941c73030621579}{fully\+\_\+apply}
+\begin{DoxyCompactList}\small\item\em whether to apply the weights to more than the first sum \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a2857c72d3d83c1ec4dfaea5dc6fb4893}\label{class_cached_w_grevlex___ordering_a2857c72d3d83c1ec4dfaea5dc6fb4893}} 
+const N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_cached_w_grevlex___ordering_a2857c72d3d83c1ec4dfaea5dc6fb4893}{n}
+\begin{DoxyCompactList}\small\item\em the number of variables, which should remain constant \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_adb595ee1755d11ab65164222c7ec2d94}\label{class_cached_w_grevlex___ordering_adb595ee1755d11ab65164222c7ec2d94}} 
+const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_cached_w_grevlex___ordering_adb595ee1755d11ab65164222c7ec2d94}{weights}
+\begin{DoxyCompactList}\small\item\em the weights that define this ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a6b25de5d93b628d0cb77ec4caafca32b}\label{class_cached_w_grevlex___ordering_a6b25de5d93b628d0cb77ec4caafca32b}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{class_cached_w_grevlex___ordering}{Cached\+W\+Grevlex\+\_\+\+Ordering} \&word)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+the weighted grevlex ordering for a specified number of variables, with cached weights for each monomial 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+The weighted grevlex ordering first compares weighted sums of all exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. Whether the weights are applied to more than one sum can be decided at construction. \begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}.\end{Desc}
+
+
+Definition at line 380 of file particular\+\_\+orderings.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_a107617c77aaebe5ba74973af66ab75b6}\label{class_cached_w_grevlex___ordering_a107617c77aaebe5ba74973af66ab75b6}} 
+\index{Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}!Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}}
+\index{Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}!Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}}
+\subsubsection{\texorpdfstring{Cached\+W\+Grevlex\+\_\+\+Ordering()}{CachedWGrevlex\_Ordering()}}
+{\footnotesize\ttfamily Cached\+W\+Grevlex\+\_\+\+Ordering\+::\+Cached\+W\+Grevlex\+\_\+\+Ordering (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{number\+\_\+of\+\_\+variables,  }\item[{W\+T\+\_\+\+T\+Y\+PE $\ast$}]{w,  }\item[{bool}]{thorough = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+creates a weighted grevlex ordering specific to $n$ variables, using the weights specified by $w$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thorough} & determines whether the weights are applied to subsequent orderings; if {\ttfamily false}, the second, third, etc. sums are ordinary sums of the exponents, rather than weighted sums \\
+\hline
+{\em number\+\_\+of\+\_\+variables} & the number of variables this will compare; {\ttfamily weights} should have this length! \\
+\hline
+{\em w} & the weights to multiply to each exponent \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 398 of file particular\+\_\+orderings.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cached_w_grevlex___ordering_af04f39af33cba2c1c4f985e57ea8d136}\label{class_cached_w_grevlex___ordering_af04f39af33cba2c1c4f985e57ea8d136}} 
+\index{Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}!partial\+\_\+degree@{partial\+\_\+degree}}
+\index{partial\+\_\+degree@{partial\+\_\+degree}!Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}}
+\subsubsection{\texorpdfstring{partial\+\_\+degree()}{partial\_degree()}}
+{\footnotesize\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE Cached\+W\+Grevlex\+\_\+\+Ordering\+::partial\+\_\+degree (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t,  }\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{i }\end{DoxyParamCaption}) const}
+
+
+
+reports the weighted sum of the first i exponents 
+
+\begin{DoxyWarning}{Warning}
+Be sure that {\ttfamily t} has the correct ordering! 
+\end{DoxyWarning}
+
+
+Definition at line 470 of file particular\+\_\+orderings.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+particular\+\_\+orderings.\+hpp\item 
+particular\+\_\+orderings.\+cpp\end{DoxyCompactItemize}

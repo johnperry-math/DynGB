@@ -1,0 +1,25 @@
+var class_dense___univariate___integer___polynomial =
+[
+    [ "Dense_Univariate_Integer_Polynomial", "class_dense___univariate___integer___polynomial.html#aefc915a9455b4f1512415c2a31a78eb5", null ],
+    [ "Dense_Univariate_Integer_Polynomial", "class_dense___univariate___integer___polynomial.html#a412c4aac4dbcf8512294e3ec1c7dd32f", null ],
+    [ "Dense_Univariate_Integer_Polynomial", "class_dense___univariate___integer___polynomial.html#a7791b2856ef361875ba1a9f08700dcad", null ],
+    [ "~Dense_Univariate_Integer_Polynomial", "class_dense___univariate___integer___polynomial.html#a9fb7da639b0155c4b6c5b2ee4e3f89fa", null ],
+    [ "add", "class_dense___univariate___integer___polynomial.html#a9aed4c0d2f30a93f79a11f8ab102601f", null ],
+    [ "coeff", "class_dense___univariate___integer___polynomial.html#add45ee2cac1598b8069d0375190461dc", null ],
+    [ "coefficient_array", "class_dense___univariate___integer___polynomial.html#ae10c30e8f3b0702d6ec0c90b2feedb23", null ],
+    [ "degree", "class_dense___univariate___integer___polynomial.html#a5099a83e73b6b86f310a9ef56ffd5689", null ],
+    [ "expand_poly", "class_dense___univariate___integer___polynomial.html#a58fc0f5eefa5d11cdd17d3453eb9ac0d", null ],
+    [ "is_zero", "class_dense___univariate___integer___polynomial.html#ac5251f81aaecea090443ed6cff755da4", null ],
+    [ "multiply_by", "class_dense___univariate___integer___polynomial.html#a8c06ba1749b4197a9e1676cfeb87134e", null ],
+    [ "multiply_by_monomial_of_degree", "class_dense___univariate___integer___polynomial.html#a984a6d80cc0182348e20c60f20e4e180", null ],
+    [ "negate", "class_dense___univariate___integer___polynomial.html#ab3fd69e979b7b369064a3188e6b8a650", null ],
+    [ "operator+=", "class_dense___univariate___integer___polynomial.html#ad3fcc4a1885e52b7c6c1814aac13b7b0", null ],
+    [ "operator-", "class_dense___univariate___integer___polynomial.html#acd4d8a0d3e9e6704a6ea91e9c29cfea0", null ],
+    [ "operator[]", "class_dense___univariate___integer___polynomial.html#af39a736de8d5640ac943d358396f1f85", null ],
+    [ "scale_by", "class_dense___univariate___integer___polynomial.html#a0e56525a2b24c37a6a43c2175b9b6178", null ],
+    [ "set_coefficient", "class_dense___univariate___integer___polynomial.html#a132de1284f006ae6e943c50e8fdee973", null ],
+    [ "operator<<", "class_dense___univariate___integer___polynomial.html#a73b460b2b57fc554551b92dfc818d45d", null ],
+    [ "coeffs", "class_dense___univariate___integer___polynomial.html#ac980954e486906d80d08f4155254d186", null ],
+    [ "deg", "class_dense___univariate___integer___polynomial.html#a2dc3d8ec3b25f3a17417883c890fbdce", null ],
+    [ "size", "class_dense___univariate___integer___polynomial.html#a7691962e41ebc91eb18c270f0d11845a", null ]
+];

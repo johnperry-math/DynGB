@@ -1,0 +1,204 @@
+\hypertarget{class_double___buffered___polynomial}{}\section{Double\+\_\+\+Buffered\+\_\+\+Polynomial Class Reference}
+\label{class_double___buffered___polynomial}\index{Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}}
+
+
+Polynomials implemented using double buffers.
+
+A double-\/buffered polynomial maintains at all times two arrays to store its terms. (Technically, it retains four arrays\+: two for the monomials, and two for the coefficients.) Any operation that might change the {\itshape length} of the polynomials reads the data in one buffer and writes the result to the other buffer. The goal of this approach is to avoid the penalties associated with allocating, deallocating, and traversing the nodes of a linked list.  
+
+
+
+
+{\ttfamily \#include $<$polynomial\+\_\+double\+\_\+buffered.\+hpp$>$}
+
+Inheritance diagram for Double\+\_\+\+Buffered\+\_\+\+Polynomial\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_double___buffered___polynomial}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_ab663800f31484a5d55ec9363e7669f56}\label{class_double___buffered___polynomial_ab663800f31484a5d55ec9363e7669f56}} 
+{\bfseries Double\+\_\+\+Buffered\+\_\+\+Polynomial} (\hyperlink{class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&\hyperlink{class_abstract___polynomial_a551ade20b7dcd96c227dd0401f6ffbbe}{R}, \hyperlink{class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$order=generic\+\_\+grevlex\+\_\+ptr)
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_ace854a5e7d0fac35ad2d9469a34656a7}\label{class_double___buffered___polynomial_ace854a5e7d0fac35ad2d9469a34656a7}} 
+{\bfseries Double\+\_\+\+Buffered\+\_\+\+Polynomial} (\hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} const \&p)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a61b7620ea7b3b7ba3db0b96065458166}\label{class_double___buffered___polynomial_a61b7620ea7b3b7ba3db0b96065458166}} 
+{\bfseries $\sim$\+Double\+\_\+\+Buffered\+\_\+\+Polynomial} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aaa26be2d12a3bf9ad1a4957b11318a29}\label{class_double___buffered___polynomial_aaa26be2d12a3bf9ad1a4957b11318a29}} 
+virtual \hyperlink{class_monomial}{Monomial} \& \hyperlink{class_double___buffered___polynomial_aaa26be2d12a3bf9ad1a4957b11318a29}{leading\+\_\+monomial} () const
+\begin{DoxyCompactList}\small\item\em leading monomial -- call after \hyperlink{class_double___buffered___polynomial_a0e7acad01d5ade31b60fe5453d48fdb5}{sort\+\_\+by\+\_\+order()}! \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a6b5f88d2c15d479e993f5f958ae70b8e}\label{class_double___buffered___polynomial_a6b5f88d2c15d479e993f5f958ae70b8e}} 
+virtual \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \hyperlink{class_double___buffered___polynomial_a6b5f88d2c15d479e993f5f958ae70b8e}{leading\+\_\+coefficient} () const
+\begin{DoxyCompactList}\small\item\em leading coefficient -- call after \hyperlink{class_double___buffered___polynomial_a0e7acad01d5ade31b60fe5453d48fdb5}{sort\+\_\+by\+\_\+order()}! \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a0d3de3a5b355331e0e61cb68f0a501a5}\label{class_double___buffered___polynomial_a0d3de3a5b355331e0e61cb68f0a501a5}} 
+virtual unsigned \hyperlink{class_double___buffered___polynomial_a0d3de3a5b355331e0e61cb68f0a501a5}{length} () const
+\begin{DoxyCompactList}\small\item\em number of monomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a1575f7de343e1c2644a6ca58db80e5d4}\label{class_double___buffered___polynomial_a1575f7de343e1c2644a6ca58db80e5d4}} 
+virtual bool \hyperlink{class_double___buffered___polynomial_a1575f7de343e1c2644a6ca58db80e5d4}{is\+\_\+zero} () const
+\begin{DoxyCompactList}\small\item\em is this polynomial zero? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a1303fe35f4bdb1d6e3dbfbb6aed5bdd9}\label{class_double___buffered___polynomial_a1303fe35f4bdb1d6e3dbfbb6aed5bdd9}} 
+virtual bool \hyperlink{class_double___buffered___polynomial_a1303fe35f4bdb1d6e3dbfbb6aed5bdd9}{can\+\_\+reduce} (\hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&other) const
+\begin{DoxyCompactList}\small\item\em can {\ttfamily this} reduce {\ttfamily other}? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aadeeb207edd8c197cbe23dac7669f586}\label{class_double___buffered___polynomial_aadeeb207edd8c197cbe23dac7669f586}} 
+virtual \hyperlink{class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} $\ast$ \hyperlink{class_double___buffered___polynomial_aadeeb207edd8c197cbe23dac7669f586}{zero\+\_\+polynomial} () const
+\begin{DoxyCompactList}\small\item\em zero polynomial of this type \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_double___buffered___polynomial_ae0cb00f5657fcc0c51c5c6e9659b89a3}{set\+\_\+monomial\+\_\+ordering} (\hyperlink{class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$order, bool sort\+\_\+anew=true)
+\begin{DoxyCompactList}\small\item\em set the monomial ordering and sort the polynomials (optionally, but by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_ad642c3ef39e32094400f984d9094e78f}\label{class_double___buffered___polynomial_ad642c3ef39e32094400f984d9094e78f}} 
+virtual \hyperlink{class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} $\ast$ \hyperlink{class_double___buffered___polynomial_ad642c3ef39e32094400f984d9094e78f}{monomial\+\_\+multiple} (const \hyperlink{class_monomial}{Monomial} \&t) const
+\begin{DoxyCompactList}\small\item\em multiple of this and u \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a30c02306311c8ed94a8eb07840bd5ea0}\label{class_double___buffered___polynomial_a30c02306311c8ed94a8eb07840bd5ea0}} 
+virtual \hyperlink{class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} $\ast$ \hyperlink{class_double___buffered___polynomial_a30c02306311c8ed94a8eb07840bd5ea0}{scalar\+\_\+multiple} (const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&c) const
+\begin{DoxyCompactList}\small\item\em multiple of this and c \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a820f216eb97e0d3238b92996a0c80483}\label{class_double___buffered___polynomial_a820f216eb97e0d3238b92996a0c80483}} 
+virtual \hyperlink{class_mutable___polynomial}{Mutable\+\_\+\+Polynomial} \& \hyperlink{class_double___buffered___polynomial_a820f216eb97e0d3238b92996a0c80483}{operator+=} (const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&p)
+\begin{DoxyCompactList}\small\item\em add another polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aef7a10e69a05bac6b02d8c752f0685c8}\label{class_double___buffered___polynomial_aef7a10e69a05bac6b02d8c752f0685c8}} 
+virtual \hyperlink{class_mutable___polynomial}{Mutable\+\_\+\+Polynomial} \& \hyperlink{class_double___buffered___polynomial_aef7a10e69a05bac6b02d8c752f0685c8}{operator-\/=} (const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&p)
+\begin{DoxyCompactList}\small\item\em subtract another polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a2c378eabf8bbbfd15492fc8f4541428a}\label{class_double___buffered___polynomial_a2c378eabf8bbbfd15492fc8f4541428a}} 
+virtual void \hyperlink{class_double___buffered___polynomial_a2c378eabf8bbbfd15492fc8f4541428a}{add\+\_\+polynomial\+\_\+multiple} (const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a, const \hyperlink{class_monomial}{Monomial} \&u, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&p, bool subtract)
+\begin{DoxyCompactList}\small\item\em add monomial multiple of other \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_double___buffered___polynomial_a0e7acad01d5ade31b60fe5453d48fdb5}{sort\+\_\+by\+\_\+order} ()
+\begin{DoxyCompactList}\small\item\em sort according to the leading monomial's ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aa4b7feead6f82b144851a5d1828b2cb1}\label{class_double___buffered___polynomial_aa4b7feead6f82b144851a5d1828b2cb1}} 
+virtual \hyperlink{class_d_b___polynomial___iterator}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{class_double___buffered___polynomial_aa4b7feead6f82b144851a5d1828b2cb1}{new\+\_\+iterator} () const
+\begin{DoxyCompactList}\small\item\em An iterator that poses no risk of modifying the polynomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_ac85f3899da0c62afdfa8ace3a65e7704}\label{class_double___buffered___polynomial_ac85f3899da0c62afdfa8ace3a65e7704}} 
+virtual \hyperlink{class_d_b___polynomial___iterator}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{class_double___buffered___polynomial_ac85f3899da0c62afdfa8ace3a65e7704}{new\+\_\+mutable\+\_\+iterator} ()
+\begin{DoxyCompactList}\small\item\em An iterator that may modify the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a2be8752fc15c2f55aa64eb8a94f66807}\label{class_double___buffered___polynomial_a2be8752fc15c2f55aa64eb8a94f66807}} 
+virtual \hyperlink{class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_ae5463da4bd4c8a68e93deedb0ed1b2e3}\label{class_double___buffered___polynomial_ae5463da4bd4c8a68e93deedb0ed1b2e3}} 
+virtual \hyperlink{class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries end} () const
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a9ea67190d302340e35d1318a32df0c66}\label{class_double___buffered___polynomial_a9ea67190d302340e35d1318a32df0c66}} 
+virtual void \hyperlink{class_double___buffered___polynomial_a9ea67190d302340e35d1318a32df0c66}{add\+\_\+last} (const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a, const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em Attach a new monomial to the tail -- check that it belongs at tail! \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aa1abce108245118a97c9086dd9726fea}\label{class_double___buffered___polynomial_aa1abce108245118a97c9086dd9726fea}} 
+virtual \hyperlink{class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List} $\ast$ \hyperlink{class_double___buffered___polynomial_aa1abce108245118a97c9086dd9726fea}{detach\+\_\+head} ()
+\begin{DoxyCompactList}\small\item\em Remove and return the head. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{Indent}\textbf{ Buffering}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_a399d8bc13840f21ab8a1b8c844053eb9}\label{class_double___buffered___polynomial_a399d8bc13840f21ab8a1b8c844053eb9}} 
+bool \hyperlink{class_double___buffered___polynomial_a399d8bc13840f21ab8a1b8c844053eb9}{test\+\_\+buffer} (unsigned b, unsigned n)
+\begin{DoxyCompactList}\small\item\em {\ttfamily true} iff buffer {\ttfamily b} has space to hold {\ttfamily n} elements; expand other buffer if not. \end{DoxyCompactList}\item 
+void \hyperlink{class_double___buffered___polynomial_acd9235d4fe5a56a3a0842a80b4efbdbb}{expand\+\_\+buffer} (unsigned b, unsigned n)
+\begin{DoxyCompactList}\small\item\em Expand buffer {\ttfamily b} to hold $ 2n $ elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_double___buffered___polynomial_aea7290ecfb1e468c20192be43af46a96}\label{class_double___buffered___polynomial_aea7290ecfb1e468c20192be43af46a96}} 
+class {\bfseries D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Polynomials implemented using double buffers.
+
+A double-\/buffered polynomial maintains at all times two arrays to store its terms. (Technically, it retains four arrays\+: two for the monomials, and two for the coefficients.) Any operation that might change the {\itshape length} of the polynomials reads the data in one buffer and writes the result to the other buffer. The goal of this approach is to avoid the penalties associated with allocating, deallocating, and traversing the nodes of a linked list. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 93 of file polynomial\+\_\+double\+\_\+buffered.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_double___buffered___polynomial_acd9235d4fe5a56a3a0842a80b4efbdbb}\label{class_double___buffered___polynomial_acd9235d4fe5a56a3a0842a80b4efbdbb}} 
+\index{Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}!expand\+\_\+buffer@{expand\+\_\+buffer}}
+\index{expand\+\_\+buffer@{expand\+\_\+buffer}!Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{expand\+\_\+buffer()}{expand\_buffer()}}
+{\footnotesize\ttfamily void Double\+\_\+\+Buffered\+\_\+\+Polynomial\+::expand\+\_\+buffer (\begin{DoxyParamCaption}\item[{unsigned}]{b,  }\item[{unsigned}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Expand buffer {\ttfamily b} to hold $ 2n $ elements. 
+
+This does {\itshape not} test to see if the space is already available. 
+
+Definition at line 196 of file polynomial\+\_\+double\+\_\+buffered.\+hpp.
+
+\mbox{\Hypertarget{class_double___buffered___polynomial_ae0cb00f5657fcc0c51c5c6e9659b89a3}\label{class_double___buffered___polynomial_ae0cb00f5657fcc0c51c5c6e9659b89a3}} 
+\index{Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}!set\+\_\+monomial\+\_\+ordering@{set\+\_\+monomial\+\_\+ordering}}
+\index{set\+\_\+monomial\+\_\+ordering@{set\+\_\+monomial\+\_\+ordering}!Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{set\+\_\+monomial\+\_\+ordering()}{set\_monomial\_ordering()}}
+{\footnotesize\ttfamily void Double\+\_\+\+Buffered\+\_\+\+Polynomial\+::set\+\_\+monomial\+\_\+ordering (\begin{DoxyParamCaption}\item[{\hyperlink{class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order,  }\item[{bool}]{sort\+\_\+anew = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+set the monomial ordering and sort the polynomials (optionally, but by default) 
+
+\begin{DoxyWarning}{Warning}
+In most cases you will want to sort anew {\itshape immediately} after setting the ordering. Otherwise, the monomials may be in the wrong order! That is therefore the default behavior of this function, but in case you don't want to sort, that option is provided. 
+\end{DoxyWarning}
+
+
+Implements \hyperlink{class_abstract___polynomial_ad783804725a64f09fff6eeec058afe98}{Abstract\+\_\+\+Polynomial}.
+
+
+
+Definition at line 128 of file polynomial\+\_\+double\+\_\+buffered.\+cpp.
+
+\mbox{\Hypertarget{class_double___buffered___polynomial_a0e7acad01d5ade31b60fe5453d48fdb5}\label{class_double___buffered___polynomial_a0e7acad01d5ade31b60fe5453d48fdb5}} 
+\index{Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}!sort\+\_\+by\+\_\+order@{sort\+\_\+by\+\_\+order}}
+\index{sort\+\_\+by\+\_\+order@{sort\+\_\+by\+\_\+order}!Double\+\_\+\+Buffered\+\_\+\+Polynomial@{Double\+\_\+\+Buffered\+\_\+\+Polynomial}}
+\subsubsection{\texorpdfstring{sort\+\_\+by\+\_\+order()}{sort\_by\_order()}}
+{\footnotesize\ttfamily void Double\+\_\+\+Buffered\+\_\+\+Polynomial\+::sort\+\_\+by\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+sort according to the leading monomial's ordering 
+
+Note that it makes sense to sort even \hyperlink{class_constant___polynomial}{Constant\+\_\+\+Polynomial}'s, as it is not the polynomial that changes, only the order of its monomials. 
+
+Implements \hyperlink{class_abstract___polynomial_a1fcdd29c324c660ea935197c39e682f2}{Abstract\+\_\+\+Polynomial}.
+
+
+
+Definition at line 329 of file polynomial\+\_\+double\+\_\+buffered.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial\+\_\+double\+\_\+buffered.\+hpp\item 
+polynomial\+\_\+double\+\_\+buffered.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,89 @@
+\hypertarget{class_monomial___node}{}\section{Monomial\+\_\+\+Node Class Reference}
+\label{class_monomial___node}\index{Monomial\+\_\+\+Node@{Monomial\+\_\+\+Node}}
+
+
+Tool for \hyperlink{class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List}.  
+
+
+
+
+{\ttfamily \#include $<$polynomial\+\_\+linked\+\_\+list.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___node_af979446eca6482aa603a53681a0c1ce9}\label{class_monomial___node_af979446eca6482aa603a53681a0c1ce9}} 
+\hyperlink{class_monomial___node_af979446eca6482aa603a53681a0c1ce9}{Monomial\+\_\+\+Node} (const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&a, const \hyperlink{class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_monomial}{Monomial} u with coefficient a. Both are copied, and can be deleted. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_a4de7838dc51013c36fe23831249a8096}\label{class_monomial___node_a4de7838dc51013c36fe23831249a8096}} 
+\hyperlink{class_monomial___node_a4de7838dc51013c36fe23831249a8096}{Monomial\+\_\+\+Node} (\hyperlink{class_prime___field}{Prime\+\_\+\+Field} \&F, const \hyperlink{class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_monomial}{Monomial} u (copied) with coefficient 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___node_ae2de10486486a056aa860ae8f133c309}\label{class_monomial___node_ae2de10486486a056aa860ae8f133c309}} 
+\hyperlink{class_monomial}{Monomial} \& \hyperlink{class_monomial___node_ae2de10486486a056aa860ae8f133c309}{monomial} ()
+\begin{DoxyCompactList}\small\item\em This term's monomial, or power product. The coefficient is not included. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_a9eaedcc01e0c081565981450d08379f4}\label{class_monomial___node_a9eaedcc01e0c081565981450d08379f4}} 
+\hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{class_monomial___node_a9eaedcc01e0c081565981450d08379f4}{coefficient} ()
+\begin{DoxyCompactList}\small\item\em This term's coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Memory management}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___node_a556f9f54dca0f5407ec03c2ee88bac4b}\label{class_monomial___node_a556f9f54dca0f5407ec03c2ee88bac4b}} 
+void $\ast$ \hyperlink{class_monomial___node_a556f9f54dca0f5407ec03c2ee88bac4b}{operator new} (size\+\_\+t)
+\begin{DoxyCompactList}\small\item\em requests memory form \hyperlink{class_monomial___node}{Monomial\+\_\+\+Node}\textquotesingle{}s \hyperlink{class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_ae954b3ac41cf1c05b64c9b7f3c3d84a5}\label{class_monomial___node_ae954b3ac41cf1c05b64c9b7f3c3d84a5}} 
+void \hyperlink{class_monomial___node_ae954b3ac41cf1c05b64c9b7f3c3d84a5}{operator delete} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em returns data to \hyperlink{class_monomial___node}{Monomial\+\_\+\+Node}\textquotesingle{}s \hyperlink{class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___node_aa1dcb82900a21ba573517b727a84dd27}\label{class_monomial___node_aa1dcb82900a21ba573517b727a84dd27}} 
+\hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \hyperlink{class_monomial___node_aa1dcb82900a21ba573517b727a84dd27}{c}
+\begin{DoxyCompactList}\small\item\em the monomial's coefficient \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_a21f0bb73c29eb42438c6ecc0262947bf}\label{class_monomial___node_a21f0bb73c29eb42438c6ecc0262947bf}} 
+\hyperlink{class_monomial___node}{Monomial\+\_\+\+Node} $\ast$ \hyperlink{class_monomial___node_a21f0bb73c29eb42438c6ecc0262947bf}{next}
+\begin{DoxyCompactList}\small\item\em for linking \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_a7f2913a95e35d7c0e7d8fd04968f9ed1}\label{class_monomial___node_a7f2913a95e35d7c0e7d8fd04968f9ed1}} 
+\hyperlink{class_monomial___node}{Monomial\+\_\+\+Node} $\ast$ \hyperlink{class_monomial___node_a7f2913a95e35d7c0e7d8fd04968f9ed1}{prev}
+\begin{DoxyCompactList}\small\item\em for linking \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___node_af30c51160297f65bb77d063e8e0ecaa6}\label{class_monomial___node_af30c51160297f65bb77d063e8e0ecaa6}} 
+\hyperlink{class_monomial}{Monomial} \hyperlink{class_monomial___node_af30c51160297f65bb77d063e8e0ecaa6}{t}
+\begin{DoxyCompactList}\small\item\em the monomial in this node \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___node_adc04ceaa684cbc36bd6800c57364bd2e}\label{class_monomial___node_adc04ceaa684cbc36bd6800c57364bd2e}} 
+class {\bfseries L\+L\+Polynomial\+\_\+\+Iterator}
+\item 
+\mbox{\Hypertarget{class_monomial___node_a7e28ea806491074003c51b4d857abd6c}\label{class_monomial___node_a7e28ea806491074003c51b4d857abd6c}} 
+class {\bfseries Polynomial\+\_\+\+Linked\+\_\+\+List}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Tool for \hyperlink{class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List}. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+Each node in a linked list polynomial contains both the coefficient and the monomial. 
+
+Definition at line 25 of file polynomial\+\_\+linked\+\_\+list.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial\+\_\+linked\+\_\+list.\+hpp\item 
+polynomial\+\_\+linked\+\_\+list.\+cpp\end{DoxyCompactItemize}

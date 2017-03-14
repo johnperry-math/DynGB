@@ -1,0 +1,114 @@
+\hypertarget{class_constant___polynomial___iterator}{}\section{Constant\+\_\+\+Polynomial\+\_\+\+Iterator Class Reference}
+\label{class_constant___polynomial___iterator}\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+
+
+Iterates through a \hyperlink{class_constant___polynomial}{Constant\+\_\+\+Polynomial}.  
+
+
+
+
+{\ttfamily \#include $<$polynomial\+\_\+array.\+hpp$>$}
+
+Inheritance diagram for Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_constant___polynomial___iterator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_afc5daccff7f847d0c17b880e3964b838}\label{class_constant___polynomial___iterator_afc5daccff7f847d0c17b880e3964b838}} 
+\hyperlink{class_constant___polynomial___iterator_afc5daccff7f847d0c17b880e3964b838}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator} (const \hyperlink{class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$, bool at\+\_\+end=false)
+\begin{DoxyCompactList}\small\item\em Creates an iterator for {\ttfamily poly} and starts at the leading term. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a929c0ee12daaa99dc7961825507434fb}\label{class_constant___polynomial___iterator_a929c0ee12daaa99dc7961825507434fb}} 
+{\bfseries $\sim$\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a061fee4b1e6a986fb8849f4cd8232069}\label{class_constant___polynomial___iterator_a061fee4b1e6a986fb8849f4cd8232069}} 
+virtual void \hyperlink{class_constant___polynomial___iterator_a061fee4b1e6a986fb8849f4cd8232069}{restart\+\_\+iteration} ()
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_aa883e32fd7f387438e71c9ee72271bf4}\label{class_constant___polynomial___iterator_aa883e32fd7f387438e71c9ee72271bf4}} 
+virtual void \hyperlink{class_constant___polynomial___iterator_aa883e32fd7f387438e71c9ee72271bf4}{move\+Right} ()
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a555ff7a66ef121e3a22ac0af11267d7f}\label{class_constant___polynomial___iterator_a555ff7a66ef121e3a22ac0af11267d7f}} 
+virtual void \hyperlink{class_constant___polynomial___iterator_a555ff7a66ef121e3a22ac0af11267d7f}{move\+Left} ()
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a2937aec97898259569493986a2acb3ee}\label{class_constant___polynomial___iterator_a2937aec97898259569493986a2acb3ee}} 
+virtual bool \hyperlink{class_constant___polynomial___iterator_a2937aec97898259569493986a2acb3ee}{can\+Move\+Right} () const
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a6a29432be1533bb5850c7940984596c3}\label{class_constant___polynomial___iterator_a6a29432be1533bb5850c7940984596c3}} 
+virtual bool \hyperlink{class_constant___polynomial___iterator_a6a29432be1533bb5850c7940984596c3}{can\+Move\+Left} () const
+\begin{DoxyCompactList}\small\item\em Can this iterator move left, or would it fall off? \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_constant___polynomial___iterator_aad50167fd2010a1a5c09358c777d40e0}{fell\+Off} () const
+\begin{DoxyCompactList}\small\item\em Reports true iff the iterator no longer points to a valid monomial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a74d8a4b5189b73fdd43abf4e4cd0da2d}\label{class_constant___polynomial___iterator_a74d8a4b5189b73fdd43abf4e4cd0da2d}} 
+virtual const \hyperlink{class_monomial}{Monomial} \& \hyperlink{class_constant___polynomial___iterator_a74d8a4b5189b73fdd43abf4e4cd0da2d}{curr\+Monomial} () const
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_ace65808176ffab900891fc7bbced48c4}\label{class_constant___polynomial___iterator_ace65808176ffab900891fc7bbced48c4}} 
+virtual const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{class_constant___polynomial___iterator_ace65808176ffab900891fc7bbced48c4}{curr\+Coeff} () const
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_ab321ce25d6477f96450100cdc41090a6}\label{class_constant___polynomial___iterator_ab321ce25d6477f96450100cdc41090a6}} 
+long \hyperlink{class_constant___polynomial___iterator_ab321ce25d6477f96450100cdc41090a6}{i}
+\begin{DoxyCompactList}\small\item\em current position in p's array \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_constant___polynomial___iterator_a5eb1e51bcc01a9da6dffd950a3e1b1ca}\label{class_constant___polynomial___iterator_a5eb1e51bcc01a9da6dffd950a3e1b1ca}} 
+const \hyperlink{class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ \hyperlink{class_constant___polynomial___iterator_a5eb1e51bcc01a9da6dffd950a3e1b1ca}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial we iterate on \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Iterates through a \hyperlink{class_constant___polynomial}{Constant\+\_\+\+Polynomial}. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015 
+\end{DoxyDate}
+
+
+Definition at line 18 of file polynomial\+\_\+array.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_constant___polynomial___iterator_aad50167fd2010a1a5c09358c777d40e0}\label{class_constant___polynomial___iterator_aad50167fd2010a1a5c09358c777d40e0}} 
+\index{Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Constant\+\_\+\+Polynomial\+\_\+\+Iterator@{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}}
+\subsubsection{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily bool Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reports true iff the iterator no longer points to a valid monomial. 
+
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implements \hyperlink{class_polynomial___iterator_ac571e120134088d6067718bbad513e2d}{Polynomial\+\_\+\+Iterator}.
+
+
+
+Definition at line 34 of file polynomial\+\_\+array.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial\+\_\+array.\+hpp\item 
+polynomial\+\_\+array.\+cpp\end{DoxyCompactItemize}

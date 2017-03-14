@@ -1,0 +1,73 @@
+\hypertarget{group___set_arithmetic}{}\section{arithmetic on sets}
+\label{group___set_arithmetic}\index{arithmetic on sets@{arithmetic on sets}}
+
+
+convenience functions for computing intersections, unions, and related properties  
+
+
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group___set_arithmetic_ga277915858d16f125ab4fc01ed84e6989}{number\+\_\+of\+\_\+common\+\_\+constraints} (set$<$ \hyperlink{classconstraint}{constraint} $>$ \&, set$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\item 
+set$<$ \hyperlink{classconstraint}{constraint} $>$ \hyperlink{group___set_arithmetic_gaf7e728b1750953e1f5331dbc21f3c02d}{intersections\+\_\+of\+\_\+active\+\_\+constraints} (set$<$ \hyperlink{classconstraint}{constraint} $>$ \&, set$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\item 
+bool \hyperlink{group___set_arithmetic_ga429f8cae774d16957f029449f120d895}{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second} (set$<$ \hyperlink{classconstraint}{constraint} $>$ \&, set$<$ \hyperlink{classconstraint}{constraint} $>$ \&)
+\item 
+set$<$ \hyperlink{classedge}{edge} $>$ \hyperlink{group___set_arithmetic_ga2b6dbec1643b53f8e613b0a3de07f3ce}{union\+\_\+of\+\_\+edge\+\_\+sets} (const set$<$ \hyperlink{classedge}{edge} $>$ \&, const set$<$ \hyperlink{classedge}{edge} $>$ \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+convenience functions for computing intersections, unions, and related properties 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{group___set_arithmetic_gaf7e728b1750953e1f5331dbc21f3c02d}{}\index{arithmetic on sets@{arithmetic on sets}!intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}}
+\index{intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}!arithmetic on sets@{arithmetic on sets}}
+\subsubsection[{intersections\+\_\+of\+\_\+active\+\_\+constraints(set$<$ constraint $>$ \&, set$<$ constraint $>$ \&)}]{\setlength{\rightskip}{0pt plus 5cm}set$<${\bf constraint}$>$ intersections\+\_\+of\+\_\+active\+\_\+constraints (
+\begin{DoxyParamCaption}
+\item[{set$<$ {\bf constraint} $>$ \&}]{, }
+\item[{set$<$ {\bf constraint} $>$ \&}]{}
+\end{DoxyParamCaption}
+)}\label{group___set_arithmetic_gaf7e728b1750953e1f5331dbc21f3c02d}
+Returns the intersection between the given sets of constraints. 
+
+Definition at line 633 of file skeleton.\+cpp.
+
+\hypertarget{group___set_arithmetic_ga429f8cae774d16957f029449f120d895}{}\index{arithmetic on sets@{arithmetic on sets}!is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second@{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second}}
+\index{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second@{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second}!arithmetic on sets@{arithmetic on sets}}
+\subsubsection[{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second(set$<$ constraint $>$ \&, set$<$ constraint $>$ \&)}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second (
+\begin{DoxyParamCaption}
+\item[{set$<$ {\bf constraint} $>$ \&}]{, }
+\item[{set$<$ {\bf constraint} $>$ \&}]{}
+\end{DoxyParamCaption}
+)}\label{group___set_arithmetic_ga429f8cae774d16957f029449f120d895}
+Returns {\ttfamily true} if and only if the first set is a subset of the second. 
+
+Definition at line 645 of file skeleton.\+cpp.
+
+\hypertarget{group___set_arithmetic_ga277915858d16f125ab4fc01ed84e6989}{}\index{arithmetic on sets@{arithmetic on sets}!number\+\_\+of\+\_\+common\+\_\+constraints@{number\+\_\+of\+\_\+common\+\_\+constraints}}
+\index{number\+\_\+of\+\_\+common\+\_\+constraints@{number\+\_\+of\+\_\+common\+\_\+constraints}!arithmetic on sets@{arithmetic on sets}}
+\subsubsection[{number\+\_\+of\+\_\+common\+\_\+constraints(set$<$ constraint $>$ \&, set$<$ constraint $>$ \&)}]{\setlength{\rightskip}{0pt plus 5cm}int number\+\_\+of\+\_\+common\+\_\+constraints (
+\begin{DoxyParamCaption}
+\item[{set$<$ {\bf constraint} $>$ \&}]{, }
+\item[{set$<$ {\bf constraint} $>$ \&}]{}
+\end{DoxyParamCaption}
+)}\label{group___set_arithmetic_ga277915858d16f125ab4fc01ed84e6989}
+Returns the number of constraints common to both sets. 
+
+Definition at line 619 of file skeleton.\+cpp.
+
+\hypertarget{group___set_arithmetic_ga2b6dbec1643b53f8e613b0a3de07f3ce}{}\index{arithmetic on sets@{arithmetic on sets}!union\+\_\+of\+\_\+edge\+\_\+sets@{union\+\_\+of\+\_\+edge\+\_\+sets}}
+\index{union\+\_\+of\+\_\+edge\+\_\+sets@{union\+\_\+of\+\_\+edge\+\_\+sets}!arithmetic on sets@{arithmetic on sets}}
+\subsubsection[{union\+\_\+of\+\_\+edge\+\_\+sets(const set$<$ edge $>$ \&, const set$<$ edge $>$ \&)}]{\setlength{\rightskip}{0pt plus 5cm}set$<${\bf edge}$>$ union\+\_\+of\+\_\+edge\+\_\+sets (
+\begin{DoxyParamCaption}
+\item[{const set$<$ {\bf edge} $>$ \&}]{, }
+\item[{const set$<$ {\bf edge} $>$ \&}]{}
+\end{DoxyParamCaption}
+)}\label{group___set_arithmetic_ga2b6dbec1643b53f8e613b0a3de07f3ce}
+Returns the unions of two sets of edges. 
+
+Definition at line 660 of file skeleton.\+cpp.
+

@@ -1,0 +1,276 @@
+\hypertarget{test_4by4_8cpp-example}{}\section{test\+\_\+4by4.\+cpp}
+This illustrates how to compute a Gr\"{o}bner basis of the $4\times4$ system described \cite{YanGeobuckets}. The $4\times4$ system consists of the entries of the equation \[AB-BA,\] where each entry in $A$ and $B$ is a unique variable. For instance, the first entry in $AB-BA$ is \[-x_{12}x_{19} + x_1x_{20} + x_2x_{24} + x_{28}x_3 - x_{17}x_4 - x_{18}x_8.\] This system is notable because our code outperforms Singular on this system, and because the Hilbert heuristic will not work here despite the fact that coefficients were {\ttfamily uint64\+\_\+t}.
+
+
+\begin{DoxyCodeInclude}
+\textcolor{comment}{/*****************************************************************************\(\backslash\)}
+\textcolor{comment}{* This file is part of DynGB.                                                 *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* DynGB is free software: you can redistribute it and/or modify               *}
+\textcolor{comment}{* it under the terms of the GNU General Public License as published by        *}
+\textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
+\textcolor{comment}{* (at your option) any later version.                                         *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
+\textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
+\textcolor{comment}{* GNU General Public License for more details.                                *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* You should have received a copy of the GNU General Public License           *}
+\textcolor{comment}{* along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *}
+\textcolor{comment}{\(\backslash\)*****************************************************************************/}
+
+
+
+\textcolor{preprocessor}{#include <set>}
+\textcolor{preprocessor}{#include <cstdlib>}
+\textcolor{preprocessor}{#include <cstring>}
+\textcolor{preprocessor}{#include <iostream>}
+
+\textcolor{keyword}{using} std::set;
+\textcolor{keyword}{using} std::cout; \textcolor{keyword}{using} std::endl;
+
+\textcolor{preprocessor}{#include "system\_constants.hpp"}
+
+\textcolor{preprocessor}{#include "fields.hpp"}
+\textcolor{preprocessor}{#include "monomial.hpp"}
+\textcolor{preprocessor}{#include "polynomial.hpp"}
+
+\textcolor{preprocessor}{#include "dynamic\_engine.hpp"}
+
+\textcolor{preprocessor}{#include "algorithm\_buchberger\_basic.hpp"}
+\textcolor{preprocessor}{#include "algorithm\_buchberger\_dynamic.hpp"}
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+  \textcolor{keywordflow}{if} (argc < 3 or (strcmp(argv[2],\textcolor{stringliteral}{"stat"}) and strcmp(argv[2],\textcolor{stringliteral}{"dyn"}))) \{
+    cout << \textcolor{stringliteral}{"Need to know method (usually 2), then if dynamic (stat or dyn).\(\backslash\)n"};
+    \textcolor{keywordflow}{return} 1;
+  \}
+  \textcolor{comment}{// obtain method -- don't screw it up b/c we don't check it}
+  \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} method = (\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} )atoi(argv[1]);
+  \textcolor{keywordtype}{bool} static\_algorithm = \textcolor{keyword}{true};
+  \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} solver = GLPK\_SOLVER;
+  \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} heuristic;
+  \textcolor{keywordflow}{if} (!strcmp(argv[2],\textcolor{stringliteral}{"dyn"})) \{
+    \textcolor{keywordtype}{unsigned} heur\_opt\_location = 4;
+    \textcolor{keywordflow}{if} (
+        argc < 4 or
+        (strcmp(argv[3],\textcolor{stringliteral}{"skel"}) and strcmp(argv[3],\textcolor{stringliteral}{"glpk"})
+          and strcmp(argv[3],\textcolor{stringliteral}{"simpl"}) and strcmp(argv[3],\textcolor{stringliteral}{"ppl"}))
+    ) \{
+      cout << \textcolor{stringliteral}{"For a dynamic algorithm, we also need the solver:\(\backslash\)n"};
+      cout << \textcolor{stringliteral}{"\(\backslash\)tskeleton (skel) or simplex (glpk or simpl).\(\backslash\)n"};
+      \textcolor{keywordflow}{return} 2;
+    \}
+    static\_algorithm = \textcolor{keyword}{false};
+    \textcolor{keywordflow}{if} (!strcmp(argv[3],\textcolor{stringliteral}{"skel"})) solver = SKELETON\_SOLVER;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[3],\textcolor{stringliteral}{"ppl"})) solver = PPL\_SOLVER;
+    \textcolor{comment}{// obtain heuristic}
+    \textcolor{keywordflow}{if} (argc < heur\_opt\_location + 1 or
+        argv[heur\_opt\_location][0] != \textcolor{charliteral}{'h'} or argv[heur\_opt\_location][1] != \textcolor{charliteral}{'e'} or
+        argv[heur\_opt\_location][2] != \textcolor{charliteral}{'u'} or argv[heur\_opt\_location][3] != \textcolor{charliteral}{'r'}
+    ) \{
+      cout << \textcolor{stringliteral}{"Need to know heuristic. Use format heur=...\(\backslash\)n"};
+      \textcolor{keywordflow}{return} 1;
+    \}
+    heuristic = (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} )atoi(&(argv[heur\_opt\_location][5]));
+  \}
+ \textcolor{comment}{// set up the field}
+  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F17 = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(32003);
+  \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R(32, F17);
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = F17.\hyperlink{group___fields_group_ad9e3622a14de40faa75056ed40d67bb2}{unity}();
+  \textcolor{comment}{// set up our polynomials}
+  \textcolor{comment}{// first poly}
+  EXP\_TYPE e11 [] \{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t11(32, e11);
+  EXP\_TYPE e12 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t12(32, e12);
+  EXP\_TYPE e13 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t13(32, e13);
+  EXP\_TYPE e14 [] \{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t14(32, e14);
+  EXP\_TYPE e15 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t15(32, e15);
+  EXP\_TYPE e16 [] \{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t16(32, e16);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M1 [] \{ t11, t12, t13, t14, t15, t16 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C1 [] \{ -a, a, a, a, -a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f1(6, R, M1, C1);
+  f1.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// second poly}
+  EXP\_TYPE e21 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t21(32, e21);
+  EXP\_TYPE e22 [] \{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t22(32, e22);
+  EXP\_TYPE e23 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t23(32, e23);
+  EXP\_TYPE e24 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t24(32, e24);
+  EXP\_TYPE e25 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t25(32, e25);
+  EXP\_TYPE e26 [] \{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t26(32, e26);
+  EXP\_TYPE e27 [] \{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t27(32, e27);
+  EXP\_TYPE e28 [] \{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t28(32, e28);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M2 [] \{ t21, t22, t23, t24, t25, t26, t27, t28 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C2 [] \{ -a, a, -a, a, a, a, -a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f2(8, R, M2, C2);
+  f2.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// third poly}
+  EXP\_TYPE e31 [] \{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t31(32, e31);
+  EXP\_TYPE e32 [] \{0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t32(32, e32);
+  EXP\_TYPE e33 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t33(32, e33);
+  EXP\_TYPE e34 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t34(32, e34);
+  EXP\_TYPE e35 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t35(32, e35);
+  EXP\_TYPE e36 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t36(32, e36);
+  EXP\_TYPE e37 [] \{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t37(32, e37);
+  EXP\_TYPE e38 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t38(32, e38);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M3 [] \{ t31, t32, t33, t34, t35, t36, t37, t38 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C3 [] \{ a, -a, -a, -a, a, a, a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f3(8, R, M3, C3);
+  f3.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// fourth poly}
+  EXP\_TYPE e41 [] \{0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t41(32, e41);
+  EXP\_TYPE e42 [] \{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t42(32, e42);
+  EXP\_TYPE e43 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t43(32, e43);
+  EXP\_TYPE e44 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t44(32, e44);
+  EXP\_TYPE e45 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t45(32, e45);
+  EXP\_TYPE e46 [] \{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t46(32, e46);
+  EXP\_TYPE e47 [] \{0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t47(32, e47);
+  EXP\_TYPE e48 [] \{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t48(32, e48);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M4 [] \{ t41, t42, t43, t44, t45, t46, t47, t48 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C4 [] \{ -a, a, -a, a, a, -a, a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f4(8, R, M4, C4);
+  f4.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// fifth poly}
+  EXP\_TYPE e51 [] \{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t51(32, e51);
+  EXP\_TYPE e52 [] \{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t52(32, e52);
+  EXP\_TYPE e53 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t53(32, e53);
+  EXP\_TYPE e54 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t54(32, e54);
+  EXP\_TYPE e55 [] \{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t55(32, e55);
+  EXP\_TYPE e56 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t56(32, e56);
+  EXP\_TYPE e57 [] \{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t57(32, e57);
+  EXP\_TYPE e58 [] \{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t58(32, e58);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M5 [] \{ t51, t52, t53, t54, t55, t56, t57, t58 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C5 [] \{ -a, -a, a, -a, a, a, a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f5(8, R, M5, C5);
+  f5.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// sixth poly}
+  EXP\_TYPE e61 [] \{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t61(32, e61);
+  EXP\_TYPE e62 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t62(32, e62);
+  EXP\_TYPE e63 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t63(32, e63);
+  EXP\_TYPE e64 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t64(32, e64);
+  EXP\_TYPE e65 [] \{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t65(32, e65);
+  EXP\_TYPE e66 [] \{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t66(32, e66);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M6 [] \{ t61, t62, t63, t64, t65, t66 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C6 [] \{ -a, -a, a, a, a, -a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f6(6, R, M6, C6);
+  f6.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// seventh poly}
+  EXP\_TYPE e71 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t71(32, e71);
+  EXP\_TYPE e72 [] \{0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t72(32, e72);
+  EXP\_TYPE e73 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t73(32, e73);
+  EXP\_TYPE e74 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t74(32, e74);
+  EXP\_TYPE e75 [] \{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t75(32, e75);
+  EXP\_TYPE e76 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t76(32, e76);
+  EXP\_TYPE e77 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t77(32, e77);
+  EXP\_TYPE e78 [] \{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t78(32, e78);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M7 [] \{ t71, t72, t73, t74, t75, t76, t77, t78 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C7 [] \{ -a, -a, -a, a, a, -a, a, a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f7(8, R, M7, C7);
+  f7.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// eighth poly}
+  EXP\_TYPE e81 [] \{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t81(32, e81);
+  EXP\_TYPE e82 [] \{0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t82(32, e82);
+  EXP\_TYPE e83 [] \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t83(32, e83);
+  EXP\_TYPE e84 [] \{0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t84(32, e84);
+  EXP\_TYPE e85 [] \{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t85(32, e85);
+  EXP\_TYPE e86 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t86(32, e86);
+  EXP\_TYPE e87 [] \{0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t87(32, e87);
+  EXP\_TYPE e88 [] \{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0\}; 
+      \hyperlink{group__polygroup_class_monomial}{Monomial} t88(32, e88);
+  \hyperlink{group__polygroup_class_monomial}{Monomial} M8 [] \{ t81, t82, t83, t84, t85, t86, t87, t88 \};
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} C8 [] \{ -a, -a, -a, a, a, -a, a, a \};
+  \hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} f8(8, R, M8, C8);
+  f8.\hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{sort\_by\_order}();
+  \textcolor{comment}{// message}
+  cout << \textcolor{stringliteral}{"Computing a Groebner basis for\(\backslash\)n\(\backslash\)t"} << f1 << \textcolor{stringliteral}{",\(\backslash\)n\(\backslash\)t"} << f2
+       << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f3 << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f4
+       << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f5 << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f6
+       << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f7 << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)t"} << f8
+       << endl;
+  \textcolor{comment}{// compute basis}
+  list<Abstract\_Polynomial *> F;
+  F.push\_back(&f1); F.push\_back(&f2); F.push\_back(&f3); F.push\_back(&f4);
+  F.push\_back(&f5); F.push\_back(&f6); F.push\_back(&f7); F.push\_back(&f8);
+  list<Constant\_Polynomial *> G;
+  \textcolor{keywordflow}{if} (static\_algorithm) G = \hyperlink{group___g_b_computation_ga37aa7e2fec96fac6c914934a4243f603}{buchberger}(F, method, StrategyFlags::SUGAR\_STRATEGY);
+  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+      F, method, StrategyFlags::SUGAR\_STRATEGY, \textcolor{keyword}{nullptr}, heuristic, solver, \textcolor{keyword}{true}
+  );
+  \textcolor{keyword}{auto} ordering = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} *\textcolor{keyword}{>}(
+      G.front()->monomial\_ordering()
+  );
+  cout << \textcolor{stringliteral}{"Basis:\(\backslash\)n"};
+  \textcolor{keywordflow}{while} (not G.empty()) \{
+    \textcolor{keyword}{auto} g = G.front();
+    G.pop\_front();
+    cout << \textcolor{charliteral}{'\(\backslash\)t'} << g->leading\_monomial() << endl;
+    \textcolor{comment}{//delete g;}
+  \}
+  \textcolor{keywordflow}{if} (not static\_algorithm) \{
+    \textcolor{keyword}{delete} [] ordering->\hyperlink{group__orderinggroup_a4997585d5bc84222551e555eac13ebf9}{order\_weights}();
+    \textcolor{keyword}{delete} ordering;
+  \}
+  \textcolor{comment}{//check\_correctness(G, SUGAR\_STRATEGY);}
+  cout << \textcolor{stringliteral}{"bye\(\backslash\)n"};
+\}
+\end{DoxyCodeInclude}
+ 

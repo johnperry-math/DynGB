@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['degofnewpairs',['degOfNewPairs',['../group___g_b_computation.html#aa672d26c042569006512f3ac0fe1de34',1,'PPWithIdeal']]],
+  ['degree',['degree',['../group__polygroup.html#a5099a83e73b6b86f310a9ef56ffd5689',1,'Dense_Univariate_Integer_Polynomial::degree()'],['../group__polygroup.html#a12c3fe334fa0eefdc2533bad00df262d',1,'Dense_Univariate_Rational_Polynomial::degree()'],['../group__polygroup.html#a817508c95fe721c56c78d91975b8416b',1,'Monomial::degree()']]],
+  ['deinitialize',['deinitialize',['../group__polygroup.html#a471eab4cf0ce40225a1b8210513ad9e4',1,'Monomial']]],
+  ['denominator',['denominator',['../group__polygroup.html#ab44929e18d513793ff41b2061ea144ee',1,'Dense_Univariate_Rational_Polynomial']]],
+  ['dense_5funivariate_5finteger_5fpolynomial',['Dense_Univariate_Integer_Polynomial',['../group__polygroup.html#aefc915a9455b4f1512415c2a31a78eb5',1,'Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(DEG_TYPE)'],['../group__polygroup.html#a412c4aac4dbcf8512294e3ec1c7dd32f',1,'Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(const Dense_Univariate_Integer_Polynomial &amp;)'],['../group__polygroup.html#a7791b2856ef361875ba1a9f08700dcad',1,'Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(DEG_TYPE, int64_t *)']]],
+  ['dense_5funivariate_5frational_5fpolynomial',['Dense_Univariate_Rational_Polynomial',['../group__polygroup.html#a373bccc0cf3c06160702a484edb5ca10',1,'Dense_Univariate_Rational_Polynomial::Dense_Univariate_Rational_Polynomial(DEG_TYPE)'],['../group__polygroup.html#a809d897a0cc6a226c42b80617c2aeab5',1,'Dense_Univariate_Rational_Polynomial::Dense_Univariate_Rational_Polynomial(const Dense_Univariate_Rational_Polynomial &amp;)'],['../group__polygroup.html#a355c74bb36083fa2407a28ac066ca081',1,'Dense_Univariate_Rational_Polynomial::Dense_Univariate_Rational_Polynomial(DEG_TYPE, int64_t *, uint64_t *)']]],
+  ['detach_5fhead',['detach_head',['../group__polygroup.html#a3acd7e39f907f95ab05a9ee68af7556c',1,'Mutable_Polynomial::detach_head()'],['../group__polygroup.html#a4414c7a72f980efac7b794525151b653',1,'Double_Buffered_Polynomial::detach_head()'],['../group__polygroup.html#a57606623bed3fcd4f7b38530af211346',1,'Polynomial_Geobucket::detach_head()'],['../group__polygroup.html#a919a99403d3e5117919b3086844cb0e8',1,'Polynomial_Linked_List::detach_head()']]],
+  ['dimension',['dimension',['../group__polygroup.html#a3be382128a7fc5e42b3a1cbcc226ceb9',1,'Monomial_Ideal']]],
+  ['divide_5fby_5fcommon_5fterm',['divide_by_common_term',['../group__utils.html#gaefe33f79de88accbc6f455e91dab9288',1,'hilbert_functions.hpp']]],
+  ['divisible_5fby',['divisible_by',['../group__polygroup.html#aa0341b299fa1fcd4459f9a6810768f0e',1,'Monomial']]]
+];

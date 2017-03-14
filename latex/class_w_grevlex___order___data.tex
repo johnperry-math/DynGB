@@ -1,0 +1,133 @@
+\hypertarget{class_w_grevlex___order___data}{}\section{W\+Grevlex\+\_\+\+Order\+\_\+\+Data Class Reference}
+\label{class_w_grevlex___order___data}\index{W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}}
+
+
+data for the weighted grevlex monomial ordering  
+
+
+
+
+{\ttfamily \#include $<$particular\+\_\+orderings.\+hpp$>$}
+
+Inheritance diagram for W\+Grevlex\+\_\+\+Order\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_w_grevlex___order___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_w_grevlex___order___data_a48076dd5a0a5c89e5b1249f760eac8ac}{W\+Grevlex\+\_\+\+Order\+\_\+\+Data} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em creates an array of partial weights of {\ttfamily t} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a6074df104102f245666d996d100a859c}\label{class_w_grevlex___order___data_a6074df104102f245666d996d100a859c}} 
+\hyperlink{class_w_grevlex___order___data_a6074df104102f245666d996d100a859c}{W\+Grevlex\+\_\+\+Order\+\_\+\+Data} (const \hyperlink{class_w_grevlex___order___data}{W\+Grevlex\+\_\+\+Order\+\_\+\+Data} \&)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a4a3f45d5aabe055a5da7eaad018a206f}\label{class_w_grevlex___order___data_a4a3f45d5aabe055a5da7eaad018a206f}} 
+\hyperlink{class_w_grevlex___order___data}{W\+Grevlex\+\_\+\+Order\+\_\+\+Data} $\ast$ \hyperlink{class_w_grevlex___order___data_a4a3f45d5aabe055a5da7eaad018a206f}{clone} ()
+\begin{DoxyCompactList}\small\item\em clone constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_aad8299f5ca80ad008cd62ba9e802abae}\label{class_w_grevlex___order___data_aad8299f5ca80ad008cd62ba9e802abae}} 
+\hyperlink{class_w_grevlex___order___data_aad8299f5ca80ad008cd62ba9e802abae}{$\sim$\+W\+Grevlex\+\_\+\+Order\+\_\+\+Data} ()
+\begin{DoxyCompactList}\small\item\em deletes the array of partial weights \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ returns the weighted sum of the first \textbackslash{}f\$i\textbackslash{}f\$ variables}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a91af5dd81fbb141ab08be35acbd001a1}\label{class_w_grevlex___order___data_a91af5dd81fbb141ab08be35acbd001a1}} 
+D\+E\+G\+\_\+\+T\+Y\+PE {\bfseries operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a8c40a4e5b4859c6ffe0060419f81cea5}\label{class_w_grevlex___order___data_a8c40a4e5b4859c6ffe0060419f81cea5}} 
+virtual D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_w_grevlex___order___data_a8c40a4e5b4859c6ffe0060419f81cea5}{grading} (N\+V\+A\+R\+\_\+\+T\+Y\+PE i) const
+\begin{DoxyCompactList}\small\item\em default value is useless; orderings that supply gradings should redefine \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_w_grevlex___order___data_a43f37e1e5c272de1cd51afdde79727ae}{assign\+\_\+gradings} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em assigns gradings to a pre-\/allocated array \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Memory management}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_ac81e3130c94b4f908e277c0c9a6f3d83}\label{class_w_grevlex___order___data_ac81e3130c94b4f908e277c0c9a6f3d83}} 
+void $\ast$ \hyperlink{class_w_grevlex___order___data_ac81e3130c94b4f908e277c0c9a6f3d83}{operator new} (size\+\_\+t)
+\begin{DoxyCompactList}\small\item\em requests memory form W\+Grevlex\+\_\+\+Ordering\textquotesingle{}s \hyperlink{class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_aa512b345dc053fe960b5d955d73270c7}\label{class_w_grevlex___order___data_aa512b345dc053fe960b5d955d73270c7}} 
+void \hyperlink{class_w_grevlex___order___data_aa512b345dc053fe960b5d955d73270c7}{operator delete} (void $\ast$)
+\begin{DoxyCompactList}\small\item\em returns data to W\+Grevlex\+\_\+\+Ordering\textquotesingle{}s \hyperlink{class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a84079d31936d09b373b3cb3d79c5cec4}\label{class_w_grevlex___order___data_a84079d31936d09b373b3cb3d79c5cec4}} 
+D\+E\+G\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_w_grevlex___order___data_a84079d31936d09b373b3cb3d79c5cec4}{gradings}
+\begin{DoxyCompactList}\small\item\em array of partial weighted sums of exponents \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_w_grevlex___order___data_a4ec320689813725e8f1e0b23334e6cbd}\label{class_w_grevlex___order___data_a4ec320689813725e8f1e0b23334e6cbd}} 
+const N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_w_grevlex___order___data_a4ec320689813725e8f1e0b23334e6cbd}{number\+\_\+of\+\_\+gradings}
+\begin{DoxyCompactList}\small\item\em length of {\ttfamily gradings} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+data for the weighted grevlex monomial ordering 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+The data involves an array of $n$ {\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE}, where the first entry is a weighted sum of the first $n$ variables, the second entry is the {\itshape ordinary} sum of all but the last variable, etc. 
+
+Definition at line 318 of file particular\+\_\+orderings.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_w_grevlex___order___data_a48076dd5a0a5c89e5b1249f760eac8ac}\label{class_w_grevlex___order___data_a48076dd5a0a5c89e5b1249f760eac8ac}} 
+\index{W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}!W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\index{W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}!W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{W\+Grevlex\+\_\+\+Order\+\_\+\+Data()}{WGrevlex\_Order\_Data()}}
+{\footnotesize\ttfamily W\+Grevlex\+\_\+\+Order\+\_\+\+Data\+::\+W\+Grevlex\+\_\+\+Order\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+creates an array of partial weights of {\ttfamily t} 
+
+\begin{DoxyWarning}{Warning}
+Assign the correct ordering to {\ttfamily t} first! 
+\end{DoxyWarning}
+
+
+Definition at line 372 of file particular\+\_\+orderings.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_w_grevlex___order___data_a43f37e1e5c272de1cd51afdde79727ae}\label{class_w_grevlex___order___data_a43f37e1e5c272de1cd51afdde79727ae}} 
+\index{W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}!assign\+\_\+gradings@{assign\+\_\+gradings}}
+\index{assign\+\_\+gradings@{assign\+\_\+gradings}!W\+Grevlex\+\_\+\+Order\+\_\+\+Data@{W\+Grevlex\+\_\+\+Order\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{assign\+\_\+gradings()}{assign\_gradings()}}
+{\footnotesize\ttfamily void W\+Grevlex\+\_\+\+Order\+\_\+\+Data\+::assign\+\_\+gradings (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+assigns gradings to a pre-\/allocated array 
+
+\begin{DoxyWarning}{Warning}
+This does not create the array if it does not exist already! 
+\end{DoxyWarning}
+
+
+Definition at line 361 of file particular\+\_\+orderings.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+particular\+\_\+orderings.\+hpp\item 
+particular\+\_\+orderings.\+cpp\end{DoxyCompactItemize}

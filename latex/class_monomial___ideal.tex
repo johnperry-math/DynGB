@@ -1,0 +1,225 @@
+\hypertarget{class_monomial___ideal}{}\section{Monomial\+\_\+\+Ideal Class Reference}
+\label{class_monomial___ideal}\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+
+
+A class for monomial ideals.  
+
+
+
+
+{\ttfamily \#include $<$monomial\+\_\+ideal.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_a1c1ca0ff8991217e18bb263c7ecfc316}\label{class_monomial___ideal_a1c1ca0ff8991217e18bb263c7ecfc316}} 
+\hyperlink{class_monomial___ideal_a1c1ca0ff8991217e18bb263c7ecfc316}{Monomial\+\_\+\+Ideal} (N\+V\+A\+R\+\_\+\+T\+Y\+PE nvars)
+\begin{DoxyCompactList}\small\item\em Creates a zero ideal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a7db4fc98fce195b0d0ba5fa9c89292a0}\label{class_monomial___ideal_a7db4fc98fce195b0d0ba5fa9c89292a0}} 
+\hyperlink{class_monomial___ideal_a7db4fc98fce195b0d0ba5fa9c89292a0}{Monomial\+\_\+\+Ideal} (N\+V\+A\+R\+\_\+\+T\+Y\+PE nvars, const list$<$ \hyperlink{class_monomial}{Monomial} $>$ \&G, const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$h\+\_\+old=nullptr, const W\+T\+\_\+\+T\+Y\+PE $\ast$h\+\_\+grading=nullptr)
+\begin{DoxyCompactList}\small\item\em Copies {\ttfamily basis}. If you supply a Hilbert function that is not computed according to the standard grading, please supply the grading as {\ttfamily h\+\_\+grading} . \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_af10301d05f7eac529acca28831e54eac}\label{class_monomial___ideal_af10301d05f7eac529acca28831e54eac}} 
+\hyperlink{class_monomial___ideal_af10301d05f7eac529acca28831e54eac}{Monomial\+\_\+\+Ideal} (N\+V\+A\+R\+\_\+\+T\+Y\+PE nvars, const vector$<$ \hyperlink{class_monomial}{Monomial} $>$ \&G, const \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$h\+\_\+old=nullptr, const W\+T\+\_\+\+T\+Y\+PE $\ast$h\+\_\+grading=nullptr)
+\begin{DoxyCompactList}\small\item\em Copies {\ttfamily basis}. If you supply a Hilbert function that is not computed according to the standard grading, please supply the grading as {\ttfamily h\+\_\+grading} . \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_aa20312c8d7f14a18d73128a99d1d5c04}\label{class_monomial___ideal_aa20312c8d7f14a18d73128a99d1d5c04}} 
+\hyperlink{class_monomial___ideal_aa20312c8d7f14a18d73128a99d1d5c04}{Monomial\+\_\+\+Ideal} (const \hyperlink{class_monomial___ideal}{Monomial\+\_\+\+Ideal} \&I)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_a96f5e7396229382fbcbe8f7c4ceeaa65}\label{class_monomial___ideal_a96f5e7396229382fbcbe8f7c4ceeaa65}} 
+\hyperlink{class_monomial___ideal_a96f5e7396229382fbcbe8f7c4ceeaa65}{$\sim$\+Monomial\+\_\+\+Ideal} ()
+\begin{DoxyCompactList}\small\item\em destroys the Hilbert data, but not the grading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+{\em The following functions give information about the ideal, but do not modify it. }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_a606b7dd86fedd848182e6a4a6d18c77d}\label{class_monomial___ideal_a606b7dd86fedd848182e6a4a6d18c77d}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_monomial___ideal_a606b7dd86fedd848182e6a4a6d18c77d}{number\+\_\+of\+\_\+variables} () const
+\begin{DoxyCompactList}\small\item\em number of variables in each {\ttfamily \hyperlink{class_monomial}{Monomial}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a31f60f6a6370dc419d8083d3f3f469cc}\label{class_monomial___ideal_a31f60f6a6370dc419d8083d3f3f469cc}} 
+unsigned \hyperlink{class_monomial___ideal_a31f60f6a6370dc419d8083d3f3f469cc}{size} () const
+\begin{DoxyCompactList}\small\item\em number of generators \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a2b7a092c8889479db32c76c0d2a65eae}\label{class_monomial___ideal_a2b7a092c8889479db32c76c0d2a65eae}} 
+const list$<$ \hyperlink{class_monomial}{Monomial} $>$ \& \hyperlink{class_monomial___ideal_a2b7a092c8889479db32c76c0d2a65eae}{generators} () const
+\begin{DoxyCompactList}\small\item\em returns the list of generators \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a3be382128a7fc5e42b3a1cbcc226ceb9}\label{class_monomial___ideal_a3be382128a7fc5e42b3a1cbcc226ceb9}} 
+unsigned \hyperlink{class_monomial___ideal_a3be382128a7fc5e42b3a1cbcc226ceb9}{dimension} ()
+\begin{DoxyCompactList}\small\item\em returns the dimension of the ideal \end{DoxyCompactList}\item 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a4baf5da74da622fa61e048552e873733}{hilbert\+\_\+numerator} (const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em the (un-\/reduced) Hilbert numerator \end{DoxyCompactList}\item 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a814e71b7c8df465869708bbcdf8f6007}{reduced\+\_\+hilbert\+\_\+numerator} (const W\+T\+\_\+\+T\+Y\+PE $\ast$grading=nullptr)
+\begin{DoxyCompactList}\small\item\em the reduced Hilbert Numerator \end{DoxyCompactList}\item 
+\hyperlink{class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a2f5e73c22e492ea016a4c7ff117cc7a3}{hilbert\+\_\+poly} ()
+\begin{DoxyCompactList}\small\item\em the Hilbert Polynomial for this ideal \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Computation}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_monomial___ideal}{Monomial\+\_\+\+Ideal} $\ast$ \hyperlink{class_monomial___ideal_a708f7bc64b3e5d5ac3ea8e3b0cb15769}{colon} (const \hyperlink{class_monomial}{Monomial} \&t) const
+\begin{DoxyCompactList}\small\item\em returns the ideal $J=\{u:t \forall u\in I\}$, where $I$ is {\ttfamily this} \end{DoxyCompactList}\item 
+void \hyperlink{class_monomial___ideal_a2ae67955874f0a461952a89f6fb25647}{colon\+\_\+with} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em replaces the generators of {\ttfamily this} with those of the ideal $J=\{u:t \forall u\in I\}$, where $I$ is {\ttfamily this} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_a10135daadd19fbd37cde2c1109eaf26d}\label{class_monomial___ideal_a10135daadd19fbd37cde2c1109eaf26d}} 
+void \hyperlink{class_monomial___ideal_a10135daadd19fbd37cde2c1109eaf26d}{add\+\_\+generator} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em adds {\ttfamily t} to the basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a5410d31236ca04dfca3fe27acb7553f4}\label{class_monomial___ideal_a5410d31236ca04dfca3fe27acb7553f4}} 
+void \hyperlink{class_monomial___ideal_a5410d31236ca04dfca3fe27acb7553f4}{remove\+\_\+newest} ()
+\begin{DoxyCompactList}\small\item\em removes the newest monomial from the basis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a5653fee1985ec45e11c594d7de53385b}\label{class_monomial___ideal_a5653fee1985ec45e11c594d7de53385b}} 
+void \hyperlink{class_monomial___ideal_a5653fee1985ec45e11c594d7de53385b}{forget\+\_\+hilbert\+\_\+numerator} ()
+\begin{DoxyCompactList}\small\item\em sets numerator to {\ttfamily nullptr} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_ab0c510ed85328199cce722831143165e}\label{class_monomial___ideal_ab0c510ed85328199cce722831143165e}} 
+void \hyperlink{class_monomial___ideal_ab0c510ed85328199cce722831143165e}{set\+\_\+hilbert\+\_\+numerator} (\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$h)
+\begin{DoxyCompactList}\small\item\em sets numerator to given value; only use when you know this is true! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_a5363a11d0bdbc878e3bdc201e620518e}\label{class_monomial___ideal_a5363a11d0bdbc878e3bdc201e620518e}} 
+const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_monomial___ideal_a5363a11d0bdbc878e3bdc201e620518e}{current\+\_\+grading}
+\begin{DoxyCompactList}\small\item\em the most recent grading for the Hilbert functions; {\ttfamily nullptr} implies standard grading \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a201c8da1d540749b19af0b4dea1dbe86}\label{class_monomial___ideal_a201c8da1d540749b19af0b4dea1dbe86}} 
+list$<$ \hyperlink{class_monomial}{Monomial} $>$ \hyperlink{class_monomial___ideal_a201c8da1d540749b19af0b4dea1dbe86}{gens}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s generators \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a958dee87e6d37079b72c095b79ff0347}\label{class_monomial___ideal_a958dee87e6d37079b72c095b79ff0347}} 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a958dee87e6d37079b72c095b79ff0347}{h\+Grad\+Num}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s Hilbert numerator, according to current\+\_\+grading \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a383828c3e1596abe05b6184d45cd7f7a}\label{class_monomial___ideal_a383828c3e1596abe05b6184d45cd7f7a}} 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a383828c3e1596abe05b6184d45cd7f7a}{h\+Grad\+Red\+Num}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s reduced Hilbert numerator, according to current\+\_\+grading \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a2613e425082e968058426465d309abbc}\label{class_monomial___ideal_a2613e425082e968058426465d309abbc}} 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a2613e425082e968058426465d309abbc}{h\+Num}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s Hilbert numerator, standard grading \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a90e5ee8eb2a8c5b3ebe63ee381f42535}\label{class_monomial___ideal_a90e5ee8eb2a8c5b3ebe63ee381f42535}} 
+\hyperlink{class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a90e5ee8eb2a8c5b3ebe63ee381f42535}{h\+Pol}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s Hilbert polynomial -- standard grading only \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a4a060a173e9550bf986c9aa2697cbc27}\label{class_monomial___ideal_a4a060a173e9550bf986c9aa2697cbc27}} 
+\hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{class_monomial___ideal_a4a060a173e9550bf986c9aa2697cbc27}{h\+Red\+Num}
+\begin{DoxyCompactList}\small\item\em the ideal\textquotesingle{}s reduced Hilbert numerator, standard grading \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_monomial___ideal_a4340e27f56e4229b2357e00bd6c98021}\label{class_monomial___ideal_a4340e27f56e4229b2357e00bd6c98021}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_monomial___ideal_a4340e27f56e4229b2357e00bd6c98021}{n}
+\begin{DoxyCompactList}\small\item\em number of variables the monomials of this ideal have \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_monomial___ideal_afcb33f97b01be14e0eefe468fe752b7b}\label{class_monomial___ideal_afcb33f97b01be14e0eefe468fe752b7b}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&, const \hyperlink{class_monomial___ideal}{Monomial\+\_\+\+Ideal} \&)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+A class for monomial ideals. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+Mostly a convenience class to encapsulate basic operations. I am in the process of moving some functions outside this class into it. 
+
+Definition at line 53 of file monomial\+\_\+ideal.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_monomial___ideal_a708f7bc64b3e5d5ac3ea8e3b0cb15769}\label{class_monomial___ideal_a708f7bc64b3e5d5ac3ea8e3b0cb15769}} 
+\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!colon@{colon}}
+\index{colon@{colon}!Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+\subsubsection{\texorpdfstring{colon()}{colon()}}
+{\footnotesize\ttfamily \hyperlink{class_monomial___ideal}{Monomial\+\_\+\+Ideal}$\ast$ Monomial\+\_\+\+Ideal\+::colon (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the ideal $J=\{u:t \forall u\in I\}$, where $I$ is {\ttfamily this} 
+
+This does not recompute Hilbert data even if already known. It is probably better to do that explicitly, anyhow. 
+
+Definition at line 261 of file monomial\+\_\+ideal.\+hpp.
+
+\mbox{\Hypertarget{class_monomial___ideal_a2ae67955874f0a461952a89f6fb25647}\label{class_monomial___ideal_a2ae67955874f0a461952a89f6fb25647}} 
+\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!colon\+\_\+with@{colon\+\_\+with}}
+\index{colon\+\_\+with@{colon\+\_\+with}!Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+\subsubsection{\texorpdfstring{colon\+\_\+with()}{colon\_with()}}
+{\footnotesize\ttfamily void Monomial\+\_\+\+Ideal\+::colon\+\_\+with (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+replaces the generators of {\ttfamily this} with those of the ideal $J=\{u:t \forall u\in I\}$, where $I$ is {\ttfamily this} 
+
+\begin{DoxyWarning}{Warning}
+does not delete the old Hilbert numerator (as this could be a copy) so delete manually if you need that done 
+\end{DoxyWarning}
+
+
+Definition at line 270 of file monomial\+\_\+ideal.\+hpp.
+
+\mbox{\Hypertarget{class_monomial___ideal_a4baf5da74da622fa61e048552e873733}\label{class_monomial___ideal_a4baf5da74da622fa61e048552e873733}} 
+\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!hilbert\+\_\+numerator@{hilbert\+\_\+numerator}}
+\index{hilbert\+\_\+numerator@{hilbert\+\_\+numerator}!Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+\subsubsection{\texorpdfstring{hilbert\+\_\+numerator()}{hilbert\_numerator()}}
+{\footnotesize\ttfamily \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ Monomial\+\_\+\+Ideal\+::hilbert\+\_\+numerator (\begin{DoxyParamCaption}\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the (un-\/reduced) Hilbert numerator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grading} & grading to use for computing this; use {\ttfamily nullptr} for standard, which is the default \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Destroys the old Hilbert numerator if it was assigned a different grading. The comparison is by pointer only, not by values. 
+\end{DoxyWarning}
+
+
+Definition at line 178 of file monomial\+\_\+ideal.\+hpp.
+
+\mbox{\Hypertarget{class_monomial___ideal_a2f5e73c22e492ea016a4c7ff117cc7a3}\label{class_monomial___ideal_a2f5e73c22e492ea016a4c7ff117cc7a3}} 
+\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!hilbert\+\_\+poly@{hilbert\+\_\+poly}}
+\index{hilbert\+\_\+poly@{hilbert\+\_\+poly}!Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+\subsubsection{\texorpdfstring{hilbert\+\_\+poly()}{hilbert\_poly()}}
+{\footnotesize\ttfamily \hyperlink{class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}$\ast$ Monomial\+\_\+\+Ideal\+::hilbert\+\_\+poly (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the Hilbert Polynomial for this ideal 
+
+A ``Hilbert Polynomial'' does not exist in the non-\/standard graded case, so there is no option to supply a grading here, and if the Hilbert numerators have been computed for a different grading, this function re-\/computes them for the standard grading, without however losing the ones computed for the non-\/standard grading. 
+
+Definition at line 237 of file monomial\+\_\+ideal.\+hpp.
+
+\mbox{\Hypertarget{class_monomial___ideal_a814e71b7c8df465869708bbcdf8f6007}\label{class_monomial___ideal_a814e71b7c8df465869708bbcdf8f6007}} 
+\index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!reduced\+\_\+hilbert\+\_\+numerator@{reduced\+\_\+hilbert\+\_\+numerator}}
+\index{reduced\+\_\+hilbert\+\_\+numerator@{reduced\+\_\+hilbert\+\_\+numerator}!Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}
+\subsubsection{\texorpdfstring{reduced\+\_\+hilbert\+\_\+numerator()}{reduced\_hilbert\_numerator()}}
+{\footnotesize\ttfamily \hyperlink{class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}$\ast$ Monomial\+\_\+\+Ideal\+::reduced\+\_\+hilbert\+\_\+numerator (\begin{DoxyParamCaption}\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{grading = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the reduced Hilbert Numerator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grading} & grading to use for computing this; use {\ttfamily nullptr} for standard, which is the default \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 206 of file monomial\+\_\+ideal.\+hpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+monomial\+\_\+ideal.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,112 @@
+\hypertarget{class_polynomial___iterator}{}\section{Polynomial\+\_\+\+Iterator Class Reference}
+\label{class_polynomial___iterator}\index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}}
+
+
+Used to iterate through a polynomial.  
+
+
+
+
+{\ttfamily \#include $<$polynomial.\+hpp$>$}
+
+Inheritance diagram for Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.779661cm]{class_polynomial___iterator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a20e700b363cc17d2f8c015f4eca1030f}\label{class_polynomial___iterator_a20e700b363cc17d2f8c015f4eca1030f}} 
+virtual \hyperlink{class_polynomial___iterator_a20e700b363cc17d2f8c015f4eca1030f}{$\sim$\+Polynomial\+\_\+\+Iterator} ()=0
+\begin{DoxyCompactList}\small\item\em needed to avoid undefined behavior when disposing \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Iteration}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a7135fd6c3a90134741abc2da51467a43}\label{class_polynomial___iterator_a7135fd6c3a90134741abc2da51467a43}} 
+virtual void \hyperlink{class_polynomial___iterator_a7135fd6c3a90134741abc2da51467a43}{restart\+\_\+iteration} ()=0
+\begin{DoxyCompactList}\small\item\em This should move the iterator to the leading term. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_ad7adb26df3077c6c7dec39e066436ce9}\label{class_polynomial___iterator_ad7adb26df3077c6c7dec39e066436ce9}} 
+virtual void \hyperlink{class_polynomial___iterator_ad7adb26df3077c6c7dec39e066436ce9}{move\+Right} ()=0
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a934c291b780f91efefea23880827d5dc}\label{class_polynomial___iterator_a934c291b780f91efefea23880827d5dc}} 
+const \hyperlink{class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} \& \hyperlink{class_polynomial___iterator_a934c291b780f91efefea23880827d5dc}{operator++} ()
+\begin{DoxyCompactList}\small\item\em Moves right in the polynomial, to the next smaller monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_ae800f42d78fae005b9d9600b00946026}\label{class_polynomial___iterator_ae800f42d78fae005b9d9600b00946026}} 
+virtual bool \hyperlink{class_polynomial___iterator_ae800f42d78fae005b9d9600b00946026}{can\+Move\+Right} () const =0
+\begin{DoxyCompactList}\small\item\em Can this iterator move right, or would it fall off? \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a47683fc8085c51bd14c5647a7e9e7e87}\label{class_polynomial___iterator_a47683fc8085c51bd14c5647a7e9e7e87}} 
+virtual void \hyperlink{class_polynomial___iterator_a47683fc8085c51bd14c5647a7e9e7e87}{move\+Left} ()=0
+\begin{DoxyCompactList}\small\item\em Moves left in the polynomial, to the next larger monomial. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a7ab348897446bc182500f84df8a9e590}\label{class_polynomial___iterator_a7ab348897446bc182500f84df8a9e590}} 
+virtual bool \hyperlink{class_polynomial___iterator_a7ab348897446bc182500f84df8a9e590}{can\+Move\+Left} () const =0
+\begin{DoxyCompactList}\small\item\em Can this iterator move left, or would it fall off? \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_polynomial___iterator_ac571e120134088d6067718bbad513e2d}{fell\+Off} () const =0
+\begin{DoxyCompactList}\small\item\em Reports true iff the iterator no longer points to a valid monomial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data access}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a7c21bc208d7a71c4a806c4abd1dcf05f}\label{class_polynomial___iterator_a7c21bc208d7a71c4a806c4abd1dcf05f}} 
+virtual const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ \hyperlink{class_polynomial___iterator_a7c21bc208d7a71c4a806c4abd1dcf05f}{my\+\_\+poly} () const
+\begin{DoxyCompactList}\small\item\em Reports the polynomial on which {\ttfamily this} is iterating. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a95408f0c39ca1cec17dd7802337fe028}\label{class_polynomial___iterator_a95408f0c39ca1cec17dd7802337fe028}} 
+virtual const \hyperlink{class_monomial}{Monomial} \& \hyperlink{class_polynomial___iterator_a95408f0c39ca1cec17dd7802337fe028}{curr\+Monomial} () const =0
+\begin{DoxyCompactList}\small\item\em Reports the monomial at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a92a7e8c4e0054153a2554c8009536405}\label{class_polynomial___iterator_a92a7e8c4e0054153a2554c8009536405}} 
+virtual const \hyperlink{class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{class_polynomial___iterator_a92a7e8c4e0054153a2554c8009536405}{curr\+Coeff} () const =0
+\begin{DoxyCompactList}\small\item\em Reports the coefficient at the current position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a119cd2937a0cacd43585dee8dc95505f}\label{class_polynomial___iterator_a119cd2937a0cacd43585dee8dc95505f}} 
+const \hyperlink{class_polynomial___term}{Polynomial\+\_\+\+Term} \hyperlink{class_polynomial___iterator_a119cd2937a0cacd43585dee8dc95505f}{operator$\ast$} () const
+\begin{DoxyCompactList}\small\item\em C++11 iteration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_polynomial___iterator_a55bdf643502d14fc6d59df65465d21cd}\label{class_polynomial___iterator_a55bdf643502d14fc6d59df65465d21cd}} 
+virtual bool {\bfseries operator!=} (const \hyperlink{class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} \&other) const
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_polynomial___iterator_ab35e9b9c4d7ed12dabce5057a4c2a1b5}\label{class_polynomial___iterator_ab35e9b9c4d7ed12dabce5057a4c2a1b5}} 
+const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ \hyperlink{class_polynomial___iterator_ab35e9b9c4d7ed12dabce5057a4c2a1b5}{p}
+\begin{DoxyCompactList}\small\item\em the polynomial {\ttfamily this} points to \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Used to iterate through a polynomial. 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+This class encapsulates the basic functionality needed to iterate through the monomials of a polynomial. A \hyperlink{class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} cannot modify a polynomial, however; to do that, you need a \hyperlink{class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}. 
+
+Definition at line 204 of file polynomial.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_polynomial___iterator_ac571e120134088d6067718bbad513e2d}\label{class_polynomial___iterator_ac571e120134088d6067718bbad513e2d}} 
+\index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}
+\index{fell\+Off@{fell\+Off}!Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}}
+\subsubsection{\texorpdfstring{fell\+Off()}{fellOff()}}
+{\footnotesize\ttfamily virtual bool Polynomial\+\_\+\+Iterator\+::fell\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Reports true iff the iterator no longer points to a valid monomial. 
+
+This is N\+OT the same as pointing to a monomial with coefficient zero; this is true when the iterator would probably report inaccurate data. 
+
+Implemented in \hyperlink{class_mutable___constant___polynomial___iterator_a5b6d56b68ad61ecaaf27f8370d1c2d31}{Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, \hyperlink{class_l_l_polynomial___iterator_aed442195d521dc796f86c1216223c022}{L\+L\+Polynomial\+\_\+\+Iterator}, \hyperlink{class_geobucket___iterator_a5845016f7b9cb2c7538cef310af0b102}{Geobucket\+\_\+\+Iterator}, \hyperlink{class_d_b___polynomial___iterator_a5d81456e74a757cf6769ce17d37b82ce}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}, and \hyperlink{class_constant___polynomial___iterator_aad50167fd2010a1a5c09358c777d40e0}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+polynomial.\+hpp\item 
+polynomial.\+cpp\end{DoxyCompactItemize}

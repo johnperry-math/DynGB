@@ -1,0 +1,267 @@
+\hypertarget{test_dynamic_8cpp-example}{}\section{test\+\_\+dynamic.\+cpp}
+This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system \[ x_1 + \cdots + x_n,\\ x_1 x_2 + x_2 x_3 + \cdots + x_n x_1,\\ x_1 x_2 x_3 + x_2 x_3 x_4 + \cdots + x_n x_1 x_2,\\ \vdots\\ x_1 \cdots x_{n-1} + x_2 \cdots x_n + \cdots + x_n x_1 \cdots x_{n-2},\\ x_1 \cdots x_n - 1 \] using this package. This version uses the {\bfseries dynamic} Buchberger algorithm. See \hyperlink{test__cyclicn_8cpp_source}{test\+\_\+cyclicn.\+cpp} for the dynamic version.
+
+
+\begin{DoxyCodeInclude}
+\textcolor{comment}{/*****************************************************************************\(\backslash\)}
+\textcolor{comment}{* This file is part of DynGB.                                                 *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* DynGB is free software: you can redistribute it and/or modify               *}
+\textcolor{comment}{* it under the terms of the GNU General Public License as published by        *}
+\textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
+\textcolor{comment}{* (at your option) any later version.                                         *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
+\textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
+\textcolor{comment}{* GNU General Public License for more details.                                *}
+\textcolor{comment}{*                                                                             *}
+\textcolor{comment}{* You should have received a copy of the GNU General Public License           *}
+\textcolor{comment}{* along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *}
+\textcolor{comment}{\(\backslash\)*****************************************************************************/}
+
+\textcolor{preprocessor}{#include <set>}
+\textcolor{preprocessor}{#include <cstring>}
+\textcolor{preprocessor}{#include <iostream>}
+
+\textcolor{keyword}{using} std::set;
+\textcolor{keyword}{using} std::cout; \textcolor{keyword}{using} std::endl;
+
+\textcolor{preprocessor}{#include "system\_constants.hpp"}
+
+\textcolor{preprocessor}{#include "goda.hpp"}
+\textcolor{preprocessor}{#include "cyclic\_n.hpp"}
+\textcolor{preprocessor}{#include "polynomial.hpp"}
+\textcolor{preprocessor}{#include "strategies.hpp"}
+\textcolor{preprocessor}{#include "dynamic\_engine.hpp"}
+\textcolor{preprocessor}{#include "monomial\_ordering.hpp"}
+\textcolor{preprocessor}{#include "particular\_orderings.hpp"}
+\textcolor{preprocessor}{#include "polynomial\_linked\_list.hpp"}
+\textcolor{preprocessor}{#include "algorithm\_buchberger\_dynamic.hpp"}
+
+\textcolor{keyword}{extern} \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\_Ordering} * generic\_grevlex\_ptr;
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<WT\_TYPE>} * 
+      \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<DEG\_TYPE>} * 
+      \hyperlink{group__memorygroup_gab09a3dd19e9c8880eec08c13bcb42f36}{doda};
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<EXP\_TYPE>} * 
+      \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<Monomial>} * 
+      \hyperlink{group__memorygroup_ga76b5ae808895658b417e3f3a13c60e51}{monoda};
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<Monomial\_Node>} * 
+      \hyperlink{group__memorygroup_ga2b5eeb775f6c601e624b487f3245983a}{monododa};
+\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<CachedWGrevlex\_Ordering>}
+       * \hyperlink{group__memorygroup_ga929e61b883d430fc6909a80fdb9ebb83}{woda};
+
+\textcolor{comment}{// Forward declarations}
+\textcolor{keywordtype}{bool} meaningful\_arguments(
+  \textcolor{keywordtype}{int}, \textcolor{keywordtype}{char} **, \textcolor{keywordtype}{bool} &, \textcolor{keywordtype}{int} &, \textcolor{keywordtype}{int} &, \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} &,
+  \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} &, \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} &, 
+      \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} &
+);
+
+\textcolor{keywordtype}{void} give\_help();
+
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+  \textcolor{keywordtype}{bool} homog;
+  \textcolor{keywordtype}{int} modulus, numvars;
+  \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} method;
+  \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} strategy = StrategyFlags::SUGAR\_STRATEGY;
+  \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} heuristic = DynamicHeuristic::ORD\_HILBERT\_THEN\_DEG;
+  \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} solver = SKELETON\_SOLVER;
+  WT\_TYPE * grading = \textcolor{keyword}{nullptr};
+  \hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} * mord = \textcolor{keyword}{nullptr};
+  \textcolor{keyword}{const} \hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} * ford = \textcolor{keyword}{nullptr}; \textcolor{comment}{// final ordering}
+  \textcolor{keywordflow}{if} (not meaningful\_arguments(
+        argc, argv, homog, modulus, numvars, method, strategy, heuristic, solver
+      )) \{
+    give\_help();
+  \} \textcolor{keywordflow}{else} \{
+    \textcolor{keywordtype}{int} true\_numvars = (homog) ? numvars + 1 : numvars;
+    grading = \textcolor{keyword}{new} WT\_TYPE [true\_numvars];
+    \textcolor{keywordflow}{for} (NVAR\_TYPE i = 0; i < true\_numvars; ++i) grading[i] = 1;
+    mord = \textcolor{keyword}{new} \hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering}(true\_numvars, grading);
+    \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} FF = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(modulus);
+    \textcolor{comment}{// set up the basis}
+    list<Abstract\_Polynomial *> F = \hyperlink{group__polygroup_gaa458dfbf51ecbb98f93bf8f0133725d0}{cyclic\_n}(numvars, FF, homog, mord);
+    \textcolor{comment}{// message}
+    cout << \textcolor{stringliteral}{"Computing a Groebner basis for:\(\backslash\)n"};
+    \textcolor{keywordflow}{for} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\_Polynomial} * f : F)
+      cout << \textcolor{charliteral}{'\(\backslash\)t'} << *f << endl;
+    cout << \textcolor{stringliteral}{"Using "};
+    \textcolor{keywordflow}{switch}(solver) \{
+      \textcolor{keywordflow}{case} GLPK\_SOLVER: cout << \textcolor{stringliteral}{"GLPK\(\backslash\)n"}; \textcolor{keywordflow}{break};
+      \textcolor{keywordflow}{case} SKELETON\_SOLVER: cout << \textcolor{stringliteral}{"Skeleton\(\backslash\)n"}; \textcolor{keywordflow}{break};
+      \textcolor{keywordflow}{case} PPL\_SOLVER: cout << \textcolor{stringliteral}{"PPL\(\backslash\)n"}; \textcolor{keywordflow}{break};
+      \textcolor{keywordflow}{default}: cout << \textcolor{stringliteral}{"Unknown solver\(\backslash\)n"}; \textcolor{keywordflow}{break};
+    \}
+    \textcolor{comment}{// compute basis}
+    list<Constant\_Polynomial *> G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+        F, method, strategy, grading, (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} )heuristic, solver
+    );
+    \textcolor{comment}{// display basis}
+    cout << G.size() << \textcolor{stringliteral}{" polynomials in basis:\(\backslash\)n"};
+    \textcolor{comment}{/*for (list<Constant\_Polynomial *>::const\_iterator g = G.begin(); g != G.end(); ++g)}
+\textcolor{comment}{      cout << '\(\backslash\)t' << *(*g) << endl;*/}
+    \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} * R = & (G.front()->base\_ring());
+    ford = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} *\textcolor{keyword}{>}(
+        G.front()->monomial\_ordering()
+    );
+    cout << G.size() << \textcolor{stringliteral}{" leading monomials:\(\backslash\)n"};
+    \textcolor{keywordflow}{for} (\hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} * g : G) \{
+      cout << g->leading\_monomial() << \textcolor{stringliteral}{", "};
+      \textcolor{comment}{//cout << *g << endl;}
+      \textcolor{keyword}{delete} g;
+    \}
+    cout << endl;
+    \textcolor{keywordflow}{for} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\_Polynomial} * f : F) \textcolor{keyword}{delete} f;
+    \textcolor{keyword}{delete} R;
+  \}
+  \textcolor{keywordflow}{if} (ford != \textcolor{keyword}{nullptr}) \{
+    \textcolor{keyword}{delete} [] ford->\hyperlink{group__orderinggroup_a4997585d5bc84222551e555eac13ebf9}{order\_weights}();
+    \textcolor{keyword}{delete} ford;
+  \}
+  \textcolor{keywordflow}{if} (mord != generic\_grevlex\_ptr) \textcolor{keyword}{delete} mord;
+  \textcolor{keywordflow}{if} (goda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
+  \textcolor{keywordflow}{if} (doda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gab09a3dd19e9c8880eec08c13bcb42f36}{doda};
+  \textcolor{keywordflow}{if} (moda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
+  \textcolor{keywordflow}{if} (monoda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga76b5ae808895658b417e3f3a13c60e51}{monoda};
+  \textcolor{keywordflow}{if} (monododa != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga2b5eeb775f6c601e624b487f3245983a}{monododa};
+  \textcolor{keywordflow}{if} (woda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga929e61b883d430fc6909a80fdb9ebb83}{woda};
+  \textcolor{keywordflow}{if} (grading != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} [] grading;
+  cout << \textcolor{stringliteral}{"bye\(\backslash\)n"};
+\}
+
+\textcolor{keyword}{enum} order\_flags \{ GENERIC\_GREVLEX = 0, GREVLEX, LEX, WGREVLEX \};
+
+\textcolor{keywordtype}{bool} meaningful\_arguments(
+    \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[],
+    \textcolor{keywordtype}{bool} & homogeneous, \textcolor{keywordtype}{int} & modulus, \textcolor{keywordtype}{int} & numvars,
+    \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} & method, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} & strategy,
+    \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} & heuristic, \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} & solver
+) \{
+  modulus = 43;
+  method = SPolyCreationFlags::GEOBUCKETS;
+  homogeneous = \textcolor{keyword}{false};
+  WT\_TYPE * weights = \textcolor{keyword}{nullptr};
+  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} order\_flag = 0;
+  \textcolor{keywordtype}{bool} good\_args = (argc > 1);
+  \textcolor{keywordflow}{if} (good\_args) \{
+    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; good\_args and i < argc; ++i) \{
+      \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"hom"}) or !strcmp(argv[i],\textcolor{stringliteral}{"homog"})
+          or !strcmp(argv[i],"homogeneous"))
+        homogeneous = true;
+      else \{
+        \textcolor{keywordtype}{int} j = 0;
+        \textcolor{keywordflow}{for} (\textcolor{comment}{/* */}; argv[i][j] != \textcolor{charliteral}{'='} and argv[i][j] != \textcolor{charliteral}{'\(\backslash\)0'}; ++j) \{ \textcolor{comment}{/* */} \}
+        \textcolor{keywordflow}{if} (argv[i][j] != \textcolor{charliteral}{'='}) \{
+          good\_args = \textcolor{keyword}{false};
+          cout << \textcolor{stringliteral}{"Options must have form <option>=<value>.\(\backslash\)n"};
+        \}
+        \textcolor{keywordflow}{else} \{
+          argv[i][j] = \textcolor{charliteral}{'\(\backslash\)0'};
+          \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"n"}) or !strcmp(argv[i],\textcolor{stringliteral}{"num"})
+              or !strcmp(argv[i],\textcolor{stringliteral}{"numvars"})) \{
+            numvars = atoi(&(argv[i][j+1]));
+            \textcolor{keywordflow}{if} (numvars < 3) \{
+              good\_args = \textcolor{keyword}{false};
+              cout << \textcolor{stringliteral}{"Invalid number of variables: must be at least 3.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"m"}) or !strcmp(argv[i],\textcolor{stringliteral}{"mod"})
+                   or !strcmp(argv[i],\textcolor{stringliteral}{"modulus"}))
+          \{
+            modulus = atoi(&(argv[i][j+1]));
+            \textcolor{keywordflow}{if} (modulus < 2) \{
+              good\_args = \textcolor{keyword}{false};
+              cout << \textcolor{stringliteral}{"Invalid modulus; must be at least 2.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"r"}) or !strcmp(argv[i],\textcolor{stringliteral}{"repr"})
+                   or !strcmp(argv[i], \textcolor{stringliteral}{"representation"}))
+          \{
+            method = (\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} )atoi(&(argv[i][j+1]));
+            \textcolor{keywordflow}{if} (
+                method <= SPolyCreationFlags::MIN\_SPCREATE\_FLAG or
+                method >= SPolyCreationFlags::MAX\_SPCREATE\_FLAG
+            ) \{
+              good\_args = \textcolor{keyword}{false};
+              cout << \textcolor{stringliteral}{"Invalid method; must be at least 1 and at most 3.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i], \textcolor{stringliteral}{"heur"}) or !strcmp(argv[i],\textcolor{stringliteral}{"heuristic"})) \{
+            heuristic = (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic})atoi(&(argv[i][j+1]));
+            \textcolor{keywordflow}{if} (
+                heuristic <= DynamicHeuristic::MIN\_HEURISTIC or
+                heuristic >= DynamicHeuristic::MAX\_HEURISTIC
+            ) \{
+              good\_args = \textcolor{keyword}{false};\(\backslash\)
+              cout << \textcolor{stringliteral}{"Invalid method; must be at least 1 and at most 10.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"strat"}) or !strcmp(argv[i],\textcolor{stringliteral}{"strategy"})) \{
+            \textcolor{keywordtype}{char} * request = &(argv[i][j+1]);
+            \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"normal"}) or !strcmp(request, \textcolor{stringliteral}{"norm"}))
+              strategy = StrategyFlags::NORMAL\_STRATEGY;
+            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"sugar"}) or !strcmp(request, \textcolor{stringliteral}{"sug"}))
+              strategy = StrategyFlags::SUGAR\_STRATEGY;
+            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"wsugar"}) or !strcmp(request, \textcolor{stringliteral}{"wsug"})) \{
+              strategy = StrategyFlags::WSUGAR\_STRATEGY;
+              \textcolor{keywordtype}{unsigned} n = (homogeneous) ? numvars + 1 : numvars;
+            \}
+            \textcolor{keywordflow}{else} \{
+              good\_args = \textcolor{keyword}{false};
+              cout << \textcolor{stringliteral}{"Strategy must be 'normal' or 'sugar' or 'wsugar'.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i],\textcolor{stringliteral}{"solver"})) \{
+            \textcolor{keywordtype}{char} * request = &(argv[i][j+1]);
+            \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"skel"}) or !strcmp(request, \textcolor{stringliteral}{"skeleton"}))
+              solver = SKELETON\_SOLVER;
+            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"glpk"}) or !strcmp(request, \textcolor{stringliteral}{"GLPK"}))
+              solver = GLPK\_SOLVER;
+            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(request, \textcolor{stringliteral}{"ppl"}) or !strcmp(request, \textcolor{stringliteral}{"PPL"}))
+              solver = PPL\_SOLVER;
+            \textcolor{keywordflow}{else} \{
+              good\_args = \textcolor{keyword}{false};
+              cout << \textcolor{stringliteral}{"Strategy must be 'skeleton' or 'glpk'.\(\backslash\)n"};
+            \}
+          \}
+          \textcolor{keywordflow}{else} \{
+            cout << \textcolor{stringliteral}{"Unrecognized argument.\(\backslash\)n"}; good\_args = \textcolor{keyword}{false};
+          \}
+        \}
+      \}
+    \}
+  \}
+  \textcolor{keywordflow}{return} good\_args;
+\}
+
+\textcolor{keywordtype}{void} give\_help() \{
+  cout << \textcolor{stringliteral}{"Call with options n=<num> m=<mod> r=<repr> [hom] heur=<heur>\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"You *must* specify <num> vars, an integer greater than 2.\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"You can add optional <mod>ulus (please make it prime).\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"The option <hom>ogenize will give you a homogenized ideal.\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"You can also select the <repr>esentation of s-polynomials:\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t1) linked lists,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t2) geobuckets, or\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t3) double-buffered polynomials.\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"The option <heur>istic allows you to select from the following:\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t1) Hilbert heuristic w/ties broken by lex ordering,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t2) Hilbert heuristic w/ties broken by total degree,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t3) total degree w/ties broken by Hilbert heuristic,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t4) graded Hilbert heuristic w/ties broken by lex ordering,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t5) total degree w/ties broken by graded Hilbert heuristic,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t6) aiming for polynomials of smoothest degrees (nearly homogeneous),\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t7) aiming for a polynomial with the largest maximal component,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t8) aiming to minimize the number of new critical pairs at min degree,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t9) aiming to minimize the number of new critical pairs at min graded degree,\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"\(\backslash\)t10) pseudosignature Hilbert heuristic.\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"So 'test\_cyclicn n=6 m=43 r=2' would compute the Groebner basis\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"of the Cyclic-n ideal in 6 variables, modulo 43,"};
+  cout << \textcolor{stringliteral}{"using geobuckets.\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"You can also specify the strategy ('normal', 'sugar', 'wsugar')\(\backslash\)n"};
+  cout << \textcolor{stringliteral}{"('wsugar' requires a list of <num> integers, where <num> is as above."};
+\}
+\end{DoxyCodeInclude}
+ 

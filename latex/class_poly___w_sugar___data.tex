@@ -1,0 +1,115 @@
+\hypertarget{class_poly___w_sugar___data}{}\section{Poly\+\_\+\+W\+Sugar\+\_\+\+Data Class Reference}
+\label{class_poly___w_sugar___data}\index{Poly\+\_\+\+W\+Sugar\+\_\+\+Data@{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}}
+
+
+polynomial-\/related data for a weighted sugar strategy  
+
+
+
+
+{\ttfamily \#include $<$weighted\+\_\+sugar\+\_\+strategy.\+hpp$>$}
+
+Inheritance diagram for Poly\+\_\+\+W\+Sugar\+\_\+\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_poly___w_sugar___data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_poly___w_sugar___data_a685c420830b3c050866a4675b4c1d749}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data} (const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$poly, const W\+T\+\_\+\+T\+Y\+PE $\ast$)
+\begin{DoxyCompactList}\small\item\em records {\ttfamily poly} as the reference for {\ttfamily this} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_ac07ee9ee15bd97e5e8befb3f6cec3929}\label{class_poly___w_sugar___data_ac07ee9ee15bd97e5e8befb3f6cec3929}} 
+virtual void \hyperlink{class_poly___w_sugar___data_ac07ee9ee15bd97e5e8befb3f6cec3929}{at\+\_\+generation\+\_\+tasks} ()
+\begin{DoxyCompactList}\small\item\em sets the sugar to the largest weighted degree of a monomial in the assigned previously polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_ac58bd8d30e7e10dbbe8e86b1d9d04376}\label{class_poly___w_sugar___data_ac58bd8d30e7e10dbbe8e86b1d9d04376}} 
+virtual void \hyperlink{class_poly___w_sugar___data_ac58bd8d30e7e10dbbe8e86b1d9d04376}{at\+\_\+generation\+\_\+tasks} (const \hyperlink{class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em sets the sugar to the largest weighted degree of a monomial in the product of the monomial and the previously assigned polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a50b4b29d57fb8bed56174733207369dd}\label{class_poly___w_sugar___data_a50b4b29d57fb8bed56174733207369dd}} 
+virtual bool \hyperlink{class_poly___w_sugar___data_a50b4b29d57fb8bed56174733207369dd}{equivalent} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff the sugars are equal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a83a899b8195beed8d72d692fe4c228a3}\label{class_poly___w_sugar___data_a83a899b8195beed8d72d692fe4c228a3}} 
+virtual bool \hyperlink{class_poly___w_sugar___data_a83a899b8195beed8d72d692fe4c228a3}{first\+\_\+larger} (const \hyperlink{class_poly___strategy___data}{Poly\+\_\+\+Strategy\+\_\+\+Data} \&sd) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff {\ttfamily this} sugar is larger than {\ttfamily sd} 's \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a4a34039eb50a2294d2aaf6245c1833b8}\label{class_poly___w_sugar___data_a4a34039eb50a2294d2aaf6245c1833b8}} 
+virtual void \hyperlink{class_poly___w_sugar___data_a4a34039eb50a2294d2aaf6245c1833b8}{pre\+\_\+reduction\+\_\+tasks} (const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$u, const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&g)
+\begin{DoxyCompactList}\small\item\em re-\/evaluates the sugar, if need be \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a472c39541209b6738cb497ebc3c9e205}\label{class_poly___w_sugar___data_a472c39541209b6738cb497ebc3c9e205}} 
+\hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} \hyperlink{class_poly___w_sugar___data_a472c39541209b6738cb497ebc3c9e205}{type} ()
+\begin{DoxyCompactList}\small\item\em type of strategy \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a2d369a1ab46cf990413f190f22203a3d}\label{class_poly___w_sugar___data_a2d369a1ab46cf990413f190f22203a3d}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_poly___w_sugar___data_a2d369a1ab46cf990413f190f22203a3d}{poly\+\_\+sugar} () const
+\begin{DoxyCompactList}\small\item\em the sugar itself \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a0ac423ed3a00a9b7e71dc8103116c82c}\label{class_poly___w_sugar___data_a0ac423ed3a00a9b7e71dc8103116c82c}} 
+const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_poly___w_sugar___data_a0ac423ed3a00a9b7e71dc8103116c82c}{weighting} () const
+\begin{DoxyCompactList}\small\item\em the weights used to compute the sugar \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_aa8fbd9cf3d9e391a9db0ececdabea03f}\label{class_poly___w_sugar___data_aa8fbd9cf3d9e391a9db0ececdabea03f}} 
+void \hyperlink{class_poly___w_sugar___data_aa8fbd9cf3d9e391a9db0ececdabea03f}{change\+\_\+weights} (const W\+T\+\_\+\+T\+Y\+PE $\ast$w)
+\begin{DoxyCompactList}\small\item\em changes the weights used to compute the sugar to {\ttfamily w} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_a8a3f679ee5536587a4794a8c20b92cb9}\label{class_poly___w_sugar___data_a8a3f679ee5536587a4794a8c20b92cb9}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{class_poly___w_sugar___data_a8a3f679ee5536587a4794a8c20b92cb9}{sugar}
+\begin{DoxyCompactList}\small\item\em the polynomial's sugar \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_acbe98e7f937ab0c074a732becdd8c619}\label{class_poly___w_sugar___data_acbe98e7f937ab0c074a732becdd8c619}} 
+const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_poly___w_sugar___data_acbe98e7f937ab0c074a732becdd8c619}{weights}
+\begin{DoxyCompactList}\small\item\em pointer to the weights \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_poly___w_sugar___data_aaa672dbee5334fe3b57404502489f800}\label{class_poly___w_sugar___data_aaa672dbee5334fe3b57404502489f800}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&, const \hyperlink{class_poly___w_sugar___data}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data} \&)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+polynomial-\/related data for a weighted sugar strategy 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2016
+\end{DoxyDate}
+This strategy is based on a weight vector, rather than simply adding exponents. While the weight vector {\itshape can} be that of a weighted ordering, one is also free to use a different weight altogether. Simply supply the relevant data. 
+
+Definition at line 22 of file weighted\+\_\+sugar\+\_\+strategy.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_poly___w_sugar___data_a685c420830b3c050866a4675b4c1d749}\label{class_poly___w_sugar___data_a685c420830b3c050866a4675b4c1d749}} 
+\index{Poly\+\_\+\+W\+Sugar\+\_\+\+Data@{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}!Poly\+\_\+\+W\+Sugar\+\_\+\+Data@{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}}
+\index{Poly\+\_\+\+W\+Sugar\+\_\+\+Data@{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}!Poly\+\_\+\+W\+Sugar\+\_\+\+Data@{Poly\+\_\+\+W\+Sugar\+\_\+\+Data}}
+\subsubsection{\texorpdfstring{Poly\+\_\+\+W\+Sugar\+\_\+\+Data()}{Poly\_WSugar\_Data()}}
+{\footnotesize\ttfamily Poly\+\_\+\+W\+Sugar\+\_\+\+Data\+::\+Poly\+\_\+\+W\+Sugar\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$}]{poly,  }\item[{const W\+T\+\_\+\+T\+Y\+PE $\ast$}]{w }\end{DoxyParamCaption})}
+
+
+
+records {\ttfamily poly} as the reference for {\ttfamily this} 
+
+This expects the weights to be as long as the number of monomials. It copies the list, so you can subsequently modify it without subsequently affecting correctness. \begin{DoxyWarning}{Warning}
+The weights are not copied. Please do not modify them, as behavior is hard to predict in this case. It is predictable, but it's likely highly undesirable. Better to create a new \hyperlink{class_poly___w_sugar___data}{Poly\+\_\+\+W\+Sugar\+\_\+\+Data} instead. 
+\end{DoxyWarning}
+
+
+Definition at line 10 of file weighted\+\_\+sugar\+\_\+strategy.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+weighted\+\_\+sugar\+\_\+strategy.\+hpp\item 
+weighted\+\_\+sugar\+\_\+strategy.\+cpp\end{DoxyCompactItemize}

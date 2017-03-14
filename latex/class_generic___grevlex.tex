@@ -1,0 +1,75 @@
+\hypertarget{class_generic___grevlex}{}\section{Generic\+\_\+\+Grevlex Class Reference}
+\label{class_generic___grevlex}\index{Generic\+\_\+\+Grevlex@{Generic\+\_\+\+Grevlex}}
+
+
+generic grevlex ordering, works with any number of variables  
+
+
+
+
+{\ttfamily \#include $<$particular\+\_\+orderings.\+hpp$>$}
+
+Inheritance diagram for Generic\+\_\+\+Grevlex\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_generic___grevlex}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Comparison}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_generic___grevlex_ab34a4b1def40fd943db4293ddf09c7c5}\label{class_generic___grevlex_ab34a4b1def40fd943db4293ddf09c7c5}} 
+virtual bool \hyperlink{class_generic___grevlex_ab34a4b1def40fd943db4293ddf09c7c5}{first\+\_\+larger} (const \hyperlink{class_monomial}{Monomial} \&, const \hyperlink{class_monomial}{Monomial} \&) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff the first \hyperlink{class_monomial}{Monomial} is larger than the second \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_generic___grevlex_a66a1f09fffbdb319fd130941880c7848}\label{class_generic___grevlex_a66a1f09fffbdb319fd130941880c7848}} 
+virtual bool \hyperlink{class_generic___grevlex_a66a1f09fffbdb319fd130941880c7848}{first\+\_\+smaller} (const \hyperlink{class_monomial}{Monomial} \&, const \hyperlink{class_monomial}{Monomial} \&) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff the first \hyperlink{class_monomial}{Monomial} is smaller than the second \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_generic___grevlex_a93cb33a7a2f73152ec1e01d155ad14c9}\label{class_generic___grevlex_a93cb33a7a2f73152ec1e01d155ad14c9}} 
+virtual bool \hyperlink{class_generic___grevlex_a93cb33a7a2f73152ec1e01d155ad14c9}{first\+\_\+larger\+\_\+than\+\_\+multiple} (const \hyperlink{class_monomial}{Monomial} \&, const \hyperlink{class_monomial}{Monomial} \&, const \hyperlink{class_monomial}{Monomial} \&) const
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff the first \hyperlink{class_monomial}{Monomial} is larger than the product of the second and the third \end{DoxyCompactList}\item 
+virtual int \hyperlink{class_generic___grevlex_afb101ce92463ca2fef409237d005bd87}{cmp} (const \hyperlink{class_monomial}{Monomial} \&t, const \hyperlink{class_monomial}{Monomial} \&u) const
+\begin{DoxyCompactList}\small\item\em \{@ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+generic grevlex ordering, works with any number of variables 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015
+\end{DoxyDate}
+The difference between \hyperlink{class_generic___grevlex}{Generic\+\_\+\+Grevlex} and \hyperlink{class_grevlex___ordering}{Grevlex\+\_\+\+Ordering} is that the former doesn't track any \hyperlink{class_monomial___order___data}{Monomial\+\_\+\+Order\+\_\+\+Data}, while the latter relies on it. The latter should, as a result, be more time efficient, while the former is more space efficient. \hyperlink{class_generic___grevlex}{Generic\+\_\+\+Grevlex} will also order monomials which by design have a different number of variables, though that should not in general be something one encounters, and it's rather dangerous with \hyperlink{class_generic___grevlex_a93cb33a7a2f73152ec1e01d155ad14c9}{first\+\_\+larger\+\_\+than\+\_\+multiple()}. 
+
+Definition at line 26 of file particular\+\_\+orderings.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_generic___grevlex_afb101ce92463ca2fef409237d005bd87}\label{class_generic___grevlex_afb101ce92463ca2fef409237d005bd87}} 
+\index{Generic\+\_\+\+Grevlex@{Generic\+\_\+\+Grevlex}!cmp@{cmp}}
+\index{cmp@{cmp}!Generic\+\_\+\+Grevlex@{Generic\+\_\+\+Grevlex}}
+\subsubsection{\texorpdfstring{cmp()}{cmp()}}
+{\footnotesize\ttfamily virtual int Generic\+\_\+\+Grevlex\+::cmp (\begin{DoxyParamCaption}\item[{const \hyperlink{class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\{@ 
+
+returns 0 if the Monomials are like; negative if smaller, positive if larger -- for efficiency, you probably want to redefine this 
+
+Implements \hyperlink{class_monomial___ordering_a9bc3155fc98b4d40c26118fa2114b827}{Monomial\+\_\+\+Ordering}.
+
+
+
+Definition at line 41 of file particular\+\_\+orderings.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+particular\+\_\+orderings.\+hpp\item 
+particular\+\_\+orderings.\+cpp\end{DoxyCompactItemize}

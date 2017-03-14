@@ -1,0 +1,227 @@
+\hypertarget{classconstraint}{}\section{constraint Class Reference}
+\label{classconstraint}\index{constraint@{constraint}}
+
+
+a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $  
+
+
+
+
+{\ttfamily \#include $<$lp\+\_\+solver.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{Indent}\textbf{ Construction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classconstraint_aac499533508fc7e6fcdfad614dbecc48}{constraint} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Initialize constraint to the given coefficients. \end{DoxyCompactList}\item 
+\hyperlink{classconstraint_abcf2ec568e0dcfd37c2dc150b738ad2d}{constraint} (vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&)
+\begin{DoxyCompactList}\small\item\em Initialize constraint to the given coefficients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classconstraint_a796ee0ed5407fb1e4a4774156f0faac9}\label{classconstraint_a796ee0ed5407fb1e4a4774156f0faac9}} 
+\hyperlink{classconstraint_a796ee0ed5407fb1e4a4774156f0faac9}{constraint} (const \hyperlink{classconstraint}{constraint} \&)
+\begin{DoxyCompactList}\small\item\em Copies the coefficients of the other constraint, including the allocation of new memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classconstraint_a02e58b1ce0b271e3daac2da841152582}{$\sim$constraint} ()
+\begin{DoxyCompactList}\small\item\em Deletes memory allocated by the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Friends}
+\begin{Indent}\textbf{ I/O}\par
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classconstraint_a829b1dbba361c34d021ebe82ccf5cb7f}{operator$<$$<$} (ostream \&, const \hyperlink{classconstraint}{constraint} \&)
+\begin{DoxyCompactList}\small\item\em print a representation of the constraint to the stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Basic properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classconstraint_a62f9d6527236b92bce67ef3251ba1fae}\label{classconstraint_a62f9d6527236b92bce67ef3251ba1fae}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{classconstraint_a62f9d6527236b92bce67ef3251ba1fae}{get\+\_\+number\+\_\+of\+\_\+variables} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of variables in the constraint. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classconstraint_aab075ba7c8fa216eff36aeee8fc5552e}\label{classconstraint_aab075ba7c8fa216eff36aeee8fc5552e}} 
+C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \hyperlink{classconstraint_aab075ba7c8fa216eff36aeee8fc5552e}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index) const
+\begin{DoxyCompactList}\small\item\em Returns the coefficient indicated. Numbering starts at 0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classconstraint_ac70165b34389dbe7e58d757e1f16bd8d}\label{classconstraint_ac70165b34389dbe7e58d757e1f16bd8d}} 
+const C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{classconstraint_ac70165b34389dbe7e58d757e1f16bd8d}{coeffs} () const
+\begin{DoxyCompactList}\small\item\em Returns the coefficients that determine this constraints. \end{DoxyCompactList}\item 
+bool \hyperlink{classconstraint_aecc988c4f28198ecc105f60eddfbfddc}{operator$<$} (const \hyperlink{classconstraint}{constraint} \&a, const \hyperlink{classconstraint}{constraint} \&b)
+\begin{DoxyCompactList}\small\item\em Lexicographic comparison of constraints. \end{DoxyCompactList}\item 
+bool \hyperlink{classconstraint_acb6f7858d12f0c03f1c8be86ecbef902}{operator==} (const \hyperlink{classconstraint}{constraint} \&a, const \hyperlink{classconstraint}{constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint equality \end{DoxyCompactList}\item 
+bool \hyperlink{classconstraint_a6b57d19474acdea10ab0a0e954ef3ef9}{operator!=} (const \hyperlink{classconstraint}{constraint} \&a, const \hyperlink{classconstraint}{constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\item 
+bool \hyperlink{classconstraint_a75ee7037f652ba94155890c109b88ef8}{operator!=} (\hyperlink{classconstraint}{constraint} \&a, \hyperlink{classconstraint}{constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $ 
+
+\begin{DoxyAuthor}{Author}
+John Perry 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+October 2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+The University of Southern Mississippi
+\end{DoxyCopyright}
+This class encapsulates a simple constraint for a skeleton; that is, an inequality of the form $ c_1 x_1 + \ldots + c_n x_n \geq 0 $. Constraints can be ordered lexicographically using the less-\/than operator, allowing for their inclusion in ordered collections, such as sets. 
+
+Definition at line 36 of file lp\+\_\+solver.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classconstraint_aac499533508fc7e6fcdfad614dbecc48}\label{classconstraint_aac499533508fc7e6fcdfad614dbecc48}} 
+\index{constraint@{constraint}!constraint@{constraint}}
+\index{constraint@{constraint}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{constraint()}{constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily constraint\+::constraint (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+variables,  }\item[{C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE}]{coeffs\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Initialize constraint to the given coefficients. 
+
+The resulting constraint is $ c_1x_1 + \cdots + c_nx_n \geq 0, $ where $ c_i $ is the coefficient of $ x_i $. 
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+variables} & length of coeffs \\
+\hline
+{\em coeffs} & copies this array of coefficients \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+the size of the array needs to be at least as long as the dimension! 
+\end{DoxyPrecond}
+
+
+Definition at line 6 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{classconstraint_abcf2ec568e0dcfd37c2dc150b738ad2d}\label{classconstraint_abcf2ec568e0dcfd37c2dc150b738ad2d}} 
+\index{constraint@{constraint}!constraint@{constraint}}
+\index{constraint@{constraint}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{constraint()}{constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily constraint\+::constraint (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&}]{coeffs }\end{DoxyParamCaption})}
+
+
+
+Initialize constraint to the given coefficients. 
+
+The resulting constraint is $ c_1x_1 + \cdots + c_nx_n \geq 0, $ where $ c_i $ is the coefficient of $ x_i $. 
+\begin{DoxyParams}{Parameters}
+{\em coeffs} & copies thiis vector of coefficients \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+{\ttfamily nvars} will have the value equal to {\ttfamily coeffs.\+size()} 
+\end{DoxyPostcond}
+
+
+Definition at line 14 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{classconstraint_a02e58b1ce0b271e3daac2da841152582}\label{classconstraint_a02e58b1ce0b271e3daac2da841152582}} 
+\index{constraint@{constraint}!````~constraint@{$\sim$constraint}}
+\index{````~constraint@{$\sim$constraint}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{$\sim$constraint()}{~constraint()}}
+{\footnotesize\ttfamily constraint\+::$\sim$constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deletes memory allocated by the constructor. 
+
+Currently, that means it deletes an array created by the constructors. 
+
+Definition at line 94 of file lp\+\_\+solver.\+cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classconstraint_a6b57d19474acdea10ab0a0e954ef3ef9}\label{classconstraint_a6b57d19474acdea10ab0a0e954ef3ef9}} 
+\index{constraint@{constraint}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+check for constraint inequality 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classconstraint_a75ee7037f652ba94155890c109b88ef8}\label{classconstraint_a75ee7037f652ba94155890c109b88ef8}} 
+\index{constraint@{constraint}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{\hyperlink{classconstraint}{constraint} \&}]{a,  }\item[{\hyperlink{classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+check for constraint inequality 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+
+Definition at line 54 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{classconstraint_aecc988c4f28198ecc105f60eddfbfddc}\label{classconstraint_aecc988c4f28198ecc105f60eddfbfddc}} 
+\index{constraint@{constraint}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{operator$<$}{operator<}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Lexicographic comparison of constraints. 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+
+Definition at line 31 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{classconstraint_a829b1dbba361c34d021ebe82ccf5cb7f}\label{classconstraint_a829b1dbba361c34d021ebe82ccf5cb7f}} 
+\index{constraint@{constraint}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{ostr,  }\item[{const \hyperlink{classconstraint}{constraint} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+print a representation of the constraint to the stream 
+
+Output is of the form $ c_1 x_1 + \ldots + c_n x_n $ , where $ c_i $ is the coefficient of $ x_i $. 
+
+Definition at line 64 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{classconstraint_acb6f7858d12f0c03f1c8be86ecbef902}\label{classconstraint_acb6f7858d12f0c03f1c8be86ecbef902}} 
+\index{constraint@{constraint}!operator==@{operator==}}
+\index{operator==@{operator==}!constraint@{constraint}}
+\subsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+check for constraint equality 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+
+Definition at line 44 of file lp\+\_\+solver.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lp\+\_\+solver.\+hpp\item 
+lp\+\_\+solver.\+cpp\end{DoxyCompactItemize}
