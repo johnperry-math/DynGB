@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   SPolyCreationFlags method = (SPolyCreationFlags )atoi(argv[1]);
   bool static_algorithm = true;
   DynamicSolver solver = GLPK_SOLVER;
-  DynamicHeuristic heuristic;
+  Dynamic_Heuristic heuristic;
   if (!strcmp(argv[2],"dyn")) {
     unsigned heur_opt_location = 4;
     if (
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
       cout << "Need to know heuristic. Use format heur=...\n";
       return 1;
     }
-    heuristic = (DynamicHeuristic )atoi(&(argv[heur_opt_location][5]));
+    heuristic = (Dynamic_Heuristic )atoi(&(argv[heur_opt_location][5]));
   }
  // set up the field
   Prime_Field F17 = Prime_Field(32003);

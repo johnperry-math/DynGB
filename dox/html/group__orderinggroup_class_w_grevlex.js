@@ -1,11 +1,13 @@
 var group__orderinggroup_class_w_grevlex =
 [
     [ "WGrevlex", "group__orderinggroup.html#a0ac3e66fb20c098427f6a08c92fd3771", null ],
+    [ "WGrevlex", "group__orderinggroup.html#a60f58ee49c04e416085a096c4e5798c1", null ],
     [ "cmp", "group__orderinggroup.html#a0a65b26c9057d7f9d8c29ca3896cfd74", null ],
     [ "compute_ith_weight", "group__orderinggroup.html#a760db9641eb6993748fb26c211bd4bb0", null ],
     [ "first_larger", "group__orderinggroup.html#a547c267540f69917cadbeba621642f2a", null ],
     [ "first_larger_than_multiple", "group__orderinggroup.html#a89e34bbf5098cc47d86468fcc334b670", null ],
     [ "first_smaller", "group__orderinggroup.html#a0e4327be4c18de7180ba2cd8c2f9d549", null ],
+    [ "number_of_weights", "group__orderinggroup.html#afd715e453ad062b40578438b1bbe10e9", null ],
     [ "order_weights", "group__orderinggroup.html#a2eb6db0248ec4b205d15b5b1b2261db6", null ],
     [ "partial_degree", "group__orderinggroup.html#ad7e630709c14774bac365c46b9455bab", null ],
     [ "set_data", "group__orderinggroup.html#a18ba60cd0a76da002303a11d362142d9", null ],

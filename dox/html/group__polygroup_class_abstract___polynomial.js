@@ -6,7 +6,7 @@ var group__polygroup_class_abstract___polynomial =
     [ "begin", "group__polygroup.html#ad8da27c2d5e41d6e81d15d756eebf868", null ],
     [ "can_reduce", "group__polygroup.html#af43d43a17c02c38c3ba3e71710e226bf", null ],
     [ "end", "group__polygroup.html#aa769b074a39e5eac6526101d77e2e53f", null ],
-    [ "ground_field", "group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f", null ],
+    [ "ground_field", "group__polygroup.html#a9569282b79afba5d6393a75844437702", null ],
     [ "is_zero", "group__polygroup.html#afb4895702dd56895a792850a831c2f51", null ],
     [ "leading_coefficient", "group__polygroup.html#a511ce8e997fe3fd1141293d256e25fad", null ],
     [ "leading_monomial", "group__polygroup.html#a9186ed0f55c5cc4ecb1b9bc11ba9f679", null ],

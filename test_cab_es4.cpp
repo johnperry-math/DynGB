@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
   if (static_algorithm) G = buchberger(F, method, StrategyFlags::SUGAR_STRATEGY);
   else G = buchberger_dynamic(
       F, method, StrategyFlags::SUGAR_STRATEGY,
-      nullptr, DynamicHeuristic::ORD_HILBERT_THEN_DEG
+      nullptr, Dynamic_Heuristic::ORD_HILBERT_THEN_DEG
   );
   cout << "Basis:\n";
   for (Constant_Polynomial * g : G) {

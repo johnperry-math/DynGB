@@ -170,7 +170,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>This class encapsulates the minimum feature set necessary for our application. Naturally, it must be possible to identify a leading monomial and coefficient. Every polynomial must also be able to produce an iterator; indicate its its length (number of monomials), and its number of variables; describe its ground field; and produce a zero polynomial of the same type (this has its uses).</p>
 <dl class="section warning"><dt>Warning</dt><dd>Monomials should have the same number of variables, and coefficients should all come from the same field. Behavior is undefined if these assumptions are violated. From an algebraic point of view, it doesn&rsquo;t make much sense to violate them, anyway; (in/pro)ject into a different ring if you want to screw around like this. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a3">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a11">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a5">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a3">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a13">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a5">user_interface.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00101">101</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
 </div><div class="dynheader">
@@ -193,17 +193,18 @@ Inheritance diagram for Abstract_Polynomial:</div>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -272,10 +273,12 @@ virtual <a class="el" href="group___iterator_group.html#class_polynomial___itera
 <tr class="memdesc:a9cb8460694b7fceaa5a22ae58c73ebe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An iterator that poses no risk of modifying the polynomial. <br /></td></tr>
 <tr class="separator:a9cb8460694b7fceaa5a22ae58c73ebe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8da27c2d5e41d6e81d15d756eebf868"><td class="memItemLeft" align="right" valign="top"><a id="ad8da27c2d5e41d6e81d15d756eebf868"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const =0</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ad8da27c2d5e41d6e81d15d756eebf868">begin</a> () const =0</td></tr>
+<tr class="memdesc:ad8da27c2d5e41d6e81d15d756eebf868"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an iterator to the polynomial&rsquo;s leading monomial <br /></td></tr>
 <tr class="separator:ad8da27c2d5e41d6e81d15d756eebf868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa769b074a39e5eac6526101d77e2e53f"><td class="memItemLeft" align="right" valign="top"><a id="aa769b074a39e5eac6526101d77e2e53f"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const =0</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#aa769b074a39e5eac6526101d77e2e53f">end</a> () const =0</td></tr>
+<tr class="memdesc:aa769b074a39e5eac6526101d77e2e53f"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterator to last monomial <br /></td></tr>
 <tr class="separator:aa769b074a39e5eac6526101d77e2e53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:a551ade20b7dcd96c227dd0401f6ffbbe"><td class="memItemLeft" align="right" valign="top"><a id="a551ade20b7dcd96c227dd0401f6ffbbe"></a>
@@ -288,13 +291,16 @@ virtual <a class="el" href="group___iterator_group.html#class_polynomial___itera
 <tr class="separator:a764336acff942ed6d6e160b5d62f90c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>I/O</h3></td></tr>
 <tr class="memitem:adbbb6af1fb79d5794af42e28d584641b"><td class="memItemLeft" align="right" valign="top"><a id="adbbb6af1fb79d5794af42e28d584641b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">print</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:adbbb6af1fb79d5794af42e28d584641b"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code> <br /></td></tr>
 <tr class="separator:adbbb6af1fb79d5794af42e28d584641b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadc14212f0cbdb81df9977916cc13798"><td class="memItemLeft" align="right" valign="top"><a id="aadc14212f0cbdb81df9977916cc13798"></a>
 ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#aadc14212f0cbdb81df9977916cc13798">operator&lt;&lt;</a> (ostream &amp;os, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;p)</td></tr>
@@ -422,7 +428,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>sort according to the leading monomial&rsquo;s ordering </p>
 <p>Note that it makes sense to sort even <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a>&rsquo;s, as it is not the polynomial that changes, only the order of its monomials. </p>
 
-<p>Implemented in <a class="el" href="group__polygroup.html#a254bec60707b34bd26ef9d9bb08a4fe9">Polynomial_Linked_List</a>, <a class="el" href="group__polygroup.html#a41e751eee1614e26ebba39a9f81f7993">Double_Buffered_Polynomial</a>, <a class="el" href="group__polygroup.html#a808018b52eca472a7a1b2995e403f35a">Constant_Polynomial</a>, and <a class="el" href="group__polygroup.html#ad3c705cb5c03be2ed62fea65101d1195">Polynomial_Geobucket</a>.</p>
+<p>Implemented in <a class="el" href="group__polygroup.html#a254bec60707b34bd26ef9d9bb08a4fe9">Polynomial_Linked_List</a>, <a class="el" href="group__polygroup.html#a808018b52eca472a7a1b2995e403f35a">Constant_Polynomial</a>, <a class="el" href="group__polygroup.html#a41e751eee1614e26ebba39a9f81f7993">Double_Buffered_Polynomial</a>, and <a class="el" href="group__polygroup.html#ad3c705cb5c03be2ed62fea65101d1195">Polynomial_Geobucket</a>.</p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="user_interface_8cpp-example.html#a7">user_interface.cpp</a>.</dd>
 </dl>
 </div>
@@ -459,7 +465,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>Equivalent to <a class="el" href="group__polygroup.html#aa619f56a2df5d0077335709ac11de039" title="maximum sum of exponents for any monomial ">standard_degree()</a> if <code>w == nullptr</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial_8cpp_source.html#l00108">108</a> of file <a class="el" href="polynomial_8cpp_source.html">polynomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial_8cpp_source.html#l00110">110</a> of file <a class="el" href="polynomial_8cpp_source.html">polynomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -481,9 +487,9 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>We do allow on change at this level: to resort the monomials. We do not consider this a real change (it&rsquo;s still the same polynomial), and in any case even this is effectively unimplemented right now (unless you set up the polynomial with unsorted terms, in which case sorting them helps). </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a7">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a6">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a6">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a6">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a6">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a6">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a6">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a5">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a8">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a14">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a6">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a7">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a6">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a6">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a6">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a6">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a6">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a6">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a5">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a8">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a16">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a6">user_interface.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00087">87</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00089">89</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Constant_Polynomial:</div>
 <div class="dyncontent">
@@ -498,6 +504,8 @@ Inheritance diagram for Constant_Polynomial:</div>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
 <tr class="memitem:a17e78adc39df3472a0610b17c906898f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a17e78adc39df3472a0610b17c906898f">Constant_Polynomial</a> (unsigned <a class="el" href="group__polygroup.html#a9a6bcfaf1f4d6260b39f6abfb2b646ea">length</a>, <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;<a class="el" href="group__polygroup.html#a551ade20b7dcd96c227dd0401f6ffbbe">R</a>, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *mons, const <a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> *coeffs, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *order=nullptr)</td></tr>
 <tr class="separator:a17e78adc39df3472a0610b17c906898f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa64fa434a206b1b29f27b09d36060dac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#aa64fa434a206b1b29f27b09d36060dac">Constant_Polynomial</a> (unsigned <a class="el" href="group__polygroup.html#a9a6bcfaf1f4d6260b39f6abfb2b646ea">length</a>, <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;<a class="el" href="group__polygroup.html#a551ade20b7dcd96c227dd0401f6ffbbe">R</a>, const vector&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt; mons, const COEF_TYPE *coeffs, unsigned start)</td></tr>
+<tr class="separator:aa64fa434a206b1b29f27b09d36060dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8bd342911678053e14cf72af46819c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ac8bd342911678053e14cf72af46819c5">Constant_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;<a class="el" href="group__polygroup.html#a551ade20b7dcd96c227dd0401f6ffbbe">R</a>, const list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;mons, const list&lt; <a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> &gt; &amp;coeffs, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *order=nullptr)</td></tr>
 <tr class="separator:ac8bd342911678053e14cf72af46819c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc487b48dbf5d0dc25dfb419a341ea5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abbc487b48dbf5d0dc25dfb419a341ea5">Constant_Polynomial</a> (unsigned <a class="el" href="group__polygroup.html#a9a6bcfaf1f4d6260b39f6abfb2b646ea">length</a>, <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;<a class="el" href="group__polygroup.html#a551ade20b7dcd96c227dd0401f6ffbbe">R</a>, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *order=generic_grevlex_ptr)</td></tr>
@@ -556,16 +564,17 @@ virtual <a class="el" href="group___iterator_group.html#class_polynomial___itera
 <tr class="memitem:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#af72cda5555005f99c9844fece4e5ca46">Abstract_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;ring, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *ordering)</td></tr>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -593,13 +602,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the polynomial&rsquo;s strategy to <code>psd</code> <br /></td></tr>
 <tr class="separator:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="adbbb6af1fb79d5794af42e28d584641b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">print</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code> <br /></td></tr>
 <tr class="separator:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:a0b78eef8746e334e8db176d479e734b9"><td class="memItemLeft" align="right" valign="top"><a id="a0b78eef8746e334e8db176d479e734b9"></a>
@@ -639,7 +651,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 </table>
 <h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
 <a id="a17e78adc39df3472a0610b17c906898f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17e78adc39df3472a0610b17c906898f">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a17e78adc39df3472a0610b17c906898f">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -697,8 +709,67 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 </div>
 </div>
+<a id="aa64fa434a206b1b29f27b09d36060dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa64fa434a206b1b29f27b09d36060dac">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Constant_Polynomial::Constant_Polynomial </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td>
+          <td class="paramname"><em>R</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;&#160;</td>
+          <td class="paramname"><em>mons</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const COEF_TYPE *&#160;</td>
+          <td class="paramname"><em>coeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>start</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">length</td><td>how long <code>this</code> should be </td></tr>
+    <tr><td class="paramname">R</td><td>parent ring </td></tr>
+    <tr><td class="paramname">mons</td><td>vector of pointers to <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a> to populate the terms </td></tr>
+    <tr><td class="paramname">coeffs</td><td>array of coefficients to populate the terms, in same order as <code>mons</code> </td></tr>
+    <tr><td class="paramname">start</td><td>where in the array to start populating the polynomial's coefficients</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This initializes a polynomial from <code>mons</code> and <code>coeffs</code>. It is assumed that <code>coeffs</code> may have some zero elements; we do not add these to the polynomial. It is also assumed that the monomials are already in correct order, so that no sorting is required. The monomial ordering is taken from the first monomial. </p>
+
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00082">82</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ac8bd342911678053e14cf72af46819c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8bd342911678053e14cf72af46819c5">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8bd342911678053e14cf72af46819c5">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,12 +816,12 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 </dl>
 <p>We assume that mons and coeffs have the same length. We do not check that the monomials have the same number of variables, nor that the coefficients come from the same field, nor do we sort the monomials. The client needs to do this! </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00082">82</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00109">109</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
 <a id="abbc487b48dbf5d0dc25dfb419a341ea5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbc487b48dbf5d0dc25dfb419a341ea5">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc487b48dbf5d0dc25dfb419a341ea5">&#9670;&nbsp;</a></span>Constant_Polynomial() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -790,7 +861,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 </dl>
 <p>This is a pretty useless constructor unless you know what you&rsquo;re doing. Unless you&rsquo;re a child of <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a>, you don&rsquo;t know what you&rsquo;re doing. Even then, you <em>probably</em> don&rsquo;t know what you&rsquo;re doing. </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00113">113</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00140">140</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -821,7 +892,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#afb4895702dd56895a792850a831c2f51">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00209">209</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00236">236</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -851,7 +922,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#a511ce8e997fe3fd1141293d256e25fad">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00203">203</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00230">230</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +952,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#a9186ed0f55c5cc4ecb1b9bc11ba9f679">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00201">201</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00228">228</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -911,7 +982,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#a48f4c3c030ca66a9386cd71f71d5def7">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00207">207</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00234">234</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -948,7 +1019,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#aacee94ef63116201c91c7d65779097d8">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00221">221</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00248">248</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -985,7 +1056,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#a53b0ed425ff4bbbf01818005d6003d59">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00229">229</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00256">256</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1013,7 +1084,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 </dl>
 <p>The data is stored in the form [ A1 M11 M12 ... M1n A2 M21 M22 ... M2n ... ] where Ai is the ith coefficient (lead is first) and Mij is the exponent of xj in the ith monomial </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00152">152</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00179">179</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1062,7 +1133,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#a12e023570eb675343c4b7ed635a031dc">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00174">174</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00201">201</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1095,7 +1166,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 <p>Implements <a class="el" href="group__polygroup.html#a1fcdd29c324c660ea935197c39e682f2">Abstract_Polynomial</a>.</p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a8">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#a7">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#a7">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#a7">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#a7">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#a7">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#a7">test_cab_es9.cpp</a>, and <a class="el" href="test_cyclic4_8cpp-example.html#a6">test_cyclic4.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00183">183</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00210">210</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1125,7 +1196,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 
 <p>Implements <a class="el" href="group__polygroup.html#ab50acaac5654329c0299d5694a25b1ed">Abstract_Polynomial</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00213">213</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00240">240</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1669,10 +1740,12 @@ virtual <a class="el" href="group___iterator_group.html#class_d_b___polynomial__
 <tr class="memdesc:aabbde4f088511cb480e959eaac056784"><td class="mdescLeft">&#160;</td><td class="mdescRight">An iterator that may modify the current position. <br /></td></tr>
 <tr class="separator:aabbde4f088511cb480e959eaac056784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85169b0b1146537bb69127f3c1a866ff"><td class="memItemLeft" align="right" valign="top"><a id="a85169b0b1146537bb69127f3c1a866ff"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const override</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a85169b0b1146537bb69127f3c1a866ff">begin</a> () const override</td></tr>
+<tr class="memdesc:a85169b0b1146537bb69127f3c1a866ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an iterator to the polynomial&rsquo;s leading monomial <br /></td></tr>
 <tr class="separator:a85169b0b1146537bb69127f3c1a866ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad89a902fa53246364fbef37eefa44080"><td class="memItemLeft" align="right" valign="top"><a id="ad89a902fa53246364fbef37eefa44080"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const override</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ad89a902fa53246364fbef37eefa44080">end</a> () const override</td></tr>
+<tr class="memdesc:ad89a902fa53246364fbef37eefa44080"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterator to last monomial <br /></td></tr>
 <tr class="separator:ad89a902fa53246364fbef37eefa44080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
 <tr class="memitem:a5bcb9f095148d20d1f428f75e8bd081d"><td class="memItemLeft" align="right" valign="top"><a id="a5bcb9f095148d20d1f428f75e8bd081d"></a>
@@ -1708,16 +1781,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#af72cda5555005f99c9844fece4e5ca46">Abstract_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;ring, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *ordering)</td></tr>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -1741,13 +1815,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the polynomial&rsquo;s strategy to <code>psd</code> <br /></td></tr>
 <tr class="separator:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="adbbb6af1fb79d5794af42e28d584641b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">print</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code> <br /></td></tr>
 <tr class="separator:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Buffering</div></td></tr>
@@ -1924,7 +2001,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Implementation of indeterminates, for easier building of polynomials. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
-<p>The main purpose of this class is to help make it easier to build polynomials. It is not especially useful otherwise, and is highly inefficient. However, it makes the following possible: </p><div class="fragment"><div class="line"><a class="code" href="group___fields_group.html#class_prime___field">Prime_Field</a> F = <a class="code" href="group___fields_group.html#class_prime___field">Prime_Field</a>(43);</div><div class="line"><span class="keywordtype">string</span> var_names [] = { <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot;y&quot;</span> };</div><div class="line">P = <a class="code" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a>(2, F, var_names);</div><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> x(<a class="code" href="group__polygroup.html#a78f5339712602f11e29a091d228032c4">R</a>, 0);</div><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> y(<a class="code" href="group__polygroup.html#a78f5339712602f11e29a091d228032c4">R</a>, 1);</div><div class="line"><a class="code" href="group__polygroup.html#class_monomial">Monomial</a> x3y = (x^3) * (x*y);</div><div class="line">x3y.<a class="code" href="group__polygroup.html#a339f1927077ab6d92b050d222d945f72">printlncout</a>();</div></div><!-- fragment --><p> &hellip;and the result should be \(x^3y\). Alternately, you could do: </p><div class="fragment"><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> * X = P.indeterminates();</div><div class="line"><a class="code" href="group__polygroup.html#class_monomial">Monomial</a> x3y = (X[0]^3) * (X[0]*X[1]);</div><div class="line">x3y.<a class="code" href="group__polygroup.html#a339f1927077ab6d92b050d222d945f72">printlncout</a>();</div><div class="line">free(X);</div></div><!-- fragment --><p> &hellip;with the same result. Just be careful in the second case to destroy the evidence. </p>
+<p>The main purpose of this class is to help make it easier to build polynomials. It is not especially useful otherwise, and is highly inefficient. However, it makes the following possible: </p><div class="fragment"><div class="line"><a class="code" href="group___fields_group.html#class_prime___field">Prime_Field</a> F = <a class="code" href="group___fields_group.html#class_prime___field">Prime_Field</a>(43);</div><div class="line"><span class="keywordtype">string</span> var_names [] = { <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot;y&quot;</span> };</div><div class="line">P = <a class="code" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a>(2, F, var_names);</div><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> x(<a class="code" href="group__polygroup.html#a78f5339712602f11e29a091d228032c4">R</a>, 0);</div><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> y(<a class="code" href="group__polygroup.html#a78f5339712602f11e29a091d228032c4">R</a>, 1);</div><div class="line"><a class="code" href="group__polygroup.html#class_monomial">Monomial</a> x3y = (x^3) * (x*y);</div><div class="line">x3y.<a class="code" href="group__polygroup.html#a34143922dd6ce2d44a62777a8948bf97">printlncout</a>();</div></div><!-- fragment --><p> &hellip;and the result should be \(x^3y\). Alternately, you could do: </p><div class="fragment"><div class="line"><a class="code" href="group__polygroup.html#class_indeterminate">Indeterminate</a> * X = P.indeterminates();</div><div class="line"><a class="code" href="group__polygroup.html#class_monomial">Monomial</a> x3y = (X[0]^3) * (X[0]*X[1]);</div><div class="line">x3y.<a class="code" href="group__polygroup.html#a34143922dd6ce2d44a62777a8948bf97">printlncout</a>();</div><div class="line">free(X);</div></div><!-- fragment --><p> &hellip;with the same result. Just be careful in the second case to destroy the evidence. </p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_monomials_8cpp-example.html#_a6">test_monomials.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="indeterminate_8hpp_source.html#l00063">63</a> of file <a class="el" href="indeterminate_8hpp_source.html">indeterminate.hpp</a>.</p>
@@ -2117,6 +2194,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a563c96b359a1faa97d73be48576c1d42">is_like</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;other) const</td></tr>
 <tr class="memdesc:a563c96b359a1faa97d73be48576c1d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Have same variables, same powers? Synonymous with <a class="el" href="group__polygroup.html#a063e7166a4bf8abc8748f8758cc31d73" title="equal/alike? ">operator==()</a>. <br /></td></tr>
 <tr class="separator:a563c96b359a1faa97d73be48576c1d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac68d2650242d00ab6c26c3f01f31414a"><td class="memItemLeft" align="right" valign="top"><a id="ac68d2650242d00ab6c26c3f01f31414a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ac68d2650242d00ab6c26c3f01f31414a">is_like</a> (const EXP_TYPE *e) const</td></tr>
+<tr class="memdesc:ac68d2650242d00ab6c26c3f01f31414a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Have same variables, same powers? Comparison of exponent vectors. <br /></td></tr>
+<tr class="separator:ac68d2650242d00ab6c26c3f01f31414a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adec4a37e9e36f821ae69ca00eb087961"><td class="memItemLeft" align="right" valign="top"><a id="adec4a37e9e36f821ae69ca00eb087961"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adec4a37e9e36f821ae69ca00eb087961">like_multiple</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;v) const</td></tr>
 <tr class="memdesc:adec4a37e9e36f821ae69ca00eb087961"><td class="mdescLeft">&#160;</td><td class="mdescRight">is <code>this</code> like \(uv\)? <br /></td></tr>
@@ -2224,12 +2305,12 @@ const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">M
 <tr><td colspan="2"><h3>I/O</h3></td></tr>
 <tr class="memitem:ad428399071b7e7b63604d506b5dfdf93"><td class="memItemLeft" align="right" valign="top"><a id="ad428399071b7e7b63604d506b5dfdf93"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ad428399071b7e7b63604d506b5dfdf93">print</a> (bool=true, ostream &amp;=cout, const string *names=nullptr) const</td></tr>
-<tr class="memdesc:ad428399071b7e7b63604d506b5dfdf93"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the monomial to the give stream with the given names; adds a newline if the boolean is true <br /></td></tr>
+<tr class="memdesc:ad428399071b7e7b63604d506b5dfdf93"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the monomial with the given names; adds a newline if the boolean is true <br /></td></tr>
 <tr class="separator:ad428399071b7e7b63604d506b5dfdf93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339f1927077ab6d92b050d222d945f72"><td class="memItemLeft" align="right" valign="top"><a id="a339f1927077ab6d92b050d222d945f72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a339f1927077ab6d92b050d222d945f72">printlncout</a> ()</td></tr>
-<tr class="memdesc:a339f1927077ab6d92b050d222d945f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">equivalent to <code><a class="el" href="group__polygroup.html#ad428399071b7e7b63604d506b5dfdf93" title="prints the monomial to the give stream with the given names; adds a newline if the boolean is true ...">print()</a></code> with default values <br /></td></tr>
-<tr class="separator:a339f1927077ab6d92b050d222d945f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34143922dd6ce2d44a62777a8948bf97"><td class="memItemLeft" align="right" valign="top"><a id="a34143922dd6ce2d44a62777a8948bf97"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a34143922dd6ce2d44a62777a8948bf97">printlncout</a> () const</td></tr>
+<tr class="memdesc:a34143922dd6ce2d44a62777a8948bf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">equivalent to <code><a class="el" href="group__polygroup.html#ad428399071b7e7b63604d506b5dfdf93" title="prints the monomial with the given names; adds a newline if the boolean is true ">print()</a></code> with default values <br /></td></tr>
+<tr class="separator:a34143922dd6ce2d44a62777a8948bf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76dc21e1d0624ecd913ce3e2f83c0f13"><td class="memItemLeft" align="right" valign="top"><a id="a76dc21e1d0624ecd913ce3e2f83c0f13"></a>
 ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a76dc21e1d0624ecd913ce3e2f83c0f13">operator&lt;&lt;</a> (ostream &amp;, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
 <tr class="memdesc:a76dc21e1d0624ecd913ce3e2f83c0f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">essentially <code>u.print(false, ostream)</code> <br /></td></tr>
@@ -2272,7 +2353,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>The list should contains the powers of the exponents, in order. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00120">120</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00134">134</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2319,7 +2400,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>Copies exponents so you can reuse yours. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00147">147</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00161">161</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2350,7 +2431,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="section warning"><dt>Warning</dt><dd>Does not check if <code>this</code> is divisible by other. See <a class="el" href="group__polygroup.html#aa0341b299fa1fcd4459f9a6810768f0e" title="Divisible by other? ">divisible_by()</a>, which is the tool to use. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if <code>this</code> and <code>other</code> have the same number of variables </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00351">351</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00370">370</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2379,7 +2460,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>total standard degree of this <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00190">190</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00208">208</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2418,7 +2499,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>If <code>weights</code> is <code>nullptr</code> then returns total_degree(m). If <code>m</code> is zero (default), computes for all indeterminates. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00199">199</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00217">217</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2441,7 +2522,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
 <p>Mostly a convenience class to encapsulate basic operations. I am in the process of moving some functions outside this class into it. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00078">78</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00077">77</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
@@ -2598,7 +2679,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section return"><dt>Returns</dt><dd>the colon ideal</dd></dl>
 <p>This does not recompute Hilbert data even if already known. It is probably better to do that explicitly, anyhow. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00321">321</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00320">320</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 
 </div>
 </div>
@@ -2635,7 +2716,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>does not delete the old Hilbert numerator (as this could be a copy) so delete manually if you need that done </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00331">331</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00330">330</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 
 </div>
 </div>
@@ -2671,7 +2752,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>Destroys the old Hilbert numerator if it was assigned a different grading. The comparison is by pointer only, not by values. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00227">227</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00226">226</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 
 </div>
 </div>
@@ -2700,7 +2781,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section return"><dt>Returns</dt><dd>the Hilbert Polynomial for this ideal</dd></dl>
 <p>A &ldquo;Hilbert Polynomial&rdquo; does not exist in the non-standard graded case, so there is no option to supply a grading here, and if the Hilbert numerators have been computed for a different grading, this function re-computes them for the standard grading, without however losing the ones computed for the non-standard grading. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00291">291</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00290">290</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 
 </div>
 </div>
@@ -2738,7 +2819,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section return"><dt>Returns</dt><dd>the reduced Hilbert numberator of this ideal, which is computed by canceling common factors with the denominator </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__commalg.html#ga572e81ac2dce2e17ab459e9a0b687084" title="computes the second Hilbert numerator (after reduction by ) ">hilbert_second_numerator()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00259">259</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00258">258</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 
 </div>
 </div>
@@ -2760,7 +2841,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00046">46</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial__ideal_8hpp_source.html#l00045">45</a> of file <a class="el" href="monomial__ideal_8hpp_source.html">monomial_ideal.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Monomial_Ideal_Variables_Exception:</div>
 <div class="dyncontent">
@@ -2863,7 +2944,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Polynomial_Linked_Li
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>This class extends <a class="el" href="group__polygroup.html#class_abstract___polynomial" title="The general class of a polynomial. ">Abstract_Polynomial</a> to allow for basic arithmetic of a polynomial. </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00305">305</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00313">313</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Mutable_Polynomial:</div>
 <div class="dyncontent">
@@ -2943,16 +3024,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#af72cda5555005f99c9844fece4e5ca46">Abstract_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;ring, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *ordering)</td></tr>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -3006,19 +3088,24 @@ virtual <a class="el" href="group___iterator_group.html#class_polynomial___itera
 <tr class="memdesc:a9cb8460694b7fceaa5a22ae58c73ebe7 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">An iterator that poses no risk of modifying the polynomial. <br /></td></tr>
 <tr class="separator:a9cb8460694b7fceaa5a22ae58c73ebe7 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8da27c2d5e41d6e81d15d756eebf868 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="ad8da27c2d5e41d6e81d15d756eebf868"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const =0</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#ad8da27c2d5e41d6e81d15d756eebf868">begin</a> () const =0</td></tr>
+<tr class="memdesc:ad8da27c2d5e41d6e81d15d756eebf868 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an iterator to the polynomial&rsquo;s leading monomial <br /></td></tr>
 <tr class="separator:ad8da27c2d5e41d6e81d15d756eebf868 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa769b074a39e5eac6526101d77e2e53f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="aa769b074a39e5eac6526101d77e2e53f"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const =0</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#aa769b074a39e5eac6526101d77e2e53f">end</a> () const =0</td></tr>
+<tr class="memdesc:aa769b074a39e5eac6526101d77e2e53f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterator to last monomial <br /></td></tr>
 <tr class="separator:aa769b074a39e5eac6526101d77e2e53f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="adbbb6af1fb79d5794af42e28d584641b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">print</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code> <br /></td></tr>
 <tr class="separator:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -3112,10 +3199,12 @@ virtual <a class="el" href="group___iterator_group.html#class_geobucket___iterat
 <tr class="memdesc:a08a6bd3fd143c05e1b2762a7f239b371"><td class="mdescLeft">&#160;</td><td class="mdescRight">An iterator that poses no risk of modifying the polynomial. <br /></td></tr>
 <tr class="separator:a08a6bd3fd143c05e1b2762a7f239b371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c5f05f041e6d2c462d1dcb2bdd39df0"><td class="memItemLeft" align="right" valign="top"><a id="a0c5f05f041e6d2c462d1dcb2bdd39df0"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const override</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a0c5f05f041e6d2c462d1dcb2bdd39df0">begin</a> () const override</td></tr>
+<tr class="memdesc:a0c5f05f041e6d2c462d1dcb2bdd39df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an iterator to the polynomial&rsquo;s leading monomial <br /></td></tr>
 <tr class="separator:a0c5f05f041e6d2c462d1dcb2bdd39df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28dde5c7941ad0636f17054cd80bbd8e"><td class="memItemLeft" align="right" valign="top"><a id="a28dde5c7941ad0636f17054cd80bbd8e"></a>
-virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const override</td></tr>
+virtual <a class="el" href="group___iterator_group.html#class_polynomial___iterator">Polynomial_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a28dde5c7941ad0636f17054cd80bbd8e">end</a> () const override</td></tr>
+<tr class="memdesc:a28dde5c7941ad0636f17054cd80bbd8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterator to last monomial <br /></td></tr>
 <tr class="separator:a28dde5c7941ad0636f17054cd80bbd8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a630c245914a9235dd84af2b34deb778d"><td class="memItemLeft" align="right" valign="top"><a id="a630c245914a9235dd84af2b34deb778d"></a>
 virtual <a class="el" href="group___iterator_group.html#class_geobucket___iterator">Geobucket_Iterator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a630c245914a9235dd84af2b34deb778d">new_mutable_iterator</a> () override</td></tr>
@@ -3180,16 +3269,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#af72cda5555005f99c9844fece4e5ca46">Abstract_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;ring, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *ordering)</td></tr>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -3213,10 +3303,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the polynomial&rsquo;s strategy to <code>psd</code> <br /></td></tr>
 <tr class="separator:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Member Functions</h3></td></tr>
 <tr class="memitem:a82e8a9286f5c30e48c13e05d74af7fb9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a82e8a9286f5c30e48c13e05d74af7fb9">lglen</a> (unsigned i)</td></tr>
@@ -3581,7 +3673,7 @@ Descendants that perform any arithemtic that might change the leading monomial s
 </p>
 <p> Parentheses separate buckets, whose sums have not (yet) been simplified. Uninitiated and nonzero buckets are not printed. </p>
 
-<p>Reimplemented from <a class="el" href="group__polygroup.html">Abstract_Polynomial</a>.</p>
+<p>Reimplemented from <a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">Abstract_Polynomial</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="polynomial__geobucket_8cpp_source.html#l00403">403</a> of file <a class="el" href="polynomial__geobucket_8cpp_source.html">polynomial_geobucket.cpp</a>.</p>
 
@@ -3925,16 +4017,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#af72cda5555005f99c9844fece4e5ca46">Abstract_Polynomial</a> (<a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;ring, const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *ordering)</td></tr>
 <tr class="separator:af72cda5555005f99c9844fece4e5ca46 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5082a214ab62d3d5aad6d294926be8e2"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Abstract_Polynomial</b> ()</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2">~Abstract_Polynomial</a> ()</td></tr>
+<tr class="memdesc:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the strategy, if there is one <br /></td></tr>
 <tr class="separator:a5082a214ab62d3d5aad6d294926be8e2 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="abf1f531c0004bf37874e98eee42dc0f4"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#abf1f531c0004bf37874e98eee42dc0f4">base_ring</a> () const</td></tr>
 <tr class="memdesc:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ring in which this polynomial resides <br /></td></tr>
 <tr class="separator:abf1f531c0004bf37874e98eee42dc0f4 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a5bd4f2c1ef7a4f090afd6cd55bc2604f"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a5bd4f2c1ef7a4f090afd6cd55bc2604f">ground_field</a> ()</td></tr>
-<tr class="memdesc:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
-<tr class="separator:a5bd4f2c1ef7a4f090afd6cd55bc2604f inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a9569282b79afba5d6393a75844437702"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a9569282b79afba5d6393a75844437702">ground_field</a> () const</td></tr>
+<tr class="memdesc:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">ground field &ndash; all coefficients should be in this field <br /></td></tr>
+<tr class="separator:a9569282b79afba5d6393a75844437702 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a4419bbe47e14683f2903c47bee8e04af"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af">number_of_variables</a> () const</td></tr>
 <tr class="memdesc:a4419bbe47e14683f2903c47bee8e04af inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables &ndash; all monomials should agree with this (though it is never tested by the class) <br /></td></tr>
@@ -3962,13 +4055,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the polynomial&rsquo;s strategy to <code>psd</code> <br /></td></tr>
 <tr class="separator:a780b8c4b18ae1df16ce680f79d9ace7b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="adbbb6af1fb79d5794af42e28d584641b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b">print</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code> <br /></td></tr>
 <tr class="separator:adbbb6af1fb79d5794af42e28d584641b inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a597dc990980f1936e86dbf8940dbeecd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (ostream &amp;os=cout) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd">println</a> (ostream &amp;os=cout) const</td></tr>
+<tr class="memdesc:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>os</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a597dc990980f1936e86dbf8940dbeecd inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memItemLeft" align="right" valign="top"><a id="a69dfd6bd725e126d2476826fb345c5f6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printlncout</b> () const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6">printlncout</a> () const</td></tr>
+<tr class="memdesc:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the polynomial to <code>cout</code>, followed by a carriage return <br /></td></tr>
 <tr class="separator:a69dfd6bd725e126d2476826fb345c5f6 inherit pub_methods_group__polygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:a55c2905ab5c77fb51ff1c282ec3ce9e5"><td class="memItemLeft" align="right" valign="top"><a id="a55c2905ab5c77fb51ff1c282ec3ce9e5"></a>
@@ -4121,7 +4217,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gro
 <div class="textblock"><p>Encapsulates information about a polynomial ring for easy access: ground field, number of indeterminates, &hellip;. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015 </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a3">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a2">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a2">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a2">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a2">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a2">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a2">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a1">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a7">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a13">test_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a5">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a2">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a3">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a2">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a2">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a2">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a2">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a2">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a2">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a1">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a7">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a15">test_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a5">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a2">user_interface.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="polynomial__ring_8hpp_source.html#l00042">42</a> of file <a class="el" href="polynomial__ring_8hpp_source.html">polynomial_ring.hpp</a>.</p>
 </div><table class="memberdecls">
@@ -4389,7 +4485,7 @@ string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 \[ x_0 + x_1 + ... + x_n,\\ x_0 x_1 + x_1 x_2 + x_2 x_3 + ... + x_n x_1,\\ x_0 x_1 x_2 + x_1 x_2 x_3 + x_2 x_3 x_4 + x_n x_1 x_2,\\ \ldots\\ x_0 x_1 \ldots x_n - 1.\]
 </p>
 <p> Use \(n &gt; 2\). If <code>homog</code> is <code>true</code>, the last monomial is \(h^5\) instead of 1. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#a2">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a10">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#a2">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a12">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="cyclic__n_8hpp_source.html#l00057">57</a> of file <a class="el" href="cyclic__n_8hpp_source.html">cyclic_n.hpp</a>.</p>
 

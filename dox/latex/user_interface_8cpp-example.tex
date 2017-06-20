@@ -25,7 +25,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
 \textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
 \textcolor{comment}{* (at your option) any later version.                                         *}
 \textcolor{comment}{*                                                                             *}
-\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* DynGB is distributed in the hope that it will be useful,                    *}
 \textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
 \textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
 \textcolor{comment}{* GNU General Public License for more details.                                *}
@@ -187,7 +187,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not solver\_choice.compare(\textcolor{stringliteral}{"ppl"}))
       solver = PPL\_SOLVER;
     \textcolor{keywordtype}{string} heur\_choice;
-    \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} heuristic;
+    \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} heuristic;
     \textcolor{keywordflow}{while} (
       heur\_choice.compare(\textcolor{stringliteral}{"h"}) and heur\_choice.compare(\textcolor{stringliteral}{"gh"})
       and heur\_choice.compare(\textcolor{stringliteral}{"b"}) and heur\_choice.compare(\textcolor{stringliteral}{"bb"})
@@ -205,13 +205,13 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
       cout << \textcolor{stringliteral}{"which heuristic would you like? "};
       getline(cin, heur\_choice);
     \}
-    \textcolor{keywordflow}{if}      (not heur\_choice.compare( \textcolor{stringliteral}{"h"})) heuristic = DynamicHeuristic::ORD\_HILBERT\_THEN\_DEG;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"gh"})) heuristic = DynamicHeuristic::GRAD\_HILB\_THEN\_DEG;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"b"})) heuristic = DynamicHeuristic::BETTI\_HILBERT\_DEG;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"bb"})) heuristic = DynamicHeuristic::BIG\_BETTI\_HILBERT\_DEG;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"gb"})) heuristic = DynamicHeuristic::GRAD\_BETTI\_HILBERT\_DEG;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"c"})) heuristic = DynamicHeuristic::MIN\_CRIT\_PAIRS;
-    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"d"})) heuristic = DynamicHeuristic::DEG\_THEN\_ORD\_HILBERT;
+    \textcolor{keywordflow}{if}      (not heur\_choice.compare( \textcolor{stringliteral}{"h"})) heuristic = Dynamic\_Heuristic::ORD\_HILBERT\_THEN\_DEG;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"gh"})) heuristic = Dynamic\_Heuristic::GRAD\_HILB\_THEN\_DEG;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"b"})) heuristic = Dynamic\_Heuristic::BETTI\_HILBERT\_DEG;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"bb"})) heuristic = Dynamic\_Heuristic::BIG\_BETTI\_HILBERT\_DEG;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"gb"})) heuristic = Dynamic\_Heuristic::GRAD\_BETTI\_HILBERT\_DEG;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"c"})) heuristic = Dynamic\_Heuristic::MIN\_CRIT\_PAIRS;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"d"})) heuristic = Dynamic\_Heuristic::DEG\_THEN\_ORD\_HILBERT;
     \textcolor{keywordtype}{string} whether\_analysis;
     \textcolor{keywordtype}{bool} analyze\_first = \textcolor{keyword}{false};
     \textcolor{keywordflow}{while} (whether\_analysis.compare(\textcolor{stringliteral}{"y"}) and whether\_analysis.compare(\textcolor{stringliteral}{"n"})) \{
@@ -219,7 +219,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
       cin >> whether\_analysis;
     \}
     \textcolor{keywordflow}{if} (not whether\_analysis.compare(\textcolor{stringliteral}{"y"})) analyze\_first = \textcolor{keyword}{true};
-    B = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+    B = \hyperlink{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}{buchberger\_dynamic}(
         I, SPolyCreationFlags::GEOBUCKETS, StrategyFlags::SUGAR\_STRATEGY,
         \textcolor{keyword}{nullptr}, heuristic, solver, analyze\_first
     );

@@ -3,7 +3,7 @@
   \author John Perry
   \version 1.0
   \date October 2014
-  \copyright The University of Southern Mississippi
+  @copyright The University of Southern Mississippi
 */
 
 /*****************************************************************************\
@@ -14,7 +14,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -36,26 +36,31 @@ using std::set_union;
 #include "goda.hpp"
 #include "skeleton.hpp"
 
-edge::edge(const ray &first_ray, const ray &second_ray)
+namespace LP_Solvers {
+
+Edge::Edge(const Ray &first_ray, const Ray &second_ray)
     : first(first_ray), second(second_ray)
 {
   if (first < second)
     first.swap(second);
 }
 
-edge::edge(const edge &old_edge)
+Edge::Edge(const Edge &old_edge)
     : first(old_edge.first), second(old_edge.second)
 {
   // nothing to do
 }
 
-ostream & operator<<(ostream & ostr, const edge &e)
+ostream & operator<<(ostream & ostr, const Edge &e)
 {
   ostr << "{ " << e.first << " , " << e.second << " }";
   return ostr;
 }
 
-bool operator < (const edge &first, const edge &second)
+bool operator==(const Edge &e1, const Edge &e2)
+{ return e1.first == e2.first && e1.second == e2.second; }
+
+bool operator < (const Edge &first, const Edge &second)
 {
   bool result = true;
   if (first.first < second.first)
@@ -74,7 +79,7 @@ bool operator < (const edge &first, const edge &second)
   return result;
 }
 
-edge & edge::operator=(const edge &other)
+Edge & Edge::operator=(const Edge &other)
 {
   if (!(*this == other))
   {
@@ -84,7 +89,7 @@ edge & edge::operator=(const edge &other)
   return *this;
 }
 
-void skeleton::common_initialization(NVAR_TYPE dimension)
+void Skeleton::common_initialization(NVAR_TYPE dimension)
 {
   //cout << "creating skeleton with dimension " << dimension << endl;
   dim = dimension;
@@ -95,14 +100,14 @@ void skeleton::common_initialization(NVAR_TYPE dimension)
   for (NVAR_TYPE i = 0; i < dim; ++i)
   {
     constr_coords[i] = 1;
-    constraints.push_back(constraint(dim, constr_coords));
+    constraints.push_back(Constraint(dim, constr_coords));
     constr_coords[i] = 0;
   }
   delete [] constr_coords;
   // initialize the rays, one for each axis
   for (NVAR_TYPE i = 0; i < dim; ++i)
   {
-    ray new_ray(dim, i);
+    Ray new_ray(dim, i);
     rays.insert(new_ray);
   }
   // initialize the edges
@@ -111,24 +116,24 @@ void skeleton::common_initialization(NVAR_TYPE dimension)
     for (auto siter = rays.begin(); siter != rays.end(); ++siter)
       if (*riter != *siter)
       {
-        edge new_edge(*riter, *siter);
+        Edge new_edge(*riter, *siter);
         edges.insert(new_edge);
       }
 }
 
-skeleton::skeleton(NVAR_TYPE dimension)
+Skeleton::Skeleton(NVAR_TYPE dimension)
 {
   common_initialization(dimension);
 }
 
-skeleton::skeleton(NVAR_TYPE dimension, vector<constraint> &constraints)
-        //: skeleton(dimension)
+Skeleton::Skeleton(NVAR_TYPE dimension, const vector<Constraint> &constraints)
+        //: Skeleton(dimension)
 {
   common_initialization(dimension);
   solve(constraints);
 }
 
-skeleton::skeleton(skeleton &old_skeleton)
+Skeleton::Skeleton(Skeleton &old_skeleton)
         : constraints(old_skeleton.constraints),
           edges(old_skeleton.edges), dim(old_skeleton.dim)
           
@@ -137,15 +142,15 @@ skeleton::skeleton(skeleton &old_skeleton)
   // nothing more to do
 }
 
-bool skeleton::copy(const LP_Solver * other) {
-  const skeleton * old_skeleton = dynamic_cast<const skeleton *>(other);
+bool Skeleton::copy(const LP_Solver * other) {
+  const Skeleton * old_skeleton = dynamic_cast<const Skeleton *>(other);
   if (old_skeleton != nullptr) {
     constraints.clear(); rays.clear(); edges.clear();
-    for (const constraint & c : old_skeleton->constraints)
+    for (const Constraint & c : old_skeleton->constraints)
       constraints.push_back(c);
-    for (const ray & r : old_skeleton->rays)
+    for (const Ray & r : old_skeleton->rays)
       rays.emplace(r);
-    for (const edge & e : old_skeleton->edges)
+    for (const Edge & e : old_skeleton->edges)
       edges.emplace(e);
     /*constraints = old_skeleton->constraints;
     rays = old_skeleton->rays;
@@ -155,17 +160,17 @@ bool skeleton::copy(const LP_Solver * other) {
   return (old_skeleton != nullptr);
 }
 
-skeleton::~skeleton()
+Skeleton::~Skeleton()
 {
 }
 
-bool skeleton::solve(constraint &constraint)
+bool Skeleton::solve(const Constraint &constraint)
 {
   // cout << "processing constraint " << constraint << endl;
   // innocent until proven guilty
   bool consistent = true;
   // sort the rays into the ones above, below, or on the constraint
-  set<ray> rays_above, rays_below, rays_on;
+  set<Ray> rays_above, rays_below, rays_on;
   for (auto riter = rays.begin(); riter != rays.end(); ++riter)
   {
     DOTPROD_TYPE dp = (*riter) * constraint; // overloaded * as dot product :-)
@@ -181,7 +186,7 @@ bool skeleton::solve(constraint &constraint)
     }
     else
     {
-      ray old_ray = *riter;
+      Ray old_ray = *riter;
       rays_on.insert(old_ray);
       // cout << *riter << " is on constraint\n";
     }
@@ -198,12 +203,12 @@ bool skeleton::solve(constraint &constraint)
   // that at least one ray is below the constraint
   if (consistent and rays_below.size() != 0)
   {
-    set<edge> edges_above, edges_on;
+    set<Edge> edges_above, edges_on;
     for (auto eiter = edges.begin(); eiter != edges.end(); ++eiter)
     {
-      edge e = *eiter;
-      ray u = e.get_first_ray();
-      ray v = e.get_second_ray();
+      Edge e = *eiter;
+      Ray u = e.get_first_ray();
+      Ray v = e.get_second_ray();
       //cout << "edge " << u << ',' << v << endl;
       // identify the edges that lie above and on this constraint
       if ((u*constraint >= 0) and (v*constraint >= 0))
@@ -214,27 +219,27 @@ bool skeleton::solve(constraint &constraint)
     }
     for (auto eiter = edges.begin(); eiter != edges.end(); ++eiter)
     {
-      edge e = *eiter;
-      ray u = e.get_first_ray();
-      ray v = e.get_second_ray();
+      Edge e = *eiter;
+      Ray u = e.get_first_ray();
+      Ray v = e.get_second_ray();
       DOTPROD_TYPE a = u*constraint;
       DOTPROD_TYPE b = v*constraint;
       // identify edges that pass through the constraint
       // (one ray above, one ray below)
       if (a > 0 and b < 0)
       {
-        ray w = a*v - b*u;
+        Ray w = a*v - b*u;
         w.simplify_ray();
         rays_on.insert(w);
-        edges_on.insert(edge(u,w));
+        edges_on.insert(Edge(u,w));
         // cout << "new ray (u,v) is " << w << " with constraints " << endl;
       }
       else if (b > 0 and a < 0)
       {
-        ray w = b*u - a*v;
+        Ray w = b*u - a*v;
         w.simplify_ray();
         rays_on.insert(w);
-        edges_on.insert(edge(v,w));
+        edges_on.insert(Edge(v,w));
         // cout << "new ray (v,u) is " << w << " with constraints " << endl;
       }
     }
@@ -258,7 +263,7 @@ bool skeleton::solve(constraint &constraint)
     // add the good constraint
     constraints.push_back(constraint);
     // determine new edges
-    set<edge> edges_new = adjacencies_by_graphs(rays_on);
+    set<Edge> edges_new = adjacencies_by_graphs(rays_on);
     // combine new edges with old ones that are known to be valid
     edges = union_of_edge_sets(union_of_edge_sets(edges_above, edges_on), edges_new);
     //cout << edges.size() << " edges\n";
@@ -267,7 +272,7 @@ bool skeleton::solve(constraint &constraint)
   return consistent;
 }
 
-bool skeleton::solve(vector<constraint> &new_constraints)
+bool Skeleton::solve(const vector<Constraint> &new_constraints)
 {
   // innocent until proven guilty
   bool consistent = true;
@@ -339,20 +344,20 @@ bool is_first_subset_of_second(
   return result;
 }
 
-set<edge> union_of_edge_sets(const set<edge> & a, const set<edge> & b)
+set<Edge> union_of_edge_sets(const set<Edge> & a, const set<Edge> & b)
 {
   // optimized with a hint for the position (riter) of the new element
-  set<edge> result;
-  for (const edge & e : a) result.insert(e);
-  for (const edge & e : b) result.insert(e);
+  set<Edge> result;
+  for (const Edge & e : a) result.insert(e);
+  for (const Edge & e : b) result.insert(e);
   return result;
 }
 
-set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
+set<Edge> Skeleton::adjacencies_by_graphs(const set<Ray> & new_rays)
 {
   static unsigned long invocations;
-  set<edge> new_edges;
-  set<ray> tested_rays;
+  set<Edge> new_edges;
+  set<Ray> tested_rays;
   bool *   Zu = new bool [constraints.size()] { false };
   bool *   Zv = new bool [constraints.size()] { false };
   bool * w_active = new bool [constraints.size()] { false };
@@ -360,16 +365,16 @@ set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
   // loop through each new ray, examining active constraints shared with other rays
   for (auto riter = new_rays.begin(); riter != new_rays.end(); ++riter)
   {
-    ray u = *riter;
+    Ray u = *riter;
     tested_rays.insert(u);
     which_constraints_active_at(u, Zu);
     // D's rays have at least dim - 2 active constraints in common with u
     // (see Proposition 3 in Zolotych's paper)
-    set<ray> D;
+    set<Ray> D;
     for (auto siter = new_rays.begin(); siter != new_rays.end(); ++siter)
       if (*riter != *siter)
       {
-        ray v = *siter;
+        Ray v = *siter;
         which_constraints_active_at(v, Zv);
         //cout << "checking constraints of " << u << " against " << v  << " for " << dim << endl;
         //if (number_of_common_constraints(*Zu, *Zv) >= dim - 2)
@@ -387,7 +392,7 @@ set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
     unsigned ijk = 0;
     for (auto diter = D.begin(); diter != D.end(); ++diter)
     {
-      ray v = *diter;
+      Ray v = *diter;
       if (tested_rays.find(v) == tested_rays.end()) // avoid doubling edges
       {
         which_constraints_active_at(v, Zv);
@@ -405,7 +410,7 @@ set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
                ++dditer
               )
           {
-            ray w = *dditer;
+            Ray w = *dditer;
             if (!(w == v)) {
               which_constraints_active_at(w, w_active);
               if (is_first_subset_of_second(Zuv, w_active, constraints.size()))
@@ -417,7 +422,7 @@ set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
           }
           if (can_be_added)
           {
-            edge new_edge(u, v);
+            Edge new_edge(u, v);
             //cout << "edge " << new_edge << " passes all criteria\n";
             new_edges.insert(new_edge);
           }
@@ -432,12 +437,12 @@ set<edge> skeleton::adjacencies_by_graphs(set<ray> new_rays)
   return new_edges;
 }
 
-ostream & operator << (ostream & ostr, const skeleton &skel)
+ostream & operator << (ostream & ostr, const Skeleton &skel)
 {
   // header, start constraints
   ostr << "Skeleton defined by constraints" << endl;
   for (
-       vector<constraint>::const_iterator citer=skel.constraints.begin();
+       vector<Constraint>::const_iterator citer=skel.constraints.begin();
        citer != skel.constraints.end();
        ++citer
       )
@@ -455,7 +460,7 @@ ostream & operator << (ostream & ostr, const skeleton &skel)
   return ostr;
 }
 
-skeleton & skeleton::operator=(const skeleton & other)
+Skeleton & Skeleton::operator=(const Skeleton & other)
 {
   rays.clear();
   edges.clear();
@@ -474,12 +479,14 @@ skeleton & skeleton::operator=(const skeleton & other)
       )
     edges.insert(*eiter);
   for (
-        vector<constraint>::const_iterator citer = other.constraints.begin();
+        vector<Constraint>::const_iterator citer = other.constraints.begin();
         citer != other.constraints.end();
         ++citer
       )
     constraints.push_back(*citer);
   return *this;
+}
+
 }
 
 #endif

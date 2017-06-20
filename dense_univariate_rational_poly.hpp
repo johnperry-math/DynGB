@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -30,9 +30,9 @@ using std::ostream; using std::cout; using std::endl;
   @author John Perry
   @date 2016
   @brief quick-&rsquo;n-dirty Dense_Univariate rational polynomial class
-  @warning You must have \c deg smaller than \c size,
-    as \c deg indexes the monomial of largest degree,
-    which can be at most \c size&nbsp;-&nbsp;1.
+  @warning You must have @c deg smaller than @c size,
+    as @c deg indexes the monomial of largest degree,
+    which can be at most @c size&nbsp;-&nbsp;1.
 */
 class Dense_Univariate_Rational_Polynomial {
 public:
@@ -59,7 +59,7 @@ public:
       could expand the size of the polynomial.
   */
   void expand_poly(DEG_TYPE);
-  /** @brief set the coefficient of \f$x^k\f$ to \f$\frac{a}{b}\f$ */
+  /** @brief set the coefficient of @f$x^k@f$ to @f$\frac{a}{b}@f$ */
   void set_coefficient(DEG_TYPE k, long a, unsigned long b) {
     expand_poly(k);
     MPZCOEF_TYPE az = a;
@@ -94,17 +94,17 @@ public:
   */
   void multiply_by_monomial_of_degree(DEG_TYPE);
   /**
-    @brief highly inefficient polynomial multiplication (\f$O(mn)\f$)
+    @brief highly inefficient polynomial multiplication (@f$O(mn)@f$)
   */
   void multiply_by(const Dense_Univariate_Rational_Polynomial &);
   /** @brief negates the numerators */
   void negate();
-  /** @brief adds \c other to \c this */
+  /** @brief adds @c other to @c this */
   void add(const Dense_Univariate_Rational_Polynomial &);
   /** @brief alias for add() */
   void operator +=(const Dense_Univariate_Rational_Polynomial & other) { add(other); }
   /**
-    @brief subtracts \c other from \c this
+    @brief subtracts @c other from @c this
   */
   void subtract(const Dense_Univariate_Rational_Polynomial &);
   /** @brief alias for subtract() */
@@ -112,7 +112,7 @@ public:
   ///@}
   /** @name Computation */
   ///@{
-  /** @brief returns the difference between \c this and the other */
+  /** @brief returns the difference between @c this and the other */
   Dense_Univariate_Rational_Polynomial operator-(
     const Dense_Univariate_Rational_Polynomial &) const;
   ///@}
@@ -125,9 +125,9 @@ public:
       nonzero = (coeffs[i] == 0);
     return nonzero;
   }
-  /** @brief returns the \f$k\f$th numerator */
+  /** @brief returns the @f$k@f$th numerator */
   MPZCOEF_TYPE numerator(DEG_TYPE k) const { return coeffs[k].get_num(); }
-  /** @brief returns the \f$k\f$th denominator */
+  /** @brief returns the @f$k@f$th denominator */
   MPZCOEF_TYPE denominator(DEG_TYPE k) const { return coeffs[k].get_den(); }
   /** @brief returns the polynomial&rsquo;s degree */
   DEG_TYPE degree() const { return deg; }

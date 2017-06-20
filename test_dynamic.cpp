@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -29,6 +29,7 @@ using std::cout; using std::endl;
 #include "polynomial.hpp"
 #include "strategies.hpp"
 #include "dynamic_engine.hpp"
+using LP_Solvers::doda;
 #include "monomial_ordering.hpp"
 #include "particular_orderings.hpp"
 #include "polynomial_linked_list.hpp"
@@ -45,7 +46,7 @@ extern Grading_Order_Data_Allocator<CachedWGrevlex_Ordering> * woda;
 // Forward declarations
 bool meaningful_arguments(
   int, char **, bool &, int &, int &, SPolyCreationFlags &,
-  StrategyFlags &, DynamicHeuristic &, DynamicSolver &
+  StrategyFlags &, Dynamic_Heuristic &, DynamicSolver &
 );
 
 void give_help();
@@ -55,7 +56,7 @@ int main(int argc, char *argv[]) {
   int modulus, numvars;
   SPolyCreationFlags method;
   StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY;
-  DynamicHeuristic heuristic = DynamicHeuristic::ORD_HILBERT_THEN_DEG;
+  Dynamic_Heuristic heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
   DynamicSolver solver = SKELETON_SOLVER;
   WT_TYPE * grading = nullptr;
   CachedWGrevlex_Ordering * mord = nullptr;
@@ -85,7 +86,7 @@ int main(int argc, char *argv[]) {
     }
     // compute basis
     list<Constant_Polynomial *> G = buchberger_dynamic(
-        F, method, strategy, grading, (DynamicHeuristic )heuristic, solver
+        F, method, strategy, grading, (Dynamic_Heuristic )heuristic, solver
     );
     // display basis
     cout << G.size() << " polynomials in basis:\n";
@@ -126,7 +127,7 @@ bool meaningful_arguments(
     int argc, char *argv[],
     bool & homogeneous, int & modulus, int & numvars,
     SPolyCreationFlags & method, StrategyFlags & strategy,
-    DynamicHeuristic & heuristic, DynamicSolver & solver
+    Dynamic_Heuristic & heuristic, DynamicSolver & solver
 ) {
   modulus = 43;
   method = SPolyCreationFlags::GEOBUCKETS;
@@ -178,10 +179,10 @@ bool meaningful_arguments(
             }
           }
           else if (!strcmp(argv[i], "heur") or !strcmp(argv[i],"heuristic")) {
-            heuristic = (DynamicHeuristic)atoi(&(argv[i][j+1]));
+            heuristic = (Dynamic_Heuristic)atoi(&(argv[i][j+1]));
             if (
-                heuristic <= DynamicHeuristic::MIN_HEURISTIC or
-                heuristic >= DynamicHeuristic::MAX_HEURISTIC
+                heuristic <= Dynamic_Heuristic::MIN_HEURISTIC or
+                heuristic >= Dynamic_Heuristic::MAX_HEURISTIC
             ) {
               good_args = false;\
               cout << "Invalid method; must be at least 1 and at most 10.\n";

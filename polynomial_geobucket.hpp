@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -49,7 +49,7 @@ class Polynomial_Geobucket;
   See Mutable_Polynomial_Iterator for details on methods.
   @ingroup IteratorGroup
 
-  @details Implementation based on \cite YanGeobuckets.
+  @details Implementation based on @cite YanGeobuckets.
   @warning A polynomial in geobucket representation may not be fully simplified.
     Clients must not expect the monomials to be in any sort of order,
     and multiple instances of a monomial are possible.
@@ -123,7 +123,7 @@ public:
                        Monomial_Ordering * order = generic_grevlex_ptr
   );
   /**
-    @brief Initializes a geobucket that is a copy of \f$p\f$.
+    @brief Initializes a geobucket that is a copy of @f$p@f$.
   */
   Polynomial_Geobucket(Abstract_Polynomial & p);
   ///@}
@@ -217,24 +217,24 @@ public:
   */
   void recompute_leading_monomial();
   /**
-    @brief Returns \f$\texttt{this}\times t\f$.
+    @brief Returns @f$\texttt{this}\times t@f$.
   */
   virtual Polynomial_Geobucket * monomial_multiple(const Monomial &t) const override;
   /**
-    @brief Returns \f$\texttt{this}\times a\f$.
+    @brief Returns @f$\texttt{this}\times a@f$.
   */
   virtual Polynomial_Geobucket * scalar_multiple(const Prime_Field_Element & a)
       const override;
   /**
-    @brief Adds \f$g\f$ to <c>this</c>. Recomputes leading monomial.
+    @brief Adds @f$g@f$ to <c>this</c>. Recomputes leading monomial.
   */
   virtual Polynomial_Geobucket & operator +=(const Abstract_Polynomial & g) override;
   /**
-    @brief Subtracts \f$g\f$ from <c>this</c>. Recomputes leading monomial.
+    @brief Subtracts @f$g@f$ from <c>this</c>. Recomputes leading monomial.
   */
   virtual Polynomial_Geobucket & operator -=(const Abstract_Polynomial & g) override;
   /**
-    @brief Adds \f$bug\f$ to <c>this</c>. Recomputes leading monomial.
+    @brief Adds @f$bug@f$ to <c>this</c>. Recomputes leading monomial.
   */
   virtual void add_polynomial_multiple(
        const Prime_Field_Element & b, const Monomial & u,
@@ -245,7 +245,7 @@ public:
   */
   virtual Polynomial_Linked_List * detach_head() override;
   /**
-    @brief Adds \f$at\f$ as a monomial of <c>this</c>.
+    @brief Adds @f$at@f$ as a monomial of <c>this</c>.
       (Not necessarily the last!)
     @param a coefficient of the term to add
     @param t Monomial of the term to add
@@ -259,9 +259,9 @@ public:
   /**
     @brief returns a copy of <c>this</c> in a simplified linear form
     @param constant_result whether you want a Constant_Polynomial
-    @details If \p constant_result is \c true, the result is a
-      \c Constant_Polynomial.
-      Otherwise, the result is a \c Polynomial_Linked_List.
+    @details If @p constant_result is @c true, the result is a
+      @c Constant_Polynomial.
+      Otherwise, the result is a @c Polynomial_Linked_List.
       Choose the latter if you anticipate further reduction,
       such as tail reduction.
       (Geobuckets by default do not reduce lower-order terms.)
@@ -272,7 +272,7 @@ public:
   /** @name I/O */
   ///@{
   /**
-    @brief prints the \f$i\f$th bucket
+    @brief prints the @f$i@f$th bucket
     @param i which bucket to print
     @param os where to print the bucket
     @details In the context of geobuckets, this makes more sense than printing
@@ -285,7 +285,7 @@ public:
     @brief prints the polynomial with an explicitly bucket form
     @param os where to print the polynomial
     @details Prints the polynomial in the form
-    \f[(b_1) + (b_2) + \cdots + (b_\textrm{last}).\f]
+    @f[(b_1) + (b_2) + \cdots + (b_\textrm{last}).@f]
     Parentheses separate buckets, whose sums have not (yet) been simplified.
     Uninitiated and nonzero buckets are not printed.
   */
@@ -294,8 +294,8 @@ public:
   ///@}
 protected:
   /**
-    @brief Log-length of \f$i\f$, used to select a bucket for a polynomial
-      of length \f$i\f$.
+    @brief Log-length of @f$i@f$, used to select a bucket for a polynomial
+      of length @f$i@f$.
     @param i number of terms we need space for
     @return the smallest power of 2 larger than i
   */

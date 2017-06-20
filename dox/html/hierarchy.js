@@ -8,7 +8,6 @@ var hierarchy =
         [ "Polynomial_Linked_List", "group__polygroup.html#class_polynomial___linked___list", null ]
       ] ]
     ] ],
-    [ "constraint", "group___c_l_s_solvers.html#classconstraint", null ],
     [ "Critical_Pair_Basic", "group___g_b_computation.html#class_critical___pair___basic", [
       [ "Critical_Pair_Dynamic", "group___g_b_computation.html#class_critical___pair___dynamic", null ],
       [ "Critical_Pair_XPlor", "group___g_b_computation.html#class_critical___pair___x_plor", null ],
@@ -18,20 +17,19 @@ var hierarchy =
     [ "Critical_Pair_Communication", "struct_critical___pair___communication.html", null ],
     [ "Dense_Univariate_Integer_Polynomial", "group__polygroup.html#class_dense___univariate___integer___polynomial", null ],
     [ "Dense_Univariate_Rational_Polynomial", "group__polygroup.html#class_dense___univariate___rational___polynomial", null ],
-    [ "edge", "group___c_l_s_solvers.html#classedge", null ],
-    [ "exception", null, [
-      [ "Monomial_Ideal_Variables_Exception", "group__polygroup.html#class_monomial___ideal___variables___exception", null ],
-      [ "Nonsingular_Matrix_Ordering_Exception", "group__orderinggroup.html#class_nonsingular___matrix___ordering___exception", null ]
-    ] ],
+    [ "Dynamic_Engine::PP_With_Ideal", "group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal", null ],
     [ "F4_Reduction_Data", "group___g_b_computation.html#class_f4___reduction___data", null ],
     [ "goda_block< TYPE >", "group__memorygroup.html#uniongoda__block", null ],
     [ "Grading_Order_Data_Allocator< TYPE >", "group__memorygroup.html#class_grading___order___data___allocator", null ],
     [ "Indeterminate", "group__polygroup.html#class_indeterminate", null ],
-    [ "LP_Solver", "group___c_l_s_solvers.html#class_l_p___solver", [
-      [ "GLPK_Solver", "group___c_l_s_solvers.html#class_g_l_p_k___solver", null ],
-      [ "PPL_Solver", "group___c_l_s_solvers.html#class_p_p_l___solver", null ],
-      [ "skeleton", "group___c_l_s_solvers.html#classskeleton", null ]
+    [ "LP_Solvers::Constraint", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint", null ],
+    [ "LP_Solvers::Edge", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_edge", null ],
+    [ "LP_Solvers::LP_Solver", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver", [
+      [ "LP_Solvers::GLPK_Solver", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver", null ],
+      [ "LP_Solvers::PPL_Solver", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_p_p_l___solver", null ],
+      [ "LP_Solvers::Skeleton", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_skeleton", null ]
     ] ],
+    [ "LP_Solvers::Ray", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray", null ],
     [ "Monomial", "group__polygroup.html#class_monomial", null ],
     [ "Monomial_Ideal", "group__polygroup.html#class_monomial___ideal", null ],
     [ "Monomial_Node", "group__polygroup.html#class_monomial___node", null ],
@@ -69,9 +67,11 @@ var hierarchy =
     ] ],
     [ "Polynomial_Ring", "group__polygroup.html#class_polynomial___ring", null ],
     [ "Polynomial_Term", "group___iterator_group.html#class_polynomial___term", null ],
-    [ "PPWithIdeal", "group___g_b_computation.html#class_p_p_with_ideal", null ],
     [ "Prime_Field", "group___fields_group.html#class_prime___field", null ],
     [ "Prime_Field_Element", "group___fields_group.html#class_prime___field___element", null ],
-    [ "ray", "group___c_l_s_solvers.html#classray", null ],
-    [ "smaller_lm", "group___g_b_computation.html#structsmaller__lm", null ]
+    [ "smaller_lm", "group___g_b_computation.html#structsmaller__lm", null ],
+    [ "exception", null, [
+      [ "Monomial_Ideal_Variables_Exception", "group__polygroup.html#class_monomial___ideal___variables___exception", null ],
+      [ "Nonsingular_Matrix_Ordering_Exception", "group__orderinggroup.html#class_nonsingular___matrix___ordering___exception", null ]
+    ] ]
 ];

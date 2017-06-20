@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -34,13 +34,13 @@ class Monomial;
   @class Monomial_Order_Data
   @author John Perry
   @date 2015
-  @brief data for a monomial ordering: optional, but stored in \c Monomial
+  @brief data for a monomial ordering: optional, but stored in @c Monomial
 */
 class Monomial_Order_Data {
 public:
   /** @name Construction */
   ///@{
-  /** @brief default clone returns \c nullptr */
+  /** @brief default clone returns @c nullptr */
   virtual Monomial_Order_Data * clone() { return nullptr; }
   ///@}
   /** @name Basic data */
@@ -78,7 +78,7 @@ class Monomial_Ordering {
 public:
   /** @name Destruction */
   ///@{
-  /** @brief needs virtual destructor for polymorphic \c delete */
+  /** @brief needs virtual destructor for polymorphic @c delete */
   virtual ~Monomial_Ordering();
   ///@}
   /** @name Utility */
@@ -95,8 +95,8 @@ public:
   /** @name Comparison */
   ///{@
   /**
-    @param t a Monomial to compare to \f$ u \f$
-    @param u a Monomial to compare to \f$ t \f$
+    @param t a Monomial to compare to @f$ u @f$
+    @param u a Monomial to compare to @f$ t @f$
     @return 0 if the Monomials are like; negative if smaller, positive
       if larger -- for efficiency, you probably want to redefine this
   */
@@ -108,36 +108,36 @@ public:
     return result;
   }*/
   /**
-    @return \c true iff the first Monomial is larger than the second
+    @return @c true iff the first Monomial is larger than the second
   */
   virtual bool first_larger(const Monomial &, const Monomial &) const = 0;
   /**
-    @return \c true iff the first Monomial is larger or equal to the second
+    @return @c true iff the first Monomial is larger or equal to the second
     @see first_larger()
     @warning Do not override unless you know what you&rsquo;re doing
   */
   bool first_larger_or_equal(const Monomial &, const Monomial &) const;
   /**
-    @return \c true iff the first Monomial is smaller than the second
+    @return @c true iff the first Monomial is smaller than the second
     @warning Do not override unless you know what you&rsquo;re doing
   */
   virtual bool first_smaller(const Monomial &, const Monomial &) const = 0;
   /**
-    @return \c true iff the first Monomial is smaller or equal
+    @return @c true iff the first Monomial is smaller or equal
       to the second
     @see first_larger()
     @warning Do not override unless you know what you&rsquo;re doing
   */
   bool first_smaller_or_equal(const Monomial &, const Monomial &) const;
   /**
-    @brief returns \c true iff the first Monomial is larger than the specified
+    @brief returns @c true iff the first Monomial is larger than the specified
       multiple of the second
   */
   virtual bool first_larger_than_multiple(
       const Monomial &, const Monomial &, const Monomial &
   ) const = 0;
   /**
-    @return \c true iff the first Monomial is larger or equal to 
+    @return @c true iff the first Monomial is larger or equal to 
       the specified multiple of the second
     @see first_larger()
     @warning Do not override unless you know what you&rsquo;re doing
@@ -146,7 +146,7 @@ public:
       const Monomial &, const Monomial &, const Monomial &
   ) const;
   /**
-    @return \c true iff the first Monomial is smaller than the specified
+    @return @c true iff the first Monomial is smaller than the specified
       multiple of the second
     @warning Do not override unless you know what you&rsquo;re doing
   */
@@ -154,7 +154,7 @@ public:
       const Monomial &, const Monomial &, const Monomial &
   ) const;
   /**
-    @return \c true iff the first Monomial is smaller or equal to
+    @return @c true iff the first Monomial is smaller or equal to
       the specified multiple of the second
     @see first_larger()
     @warning Do not override unless you know what you&rsquo;re doing
@@ -180,6 +180,8 @@ public:
   ///@{
   /** @brief returns the weights used by this orderings */
   virtual const WT_TYPE * order_weights() const = 0;
+  /** @brief returns the number of weights (same as number of indeterminates) */
+  virtual NVAR_TYPE number_of_weights() const = 0;
   ///@}
 };
 

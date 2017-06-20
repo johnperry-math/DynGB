@@ -4,7 +4,7 @@ var searchData=
   ['data_5fsize',['data_size',['../group__memorygroup.html#a7073b652fe474ccd684c1eebd2129a0b',1,'Grading_Order_Data_Allocator']]],
   ['db_5fpolynomial_5fiterator',['DB_Polynomial_Iterator',['../group___iterator_group.html#class_d_b___polynomial___iterator',1,'DB_Polynomial_Iterator'],['../group__polygroup.html#aea7290ecfb1e468c20192be43af46a96',1,'Double_Buffered_Polynomial::DB_Polynomial_Iterator()']]],
   ['deg',['deg',['../group__polygroup.html#a2dc3d8ec3b25f3a17417883c890fbdce',1,'Dense_Univariate_Integer_Polynomial::deg()'],['../group__polygroup.html#a1c6da3f7245cd50ec18c5877202fd8f6',1,'Dense_Univariate_Rational_Polynomial::deg()']]],
-  ['degofnewpairs',['degOfNewPairs',['../group___g_b_computation.html#aa672d26c042569006512f3ac0fe1de34',1,'PPWithIdeal']]],
+  ['deg_5fof_5fnew_5fpairs',['deg_of_new_pairs',['../group___g_b_computation.html#a68c0ece8174abdb6d2955d63f04cd437',1,'Dynamic_Engine::PP_With_Ideal']]],
   ['degree',['degree',['../group__polygroup.html#a5099a83e73b6b86f310a9ef56ffd5689',1,'Dense_Univariate_Integer_Polynomial::degree()'],['../group__polygroup.html#a12c3fe334fa0eefdc2533bad00df262d',1,'Dense_Univariate_Rational_Polynomial::degree()'],['../group__polygroup.html#a817508c95fe721c56c78d91975b8416b',1,'Monomial::degree()']]],
   ['deinitialize',['deinitialize',['../group__polygroup.html#a471eab4cf0ce40225a1b8210513ad9e4',1,'Monomial']]],
   ['denominator',['denominator',['../group__polygroup.html#ab44929e18d513793ff41b2061ea144ee',1,'Dense_Univariate_Rational_Polynomial']]],
@@ -14,9 +14,10 @@ var searchData=
   ['dimension',['dimension',['../group__polygroup.html#a3be382128a7fc5e42b3a1cbcc226ceb9',1,'Monomial_Ideal']]],
   ['divide_5fby_5fcommon_5fterm',['divide_by_common_term',['../group__utils.html#gaefe33f79de88accbc6f455e91dab9288',1,'hilbert_functions.hpp']]],
   ['divisible_5fby',['divisible_by',['../group__polygroup.html#aa0341b299fa1fcd4459f9a6810768f0e',1,'Monomial']]],
-  ['doda',['doda',['../group__memorygroup.html#gab09a3dd19e9c8880eec08c13bcb42f36',1,'doda():&#160;lp_solver.cpp'],['../group__memorygroup.html#gab09a3dd19e9c8880eec08c13bcb42f36',1,'doda():&#160;lp_solver.cpp']]],
+  ['doda',['doda',['../group__memorygroup.html#ga0dc763860167cb9a6e5c84bfda9a456e',1,'LP_Solvers::doda()'],['../group__memorygroup.html#ga0dc763860167cb9a6e5c84bfda9a456e',1,'doda():&#160;lp_solver.cpp']]],
   ['double_5fbuffered_5fpolynomial',['Double_Buffered_Polynomial',['../group__polygroup.html#class_double___buffered___polynomial',1,'']]],
-  ['dynamicheuristic',['DynamicHeuristic',['../group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0',1,'dynamic_engine.hpp']]],
+  ['dynamic_5fengine',['Dynamic_Engine',['../namespace_dynamic___engine.html',1,'']]],
+  ['dynamic_5fheuristic',['Dynamic_Heuristic',['../group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0',1,'Dynamic_Engine']]],
   ['dynamicsolver',['DynamicSolver',['../group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac',1,'algorithm_buchberger_dynamic.hpp']]],
   ['dyngb_3a_20dynamic_20gr_26ouml_3bbner_20basis_20project_20files',['DynGB: Dynamic Gr&amp;ouml;bner basis project files',['../index.html',1,'']]]
 ];

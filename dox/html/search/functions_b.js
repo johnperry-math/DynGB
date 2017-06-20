@@ -9,7 +9,9 @@ var searchData=
   ['nonsingular',['nonsingular',['../group__orderinggroup.html#ga22e2d4b10cd30468c9e67351ab78aa27',1,'particular_orderings.cpp']]],
   ['normal_5fstrategy',['Normal_Strategy',['../group__strategygroup.html#a6aa0afb9976f32afc9ae55d54d0ff9d4',1,'Normal_Strategy']]],
   ['num_5fvars',['num_vars',['../group__polygroup.html#a4ade87fb2cae33669c66c7b23819ba57',1,'Monomial']]],
-  ['number_5fof_5fcommon_5fconstraints',['number_of_common_constraints',['../group___c_l_s_solvers.html#ga33829eddeaa7be000404e4d281d90973',1,'number_of_common_constraints(bool *a, bool *b, unsigned m):&#160;skeleton.cpp'],['../group___c_l_s_solvers.html#ga33829eddeaa7be000404e4d281d90973',1,'number_of_common_constraints(bool *, bool *, unsigned):&#160;skeleton.cpp']]],
+  ['number_5fof_5fcommon_5fconstraints',['number_of_common_constraints',['../group___c_l_s_solvers.html#gad030de457424bef601e2903eb619926e',1,'LP_Solvers']]],
+  ['number_5fof_5frows',['number_of_rows',['../group___g_b_computation.html#afe2aa558df25088c0b184134deaf0ee2',1,'F4_Reduction_Data::number_of_rows() const'],['../group___g_b_computation.html#ac56c717e4015d655e40b2c8033fa9d92',1,'F4_Reduction_Data::number_of_rows()']]],
   ['number_5fof_5fvariables',['number_of_variables',['../group__polygroup.html#a606b7dd86fedd848182e6a4a6d18c77d',1,'Monomial_Ideal::number_of_variables()'],['../group__polygroup.html#a4419bbe47e14683f2903c47bee8e04af',1,'Abstract_Polynomial::number_of_variables()'],['../group__polygroup.html#a79e7dd821659e9d4b6862487963f7352',1,'Polynomial_Ring::number_of_variables()']]],
+  ['number_5fof_5fweights',['number_of_weights',['../group__orderinggroup.html#a7f13d8c571e36bc29d2de39ace88bdd8',1,'Weighted_Ordering::number_of_weights()'],['../group__orderinggroup.html#afd715e453ad062b40578438b1bbe10e9',1,'WGrevlex::number_of_weights()'],['../group__orderinggroup.html#aabbf09fabf721a0f894110b0f5651730',1,'CachedWGrevlex_Ordering::number_of_weights()']]],
   ['numerator',['numerator',['../group__polygroup.html#a2301bb5e91284d51b7c7a49951f8c2d8',1,'Dense_Univariate_Rational_Polynomial']]]
 ];

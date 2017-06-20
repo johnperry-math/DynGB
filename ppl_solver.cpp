@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -30,7 +30,11 @@ using PPL::NNC_Polyhedron;
 using PPL::Constraint_System;
 using PPL::raw_value;
 
+namespace LP_Solvers {
+
+/** @brief shorthand for <c>PPL::Constraint</c> */
 typedef PPL::Constraint PPL_Constraint;
+/** @brief shorthand for <c>PPL::Generator</c> */
 typedef PPL::Generator PPL_Generator;
 
 unsigned PPL_Solver::instances = 0;
@@ -110,7 +114,7 @@ PPL_Solver::~PPL_Solver() {
     Parma_Polyhedra_Library::finalize();
 }
 
-bool PPL_Solver::solve(constraint & c) {
+bool PPL_Solver::solve(const Constraint & c) {
   Linear_Expression ineq;
   for (NVAR_TYPE i = 0; i < n; ++i) {
     if (c[i] != 0)
@@ -122,9 +126,9 @@ bool PPL_Solver::solve(constraint & c) {
   return (rays.size() > 0);
 }
 
-bool PPL_Solver::solve(vector<constraint> &C) {
+bool PPL_Solver::solve(const vector<Constraint> &C) {
   Constraint_System cs;
-  for (constraint c : C) {
+  for (const Constraint & c : C) {
     Linear_Expression ineq;
     for (NVAR_TYPE i = 0; i < n; ++i) {
       if (c[i] != 0)
@@ -136,6 +140,8 @@ bool PPL_Solver::solve(vector<constraint> &C) {
   lp->refine_with_constraints(cs);
   setup_rays();
   return (rays.size() > 0);
+}
+
 }
 
 #endif

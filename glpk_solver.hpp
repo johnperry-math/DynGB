@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -24,21 +24,23 @@
 
 #include "lp_solver.hpp"
 
+namespace LP_Solvers {
+
 /**
-  \brief approximate skeleton of a polyhedral cone, using GLPK linear solver
-  \author John Perry
+  @brief approximate skeleton of a polyhedral cone, using GLPK linear solver
+  @author John Perry
   \version 1.0
-  \date January 2017
-  \copyright The University of Southern Mississippi
+  @date January 2017
+  @copyright The University of Southern Mississippi
   @ingroup CLSSolvers
-  \details This class serves as an interface to GLPK \cite glpk, which we can
+  @details This class serves as an interface to GLPK @cite glpk, which we can
       use to find an approximate skeleton to a polyhedral cone.
 */
 class GLPK_Solver : public LP_Solver {
 public:
   /** @name Construction */
   ///@{
-  /** @brief initializes solver for \f$ n \f$ variables */
+  /** @brief initializes solver for @f$ n @f$ variables */
   GLPK_Solver(NVAR_TYPE n);
   /** @brief copy constructor (deep copy) */
   GLPK_Solver(const GLPK_Solver &);
@@ -57,13 +59,13 @@ public:
     else result = rays.size();
     return result;
   }
-  virtual const set<ray> & get_rays();
+  virtual const set<Ray> & get_rays();
   virtual unsigned long get_number_of_constraints() { return m; }
   ///@}
   /** @name Modification */
   ///@{
-  virtual bool solve(constraint &);
-  virtual bool solve(vector<constraint> &);
+  virtual bool solve(const Constraint &);
+  virtual bool solve(const vector<Constraint> &);
   ///@}
   /** @name Computation */
   ///@{
@@ -99,7 +101,9 @@ private:
   RAYENT_TYPE * ray_data; /**< to retrieve solution */
   int m; /**< number of constraints */
   int n; /**< number of variables */
-  bool dirty; /**< whether the rays are valid (here, \c false means valid) */
+  bool dirty; /**< whether the rays are valid (here, @c false means valid) */
 };
+
+}
 
 #endif

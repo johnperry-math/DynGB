@@ -7,6 +7,7 @@ var group__orderinggroup =
       [ "first_larger", "group__orderinggroup.html#a78e346a28a1dde835e487c01c7ce2b5a", null ],
       [ "first_larger_than_multiple", "group__orderinggroup.html#a7841ec558b2858c2a6eda8fd6073641e", null ],
       [ "first_smaller", "group__orderinggroup.html#a131b09d8226c2dc5f0718f90ab8e009f", null ],
+      [ "number_of_weights", "group__orderinggroup.html#aabbf09fabf721a0f894110b0f5651730", null ],
       [ "order_weights", "group__orderinggroup.html#a4997585d5bc84222551e555eac13ebf9", null ],
       [ "partial_degree", "group__orderinggroup.html#af04f39af33cba2c1c4f985e57ea8d136", null ],
       [ "set_data", "group__orderinggroup.html#a65f1e27ee52413c91ffcb87632dcb27c", null ],
@@ -82,15 +83,18 @@ var group__orderinggroup =
     ] ],
     [ "Nonsingular_Matrix_Ordering_Exception", "group__orderinggroup.html#class_nonsingular___matrix___ordering___exception", null ],
     [ "Weighted_Ordering", "group__orderinggroup.html#class_weighted___ordering", [
+      [ "number_of_weights", "group__orderinggroup.html#a7f13d8c571e36bc29d2de39ace88bdd8", null ],
       [ "order_weights", "group__orderinggroup.html#a5916f1631d5c30fe39dedcef96a3944e", null ]
     ] ],
     [ "WGrevlex", "group__orderinggroup.html#class_w_grevlex", [
       [ "WGrevlex", "group__orderinggroup.html#a0ac3e66fb20c098427f6a08c92fd3771", null ],
+      [ "WGrevlex", "group__orderinggroup.html#a60f58ee49c04e416085a096c4e5798c1", null ],
       [ "cmp", "group__orderinggroup.html#a0a65b26c9057d7f9d8c29ca3896cfd74", null ],
       [ "compute_ith_weight", "group__orderinggroup.html#a760db9641eb6993748fb26c211bd4bb0", null ],
       [ "first_larger", "group__orderinggroup.html#a547c267540f69917cadbeba621642f2a", null ],
       [ "first_larger_than_multiple", "group__orderinggroup.html#a89e34bbf5098cc47d86468fcc334b670", null ],
       [ "first_smaller", "group__orderinggroup.html#a0e4327be4c18de7180ba2cd8c2f9d549", null ],
+      [ "number_of_weights", "group__orderinggroup.html#afd715e453ad062b40578438b1bbe10e9", null ],
       [ "order_weights", "group__orderinggroup.html#a2eb6db0248ec4b205d15b5b1b2261db6", null ],
       [ "partial_degree", "group__orderinggroup.html#ad7e630709c14774bac365c46b9455bab", null ],
       [ "set_data", "group__orderinggroup.html#a18ba60cd0a76da002303a11d362142d9", null ],

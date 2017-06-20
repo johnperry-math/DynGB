@@ -108,9 +108,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:gab09a3dd19e9c8880eec08c13bcb42f36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt; DEG_TYPE &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#gab09a3dd19e9c8880eec08c13bcb42f36">doda</a> = nullptr</td></tr>
-<tr class="memdesc:gab09a3dd19e9c8880eec08c13bcb42f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory manager for ray entries  <a href="#gab09a3dd19e9c8880eec08c13bcb42f36">More...</a><br /></td></tr>
-<tr class="separator:gab09a3dd19e9c8880eec08c13bcb42f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dc763860167cb9a6e5c84bfda9a456e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt; DEG_TYPE &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#ga0dc763860167cb9a6e5c84bfda9a456e">LP_Solvers::doda</a> = nullptr</td></tr>
+<tr class="memdesc:ga0dc763860167cb9a6e5c84bfda9a456e"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory manager for ray entries  <a href="group__memorygroup.html#ga0dc763860167cb9a6e5c84bfda9a456e">More...</a><br /></td></tr>
+<tr class="separator:ga0dc763860167cb9a6e5c84bfda9a456e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadf1bccf09eada41d10a5d4ceda7ca479"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt; WT_TYPE &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#gadf1bccf09eada41d10a5d4ceda7ca479">goda</a> = nullptr</td></tr>
 <tr class="memdesc:gadf1bccf09eada41d10a5d4ceda7ca479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory manager for graded ordering data.  <a href="#gadf1bccf09eada41d10a5d4ceda7ca479">More...</a><br /></td></tr>
 <tr class="separator:gadf1bccf09eada41d10a5d4ceda7ca479"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,7 +186,7 @@ class Grading_Order_Data_Allocator&lt; TYPE &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
 <p>This is a quick-n-dirty memory pool allocator for <a class="el" href="group__orderinggroup.html#class_grevlex___order___data" title="data for the grevlex monomial ordering ">Grevlex_Order_Data</a> and <a class="el" href="group__orderinggroup.html#class_w_grevlex___order___data" title="data for the weighted grevlex monomial ordering ">WGrevlex_Order_Data</a>. It isn't quite \(O(1)\) but the plan is to fix that eventually (I have to locate my notes from class). </p><dl class="section warning"><dt>Warning</dt><dd>This is initialized to a certain number of variables, which cannot change. If you want to do this for a different number of variables, create another allocator. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_dynamic_8cpp-example.html#_a1">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_dynamic_8cpp-example.html#_a2">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00067">67</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 </div><table class="memberdecls">
@@ -368,22 +368,23 @@ template&lt;typename TYPE&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="gab09a3dd19e9c8880eec08c13bcb42f36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab09a3dd19e9c8880eec08c13bcb42f36">&#9670;&nbsp;</a></span>doda</h2>
+<a id="ga0dc763860167cb9a6e5c84bfda9a456e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0dc763860167cb9a6e5c84bfda9a456e">&#9670;&nbsp;</a></span>doda</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt;DEG_TYPE&gt;* doda = nullptr</td>
+          <td class="memname"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt; DEG_TYPE &gt; * LP_Solvers::doda = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>memory manager for ray entries </p>
 <p>Automatically initialized, but clients need to call the destructor when finished. </p>
-
-<p class="definition">Definition at line <a class="el" href="lp__solver_8cpp_source.html#l00122">122</a> of file <a class="el" href="lp__solver_8cpp_source.html">lp_solver.cpp</a>.</p>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_dynamic_8cpp-example.html#a0">test_dynamic.cpp</a>.</dd>
+</dl>
+<p class="definition">Definition at line <a class="el" href="lp__solver_8cpp_source.html#l00118">118</a> of file <a class="el" href="lp__solver_8cpp_source.html">lp_solver.cpp</a>.</p>
 
 </div>
 </div>
@@ -421,7 +422,7 @@ template&lt;typename TYPE&gt; </div>
 <p>memory manager for monomial exponents </p>
 <p>Automatically initialized, but clients need to call the destructor when finished. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00046">46</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00048">48</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +441,7 @@ template&lt;typename TYPE&gt; </div>
 <p>memory manager for monomials (not their exponents; see moda for that). </p>
 <p>Automatically initialized, but clients need to call the destructor when finished. </p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00053">53</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00056">56</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -30,9 +30,9 @@ using std::ostream;
   @author John Perry
   @date 2016
   @brief quick-&rsquo;n-dirty Dense_Univariate integer polynomial class
-  @warning You must have \c deg smaller than \c size,
-    as \c deg indexes the monomial of largest degree,
-    which can be at most \c size&nbsp;-&nbsp;1.
+  @warning You must have @c deg smaller than @c size,
+    as @c deg indexes the monomial of largest degree,
+    which can be at most @c size&nbsp;-&nbsp;1.
 */
 class Dense_Univariate_Integer_Polynomial {
 public:
@@ -59,7 +59,7 @@ public:
       could expand the size of the polynomial.
   */
   void expand_poly(DEG_TYPE);
-  /** @brief set the coefficient of \f$x^k\f$ to \f$\frac{a}{b}\f$ */
+  /** @brief set the coefficient of @f$x^k@f$ to @f$\frac{a}{b}@f$ */
   void set_coefficient(DEG_TYPE k, COEF_TYPE a);
   /**
     @brief multiplies every monomial by a constant
@@ -72,7 +72,7 @@ public:
   */
   void multiply_by_monomial_of_degree(DEG_TYPE);
   /**
-    @brief highly inefficient polynomial multiplication (\f$O(mn)\f$)
+    @brief highly inefficient polynomial multiplication (@f$O(mn)@f$)
   */
   void multiply_by(const Dense_Univariate_Integer_Polynomial &);
   /** @brief negates the coefficients */
@@ -96,20 +96,20 @@ public:
   ///@}
   /** @name Computation */
   ///@{
-  /** @brief returns the result of subtracting the other from \c this */
+  /** @brief returns the result of subtracting the other from @c this */
   Dense_Univariate_Integer_Polynomial operator-(
       const Dense_Univariate_Integer_Polynomial &
   ) const;
   ///@}
   /** @name Basic properties */
   ///@{
-  /** @brief the \f$k\f$th coefficient */
+  /** @brief the @f$k@f$th coefficient */
   COEF_TYPE coeff(DEG_TYPE k) const { return coeffs[k]; }
-  /** @brief synonym for \c coeff(k) */
+  /** @brief synonym for @c coeff(k) */
   COEF_TYPE operator[](DEG_TYPE k) const { return coeffs[k]; }
   /** @brief the polynomial&rsquo;s degree (exponent of largest nonzero term) */
   DEG_TYPE degree() const { return deg; }
-  /** @brief returns \c True if and only if every valid coefficient is zero */
+  /** @brief returns @c True if and only if every valid coefficient is zero */
   bool is_zero() const {
     bool result = true;
     for (DEG_TYPE i = 0; result and i <= deg; ++i)

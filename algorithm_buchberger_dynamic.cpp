@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -25,12 +25,9 @@
 
 #include "skeleton.hpp"
 #include "dynamic_engine.hpp"
+using Dynamic_Engine::compatible_pp; using Dynamic_Engine::hilbert_cmp;
 #include "particular_orderings.hpp"
 #include "reduction_support.hpp"
-
-// caching the weights seems to run about 15% slower, oddly enough
-//#define ORDERING_TYPE CachedWGrevlex_Ordering
-#define ORDERING_TYPE WGrevlex
 
 void reduce_over_basis_dynamic(
     Mutable_Polynomial **sp,
@@ -85,17 +82,6 @@ void reduce_over_basis_dynamic(
   *sp = r;
 }
 
-/**
-  @brief implementation of Gebauer-M&ouml;ller algorithm,
-      adjusted for dynamic computation
-  @details Based on description in Becker and Weispfenning (1993).
-  @ingroup GBComputation
-  @param P list of critical pairs
-  @param G current basis
-  @param r polynomial to add to basis (and to generate new pairs)
-  @param strategy how to sort pairs
-  @param ordering current ordering in the basis
-*/
 void gm_update_dynamic(
     list<Critical_Pair_Dynamic *> & P,
     list<Abstract_Polynomial *> & G,
@@ -216,7 +202,7 @@ void initial_analysis(
       fi->moveRight();
     }
     delete fi;
-    compatiblePP(f->leading_monomial(), U, solver->get_rays(), T, V, solver);
+    compatible_pp(f->leading_monomial(), U, T, V, solver);
     list<Monomial> W;
     for (auto t : T) W.push_back(t);
     mons.push_back(W);
@@ -226,7 +212,7 @@ void initial_analysis(
   // now check each chain for solvability & desirability
   Dense_Univariate_Integer_Polynomial * win_hn = nullptr;
   Dense_Univariate_Rational_Polynomial * win_hp = nullptr;
-  vector<constraint> all_constraints;
+  vector<Constraint> all_constraints;
   for (auto M : mon_chains) {
     list<Monomial> T;
     list<Abstract_Polynomial *> G;
@@ -237,14 +223,14 @@ void initial_analysis(
     Dense_Univariate_Rational_Polynomial * T_hp
         = hilbert_polynomial(n, ideal_dimension(n, T_hn, T_hn2), M, T_hn, T_hn2);
     delete T_hn2;
-    if (not (win_hn == nullptr or hilbertCmp(*win_hn, *win_hp, *T_hn, *T_hp) > 0))
+    if (not (win_hn == nullptr or hilbert_cmp(*win_hn, *win_hp, *T_hn, *T_hp) > 0))
     {
       delete T_hn;
       delete T_hp;
     } else {
       // temporarily solve using GLPK
       GLPK_Solver * tmp_lp = new GLPK_Solver(n);
-      set<constraint> tmp_cnstr;
+      set<Constraint> tmp_cnstr;
       bool consistent = true;
       CONSTR_TYPE w[n];
       auto Mi = M.begin();
@@ -255,7 +241,7 @@ void initial_analysis(
           if (not t.is_like(*fi)) {
             for (NVAR_TYPE i = 0; i < n; ++i)
               w[i] = t.degree(i) - fi->degree(i);
-            constraint c(n, w);
+            Constraint c(n, w);
             consistent = tmp_lp->solve(c);
             if (consistent) tmp_cnstr.emplace(c);
           }
@@ -281,7 +267,7 @@ void initial_analysis(
   }
   solver->solve(all_constraints);
   cout << "prefer ordering with " << solver->get_rays().size() << " rays: ";
-  ::ray interior_ray = ray_sum(solver->get_rays());
+  Ray interior_ray = ray_sum(solver->get_rays());
   cout << interior_ray << endl;
   auto wt_ptr = interior_ray.weights();
   for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
@@ -295,7 +281,7 @@ list<Constant_Polynomial *> buchberger_dynamic(
     SPolyCreationFlags method,
     StrategyFlags strategy,
     WT_TYPE * strategy_weights,
-    DynamicHeuristic heuristic,
+    Dynamic_Heuristic heuristic,
     DynamicSolver solver_type,
     bool analyze_inputs
 ) {
@@ -315,10 +301,10 @@ list<Constant_Polynomial *> buchberger_dynamic(
   // create skeleton
   LP_Solver * solver;
   switch (solver_type) {
-    case SKELETON_SOLVER: solver = new skeleton(n); break;
+    case SKELETON_SOLVER: solver = new Skeleton(n); break;
     case GLPK_SOLVER: solver = new GLPK_Solver(n); break;
     case PPL_SOLVER: solver = new PPL_Solver(n); break;
-    default: solver = new skeleton(n); break;
+    default: solver = new Skeleton(n); break;
   }
   //G.push_back(*(F.begin()));
   // set up initial ordering
@@ -335,13 +321,13 @@ list<Constant_Polynomial *> buchberger_dynamic(
   }
   bool new_world_order = false;
   Dense_Univariate_Integer_Polynomial * hNum = nullptr;
-  SelectMonomial(g, currentLPPs, &hNum, G, P, solver, new_world_order, heuristic);
+  select_monomial(g, currentLPPs, &hNum, G, P, solver, new_world_order, heuristic);
   G.push_back(g);
   // check ordering & convert if necessary
   if (new_world_order) {
     weights = new WT_TYPE [n];
     cout << "new ordering from " << solver->get_rays().size() << " rays: ";
-    ::ray interior_ray = ray_sum(solver->get_rays());
+    Ray interior_ray = ray_sum(solver->get_rays());
     cout << interior_ray << endl;
     wt_ptr = interior_ray.weights();
     for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
@@ -400,17 +386,14 @@ list<Constant_Polynomial *> buchberger_dynamic(
       // Currently performing "late conversion" of polynomials to new orderings
       // so new_world_order should be useless for the time being
       bool new_world_order = false;
-      SelectMonomial(r, currentLPPs, &hNum, G, P, solver, new_world_order, heuristic);
+      select_monomial(r, currentLPPs, &hNum, G, P, solver, new_world_order, heuristic);
       if (new_world_order) {
         cout << "new ordering from " << solver->get_rays().size() << " rays: ";
-        ::ray interior_ray = ray_sum(solver->get_rays());
+        Ray interior_ray = ray_sum(solver->get_rays());
         cout << interior_ray << endl;
         //for (auto r: solver->get_rays()) cout << '\t' << r << endl;
         //cout << endl;
-        wt_ptr = interior_ray.weights();
-        weights = new WT_TYPE [n];
-        for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
-        curr_ord = new ORDERING_TYPE(n, weights);
+        curr_ord = new ORDERING_TYPE(interior_ray);
         //cout << skel << endl;
         all_orderings_used.push_front(curr_ord);
         r->set_monomial_ordering(curr_ord);

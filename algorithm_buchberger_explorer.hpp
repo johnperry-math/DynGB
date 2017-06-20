@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -55,8 +55,8 @@ using std::cout; using std::endl;
 */
 list<Constant_Polynomial *> buchberger_explorer(
     const vector<Abstract_Polynomial *> &F,
-    SPolyCreationFlags method = GEOBUCKETS,
-    StrategyFlags strategy = NORMAL_STRATEGY,
+    SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS,
+    StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY,
     WT_TYPE * strategy_weights = nullptr,
     const int comm_id = 0,
     const int comm_size = 1

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -46,7 +46,7 @@ class Polynomial_Ring;
   Monomial x3y = (x^3) * (x*y);
   x3y.printlncout();
   @endcode
-  &hellip;and the result should be \f$x^3y\f$. Alternately, you could do:
+  &hellip;and the result should be @f$x^3y@f$. Alternately, you could do:
   @code
   Indeterminate * X = P.indeterminates();
   Monomial x3y = (X[0]^3) * (X[0]*X[1]);
@@ -67,7 +67,7 @@ public:
   /** @name Construction */
   ///@{
 
-  /** @brief \c this will correspond to the <c>xi</c>th indeterminate of \c P. */
+  /** @brief @c this will correspond to the <c>xi</c>th indeterminate of @c P. */
   Indeterminate(Polynomial_Ring & P, NVAR_TYPE xi) : R(&P), i(xi) { }
 
   /** @brief copy constructor */
@@ -80,10 +80,10 @@ public:
   /** @name Basic properties */
   ///@{
 
-  /** @brief the Polynomial_Ring \c this lives in */
+  /** @brief the Polynomial_Ring @c this lives in */
   Polynomial_Ring & base_ring() { return *R; }
 
-  /** @brief which variable in base_ring() \c this is*/
+  /** @brief which variable in base_ring() @c this is*/
   NVAR_TYPE index_in_ring() { return i; }
 
   ///@}
@@ -91,13 +91,13 @@ public:
   /** @name Computation */
   ///@{
 
-  /** @brief returns \c this to the <c>a</c>th power */
+  /** @brief returns @c this to the <c>a</c>th power */
   Monomial operator ^(EXP_TYPE a);
 
-  /** @brief returns the product of \c this and \p y */
+  /** @brief returns the product of @c this and @p y */
   Monomial operator *(Indeterminate y);
 
-  /** @brief returns the product of \c this and \p t */
+  /** @brief returns the product of @c this and @p t */
   Monomial operator *(Monomial t) {
     Monomial u(t);
     u.set_exponent(i, u.degree(i) + 1);
@@ -109,16 +109,16 @@ public:
   /** @name I/O */
   ///@{
 
-  /** @brief prints \c this with the appropriate name */
+  /** @brief prints @c this with the appropriate name */
   friend ostream & operator << (ostream &, Indeterminate &);
 
   ///@}
 
 protected:
 
-  /** @brief the ring \c this lives in */
+  /** @brief the ring @c this lives in */
   Polynomial_Ring * R;
-  /** @brief which indeterminate in \c R \c this is */
+  /** @brief which indeterminate in @c R @c this is */
   NVAR_TYPE i;
 };
 

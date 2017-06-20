@@ -11,7 +11,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
 \textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
 \textcolor{comment}{* (at your option) any later version.                                         *}
 \textcolor{comment}{*                                                                             *}
-\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* DynGB is distributed in the hope that it will be useful,                    *}
 \textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
 \textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
 \textcolor{comment}{* GNU General Public License for more details.                                *}
@@ -34,6 +34,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
 \textcolor{preprocessor}{#include "polynomial.hpp"}
 \textcolor{preprocessor}{#include "strategies.hpp"}
 \textcolor{preprocessor}{#include "dynamic\_engine.hpp"}
+\textcolor{keyword}{using} \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{LP\_Solvers::doda};
 \textcolor{preprocessor}{#include "monomial\_ordering.hpp"}
 \textcolor{preprocessor}{#include "particular\_orderings.hpp"}
 \textcolor{preprocessor}{#include "polynomial\_linked\_list.hpp"}
@@ -43,7 +44,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<WT\_TYPE>} * 
       \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<DEG\_TYPE>} * 
-      \hyperlink{group__memorygroup_gab09a3dd19e9c8880eec08c13bcb42f36}{doda};
+      \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda};
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<EXP\_TYPE>} * 
       \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<Monomial>} * 
@@ -56,7 +57,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
 \textcolor{comment}{// Forward declarations}
 \textcolor{keywordtype}{bool} meaningful\_arguments(
   \textcolor{keywordtype}{int}, \textcolor{keywordtype}{char} **, \textcolor{keywordtype}{bool} &, \textcolor{keywordtype}{int} &, \textcolor{keywordtype}{int} &, \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} &,
-  \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} &, \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} &, 
+  \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} &, \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} &, 
       \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} &
 );
 
@@ -67,7 +68,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
   \textcolor{keywordtype}{int} modulus, numvars;
   \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} method;
   \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} strategy = StrategyFlags::SUGAR\_STRATEGY;
-  \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} heuristic = DynamicHeuristic::ORD\_HILBERT\_THEN\_DEG;
+  \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} heuristic = Dynamic\_Heuristic::ORD\_HILBERT\_THEN\_DEG;
   \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} solver = SKELETON\_SOLVER;
   WT\_TYPE * grading = \textcolor{keyword}{nullptr};
   \hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} * mord = \textcolor{keyword}{nullptr};
@@ -96,8 +97,8 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
       \textcolor{keywordflow}{default}: cout << \textcolor{stringliteral}{"Unknown solver\(\backslash\)n"}; \textcolor{keywordflow}{break};
     \}
     \textcolor{comment}{// compute basis}
-    list<Constant\_Polynomial *> G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
-        F, method, strategy, grading, (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} )heuristic, solver
+    list<Constant\_Polynomial *> G = \hyperlink{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}{buchberger\_dynamic}(
+        F, method, strategy, grading, (\hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} )heuristic, solver
     );
     \textcolor{comment}{// display basis}
     cout << G.size() << \textcolor{stringliteral}{" polynomials in basis:\(\backslash\)n"};
@@ -123,7 +124,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
   \}
   \textcolor{keywordflow}{if} (mord != generic\_grevlex\_ptr) \textcolor{keyword}{delete} mord;
   \textcolor{keywordflow}{if} (goda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
-  \textcolor{keywordflow}{if} (doda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gab09a3dd19e9c8880eec08c13bcb42f36}{doda};
+  \textcolor{keywordflow}{if} (doda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda};
   \textcolor{keywordflow}{if} (moda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
   \textcolor{keywordflow}{if} (monoda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga76b5ae808895658b417e3f3a13c60e51}{monoda};
   \textcolor{keywordflow}{if} (monododa != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga2b5eeb775f6c601e624b487f3245983a}{monododa};
@@ -138,7 +139,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
     \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[],
     \textcolor{keywordtype}{bool} & homogeneous, \textcolor{keywordtype}{int} & modulus, \textcolor{keywordtype}{int} & numvars,
     \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} & method, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{StrategyFlags} & strategy,
-    \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} & heuristic, \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} & solver
+    \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} & heuristic, \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} & solver
 ) \{
   modulus = 43;
   method = SPolyCreationFlags::GEOBUCKETS;
@@ -190,10 +191,10 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
             \}
           \}
           \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!strcmp(argv[i], \textcolor{stringliteral}{"heur"}) or !strcmp(argv[i],\textcolor{stringliteral}{"heuristic"})) \{
-            heuristic = (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic})atoi(&(argv[i][j+1]));
+            heuristic = (\hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic})atoi(&(argv[i][j+1]));
             \textcolor{keywordflow}{if} (
-                heuristic <= DynamicHeuristic::MIN\_HEURISTIC or
-                heuristic >= DynamicHeuristic::MAX\_HEURISTIC
+                heuristic <= Dynamic\_Heuristic::MIN\_HEURISTIC or
+                heuristic >= Dynamic\_Heuristic::MAX\_HEURISTIC
             ) \{
               good\_args = \textcolor{keyword}{false};\(\backslash\)
               cout << \textcolor{stringliteral}{"Invalid method; must be at least 1 and at most 10.\(\backslash\)n"};

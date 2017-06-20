@@ -17,6 +17,16 @@ var NAVTREE =
     [ "Todo List", "todo.html", null ],
     [ "Bibliography", "citelist.html", null ],
     [ "Modules", "modules.html", "modules" ],
+    [ "Namespaces", null, [
+      [ "Namespace List", "namespaces.html", "namespaces" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -38,10 +48,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "algorithm__buchberger__basic_8cpp_source.html",
-"group___g_b_computation.html#a06da1cbbe1451962b68f2bbf90855fae",
-"group__commalg.html#ga0c0869fddcdc6498993507e6b4f88658",
-"group__polygroup.html#a630c245914a9235dd84af2b34deb778d",
-"group__strategygroup.html#a6683749a5fb30b6f91075a28899fbfe7"
+"group___g_b_computation.html#a038d8389aa28cdbc63a3e132bd226cfc",
+"group___iterator_group.html#ae94baa36d6b096c1144068dc21108c23",
+"group__polygroup.html#a539835f92490fbbb5ba3b37e4f80ef49",
+"group__strategygroup.html#a177d4749902d7c94d8e48340a64d87b7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -22,6 +22,8 @@
 #include <iostream>
 #include <list>
 using std::list;
+#include <vector>
+using std::vector;
 
 #include "polynomial.hpp"
 
@@ -108,6 +110,28 @@ public:
       const Monomial *mons,
       const Prime_Field_Element *coeffs,
       const Monomial_Ordering * order = nullptr
+  );
+  /**
+    @param length how long @c this should be
+    @param R parent ring
+    @param mons vector of pointers to Monomial to populate the terms
+    @param coeffs array of coefficients to populate the terms, in same order as
+        @p mons
+    @param start where in the array to start populating the polynomial's
+        coefficients
+    @details This initializes a polynomial from @p mons and @p coeffs.
+        It is assumed that @p coeffs may have some zero elements;
+        we do not add these to the polynomial.
+        It is also assumed that the monomials are already in correct order,
+        so that no sorting is required.
+        The monomial ordering is taken from the first monomial.
+  */
+  Constant_Polynomial(
+      unsigned length,
+      Polynomial_Ring & R,
+      const vector<Monomial *> mons,
+      const COEF_TYPE *coeffs,
+      unsigned start
   );
   /**
     @param R parent ring

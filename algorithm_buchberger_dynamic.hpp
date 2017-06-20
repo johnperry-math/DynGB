@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -24,7 +24,6 @@
 
 using std::list;
 using std::cout; using std::endl;
-using std::next;
 using std::set;
 
 #include "system_constants.hpp"
@@ -43,7 +42,12 @@ using std::set;
 #include "weighted_sugar_strategy.hpp"
 
 #include "dynamic_engine.hpp"
+using Dynamic_Engine::Dynamic_Heuristic;
 #include "algorithm_buchberger_basic.hpp"
+
+// caching the weights seems to run about 15% slower, oddly enough
+//#define ORDERING_TYPE CachedWGrevlex_Ordering
+#define ORDERING_TYPE WGrevlex
 
 /**
   @defgroup GBComputation Gr&ouml;bner basis computation
@@ -68,11 +72,11 @@ void reduce_over_basis_dynamic(
   @date 2017
   @brief used by buchberger_dynamic() to decide which solver to use
   @details Current options include:
-      - SKELETON_SOLVER use the skeleton class for an exact skeleton
+      - SKELETON_SOLVER use the Skeleton class for an exact skeleton
       - GLPK_SOLVER, use the GLPK_Solver for an approximate skeleton
       - PPL_SOLVER, use the PPL_Solver for an exact skeleton
       - GLPK_ORACLE_SOLVER, use the GLPK_Solver to determine quickly
-        if a solution exists, and use skeleton only when the solution
+        if a solution exists, and use Skeleton only when the solution
         does in fact exist (idea due to D. Lichtblau)
 */
 enum DynamicSolver {
@@ -102,8 +106,8 @@ void initial_analysis(
   @param F generators of a polynomial ideal
   @param method how to represent the S-polynomials during reduction
   @param strategy strategy to use while sorting pairs
-  @param strategy_weights used by \c strategy
-  @param heuristic see DynamicHeuristic
+  @param strategy_weights used by @c strategy
+  @param heuristic see Dynamic_Heuristic
   @param solver how to compute possible monomial orderings (polyhedral skeleton)
   @param analyze_inputs set to @c true if you want the solver to analyze the
       inputs to find an initial ordering (see notes)
@@ -115,7 +119,7 @@ void initial_analysis(
     before passing it to this function, as the algorithm starts from the first
     polynomial. This is an effective preprocessing technique
     that is equivalent to the standard Hilbert heuristic, since a monomial of
-    degree \f$ d \f$ will have Hilbert numerator \f$ \lambda^d - 1 \f$.
+    degree @f$ d @f$ will have Hilbert numerator @f$ \lambda^d - 1 @f$.
     The other effective heuristics (minimum critical pairs, incremental Betti
     numbers) do not make sense with an empty basis.
   @note If desired, the algorithm can analyze the inputs to find a good global
@@ -128,7 +132,7 @@ list<Constant_Polynomial *> buchberger_dynamic(
     SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS,
     StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY,
     WT_TYPE * strategy_weights = nullptr,
-    DynamicHeuristic heuristic = DynamicHeuristic::ORD_HILBERT_THEN_DEG,
+    Dynamic_Heuristic heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG,
     DynamicSolver solver = SKELETON_SOLVER,
     bool analyze_inputs = false
 );
@@ -145,6 +149,25 @@ template void report_critical_pairs<Critical_Pair_Dynamic>(
 
 template void sort_pairs_by_strategy<Critical_Pair_Dynamic>(
     list<Critical_Pair_Dynamic *> &
+);
+
+/**
+  @brief implementation of Gebauer-M&ouml;ller algorithm,
+      adjusted for dynamic computation
+  @details Based on description in Becker and Weispfenning (1993).
+  @ingroup GBComputation
+  @param P list of critical pairs
+  @param G current basis
+  @param r polynomial to add to basis (and to generate new pairs)
+  @param strategy how to sort pairs
+  @param ordering current ordering in the basis
+*/
+void gm_update_dynamic(
+    list<Critical_Pair_Dynamic *> & P,
+    list<Abstract_Polynomial *> & G,
+    Abstract_Polynomial * r,
+    StrategyFlags strategy,
+    ORDERING_TYPE * ordering
 );
 
 #endif

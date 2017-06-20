@@ -1,6 +1,7 @@
 var group__polygroup_class_constant___polynomial =
 [
     [ "Constant_Polynomial", "group__polygroup.html#a17e78adc39df3472a0610b17c906898f", null ],
+    [ "Constant_Polynomial", "group__polygroup.html#aa64fa434a206b1b29f27b09d36060dac", null ],
     [ "Constant_Polynomial", "group__polygroup.html#ac8bd342911678053e14cf72af46819c5", null ],
     [ "Constant_Polynomial", "group__polygroup.html#abbc487b48dbf5d0dc25dfb419a341ea5", null ],
     [ "Constant_Polynomial", "group__polygroup.html#a3e0e3066356e56c7245bb517b4e04284", null ],

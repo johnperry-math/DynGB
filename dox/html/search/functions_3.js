@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['degofnewpairs',['degOfNewPairs',['../group___g_b_computation.html#aa672d26c042569006512f3ac0fe1de34',1,'PPWithIdeal']]],
+  ['deg_5fof_5fnew_5fpairs',['deg_of_new_pairs',['../group___g_b_computation.html#a68c0ece8174abdb6d2955d63f04cd437',1,'Dynamic_Engine::PP_With_Ideal']]],
   ['degree',['degree',['../group__polygroup.html#a5099a83e73b6b86f310a9ef56ffd5689',1,'Dense_Univariate_Integer_Polynomial::degree()'],['../group__polygroup.html#a12c3fe334fa0eefdc2533bad00df262d',1,'Dense_Univariate_Rational_Polynomial::degree()'],['../group__polygroup.html#a817508c95fe721c56c78d91975b8416b',1,'Monomial::degree()']]],
   ['deinitialize',['deinitialize',['../group__polygroup.html#a471eab4cf0ce40225a1b8210513ad9e4',1,'Monomial']]],
   ['denominator',['denominator',['../group__polygroup.html#ab44929e18d513793ff41b2061ea144ee',1,'Dense_Univariate_Rational_Polynomial']]],

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -41,14 +41,14 @@ class Poly_Sugar_Data;
 
 /**
   \enum SPolyCreationFlags
-  \author John Perry
-  \date 2015
-  \brief flag indicating which structure to use for an s-polynomial
+  @author John Perry
+  @date 2015
+  @brief flag indicating which structure to use for an s-polynomial
   @ingroup GBComputation
   @details The following options are currently available:
     - LINKED_LST polynomials are created and manipulated in linked list format
     - GEOBUCKETS polynomials are created and manipulated in geobucket format
-      \cite YanGeobuckets
+      @cite YanGeobuckets
     - DOUBLE_BUF polynomials are created and manipulated in a novel,
       doubled-buffered format
 */
@@ -61,15 +61,15 @@ enum class SPolyCreationFlags {
 };
 
 /**
-  \class Critical_Pair_Basic
-  \author John Perry
-  \date 2015
-  \brief Controls the creation of s-polynomials.
+  @class Critical_Pair_Basic
+  @author John Perry
+  @date 2015
+  @brief Controls the creation of s-polynomials.
   @ingroup GBComputation
   
   @details This class encapsulates the information necessary to create
-  an \f$S\f$-polynomial, including the actual generation of
-  an \f$S\f$-polynomial, though it does not retain that information.
+  an @f$S@f$-polynomial, including the actual generation of
+  an @f$S@f$-polynomial, though it does not retain that information.
 */
 class Critical_Pair_Basic {
 public:
@@ -107,7 +107,7 @@ public:
   /**
     @brief to use only if s-polynomial is already computed by another method
     @warning If you have not already created an s-polynomial using one of
-        SPolyCreationFlags, then this returns \c nullptr and is useless.
+        SPolyCreationFlags, then this returns @c nullptr and is useless.
     @return the s-polynomial of this pair
   */
   virtual Mutable_Polynomial * s_polynomial() { return s; }
@@ -121,7 +121,7 @@ public:
   ///@}
   /** @name Modification */
   ///@{
-  /** @brief sets the s-polynomial to \c p, for explorer methods*/
+  /** @brief sets the s-polynomial to @c p, for explorer methods*/
   virtual void set_spoly(Mutable_Polynomial * p) { s = p; }
   ///@}
   /** @name I/O */
@@ -135,28 +135,28 @@ protected:
   Abstract_Polynomial * q;
   /** @brief S-polynomial */
   Mutable_Polynomial * s;
-  /** @brief lcm of leading monomials of \f$p\f$ and \f$q\f$ */
+  /** @brief lcm of leading monomials of @f$p@f$ and @f$q@f$ */
   Monomial tpq;
-  /** @brief monomial multiple of \f$p\f$ that produces \f$S\f$-polynomial */
+  /** @brief monomial multiple of @f$p@f$ that produces @f$S@f$-polynomial */
   Monomial tp;
-  /** @brief monomial multiple of \f$q\f$ that produces \f$S\f$-polynomial */
+  /** @brief monomial multiple of @f$q@f$ that produces @f$S@f$-polynomial */
   Monomial tq;
   /** @brief strategy used to sort critical pairs */
   Pair_Strategy_Data * key = nullptr;
 };
 
 /**
-  \class Critical_Pair_Dynamic
-  \author John Perry
-  \date 2016
-  \brief Controls the creation of s-polynomials, specialized for the dynamic
+  @class Critical_Pair_Dynamic
+  @author John Perry
+  @date 2016
+  @brief Controls the creation of s-polynomials, specialized for the dynamic
       algorithm.
   @ingroup GBComputation
   
   @details This class encapsulates the information necessary to create
-  an \f$S\f$-polynomial, including the actual generation of
-  an \f$S\f$-polynomial, though it does not retain that information.
-  The main difference with \c Critical_Pair_Basic is the enabling of late
+  an @f$S@f$-polynomial, including the actual generation of
+  an @f$S@f$-polynomial, though it does not retain that information.
+  The main difference with @c Critical_Pair_Basic is the enabling of late
   re-sorting.
 */
 class Critical_Pair_Dynamic : public Critical_Pair_Basic {
@@ -260,7 +260,7 @@ public:
   ///@}
 protected:
   /**
-    @brief the \c Monomial_Ordering assigned to this pair &mdash; might disagree
+    @brief the @c Monomial_Ordering assigned to this pair &mdash; might disagree
       with that of polynomials; they must be updated immediately if this is a
       generator; otherwise, update can wait until the critical pair is computed.
   */

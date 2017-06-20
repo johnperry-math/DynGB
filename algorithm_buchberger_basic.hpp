@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -81,7 +81,7 @@ template bool no_triplet<Critical_Pair_Basic>(
   @param u a monomial
   @param p a critical pair
   @ingroup GBComputation
-  @return \c true iff \f$ lcm(t,u) \f$ is @p p&rsquo;s lcm
+  @return @c true iff \f$ lcm(t,u) \f$ is @p p&rsquo;s lcm
 */
 bool lcm_alike(
     const Monomial & t,
@@ -140,12 +140,12 @@ template void report_critical_pairs<Critical_Pair_Basic>(
 */
 struct smaller_lm {
   /**
-    @brief returns \c true iff \p f&rsquo;s leading monomial is
-      smaller than \c g&rsquo;s
+    @brief returns @c true iff @p f&rsquo;s leading monomial is
+      smaller than @c g&rsquo;s
     @param f a polynomial of some sort
     @param g a polynomial of some sort
-    @return  \c true iff \p f&rsquo;s leading monomial is
-      smaller than \c g&rsquo;s
+    @return  @c true iff @p f&rsquo;s leading monomial is
+      smaller than @c g&rsquo;s
   */
   bool operator()(Abstract_Polynomial *f, Abstract_Polynomial *g) {
     return f->leading_monomial() < g->leading_monomial();
@@ -153,7 +153,7 @@ struct smaller_lm {
 };
 
 /**
-  @brief checks that \p G is a Gr&ouml;bner basis by verifying each s-polynomial
+  @brief checks that @p G is a Gr&ouml;bner basis by verifying each s-polynomial
     reduces to zero
   @ingroup GBComputation
   @param G list of generators of an ideal
@@ -173,8 +173,8 @@ void report_basis(
 );
 
 /**
-  @brief gives a summary of information in \c p, with additional information
-      depending on \c strategy
+  @brief gives a summary of information in @c p, with additional information
+      depending on @c strategy
 */
 void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy);
 
@@ -189,7 +189,7 @@ void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy);
       (default is SUGAR_STRATEGY)
   @param strategy_weights if using a weighted sugar strategy, place an array
       of weights here
-  @return list of polynomials in a Gr&ouml;bner basis of \c F
+  @return list of polynomials in a Gr&ouml;bner basis of @c F
 */
 list<Constant_Polynomial *> buchberger(
     const list<Abstract_Polynomial *> &F,

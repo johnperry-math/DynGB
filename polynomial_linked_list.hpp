@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -236,11 +236,11 @@ public:
   */
   virtual Polynomial_Linked_List * zero_polynomial() const override;
   /**
-    @brief Returns a new polynomial whose value is \f$\textit{this}\times u\f$.
+    @brief Returns a new polynomial whose value is @f$\textit{this}\times u@f$.
   */
   virtual Polynomial_Linked_List * monomial_multiple(const Monomial &u) const override;
   /**
-    @brief Returns a new polynomial whose value is \f$\textit{this}\times c\f$.
+    @brief Returns a new polynomial whose value is @f$\textit{this}\times c@f$.
   */
   virtual Polynomial_Linked_List * scalar_multiple(const Prime_Field_Element &c)
       const override;
@@ -253,11 +253,11 @@ public:
   */
   virtual Polynomial_Linked_List & operator -=(const Abstract_Polynomial &other) override;
   /**
-    @brief "Fast" addition of \f$atq\f$ to <c>this</c>.
+    @brief "Fast" addition of @f$atq@f$ to <c>this</c>.
     @details If <c>subtract==true</c>, subtract instead.
     @param a coefficient of the term to multiply to @p q
     @param t Monomial of the term to multiply to @p q
-    @param q polynomial to add to @c this, after multiplying @p q by \f$ at \f$
+    @param q polynomial to add to @c this, after multiplying @p q by @f$ at @f$
     @param subtract whether to add instead of subtract
   */
   virtual void add_polynomial_multiple(

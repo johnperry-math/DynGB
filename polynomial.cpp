@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -24,7 +24,9 @@ Polynomial_Iterator::~Polynomial_Iterator() {}
 
 Polynomial_Ring & Abstract_Polynomial::base_ring() const { return R; }
 
-Prime_Field & Abstract_Polynomial::ground_field() { return R.ground_field(); }
+const Prime_Field & Abstract_Polynomial::ground_field() const {
+  return R.ground_field();
+}
 
 unsigned Abstract_Polynomial::number_of_variables() const {
   return R.number_of_variables();

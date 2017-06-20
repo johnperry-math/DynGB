@@ -45,7 +45,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 37 of file polynomial\+\_\+array.\+hpp.
+Definition at line 39 of file polynomial\+\_\+array.\+hpp.
 
 Inheritance diagram for Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
 \begin{center}
@@ -558,7 +558,7 @@ John Perry
 \end{DoxyDate}
 Sometimes we want to be able to change particular monomials in a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. This a bit naughty, since it violates the spirit of a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}. I guess I need a different name for the latter. This generally mimics a \hyperlink{group___iterator_group_class_constant___polynomial___iterator}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, but cannot inherit from it due to issues with the {\ttfamily const} keyword. This may reflect bad design. 
 
-Definition at line 253 of file polynomial\+\_\+array.\+hpp.
+Definition at line 277 of file polynomial\+\_\+array.\+hpp.
 
 Inheritance diagram for Mutable\+\_\+\+Constant\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
 \begin{center}
@@ -644,7 +644,7 @@ Creates an iterator for {\ttfamily poly} and starts at its leading term.
 \end{DoxyParams}
 
 
-Definition at line 267 of file polynomial\+\_\+array.\+cpp.
+Definition at line 294 of file polynomial\+\_\+array.\+cpp.
 
 
 
@@ -664,7 +664,7 @@ Implements \hyperlink{group___iterator_group_ac571e120134088d6067718bbad513e2d}{
 
 
 
-Definition at line 282 of file polynomial\+\_\+array.\+cpp.
+Definition at line 309 of file polynomial\+\_\+array.\+cpp.
 
 \index{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator@{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}}\label{class_mutable___polynomial___iterator}
 \Hypertarget{group___iterator_group_class_mutable___polynomial___iterator}
@@ -679,7 +679,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 283 of file polynomial.\+hpp.
+Definition at line 291 of file polynomial.\+hpp.
 
 Inheritance diagram for Mutable\+\_\+\+Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
 \begin{center}
@@ -712,7 +712,7 @@ John Perry
 \end{DoxyDate}
 This class encapsulates the basic functionality needed to iterate through the monomials of a polynomial. A \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} cannot modify a polynomial, however; to do that, you need a \hyperlink{group___iterator_group_class_mutable___polynomial___iterator}{Mutable\+\_\+\+Polynomial\+\_\+\+Iterator}. 
 
-Definition at line 224 of file polynomial.\+hpp.
+Definition at line 232 of file polynomial.\+hpp.
 
 Inheritance diagram for Polynomial\+\_\+\+Iterator\+:\begin{figure}[H]
 \begin{center}
@@ -790,7 +790,7 @@ Can this iterator move left, or would it fall off?
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}{L\+L\+Polynomial\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}{Geobucket\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}, and \hyperlink{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}.
+Implemented in \hyperlink{group___iterator_group_a2df38ef3fd64b5e90432c754ce21f0c4}{L\+L\+Polynomial\+\_\+\+Iterator}, \hyperlink{group___iterator_group_a6c3db5961d5faf1b465c51e8935e0b89}{Geobucket\+\_\+\+Iterator}, \hyperlink{group___iterator_group_ade22e36aead8eca568dbd99c6ab73cc2}{Constant\+\_\+\+Polynomial\+\_\+\+Iterator}, and \hyperlink{group___iterator_group_a4094a88fd6d77894ff04960efd492ec6}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator}.
 
 \mbox{\Hypertarget{group___iterator_group_ac571e120134088d6067718bbad513e2d}\label{group___iterator_group_ac571e120134088d6067718bbad513e2d}} 
 \index{Polynomial\+\_\+\+Iterator@{Polynomial\+\_\+\+Iterator}!fell\+Off@{fell\+Off}}

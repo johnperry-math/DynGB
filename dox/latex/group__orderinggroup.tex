@@ -61,7 +61,7 @@ The weighted grevlex ordering first compares weighted sums of all exponents, the
 \hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}, and \hyperlink{test_dynamic_8cpp-example}{test\+\_\+dynamic.\+cpp}.\end{Desc}
 
 
-Definition at line 454 of file particular\+\_\+orderings.\+hpp.
+Definition at line 465 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Cached\+W\+Grevlex\+\_\+\+Ordering\+:\begin{figure}[H]
 \begin{center}
@@ -81,7 +81,10 @@ Inheritance diagram for Cached\+W\+Grevlex\+\_\+\+Ordering\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{group__orderinggroup_a4997585d5bc84222551e555eac13ebf9}\label{group__orderinggroup_a4997585d5bc84222551e555eac13ebf9}} 
 virtual const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__orderinggroup_a4997585d5bc84222551e555eac13ebf9}{order\+\_\+weights} () const override
-\begin{DoxyCompactList}\small\item\em the weights that define this ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em the weights that define this ordering \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__orderinggroup_aabbf09fabf721a0f894110b0f5651730}\label{group__orderinggroup_aabbf09fabf721a0f894110b0f5651730}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group__orderinggroup_aabbf09fabf721a0f894110b0f5651730}{number\+\_\+of\+\_\+weights} () const override
+\begin{DoxyCompactList}\small\item\em returns the number of weights (same as number of indeterminates) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Comparison}\par
 \begin{DoxyCompactItemize}
@@ -154,7 +157,7 @@ creates a weighted grevlex ordering specific to $n$ variables, using the weights
 \end{DoxyParams}
 
 
-Definition at line 423 of file particular\+\_\+orderings.\+cpp.
+Definition at line 431 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -177,7 +180,7 @@ the sum of the first i exponents
 \end{DoxyParams}
 
 
-Definition at line 519 of file particular\+\_\+orderings.\+cpp.
+Definition at line 527 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_af04f39af33cba2c1c4f985e57ea8d136}\label{group__orderinggroup_af04f39af33cba2c1c4f985e57ea8d136}} 
 \index{Cached\+W\+Grevlex\+\_\+\+Ordering@{Cached\+W\+Grevlex\+\_\+\+Ordering}!partial\+\_\+degree@{partial\+\_\+degree}}
@@ -200,7 +203,7 @@ Be sure that {\ttfamily t} has the correct ordering!
 \end{DoxyWarning}
 
 
-Definition at line 504 of file particular\+\_\+orderings.\+hpp.
+Definition at line 517 of file particular\+\_\+orderings.\+hpp.
 
 \index{Generic\+\_\+\+Grevlex@{Generic\+\_\+\+Grevlex}}\label{class_generic___grevlex}
 \Hypertarget{group__orderinggroup_class_generic___grevlex}
@@ -215,7 +218,7 @@ John Perry
 \end{DoxyDate}
 The difference between \hyperlink{group__orderinggroup_class_generic___grevlex}{Generic\+\_\+\+Grevlex} and \hyperlink{group__orderinggroup_class_grevlex___ordering}{Grevlex\+\_\+\+Ordering} is that the former doesn't track any \hyperlink{group__orderinggroup_class_monomial___order___data}{Monomial\+\_\+\+Order\+\_\+\+Data}, while the latter relies on it. The latter should, as a result, be more time efficient, while the former is more space efficient. \hyperlink{group__orderinggroup_class_generic___grevlex}{Generic\+\_\+\+Grevlex} will also order monomials which by design have a different number of variables, though that should not in general be something one encounters, and it's rather dangerous with \hyperlink{group__orderinggroup_a1696724ba30a8565b759bb2c8aeefde4}{first\+\_\+larger\+\_\+than\+\_\+multiple()}. 
 
-Definition at line 43 of file particular\+\_\+orderings.\+hpp.
+Definition at line 46 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Generic\+\_\+\+Grevlex\+:\begin{figure}[H]
 \begin{center}
@@ -270,7 +273,7 @@ Implements \hyperlink{group__orderinggroup_a9bc3155fc98b4d40c26118fa2114b827}{Mo
 
 
 
-Definition at line 63 of file particular\+\_\+orderings.\+hpp.
+Definition at line 66 of file particular\+\_\+orderings.\+hpp.
 
 \mbox{\Hypertarget{group__orderinggroup_a14c344858da03d16c8019afdae3da5dc}\label{group__orderinggroup_a14c344858da03d16c8019afdae3da5dc}} 
 \index{Generic\+\_\+\+Grevlex@{Generic\+\_\+\+Grevlex}!set\+\_\+data@{set\+\_\+data}}
@@ -303,7 +306,7 @@ John Perry
 \end{DoxyDate}
 The data involves an array of $n$ {\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE}, where the first entry is the sum of the first $n$ variables, the second entry is the sum of all but the last variable, etc. 
 
-Definition at line 97 of file particular\+\_\+orderings.\+hpp.
+Definition at line 100 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Grevlex\+\_\+\+Order\+\_\+\+Data\+:\begin{figure}[H]
 \begin{center}
@@ -376,7 +379,7 @@ creates an array of partial weights of {\ttfamily t}
 \end{DoxyParams}
 
 
-Definition at line 223 of file particular\+\_\+orderings.\+cpp.
+Definition at line 231 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -396,7 +399,7 @@ This does not create the array if it does not exist already!
 \end{DoxyWarning}
 
 
-Definition at line 215 of file particular\+\_\+orderings.\+cpp.
+Definition at line 223 of file particular\+\_\+orderings.\+cpp.
 
 \index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}}\label{class_grevlex___ordering}
 \Hypertarget{group__orderinggroup_class_grevlex___ordering}
@@ -414,7 +417,7 @@ The grevlex ordering first compares the sums of the exponents, then the sums of 
 \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}.\end{Desc}
 
 
-Definition at line 150 of file particular\+\_\+orderings.\+hpp.
+Definition at line 153 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Grevlex\+\_\+\+Ordering\+:\begin{figure}[H]
 \begin{center}
@@ -487,7 +490,7 @@ Implements \hyperlink{group__orderinggroup_a9bc3155fc98b4d40c26118fa2114b827}{Mo
 
 
 
-Definition at line 190 of file particular\+\_\+orderings.\+hpp.
+Definition at line 193 of file particular\+\_\+orderings.\+hpp.
 
 \mbox{\Hypertarget{group__orderinggroup_a4f8a9207711dabeb940fba0e32f4ab1f}\label{group__orderinggroup_a4f8a9207711dabeb940fba0e32f4ab1f}} 
 \index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}!first\+\_\+larger\+\_\+than\+\_\+multiple@{first\+\_\+larger\+\_\+than\+\_\+multiple}}
@@ -513,7 +516,7 @@ Implements \hyperlink{group__orderinggroup_aacb0439b908d45cc5f2635567c6633fd}{Mo
 
 
 
-Definition at line 287 of file particular\+\_\+orderings.\+cpp.
+Definition at line 295 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_a24d2e7bf28ecab1d8a6c703147f48341}\label{group__orderinggroup_a24d2e7bf28ecab1d8a6c703147f48341}} 
 \index{Grevlex\+\_\+\+Ordering@{Grevlex\+\_\+\+Ordering}!partial\+\_\+degree@{partial\+\_\+degree}}
@@ -536,7 +539,7 @@ Be sure that {\ttfamily t} has the correct ordering!
 \end{DoxyParams}
 
 
-Definition at line 306 of file particular\+\_\+orderings.\+cpp.
+Definition at line 314 of file particular\+\_\+orderings.\+cpp.
 
 \index{Lex\+\_\+\+Ordering@{Lex\+\_\+\+Ordering}}\label{class_lex___ordering}
 \Hypertarget{group__orderinggroup_class_lex___ordering}
@@ -554,7 +557,7 @@ The lex ordering is a dictionary ordering. The first variable is considered larg
 \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}.\end{Desc}
 
 
-Definition at line 328 of file particular\+\_\+orderings.\+hpp.
+Definition at line 339 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Lex\+\_\+\+Ordering\+:\begin{figure}[H]
 \begin{center}
@@ -607,7 +610,7 @@ creates a lex ordering specific to $n$ variables
 \end{DoxyParams}
 
 
-Definition at line 329 of file particular\+\_\+orderings.\+cpp.
+Definition at line 337 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -634,7 +637,7 @@ Implements \hyperlink{group__orderinggroup_a9bc3155fc98b4d40c26118fa2114b827}{Mo
 
 
 
-Definition at line 366 of file particular\+\_\+orderings.\+hpp.
+Definition at line 377 of file particular\+\_\+orderings.\+hpp.
 
 \mbox{\Hypertarget{group__orderinggroup_acf085490051fdbbdde6e89831e3f0eda}\label{group__orderinggroup_acf085490051fdbbdde6e89831e3f0eda}} 
 \index{Lex\+\_\+\+Ordering@{Lex\+\_\+\+Ordering}!first\+\_\+larger@{first\+\_\+larger}}
@@ -658,7 +661,7 @@ Implements \hyperlink{group__orderinggroup_aed41fe82e1ca5cd287a93d287fee7c20}{Mo
 
 
 
-Definition at line 332 of file particular\+\_\+orderings.\+cpp.
+Definition at line 340 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_a3ed34485d01b60236bc2ed70e05ed06a}\label{group__orderinggroup_a3ed34485d01b60236bc2ed70e05ed06a}} 
 \index{Lex\+\_\+\+Ordering@{Lex\+\_\+\+Ordering}!first\+\_\+larger\+\_\+than\+\_\+multiple@{first\+\_\+larger\+\_\+than\+\_\+multiple}}
@@ -684,7 +687,7 @@ Implements \hyperlink{group__orderinggroup_aacb0439b908d45cc5f2635567c6633fd}{Mo
 
 
 
-Definition at line 364 of file particular\+\_\+orderings.\+cpp.
+Definition at line 372 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ae42ea2c7b8fa45bcb46e56480d5f8abb}\label{group__orderinggroup_ae42ea2c7b8fa45bcb46e56480d5f8abb}} 
 \index{Lex\+\_\+\+Ordering@{Lex\+\_\+\+Ordering}!first\+\_\+smaller@{first\+\_\+smaller}}
@@ -708,7 +711,7 @@ Implements \hyperlink{group__orderinggroup_ab6c02638f87382f7a9a95b994e9a5dfb}{Mo
 
 
 
-Definition at line 348 of file particular\+\_\+orderings.\+cpp.
+Definition at line 356 of file particular\+\_\+orderings.\+cpp.
 
 \index{Matrix\+\_\+\+Ordering@{Matrix\+\_\+\+Ordering}}\label{class_matrix___ordering}
 \Hypertarget{group__orderinggroup_class_matrix___ordering}
@@ -723,7 +726,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 556 of file particular\+\_\+orderings.\+hpp.
+Definition at line 569 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Matrix\+\_\+\+Ordering\+:\begin{figure}[H]
 \begin{center}
@@ -780,7 +783,7 @@ checks that {\ttfamily data} defines a nonsingular matrix, and sets things up
 \end{DoxyParams}
 
 
-Definition at line 620 of file particular\+\_\+orderings.\+cpp.
+Definition at line 628 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -807,7 +810,7 @@ Implements \hyperlink{group__orderinggroup_a9bc3155fc98b4d40c26118fa2114b827}{Mo
 
 
 
-Definition at line 592 of file particular\+\_\+orderings.\+hpp.
+Definition at line 605 of file particular\+\_\+orderings.\+hpp.
 
 \mbox{\Hypertarget{group__orderinggroup_aed327b2dfb248ac239694717c3313e31}\label{group__orderinggroup_aed327b2dfb248ac239694717c3313e31}} 
 \index{Matrix\+\_\+\+Ordering@{Matrix\+\_\+\+Ordering}!first\+\_\+larger@{first\+\_\+larger}}
@@ -831,7 +834,7 @@ Implements \hyperlink{group__orderinggroup_aed41fe82e1ca5cd287a93d287fee7c20}{Mo
 
 
 
-Definition at line 627 of file particular\+\_\+orderings.\+cpp.
+Definition at line 635 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ad9be3dafe786d480521cc0a31ebdef8c}\label{group__orderinggroup_ad9be3dafe786d480521cc0a31ebdef8c}} 
 \index{Matrix\+\_\+\+Ordering@{Matrix\+\_\+\+Ordering}!first\+\_\+larger\+\_\+than\+\_\+multiple@{first\+\_\+larger\+\_\+than\+\_\+multiple}}
@@ -857,7 +860,7 @@ Implements \hyperlink{group__orderinggroup_aacb0439b908d45cc5f2635567c6633fd}{Mo
 
 
 
-Definition at line 673 of file particular\+\_\+orderings.\+cpp.
+Definition at line 681 of file particular\+\_\+orderings.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ab7881ff6bbc52d02bf786ef8ab8c5c37}\label{group__orderinggroup_ab7881ff6bbc52d02bf786ef8ab8c5c37}} 
 \index{Matrix\+\_\+\+Ordering@{Matrix\+\_\+\+Ordering}!first\+\_\+smaller@{first\+\_\+smaller}}
@@ -881,7 +884,7 @@ Implements \hyperlink{group__orderinggroup_ab6c02638f87382f7a9a95b994e9a5dfb}{Mo
 
 
 
-Definition at line 650 of file particular\+\_\+orderings.\+cpp.
+Definition at line 658 of file particular\+\_\+orderings.\+cpp.
 
 \index{Monomial\+\_\+\+Order\+\_\+\+Data@{Monomial\+\_\+\+Order\+\_\+\+Data}}\label{class_monomial___order___data}
 \Hypertarget{group__orderinggroup_class_monomial___order___data}
@@ -1049,7 +1052,7 @@ Do not override unless you know what you're doing
 \end{DoxyWarning}
 
 
-Definition at line 471 of file monomial.\+cpp.
+Definition at line 490 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ad4af4c79cf46666222fe30fdd4ceb45e}\label{group__orderinggroup_ad4af4c79cf46666222fe30fdd4ceb45e}} 
 \index{Monomial\+\_\+\+Ordering@{Monomial\+\_\+\+Ordering}!first\+\_\+larger\+\_\+or\+\_\+equal\+\_\+than\+\_\+multiple@{first\+\_\+larger\+\_\+or\+\_\+equal\+\_\+than\+\_\+multiple}}
@@ -1068,7 +1071,7 @@ Do not override unless you know what you're doing
 \end{DoxyWarning}
 
 
-Definition at line 477 of file monomial.\+cpp.
+Definition at line 496 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ab6c02638f87382f7a9a95b994e9a5dfb}\label{group__orderinggroup_ab6c02638f87382f7a9a95b994e9a5dfb}} 
 \index{Monomial\+\_\+\+Ordering@{Monomial\+\_\+\+Ordering}!first\+\_\+smaller@{first\+\_\+smaller}}
@@ -1156,7 +1159,7 @@ Reimplemented in \hyperlink{group__orderinggroup_a65f1e27ee52413c91ffcb87632dcb2
 
 
 
-Definition at line 467 of file monomial.\+cpp.
+Definition at line 486 of file monomial.\+cpp.
 
 \index{Nonsingular\+\_\+\+Matrix\+\_\+\+Ordering\+\_\+\+Exception@{Nonsingular\+\_\+\+Matrix\+\_\+\+Ordering\+\_\+\+Exception}}\label{class_nonsingular___matrix___ordering___exception}
 \Hypertarget{group__orderinggroup_class_nonsingular___matrix___ordering___exception}
@@ -1171,7 +1174,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 545 of file particular\+\_\+orderings.\+hpp.
+Definition at line 558 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for Nonsingular\+\_\+\+Matrix\+\_\+\+Ordering\+\_\+\+Exception\+:\begin{figure}[H]
 \begin{center}
@@ -1209,7 +1212,10 @@ Inheritance diagram for Weighted\+\_\+\+Ordering\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{group__orderinggroup_a5916f1631d5c30fe39dedcef96a3944e}\label{group__orderinggroup_a5916f1631d5c30fe39dedcef96a3944e}} 
 virtual const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__orderinggroup_a5916f1631d5c30fe39dedcef96a3944e}{order\+\_\+weights} () const =0
-\begin{DoxyCompactList}\small\item\em returns the weights used by this orderings \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em returns the weights used by this orderings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__orderinggroup_a7f13d8c571e36bc29d2de39ace88bdd8}\label{group__orderinggroup_a7f13d8c571e36bc29d2de39ace88bdd8}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group__orderinggroup_a7f13d8c571e36bc29d2de39ace88bdd8}{number\+\_\+of\+\_\+weights} () const =0
+\begin{DoxyCompactList}\small\item\em returns the number of weights (same as number of indeterminates) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \index{W\+Grevlex@{W\+Grevlex}}\label{class_w_grevlex}
 \Hypertarget{group__orderinggroup_class_w_grevlex}
@@ -1224,7 +1230,7 @@ John Perry
 \end{DoxyDate}
 The grevlex ordering first compares the sums of the exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. 
 
-Definition at line 226 of file particular\+\_\+orderings.\+hpp.
+Definition at line 229 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for W\+Grevlex\+:\begin{figure}[H]
 \begin{center}
@@ -1238,14 +1244,20 @@ Inheritance diagram for W\+Grevlex\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{group__orderinggroup_a0ac3e66fb20c098427f6a08c92fd3771}\label{group__orderinggroup_a0ac3e66fb20c098427f6a08c92fd3771}} 
 \hyperlink{group__orderinggroup_a0ac3e66fb20c098427f6a08c92fd3771}{W\+Grevlex} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, W\+T\+\_\+\+T\+Y\+PE $\ast$, bool=true)
-\begin{DoxyCompactList}\small\item\em Creates a grevlex ordering specific to the specified number of variables, with the given weights. The final parameter indicates whether to apply the weights when breaking ties. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creates a grevlex ordering specific to the specified number of variables, with the given weights. The final parameter indicates whether to apply the weights when breaking ties. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__orderinggroup_a60f58ee49c04e416085a096c4e5798c1}\label{group__orderinggroup_a60f58ee49c04e416085a096c4e5798c1}} 
+\hyperlink{group__orderinggroup_a60f58ee49c04e416085a096c4e5798c1}{W\+Grevlex} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} r, bool=true)
+\begin{DoxyCompactList}\small\item\em Creates a weighted grevlex ordering using the specified ray. The final parameter indicates whether to apply the weights when breaking ties. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group__orderinggroup_a2eb6db0248ec4b205d15b5b1b2261db6}\label{group__orderinggroup_a2eb6db0248ec4b205d15b5b1b2261db6}} 
 virtual const W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__orderinggroup_a2eb6db0248ec4b205d15b5b1b2261db6}{order\+\_\+weights} () const override
-\begin{DoxyCompactList}\small\item\em this weighted ordering's weights \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em this weighted ordering's weights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__orderinggroup_afd715e453ad062b40578438b1bbe10e9}\label{group__orderinggroup_afd715e453ad062b40578438b1bbe10e9}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group__orderinggroup_afd715e453ad062b40578438b1bbe10e9}{number\+\_\+of\+\_\+weights} () const override
+\begin{DoxyCompactList}\small\item\em returns the number of weights (same as number of indeterminates) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Comparison}\par
 \begin{DoxyCompactItemize}
@@ -1319,7 +1331,7 @@ Implements \hyperlink{group__orderinggroup_a9bc3155fc98b4d40c26118fa2114b827}{Mo
 
 
 
-Definition at line 273 of file particular\+\_\+orderings.\+hpp.
+Definition at line 284 of file particular\+\_\+orderings.\+hpp.
 
 \mbox{\Hypertarget{group__orderinggroup_ad7e630709c14774bac365c46b9455bab}\label{group__orderinggroup_ad7e630709c14774bac365c46b9455bab}} 
 \index{W\+Grevlex@{W\+Grevlex}!partial\+\_\+degree@{partial\+\_\+degree}}
@@ -1353,7 +1365,7 @@ John Perry
 \end{DoxyDate}
 The data involves an array of $n$ {\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE}, where the first entry is a weighted sum of the first $n$ variables, the second entry is the {\itshape ordinary} sum of all but the last variable, etc. 
 
-Definition at line 390 of file particular\+\_\+orderings.\+hpp.
+Definition at line 401 of file particular\+\_\+orderings.\+hpp.
 
 Inheritance diagram for W\+Grevlex\+\_\+\+Order\+\_\+\+Data\+:\begin{figure}[H]
 \begin{center}
@@ -1381,7 +1393,7 @@ virtual \hyperlink{group__orderinggroup_class_w_grevlex___order___data}{W\+Grevl
 \hyperlink{group__orderinggroup_aad8299f5ca80ad008cd62ba9e802abae}{$\sim$\+W\+Grevlex\+\_\+\+Order\+\_\+\+Data} ()
 \begin{DoxyCompactList}\small\item\em deletes the array of partial weights \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
-\begin{Indent}\textbf{ returns the weighted sum of the first \textbackslash{}f\$i\textbackslash{}f\$ variables}\par
+\begin{Indent}\textbf{ returns the weighted sum of the first @f\$i@f\$ variables}\par
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group__orderinggroup_a91af5dd81fbb141ab08be35acbd001a1}\label{group__orderinggroup_a91af5dd81fbb141ab08be35acbd001a1}} 
@@ -1439,7 +1451,7 @@ Assign the correct ordering to {\ttfamily t} first!
 \end{DoxyParams}
 
 
-Definition at line 397 of file particular\+\_\+orderings.\+cpp.
+Definition at line 405 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -1464,7 +1476,7 @@ This does not create the array if it does not exist already!
 \end{DoxyParams}
 
 
-Definition at line 383 of file particular\+\_\+orderings.\+cpp.
+Definition at line 391 of file particular\+\_\+orderings.\+cpp.
 
 
 
@@ -1499,5 +1511,5 @@ For the time being, this reduces the matrix to upper triangular form (if possibl
 \end{DoxyReturn}
 
 
-Definition at line 558 of file particular\+\_\+orderings.\+cpp.
+Definition at line 566 of file particular\+\_\+orderings.\+cpp.
 

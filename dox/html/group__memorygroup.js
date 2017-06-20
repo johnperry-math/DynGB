@@ -14,7 +14,7 @@ var group__memorygroup =
       [ "block", "group__memorygroup.html#a15e185c6ba2c5262bc03ad13e2dbc223", null ],
       [ "data_size", "group__memorygroup.html#a7073b652fe474ccd684c1eebd2129a0b", null ]
     ] ],
-    [ "doda", "group__memorygroup.html#gab09a3dd19e9c8880eec08c13bcb42f36", null ],
+    [ "doda", "group__memorygroup.html#ga0dc763860167cb9a6e5c84bfda9a456e", null ],
     [ "goda", "group__memorygroup.html#gadf1bccf09eada41d10a5d4ceda7ca479", null ],
     [ "moda", "group__memorygroup.html#gaf2c367d23e09c5dad7e0273995a3304c", null ],
     [ "monoda", "group__memorygroup.html#ga76b5ae808895658b417e3f3a13c60e51", null ],

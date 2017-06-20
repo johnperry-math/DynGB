@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -133,6 +133,14 @@ Monomial_Ordering * generic_grevlex_ptr = &generic_grevlex;
 WGrevlex::WGrevlex(NVAR_TYPE num_vars, WT_TYPE * wts, bool thorough) :
     n(num_vars), weights(wts), thorough_weighting(thorough)
 {}
+
+WGrevlex::WGrevlex(Ray r, bool thorough) :
+    n(r.get_dimension()), thorough_weighting(thorough)
+{
+  weights = new WT_TYPE[n];
+  for (NVAR_TYPE i = 0; i < n; ++i)
+    weights[i] = r[i];
+}
 
 void WGrevlex::set_data(Monomial & t) const {
   t.set_ordering_data(nullptr);

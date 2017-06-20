@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -50,7 +50,7 @@ using std::cin; using std::cout; using std::endl;
       -# static or dynamic computation
       -# if dynamic,
         -# which solver (LP_Solver)
-        -# which heuristic (DynamicHeuristic)
+        -# which heuristic (Dynamic_Heuristic)
         -# whether to perform a global analysis of the input
     The code has some other options, but they are mere curiosities for the time
     being.
@@ -192,11 +192,12 @@ void user_interface() {
     else if (not solver_choice.compare("ppl"))
       solver = PPL_SOLVER;
     string heur_choice;
-    DynamicHeuristic heuristic;
+    Dynamic_Heuristic heuristic;
     while (
       heur_choice.compare("h") and heur_choice.compare("gh")
       and heur_choice.compare("b") and heur_choice.compare("bb")
       and heur_choice.compare("gb") and heur_choice.compare("c")
+      and heur_choice.compare("d")
     ) {
       cout << "available heuristics are\n";
       cout << "\t h = hilbert with standard grading\n";
@@ -205,15 +206,17 @@ void user_interface() {
       cout << "\tbb = \"big\" betti with standard grading\n";
       cout << "\tgb = betti with order-based grading\n";
       cout << "\t c = minimal number of critical pairs\n";
+      cout << "\t d = minimal degree, ties broken by hilbert\n";
       cout << "which heuristic would you like? ";
       getline(cin, heur_choice);
     }
-    if      (not heur_choice.compare( "h")) heuristic = DynamicHeuristic::ORD_HILBERT_THEN_DEG;
-    else if (not heur_choice.compare("gh")) heuristic = DynamicHeuristic::GRAD_HILB_THEN_DEG;
-    else if (not heur_choice.compare( "b")) heuristic = DynamicHeuristic::BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare("bb")) heuristic = DynamicHeuristic::BIG_BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare("gb")) heuristic = DynamicHeuristic::GRAD_BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare( "c")) heuristic = DynamicHeuristic::MIN_CRIT_PAIRS;
+    if      (not heur_choice.compare( "h")) heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+    else if (not heur_choice.compare("gh")) heuristic = Dynamic_Heuristic::GRAD_HILB_THEN_DEG;
+    else if (not heur_choice.compare( "b")) heuristic = Dynamic_Heuristic::BETTI_HILBERT_DEG;
+    else if (not heur_choice.compare("bb")) heuristic = Dynamic_Heuristic::BIG_BETTI_HILBERT_DEG;
+    else if (not heur_choice.compare("gb")) heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
+    else if (not heur_choice.compare( "c")) heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
+    else if (not heur_choice.compare( "d")) heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
     string whether_analysis;
     bool analyze_first = false;
     while (whether_analysis.compare("y") and whether_analysis.compare("n")) {

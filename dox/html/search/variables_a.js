@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lp',['lp',['../group___c_l_s_solvers.html#a6abc19f36a28ed91b4ebc4d3a1e32dc6',1,'PPL_Solver']]]
+  ['lp',['lp',['../group___c_l_s_solvers.html#ad85a1f4b919c2f4580b48360571aaf89',1,'LP_Solvers::PPL_Solver']]]
 ];

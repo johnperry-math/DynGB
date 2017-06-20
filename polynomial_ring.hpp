@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -65,10 +65,10 @@ public:
   ///@{
   /**
     @brief sets the names of the indeterminates, if you do not want the default
-    @details Returns \c True if and only if successful.
+    @details Returns @c True if and only if successful.
       The names are not copied, so please do not discard them until you are done
       with this ring, or else have reassigned the names.
-    @warning If \c length is not the same as the number of indeterminates,
+    @warning If @c length is not the same as the number of indeterminates,
       things can go very, very badly.
     @param new_names names for the indeterminates
     @param length number of names in @p new_names
@@ -84,7 +84,7 @@ public:
   virtual Indeterminate * indeterminates();
   /** @brief ground field */
   virtual Prime_Field & ground_field() const;
-  /** @brief name of the \f$i\f$th indeterminate */
+  /** @brief name of the @f$i@f$th indeterminate */
   virtual const string name(NVAR_TYPE i) const;
   /** @brief names of all the variabiles */
   virtual const string * name_list() const { return names; }

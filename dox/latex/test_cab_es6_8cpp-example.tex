@@ -11,7 +11,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the second example in \ci
 \textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
 \textcolor{comment}{* (at your option) any later version.                                         *}
 \textcolor{comment}{*                                                                             *}
-\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* DynGB is distributed in the hope that it will be useful,                    *}
 \textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
 \textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
 \textcolor{comment}{* GNU General Public License for more details.                                *}
@@ -52,7 +52,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the second example in \ci
   \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} FF = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(32003);
   \textcolor{keywordtype}{string} X [9] = \{ \textcolor{stringliteral}{"t"}, \textcolor{stringliteral}{"u"}, \textcolor{stringliteral}{"v"}, \textcolor{stringliteral}{"x"}, \textcolor{stringliteral}{"y"}, \textcolor{stringliteral}{"z"} \} ;
   \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R(6, FF, X );
-  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = FF.\hyperlink{group___fields_group_ad9e3622a14de40faa75056ed40d67bb2}{unity}();
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = FF.\hyperlink{group___fields_group_a97534ab1050f0b34023300f1bd3a97f5}{unity}();
   \hyperlink{group__polygroup_class_monomial}{Monomial} one \{ 0, 0, 0, 0, 0, 0 \};
   \textcolor{comment}{// set up our polynomials}
   \textcolor{comment}{// first poly}
@@ -109,9 +109,9 @@ This illustrates how to compute a Gr\"{o}bner basis of the second example in \ci
   F.push\_back(&f4); F.push\_back(&f5); F.push\_back(&f6);
   list<Constant\_Polynomial *> G;
   \textcolor{keywordflow}{if} (static\_algorithm) G = \hyperlink{group___g_b_computation_ga37aa7e2fec96fac6c914934a4243f603}{buchberger}(F, method, StrategyFlags::SUGAR\_STRATEGY);
-  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}{buchberger\_dynamic}(
       F, method, StrategyFlags::SUGAR\_STRATEGY, \textcolor{keyword}{nullptr},
-      DynamicHeuristic::ORD\_HILBERT\_THEN\_DEG
+      Dynamic\_Heuristic::ORD\_HILBERT\_THEN\_DEG
   );
   cout << \textcolor{stringliteral}{"Basis:\(\backslash\)n"};
   \textcolor{keywordflow}{for} (\hyperlink{group__polygroup_class_constant___polynomial}{Constant\_Polynomial} * g : G) \{

@@ -5,48 +5,59 @@
 classes that solve constrained linear systems  
 
 
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_l_p___solvers}{L\+P\+\_\+\+Solvers}
+\begin{DoxyCompactList}\small\item\em classes that solve constrained linear systems \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{group___c_l_s_solvers_classconstraint}{constraint}
-\begin{DoxyCompactList}\small\item\em a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $  \hyperlink{group___c_l_s_solvers_classconstraint}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_classedge}{edge}
-\begin{DoxyCompactList}\small\item\em an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $  \hyperlink{group___c_l_s_solvers_classedge}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}
-\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using G\+L\+PK linear solver  \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver}
-\begin{DoxyCompactList}\small\item\em exact or approximate polyhedral cone solution, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_class_l_p___solver}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver}
-\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using P\+PL linear solver  \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_classray}{ray}
-\begin{DoxyCompactList}\small\item\em a ray defined by nonnegative coordinates $(a_1,\ldots,a_n)$  \hyperlink{group___c_l_s_solvers_classray}{More...}\end{DoxyCompactList}\item 
-class \hyperlink{group___c_l_s_solvers_classskeleton}{skeleton}
-\begin{DoxyCompactList}\small\item\em skeleton of a polyhedral cone, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_classskeleton}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{L\+P\+\_\+\+Solvers\+::\+Constraint}
+\begin{DoxyCompactList}\small\item\em a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{L\+P\+\_\+\+Solvers\+::\+Edge}
+\begin{DoxyCompactList}\small\item\em an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using G\+L\+PK linear solver  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em exact or approximate polyhedral cone solution, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using P\+PL linear solver  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{L\+P\+\_\+\+Solvers\+::\+Ray}
+\begin{DoxyCompactList}\small\item\em a ray defined by nonnegative coordinates $(a_1,\ldots,a_n)$  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{L\+P\+\_\+\+Solvers\+::\+Skeleton}
+\begin{DoxyCompactList}\small\item\em skeleton of a polyhedral cone, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ bool $>$ \hyperlink{group___c_l_s_solvers_gacb5ce7e22db91b33c26ea0be6a6026de}{intersections\+\_\+of\+\_\+active\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
-\item 
-bool \hyperlink{group___c_l_s_solvers_ga06bebd50facdc36f850371e545f82174}{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second} (bool $\ast$, bool $\ast$, unsigned)
-\item 
-int \hyperlink{group___c_l_s_solvers_ga33829eddeaa7be000404e4d281d90973}{number\+\_\+of\+\_\+common\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
-\item 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_gae039f9fb46b8c57063342f6203add523}{operator$\ast$} (R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE, \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+vector$<$ bool $>$ \hyperlink{group___c_l_s_solvers_gaf3434d5c281c16ef7a09d8f73445ea00}{L\+P\+\_\+\+Solvers\+::intersections\+\_\+of\+\_\+active\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em indicates which constraints are active for both sets \end{DoxyCompactList}\item 
+void \hyperlink{group___c_l_s_solvers_ga1f87ac127ced7d681b3e51e38eef0cf4}{L\+P\+\_\+\+Solvers\+::intersections\+\_\+of\+\_\+active\+\_\+constraints} (bool $\ast$a, bool $\ast$b, bool $\ast$result, unsigned m)
+\begin{DoxyCompactList}\small\item\em indicates which constraints are active for both sets \end{DoxyCompactList}\item 
+bool \hyperlink{group___c_l_s_solvers_ga0a997634a9b11bec9c54d0243ac29008}{L\+P\+\_\+\+Solvers\+::is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em determines whether the first set of active constraints is a subset of the second \end{DoxyCompactList}\item 
+int \hyperlink{group___c_l_s_solvers_gad030de457424bef601e2903eb619926e}{L\+P\+\_\+\+Solvers\+::number\+\_\+of\+\_\+common\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em counts the number of constraints active in both sets \end{DoxyCompactList}\item 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gaf71a7e68f920518b02b6a58660594ca2}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Multiply every coordinate in the given ray by the given scalar. \end{DoxyCompactList}\item 
-R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ga30af4b27086e461f862e7d16e9d209df}{operator$\ast$} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Compute the dot product on the rays. \end{DoxyCompactList}\item 
-D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gac22c25c0110c6684317aaf0e50c2e9a0}{operator$\ast$} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&r, const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&c)
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const vector$<$ long $>$ \&)
+\begin{DoxyCompactList}\small\item\em compute the dot product of the specified rays, one of which is a vector \end{DoxyCompactList}\item 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (const vector$<$ long $>$ \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em compute the dot product of the specified rays, one of which is a vector \end{DoxyCompactList}\item 
+D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c)
 \begin{DoxyCompactList}\small\item\em Compute the dot product between the ray and the constraint. \end{DoxyCompactList}\item 
-D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ga240d91c518c3bfe3817504de43039022}{operator$\ast$} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&c, \hyperlink{group___c_l_s_solvers_classray}{ray} \&r)
+D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}{L\+P\+\_\+\+Solvers\+::operator$\ast$} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r)
 \begin{DoxyCompactList}\small\item\em Compute the dot product between the ray and the constraint. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_gaaa48bb668551858c8d53e230546042ba}{operator+} (\hyperlink{group___c_l_s_solvers_classray}{ray} \&, \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}{L\+P\+\_\+\+Solvers\+::operator+} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Add the two rays. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_gafcb092cfc55771c4303f540cb7697a40}{operator-\/} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}{L\+P\+\_\+\+Solvers\+::operator-\/} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Subtract the two rays. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_gafb95c2b09dc0a5ea693a99cb8340ff28}{ray\+\_\+sum} (const set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$ \&)
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}{L\+P\+\_\+\+Solvers\+::ray\+\_\+sum} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Add all the rays in a set. \end{DoxyCompactList}\item 
-set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \hyperlink{group___c_l_s_solvers_ga2b6dbec1643b53f8e613b0a3de07f3ce}{union\+\_\+of\+\_\+edge\+\_\+sets} (const set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \&, const set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \&)
-\end{DoxyCompactItemize}
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}{L\+P\+\_\+\+Solvers\+::union\+\_\+of\+\_\+edge\+\_\+sets} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&, const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&)
+\begin{DoxyCompactList}\small\item\em computes the union of the specified edge sets \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -55,9 +66,9 @@ classes that solve constrained linear systems
 Classes in this group solve constrained linear systems; that is, they solve systems of the form $\left\{\sum_{j=1}^na_{ij}x_j\leq b_i\right\}_{i=1}^m$ (where the inequality may or may not be strict). 
 
 \subsection{Class Documentation}
-\index{constraint@{constraint}}\label{classconstraint}
-\Hypertarget{group___c_l_s_solvers_classconstraint}
-\subsubsection{class constraint}
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}\label{class_l_p___solvers_1_1_constraint}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:Constraint}
 a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $ 
 
 \begin{DoxyAuthor}{Author}
@@ -74,61 +85,64 @@ The University of Southern Mississippi
 \end{DoxyCopyright}
 This class encapsulates a simple constraint for a skeleton; that is, an inequality of the form $ c_1 x_1 + \ldots + c_n x_n \geq 0 $. Constraints can be ordered lexicographically using the less-\/than operator, allowing for their inclusion in ordered collections, such as sets. 
 
-Definition at line 53 of file lp\+\_\+solver.\+hpp.
+Definition at line 72 of file lp\+\_\+solver.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___c_l_s_solvers_aac499533508fc7e6fcdfad614dbecc48}{constraint} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
+\hyperlink{group___c_l_s_solvers_a461ed6a3396f874d12b2aec6996180d9}{Constraint} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Initialize constraint to the given coefficients. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_abcf2ec568e0dcfd37c2dc150b738ad2d}{constraint} (vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&)
+\hyperlink{group___c_l_s_solvers_abc362e0473a75944d6b8830f6dc33846}{Constraint} (vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&)
 \begin{DoxyCompactList}\small\item\em Initialize constraint to the given coefficients. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a796ee0ed5407fb1e4a4774156f0faac9}\label{group___c_l_s_solvers_a796ee0ed5407fb1e4a4774156f0faac9}} 
-\hyperlink{group___c_l_s_solvers_a796ee0ed5407fb1e4a4774156f0faac9}{constraint} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_aacfc403f974d4749f133aebdc6f1fb63}\label{group___c_l_s_solvers_aacfc403f974d4749f133aebdc6f1fb63}} 
+\hyperlink{group___c_l_s_solvers_aacfc403f974d4749f133aebdc6f1fb63}{Constraint} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
 \begin{DoxyCompactList}\small\item\em Copies the coefficients of the other constraint, including the allocation of new memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___c_l_s_solvers_a02e58b1ce0b271e3daac2da841152582}{$\sim$constraint} ()
+\hyperlink{group___c_l_s_solvers_a2949083e68c41842b613bd8cf78c6389}{$\sim$\+Constraint} ()
 \begin{DoxyCompactList}\small\item\em Deletes memory allocated by the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
+\begin{Indent}\textbf{ Basic properties}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___c_l_s_solvers_a10b3789ede36e0b614fb76fbe0248476}\label{group___c_l_s_solvers_a10b3789ede36e0b614fb76fbe0248476}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a10b3789ede36e0b614fb76fbe0248476}{get\+\_\+number\+\_\+of\+\_\+variables} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of variables in the constraint. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___c_l_s_solvers_a286fb7825aa45114478110e17bef1ccc}\label{group___c_l_s_solvers_a286fb7825aa45114478110e17bef1ccc}} 
+C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a286fb7825aa45114478110e17bef1ccc}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index) const
+\begin{DoxyCompactList}\small\item\em Returns the coefficient indicated. Numbering starts at 0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___c_l_s_solvers_a4e6dd23c317ce6865167b30d1d75de19}\label{group___c_l_s_solvers_a4e6dd23c317ce6865167b30d1d75de19}} 
+const C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_a4e6dd23c317ce6865167b30d1d75de19}{coeffs} () const
+\begin{DoxyCompactList}\small\item\em Returns the coefficients that determine this constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
 \subsubsection*{Friends}
+\begin{Indent}\textbf{ Comparisons}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group___c_l_s_solvers_ad7246226080bd15a0d477cd905b4b71c}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em Lexicographic comparison of constraints. \end{DoxyCompactList}\item 
+bool \hyperlink{group___c_l_s_solvers_a9411a8f6505608b523a4d5f28014d4c2}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint equality \end{DoxyCompactList}\item 
+bool \hyperlink{group___c_l_s_solvers_ab67011dc88bf8927d50bf3806e792f8b}{operator!=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
 \begin{Indent}\textbf{ I/O}\par
 \begin{DoxyCompactItemize}
 \item 
-ostream \& \hyperlink{group___c_l_s_solvers_a829b1dbba361c34d021ebe82ccf5cb7f}{operator$<$$<$} (ostream \&, const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)
+ostream \& \hyperlink{group___c_l_s_solvers_a7233f9b589a413e310991431039b05b6}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c)
 \begin{DoxyCompactList}\small\item\em print a representation of the constraint to the stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
-\subsubsection*{Basic properties}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a62f9d6527236b92bce67ef3251ba1fae}\label{group___c_l_s_solvers_a62f9d6527236b92bce67ef3251ba1fae}} 
-N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a62f9d6527236b92bce67ef3251ba1fae}{get\+\_\+number\+\_\+of\+\_\+variables} () const
-\begin{DoxyCompactList}\small\item\em Returns the number of variables in the constraint. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aab075ba7c8fa216eff36aeee8fc5552e}\label{group___c_l_s_solvers_aab075ba7c8fa216eff36aeee8fc5552e}} 
-C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_aab075ba7c8fa216eff36aeee8fc5552e}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index) const
-\begin{DoxyCompactList}\small\item\em Returns the coefficient indicated. Numbering starts at 0. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ac70165b34389dbe7e58d757e1f16bd8d}\label{group___c_l_s_solvers_ac70165b34389dbe7e58d757e1f16bd8d}} 
-const C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_ac70165b34389dbe7e58d757e1f16bd8d}{coeffs} () const
-\begin{DoxyCompactList}\small\item\em Returns the coefficients that determine this constraints. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_aecc988c4f28198ecc105f60eddfbfddc}{operator$<$} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&a, const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&b)
-\begin{DoxyCompactList}\small\item\em Lexicographic comparison of constraints. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_acb6f7858d12f0c03f1c8be86ecbef902}{operator==} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&a, const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&b)
-\begin{DoxyCompactList}\small\item\em check for constraint equality \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a6b57d19474acdea10ab0a0e954ef3ef9}{operator!=} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&a, const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&b)
-\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a75ee7037f652ba94155890c109b88ef8}{operator!=} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&a, \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&b)
-\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_aac499533508fc7e6fcdfad614dbecc48}\label{group___c_l_s_solvers_aac499533508fc7e6fcdfad614dbecc48}} 
-\index{constraint@{constraint}!constraint@{constraint}}
-\index{constraint@{constraint}!constraint@{constraint}}
-\subparagraph{\texorpdfstring{constraint()}{constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily constraint\+::constraint (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+variables,  }\item[{C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE}]{coeffs\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_a461ed6a3396f874d12b2aec6996180d9}\label{group___c_l_s_solvers_a461ed6a3396f874d12b2aec6996180d9}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!Constraint@{Constraint}}
+\index{Constraint@{Constraint}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
+\subparagraph{\texorpdfstring{Constraint()}{Constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Constraint\+::\+Constraint (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+variables,  }\item[{C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE}]{coeffs\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
@@ -146,13 +160,13 @@ the size of the array needs to be at least as long as the dimension!
 \end{DoxyPrecond}
 
 
-Definition at line 23 of file lp\+\_\+solver.\+cpp.
+Definition at line 25 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_abcf2ec568e0dcfd37c2dc150b738ad2d}\label{group___c_l_s_solvers_abcf2ec568e0dcfd37c2dc150b738ad2d}} 
-\index{constraint@{constraint}!constraint@{constraint}}
-\index{constraint@{constraint}!constraint@{constraint}}
-\subparagraph{\texorpdfstring{constraint()}{constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily constraint\+::constraint (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&}]{coeffs }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_abc362e0473a75944d6b8830f6dc33846}\label{group___c_l_s_solvers_abc362e0473a75944d6b8830f6dc33846}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!Constraint@{Constraint}}
+\index{Constraint@{Constraint}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
+\subparagraph{\texorpdfstring{Constraint()}{Constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Constraint\+::\+Constraint (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&}]{coeffs }\end{DoxyParamCaption})}
 
 
 
@@ -168,13 +182,13 @@ The resulting constraint is $ c_1x_1 + \cdots + c_nx_n \geq 0, $ where $ c_i $ i
 \end{DoxyPostcond}
 
 
-Definition at line 31 of file lp\+\_\+solver.\+cpp.
+Definition at line 33 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a02e58b1ce0b271e3daac2da841152582}\label{group___c_l_s_solvers_a02e58b1ce0b271e3daac2da841152582}} 
-\index{constraint@{constraint}!````~constraint@{$\sim$constraint}}
-\index{````~constraint@{$\sim$constraint}!constraint@{constraint}}
-\subparagraph{\texorpdfstring{$\sim$constraint()}{~constraint()}}
-{\footnotesize\ttfamily constraint\+::$\sim$constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_a2949083e68c41842b613bd8cf78c6389}\label{group___c_l_s_solvers_a2949083e68c41842b613bd8cf78c6389}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!````~Constraint@{$\sim$\+Constraint}}
+\index{````~Constraint@{$\sim$\+Constraint}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
+\subparagraph{\texorpdfstring{$\sim$\+Constraint()}{~Constraint()}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Constraint\+::$\sim$\+Constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -182,120 +196,121 @@ Deletes memory allocated by the constructor.
 
 Currently, that means it deletes an array created by the constructors. 
 
-Definition at line 111 of file lp\+\_\+solver.\+cpp.
+Definition at line 113 of file lp\+\_\+solver.\+cpp.
 
 
 
 \paragraph{Friends And Related Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a6b57d19474acdea10ab0a0e954ef3ef9}\label{group___c_l_s_solvers_a6b57d19474acdea10ab0a0e954ef3ef9}} 
-\index{constraint@{constraint}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!constraint@{constraint}}
-\subparagraph{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+\mbox{\Hypertarget{group___c_l_s_solvers_ab67011dc88bf8927d50bf3806e792f8b}\label{group___c_l_s_solvers_ab67011dc88bf8927d50bf3806e792f8b}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
+\subparagraph{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 check for constraint inequality 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & a constraint \\
-\hline
-{\em b} & a constraint \\
-\hline
-\end{DoxyParams}
-\begin{DoxyWarning}{Warning}
-This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
-\end{DoxyWarning}
-\mbox{\Hypertarget{group___c_l_s_solvers_a75ee7037f652ba94155890c109b88ef8}\label{group___c_l_s_solvers_a75ee7037f652ba94155890c109b88ef8}} 
-\index{constraint@{constraint}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!constraint@{constraint}}
-\subparagraph{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{a,  }\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
-
-
-
-check for constraint inequality 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a} & a constraint \\
-\hline
-{\em b} & a constraint \\
-\hline
-\end{DoxyParams}
 \begin{DoxyWarning}{Warning}
 This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
 
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have different entries 
+\end{DoxyReturn}
 
-Definition at line 71 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_aecc988c4f28198ecc105f60eddfbfddc}\label{group___c_l_s_solvers_aecc988c4f28198ecc105f60eddfbfddc}} 
-\index{constraint@{constraint}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!constraint@{constraint}}
+Definition at line 73 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_ad7246226080bd15a0d477cd905b4b71c}\label{group___c_l_s_solvers_ad7246226080bd15a0d477cd905b4b71c}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
 \subparagraph{\texorpdfstring{operator$<$}{operator<}}
-{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 Lexicographic comparison of constraints. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & a constraint \\
-\hline
-{\em b} & a constraint \\
-\hline
-\end{DoxyParams}
 \begin{DoxyWarning}{Warning}
 This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
 
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have different entries 
+\end{DoxyReturn}
 
-Definition at line 48 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a829b1dbba361c34d021ebe82ccf5cb7f}\label{group___c_l_s_solvers_a829b1dbba361c34d021ebe82ccf5cb7f}} 
-\index{constraint@{constraint}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!constraint@{constraint}}
+Definition at line 50 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a7233f9b589a413e310991431039b05b6}\label{group___c_l_s_solvers_a7233f9b589a413e310991431039b05b6}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
 \subparagraph{\texorpdfstring{operator$<$$<$}{operator<<}}
-{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{ostr,  }\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 print a representation of the constraint to the stream 
 
-Output is of the form $ c_1 x_1 + \ldots + c_n x_n $ , where $ c_i $ is the coefficient of $ x_i $. 
+Output is of the form $ c_1 x_1 + \ldots + c_n x_n $ , where $ c_i $ is the coefficient of $ x_i $.
 
-Definition at line 81 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_acb6f7858d12f0c03f1c8be86ecbef902}\label{group___c_l_s_solvers_acb6f7858d12f0c03f1c8be86ecbef902}} 
-\index{constraint@{constraint}!operator==@{operator==}}
-\index{operator==@{operator==}!constraint@{constraint}}
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+{\em c} & constraint to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 83 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a9411a8f6505608b523a4d5f28014d4c2}\label{group___c_l_s_solvers_a9411a8f6505608b523a4d5f28014d4c2}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
 \subparagraph{\texorpdfstring{operator==}{operator==}}
-{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 check for constraint equality 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & a constraint \\
-\hline
-{\em b} & a constraint \\
-\hline
-\end{DoxyParams}
 \begin{DoxyWarning}{Warning}
 This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
 
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have the same entries 
+\end{DoxyReturn}
 
-Definition at line 61 of file lp\+\_\+solver.\+cpp.
 
-\index{edge@{edge}}\label{classedge}
-\Hypertarget{group___c_l_s_solvers_classedge}
-\subsubsection{class edge}
+Definition at line 63 of file lp\+\_\+solver.\+cpp.
+
+\index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}\label{class_l_p___solvers_1_1_edge}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:Edge}
 an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $ 
 
 \begin{DoxyAuthor}{Author}
@@ -317,93 +332,128 @@ An edge\textquotesingle{}s rays should have the same dimension. To start with, i
 \end{DoxyWarning}
 
 
-Definition at line 58 of file skeleton.\+hpp.
+Definition at line 60 of file skeleton.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a80e74eefbaf1864ae1297fe2cea223ad}\label{group___c_l_s_solvers_a80e74eefbaf1864ae1297fe2cea223ad}} 
-\hyperlink{group___c_l_s_solvers_a80e74eefbaf1864ae1297fe2cea223ad}{edge} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a0e0d55af1b62a30f927d22a4d4a606aa}\label{group___c_l_s_solvers_a0e0d55af1b62a30f927d22a4d4a606aa}} 
+\hyperlink{group___c_l_s_solvers_a0e0d55af1b62a30f927d22a4d4a606aa}{Edge} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Creates a new edge that joins the two rays. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a93cf571922e2c7609ddeccaa24df1b59}\label{group___c_l_s_solvers_a93cf571922e2c7609ddeccaa24df1b59}} 
-\hyperlink{group___c_l_s_solvers_a93cf571922e2c7609ddeccaa24df1b59}{edge} (const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a057b073d9eb422d71f083f2422eafcef}\label{group___c_l_s_solvers_a057b073d9eb422d71f083f2422eafcef}} 
+\hyperlink{group___c_l_s_solvers_a057b073d9eb422d71f083f2422eafcef}{Edge} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&)
 \begin{DoxyCompactList}\small\item\em Copies the rays in {\ttfamily other} to two new rays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___c_l_s_solvers_a6295b7f8e62fa95cd887fb78d64347f5}{$\sim$edge} ()
+\hyperlink{group___c_l_s_solvers_a752de1869e522b7b7a1eb9ef67664c9f}{$\sim$\+Edge} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a7c35e5555bd71f1e9f6231216b8c882e}\label{group___c_l_s_solvers_a7c35e5555bd71f1e9f6231216b8c882e}} 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_a7c35e5555bd71f1e9f6231216b8c882e}{get\+\_\+first\+\_\+ray} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a42bdb7c77776fcdd004ccc116dad062c}\label{group___c_l_s_solvers_a42bdb7c77776fcdd004ccc116dad062c}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_a42bdb7c77776fcdd004ccc116dad062c}{get\+\_\+first\+\_\+ray} () const
 \begin{DoxyCompactList}\small\item\em Returns the first ray listed in this edge. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a2baca8d9ca7f40edfb9364df3ec4c4a8}\label{group___c_l_s_solvers_a2baca8d9ca7f40edfb9364df3ec4c4a8}} 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \hyperlink{group___c_l_s_solvers_a2baca8d9ca7f40edfb9364df3ec4c4a8}{get\+\_\+second\+\_\+ray} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a9d370c22d17a71e588e1e7f55dd92546}\label{group___c_l_s_solvers_a9d370c22d17a71e588e1e7f55dd92546}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_a9d370c22d17a71e588e1e7f55dd92546}{get\+\_\+second\+\_\+ray} () const
 \begin{DoxyCompactList}\small\item\em Returns the second ray listed in this edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_acd5e308a604773f2d414732b6a873032}\label{group___c_l_s_solvers_acd5e308a604773f2d414732b6a873032}} 
-\hyperlink{group___c_l_s_solvers_classedge}{edge} \& \hyperlink{group___c_l_s_solvers_acd5e308a604773f2d414732b6a873032}{operator=} (const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a61244022cf65ac1c5cb9d11377985bc8}\label{group___c_l_s_solvers_a61244022cf65ac1c5cb9d11377985bc8}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \& \hyperlink{group___c_l_s_solvers_a61244022cf65ac1c5cb9d11377985bc8}{operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&)
 \begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Friends}
 \begin{Indent}\textbf{ Comparison}\par
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{group___c_l_s_solvers_a87086330455166d1fe4bb71be060fbcc}{operator==} (const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&e1, const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&e2)
+bool \hyperlink{group___c_l_s_solvers_a02f62dc93f3810dedf600e1890d0a01a}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e1, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e2)
 \begin{DoxyCompactList}\small\item\em Equal if and only if. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a983f5438e6720d3bc1d7763c0c04fcae}{operator$<$} (const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&, const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&)
+bool \hyperlink{group___c_l_s_solvers_aab1d947f208d0ba281c45ec9717522d6}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e1, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e2)
 \begin{DoxyCompactList}\small\item\em Compares two edges lexicographically. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ I/O}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aad6bb96213a9839cb6b32592a4105f53}\label{group___c_l_s_solvers_aad6bb96213a9839cb6b32592a4105f53}} 
-ostream \& \hyperlink{group___c_l_s_solvers_aad6bb96213a9839cb6b32592a4105f53}{operator$<$$<$} (ostream \&, const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&)
+ostream \& \hyperlink{group___c_l_s_solvers_a21cc787db181be486f871e88cfc2ef54}{operator$<$$<$} (ostream \&ostr, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e)
 \begin{DoxyCompactList}\small\item\em Output has the form $ \{ \mathbf{r}_1, \mathbf{r}_2 \} $ where $ \mathbf{r}_1 $ is the first ray in this edge, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a6295b7f8e62fa95cd887fb78d64347f5}\label{group___c_l_s_solvers_a6295b7f8e62fa95cd887fb78d64347f5}} 
-\index{edge@{edge}!````~edge@{$\sim$edge}}
-\index{````~edge@{$\sim$edge}!edge@{edge}}
-\subparagraph{\texorpdfstring{$\sim$edge()}{~edge()}}
-{\footnotesize\ttfamily edge\+::$\sim$edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a752de1869e522b7b7a1eb9ef67664c9f}\label{group___c_l_s_solvers_a752de1869e522b7b7a1eb9ef67664c9f}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}!````~Edge@{$\sim$\+Edge}}
+\index{````~Edge@{$\sim$\+Edge}!L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}
+\subparagraph{\texorpdfstring{$\sim$\+Edge()}{~Edge()}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Edge\+::$\sim$\+Edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Does nothing beyond what the compiler would do. 
 
-Definition at line 76 of file skeleton.\+hpp.
+Definition at line 78 of file skeleton.\+hpp.
 
 
 
 \paragraph{Friends And Related Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a983f5438e6720d3bc1d7763c0c04fcae}\label{group___c_l_s_solvers_a983f5438e6720d3bc1d7763c0c04fcae}} 
-\index{edge@{edge}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!edge@{edge}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aab1d947f208d0ba281c45ec9717522d6}\label{group___c_l_s_solvers_aab1d947f208d0ba281c45ec9717522d6}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}
 \subparagraph{\texorpdfstring{operator$<$}{operator<}}
-{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&}]{first,  }\item[{const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e1,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 Compares two edges lexicographically. 
 
-If the first ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. Otherwise, if the first rays are equal, and the second ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. 
+If the first ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. Otherwise, if the first rays are equal, and the second ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller.
 
-Definition at line 58 of file skeleton.\+cpp.
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the first edge is lexicographically smaller
+\end{DoxyReturn}
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a87086330455166d1fe4bb71be060fbcc}\label{group___c_l_s_solvers_a87086330455166d1fe4bb71be060fbcc}} 
-\index{edge@{edge}!operator==@{operator==}}
-\index{operator==@{operator==}!edge@{edge}}
+\begin{DoxyParams}{Parameters}
+{\em e1} & an edge \\
+\hline
+{\em e2} & an edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a21cc787db181be486f871e88cfc2ef54}\label{group___c_l_s_solvers_a21cc787db181be486f871e88cfc2ef54}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}
+\subparagraph{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{ostr,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output has the form $ \{ \mathbf{r}_1, \mathbf{r}_2 \} $ where $ \mathbf{r}_1 $ is the first ray in this edge, etc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ostr} & output stream to write to \\
+\hline
+{\em e} & edge to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a02f62dc93f3810dedf600e1890d0a01a}\label{group___c_l_s_solvers_a02f62dc93f3810dedf600e1890d0a01a}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}
 \subparagraph{\texorpdfstring{operator==}{operator==}}
-{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&}]{e1,  }\item[{const \hyperlink{group___c_l_s_solvers_classedge}{edge} \&}]{e2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e1,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
@@ -417,15 +467,15 @@ Equal if and only if.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-{\ttfamily true} if and only if the linked rays are identical 
+{\ttfamily true} if and only if the edges have identical entries 
 \end{DoxyReturn}
 
 
-Definition at line 100 of file skeleton.\+hpp.
+Definition at line 60 of file skeleton.\+cpp.
 
-\index{G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}}\label{class_g_l_p_k___solver}
-\Hypertarget{group___c_l_s_solvers_class_g_l_p_k___solver}
-\subsubsection{class G\+L\+P\+K\+\_\+\+Solver}
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_g_l_p_k___solver}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:G\+L\+P\+K\+\_\+\+Solver}
 approximate skeleton of a polyhedral cone, using G\+L\+PK linear solver 
 
 \begin{DoxyAuthor}{Author}
@@ -442,9 +492,9 @@ The University of Southern Mississippi
 \end{DoxyCopyright}
 This class serves as an interface to G\+L\+PK \cite{glpk}, which we can use to find an approximate skeleton to a polyhedral cone. 
 
-Definition at line 37 of file glpk\+\_\+solver.\+hpp.
+Definition at line 39 of file glpk\+\_\+solver.\+hpp.
 
-Inheritance diagram for G\+L\+P\+K\+\_\+\+Solver\+:\begin{figure}[H]
+Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:G\+L\+P\+K\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{group___c_l_s_solvers}
@@ -454,62 +504,60 @@ Inheritance diagram for G\+L\+P\+K\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a290ed6f0f6be3c6edf5ec5b5f5bfbb3a}\label{group___c_l_s_solvers_a290ed6f0f6be3c6edf5ec5b5f5bfbb3a}} 
-\hyperlink{group___c_l_s_solvers_a290ed6f0f6be3c6edf5ec5b5f5bfbb3a}{G\+L\+P\+K\+\_\+\+Solver} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n)
+\mbox{\Hypertarget{group___c_l_s_solvers_a10b3981d1807e86315318505ae0faeba}\label{group___c_l_s_solvers_a10b3981d1807e86315318505ae0faeba}} 
+\hyperlink{group___c_l_s_solvers_a10b3981d1807e86315318505ae0faeba}{G\+L\+P\+K\+\_\+\+Solver} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n)
 \begin{DoxyCompactList}\small\item\em initializes solver for $ n $ variables \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6cbd7db2555c39cb789fa45a8ad22f8f}\label{group___c_l_s_solvers_a6cbd7db2555c39cb789fa45a8ad22f8f}} 
-\hyperlink{group___c_l_s_solvers_a6cbd7db2555c39cb789fa45a8ad22f8f}{G\+L\+P\+K\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}\label{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}} 
+\hyperlink{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}{G\+L\+P\+K\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver} \&)
 \begin{DoxyCompactList}\small\item\em copy constructor (deep copy) \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_aff3a58ef3def363dfad9e0ba8eee3e67}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a4a4505a58f6d0f93a1c003797b39e468}\label{group___c_l_s_solvers_a4a4505a58f6d0f93a1c003797b39e468}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a5712c834300cea2063aa932ad8a817d7}\label{group___c_l_s_solvers_a5712c834300cea2063aa932ad8a817d7}} 
 virtual {\bfseries $\sim$\+G\+L\+P\+K\+\_\+\+Solver} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aa7ea7b9f4bb731fcb3b48991d33efe0a}\label{group___c_l_s_solvers_aa7ea7b9f4bb731fcb3b48991d33efe0a}} 
-virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_aa7ea7b9f4bb731fcb3b48991d33efe0a}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}\label{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}{get\+\_\+dimension} () const
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae687af797043acd0e7621e75dd97b37a}\label{group___c_l_s_solvers_ae687af797043acd0e7621e75dd97b37a}} 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_ae687af797043acd0e7621e75dd97b37a}{get\+\_\+number\+\_\+of\+\_\+rays} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}\label{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}} 
+virtual unsigned long \hyperlink{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}{get\+\_\+number\+\_\+of\+\_\+rays} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of rays defining the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_abd6239c7b6c914ba4c30e357d9fbc59c}\label{group___c_l_s_solvers_abd6239c7b6c914ba4c30e357d9fbc59c}} 
-virtual const set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$ \& \hyperlink{group___c_l_s_solvers_abd6239c7b6c914ba4c30e357d9fbc59c}{get\+\_\+rays} ()
-\begin{DoxyCompactList}\small\item\em Returns the rays that define the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a714f9e1e02b53d1a785297e86567b133}\label{group___c_l_s_solvers_a714f9e1e02b53d1a785297e86567b133}} 
-virtual unsigned long {\bfseries get\+\_\+number\+\_\+of\+\_\+constraints} ()
-\end{DoxyCompactItemize}
+virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}{get\+\_\+rays} ()
+\begin{DoxyCompactList}\small\item\em Returns rays that define a skeleton. \end{DoxyCompactList}\item 
+virtual unsigned long \hyperlink{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_acb3a10f3961c65b4cf23ff61f0e2310b}{solve} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a6d800f0ec270c782e3cf855aa7f59f4c}{solve} (vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ad79040934b5bf246b24aa36f30403dce}\label{group___c_l_s_solvers_ad79040934b5bf246b24aa36f30403dce}} 
-virtual bool \hyperlink{group___c_l_s_solvers_ad79040934b5bf246b24aa36f30403dce}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
+\mbox{\Hypertarget{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}\label{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}} 
+virtual bool \hyperlink{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
 \begin{DoxyCompactList}\small\item\em tests for consistency of a constraint generated by two monomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsection*{Additional Inherited Members}
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_aff3a58ef3def363dfad9e0ba8eee3e67}\label{group___c_l_s_solvers_aff3a58ef3def363dfad9e0ba8eee3e67}} 
-\index{G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}!copy@{copy}}
-\index{copy@{copy}!G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}\label{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!copy@{copy}}
+\index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool G\+L\+P\+K\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -519,21 +567,63 @@ performs a deep copy, similar to a copy constructor
 {\ttfamily true} iff copying was successful 
 \end{DoxyReturn}
 \begin{DoxyWarning}{Warning}
-Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 58 of file glpk\+\_\+solver.\+cpp.
+Definition at line 60 of file glpk\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_acb3a10f3961c65b4cf23ff61f0e2310b}\label{group___c_l_s_solvers_acb3a10f3961c65b4cf23ff61f0e2310b}} 
-\index{G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}\label{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
+\index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+returns the number of constraints used by the skeleton 
+
+\begin{DoxyReturn}{Returns}
+number of constraints 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 63 of file glpk\+\_\+solver.\+hpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}\label{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!get\+\_\+rays@{get\+\_\+rays}}
+\index{get\+\_\+rays@{get\+\_\+rays}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{get\+\_\+rays()}{get\_rays()}}
+{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns rays that define a skeleton. 
+
+\begin{DoxyReturn}{Returns}
+a set of \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} that define the given skeleton
+\end{DoxyReturn}
+When using an approximate solver such as \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, this will give only an approximate skeleton. 
+
+Reimplemented from \hyperlink{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 144 of file glpk\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}\label{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -547,17 +637,17 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 116 of file glpk\+\_\+solver.\+cpp.
+Definition at line 118 of file glpk\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6d800f0ec270c782e3cf855aa7f59f4c}\label{group___c_l_s_solvers_a6d800f0ec270c782e3cf855aa7f59f4c}} 
-\index{G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!G\+L\+P\+K\+\_\+\+Solver@{G\+L\+P\+K\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}\label{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -571,15 +661,15 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 85 of file glpk\+\_\+solver.\+cpp.
+Definition at line 87 of file glpk\+\_\+solver.\+cpp.
 
-\index{L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}}\label{class_l_p___solver}
-\Hypertarget{group___c_l_s_solvers_class_l_p___solver}
-\subsubsection{class L\+P\+\_\+\+Solver}
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_l_p___solver}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:L\+P\+\_\+\+Solver}
 exact or approximate polyhedral cone solution, with methods allowing definition and refinement 
 
 \begin{DoxyAuthor}{Author}
@@ -597,17 +687,17 @@ The University of Southern Mississippi
 This class encapsulates the skeleton of a polyhedral cone, defined by a sequence of inequalities of the form $ c_1 x_1 + \cdots c_n x_n \geq 0 $.
 
 \begin{DoxyWarning}{Warning}
-Some classes may provide only an {\itshape approximate} cone; see, for example, \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}. In addition, Clients must ensure two things.
+Some classes may provide only an {\itshape approximate} cone; see, for example, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}. In addition, Clients must ensure two things.
 \begin{DoxyEnumerate}
 \item The rays must have the same number $ m $ of dimensions, constraints must have the same number $ n $ of variables, and $ m=n $. Violating any of these three conditions will lead to undesirable behavior.
-\item When refining the cone, it is essential to check that the return value of \hyperlink{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}{solve()} is {\ttfamily true}; for if it is not, then the cone is no longer be consistent. Please read the relevant documentation. 
+\item When refining the cone, it is essential to check that the return value of \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{solve()} is {\ttfamily true}; for if it is not, then the cone is no longer be consistent. Please read the relevant documentation. 
 \end{DoxyEnumerate}
 \end{DoxyWarning}
 
 
-Definition at line 504 of file lp\+\_\+solver.\+hpp.
+Definition at line 564 of file lp\+\_\+solver.\+hpp.
 
-Inheritance diagram for L\+P\+\_\+\+Solver\+:\begin{figure}[H]
+Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:L\+P\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{group___c_l_s_solvers}
@@ -617,62 +707,58 @@ Inheritance diagram for L\+P\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)=0
+virtual bool \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)=0
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a3cdeb4d133d147bae2c071bd41ed10aa}\label{group___c_l_s_solvers_a3cdeb4d133d147bae2c071bd41ed10aa}} 
-virtual \hyperlink{group___c_l_s_solvers_a3cdeb4d133d147bae2c071bd41ed10aa}{$\sim$\+L\+P\+\_\+\+Solver} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a1d530b23b2516c36cbc02173e667d0cf}\label{group___c_l_s_solvers_a1d530b23b2516c36cbc02173e667d0cf}} 
+virtual \hyperlink{group___c_l_s_solvers_a1d530b23b2516c36cbc02173e667d0cf}{$\sim$\+L\+P\+\_\+\+Solver} ()
 \begin{DoxyCompactList}\small\item\em the default destructor does nothing (this is an abstract class) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}{solve} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)=0
+virtual bool \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)=0
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}{solve} (vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&)=0
+virtual bool \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)=0
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properies}\par
-{\em Returns rays that define a skeleton.
-
-When using an approximate solver such as \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, this will give only an approximate skeleton. }\begin{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae85c7e9a24774fd3c08a7dd9a7b8a27c}\label{group___c_l_s_solvers_ae85c7e9a24774fd3c08a7dd9a7b8a27c}} 
-virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ae85c7e9a24774fd3c08a7dd9a7b8a27c}{get\+\_\+dimension} () const =0
+\mbox{\Hypertarget{group___c_l_s_solvers_a5801b4bd5322a78e0cf3dcad83383a2e}\label{group___c_l_s_solvers_a5801b4bd5322a78e0cf3dcad83383a2e}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a5801b4bd5322a78e0cf3dcad83383a2e}{get\+\_\+dimension} () const =0
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a4262d944695d0cfcddf9e24908f72e8f}\label{group___c_l_s_solvers_a4262d944695d0cfcddf9e24908f72e8f}} 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_a4262d944695d0cfcddf9e24908f72e8f}{get\+\_\+number\+\_\+of\+\_\+rays} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}\label{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}} 
+virtual unsigned long \hyperlink{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}{get\+\_\+number\+\_\+of\+\_\+rays} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of rays defining the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a06363bbbc8dfdb4c161a001d24f94afd}\label{group___c_l_s_solvers_a06363bbbc8dfdb4c161a001d24f94afd}} 
-virtual const set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$ \& \hyperlink{group___c_l_s_solvers_a06363bbbc8dfdb4c161a001d24f94afd}{get\+\_\+rays} ()
-\begin{DoxyCompactList}\small\item\em Returns the rays that define the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a0b587fd39cbefe969e4b3dbf34387b08}\label{group___c_l_s_solvers_a0b587fd39cbefe969e4b3dbf34387b08}} 
-virtual unsigned long {\bfseries get\+\_\+number\+\_\+of\+\_\+constraints} ()=0
-\end{DoxyCompactItemize}
+virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}{get\+\_\+rays} ()
+\begin{DoxyCompactList}\small\item\em Returns rays that define a skeleton. \end{DoxyCompactList}\item 
+virtual unsigned long \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{get\+\_\+number\+\_\+of\+\_\+constraints} ()=0
+\begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a2e909dd41a7f116c62868e3e6c278a2e}\label{group___c_l_s_solvers_a2e909dd41a7f116c62868e3e6c278a2e}} 
-virtual bool \hyperlink{group___c_l_s_solvers_a2e909dd41a7f116c62868e3e6c278a2e}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
+\mbox{\Hypertarget{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}\label{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}} 
+virtual bool \hyperlink{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
 \begin{DoxyCompactList}\small\item\em tests for consistency of a constraint generated by two monomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$ \hyperlink{group___c_l_s_solvers_aa89c9167eb3ef921b57d74057217f407}{rays}
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \hyperlink{group___c_l_s_solvers_ad4c9fb3708c156496c23515c8e841374}{rays}
 \end{DoxyCompactItemize}
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}\label{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}} 
-\index{L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}!copy@{copy}}
-\index{copy@{copy}!L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}\label{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!copy@{copy}}
+\index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -682,17 +768,55 @@ performs a deep copy, similar to a copy constructor
 {\ttfamily true} iff copying was successful 
 \end{DoxyReturn}
 \begin{DoxyWarning}{Warning}
-Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_a42d30b92f27936eab11d0fa4f0cc10b4}{skeleton}, \hyperlink{group___c_l_s_solvers_a67408174d2260de5ae5f070a70f27e9d}{P\+P\+L\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_aff3a58ef3def363dfad9e0ba8eee3e67}{G\+L\+P\+K\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}\label{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}} 
-\index{L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}\label{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
+\index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+returns the number of constraints used by the skeleton 
+
+\begin{DoxyReturn}{Returns}
+number of constraints 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}\label{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!get\+\_\+rays@{get\+\_\+rays}}
+\index{get\+\_\+rays@{get\+\_\+rays}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{get\+\_\+rays()}{get\_rays()}}
+{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Returns rays that define a skeleton. 
+
+\begin{DoxyReturn}{Returns}
+a set of \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} that define the given skeleton
+\end{DoxyReturn}
+When using an approximate solver such as \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, this will give only an approximate skeleton. 
+
+Reimplemented in \hyperlink{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
+
+
+
+Definition at line 380 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}\label{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -706,13 +830,13 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_a8add1433d3bc6b1a8588f0f88134599f}{skeleton}, \hyperlink{group___c_l_s_solvers_acb3a10f3961c65b4cf23ff61f0e2310b}{G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a1ff16def22c734348c626b65437dd1e3}{P\+P\+L\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}\label{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}} 
-\index{L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}\label{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual bool L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -726,24 +850,24 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_ac366952c2b0908159255916a1e37f9b3}{skeleton}, \hyperlink{group___c_l_s_solvers_a6d800f0ec270c782e3cf855aa7f59f4c}{G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a5000b8c5bee37029276ce63a3568bfb7}{P\+P\+L\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
 
 
 
 \paragraph{Member Data Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_aa89c9167eb3ef921b57d74057217f407}\label{group___c_l_s_solvers_aa89c9167eb3ef921b57d74057217f407}} 
-\index{L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}!rays@{rays}}
-\index{rays@{rays}!L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad4c9fb3708c156496c23515c8e841374}\label{group___c_l_s_solvers_ad4c9fb3708c156496c23515c8e841374}} 
+\index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!rays@{rays}}
+\index{rays@{rays}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{rays}{rays}}
-{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_classray}{ray}$>$ L\+P\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}$>$ L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [protected]}}
 
 the skeleton (may be approximate, depending on solver) 
 
-Definition at line 602 of file lp\+\_\+solver.\+hpp.
+Definition at line 666 of file lp\+\_\+solver.\+hpp.
 
-\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}\label{class_p_p_l___solver}
-\Hypertarget{group___c_l_s_solvers_class_p_p_l___solver}
-\subsubsection{class P\+P\+L\+\_\+\+Solver}
+\index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_p_p_l___solver}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:P\+P\+L\+\_\+\+Solver}
 approximate skeleton of a polyhedral cone, using P\+PL linear solver 
 
 \begin{DoxyAuthor}{Author}
@@ -760,9 +884,9 @@ The University of Southern Mississippi
 \end{DoxyCopyright}
 This class serves as an interface to P\+PL \cite{BagnaraHZ08SCP}, which we can use to find the skeleton to a polyhedral cone. 
 
-Definition at line 38 of file ppl\+\_\+solver.\+hpp.
+Definition at line 40 of file ppl\+\_\+solver.\+hpp.
 
-Inheritance diagram for P\+P\+L\+\_\+\+Solver\+:\begin{figure}[H]
+Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:P\+P\+L\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{group___c_l_s_solvers}
@@ -772,75 +896,74 @@ Inheritance diagram for P\+P\+L\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a7484421e15572f77d014b2feb9d79f04}\label{group___c_l_s_solvers_a7484421e15572f77d014b2feb9d79f04}} 
-\hyperlink{group___c_l_s_solvers_a7484421e15572f77d014b2feb9d79f04}{P\+P\+L\+\_\+\+Solver} (N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_aa70891def9af366c47e01acf952bbdba}{n})
+\mbox{\Hypertarget{group___c_l_s_solvers_a8676ceed54fc8883fd0c2cab45e7d9a4}\label{group___c_l_s_solvers_a8676ceed54fc8883fd0c2cab45e7d9a4}} 
+\hyperlink{group___c_l_s_solvers_a8676ceed54fc8883fd0c2cab45e7d9a4}{P\+P\+L\+\_\+\+Solver} (N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a10d4394603a6a565a95fc65ce0f9a172}{n})
 \begin{DoxyCompactList}\small\item\em initializes solver for $ n $ variables \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a7aa1c2c02e059f35f9d9faca9e94f859}\label{group___c_l_s_solvers_a7aa1c2c02e059f35f9d9faca9e94f859}} 
-\hyperlink{group___c_l_s_solvers_a7aa1c2c02e059f35f9d9faca9e94f859}{P\+P\+L\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}\label{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}} 
+\hyperlink{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}{P\+P\+L\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \&)
 \begin{DoxyCompactList}\small\item\em copy constructor (deep copy) \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a67408174d2260de5ae5f070a70f27e9d}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aecb2caed09777ca3b6d5e285540abe56}\label{group___c_l_s_solvers_aecb2caed09777ca3b6d5e285540abe56}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a2d4cd90b9e8bab2ff0fe3178bb894e75}\label{group___c_l_s_solvers_a2d4cd90b9e8bab2ff0fe3178bb894e75}} 
 virtual {\bfseries $\sim$\+P\+P\+L\+\_\+\+Solver} ()
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a40b49fb3bb0b14cc66cabf54ef17e437}\label{group___c_l_s_solvers_a40b49fb3bb0b14cc66cabf54ef17e437}} 
-virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a40b49fb3bb0b14cc66cabf54ef17e437}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}\label{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}{get\+\_\+dimension} () const
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a7d09fe31148950d46219df67719aef3f}\label{group___c_l_s_solvers_a7d09fe31148950d46219df67719aef3f}} 
-virtual unsigned long {\bfseries get\+\_\+number\+\_\+of\+\_\+constraints} ()
-\end{DoxyCompactItemize}
+virtual unsigned long \hyperlink{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_a1ff16def22c734348c626b65437dd1e3}{solve} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a5000b8c5bee37029276ce63a3568bfb7}{solve} (vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a00076ee1e8ef90f7d162f02372529666}\label{group___c_l_s_solvers_a00076ee1e8ef90f7d162f02372529666}} 
-virtual void \hyperlink{group___c_l_s_solvers_a00076ee1e8ef90f7d162f02372529666}{setup\+\_\+rays} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}\label{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}} 
+virtual void \hyperlink{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}{setup\+\_\+rays} ()
 \begin{DoxyCompactList}\small\item\em clear the current set of rays and extracts the ones contained in lp \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6abc19f36a28ed91b4ebc4d3a1e32dc6}\label{group___c_l_s_solvers_a6abc19f36a28ed91b4ebc4d3a1e32dc6}} 
-P\+P\+L\+::\+N\+N\+C\+\_\+\+Polyhedron $\ast$ \hyperlink{group___c_l_s_solvers_a6abc19f36a28ed91b4ebc4d3a1e32dc6}{lp}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad85a1f4b919c2f4580b48360571aaf89}\label{group___c_l_s_solvers_ad85a1f4b919c2f4580b48360571aaf89}} 
+P\+P\+L\+::\+N\+N\+C\+\_\+\+Polyhedron $\ast$ \hyperlink{group___c_l_s_solvers_ad85a1f4b919c2f4580b48360571aaf89}{lp}
 \begin{DoxyCompactList}\small\item\em P\+PL problem interface. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6e3852b048b35faf96d8a12155b0547e}\label{group___c_l_s_solvers_a6e3852b048b35faf96d8a12155b0547e}} 
-unsigned \hyperlink{group___c_l_s_solvers_a6e3852b048b35faf96d8a12155b0547e}{m}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad32a90abf2d1ebba9243715bda4cb0c9}\label{group___c_l_s_solvers_ad32a90abf2d1ebba9243715bda4cb0c9}} 
+unsigned \hyperlink{group___c_l_s_solvers_ad32a90abf2d1ebba9243715bda4cb0c9}{m}
 \begin{DoxyCompactList}\small\item\em number of constraints \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aa70891def9af366c47e01acf952bbdba}\label{group___c_l_s_solvers_aa70891def9af366c47e01acf952bbdba}} 
-N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_aa70891def9af366c47e01acf952bbdba}{n}
+\mbox{\Hypertarget{group___c_l_s_solvers_a10d4394603a6a565a95fc65ce0f9a172}\label{group___c_l_s_solvers_a10d4394603a6a565a95fc65ce0f9a172}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a10d4394603a6a565a95fc65ce0f9a172}{n}
 \begin{DoxyCompactList}\small\item\em number of variables \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a90bb9152de9b1260cdbf938010cd48b2}\label{group___c_l_s_solvers_a90bb9152de9b1260cdbf938010cd48b2}} 
-R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_a90bb9152de9b1260cdbf938010cd48b2}{ray\+\_\+data}
+\mbox{\Hypertarget{group___c_l_s_solvers_a7e2dd1cfc4bea9e765b405b7297a6838}\label{group___c_l_s_solvers_a7e2dd1cfc4bea9e765b405b7297a6838}} 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_a7e2dd1cfc4bea9e765b405b7297a6838}{ray\+\_\+data}
 \begin{DoxyCompactList}\small\item\em used to retrieve rays \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a157a18ab31b415a615bca9845248bfcc}\label{group___c_l_s_solvers_a157a18ab31b415a615bca9845248bfcc}} 
-P\+P\+L\+::\+Variable $\ast$$\ast$ \hyperlink{group___c_l_s_solvers_a157a18ab31b415a615bca9845248bfcc}{X}
+\mbox{\Hypertarget{group___c_l_s_solvers_a3579e5105b375b1eb7e9237c39f749fa}\label{group___c_l_s_solvers_a3579e5105b375b1eb7e9237c39f749fa}} 
+P\+P\+L\+::\+Variable $\ast$$\ast$ \hyperlink{group___c_l_s_solvers_a3579e5105b375b1eb7e9237c39f749fa}{X}
 \begin{DoxyCompactList}\small\item\em array of variables \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a346402cddefaa715291dfb7f243073a2}\label{group___c_l_s_solvers_a346402cddefaa715291dfb7f243073a2}} 
-static unsigned \hyperlink{group___c_l_s_solvers_a346402cddefaa715291dfb7f243073a2}{instances} = 0
+\mbox{\Hypertarget{group___c_l_s_solvers_a4c6a4a141e8c2eb4adbdef6ad73cec21}\label{group___c_l_s_solvers_a4c6a4a141e8c2eb4adbdef6ad73cec21}} 
+static unsigned \hyperlink{group___c_l_s_solvers_a4c6a4a141e8c2eb4adbdef6ad73cec21}{instances} = 0
 \begin{DoxyCompactList}\small\item\em number of P\+PL instances \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a67408174d2260de5ae5f070a70f27e9d}\label{group___c_l_s_solvers_a67408174d2260de5ae5f070a70f27e9d}} 
-\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!copy@{copy}}
-\index{copy@{copy}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}\label{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}} 
+\index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!copy@{copy}}
+\index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -850,21 +973,42 @@ performs a deep copy, similar to a copy constructor
 {\ttfamily true} iff copying was successful 
 \end{DoxyReturn}
 \begin{DoxyWarning}{Warning}
-Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 82 of file ppl\+\_\+solver.\+cpp.
+Definition at line 86 of file ppl\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1ff16def22c734348c626b65437dd1e3}\label{group___c_l_s_solvers_a1ff16def22c734348c626b65437dd1e3}} 
-\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}\label{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}} 
+\index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
+\index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+returns the number of constraints used by the skeleton 
+
+\begin{DoxyReturn}{Returns}
+number of constraints 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+
+
+
+Definition at line 57 of file ppl\+\_\+solver.\+hpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}\label{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}} 
+\index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -878,17 +1022,17 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 113 of file ppl\+\_\+solver.\+cpp.
+Definition at line 117 of file ppl\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a5000b8c5bee37029276ce63a3568bfb7}\label{group___c_l_s_solvers_a5000b8c5bee37029276ce63a3568bfb7}} 
-\index{P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}!solve@{solve}}
-\index{solve@{solve}!P\+P\+L\+\_\+\+Solver@{P\+P\+L\+\_\+\+Solver}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}\label{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}} 
+\index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -902,15 +1046,15 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 125 of file ppl\+\_\+solver.\+cpp.
+Definition at line 129 of file ppl\+\_\+solver.\+cpp.
 
-\index{ray@{ray}}\label{classray}
-\Hypertarget{group___c_l_s_solvers_classray}
-\subsubsection{class ray}
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}\label{class_l_p___solvers_1_1_ray}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:Ray}
 a ray defined by nonnegative coordinates $(a_1,\ldots,a_n)$ 
 
 \begin{DoxyAuthor}{Author}
@@ -929,98 +1073,93 @@ This class encapsulates a ray, one major part of the definition of a skeleton. R
 
 A special feature is that a rays can track the constraints known to be active at the ray, allowing for more efficient computation in the double description method. Adding known constraints can be done with or without checking whether the constraint actually is active, so this should be done with care. 
 
-Definition at line 190 of file lp\+\_\+solver.\+hpp.
+Definition at line 222 of file lp\+\_\+solver.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___c_l_s_solvers_a48d51151bb229b2b3363869760fe4b3c}{ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, long=-\/1)
+\hyperlink{group___c_l_s_solvers_ae6acfc48cec4f68f5855aae467f71095}{Ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, long=-\/1)
 \begin{DoxyCompactList}\small\item\em Creates a ray with the given number of variables, all set to 0. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_a121e66bf83dfa1582edc24505bbc8095}{ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
+\hyperlink{group___c_l_s_solvers_ad69015f04db3f988b47cd05bae4f41a8}{Ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Creates a ray with the given number of variables, with coordinates set to the value of the array. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_a3639433d20b97abc32b56ca93779dcaf}{ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const E\+X\+P\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
+\hyperlink{group___c_l_s_solvers_aecc046b9f6a47f40ffddfc3334a47079}{Ray} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const E\+X\+P\+\_\+\+T\+Y\+PE \mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Creates a ray with the given number of variables, with coordinates set to the value of the array. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_a6387c9c134132709f29770212648c718}{ray} (const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&)
+\hyperlink{group___c_l_s_solvers_adb1e6f09dbb5081c8f34d245b1880ccc}{Ray} (const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&)
 \begin{DoxyCompactList}\small\item\em Creates a ray whose coordinates are given by the vector. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_af4ec5bf395f8b37cb7c4fd7f27999a5d}{ray} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+\hyperlink{group___c_l_s_solvers_a3a98b2f969408ba0fa58b46a3dccb9bf}{Ray} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Copies the coordinates of the other ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___c_l_s_solvers_ae29c6b5cecdc32127dc9e5c0141d120d}{$\sim$ray} ()
+\hyperlink{group___c_l_s_solvers_a4819e44c9151ea96204a5ca5233646f6}{$\sim$\+Ray} ()
 \begin{DoxyCompactList}\small\item\em Deletes memory allocated by the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properies}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a57662d3f86d00384f73869740ec21adf}\label{group___c_l_s_solvers_a57662d3f86d00384f73869740ec21adf}} 
-N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a57662d3f86d00384f73869740ec21adf}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_afa50278b90d4a5482326d351cdf556fc}\label{group___c_l_s_solvers_afa50278b90d4a5482326d351cdf556fc}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_afa50278b90d4a5482326d351cdf556fc}{get\+\_\+dimension} () const
 \begin{DoxyCompactList}\small\item\em Returns the dimension of this ray. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a952d271bf4f9361c87864e7479fb8677}\label{group___c_l_s_solvers_a952d271bf4f9361c87864e7479fb8677}} 
-R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a952d271bf4f9361c87864e7479fb8677}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index) const
+\mbox{\Hypertarget{group___c_l_s_solvers_a340608efd12ab0f65173a6c0c05e6309}\label{group___c_l_s_solvers_a340608efd12ab0f65173a6c0c05e6309}} 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a340608efd12ab0f65173a6c0c05e6309}{operator\mbox{[}$\,$\mbox{]}} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index) const
 \begin{DoxyCompactList}\small\item\em Returns the entry indicated. Numbering starts at 0. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aaff8d27de2240e43dc0d20f84f953b1b}\label{group___c_l_s_solvers_aaff8d27de2240e43dc0d20f84f953b1b}} 
-const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_aaff8d27de2240e43dc0d20f84f953b1b}{weights} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a0651d47b9e0b2a332e102c56447a1295}\label{group___c_l_s_solvers_a0651d47b9e0b2a332e102c56447a1295}} 
+const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_a0651d47b9e0b2a332e102c56447a1295}{weights} () const
 \begin{DoxyCompactList}\small\item\em Returns the weights. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a785bb4f7649e9c3db1141fdde55834c0}\label{group___c_l_s_solvers_a785bb4f7649e9c3db1141fdde55834c0}} 
-const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a785bb4f7649e9c3db1141fdde55834c0}{coordinate} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index)
+\mbox{\Hypertarget{group___c_l_s_solvers_a66e4d7533edb52e344eb68c7e723a65c}\label{group___c_l_s_solvers_a66e4d7533edb52e344eb68c7e723a65c}} 
+const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a66e4d7533edb52e344eb68c7e723a65c}{coordinate} (N\+V\+A\+R\+\_\+\+T\+Y\+PE index)
 \begin{DoxyCompactList}\small\item\em Synonym for \mbox{[}\mbox{]}. I have no idea why I added this. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_aa1831b718c9a91d786a1a578cb1cefea}{is\+\_\+active\+\_\+at} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&hyperplane) const
+bool \hyperlink{group___c_l_s_solvers_a935fd2cf258315c989cd4edce32371e7}{is\+\_\+active\+\_\+at} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&hyperplane) const
 \begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if and only if the hyperplane is active at this ray. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a5d4113ea6249145c337f4d26a54eb940}{is\+\_\+above} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&hyperplane)
+bool \hyperlink{group___c_l_s_solvers_aec0fb992267a74f098fef5ca6c159cad}{is\+\_\+above} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&hyperplane)
 \begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if and only if this ray is above the hyperplane. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a08f0af168bb0a86db612fdd3ce22045b}{is\+\_\+below} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&hyperplane)
+bool \hyperlink{group___c_l_s_solvers_a4bdad8c5669c06827f3984583e764353}{is\+\_\+below} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&hyperplane)
 \begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if and only if this ray is below the hyperplane. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a25f56f0f7acafe000f98550af47b7da9}{obtain\+\_\+dot\+\_\+product} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&) const
+D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a431363fc157d5a8df8b180ac671e19ea}{obtain\+\_\+dot\+\_\+product} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) const
 \begin{DoxyCompactList}\small\item\em Convenience function to compute dot product between ray and the given constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a99cfe50a0abd150d7effd8911664c2db}\label{group___c_l_s_solvers_a99cfe50a0abd150d7effd8911664c2db}} 
-void \hyperlink{group___c_l_s_solvers_a99cfe50a0abd150d7effd8911664c2db}{simplify\+\_\+ray} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_ac25d6feac8d47548fc157b6e3e8f26cc}\label{group___c_l_s_solvers_ac25d6feac8d47548fc157b6e3e8f26cc}} 
+void \hyperlink{group___c_l_s_solvers_ac25d6feac8d47548fc157b6e3e8f26cc}{simplify\+\_\+ray} ()
 \begin{DoxyCompactList}\small\item\em Simplifies the ray by dividing its components by the least common denominator. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_classray}{ray} \& \hyperlink{group___c_l_s_solvers_a83fa2d552fda75b973fe659c39ff9960}{operator=} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \& \hyperlink{group___c_l_s_solvers_ae70a9ad73b8788c53e0b1cc7c2cdae27}{operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Assignment operator; assigns the value of {\ttfamily other} to {\ttfamily this}. \end{DoxyCompactList}\item 
-void \hyperlink{group___c_l_s_solvers_a3f95b591c0b92d2ea8cc04b1c9b0d179}{swap} (\hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+void \hyperlink{group___c_l_s_solvers_acea89ef5df0792e64ce9003ad19913d4}{swap} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
 \begin{DoxyCompactList}\small\item\em Swap two rays of equal dimension by swapping their data, avoiding memory reallocation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Friends}
 \begin{Indent}\textbf{ Comparison}\par
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}{operator==} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
-\begin{DoxyCompactList}\small\item\em Indicates whether the two rays are equal. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a22b7d226858aa935e739c696065e4680}{operator!=} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+bool \hyperlink{group___c_l_s_solvers_a12e1a3322151c1d6bbbce9efeeec40ae}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
+\begin{DoxyCompactList}\small\item\em indicates whether the two rays are equal \end{DoxyCompactList}\item 
+bool \hyperlink{group___c_l_s_solvers_a79435f27d182af0ad5dda3646d24ecd8}{operator!=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
 \begin{DoxyCompactList}\small\item\em Indicates whether the two rays are unequal. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a088bbdf2a6fc03509fc660aa3aee110e}{operator!=} (\hyperlink{group___c_l_s_solvers_classray}{ray} \&r, \hyperlink{group___c_l_s_solvers_classray}{ray} \&s)
-\begin{DoxyCompactList}\small\item\em Indicates whether the two rays are unequal. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}{operator==} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
-\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if and only if the coordinates of the two rays are equal. \end{DoxyCompactList}\item 
-bool \hyperlink{group___c_l_s_solvers_a5909f048e7cf014f880adb43da3862d3}{operator$<$} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+bool \hyperlink{group___c_l_s_solvers_a4c3d0a1adb5408b59013e6533e144b98}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
 \begin{DoxyCompactList}\small\item\em Lexicographic comparison of rays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ I/O}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1fa347ed00fc99eec663252c28108a3f}\label{group___c_l_s_solvers_a1fa347ed00fc99eec663252c28108a3f}} 
-ostream \& \hyperlink{group___c_l_s_solvers_a1fa347ed00fc99eec663252c28108a3f}{operator$<$$<$} (ostream \&, const \hyperlink{group___c_l_s_solvers_classray}{ray} \&)
+ostream \& \hyperlink{group___c_l_s_solvers_a58ab17142b3c74a8d39c1e42dfa7a3f4}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r)
 \begin{DoxyCompactList}\small\item\em Output is of the form $(r_1, \ldots, r_n)$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a48d51151bb229b2b3363869760fe4b3c}\label{group___c_l_s_solvers_a48d51151bb229b2b3363869760fe4b3c}} 
-\index{ray@{ray}!ray@{ray}}
-\index{ray@{ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{ray()}{ray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
-{\footnotesize\ttfamily ray\+::ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{long}]{direction = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_ae6acfc48cec4f68f5855aae467f71095}\label{group___c_l_s_solvers_ae6acfc48cec4f68f5855aae467f71095}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
+\index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{long}]{direction = {\ttfamily -\/1} }\end{DoxyParamCaption})}
 
 
 
@@ -1034,30 +1173,13 @@ The dimension should be greater than zero. While the direction need not be speci
 \end{DoxyPostcond}
 
 
-Definition at line 132 of file lp\+\_\+solver.\+cpp.
+Definition at line 134 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a121e66bf83dfa1582edc24505bbc8095}\label{group___c_l_s_solvers_a121e66bf83dfa1582edc24505bbc8095}} 
-\index{ray@{ray}!ray@{ray}}
-\index{ray@{ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{ray()}{ray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
-{\footnotesize\ttfamily ray\+::ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE}]{entries\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
-
-
-
-Creates a ray with the given number of variables, with coordinates set to the value of the array. 
-
-\begin{DoxyPrecond}{Precondition}
-the size of the array needs to be at least as long as the number of variables! 
-\end{DoxyPrecond}
-
-
-Definition at line 143 of file lp\+\_\+solver.\+cpp.
-
-\mbox{\Hypertarget{group___c_l_s_solvers_a3639433d20b97abc32b56ca93779dcaf}\label{group___c_l_s_solvers_a3639433d20b97abc32b56ca93779dcaf}} 
-\index{ray@{ray}!ray@{ray}}
-\index{ray@{ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{ray()}{ray()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
-{\footnotesize\ttfamily ray\+::ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{const E\+X\+P\+\_\+\+T\+Y\+PE}]{entries\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad69015f04db3f988b47cd05bae4f41a8}\label{group___c_l_s_solvers_ad69015f04db3f988b47cd05bae4f41a8}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
+\index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE}]{entries\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
@@ -1068,13 +1190,30 @@ the size of the array needs to be at least as long as the number of variables!
 \end{DoxyPrecond}
 
 
-Definition at line 152 of file lp\+\_\+solver.\+cpp.
+Definition at line 145 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6387c9c134132709f29770212648c718}\label{group___c_l_s_solvers_a6387c9c134132709f29770212648c718}} 
-\index{ray@{ray}!ray@{ray}}
-\index{ray@{ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{ray()}{ray()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
-{\footnotesize\ttfamily ray\+::ray (\begin{DoxyParamCaption}\item[{const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&}]{entries }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_aecc046b9f6a47f40ffddfc3334a47079}\label{group___c_l_s_solvers_aecc046b9f6a47f40ffddfc3334a47079}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
+\index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{const E\+X\+P\+\_\+\+T\+Y\+PE}]{entries\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Creates a ray with the given number of variables, with coordinates set to the value of the array. 
+
+\begin{DoxyPrecond}{Precondition}
+the size of the array needs to be at least as long as the number of variables! 
+\end{DoxyPrecond}
+
+
+Definition at line 154 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_adb1e6f09dbb5081c8f34d245b1880ccc}\label{group___c_l_s_solvers_adb1e6f09dbb5081c8f34d245b1880ccc}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
+\index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&}]{entries }\end{DoxyParamCaption})}
 
 
 
@@ -1085,13 +1224,13 @@ The dimension of this ray will equal the number of entries in the vector, and th
 \end{DoxyPostcond}
 
 
-Definition at line 161 of file lp\+\_\+solver.\+cpp.
+Definition at line 163 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_af4ec5bf395f8b37cb7c4fd7f27999a5d}\label{group___c_l_s_solvers_af4ec5bf395f8b37cb7c4fd7f27999a5d}} 
-\index{ray@{ray}!ray@{ray}}
-\index{ray@{ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{ray()}{ray()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
-{\footnotesize\ttfamily ray\+::ray (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{old\+\_\+ray }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_a3a98b2f969408ba0fa58b46a3dccb9bf}\label{group___c_l_s_solvers_a3a98b2f969408ba0fa58b46a3dccb9bf}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
+\index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{old\+\_\+ray }\end{DoxyParamCaption})}
 
 
 
@@ -1099,13 +1238,13 @@ Copies the coordinates of the other ray.
 
 Allocates new memory, and copies the active constraints. 
 
-Definition at line 170 of file lp\+\_\+solver.\+cpp.
+Definition at line 172 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae29c6b5cecdc32127dc9e5c0141d120d}\label{group___c_l_s_solvers_ae29c6b5cecdc32127dc9e5c0141d120d}} 
-\index{ray@{ray}!````~ray@{$\sim$ray}}
-\index{````~ray@{$\sim$ray}!ray@{ray}}
-\subparagraph{\texorpdfstring{$\sim$ray()}{~ray()}}
-{\footnotesize\ttfamily ray\+::$\sim$ray (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_a4819e44c9151ea96204a5ca5233646f6}\label{group___c_l_s_solvers_a4819e44c9151ea96204a5ca5233646f6}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!````~Ray@{$\sim$\+Ray}}
+\index{````~Ray@{$\sim$\+Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{$\sim$\+Ray()}{~Ray()}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::$\sim$\+Ray (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -1113,16 +1252,16 @@ Deletes memory allocated by the constructor.
 
 Currently, that means it deletes {\ttfamily coords}. 
 
-Definition at line 180 of file lp\+\_\+solver.\+cpp.
+Definition at line 182 of file lp\+\_\+solver.\+cpp.
 
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a5d4113ea6249145c337f4d26a54eb940}\label{group___c_l_s_solvers_a5d4113ea6249145c337f4d26a54eb940}} 
-\index{ray@{ray}!is\+\_\+above@{is\+\_\+above}}
-\index{is\+\_\+above@{is\+\_\+above}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aec0fb992267a74f098fef5ca6c159cad}\label{group___c_l_s_solvers_aec0fb992267a74f098fef5ca6c159cad}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!is\+\_\+above@{is\+\_\+above}}
+\index{is\+\_\+above@{is\+\_\+above}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{is\+\_\+above()}{is\_above()}}
-{\footnotesize\ttfamily bool ray\+::is\+\_\+above (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{hyperplane }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Ray\+::is\+\_\+above (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{hyperplane }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1138,13 +1277,13 @@ true if and only if {\ttfamily this} is above {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r > 0 $. 
 
-Definition at line 293 of file lp\+\_\+solver.\+hpp.
+Definition at line 325 of file lp\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_aa1831b718c9a91d786a1a578cb1cefea}\label{group___c_l_s_solvers_aa1831b718c9a91d786a1a578cb1cefea}} 
-\index{ray@{ray}!is\+\_\+active\+\_\+at@{is\+\_\+active\+\_\+at}}
-\index{is\+\_\+active\+\_\+at@{is\+\_\+active\+\_\+at}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a935fd2cf258315c989cd4edce32371e7}\label{group___c_l_s_solvers_a935fd2cf258315c989cd4edce32371e7}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!is\+\_\+active\+\_\+at@{is\+\_\+active\+\_\+at}}
+\index{is\+\_\+active\+\_\+at@{is\+\_\+active\+\_\+at}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{is\+\_\+active\+\_\+at()}{is\_active\_at()}}
-{\footnotesize\ttfamily bool ray\+::is\+\_\+active\+\_\+at (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{hyperplane }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Ray\+::is\+\_\+active\+\_\+at (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{hyperplane }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1160,13 +1299,13 @@ true if and only if {\ttfamily this} lies on {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r = 0 $. 
 
-Definition at line 279 of file lp\+\_\+solver.\+hpp.
+Definition at line 311 of file lp\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a08f0af168bb0a86db612fdd3ce22045b}\label{group___c_l_s_solvers_a08f0af168bb0a86db612fdd3ce22045b}} 
-\index{ray@{ray}!is\+\_\+below@{is\+\_\+below}}
-\index{is\+\_\+below@{is\+\_\+below}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a4bdad8c5669c06827f3984583e764353}\label{group___c_l_s_solvers_a4bdad8c5669c06827f3984583e764353}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!is\+\_\+below@{is\+\_\+below}}
+\index{is\+\_\+below@{is\+\_\+below}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{is\+\_\+below()}{is\_below()}}
-{\footnotesize\ttfamily bool ray\+::is\+\_\+below (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{hyperplane }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Ray\+::is\+\_\+below (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{hyperplane }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1182,13 +1321,13 @@ true if and only if {\ttfamily this} is below {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r < 0 $. 
 
-Definition at line 307 of file lp\+\_\+solver.\+hpp.
+Definition at line 339 of file lp\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a25f56f0f7acafe000f98550af47b7da9}\label{group___c_l_s_solvers_a25f56f0f7acafe000f98550af47b7da9}} 
-\index{ray@{ray}!obtain\+\_\+dot\+\_\+product@{obtain\+\_\+dot\+\_\+product}}
-\index{obtain\+\_\+dot\+\_\+product@{obtain\+\_\+dot\+\_\+product}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a431363fc157d5a8df8b180ac671e19ea}\label{group___c_l_s_solvers_a431363fc157d5a8df8b180ac671e19ea}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!obtain\+\_\+dot\+\_\+product@{obtain\+\_\+dot\+\_\+product}}
+\index{obtain\+\_\+dot\+\_\+product@{obtain\+\_\+dot\+\_\+product}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{obtain\+\_\+dot\+\_\+product()}{obtain\_dot\_product()}}
-{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE ray\+::obtain\+\_\+dot\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{hyperplane }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::\+Ray\+::obtain\+\_\+dot\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{hyperplane }\end{DoxyParamCaption}) const}
 
 
 
@@ -1202,13 +1341,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 212 of file lp\+\_\+solver.\+cpp.
+Definition at line 214 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a83fa2d552fda75b973fe659c39ff9960}\label{group___c_l_s_solvers_a83fa2d552fda75b973fe659c39ff9960}} 
-\index{ray@{ray}!operator=@{operator=}}
-\index{operator=@{operator=}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_ae70a9ad73b8788c53e0b1cc7c2cdae27}\label{group___c_l_s_solvers_ae70a9ad73b8788c53e0b1cc7c2cdae27}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator=@{operator=}}
+\index{operator=@{operator=}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_classray}{ray} \& ray\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{other }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \& L\+P\+\_\+\+Solvers\+::\+Ray\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{other }\end{DoxyParamCaption})}
 
 
 
@@ -1222,13 +1361,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 330 of file lp\+\_\+solver.\+cpp.
+Definition at line 332 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a3f95b591c0b92d2ea8cc04b1c9b0d179}\label{group___c_l_s_solvers_a3f95b591c0b92d2ea8cc04b1c9b0d179}} 
-\index{ray@{ray}!swap@{swap}}
-\index{swap@{swap}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_acea89ef5df0792e64ce9003ad19913d4}\label{group___c_l_s_solvers_acea89ef5df0792e64ce9003ad19913d4}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!swap@{swap}}
+\index{swap@{swap}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{swap()}{swap()}}
-{\footnotesize\ttfamily void ray\+::swap (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{other }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void L\+P\+\_\+\+Solvers\+::\+Ray\+::swap (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{other }\end{DoxyParamCaption})}
 
 
 
@@ -1239,16 +1378,16 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 350 of file lp\+\_\+solver.\+cpp.
+Definition at line 352 of file lp\+\_\+solver.\+cpp.
 
 
 
 \paragraph{Friends And Related Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a22b7d226858aa935e739c696065e4680}\label{group___c_l_s_solvers_a22b7d226858aa935e739c696065e4680}} 
-\index{ray@{ray}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!ray@{ray}}
-\subparagraph{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r1,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a79435f27d182af0ad5dda3646d24ecd8}\label{group___c_l_s_solvers_a79435f27d182af0ad5dda3646d24ecd8}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
@@ -1257,39 +1396,25 @@ Indicates whether the two rays are unequal.
 \begin{DoxyWarning}{Warning}
 This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
-
-
-Definition at line 312 of file lp\+\_\+solver.\+cpp.
-
-\mbox{\Hypertarget{group___c_l_s_solvers_a088bbdf2a6fc03509fc660aa3aee110e}\label{group___c_l_s_solvers_a088bbdf2a6fc03509fc660aa3aee110e}} 
-\index{ray@{ray}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!ray@{ray}}
-\subparagraph{\texorpdfstring{operator"!=}{operator!=}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r,  }\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
-
-
-
-Indicates whether the two rays are unequal. 
-
 
 \begin{DoxyParams}{Parameters}
-{\em r} & a ray \\
+{\em a} & first ray \\
 \hline
-{\em s} & a ray \\
+{\em b} & second ray \\
 \hline
 \end{DoxyParams}
-\begin{DoxyWarning}{Warning}
-This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
-\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the rays' entries have different values
+\end{DoxyReturn}
+Notice that the rays can point in the same direction, but still be considered unequal. 
 
+Definition at line 314 of file lp\+\_\+solver.\+cpp.
 
-Definition at line 337 of file lp\+\_\+solver.\+hpp.
-
-\mbox{\Hypertarget{group___c_l_s_solvers_a5909f048e7cf014f880adb43da3862d3}\label{group___c_l_s_solvers_a5909f048e7cf014f880adb43da3862d3}} 
-\index{ray@{ray}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!ray@{ray}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a4c3d0a1adb5408b59013e6533e144b98}\label{group___c_l_s_solvers_a4c3d0a1adb5408b59013e6533e144b98}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{operator$<$}{operator<}}
-{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{first\+\_\+ray,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{second\+\_\+ray }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
@@ -1299,46 +1424,73 @@ Lexicographic comparison of rays.
 This is unsafe when dimension is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
 
+\begin{DoxyParams}{Parameters}
+{\em a} & first ray \\
+\hline
+{\em b} & second ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} is lexicographically smaller than {\ttfamily b} 
+\end{DoxyReturn}
 
-Definition at line 361 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}\label{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}} 
-\index{ray@{ray}!operator==@{operator==}}
-\index{operator==@{operator==}!ray@{ray}}
-\subparagraph{\texorpdfstring{operator==}{operator==}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r1,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+Definition at line 363 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a58ab17142b3c74a8d39c1e42dfa7a3f4}\label{group___c_l_s_solvers_a58ab17142b3c74a8d39c1e42dfa7a3f4}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
-Indicates whether the two rays are equal. 
+Output is of the form $(r_1, \ldots, r_n)$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+{\em r} & ray to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 322 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_a12e1a3322151c1d6bbbce9efeeec40ae}\label{group___c_l_s_solvers_a12e1a3322151c1d6bbbce9efeeec40ae}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
+\subparagraph{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+indicates whether the two rays are equal 
 
 \begin{DoxyWarning}{Warning}
 This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
 \end{DoxyWarning}
 
+\begin{DoxyParams}{Parameters}
+{\em a} & first ray \\
+\hline
+{\em b} & second ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the rays' entries have the same values
+\end{DoxyReturn}
+Notice that the rays can point in the same direction, but still be considered unequal. 
 
-Definition at line 304 of file lp\+\_\+solver.\+cpp.
+Definition at line 306 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}\label{group___c_l_s_solvers_ae27bf49e1b2756797f82fea0bf810dfd}} 
-\index{ray@{ray}!operator==@{operator==}}
-\index{operator==@{operator==}!ray@{ray}}
-\subparagraph{\texorpdfstring{operator==}{operator==}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r1,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
-
-
-
-Returns {\ttfamily true} if and only if the coordinates of the two rays are equal. 
-
-\begin{DoxyWarning}{Warning}
-This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
-\end{DoxyWarning}
-
-
-Definition at line 304 of file lp\+\_\+solver.\+cpp.
-
-\index{skeleton@{skeleton}}\label{classskeleton}
-\Hypertarget{group___c_l_s_solvers_classskeleton}
-\subsubsection{class skeleton}
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}\label{class_l_p___solvers_1_1_skeleton}
+\Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}
+\subsubsection{class L\+P\+\_\+\+Solvers\+:\+:Skeleton}
 skeleton of a polyhedral cone, with methods allowing definition and refinement 
 
 \begin{DoxyAuthor}{Author}
@@ -1355,9 +1507,9 @@ The University of Southern Mississippi
 \end{DoxyCopyright}
 This class implements the Double Description Method, an iterative algorithm for computing the skeleton of a cone. This particular version uses Zolotykh\textquotesingle{}s Graph\+Adj criterion \cite{Zolotych_DoubleDescription}. The iterative nature means that the cone can be updated with new constraints, passed to that algorithm, and the skeleton will be automatically recomputed. 
 
-Definition at line 178 of file skeleton.\+hpp.
+Definition at line 215 of file skeleton.\+hpp.
 
-Inheritance diagram for skeleton\+:\begin{figure}[H]
+Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:Skeleton\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{group___c_l_s_solvers}
@@ -1367,89 +1519,88 @@ Inheritance diagram for skeleton\+:\begin{figure}[H]
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a7a9181253fc3b9f7b61871047b2b31cc}\label{group___c_l_s_solvers_a7a9181253fc3b9f7b61871047b2b31cc}} 
-void \hyperlink{group___c_l_s_solvers_a7a9181253fc3b9f7b61871047b2b31cc}{common\+\_\+initialization} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
+\mbox{\Hypertarget{group___c_l_s_solvers_aa63d9454338c84be898e1a604eba3527}\label{group___c_l_s_solvers_aa63d9454338c84be898e1a604eba3527}} 
+void \hyperlink{group___c_l_s_solvers_aa63d9454338c84be898e1a604eba3527}{common\+\_\+initialization} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
 \begin{DoxyCompactList}\small\item\em Initialization common to all constructors. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_a60f5818e984abe589ea8298d189cd9c6}{skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
+\hyperlink{group___c_l_s_solvers_ad9f2f64c49dbf96ebd30852e670e7642}{Skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE)
 \begin{DoxyCompactList}\small\item\em Constructs a basic skeleton in the given number of dimensions, initialized to the axes, or (equivalently) to the set of constraints $ x_i \geq 0 $. \end{DoxyCompactList}\item 
-\hyperlink{group___c_l_s_solvers_a5d0ebc69ae4ff20afd3096e36b31ab1f}{skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&)
+\hyperlink{group___c_l_s_solvers_ad61d70c2397e93141de3ad3c987b1828}{Skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Constructs a skeleton described by the given system of constraints. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_abbb0828dc5cd38edf09093e738510d7a}\label{group___c_l_s_solvers_abbb0828dc5cd38edf09093e738510d7a}} 
-\hyperlink{group___c_l_s_solvers_abbb0828dc5cd38edf09093e738510d7a}{skeleton} (\hyperlink{group___c_l_s_solvers_classskeleton}{skeleton} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}\label{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}} 
+\hyperlink{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}{Skeleton} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&)
 \begin{DoxyCompactList}\small\item\em Performs a deep copy of {\ttfamily other}. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a42d30b92f27936eab11d0fa4f0cc10b4}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae8874234344e5e51f9b81f6199ee2aa6}\label{group___c_l_s_solvers_ae8874234344e5e51f9b81f6199ee2aa6}} 
-virtual \hyperlink{group___c_l_s_solvers_ae8874234344e5e51f9b81f6199ee2aa6}{$\sim$skeleton} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a0da8ede73aea9089d7b81683c08cfc60}\label{group___c_l_s_solvers_a0da8ede73aea9089d7b81683c08cfc60}} 
+virtual \hyperlink{group___c_l_s_solvers_a0da8ede73aea9089d7b81683c08cfc60}{$\sim$\+Skeleton} ()
 \begin{DoxyCompactList}\small\item\em Currently does nothing the compiler wouldn\textquotesingle{}t do. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}\label{group___c_l_s_solvers_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}} 
-N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ac6dd4f7d7e79ab08d6cf49ad4925f5ef}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}\label{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}{get\+\_\+dimension} () const
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a3e2662e9f9e6a0dde0459dee0b27fd1c}\label{group___c_l_s_solvers_a3e2662e9f9e6a0dde0459dee0b27fd1c}} 
-unsigned long \hyperlink{group___c_l_s_solvers_a3e2662e9f9e6a0dde0459dee0b27fd1c}{get\+\_\+number\+\_\+of\+\_\+edges} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}\label{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}} 
+unsigned long \hyperlink{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}{get\+\_\+number\+\_\+of\+\_\+edges} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of edges defining the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_adc4557716509bfeeae99f99b93953cf8}\label{group___c_l_s_solvers_adc4557716509bfeeae99f99b93953cf8}} 
-set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \hyperlink{group___c_l_s_solvers_adc4557716509bfeeae99f99b93953cf8}{get\+\_\+edges} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}\label{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}} 
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}{get\+\_\+edges} ()
 \begin{DoxyCompactList}\small\item\em Returns the edges that define the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a0b75f0ce54e512673169b193955fc58f}\label{group___c_l_s_solvers_a0b75f0ce54e512673169b193955fc58f}} 
-unsigned long \hyperlink{group___c_l_s_solvers_a0b75f0ce54e512673169b193955fc58f}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}\label{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}} 
+unsigned long \hyperlink{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of constraints defining the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a29665cf3b04694b349f224e54f93f2db}\label{group___c_l_s_solvers_a29665cf3b04694b349f224e54f93f2db}} 
-const vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \& \hyperlink{group___c_l_s_solvers_a29665cf3b04694b349f224e54f93f2db}{get\+\_\+constraints} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}\label{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}} 
+const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \& \hyperlink{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}{get\+\_\+constraints} ()
 \begin{DoxyCompactList}\small\item\em Returns the constraints that define the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a8c0ceb21b570a4a4084902a497de79a0}\label{group___c_l_s_solvers_a8c0ceb21b570a4a4084902a497de79a0}} 
-\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \hyperlink{group___c_l_s_solvers_a8c0ceb21b570a4a4084902a497de79a0}{get\+\_\+constraint} (int index)
+\mbox{\Hypertarget{group___c_l_s_solvers_abbc8543d03ed7464149e6dba20f77da1}\label{group___c_l_s_solvers_abbc8543d03ed7464149e6dba20f77da1}} 
+const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \& \hyperlink{group___c_l_s_solvers_abbc8543d03ed7464149e6dba20f77da1}{get\+\_\+constraint} (int index)
 \begin{DoxyCompactList}\small\item\em Returns the indicated constraint. Numbering starts at 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6b48120d11e7b244c14c748d990d2ade}\label{group___c_l_s_solvers_a6b48120d11e7b244c14c748d990d2ade}} 
-void \hyperlink{group___c_l_s_solvers_a6b48120d11e7b244c14c748d990d2ade}{which\+\_\+constraints\+\_\+active\+\_\+at} (const \hyperlink{group___c_l_s_solvers_classray}{ray} \&u, bool $\ast$result) const
+\mbox{\Hypertarget{group___c_l_s_solvers_ac6e9aadc18f4f7e0d3860682cae3bdf7}\label{group___c_l_s_solvers_ac6e9aadc18f4f7e0d3860682cae3bdf7}} 
+void \hyperlink{group___c_l_s_solvers_ac6e9aadc18f4f7e0d3860682cae3bdf7}{which\+\_\+constraints\+\_\+active\+\_\+at} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&u, bool $\ast$result) const
 \begin{DoxyCompactList}\small\item\em returns the set of constraints in the skeleton active at {\ttfamily u} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aca399adccf69ea8f9df6cf557526032b}\label{group___c_l_s_solvers_aca399adccf69ea8f9df6cf557526032b}} 
-bool \hyperlink{group___c_l_s_solvers_aca399adccf69ea8f9df6cf557526032b}{is\+\_\+consistent} (const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&c) const
+\mbox{\Hypertarget{group___c_l_s_solvers_a97d4c6e4864a90140728d664c8de12cf}\label{group___c_l_s_solvers_a97d4c6e4864a90140728d664c8de12cf}} 
+bool \hyperlink{group___c_l_s_solvers_a97d4c6e4864a90140728d664c8de12cf}{is\+\_\+consistent} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c) const
 \begin{DoxyCompactList}\small\item\em tests for consistency of a potentially new constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_ac366952c2b0908159255916a1e37f9b3}{solve} (vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a8add1433d3bc6b1a8588f0f88134599f}{solve} (\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1af8c607a3dc93633e0d395e73cb1c97}\label{group___c_l_s_solvers_a1af8c607a3dc93633e0d395e73cb1c97}} 
-set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \hyperlink{group___c_l_s_solvers_a1af8c607a3dc93633e0d395e73cb1c97}{adjacencies\+\_\+by\+\_\+graphs} (set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$)
+\mbox{\Hypertarget{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}\label{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}} 
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}{adjacencies\+\_\+by\+\_\+graphs} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Re-\/computes the edges in the skeleton using Zolotych\textquotesingle{}s {\ttfamily Graph\+Adj} algorithm and returns the result. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_aa5991e7e25783c2b8cfd772f41f7b99b}\label{group___c_l_s_solvers_aa5991e7e25783c2b8cfd772f41f7b99b}} 
-\hyperlink{group___c_l_s_solvers_classskeleton}{skeleton} \& \hyperlink{group___c_l_s_solvers_aa5991e7e25783c2b8cfd772f41f7b99b}{operator=} (const \hyperlink{group___c_l_s_solvers_classskeleton}{skeleton} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a6ca243248975b2f1935169d78c44033b}\label{group___c_l_s_solvers_a6ca243248975b2f1935169d78c44033b}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \& \hyperlink{group___c_l_s_solvers_a6ca243248975b2f1935169d78c44033b}{operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&)
 \begin{DoxyCompactList}\small\item\em Assignment operator; empties current set \& copies from other. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Friends}
 \begin{Indent}\textbf{ I/O}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a5732209c39488881acfc0fb5831e513b}\label{group___c_l_s_solvers_a5732209c39488881acfc0fb5831e513b}} 
-ostream \& \hyperlink{group___c_l_s_solvers_a5732209c39488881acfc0fb5831e513b}{operator$<$$<$} (ostream \&, const \hyperlink{group___c_l_s_solvers_classskeleton}{skeleton} \&)
-\begin{DoxyCompactList}\small\item\em prints out the constraints, then the rays, then the edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+ostream \& \hyperlink{group___c_l_s_solvers_a54f8dc187ec3e238ccc80d7a44b9ca82}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&s)
+\begin{DoxyCompactList}\small\item\em prints out the constraints, then the rays, then the edges of {\ttfamily s}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsection*{Additional Inherited Members}
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a60f5818e984abe589ea8298d189cd9c6}\label{group___c_l_s_solvers_a60f5818e984abe589ea8298d189cd9c6}} 
-\index{skeleton@{skeleton}!skeleton@{skeleton}}
-\index{skeleton@{skeleton}!skeleton@{skeleton}}
-\subparagraph{\texorpdfstring{skeleton()}{skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily skeleton\+::skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad9f2f64c49dbf96ebd30852e670e7642}\label{group___c_l_s_solvers_ad9f2f64c49dbf96ebd30852e670e7642}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!Skeleton@{Skeleton}}
+\index{Skeleton@{Skeleton}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
+\subparagraph{\texorpdfstring{Skeleton()}{Skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Skeleton\+::\+Skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension }\end{DoxyParamCaption})}
 
 
 
@@ -1463,13 +1614,13 @@ the skeleton of the positive orthant
 \end{DoxyPostcond}
 
 
-Definition at line 119 of file skeleton.\+cpp.
+Definition at line 124 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a5d0ebc69ae4ff20afd3096e36b31ab1f}\label{group___c_l_s_solvers_a5d0ebc69ae4ff20afd3096e36b31ab1f}} 
-\index{skeleton@{skeleton}!skeleton@{skeleton}}
-\index{skeleton@{skeleton}!skeleton@{skeleton}}
-\subparagraph{\texorpdfstring{skeleton()}{skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily skeleton\+::skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&}]{constraints }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad61d70c2397e93141de3ad3c987b1828}\label{group___c_l_s_solvers_ad61d70c2397e93141de3ad3c987b1828}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!Skeleton@{Skeleton}}
+\index{Skeleton@{Skeleton}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
+\subparagraph{\texorpdfstring{Skeleton()}{Skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Skeleton\+::\+Skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension,  }\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{constraints }\end{DoxyParamCaption})}
 
 
 
@@ -1486,16 +1637,16 @@ Your program will almost certainly fail if you do not respect the precondition.
 \end{DoxyWarning}
 
 
-Definition at line 124 of file skeleton.\+cpp.
+Definition at line 129 of file skeleton.\+cpp.
 
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a42d30b92f27936eab11d0fa4f0cc10b4}\label{group___c_l_s_solvers_a42d30b92f27936eab11d0fa4f0cc10b4}} 
-\index{skeleton@{skeleton}!copy@{copy}}
-\index{copy@{copy}!skeleton@{skeleton}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}\label{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!copy@{copy}}
+\index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool skeleton\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1505,21 +1656,21 @@ performs a deep copy, similar to a copy constructor
 {\ttfamily true} iff copying was successful 
 \end{DoxyReturn}
 \begin{DoxyWarning}{Warning}
-Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
+Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} is not equipped to copy a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, or vice versa. (This doesn\textquotesingle{}t even make sense between exact and approximate solvers.) 
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a442ad4ad67ee2feff0df49e9201d61ca}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 140 of file skeleton.\+cpp.
+Definition at line 145 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ac366952c2b0908159255916a1e37f9b3}\label{group___c_l_s_solvers_ac366952c2b0908159255916a1e37f9b3}} 
-\index{skeleton@{skeleton}!solve@{solve}}
-\index{solve@{solve}!skeleton@{skeleton}}
+\mbox{\Hypertarget{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}\label{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool skeleton\+::solve (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} $>$ \&}]{new\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{new\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1533,17 +1684,17 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a35da4bdf5db971c445f495b6eaab072d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 270 of file skeleton.\+cpp.
+Definition at line 275 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a8add1433d3bc6b1a8588f0f88134599f}\label{group___c_l_s_solvers_a8add1433d3bc6b1a8588f0f88134599f}} 
-\index{skeleton@{skeleton}!solve@{solve}}
-\index{solve@{solve}!skeleton@{skeleton}}
+\mbox{\Hypertarget{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}\label{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!solve@{solve}}
+\index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool skeleton\+::solve (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1557,55 +1708,122 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implements \hyperlink{group___c_l_s_solvers_abd84374c52124116becc8924dc74e12d}{L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
-Definition at line 162 of file skeleton.\+cpp.
+Definition at line 167 of file skeleton.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group___c_l_s_solvers_a54f8dc187ec3e238ccc80d7a44b9ca82}\label{group___c_l_s_solvers_a54f8dc187ec3e238ccc80d7a44b9ca82}} 
+\index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
+\subparagraph{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+prints out the constraints, then the rays, then the edges of {\ttfamily s}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream to print to \\
+\hline
+{\em s} & skeleton to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 440 of file skeleton.\+cpp.
 
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_gacb5ce7e22db91b33c26ea0be6a6026de}\label{group___c_l_s_solvers_gacb5ce7e22db91b33c26ea0be6a6026de}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gaf3434d5c281c16ef7a09d8f73445ea00}\label{group___c_l_s_solvers_gaf3434d5c281c16ef7a09d8f73445ea00}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}}
 \index{intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
-\subsubsection{\texorpdfstring{intersections\+\_\+of\+\_\+active\+\_\+constraints()}{intersections\_of\_active\_constraints()}}
-{\footnotesize\ttfamily vector$<$bool$>$ intersections\+\_\+of\+\_\+active\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+\subsubsection{\texorpdfstring{intersections\+\_\+of\+\_\+active\+\_\+constraints()}{intersections\_of\_active\_constraints()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily vector$<$bool$>$ L\+P\+\_\+\+Solvers\+::intersections\+\_\+of\+\_\+active\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+
+
+
+indicates which constraints are active for both sets 
 
 \begin{DoxyReturn}{Returns}
 the intersection between the given sets of constraints. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{group___c_l_s_solvers_ga06bebd50facdc36f850371e545f82174}\label{group___c_l_s_solvers_ga06bebd50facdc36f850371e545f82174}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_ga1f87ac127ced7d681b3e51e38eef0cf4}\label{group___c_l_s_solvers_ga1f87ac127ced7d681b3e51e38eef0cf4}} 
+\index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}}
+\index{intersections\+\_\+of\+\_\+active\+\_\+constraints@{intersections\+\_\+of\+\_\+active\+\_\+constraints}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
+\subsubsection{\texorpdfstring{intersections\+\_\+of\+\_\+active\+\_\+constraints()}{intersections\_of\_active\_constraints()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void L\+P\+\_\+\+Solvers\+::intersections\+\_\+of\+\_\+active\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool $\ast$}]{a,  }\item[{bool $\ast$}]{b,  }\item[{bool $\ast$}]{result,  }\item[{unsigned}]{m }\end{DoxyParamCaption})}
+
+
+
+indicates which constraints are active for both sets 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first set \\
+\hline
+{\em b} & second set \\
+\hline
+{\em result} & set where {\ttfamily true} occurs only if it does in both {\ttfamily a} and {\ttfamily b} \\
+\hline
+{\em m} & number of entries in {\ttfamily a} and {\ttfamily b} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the intersection between the given sets of constraints. 
+\end{DoxyReturn}
+
+
+Definition at line 321 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_ga0a997634a9b11bec9c54d0243ac29008}\label{group___c_l_s_solvers_ga0a997634a9b11bec9c54d0243ac29008}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second@{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second}}
 \index{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second@{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second()}{is\_first\_subset\_of\_second()}}
-{\footnotesize\ttfamily bool is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+
+
+
+determines whether the first set of active constraints is a subset of the second 
 
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if and only if the first set is a subset of the second. 
 \end{DoxyReturn}
 
 
-Definition at line 330 of file skeleton.\+cpp.
+Definition at line 335 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ga33829eddeaa7be000404e4d281d90973}\label{group___c_l_s_solvers_ga33829eddeaa7be000404e4d281d90973}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gad030de457424bef601e2903eb619926e}\label{group___c_l_s_solvers_gad030de457424bef601e2903eb619926e}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!number\+\_\+of\+\_\+common\+\_\+constraints@{number\+\_\+of\+\_\+common\+\_\+constraints}}
 \index{number\+\_\+of\+\_\+common\+\_\+constraints@{number\+\_\+of\+\_\+common\+\_\+constraints}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{number\+\_\+of\+\_\+common\+\_\+constraints()}{number\_of\_common\_constraints()}}
-{\footnotesize\ttfamily int number\+\_\+of\+\_\+common\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int L\+P\+\_\+\+Solvers\+::number\+\_\+of\+\_\+common\+\_\+constraints (\begin{DoxyParamCaption}\item[{bool $\ast$}]{,  }\item[{bool $\ast$}]{,  }\item[{unsigned}]{ }\end{DoxyParamCaption})}
+
+
+
+counts the number of constraints active in both sets 
 
 \begin{DoxyReturn}{Returns}
 the number of constraints common to both sets. 
 \end{DoxyReturn}
 
 
-Definition at line 297 of file skeleton.\+cpp.
+Definition at line 302 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_gae039f9fb46b8c57063342f6203add523}\label{group___c_l_s_solvers_gae039f9fb46b8c57063342f6203add523}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gaf71a7e68f920518b02b6a58660594ca2}\label{group___c_l_s_solvers_gaf71a7e68f920518b02b6a58660594ca2}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
-\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_classray}{ray} operator$\ast$ (\begin{DoxyParamCaption}\item[{R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE}]{,  }\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{ }\end{DoxyParamCaption})}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -1614,18 +1832,15 @@ Multiply every coordinate in the given ray by the given scalar.
 \begin{DoxyReturn}{Returns}
 a copy of the ray, scaled by the requesed amount 
 \end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-This is unsafe when dimension is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
-\end{DoxyWarning}
 
 
-Definition at line 222 of file lp\+\_\+solver.\+cpp.
+Definition at line 224 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ga30af4b27086e461f862e7d16e9d209df}\label{group___c_l_s_solvers_ga30af4b27086e461f862e7d16e9d209df}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}\label{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
-\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{ }\end{DoxyParamCaption})}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -1639,13 +1854,53 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 235 of file lp\+\_\+solver.\+cpp.
+Definition at line 237 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_gac22c25c0110c6684317aaf0e50c2e9a0}\label{group___c_l_s_solvers_gac22c25c0110c6684317aaf0e50c2e9a0}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}\label{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
-\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r,  }\item[{const \hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{,  }\item[{const vector$<$ long $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+compute the dot product of the specified rays, one of which is a vector 
+
+\begin{DoxyReturn}{Returns}
+the dot product 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This is unsafe when dimension is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+
+Definition at line 245 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}\label{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}} 
+\index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const vector$<$ long $>$ \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{ }\end{DoxyParamCaption})}
+
+
+
+compute the dot product of the specified rays, one of which is a vector 
+
+\begin{DoxyReturn}{Returns}
+the dot product 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This is unsafe when dimension is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+
+Definition at line 253 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}\label{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}} 
+\index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{r,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1666,13 +1921,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 465 of file lp\+\_\+solver.\+hpp.
+Definition at line 525 of file lp\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ga240d91c518c3bfe3817504de43039022}\label{group___c_l_s_solvers_ga240d91c518c3bfe3817504de43039022}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}\label{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
-\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE operator$\ast$ (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classconstraint}{constraint} \&}]{c,  }\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE L\+P\+\_\+\+Solvers\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{c,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1680,7 +1935,7 @@ Compute the dot product between the ray and the constraint.
 
 
 \begin{DoxyParams}{Parameters}
-{\em c} & a constraint \\
+{\em c} & a \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \\
 \hline
 {\em r} & a ray \\
 \hline
@@ -1693,13 +1948,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 477 of file lp\+\_\+solver.\+hpp.
+Definition at line 537 of file lp\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_gaaa48bb668551858c8d53e230546042ba}\label{group___c_l_s_solvers_gaaa48bb668551858c8d53e230546042ba}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}\label{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator+@{operator+}}
 \index{operator+@{operator+}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{operator+()}{operator+()}}
-{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_classray}{ray} operator+ (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{,  }\item[{\hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} L\+P\+\_\+\+Solvers\+::operator+ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -1713,13 +1968,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 259 of file lp\+\_\+solver.\+cpp.
+Definition at line 261 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_gafcb092cfc55771c4303f540cb7697a40}\label{group___c_l_s_solvers_gafcb092cfc55771c4303f540cb7697a40}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}\label{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator-\/@{operator-\/}}
 \index{operator-\/@{operator-\/}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{operator-\/()}{operator-()}}
-{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_classray}{ray} operator-\/ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_classray}{ray} \&}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} L\+P\+\_\+\+Solvers\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -1733,13 +1988,13 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 270 of file lp\+\_\+solver.\+cpp.
+Definition at line 272 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_gafb95c2b09dc0a5ea693a99cb8340ff28}\label{group___c_l_s_solvers_gafb95c2b09dc0a5ea693a99cb8340ff28}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}\label{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!ray\+\_\+sum@{ray\+\_\+sum}}
 \index{ray\+\_\+sum@{ray\+\_\+sum}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{ray\+\_\+sum()}{ray\_sum()}}
-{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_classray}{ray} ray\+\_\+sum (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group___c_l_s_solvers_classray}{ray} $>$ \&}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} L\+P\+\_\+\+Solvers\+::ray\+\_\+sum (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \&}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -1753,18 +2008,22 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 281 of file lp\+\_\+solver.\+cpp.
+Definition at line 283 of file lp\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ga2b6dbec1643b53f8e613b0a3de07f3ce}\label{group___c_l_s_solvers_ga2b6dbec1643b53f8e613b0a3de07f3ce}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}\label{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!union\+\_\+of\+\_\+edge\+\_\+sets@{union\+\_\+of\+\_\+edge\+\_\+sets}}
 \index{union\+\_\+of\+\_\+edge\+\_\+sets@{union\+\_\+of\+\_\+edge\+\_\+sets}!Constrained Linear System Solvers@{Constrained Linear System Solvers}}
 \subsubsection{\texorpdfstring{union\+\_\+of\+\_\+edge\+\_\+sets()}{union\_of\_edge\_sets()}}
-{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_classedge}{edge}$>$ union\+\_\+of\+\_\+edge\+\_\+sets (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \&}]{,  }\item[{const set$<$ \hyperlink{group___c_l_s_solvers_classedge}{edge} $>$ \&}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ L\+P\+\_\+\+Solvers\+::union\+\_\+of\+\_\+edge\+\_\+sets (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&}]{,  }\item[{const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+computes the union of the specified edge sets 
 
 \begin{DoxyReturn}{Returns}
 union of the specified edge sets 
 \end{DoxyReturn}
 
 
-Definition at line 342 of file skeleton.\+cpp.
+Definition at line 347 of file skeleton.\+cpp.
 

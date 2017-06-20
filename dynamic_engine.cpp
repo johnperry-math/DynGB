@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -29,7 +29,9 @@ using std::list;
 #include "polynomial.hpp"
 #include "dynamic_engine.hpp"
 
-int hilbertCmp(
+namespace Dynamic_Engine {
+
+int hilbert_cmp(
   const Dense_Univariate_Integer_Polynomial & hn1,
   const Dense_Univariate_Rational_Polynomial & hp1,
   const Dense_Univariate_Integer_Polynomial & hn2,
@@ -61,18 +63,18 @@ int hilbertCmp(
   return result;
 }
 
-bool LessByHilbert (PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_hilbert (PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Hilbert then Lex\n";
   bool result;
-  int n = a.getPP().num_vars();
+  int n = a.get_pp().num_vars();
   // first check the coefficients of the Hilbert polynomial
-  int hilcheck = hilbertCmp(
-    *a.getHilbertNumerator(), *a.getHilbertPolynomial(),
-    *b.getHilbertNumerator(), *b.getHilbertPolynomial()
+  int hilcheck = hilbert_cmp(
+    *a.get_hilbert_numerator(), *a.get_hilbert_polynomial(),
+    *b.get_hilbert_numerator(), *b.get_hilbert_polynomial()
   );
   if (hilcheck == 0) // the numerators are equal; break tie via current ordering
-    result = (a.getPP() < b.getPP());
+    result = (a.get_pp() < b.get_pp());
   else {
     if (hilcheck == -1) result = true;
     else result = false;
@@ -81,17 +83,17 @@ bool LessByHilbert (PPWithIdeal &a, PPWithIdeal &b)
   return result;
 };
 
-bool LessBySmoothestDegrees (PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_smoothest_degrees (PP_With_Ideal &a, PP_With_Ideal &b)
 {
-  return a.getDifferenceInDegree() < b.getDifferenceInDegree();
+  return a.get_difference_in_degree() < b.get_difference_in_degree();
 };
 
-bool LessByLargestMaxComponent (PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_largest_max_component (PP_With_Ideal &a, PP_With_Ideal &b)
 {
-  return a.getDifferenceInDegree() < b.getDifferenceInDegree();
+  return a.get_difference_in_degree() < b.get_difference_in_degree();
 }
 
-void PPWithIdeal::computeNumberNewPairs()
+void PP_With_Ideal::compute_number_new_pairs()
 {
   int n = t.num_vars();
   int m = I.size();
@@ -192,96 +194,96 @@ void PPWithIdeal::computeNumberNewPairs()
   // cout << " which makes " << num_new_pairs << " pairs total at degree " << min_deg << ".\n";
 }
 
-bool LessByNumCritPairs (PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_num_crit_pairs (PP_With_Ideal &a, PP_With_Ideal &b)
 {
   bool result;
-  NVAR_TYPE n = a.getIdeal().number_of_variables();
+  NVAR_TYPE n = a.get_ideal().number_of_variables();
   // first check if the number of critical pairs has been computed
-  if (a.howManyNewPairs() < 0) a.computeNumberNewPairs();
-  if (b.howManyNewPairs() < 0) b.computeNumberNewPairs();
+  if (a.how_many_new_pairs() < 0) a.compute_number_new_pairs();
+  if (b.how_many_new_pairs() < 0) b.compute_number_new_pairs();
   /*if (a.degOfNewPairs() < b.degOfNewPairs())
     result = true;
   else if (a.degOfNewPairs() > b.degOfNewPairs())
     result = false;*/
   // at this point, the degrees of the new pairs will be equal
-  /*else*/ if (a.howManyNewPairs() > b.howManyNewPairs())
+  /*else*/ if (a.how_many_new_pairs() > b.how_many_new_pairs())
     result = true;
-  else if (a.howManyNewPairs() < b.howManyNewPairs())
+  else if (a.how_many_new_pairs() < b.how_many_new_pairs())
     result = false;
   else // the numerators are equal; break tie via monomial ordering
-    result = a.getPP() < b.getPP();
+    result = a.get_pp() < b.get_pp();
   //cout << "\tfirst less than second? " << result << endl;
   return result;
 };
 
-bool LessByHilbertThenDegree(PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Hilbert then Deg\n";
   bool result;
-  int n = a.getIdeal().number_of_variables();
+  int n = a.get_ideal().number_of_variables();
   // first check the coefficients of the Hilbert polynomial
-  int hilcheck = hilbertCmp(
-      *a.getHilbertNumerator(), *a.getHilbertPolynomial(),
-      *b.getHilbertNumerator(), *b.getHilbertPolynomial()
+  int hilcheck = hilbert_cmp(
+      *a.get_hilbert_numerator(), *a.get_hilbert_polynomial(),
+      *b.get_hilbert_numerator(), *b.get_hilbert_polynomial()
   );
   if (hilcheck == -1) result = true;
   else if (hilcheck == 1) result = false;
   else { // the numerators are equal; break tie via monomial degree
-    if (a.getPP().total_degree() < b.getPP().total_degree())
+    if (a.get_pp().total_degree() < b.get_pp().total_degree())
       result = true;
-    else if (a.getPP().total_degree() > b.getPP().total_degree())
+    else if (a.get_pp().total_degree() > b.get_pp().total_degree())
       result = false;
     else
-      result = (a.getPP() < b.getPP());
+      result = (a.get_pp() < b.get_pp());
   }
   return result;
 };
 
-bool LessByGradHilbertThenDegree(PPWithIdeal &a, PPWithIdeal &b) {
+bool less_by_grad_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b) {
   bool result;
-  int n = a.getIdeal().number_of_variables();
+  int n = a.get_ideal().number_of_variables();
   // first check the coefficients of the Hilbert polynomial
-  Dense_Univariate_Rational_Polynomial * hp1 = a.getHilbertPolynomial();
-  Dense_Univariate_Rational_Polynomial * hp2 = b.getHilbertPolynomial();
-  int hilcheck = hilbertCmp(
-    *a.getHilbertNumerator(true), *hp1,
-    *b.getHilbertNumerator(true), *hp2
+  Dense_Univariate_Rational_Polynomial * hp1 = a.get_hilbert_polynomial();
+  Dense_Univariate_Rational_Polynomial * hp2 = b.get_hilbert_polynomial();
+  int hilcheck = hilbert_cmp(
+    *a.get_hilbert_numerator(true), *hp1,
+    *b.get_hilbert_numerator(true), *hp2
   );
   if (hilcheck == -1) result = true;
   else if (hilcheck == 1) result = false;
   else if (hilcheck == 0) { // break tie via monomial degree
-    if (a.getPP().weighted_degree(a.getOrdering().weights())
-          < b.getPP().weighted_degree(b.getOrdering().weights()))
+    if (a.get_pp().weighted_degree(a.get_ordering().weights())
+          < b.get_pp().weighted_degree(b.get_ordering().weights()))
       result = true;
-    else if (a.getPP().weighted_degree(a.getOrdering().weights())
-                > b.getPP().weighted_degree(b.getOrdering().weights()))
+    else if (a.get_pp().weighted_degree(a.get_ordering().weights())
+                > b.get_pp().weighted_degree(b.get_ordering().weights()))
       result = false;
     else
-      result = a.getPP() < b.getPP();
+      result = a.get_pp() < b.get_pp();
   }
   return result;
 };
 
-bool LessByDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_degree_then_hilbert(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Deg then Hilbert\n";
   bool result;
-  int n = a.getPP().num_vars();
+  int n = a.get_pp().num_vars();
   // first check the weighted degree
-  if (a.getPP().total_degree() < b.getPP().total_degree())
+  if (a.get_pp().total_degree() < b.get_pp().total_degree())
     result = true;
-  else if (a.getPP().total_degree() > b.getPP().total_degree())
+  else if (a.get_pp().total_degree() > b.get_pp().total_degree())
     result = false;
   else {
     // now check the coefficients of the Hilbert polynomial
-    Dense_Univariate_Rational_Polynomial HPdiff(*(a.getHilbertPolynomial()));
-    HPdiff -= *(b.getHilbertPolynomial());
+    Dense_Univariate_Rational_Polynomial HPdiff(*(a.get_hilbert_polynomial()));
+    HPdiff -= *(b.get_hilbert_polynomial());
     if (not HPdiff.is_zero())
       result = (HPdiff.numerator(HPdiff.degree()) < 0);
     else // use Hilbert series
     {
-      Dense_Univariate_Integer_Polynomial * h1 = a.getHilbertNumerator();
-      Dense_Univariate_Integer_Polynomial * h2 = b.getHilbertNumerator();
+      Dense_Univariate_Integer_Polynomial * h1 = a.get_hilbert_numerator();
+      Dense_Univariate_Integer_Polynomial * h2 = b.get_hilbert_numerator();
       DEG_TYPE i = 0;
       for ( /* already initialized */ ;
            i <= h1->degree() and i <= h2->degree() and (*h1)[i] == (*h2)[i];
@@ -292,10 +294,10 @@ bool LessByDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
         if (i > h2->degree())
         {
           int i = 0;
-          while (i < n and a.getPP()[i] == b.getPP()[i]) ++i;
+          while (i < n and a.get_pp()[i] == b.get_pp()[i]) ++i;
           if (i == n) result = false;
           else
-            result = (a.getPP()[i] < b.getPP()[i]);
+            result = (a.get_pp()[i] < b.get_pp()[i]);
         }
         else
           result = true;
@@ -310,28 +312,28 @@ bool LessByDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
   return result;
 };
 
-bool LessByWDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_wdegree_then_hilbert(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Deg then Hilbert\n";
   bool result;
-  int n = a.getPP().num_vars();
+  int n = a.get_pp().num_vars();
   // first check the weighted degree
-  if (a.getPP().weighted_degree(a.getOrdering().weights())
-        < b.getPP().weighted_degree(b.getOrdering().weights()))
+  if (a.get_pp().weighted_degree(a.get_ordering().weights())
+        < b.get_pp().weighted_degree(b.get_ordering().weights()))
     result = true;
-  else if (a.getPP().weighted_degree(a.getOrdering().weights())
-        > b.getPP().weighted_degree(b.getOrdering().weights()))
+  else if (a.get_pp().weighted_degree(a.get_ordering().weights())
+        > b.get_pp().weighted_degree(b.get_ordering().weights()))
     result = false;
   else {
     // now check the coefficients of the Hilbert polynomial
     Dense_Univariate_Rational_Polynomial HPdiff
-        = a.getHilbertPolynomial() - b.getHilbertPolynomial();
+        = a.get_hilbert_polynomial() - b.get_hilbert_polynomial();
     if (not HPdiff.is_zero())
       result = (HPdiff.numerator(HPdiff.degree()) >= 0);
     else // use Hilbert series
     {
-      Dense_Univariate_Integer_Polynomial * h1 = a.getHilbertNumerator();
-      Dense_Univariate_Integer_Polynomial * h2 = b.getHilbertNumerator();
+      Dense_Univariate_Integer_Polynomial * h1 = a.get_hilbert_numerator();
+      Dense_Univariate_Integer_Polynomial * h2 = b.get_hilbert_numerator();
       DEG_TYPE i = 0;
       for ( /* already initialized */ ;
            i <= h1->degree() and i <= h2->degree() and (*h1)[i] == (*h2)[i];
@@ -342,10 +344,10 @@ bool LessByWDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
         if (i > h2->degree())
         {
           int i = 0;
-          while (i < n and a.getPP()[i] == b.getPP()[i]) ++i;
+          while (i < n and a.get_pp()[i] == b.get_pp()[i]) ++i;
           if (i == n) result = false;
           else
-            result = (a.getPP()[i] < b.getPP()[i]);
+            result = (a.get_pp()[i] < b.get_pp()[i]);
         }
         else
           result = true;
@@ -360,27 +362,27 @@ bool LessByWDegreeThenHilbert(PPWithIdeal &a, PPWithIdeal &b)
   return result;
 };
 
-bool LessByDegreeThenGradHilbert(PPWithIdeal &a, PPWithIdeal &b)
+bool less_by_degree_then_grad_hilbert(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   bool result;
-  int n = a.getPP().num_vars();
+  int n = a.get_pp().num_vars();
   // first check the weighted degree
-  if (a.getPP().weighted_degree(a.getOrdering().weights())
-        < b.getPP().weighted_degree(b.getOrdering().weights()))
+  if (a.get_pp().weighted_degree(a.get_ordering().weights())
+        < b.get_pp().weighted_degree(b.get_ordering().weights()))
     result = true;
-  else if (a.getPP().weighted_degree(a.getOrdering().weights())
-        > b.getPP().weighted_degree(b.getOrdering().weights()))
+  else if (a.get_pp().weighted_degree(a.get_ordering().weights())
+        > b.get_pp().weighted_degree(b.get_ordering().weights()))
     result = false;
   else {
     // now check the coefficients of the Hilbert polynomial
-    Dense_Univariate_Rational_Polynomial HPdiff(*(a.getHilbertPolynomial()));
-    HPdiff -= *(b.getHilbertPolynomial());
+    Dense_Univariate_Rational_Polynomial HPdiff(*(a.get_hilbert_polynomial()));
+    HPdiff -= *(b.get_hilbert_polynomial());
     if (not HPdiff.is_zero())
       result = (HPdiff.numerator(HPdiff.degree()) < 0);
     else // use Hilbert series
     {
-      Dense_Univariate_Integer_Polynomial * h1 = a.getHilbertNumerator(true);
-      Dense_Univariate_Integer_Polynomial * h2 = b.getHilbertNumerator(true);
+      Dense_Univariate_Integer_Polynomial * h1 = a.get_hilbert_numerator(true);
+      Dense_Univariate_Integer_Polynomial * h2 = b.get_hilbert_numerator(true);
       DEG_TYPE i = 0;
       for ( /* already initialized */ ;
            i <= h1->degree() and i <= h2->degree() and (*h1)[i] == (*h2)[i];
@@ -391,9 +393,9 @@ bool LessByDegreeThenGradHilbert(PPWithIdeal &a, PPWithIdeal &b)
         if (i > h2->degree())
         {
           int i = 0;
-          while (i < n and a.getPP()[i] == b.getPP()[i]) ++i;
+          while (i < n and a.get_pp()[i] == b.get_pp()[i]) ++i;
           if (i == n) result = false;
-          else result = (a.getPP()[i] < b.getPP()[i]);
+          else result = (a.get_pp()[i] < b.get_pp()[i]);
         }
         else
           result = true;
@@ -408,10 +410,10 @@ bool LessByDegreeThenGradHilbert(PPWithIdeal &a, PPWithIdeal &b)
   return result;
 };
 
-bool LessByBetti (PPWithIdeal & a, PPWithIdeal & b) {
+bool less_by_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
   bool result;
-  const map<DEG_TYPE, unsigned long> & Ba = a.getIncBetti();
-  const map<DEG_TYPE, unsigned long> & Bb = b.getIncBetti();
+  const map<DEG_TYPE, unsigned long> & Ba = a.get_inc_betti();
+  const map<DEG_TYPE, unsigned long> & Bb = b.get_inc_betti();
   auto Bai = Ba.begin();
   auto Bbi = Bb.begin();
   for (/* */ ;
@@ -421,7 +423,7 @@ bool LessByBetti (PPWithIdeal & a, PPWithIdeal & b) {
   ) { }
   if (Bai == Ba.end()) {
     if (Bbi == Bb.end())
-      result = LessByHilbertThenDegree(a, b);
+      result = less_by_hilbert_then_degree(a, b);
     else
       result = false;
   } else {
@@ -435,16 +437,16 @@ bool LessByBetti (PPWithIdeal & a, PPWithIdeal & b) {
       else if (Bai->second < Bbi->second)
         result = false;
       else
-        result = a.getPP() < b.getPP();
+        result = a.get_pp() < b.get_pp();
     }
   }
   return result;
 }
 
-bool LessByBigBetti (PPWithIdeal & a, PPWithIdeal & b) {
+bool less_by_big_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
   bool result;
-  const map<DEG_TYPE, unsigned long> & Ba = a.getIncBetti();
-  const map<DEG_TYPE, unsigned long> & Bb = b.getIncBetti();
+  const map<DEG_TYPE, unsigned long> & Ba = a.get_inc_betti();
+  const map<DEG_TYPE, unsigned long> & Bb = b.get_inc_betti();
   auto Bai = Ba.end();
   auto Bbi = Bb.end();
   for (/* */ ;
@@ -454,7 +456,7 @@ bool LessByBigBetti (PPWithIdeal & a, PPWithIdeal & b) {
   ) { }
   if (Bai == Ba.begin()) {
     if (Bbi == Bb.begin())
-      result = LessByHilbertThenDegree(a, b);
+      result = less_by_hilbert_then_degree(a, b);
     else
       result = true;
   } else {
@@ -468,16 +470,16 @@ bool LessByBigBetti (PPWithIdeal & a, PPWithIdeal & b) {
       else if (Bai->second < Bbi->second)
         result = false;
       else
-        result = a.getPP() < b.getPP();
+        result = a.get_pp() < b.get_pp();
     }
   }
   return result;
 }
 
-bool LessByGradBetti (PPWithIdeal & a, PPWithIdeal & b) {
+bool less_by_grad_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
   bool result;
-  const map<DEG_TYPE, unsigned long> & Ba = a.getIncBetti(true);
-  const map<DEG_TYPE, unsigned long> & Bb = b.getIncBetti(true);
+  const map<DEG_TYPE, unsigned long> & Ba = a.get_inc_betti(true);
+  const map<DEG_TYPE, unsigned long> & Bb = b.get_inc_betti(true);
   auto Bai = Ba.begin();
   auto Bbi = Bb.begin();
   for (/* */ ;
@@ -487,7 +489,7 @@ bool LessByGradBetti (PPWithIdeal & a, PPWithIdeal & b) {
   ) { }
   if (Bai == Ba.end()) {
     if (Bbi == Bb.end())
-      result = LessByGradHilbertThenDegree(a, b);
+      result = less_by_grad_hilbert_then_degree(a, b);
     else
       result = false;
   } else {
@@ -501,26 +503,26 @@ bool LessByGradBetti (PPWithIdeal & a, PPWithIdeal & b) {
       else if (Bai->second < Bbi->second)
         result = false;
       else
-        result = a.getPP() < b.getPP();
+        result = a.get_pp() < b.get_pp();
     }
   }
   return result;
 }
 
-void compatiblePP(
+void compatible_pp(
   Monomial currentLPP,            // the current LPP
-  const set<Monomial> &allPPs,    // the monomials to consider;
-                                      // some will be removed
-  const set<::ray> &bndrys,     // known boundary vectors
+  const set<Monomial> & allPPs,   // the monomials to consider; some removed
   set<Monomial> &result,          // returned as PPs for Hilbert function
-                                      // ("easy" (& efficient?) to extract exps
+                                  // ("easy" (& efficient?) to extract exps
   set<Monomial> &boundary_mons,   // boundary monomials
-  LP_Solver *skel              // used for alternate refinement
+  LP_Solver *skel                 // used for alternate refinement
 )
 {
+  // known boundary vectors
+  const set<Ray> &bndrys = skel->get_rays();
   // get the exponent vector of the current LPP, insert it
   NVAR_TYPE n = currentLPP.num_vars();
-  ::ray aray(n, currentLPP.log());
+  Ray aray(n, currentLPP.log());
   set<Monomial> initial_candidates;
   initial_candidates.insert(currentLPP);
   // compare other monomials with LPP
@@ -535,7 +537,7 @@ void compatiblePP(
     //cout << '\t'; p_Write(*b_ptr, Rx);
     p_GetExpV(*b_ptr, b, Rx);
     for (unsigned long i = 1; i <= n; ++i) { along[i-1] = b[i]; }
-    ::ray bray(n, along);
+    Ray bray(n, along);
     bool searching = true;
     for (
          auto w_ptr = bndrys.begin();
@@ -589,20 +591,20 @@ void compatiblePP(
   {
     p_GetExpV(*p_ptr, a, Rx);
     for (unsigned long i = 1; i <= n; ++i) { along[i-1] = a[i]; }
-    ::ray pray(n, along);
+    Ray pray(n, along);
     bool cleared_the_hurdle = false;
     for (auto w_ptr = bndrys.begin();
          not cleared_the_hurdle and w_ptr != bndrys.end(); ++w_ptr)
     {
       bool maybe_this_vector = true;
-      ::ray w = *w_ptr;
+      Ray w = *w_ptr;
       for (auto q_ptr = initial_candidates.begin();
            maybe_this_vector and not cleared_the_hurdle and q_ptr != initial_candidates.end(); ++q_ptr)
         if (*p_ptr != *q_ptr)
         {
           p_GetExpV(*q_ptr, b, Rx);
           for (unsigned long i = 1; i <= n; ++i) { along[i-1] = b[i]; }
-          ::ray qray(n, along);
+          Ray qray(n, along);
           // guard against invalid exclusions
           unsigned long long wt = (*w_ptr) * qray;
           if ((((*w_ptr) * pray) <= wt) and wt != 0) { maybe_this_vector = false; }
@@ -619,13 +621,13 @@ void compatiblePP(
   //result = initial_candidates;
 }
 
-bool verifyAndModifyIfNecessary(
+bool verify_and_modify_if_necessary(
   LP_Solver *skel,
   const list<Abstract_Polynomial *> &currentPolys
 )
 {
   bool consistent = true; // innocent until proven guilty
-  ::ray w = ray_sum(skel->get_rays()); // our tentative ordering
+  Ray w = ray_sum(skel->get_rays()); // our tentative ordering
   // cout << "Have ray " << w << endl;
   NVAR_TYPE n = w.get_dimension();
   RAYENT_TYPE *entries = new RAYENT_TYPE [n]; // used for entries for new rays
@@ -641,7 +643,7 @@ bool verifyAndModifyIfNecessary(
     Abstract_Polynomial * pp = *piter;
     const Monomial & t = pp->leading_monomial();
     for (NVAR_TYPE i = 0; i < n; ++i) entries[i] = t[i];
-    ::ray a(n, entries);
+    Ray a(n, entries);
     // loop through the polynomial's remaining monomials
     //for (poly titer = (*piter)->next; consistent and titer != nullptr; titer = titer->next)
     Polynomial_Iterator * ti;
@@ -655,7 +657,7 @@ bool verifyAndModifyIfNecessary(
       {
         // create a ray for the PP's exponents
         for (NVAR_TYPE i = 0; i < n; ++i) entries[i] = ti->currMonomial()[i];
-        ::ray b(n, entries);
+        Ray b(n, entries);
         // compare weights between a and b; if this fails,
         // recompute the skeleton with a new constraint
         if (a*w <= b*w)
@@ -664,10 +666,10 @@ bool verifyAndModifyIfNecessary(
             coefficients = new CONSTR_TYPE[n];
           for (NVAR_TYPE i = 0; i < n; ++i)
             coefficients[i] = a[i] - b[i];
-          constraint new_constraint(n, coefficients);
+          Constraint new_constraint(n, coefficients);
           LP_Solver * newskel;
-          if (dynamic_cast<skeleton *>(skel) != nullptr)
-            newskel = new skeleton(*static_cast<skeleton *>(skel));
+          if (dynamic_cast<Skeleton *>(skel) != nullptr)
+            newskel = new Skeleton(*static_cast<Skeleton *>(skel));
           else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr) {
             newskel = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
             //piter = currentPolys.begin(); break;
@@ -698,28 +700,28 @@ bool verifyAndModifyIfNecessary(
   return consistent;
 }
 
-void ConstraintsForNewPP(
-  const PPWithIdeal &I,
+void constraints_for_new_pp(
+  const PP_With_Ideal &I,
   const set<Monomial> &monomialsForComparison,
-  vector<constraint> &result
+  vector<Constraint> &result
 )
 {
   // setup
-  NVAR_TYPE n = I.getIdeal().number_of_variables();
+  NVAR_TYPE n = I.get_ideal().number_of_variables();
   //int * a = new int[n];   // space for exponent vectors
   //int * b = new int[n];
   const EXP_TYPE * a, * b;
   CONSTR_TYPE *c = new CONSTR_TYPE[n];  // space for coefficients of constraint
-  a = I.getPP().log();  // exponent vector of candidate
+  a = I.get_pp().log();  // exponent vector of candidate
   // loop through exponent vectors of other 
   for (const Monomial & t : monomialsForComparison)
   {
     // insert only different PPs (since I->t should also be in that set)
-    if (t != I.getPP())
+    if (t != I.get_pp())
     {
       b = t.log();
       for (NVAR_TYPE i = 0; i < n; ++i) c[i] = a[i] - b[i];
-      result.push_back(constraint(n,c));
+      result.push_back(Constraint(n,c));
     }
   }
   delete [] c;
@@ -727,7 +729,7 @@ void ConstraintsForNewPP(
   //delete [] a;
 }
 
-void SelectMonomial(
+void select_monomial(
     Abstract_Polynomial * r,                    // changes
     list<Monomial> & CurrentLPPs,       // changes
     Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
@@ -735,22 +737,10 @@ void SelectMonomial(
     const list<Critical_Pair_Dynamic *> & crit_pairs,
     LP_Solver * currSkel,                        // possibly changes
     bool & ordering_changed,
-    DynamicHeuristic method
-)
-{
-  //cout << "entering selmon\n";
-  //cout << "skeleton before: " << currSkel << endl;
-  skeleton * src_skel = dynamic_cast<skeleton *>(currSkel);
-  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *>(currSkel);
-  PPL_Solver * src_PPL = dynamic_cast<PPL_Solver *>(currSkel);
-  ::ray w = ray_sum(currSkel->get_rays());
-  //cout << "Have ray " << w << endl;
-  vector<WT_TYPE> ord(w.get_dimension());
-  for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
-  const Monomial & currentLPP = r->leading_monomial();
-  //cout << "comparing against: "; p_Write(currentLPP, Rx);
-  set<Monomial> allPPs, boundaryPPs, compatiblePPs;
+    Dynamic_Heuristic method
+) {
   // transform monomials into exponent vectors
+  set<Monomial> allPPs;
   Polynomial_Iterator * ti;
   for (
        ti = r->new_iterator();
@@ -760,81 +750,110 @@ void SelectMonomial(
     allPPs.insert(ti->currMonomial());
   }
   delete ti;
+  select_monomial(
+      allPPs, r->leading_monomial(), CurrentLPPs, current_hilbert_numerator,
+      CurrentPolys, crit_pairs, currSkel, ordering_changed, method
+  );
+}
+
+void select_monomial(
+    set<Monomial> allPPs,
+    const Monomial & currentLPP,
+    list<Monomial> & CurrentLPPs,       // changes
+    Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
+    const list<Abstract_Polynomial *> & CurrentPolys,
+    const list<Critical_Pair_Dynamic *> & crit_pairs,
+    LP_Solver * currSkel,                        // possibly changes
+    bool & ordering_changed,
+    Dynamic_Heuristic method
+)
+{
+  //cout << "entering selmon\n";
+  //cout << "skeleton before: " << currSkel << endl;
+  Skeleton * src_skel = dynamic_cast<Skeleton *>(currSkel);
+  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *>(currSkel);
+  PPL_Solver * src_PPL = dynamic_cast<PPL_Solver *>(currSkel);
+  Ray w = ray_sum(currSkel->get_rays());
+  //cout << "Have ray " << w << endl;
+  vector<WT_TYPE> ord(w.get_dimension());
+  for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
+  //cout << "comparing against: "; p_Write(currentLPP, Rx);
+  set<Monomial> boundaryPPs, compatible_pps;
   // loop through all exponent vectors
   cout << allPPs.size() << " possible monomials\n";
-  compatiblePP(currentLPP, allPPs, currSkel->get_rays(), compatiblePPs, boundaryPPs, currSkel);
-  cout << compatiblePPs.size() << " compatible monomials\n";
-  //for (auto piter = compatiblePPs.begin(); piter != compatiblePPs.end(); ++piter)
+  compatible_pp(currentLPP, allPPs, compatible_pps, boundaryPPs, currSkel);
+  cout << compatible_pps.size() << " compatible monomials\n";
+  //for (auto piter = compatible_pps.begin(); piter != compatible_pps.end(); ++piter)
   //  p_Write(*piter, Rx);
   // list possible future ideals, sort by Hilbert Function
-  list<PPWithIdeal> possibleIdealsBasic;
-  for (const Monomial & t : compatiblePPs)
+  list<PP_With_Ideal> possibleIdealsBasic;
+  for (const Monomial & t : compatible_pps)
   {
-    PPWithIdeal newIdeal(t, CurrentLPPs, w, crit_pairs, *current_hilbert_numerator);
+    PP_With_Ideal newIdeal(t, CurrentLPPs, w, crit_pairs, *current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
   }
   //cout << "heuristic: " << method << endl;
   switch(method)
   {
-    case DynamicHeuristic::ORD_HILBERT_THEN_LEX:
-      possibleIdealsBasic.sort(LessByHilbert);
+    case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
+      possibleIdealsBasic.sort(less_by_hilbert);
       break;
-    case DynamicHeuristic::ORD_HILBERT_THEN_DEG:
-      possibleIdealsBasic.sort(LessByHilbertThenDegree);
+    case Dynamic_Heuristic::ORD_HILBERT_THEN_DEG:
+      possibleIdealsBasic.sort(less_by_hilbert_then_degree);
       break;
-    case DynamicHeuristic::DEG_THEN_ORD_HILBERT:
-      possibleIdealsBasic.sort(LessByDegreeThenHilbert);
+    case Dynamic_Heuristic::DEG_THEN_ORD_HILBERT:
+      possibleIdealsBasic.sort(less_by_degree_then_hilbert);
       break;
-    case DynamicHeuristic::GRAD_HILB_THEN_DEG:
-      possibleIdealsBasic.sort(LessByGradHilbertThenDegree);
+    case Dynamic_Heuristic::GRAD_HILB_THEN_DEG:
+      possibleIdealsBasic.sort(less_by_grad_hilbert_then_degree);
       break;
-    case DynamicHeuristic::DEG_THEN_GRAD_HILB:
-      possibleIdealsBasic.sort(LessByDegreeThenGradHilbert);
+    case Dynamic_Heuristic::DEG_THEN_GRAD_HILB:
+      possibleIdealsBasic.sort(less_by_degree_then_grad_hilbert);
       break;
-    case DynamicHeuristic::SMOOTHEST_DEGREES:
-      possibleIdealsBasic.sort(LessBySmoothestDegrees);
+    case Dynamic_Heuristic::SMOOTHEST_DEGREES:
+      possibleIdealsBasic.sort(less_by_smoothest_degrees);
       break;
-    case DynamicHeuristic::LARGEST_MAX_COMPONENT:
-      possibleIdealsBasic.sort(LessByLargestMaxComponent);
+    case Dynamic_Heuristic::LARGEST_MAX_COMPONENT:
+      possibleIdealsBasic.sort(less_by_largest_max_component);
       break;
-    case DynamicHeuristic::MIN_CRIT_PAIRS:
-      possibleIdealsBasic.sort(LessByNumCritPairs);
+    case Dynamic_Heuristic::MIN_CRIT_PAIRS:
+      possibleIdealsBasic.sort(less_by_num_crit_pairs);
       break;
-    case DynamicHeuristic::BETTI_HILBERT_DEG:
-      possibleIdealsBasic.sort(LessByBetti);
+    case Dynamic_Heuristic::BETTI_HILBERT_DEG:
+      possibleIdealsBasic.sort(less_by_betti);
       break;
-    case DynamicHeuristic::GRAD_BETTI_HILBERT_DEG:
-      possibleIdealsBasic.sort(LessByGradBetti);
+    case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
+      possibleIdealsBasic.sort(less_by_grad_betti);
       break;
-    default: possibleIdealsBasic.sort(LessByHilbert);
+    default: possibleIdealsBasic.sort(less_by_hilbert);
   }
-  PPWithIdeal * winner = & possibleIdealsBasic.front();
+  PP_With_Ideal * winner = & possibleIdealsBasic.front();
   bool searching = true;
   if (possibleIdealsBasic.size() != 1)
   {
     // test each combination of LPPs for consistency
     // one of them must work (current LPP, if nothing else -- see previous case) 
     set<Monomial> PPunion;
-    for (const Monomial & t : compatiblePPs)
+    for (const Monomial & t : compatible_pps)
       PPunion.insert(t);
     for (const Monomial & t : boundaryPPs)
       PPunion.insert(t);
-    for (PPWithIdeal & I : possibleIdealsBasic) {
+    for (PP_With_Ideal & I : possibleIdealsBasic) {
       //cout << currSkel << endl;
       LP_Solver * newSkeleton;
       if (src_skel != nullptr)
-        newSkeleton = new skeleton(*src_skel);
+        newSkeleton = new Skeleton(*src_skel);
       else if (src_GLPK != nullptr)
         newSkeleton = new GLPK_Solver(*src_GLPK);
       else if (src_PPL != nullptr)
         newSkeleton = new PPL_Solver(*src_PPL);
-      vector<constraint> newvecs;
-      //cout << "testing " << I.getPP() << endl;
-      ConstraintsForNewPP(I, PPunion, newvecs);
+      vector<Constraint> newvecs;
+      //cout << "testing " << I.get_pp() << endl;
+      constraints_for_new_pp(I, PPunion, newvecs);
       if (newSkeleton->solve(newvecs))
       {
         //cout << "consistent\n";
-        if (verifyAndModifyIfNecessary(newSkeleton, CurrentPolys))
+        if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
         {
           searching = false;
           if (src_skel != nullptr)
@@ -853,26 +872,26 @@ void SelectMonomial(
         //cout << "inconsistent\n";
         // cout << newSkeleton;
         // this monomial is not, in fact, compatible
-        compatiblePPs.erase(I.getPP());
+        compatible_pps.erase(I.get_pp());
       }
       delete newSkeleton;
     }
   }
-  else if (possibleIdealsBasic.size() == 1 and compatiblePPs.size() != 1)
+  else if (possibleIdealsBasic.size() == 1 and compatible_pps.size() != 1)
   {
-    vector<constraint> newvecs;
-    ConstraintsForNewPP(*(possibleIdealsBasic.begin()), compatiblePPs, newvecs);
+    vector<Constraint> newvecs;
+    constraints_for_new_pp(*(possibleIdealsBasic.begin()), compatible_pps, newvecs);
     currSkel->solve(newvecs);
-    verifyAndModifyIfNecessary(currSkel, CurrentPolys);
+    verify_and_modify_if_necessary(currSkel, CurrentPolys);
   }
     
   // set marked lpp, new Hilbert numerator
-  CurrentLPPs.push_back(winner->getPP());
+  CurrentLPPs.push_back(winner->get_pp());
   if (*current_hilbert_numerator != nullptr) delete *current_hilbert_numerator;
   *current_hilbert_numerator
-      = new Dense_Univariate_Integer_Polynomial(*(winner->getHilbertNumerator()));
+      = new Dense_Univariate_Integer_Polynomial(*(winner->get_hilbert_numerator()));
   // TODO: delete elements of allPPs (not clear how: elements are in a set)
-  ::ray new_weight = ray_sum(currSkel->get_rays());
+  Ray new_weight = ray_sum(currSkel->get_rays());
   //cout << "Have ray " << w << endl;
   new_weight.simplify_ray();
   for (
@@ -890,6 +909,8 @@ void SelectMonomial(
   cout << "skeleton after:\n";
   cout << currSkel; */
   //cout << "returning from selmon\n";
+}
+
 }
 
 #endif

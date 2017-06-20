@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -29,10 +29,10 @@ extern Monomial_Ordering * generic_grevlex_ptr;
 class Double_Buffered_Polynomial;
 
 /**
-  \class DB_Polynomial_Iterator
-  \author John Perry
-  \date 2015
-  \brief Iterator over double-buffered polynomials.
+  @class DB_Polynomial_Iterator
+  @author John Perry
+  @date 2015
+  @brief Iterator over double-buffered polynomials.
   \ingroup IteratorGroup
 */
 class DB_Polynomial_Iterator : public Mutable_Polynomial_Iterator {
@@ -92,10 +92,10 @@ protected:
 };
 
 /**
-  \class Double_Buffered_Polynomial
-  \author John Perry
-  \date 2015
-  \brief Polynomials implemented using double buffers.
+  @class Double_Buffered_Polynomial
+  @author John Perry
+  @date 2015
+  @brief Polynomials implemented using double buffers.
   \ingroup polygroup
 
   A double-buffered polynomial maintains at all times two arrays to store
@@ -200,13 +200,13 @@ protected:
   ///@{
 
   /**
-    \brief \c true iff buffer \p b has space to hold \p n elements;
+    @brief @c true iff buffer @p b has space to hold @p n elements;
     expand other buffer if not.
   */
   inline bool test_buffer(unsigned b, unsigned n) { return sizes[b] >= n; }
 
   /**
-    \brief Expand buffer \p b to hold \f$ 2n \f$ elements.
+    @brief Expand buffer @p b to hold @f$ 2n @f$ elements.
     @param b the buffer to expand
     @param n number of monomials you&rsquo;d like it to hold now
     @details This does \e not test to see if the space is already available.

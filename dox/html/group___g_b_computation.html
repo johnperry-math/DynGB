@@ -109,18 +109,19 @@ Classes</h2></td></tr>
 <tr class="memitem:class_critical___pair___x_plor"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_critical___pair___x_plor">Critical_Pair_XPlor</a></td></tr>
 <tr class="memdesc:class_critical___pair___x_plor"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains information on critical pairs by their index in the basis, in addition to the usual information  <a href="group___g_b_computation.html#class_critical___pair___x_plor">More...</a><br /></td></tr>
 <tr class="separator:class_critical___pair___x_plor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:class_dynamic___engine_1_1_p_p___with___ideal"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">Dynamic_Engine::PP_With_Ideal</a></td></tr>
+<tr class="memdesc:class_dynamic___engine_1_1_p_p___with___ideal"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to associate a potential leading power product with the resulting monomial ideal if it were chosen as the actual leading power product.  <a href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">More...</a><br /></td></tr>
+<tr class="separator:class_dynamic___engine_1_1_p_p___with___ideal"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:class_f4___reduction___data"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_f4___reduction___data">F4_Reduction_Data</a></td></tr>
 <tr class="memdesc:class_f4___reduction___data"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of Faug&egrave;re&rsquo;s F4 algorithm.  <a href="group___g_b_computation.html#class_f4___reduction___data">More...</a><br /></td></tr>
 <tr class="separator:class_f4___reduction___data"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:class_p_p_with_ideal"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_p_p_with_ideal">PPWithIdeal</a></td></tr>
-<tr class="separator:class_p_p_with_ideal"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structsmaller__lm"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#structsmaller__lm">smaller_lm</a></td></tr>
 <tr class="memdesc:structsmaller__lm"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to sort polynomials by leading monomial  <a href="group___g_b_computation.html#structsmaller__lm">More...</a><br /></td></tr>
 <tr class="separator:structsmaller__lm"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga498e6d10e581ed9dca25264cbe825ce0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a> { <br />
+<tr class="memitem:ga819b1fd40d9a40ff303df3b90647ecb0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Engine::Dynamic_Heuristic</a> { <br />
 &#160;&#160;<b>MIN_HEURISTIC</b> = 0, 
 <b>ORD_HILBERT_THEN_LEX</b>, 
 <b>ORD_HILBERT_THEN_DEG</b>, 
@@ -139,13 +140,14 @@ Enumerations</h2></td></tr>
 &#160;&#160;<b>DEG_THEN_ORD_HILBERT</b>, 
 <b>MAX_HEURISTIC</b>
 <br />
- }</td></tr>
-<tr class="separator:ga498e6d10e581ed9dca25264cbe825ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+ }<tr class="memdesc:ga819b1fd40d9a40ff303df3b90647ecb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">values for the heuristic, as in <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a></code>  <a href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:ga819b1fd40d9a40ff303df3b90647ecb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga28fbbb9eb7d8b80ced05c8fa89b2bdac"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac">DynamicSolver</a> { <b>SKELETON_SOLVER</b> = 1, 
 <b>GLPK_SOLVER</b>, 
 <b>PPL_SOLVER</b>, 
 <b>GLPK_ORACLE_SOLVER</b>
- }<tr class="memdesc:ga28fbbb9eb7d8b80ced05c8fa89b2bdac"><td class="mdescLeft">&#160;</td><td class="mdescRight">used by <a class="el" href="group___g_b_computation.html#ga40140d94eac91d7337f553d362128cb7" title="implementation of the dynamic Buchberger algorithm ">buchberger_dynamic()</a> to decide which solver to use  <a href="group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac">More...</a><br /></td></tr>
+ }<tr class="memdesc:ga28fbbb9eb7d8b80ced05c8fa89b2bdac"><td class="mdescLeft">&#160;</td><td class="mdescRight">used by <a class="el" href="group___g_b_computation.html#ga2c05f4e2ea8b43bb696483469f4cce83" title="implementation of the dynamic Buchberger algorithm ">buchberger_dynamic()</a> to decide which solver to use  <a href="group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:ga28fbbb9eb7d8b80ced05c8fa89b2bdac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga73257b8a2d5cc826853a71b77d0cebf2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga73257b8a2d5cc826853a71b77d0cebf2">SPolyCreationFlags</a> { <br />
@@ -165,9 +167,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga37aa7e2fec96fac6c914934a4243f603"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga37aa7e2fec96fac6c914934a4243f603">buchberger</a> (const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;F, <a class="el" href="group___g_b_computation.html#ga73257b8a2d5cc826853a71b77d0cebf2">SPolyCreationFlags</a> rep=SPolyCreationFlags::GEOBUCKETS, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy=StrategyFlags::SUGAR_STRATEGY, WT_TYPE *strategy_weights=nullptr)</td></tr>
 <tr class="memdesc:ga37aa7e2fec96fac6c914934a4243f603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of Buchberger&rsquo;s algorithm.  <a href="#ga37aa7e2fec96fac6c914934a4243f603">More...</a><br /></td></tr>
 <tr class="separator:ga37aa7e2fec96fac6c914934a4243f603"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga40140d94eac91d7337f553d362128cb7"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga40140d94eac91d7337f553d362128cb7">buchberger_dynamic</a> (const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;F, <a class="el" href="group___g_b_computation.html#ga73257b8a2d5cc826853a71b77d0cebf2">SPolyCreationFlags</a> method=SPolyCreationFlags::GEOBUCKETS, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy=StrategyFlags::SUGAR_STRATEGY, WT_TYPE *strategy_weights=nullptr, <a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a> heuristic=DynamicHeuristic::ORD_HILBERT_THEN_DEG, <a class="el" href="group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac">DynamicSolver</a> solver=SKELETON_SOLVER, bool analyze_inputs=false)</td></tr>
-<tr class="memdesc:ga40140d94eac91d7337f553d362128cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">implementation of the dynamic Buchberger algorithm  <a href="#ga40140d94eac91d7337f553d362128cb7">More...</a><br /></td></tr>
-<tr class="separator:ga40140d94eac91d7337f553d362128cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c05f4e2ea8b43bb696483469f4cce83"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga2c05f4e2ea8b43bb696483469f4cce83">buchberger_dynamic</a> (const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;F, <a class="el" href="group___g_b_computation.html#ga73257b8a2d5cc826853a71b77d0cebf2">SPolyCreationFlags</a> method=SPolyCreationFlags::GEOBUCKETS, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy=StrategyFlags::SUGAR_STRATEGY, WT_TYPE *strategy_weights=nullptr, Dynamic_Heuristic heuristic=Dynamic_Heuristic::ORD_HILBERT_THEN_DEG, <a class="el" href="group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac">DynamicSolver</a> solver=SKELETON_SOLVER, bool analyze_inputs=false)</td></tr>
+<tr class="memdesc:ga2c05f4e2ea8b43bb696483469f4cce83"><td class="mdescLeft">&#160;</td><td class="mdescRight">implementation of the dynamic Buchberger algorithm  <a href="#ga2c05f4e2ea8b43bb696483469f4cce83">More...</a><br /></td></tr>
+<tr class="separator:ga2c05f4e2ea8b43bb696483469f4cce83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaaaca5a3659aba7d4b3a41e253dc1a60f"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaaaca5a3659aba7d4b3a41e253dc1a60f">buchberger_explorer</a> (const vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;F, <a class="el" href="group___g_b_computation.html#ga73257b8a2d5cc826853a71b77d0cebf2">SPolyCreationFlags</a> method=SPolyCreationFlags::GEOBUCKETS, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy=StrategyFlags::NORMAL_STRATEGY, WT_TYPE *strategy_weights=nullptr, const int comm_id=0, const int comm_size=1)</td></tr>
 <tr class="memdesc:gaaaca5a3659aba7d4b3a41e253dc1a60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternate implementation of Buchberger&rsquo;s algorithm, for parallelization.  <a href="#gaaaca5a3659aba7d4b3a41e253dc1a60f">More...</a><br /></td></tr>
 <tr class="separator:gaaaca5a3659aba7d4b3a41e253dc1a60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,10 +179,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf48f43667991b8526303601bbc0709cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaf48f43667991b8526303601bbc0709cf">check_correctness</a> (list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> *&gt;G, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy)</td></tr>
 <tr class="memdesc:gaf48f43667991b8526303601bbc0709cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks that <code>G</code> is a Gr&ouml;bner basis by verifying each s-polynomial reduces to zero  <a href="#gaf48f43667991b8526303601bbc0709cf">More...</a><br /></td></tr>
 <tr class="separator:gaf48f43667991b8526303601bbc0709cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa9f8343bd8b21f30062b2844e2772b5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaa9f8343bd8b21f30062b2844e2772b5e">compatiblePP</a> (<a class="el" href="group__polygroup.html#class_monomial">Monomial</a> currentLPP, const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;allPPs, const set&lt;::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a> &gt; &amp;bndrys, set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;result, set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;boundary_mons, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *skel)</td></tr>
-<tr class="separator:gaa9f8343bd8b21f30062b2844e2772b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacd95145d20157a5f9656384ec2b3c932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gacd95145d20157a5f9656384ec2b3c932">ConstraintsForNewPP</a> (const <a class="el" href="group___g_b_computation.html#class_p_p_with_ideal">PPWithIdeal</a> &amp;pp_I, const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;monomialsForComparison, vector&lt; <a class="el" href="group___c_l_s_solvers.html#classconstraint">constraint</a> &gt; &amp;result)</td></tr>
-<tr class="separator:gacd95145d20157a5f9656384ec2b3c932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe68a8de3b87f6cc69e64fff39b71a81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gabe68a8de3b87f6cc69e64fff39b71a81">Dynamic_Engine::compatible_pp</a> (<a class="el" href="group__polygroup.html#class_monomial">Monomial</a> currentLPP, const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;allPPs, set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;result, set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;boundary_mons, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *skel)</td></tr>
+<tr class="memdesc:gabe68a8de3b87f6cc69e64fff39b71a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the compatible leading monomials of a polynomial.  <a href="group___g_b_computation.html#gabe68a8de3b87f6cc69e64fff39b71a81">More...</a><br /></td></tr>
+<tr class="separator:gabe68a8de3b87f6cc69e64fff39b71a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0ec0ad4f8430c46fc90c16104020f16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaf0ec0ad4f8430c46fc90c16104020f16">Dynamic_Engine::constraints_for_new_pp</a> (const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;pp_I, const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;monomialsForComparison, vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;result)</td></tr>
+<tr class="memdesc:gaf0ec0ad4f8430c46fc90c16104020f16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create constraints for a candidate LPP.  <a href="group___g_b_computation.html#gaf0ec0ad4f8430c46fc90c16104020f16">More...</a><br /></td></tr>
+<tr class="separator:gaf0ec0ad4f8430c46fc90c16104020f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga24647e1e20f18283bc931e723ba9fc22"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga24647e1e20f18283bc931e723ba9fc22">f4_control</a> (const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;F)</td></tr>
 <tr class="memdesc:ga24647e1e20f18283bc931e723ba9fc22"><td class="mdescLeft">&#160;</td><td class="mdescRight">equivalent to <code><a class="el" href="group___g_b_computation.html#ga37aa7e2fec96fac6c914934a4243f603" title="Implementation of Buchberger’s algorithm. ">buchberger()</a></code>, but for Faug&egrave;re&rsquo;s F4 algorithm  <a href="#ga24647e1e20f18283bc931e723ba9fc22">More...</a><br /></td></tr>
 <tr class="separator:ga24647e1e20f18283bc931e723ba9fc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,8 +204,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gab3006092b36dd11b4f06053e8dab6f19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gab3006092b36dd11b4f06053e8dab6f19">gm_update_explorer</a> (list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___x_plor">Critical_Pair_XPlor</a> *&gt; &amp;P, list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___x_plor">Critical_Pair_XPlor</a> *&gt; &amp;Pass, list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___x_plor">Critical_Pair_XPlor</a> *&gt; *Pcancel, vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;G, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *r, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy)</td></tr>
 <tr class="memdesc:gab3006092b36dd11b4f06053e8dab6f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of Gebauer-Moeller algorithm, with XPLOR critical pairs. Based on description in Becker and Weispfenning (1993).  <a href="#gab3006092b36dd11b4f06053e8dab6f19">More...</a><br /></td></tr>
 <tr class="separator:gab3006092b36dd11b4f06053e8dab6f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga70044fbc239244cda86cc6be0657bd0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga70044fbc239244cda86cc6be0657bd0d">hilbertCmp</a> (const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> &amp;hn1, const <a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> &amp;hp1, const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> &amp;hn2, const <a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> &amp;hp2)</td></tr>
-<tr class="separator:ga70044fbc239244cda86cc6be0657bd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9be1af3b4560bec7a8f17c5716e33ee7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga9be1af3b4560bec7a8f17c5716e33ee7">Dynamic_Engine::hilbert_cmp</a> (const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> &amp;hn1, const <a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> &amp;hp1, const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> &amp;hn2, const <a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> &amp;hp2)</td></tr>
+<tr class="memdesc:ga9be1af3b4560bec7a8f17c5716e33ee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares two Hilbert functions, using polynomial and numerator  <a href="group___g_b_computation.html#ga9be1af3b4560bec7a8f17c5716e33ee7">More...</a><br /></td></tr>
+<tr class="separator:ga9be1af3b4560bec7a8f17c5716e33ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa94e7defe45b81c6e80138df0637c0dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaa94e7defe45b81c6e80138df0637c0dd">lcm_alike</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *p)</td></tr>
 <tr class="memdesc:gaa94e7defe45b81c6e80138df0637c0dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the lcm of <code>t</code> and <code>u</code> is like the lcm stored in <code>p</code>.  <a href="#gaa94e7defe45b81c6e80138df0637c0dd">More...</a><br /></td></tr>
 <tr class="separator:gaa94e7defe45b81c6e80138df0637c0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,9 +228,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga08267b9fbd6289d1eb28e019a11eba99"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga08267b9fbd6289d1eb28e019a11eba99">report_critical_pairs</a> (const list&lt; T *&gt;P, bool verbose=false)</td></tr>
 <tr class="memdesc:ga08267b9fbd6289d1eb28e019a11eba99"><td class="mdescLeft">&#160;</td><td class="mdescRight">A brief report on the number of critical pairs. If <code>verbose</code> is true, also lists them.  <a href="#ga08267b9fbd6289d1eb28e019a11eba99">More...</a><br /></td></tr>
 <tr class="separator:ga08267b9fbd6289d1eb28e019a11eba99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2b4a95f98249b5b6b6f48586463fcd3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga2b4a95f98249b5b6b6f48586463fcd3b">SelectMonomial</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *r, list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;CurrentLPPs, <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> **current_hilbert_numerator, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;CurrentPolys, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;critpairs, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *currSkel, bool &amp;ordering_changed, <a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a> method=DynamicHeuristic::ORD_HILBERT_THEN_DEG)</td></tr>
-<tr class="memdesc:ga2b4a95f98249b5b6b6f48586463fcd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects a leading power product for a polynomial.  <a href="#ga2b4a95f98249b5b6b6f48586463fcd3b">More...</a><br /></td></tr>
-<tr class="separator:ga2b4a95f98249b5b6b6f48586463fcd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa01d88c431b84deabf51ee116d7d2a0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e">Dynamic_Engine::select_monomial</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *r, list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;CurrentLPPs, <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> **current_hilbert_numerator, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;CurrentPolys, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;critpairs, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *currSkel, bool &amp;ordering_changed, <a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Heuristic</a> method=Dynamic_Heuristic::ORD_HILBERT_THEN_DEG)</td></tr>
+<tr class="memdesc:gaa01d88c431b84deabf51ee116d7d2a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects a leading power product for a polynomial.  <a href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e">More...</a><br /></td></tr>
+<tr class="separator:gaa01d88c431b84deabf51ee116d7d2a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8b938265dccdb6d410ed2906de4ed5e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga8b938265dccdb6d410ed2906de4ed5e5">Dynamic_Engine::select_monomial</a> (const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; r, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;currentLPP, list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;CurrentLPPs, <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> **current_hilbert_numerator, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;CurrentPolys, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;critpairs, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *currSkel, bool &amp;ordering_changed, <a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Heuristic</a> method=Dynamic_Heuristic::ORD_HILBERT_THEN_DEG)</td></tr>
+<tr class="memdesc:ga8b938265dccdb6d410ed2906de4ed5e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial(Abstract_Polynomial *, list&lt;Monomial&gt; &amp;, Dense_Univariate_Integer_Polynomial **, const list&lt;Abstract_Polynomial *&gt; &amp;, const list&lt;Critical_Pair_Dynamic *&gt; &amp;,LP_Solver *, bool &amp;, Dynamic_Heuristic)</a></code> but with the monomials already extracted  <a href="group___g_b_computation.html#ga8b938265dccdb6d410ed2906de4ed5e5">More...</a><br /></td></tr>
+<tr class="separator:ga8b938265dccdb6d410ed2906de4ed5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga428f97f3978ba1eb759b8381a523dfe7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga428f97f3978ba1eb759b8381a523dfe7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga428f97f3978ba1eb759b8381a523dfe7">sort_pairs_by_strategy</a> (list&lt; T *&gt; &amp;P)</td></tr>
 <tr class="memdesc:ga428f97f3978ba1eb759b8381a523dfe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the strategy to find the &ldquo;smallest&rdquo; critical pair.  <a href="#ga428f97f3978ba1eb759b8381a523dfe7">More...</a><br /></td></tr>
@@ -233,8 +241,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga459782e1aa0e3b2b4a6569bcd27150cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga459782e1aa0e3b2b4a6569bcd27150cc">top_reduce</a> (<a class="el" href="group__polygroup.html#class_mutable___polynomial">Mutable_Polynomial</a> *s, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, int comm_id)</td></tr>
 <tr class="memdesc:ga459782e1aa0e3b2b4a6569bcd27150cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduce the polynomial <code>**sp</code> by <code>*g</code>  <a href="#ga459782e1aa0e3b2b4a6569bcd27150cc">More...</a><br /></td></tr>
 <tr class="separator:ga459782e1aa0e3b2b4a6569bcd27150cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7d0ce10bf904206db71f7e011ba551b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ga7d0ce10bf904206db71f7e011ba551b3">verifyAndModifyIfNecessary</a> (<a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *skel, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;currentPolys)</td></tr>
-<tr class="separator:ga7d0ce10bf904206db71f7e011ba551b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3c21c23093fae5467dd770f790540f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#gaf3c21c23093fae5467dd770f790540f6">Dynamic_Engine::verify_and_modify_if_necessary</a> (<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *skel, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;currentPolys)</td></tr>
+<tr class="memdesc:gaf3c21c23093fae5467dd770f790540f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the leading power products of the current basis remain compatible with the proposed refinement of ordering.  <a href="group___g_b_computation.html#gaf3c21c23093fae5467dd770f790540f6">More...</a><br /></td></tr>
+<tr class="separator:gaf3c21c23093fae5467dd770f790540f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>classes related directly to Gr&ouml;bner basis computation </p>
@@ -859,6 +868,189 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 
 </div>
 </div>
+<a name="class_dynamic___engine_1_1_p_p___with___ideal" id="class_dynamic___engine_1_1_p_p___with___ideal"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#class_dynamic___engine_1_1_p_p___with___ideal">&#9670;&nbsp;</a></span>Dynamic_Engine::PP_With_Ideal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">class Dynamic_Engine::PP_With_Ideal</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Used to associate a potential leading power product with the resulting monomial ideal if it were chosen as the actual leading power product. </p>
+<dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2014 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00124">124</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
+<tr class="memitem:ab79e52cd576b29fc48e7d9ad49303ae7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab79e52cd576b29fc48e7d9ad49303ae7">PP_With_Ideal</a> (<a class="el" href="group__polygroup.html#class_monomial">Monomial</a> u, const list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;F, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &amp;w, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P, const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *h=nullptr)</td></tr>
+<tr class="memdesc:ab79e52cd576b29fc48e7d9ad49303ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a monomial/ideal pair.  <a href="#ab79e52cd576b29fc48e7d9ad49303ae7">More...</a><br /></td></tr>
+<tr class="separator:ab79e52cd576b29fc48e7d9ad49303ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71ad235934d824958a14443be77789e"><td class="memItemLeft" align="right" valign="top"><a id="ac71ad235934d824958a14443be77789e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac71ad235934d824958a14443be77789e">PP_With_Ideal</a> (const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;PI)</td></tr>
+<tr class="memdesc:ac71ad235934d824958a14443be77789e"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
+<tr class="separator:ac71ad235934d824958a14443be77789e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
+<tr class="memitem:a1dd0ce9a355f10837a180b1599a2666f"><td class="memItemLeft" align="right" valign="top"><a id="a1dd0ce9a355f10837a180b1599a2666f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1dd0ce9a355f10837a180b1599a2666f">~PP_With_Ideal</a> ()</td></tr>
+<tr class="memdesc:a1dd0ce9a355f10837a180b1599a2666f"><td class="mdescLeft">&#160;</td><td class="mdescRight">does nothing the default wouldn't do <br /></td></tr>
+<tr class="separator:a1dd0ce9a355f10837a180b1599a2666f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
+<tr class="memitem:a0b70c63442c37067103f9939b17ef4ec"><td class="memItemLeft" align="right" valign="top"><a id="a0b70c63442c37067103f9939b17ef4ec"></a>
+const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a0b70c63442c37067103f9939b17ef4ec">get_pp</a> () const</td></tr>
+<tr class="memdesc:a0b70c63442c37067103f9939b17ef4ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">the leading monomial being added to the ideal <br /></td></tr>
+<tr class="separator:a0b70c63442c37067103f9939b17ef4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb57c1467a4d6e622143057fde1ba1b6"><td class="memItemLeft" align="right" valign="top"><a id="acb57c1467a4d6e622143057fde1ba1b6"></a>
+const <a class="el" href="group__polygroup.html#class_monomial___ideal">Monomial_Ideal</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acb57c1467a4d6e622143057fde1ba1b6">get_ideal</a> () const</td></tr>
+<tr class="memdesc:acb57c1467a4d6e622143057fde1ba1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">the old ideal of leading monomials <br /></td></tr>
+<tr class="separator:acb57c1467a4d6e622143057fde1ba1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d01761e8d285ddbaa35214d8214a74b"><td class="memItemLeft" align="right" valign="top"><a id="a9d01761e8d285ddbaa35214d8214a74b"></a>
+<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9d01761e8d285ddbaa35214d8214a74b">get_ordering</a> ()</td></tr>
+<tr class="memdesc:a9d01761e8d285ddbaa35214d8214a74b"><td class="mdescLeft">&#160;</td><td class="mdescRight">the current monomial ordering <br /></td></tr>
+<tr class="separator:a9d01761e8d285ddbaa35214d8214a74b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc39727c4e1ef77c8fb74bca7955e9c4"><td class="memItemLeft" align="right" valign="top"><a id="acc39727c4e1ef77c8fb74bca7955e9c4"></a>
+const map&lt; DEG_TYPE, unsigned long &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acc39727c4e1ef77c8fb74bca7955e9c4">get_inc_betti</a> (bool graded=false)</td></tr>
+<tr class="memdesc:acc39727c4e1ef77c8fb74bca7955e9c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">the incremental Betti numbers obtained by adding the monomial to the ideal <br /></td></tr>
+<tr class="separator:acc39727c4e1ef77c8fb74bca7955e9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8a9832df7be67f0e623870433577f8"><td class="memItemLeft" align="right" valign="top"><a id="a1b8a9832df7be67f0e623870433577f8"></a>
+<a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1b8a9832df7be67f0e623870433577f8">get_hilbert_numerator</a> (bool graded=false)</td></tr>
+<tr class="memdesc:a1b8a9832df7be67f0e623870433577f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert numerator obtained by adding the monomial to the ideal (numerator is <em>not</em> reduced) <br /></td></tr>
+<tr class="separator:a1b8a9832df7be67f0e623870433577f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ad52b5a6782aa3e1434f7d4084c289f"><td class="memItemLeft" align="right" valign="top"><a id="a1ad52b5a6782aa3e1434f7d4084c289f"></a>
+<a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1ad52b5a6782aa3e1434f7d4084c289f">get_hilbert_reduced_numerator</a> (bool graded=false)</td></tr>
+<tr class="memdesc:a1ad52b5a6782aa3e1434f7d4084c289f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert numerator obtained by adding the monomial to the ideal (numerator <em>is</em> reduced) <br /></td></tr>
+<tr class="separator:a1ad52b5a6782aa3e1434f7d4084c289f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63962938c3dfef78afe80e4e86eb9c78"><td class="memItemLeft" align="right" valign="top"><a id="a63962938c3dfef78afe80e4e86eb9c78"></a>
+<a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a63962938c3dfef78afe80e4e86eb9c78">get_hilbert_polynomial</a> ()</td></tr>
+<tr class="memdesc:a63962938c3dfef78afe80e4e86eb9c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert polynomial obtained by adding the monomial to the ideal <br /></td></tr>
+<tr class="separator:a63962938c3dfef78afe80e4e86eb9c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9a43c24f2d0405d1c60e12983c8003"><td class="memItemLeft" align="right" valign="top"><a id="afb9a43c24f2d0405d1c60e12983c8003"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#afb9a43c24f2d0405d1c60e12983c8003">how_many_new_pairs</a> () const</td></tr>
+<tr class="memdesc:afb9a43c24f2d0405d1c60e12983c8003"><td class="mdescLeft">&#160;</td><td class="mdescRight">estimate of the number of new critical pairs generated by adding the monomial to the ideal <br /></td></tr>
+<tr class="separator:afb9a43c24f2d0405d1c60e12983c8003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c0ece8174abdb6d2955d63f04cd437"><td class="memItemLeft" align="right" valign="top"><a id="a68c0ece8174abdb6d2955d63f04cd437"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a68c0ece8174abdb6d2955d63f04cd437">deg_of_new_pairs</a> () const</td></tr>
+<tr class="memdesc:a68c0ece8174abdb6d2955d63f04cd437"><td class="mdescLeft">&#160;</td><td class="mdescRight">the degree of the new critical pairs generated by adding the monomial to the ideal <br /></td></tr>
+<tr class="separator:a68c0ece8174abdb6d2955d63f04cd437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addbeaeb67edfe33d4b4d71d7a4aa1aac"><td class="memItemLeft" align="right" valign="top"><a id="addbeaeb67edfe33d4b4d71d7a4aa1aac"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#addbeaeb67edfe33d4b4d71d7a4aa1aac">get_difference_in_degree</a> ()</td></tr>
+<tr class="memdesc:addbeaeb67edfe33d4b4d71d7a4aa1aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the difference in degree between the first and last monomials of the ideal <br /></td></tr>
+<tr class="separator:addbeaeb67edfe33d4b4d71d7a4aa1aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
+<tr class="memitem:abedc9cad9413fc7727e1b93d6eea16af"><td class="memItemLeft" align="right" valign="top"><a id="abedc9cad9413fc7727e1b93d6eea16af"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abedc9cad9413fc7727e1b93d6eea16af">compute_number_new_pairs</a> ()</td></tr>
+<tr class="memdesc:abedc9cad9413fc7727e1b93d6eea16af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of critical pairs the monomial would add. <br /></td></tr>
+<tr class="separator:abedc9cad9413fc7727e1b93d6eea16af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20bb441439236bcce2d9e87b8486553f"><td class="memItemLeft" align="right" valign="top"><a id="a20bb441439236bcce2d9e87b8486553f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a20bb441439236bcce2d9e87b8486553f">set_hilbert_numerator</a> (<a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *h)</td></tr>
+<tr class="memdesc:a20bb441439236bcce2d9e87b8486553f"><td class="mdescLeft">&#160;</td><td class="mdescRight">assigns a value to the hilbert numerator when it&rsquo;s already known <br /></td></tr>
+<tr class="separator:a20bb441439236bcce2d9e87b8486553f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
+<tr class="memitem:a812c0be78a80ef2ecdd76e944a310363"><td class="memItemLeft" align="right" valign="top"><a id="a812c0be78a80ef2ecdd76e944a310363"></a>
+<a class="el" href="group__polygroup.html#class_monomial___ideal">Monomial_Ideal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a812c0be78a80ef2ecdd76e944a310363">I</a></td></tr>
+<tr class="memdesc:a812c0be78a80ef2ecdd76e944a310363"><td class="mdescLeft">&#160;</td><td class="mdescRight">the ideal of leading terms <br /></td></tr>
+<tr class="separator:a812c0be78a80ef2ecdd76e944a310363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fa101d6caf52005d20e4398c5ff5607"><td class="memItemLeft" align="right" valign="top"><a id="a4fa101d6caf52005d20e4398c5ff5607"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4fa101d6caf52005d20e4398c5ff5607">max_deg</a></td></tr>
+<tr class="memdesc:a4fa101d6caf52005d20e4398c5ff5607"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum weighted degree of monomials in ideal <br /></td></tr>
+<tr class="separator:a4fa101d6caf52005d20e4398c5ff5607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ede63491bf929c811c31d8ecf1051e"><td class="memItemLeft" align="right" valign="top"><a id="ae0ede63491bf929c811c31d8ecf1051e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae0ede63491bf929c811c31d8ecf1051e">min_deg</a></td></tr>
+<tr class="memdesc:ae0ede63491bf929c811c31d8ecf1051e"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum weighted degree of monomials in ideal <br /></td></tr>
+<tr class="separator:ae0ede63491bf929c811c31d8ecf1051e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79e7e4059e2ea811bc14a4c02de96c52"><td class="memItemLeft" align="right" valign="top"><a id="a79e7e4059e2ea811bc14a4c02de96c52"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a79e7e4059e2ea811bc14a4c02de96c52">num_new_pairs</a></td></tr>
+<tr class="memdesc:a79e7e4059e2ea811bc14a4c02de96c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">estimate of number of new pairs <br /></td></tr>
+<tr class="separator:a79e7e4059e2ea811bc14a4c02de96c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bc39f15f722a821f59db51b48a5d0f"><td class="memItemLeft" align="right" valign="top"><a id="ad4bc39f15f722a821f59db51b48a5d0f"></a>
+<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad4bc39f15f722a821f59db51b48a5d0f">ordering</a></td></tr>
+<tr class="memdesc:ad4bc39f15f722a821f59db51b48a5d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the current ordering of the Gr&ouml;bner basis computation <br /></td></tr>
+<tr class="separator:ad4bc39f15f722a821f59db51b48a5d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9254ab1c3c33afeb73786f3a10719e3f"><td class="memItemLeft" align="right" valign="top"><a id="a9254ab1c3c33afeb73786f3a10719e3f"></a>
+const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9254ab1c3c33afeb73786f3a10719e3f">pairs</a></td></tr>
+<tr class="memdesc:a9254ab1c3c33afeb73786f3a10719e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the list of critical pairs of \(I\) at this point in the algorithm <br /></td></tr>
+<tr class="separator:a9254ab1c3c33afeb73786f3a10719e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbb33a00772961f2fa9d851dae8a2e07"><td class="memItemLeft" align="right" valign="top"><a id="abbb33a00772961f2fa9d851dae8a2e07"></a>
+<a class="el" href="group__polygroup.html#class_monomial">Monomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abbb33a00772961f2fa9d851dae8a2e07">t</a></td></tr>
+<tr class="memdesc:abbb33a00772961f2fa9d851dae8a2e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">the last monomial added to \(I\) <br /></td></tr>
+<tr class="separator:abbb33a00772961f2fa9d851dae8a2e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
+<a id="ab79e52cd576b29fc48e7d9ad49303ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab79e52cd576b29fc48e7d9ad49303ae7">&#9670;&nbsp;</a></span>PP_With_Ideal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dynamic_Engine::PP_With_Ideal::PP_With_Ideal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__polygroup.html#class_monomial">Monomial</a>&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &amp;&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>h</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a monomial/ideal pair. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>proposed new <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a> for ideal </td></tr>
+    <tr><td class="paramname">F</td><td>current ideal </td></tr>
+    <tr><td class="paramname">w</td><td>current monomial ordering </td></tr>
+    <tr><td class="paramname">P</td><td>current list of critical pairs </td></tr>
+    <tr><td class="paramname">h</td><td>unreduced Hilbert numerator of <code>F</code> (does not verify correctness) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00136">136</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+
+</div>
+</div>
+
+</div>
+</div>
 <a name="class_f4___reduction___data" id="class_f4___reduction___data"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#class_f4___reduction___data">&#9670;&nbsp;</a></span>F4_Reduction_Data</h2>
 
@@ -871,21 +1063,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
       </table>
 </div><div class="memdoc">
 <div class="textblock"><p>Implementation of Faug&egrave;re&rsquo;s F4 algorithm. </p>
-<p>Currently computes a Gr&ouml;bner basis by selecting several s-polynomials of lowest lcm degree. </p>
+<p>Currently computes a Gr&ouml;bner basis by selecting several s-polynomials of lowest lcm degree. Data is stored in a semi-sparse matrix format, with each row a contiguous array of entries (<code>A</code>). Each row of <code>A</code> begins at the position indicated by the corresponding <code>offset</code>, and its first non-zero entry appears at the position indicated by the corresponding <code>head</code>. So the leading coefficient of the polynomial in row <code>k</code> appears in <code>A[head[k]]</code> and the leading monomial appears in <code>M[offset[k]+head[k]]</code>. Starting from <code>head[k]</code>, row <code>k</code> is actually dense. While this is not sparse, it does succeed in saving more space than one might expect. </p>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8hpp_source.html#l00053">53</a> of file <a class="el" href="f4__reduction_8hpp_source.html">f4_reduction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8hpp_source.html#l00070">70</a> of file <a class="el" href="f4__dynamic_8hpp_source.html">f4_dynamic.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
-<tr class="memitem:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ada9c61c0f75be4a2b3dd5c762c1c9a1b">F4_Reduction_Data</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;B)</td></tr>
-<tr class="memdesc:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code>  <a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">More...</a><br /></td></tr>
-<tr class="separator:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad241aa62afb6b6e0b482496c7559f092"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad241aa62afb6b6e0b482496c7559f092">add_monomials</a> (list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;ti, list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;ri, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool new_row=false)</td></tr>
-<tr class="memdesc:ad241aa62afb6b6e0b482496c7559f092"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds monomials of \( ug \) to <code>M_build</code>  <a href="#ad241aa62afb6b6e0b482496c7559f092">More...</a><br /></td></tr>
-<tr class="separator:ad241aa62afb6b6e0b482496c7559f092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a0fd30b42c2dcf0dd07dfa898f71c8751">initialize_many</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P)</td></tr>
-<tr class="memdesc:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the matrix  <a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">More...</a><br /></td></tr>
-<tr class="separator:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab908becf5415be27dd0d4e4391ee2c3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab908becf5415be27dd0d4e4391ee2c3b">F4_Reduction_Data</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;B)</td></tr>
+<tr class="memdesc:ab908becf5415be27dd0d4e4391ee2c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code>  <a href="#ab908becf5415be27dd0d4e4391ee2c3b">More...</a><br /></td></tr>
+<tr class="separator:ab908becf5415be27dd0d4e4391ee2c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2096fe45e5eecc1c855acb82787f2719"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a2096fe45e5eecc1c855acb82787f2719">add_monomials</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;ti, list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;ri, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool new_row=false)</td></tr>
+<tr class="memdesc:a2096fe45e5eecc1c855acb82787f2719"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds monomials of \( ug \) to <code>M_build</code>  <a href="#a2096fe45e5eecc1c855acb82787f2719">More...</a><br /></td></tr>
+<tr class="separator:a2096fe45e5eecc1c855acb82787f2719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9fa6a212375b9498ca86a2c18e94ca1e">initialize_many</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P)</td></tr>
+<tr class="memdesc:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the matrix  <a href="#a9fa6a212375b9498ca86a2c18e94ca1e">More...</a><br /></td></tr>
+<tr class="separator:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ada9c61c0f75be4a2b3dd5c762c1c9a1b">F4_Reduction_Data</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;B)</td></tr>
 <tr class="memdesc:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code>  <a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">More...</a><br /></td></tr>
 <tr class="separator:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -911,51 +1103,66 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="separator:aee8c1358071a26e60b2e50f9678dcfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memItemLeft" align="right" valign="top"><a id="a1e58764d1bee3437e2bfa74fbb847b1a"></a>
 vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___data">Poly_Sugar_Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1e58764d1bee3437e2bfa74fbb847b1a">get_strategies</a> ()</td></tr>
-<tr class="memdesc:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the strategy currently in use <br /></td></tr>
+<tr class="memdesc:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the strategies currently in use <br /></td></tr>
 <tr class="separator:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe2aa558df25088c0b184134deaf0ee2"><td class="memItemLeft" align="right" valign="top"><a id="afe2aa558df25088c0b184134deaf0ee2"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#afe2aa558df25088c0b184134deaf0ee2">number_of_rows</a> () const</td></tr>
+<tr class="memdesc:afe2aa558df25088c0b184134deaf0ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic properties <br /></td></tr>
+<tr class="separator:afe2aa558df25088c0b184134deaf0ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a199285ca97ceba99fced77bb368681e1"><td class="memItemLeft" align="right" valign="top"><a id="a199285ca97ceba99fced77bb368681e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a199285ca97ceba99fced77bb368681e1">monomials_in_row</a> (unsigned i, set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;) const</td></tr>
+<tr class="memdesc:a199285ca97ceba99fced77bb368681e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">set of monomials in row <code>i</code> that are not zero <br /></td></tr>
+<tr class="separator:a199285ca97ceba99fced77bb368681e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7c37d08523c27bbb1990534abd95461"><td class="memItemLeft" align="right" valign="top"><a id="ad7c37d08523c27bbb1990534abd95461"></a>
+const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad7c37d08523c27bbb1990534abd95461">current_ordering</a> () const</td></tr>
+<tr class="memdesc:ad7c37d08523c27bbb1990534abd95461"><td class="mdescLeft">&#160;</td><td class="mdescRight">current ordering of monomials <br /></td></tr>
+<tr class="separator:ad7c37d08523c27bbb1990534abd95461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee8c1358071a26e60b2e50f9678dcfb0"><td class="memItemLeft" align="right" valign="top"><a id="aee8c1358071a26e60b2e50f9678dcfb0"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aee8c1358071a26e60b2e50f9678dcfb0">is_zero</a> ()</td></tr>
 <tr class="memdesc:aee8c1358071a26e60b2e50f9678dcfb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff all the entries are 0 <br /></td></tr>
 <tr class="separator:aee8c1358071a26e60b2e50f9678dcfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memItemLeft" align="right" valign="top"><a id="a1e58764d1bee3437e2bfa74fbb847b1a"></a>
 vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___data">Poly_Sugar_Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1e58764d1bee3437e2bfa74fbb847b1a">get_strategies</a> ()</td></tr>
-<tr class="memdesc:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the strategy currently in use <br /></td></tr>
+<tr class="memdesc:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the strategies currently in use <br /></td></tr>
 <tr class="separator:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56c717e4015d655e40b2c8033fa9d92"><td class="memItemLeft" align="right" valign="top"><a id="ac56c717e4015d655e40b2c8033fa9d92"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac56c717e4015d655e40b2c8033fa9d92">number_of_rows</a> ()</td></tr>
+<tr class="memdesc:ac56c717e4015d655e40b2c8033fa9d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic properties <br /></td></tr>
+<tr class="separator:ac56c717e4015d655e40b2c8033fa9d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Conversion</div></td></tr>
 <tr class="memitem:a6f70b5f5779e7aa262d454b9f2bbd2d1"><td class="memItemLeft" align="right" valign="top"><a id="a6f70b5f5779e7aa262d454b9f2bbd2d1"></a>
 vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a6f70b5f5779e7aa262d454b9f2bbd2d1">finalize</a> ()</td></tr>
-<tr class="memdesc:a6f70b5f5779e7aa262d454b9f2bbd2d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
+<tr class="memdesc:a6f70b5f5779e7aa262d454b9f2bbd2d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a vector of <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
 <tr class="separator:a6f70b5f5779e7aa262d454b9f2bbd2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb8721524d3d30e98fe153ed08c21232"><td class="memItemLeft" align="right" valign="top"><a id="acb8721524d3d30e98fe153ed08c21232"></a>
 vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acb8721524d3d30e98fe153ed08c21232">finalize</a> ()</td></tr>
-<tr class="memdesc:acb8721524d3d30e98fe153ed08c21232"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
+<tr class="memdesc:acb8721524d3d30e98fe153ed08c21232"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a vector of <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
 <tr class="separator:acb8721524d3d30e98fe153ed08c21232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
 <tr class="memitem:ac006310b3318fa247fa9a415db495d06"><td class="memItemLeft" align="right" valign="top"><a id="ac006310b3318fa247fa9a415db495d06"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac006310b3318fa247fa9a415db495d06">clear_strategy</a> (unsigned i)</td></tr>
 <tr class="memdesc:ac006310b3318fa247fa9a415db495d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the strategy; do this if you have saved it elsewhere <br /></td></tr>
 <tr class="separator:ac006310b3318fa247fa9a415db495d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a727863db45a812f5dccc3f1d3be3a745"><td class="memItemLeft" align="right" valign="top"><a id="a727863db45a812f5dccc3f1d3be3a745"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a727863db45a812f5dccc3f1d3be3a745">set_ordering</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *ord)</td></tr>
+<tr class="memdesc:a727863db45a812f5dccc3f1d3be3a745"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets monomial ordering to indicated ordering <br /></td></tr>
+<tr class="separator:a727863db45a812f5dccc3f1d3be3a745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac006310b3318fa247fa9a415db495d06"><td class="memItemLeft" align="right" valign="top"><a id="ac006310b3318fa247fa9a415db495d06"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac006310b3318fa247fa9a415db495d06">clear_strategy</a> (unsigned i)</td></tr>
 <tr class="memdesc:ac006310b3318fa247fa9a415db495d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the strategy; do this if you have saved it elsewhere <br /></td></tr>
 <tr class="separator:ac006310b3318fa247fa9a415db495d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Computation</div></td></tr>
-<tr class="memitem:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="memItemLeft" align="right" valign="top"><a id="a1ada1a83d58ab22e7115b3c90a5d7f3f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1ada1a83d58ab22e7115b3c90a5d7f3f">advance_head</a> (unsigned i)</td></tr>
-<tr class="memdesc:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">advances <code>head</code>; useful after a computation <br /></td></tr>
-<tr class="separator:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841c43903004e8a8e355bfcf30dfd36c"><td class="memItemLeft" align="right" valign="top"><a id="a841c43903004e8a8e355bfcf30dfd36c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a841c43903004e8a8e355bfcf30dfd36c">reduce_by_old</a> ()</td></tr>
 <tr class="memdesc:a841c43903004e8a8e355bfcf30dfd36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
 <tr class="separator:a841c43903004e8a8e355bfcf30dfd36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a395928a83fb46aba60804c3d2b80c84a"><td class="memItemLeft" align="right" valign="top"><a id="a395928a83fb46aba60804c3d2b80c84a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a395928a83fb46aba60804c3d2b80c84a">reduce_by_new</a> ()</td></tr>
-<tr class="memdesc:a395928a83fb46aba60804c3d2b80c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
-<tr class="separator:a395928a83fb46aba60804c3d2b80c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="memItemLeft" align="right" valign="top"><a id="a1ada1a83d58ab22e7115b3c90a5d7f3f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1ada1a83d58ab22e7115b3c90a5d7f3f">advance_head</a> (unsigned i)</td></tr>
-<tr class="memdesc:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">advances <code>head</code>; useful after a computation <br /></td></tr>
-<tr class="separator:a1ada1a83d58ab22e7115b3c90a5d7f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680a5ada15ae93cdc757e802170e4b4e"><td class="memItemLeft" align="right" valign="top"><a id="a680a5ada15ae93cdc757e802170e4b4e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a680a5ada15ae93cdc757e802170e4b4e">reduce_by_new</a> (unsigned i, unsigned lhead_i)</td></tr>
+<tr class="memdesc:a680a5ada15ae93cdc757e802170e4b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
+<tr class="separator:a680a5ada15ae93cdc757e802170e4b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896aed2e69b7db0c0d7783bfcf7f3d03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a896aed2e69b7db0c0d7783bfcf7f3d03">select_dynamic</a> (list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;T, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; <a class="el" href="group___g_b_computation.html#a3dbc8c690c4a21ba195ae32c19982f79">G</a>, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P, <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&amp;skel, Dynamic_Heuristic heur)</td></tr>
+<tr class="memdesc:a896aed2e69b7db0c0d7783bfcf7f3d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">selects leading monomials for the remaining nonzero rows  <a href="#a896aed2e69b7db0c0d7783bfcf7f3d03">More...</a><br /></td></tr>
+<tr class="separator:a896aed2e69b7db0c0d7783bfcf7f3d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841c43903004e8a8e355bfcf30dfd36c"><td class="memItemLeft" align="right" valign="top"><a id="a841c43903004e8a8e355bfcf30dfd36c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a841c43903004e8a8e355bfcf30dfd36c">reduce_by_old</a> ()</td></tr>
 <tr class="memdesc:a841c43903004e8a8e355bfcf30dfd36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
@@ -980,43 +1187,78 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a9f3e9b5617084c34f97acd23d6e67a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the matrix  <a href="#a9f3e9b5617084c34f97acd23d6e67a43">More...</a><br /></td></tr>
 <tr class="separator:a9f3e9b5617084c34f97acd23d6e67a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Member Functions</h3></td></tr>
+<tr class="memitem:abdcffbc4a0a83211bea0385d851a4fb4"><td class="memItemLeft" align="right" valign="top"><a id="abdcffbc4a0a83211bea0385d851a4fb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abdcffbc4a0a83211bea0385d851a4fb4">initialize_some_rows</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;, unsigned)</td></tr>
+<tr class="memdesc:abdcffbc4a0a83211bea0385d851a4fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates rows of the matrix indexed by the specified pairs, starting at the specified row <br /></td></tr>
+<tr class="separator:abdcffbc4a0a83211bea0385d851a4fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada3c0b561fefae7da3c28b6f6574cbc0"><td class="memItemLeft" align="right" valign="top"><a id="ada3c0b561fefae7da3c28b6f6574cbc0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ada3c0b561fefae7da3c28b6f6574cbc0">initialize_some_rows</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;, unsigned)</td></tr>
+<tr class="memdesc:ada3c0b561fefae7da3c28b6f6574cbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates rows of the matrix indexed by the specified pairs, starting at the specified row <br /></td></tr>
+<tr class="separator:ada3c0b561fefae7da3c28b6f6574cbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354bbe37c36c47326f4e82adccb6feff"><td class="memItemLeft" align="right" valign="top"><a id="a354bbe37c36c47326f4e82adccb6feff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a354bbe37c36c47326f4e82adccb6feff">reduce_my_new_rows</a> (unsigned, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;, const set&lt; unsigned &gt; &amp;)</td></tr>
+<tr class="memdesc:a354bbe37c36c47326f4e82adccb6feff"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading <br /></td></tr>
+<tr class="separator:a354bbe37c36c47326f4e82adccb6feff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae75be9f5946c90ea68cbae7276dfd36c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae75be9f5946c90ea68cbae7276dfd36c">reduce_my_new_rows</a> (unsigned i, unsigned lhead_i, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;F, const set&lt; unsigned &gt; &amp;to_reduce)</td></tr>
+<tr class="memdesc:ae75be9f5946c90ea68cbae7276dfd36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading  <a href="#ae75be9f5946c90ea68cbae7276dfd36c">More...</a><br /></td></tr>
+<tr class="separator:ae75be9f5946c90ea68cbae7276dfd36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6f2417153c7c1dc9a77a3b7f42597"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a5fc6f2417153c7c1dc9a77a3b7f42597">reduce_my_rows</a> (const set&lt; unsigned &gt; &amp;)</td></tr>
+<tr class="memdesc:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading <br /></td></tr>
+<tr class="separator:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6f2417153c7c1dc9a77a3b7f42597"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a5fc6f2417153c7c1dc9a77a3b7f42597">reduce_my_rows</a> (const set&lt; unsigned &gt; &amp;)</td></tr>
 <tr class="memdesc:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading <br /></td></tr>
 <tr class="separator:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
-<tr class="memitem:a98a30cca19738d3f46d41b0348d5ff58"><td class="memItemLeft" align="right" valign="top"><a id="a98a30cca19738d3f46d41b0348d5ff58"></a>
-<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a98a30cca19738d3f46d41b0348d5ff58">A</a></td></tr>
-<tr class="memdesc:a98a30cca19738d3f46d41b0348d5ff58"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient data <br /></td></tr>
-<tr class="separator:a98a30cca19738d3f46d41b0348d5ff58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6d430e1b9a27198ea4acf53c632b9b4"><td class="memItemLeft" align="right" valign="top"><a id="ad6d430e1b9a27198ea4acf53c632b9b4"></a>
-unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad6d430e1b9a27198ea4acf53c632b9b4">cols</a></td></tr>
-<tr class="memdesc:ad6d430e1b9a27198ea4acf53c632b9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of columns in the polynomial <br /></td></tr>
-<tr class="separator:ad6d430e1b9a27198ea4acf53c632b9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="memItemLeft" align="right" valign="top"><a id="ae99b64462e7d5f0aef6f196a4bc5c4cd"></a>
+vector&lt; vector&lt; COEF_TYPE &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae99b64462e7d5f0aef6f196a4bc5c4cd">A</a></td></tr>
+<tr class="memdesc:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient data in sparse representation; each vector entry is a subrow of the dense matrix <br /></td></tr>
+<tr class="separator:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dbc8c690c4a21ba195ae32c19982f79"><td class="memItemLeft" align="right" valign="top"><a id="a3dbc8c690c4a21ba195ae32c19982f79"></a>
 const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a3dbc8c690c4a21ba195ae32c19982f79">G</a></td></tr>
 <tr class="memdesc:a3dbc8c690c4a21ba195ae32c19982f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">current basis of ideal <br /></td></tr>
 <tr class="separator:a3dbc8c690c4a21ba195ae32c19982f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e8393488f6c58e3a5ca2a7c622f854"><td class="memItemLeft" align="right" valign="top"><a id="ae5e8393488f6c58e3a5ca2a7c622f854"></a>
-vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae5e8393488f6c58e3a5ca2a7c622f854">heads</a></td></tr>
-<tr class="memdesc:ae5e8393488f6c58e3a5ca2a7c622f854"><td class="mdescLeft">&#160;</td><td class="mdescRight">head of the polynomial (location of leading term) <br /></td></tr>
-<tr class="separator:ae5e8393488f6c58e3a5ca2a7c622f854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1679f8bda319a602672bc866220bb7fb"><td class="memItemLeft" align="right" valign="top"><a id="a1679f8bda319a602672bc866220bb7fb"></a>
+vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1679f8bda319a602672bc866220bb7fb">head</a></td></tr>
+<tr class="memdesc:a1679f8bda319a602672bc866220bb7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">index of the first non-zero entry of this row in the dense matrix (counted from offset) <br /></td></tr>
+<tr class="separator:a1679f8bda319a602672bc866220bb7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dac72addf3ef8ff2c87c247a90eaa9d"><td class="memItemLeft" align="right" valign="top"><a id="a7dac72addf3ef8ff2c87c247a90eaa9d"></a>
 vector&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7dac72addf3ef8ff2c87c247a90eaa9d">M</a></td></tr>
-<tr class="memdesc:a7dac72addf3ef8ff2c87c247a90eaa9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">monomials for each column <br /></td></tr>
+<tr class="memdesc:a7dac72addf3ef8ff2c87c247a90eaa9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">monomials for each matrix <br /></td></tr>
 <tr class="separator:a7dac72addf3ef8ff2c87c247a90eaa9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee58b978a10b26bbdf1d518e6eb25fb5"><td class="memItemLeft" align="right" valign="top"><a id="aee58b978a10b26bbdf1d518e6eb25fb5"></a>
 list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aee58b978a10b26bbdf1d518e6eb25fb5">M_build</a></td></tr>
 <tr class="memdesc:aee58b978a10b26bbdf1d518e6eb25fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">monomials while building <br /></td></tr>
 <tr class="separator:aee58b978a10b26bbdf1d518e6eb25fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b23364eb687aaa5c09882f59be4033c"><td class="memItemLeft" align="right" valign="top"><a id="a9b23364eb687aaa5c09882f59be4033c"></a>
-const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9b23364eb687aaa5c09882f59be4033c">mord</a></td></tr>
-<tr class="memdesc:a9b23364eb687aaa5c09882f59be4033c"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
-<tr class="separator:a9b23364eb687aaa5c09882f59be4033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f684766174bbefa4d04df3fa894ad1d"><td class="memItemLeft" align="right" valign="top"><a id="a4f684766174bbefa4d04df3fa894ad1d"></a>
+const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4f684766174bbefa4d04df3fa894ad1d">mord</a></td></tr>
+<tr class="memdesc:a4f684766174bbefa4d04df3fa894ad1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
+<tr class="separator:a4f684766174bbefa4d04df3fa894ad1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a531a462792fba821e13a63c7376c35cf"><td class="memItemLeft" align="right" valign="top"><a id="a531a462792fba821e13a63c7376c35cf"></a>
+const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a531a462792fba821e13a63c7376c35cf">mord</a></td></tr>
+<tr class="memdesc:a531a462792fba821e13a63c7376c35cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
+<tr class="separator:a531a462792fba821e13a63c7376c35cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55db3cd23309e08acfbce3b6d2feec85"><td class="memItemLeft" align="right" valign="top"><a id="a55db3cd23309e08acfbce3b6d2feec85"></a>
 vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a55db3cd23309e08acfbce3b6d2feec85">nonzero_entries</a></td></tr>
 <tr class="memdesc:a55db3cd23309e08acfbce3b6d2feec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nonzero entries of each row of A <br /></td></tr>
 <tr class="separator:a55db3cd23309e08acfbce3b6d2feec85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89273e870d32497bb2a45fb74461194e"><td class="memItemLeft" align="right" valign="top"><a id="a89273e870d32497bb2a45fb74461194e"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a89273e870d32497bb2a45fb74461194e">num_cols</a></td></tr>
+<tr class="memdesc:a89273e870d32497bb2a45fb74461194e"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of columns in the polynomial <br /></td></tr>
+<tr class="separator:a89273e870d32497bb2a45fb74461194e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac160863a9b65b41bb6069740ca883da8"><td class="memItemLeft" align="right" valign="top"><a id="ac160863a9b65b41bb6069740ca883da8"></a>
+vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac160863a9b65b41bb6069740ca883da8">num_readers</a></td></tr>
+<tr class="memdesc:ac160863a9b65b41bb6069740ca883da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">count of threads that have actually read a generated actually built <br /></td></tr>
+<tr class="separator:ac160863a9b65b41bb6069740ca883da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c95ce9de848b6a4312ae19fef8980b3"><td class="memItemLeft" align="right" valign="top"><a id="a4c95ce9de848b6a4312ae19fef8980b3"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4c95ce9de848b6a4312ae19fef8980b3">num_rows</a></td></tr>
+<tr class="memdesc:a4c95ce9de848b6a4312ae19fef8980b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of rows in the matrix <br /></td></tr>
+<tr class="separator:a4c95ce9de848b6a4312ae19fef8980b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5686aed4d209fd6e2596b19e060d3c29"><td class="memItemLeft" align="right" valign="top"><a id="a5686aed4d209fd6e2596b19e060d3c29"></a>
+vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a5686aed4d209fd6e2596b19e060d3c29">offset</a></td></tr>
+<tr class="memdesc:a5686aed4d209fd6e2596b19e060d3c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">index of the starting point of this row in the dense matrix <br /></td></tr>
+<tr class="separator:a5686aed4d209fd6e2596b19e060d3c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90488d65365fd6a5512ccda45780acc5"><td class="memItemLeft" align="right" valign="top"><a id="a90488d65365fd6a5512ccda45780acc5"></a>
 vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a90488d65365fd6a5512ccda45780acc5">R</a></td></tr>
 <tr class="memdesc:a90488d65365fd6a5512ccda45780acc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalized list of indices of reducers for the corresponding monomials of <code>f</code> <br /></td></tr>
@@ -1025,10 +1267,10 @@ vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial
 list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a03bda496da1d09c73151ba42b6db7bc4">R_build</a></td></tr>
 <tr class="memdesc:a03bda496da1d09c73151ba42b6db7bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">indices of reducers for the corresponding elements of <code>M</code> <br /></td></tr>
 <tr class="separator:a03bda496da1d09c73151ba42b6db7bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae894400dbbec3bfc9e525b1b7fdd4032"><td class="memItemLeft" align="right" valign="top"><a id="ae894400dbbec3bfc9e525b1b7fdd4032"></a>
-unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae894400dbbec3bfc9e525b1b7fdd4032">rows</a></td></tr>
-<tr class="memdesc:ae894400dbbec3bfc9e525b1b7fdd4032"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of rows in the polynomial <br /></td></tr>
-<tr class="separator:ae894400dbbec3bfc9e525b1b7fdd4032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a341e74dadaec6a56cd944f17be9b9320"><td class="memItemLeft" align="right" valign="top"><a id="a341e74dadaec6a56cd944f17be9b9320"></a>
+vector&lt; vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a341e74dadaec6a56cd944f17be9b9320">R_built</a></td></tr>
+<tr class="memdesc:a341e74dadaec6a56cd944f17be9b9320"><td class="mdescLeft">&#160;</td><td class="mdescRight">reducers actually generated <br /></td></tr>
+<tr class="separator:a341e74dadaec6a56cd944f17be9b9320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a1dcdff469ec1061109dc33aaceb011"><td class="memItemLeft" align="right" valign="top"><a id="a4a1dcdff469ec1061109dc33aaceb011"></a>
 <a class="el" href="group__polygroup.html#class_polynomial___ring">Polynomial_Ring</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4a1dcdff469ec1061109dc33aaceb011">Rx</a></td></tr>
 <tr class="memdesc:a4a1dcdff469ec1061109dc33aaceb011"><td class="mdescLeft">&#160;</td><td class="mdescRight">polynomial ring <br /></td></tr>
@@ -1039,8 +1281,8 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <tr class="separator:a7536f2bbcdcfcadd45c209694c31e3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
-<a id="ada9c61c0f75be4a2b3dd5c762c1c9a1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[1/2]</span></h2>
+<a id="ab908becf5415be27dd0d4e4391ee2c3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab908becf5415be27dd0d4e4391ee2c3b">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1048,7 +1290,13 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
         <tr>
           <td class="memname">F4_Reduction_Data::F4_Reduction_Data </td>
           <td>(</td>
-          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td>
+          <td class="paramname"><em>curr_ord</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;&#160;</td>
           <td class="paramname"><em>P</em>, </td>
         </tr>
         <tr>
@@ -1068,13 +1316,14 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <p>encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">curr_ord</td><td>current monomial ordering </td></tr>
     <tr><td class="paramname">P</td><td>list of critical pairs that will create a new basis; matrix will have this many rows </td></tr>
     <tr><td class="paramname">B</td><td>list of polynomials currently in the basis </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00039">39</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00063">63</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1112,6 +1361,8 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00043">43</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
@@ -1173,12 +1424,12 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00139">139</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00182">182</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad241aa62afb6b6e0b482496c7559f092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad241aa62afb6b6e0b482496c7559f092">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[2/2]</span></h2>
+<a id="a2096fe45e5eecc1c855acb82787f2719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2096fe45e5eecc1c855acb82787f2719">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1186,6 +1437,12 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
         <tr>
           <td class="memname">void F4_Reduction_Data::add_monomials </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td>
+          <td class="paramname"><em>curr_ord</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;&#160;</td>
           <td class="paramname"><em>ti</em>, </td>
         </tr>
@@ -1225,6 +1482,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <p>If <code>g</code> is an s-polynomial generator, set the flag to <code>true</code>, <code>ti</code> to the beginning of <code>M_build</code>, <code>ri</code> to the beginning of <code>R_build</code>, and <code>u</code> to the first multiple in the critical pair. Setting the flag to <code>true</code> signals that <code>ti</code> and <code>ri</code> are not at the correct insertion point, so the function needs to find this point. In this case, <code>ti</code> and <code>ri</code> will change.</p>
 <p>If <code>g</code> is not a generator, then <code>ti</code> and <code>ri</code> should point to appropriate locations for the monomial divisible by the leading term of <code>g</code>. The algorithm advances both a copy of <code>ti</code> and an iterator on <code>g</code> to insert new monomials. In this case, the algorithm modifies neither <code>ti</code> nor <code>ri</code>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">curr_ord</td><td>current monomial ordering </td></tr>
     <tr><td class="paramname">ti</td><td>iterator through <code>M_build</code>; see details for more information </td></tr>
     <tr><td class="paramname">ri</td><td>iterator through <code>R_build</code>; see details for more information </td></tr>
     <tr><td class="paramname">g</td><td>polynomial, such as an s-polynomial generator or a reducer </td></tr>
@@ -1233,6 +1491,8 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00204">204</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1260,12 +1520,12 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00088">88</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00129">129</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a0fd30b42c2dcf0dd07dfa898f71c8751"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[2/2]</span></h2>
+<a id="a9fa6a212375b9498ca86a2c18e94ca1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fa6a212375b9498ca86a2c18e94ca1e">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1273,7 +1533,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
         <tr>
           <td class="memname">void F4_Reduction_Data::initialize_many </td>
           <td>(</td>
-          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;&#160;</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;&#160;</td>
           <td class="paramname"><em>P</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1287,6 +1547,8 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00153">153</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1314,8 +1576,6 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00197">197</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a9f3e9b5617084c34f97acd23d6e67a43"></a>
@@ -1342,120 +1602,12 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-</div>
-</div>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00265">265</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
-<a name="class_p_p_with_ideal" id="class_p_p_with_ideal"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#class_p_p_with_ideal">&#9670;&nbsp;</a></span>PPWithIdeal</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">class PPWithIdeal</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2014 Used to associate a potential leading power product with the resulting monomial ideal if it were chosen as the actual leading power product. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00109">109</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
-</div><table class="memberdecls">
-<tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
-<tr class="memitem:a4aaab17f2c6c03dfe1b6cc6bb2ca3f73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4aaab17f2c6c03dfe1b6cc6bb2ca3f73">PPWithIdeal</a> (<a class="el" href="group__polygroup.html#class_monomial">Monomial</a> u, const list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;F, ::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a> &amp;w, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P, const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *h=nullptr)</td></tr>
-<tr class="memdesc:a4aaab17f2c6c03dfe1b6cc6bb2ca3f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a monomial/ideal pair.  <a href="#a4aaab17f2c6c03dfe1b6cc6bb2ca3f73">More...</a><br /></td></tr>
-<tr class="separator:a4aaab17f2c6c03dfe1b6cc6bb2ca3f73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee52e551312d3380a5a25ed2e02c8d87"><td class="memItemLeft" align="right" valign="top"><a id="aee52e551312d3380a5a25ed2e02c8d87"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aee52e551312d3380a5a25ed2e02c8d87">PPWithIdeal</a> (const <a class="el" href="group___g_b_computation.html#class_p_p_with_ideal">PPWithIdeal</a> &amp;PI)</td></tr>
-<tr class="memdesc:aee52e551312d3380a5a25ed2e02c8d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
-<tr class="separator:aee52e551312d3380a5a25ed2e02c8d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
-<tr class="memitem:acea0ed75b266fc9abcf1fd0833493230"><td class="memItemLeft" align="right" valign="top"><a id="acea0ed75b266fc9abcf1fd0833493230"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acea0ed75b266fc9abcf1fd0833493230">~PPWithIdeal</a> ()</td></tr>
-<tr class="memdesc:acea0ed75b266fc9abcf1fd0833493230"><td class="mdescLeft">&#160;</td><td class="mdescRight">does nothing the default wouldn't do <br /></td></tr>
-<tr class="separator:acea0ed75b266fc9abcf1fd0833493230"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
-<tr class="memitem:a89093fdbc58161c646f61b54b0cd3ed5"><td class="memItemLeft" align="right" valign="top"><a id="a89093fdbc58161c646f61b54b0cd3ed5"></a>
-const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a89093fdbc58161c646f61b54b0cd3ed5">getPP</a> () const</td></tr>
-<tr class="memdesc:a89093fdbc58161c646f61b54b0cd3ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">the leading monomial being added to the ideal <br /></td></tr>
-<tr class="separator:a89093fdbc58161c646f61b54b0cd3ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad83d8400ef6e5c9fc5e100b304063500"><td class="memItemLeft" align="right" valign="top"><a id="ad83d8400ef6e5c9fc5e100b304063500"></a>
-const <a class="el" href="group__polygroup.html#class_monomial___ideal">Monomial_Ideal</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad83d8400ef6e5c9fc5e100b304063500">getIdeal</a> () const</td></tr>
-<tr class="memdesc:ad83d8400ef6e5c9fc5e100b304063500"><td class="mdescLeft">&#160;</td><td class="mdescRight">the old ideal of leading monomials <br /></td></tr>
-<tr class="separator:ad83d8400ef6e5c9fc5e100b304063500"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11af0cf4088749e2edf36ddd98ec5dc0"><td class="memItemLeft" align="right" valign="top"><a id="a11af0cf4088749e2edf36ddd98ec5dc0"></a>
-inline ::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a11af0cf4088749e2edf36ddd98ec5dc0">getOrdering</a> ()</td></tr>
-<tr class="memdesc:a11af0cf4088749e2edf36ddd98ec5dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">the current monomial ordering <br /></td></tr>
-<tr class="separator:a11af0cf4088749e2edf36ddd98ec5dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e90cb6ef17369bfae7e2932f484c4f"><td class="memItemLeft" align="right" valign="top"><a id="a23e90cb6ef17369bfae7e2932f484c4f"></a>
-const map&lt; DEG_TYPE, unsigned long &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a23e90cb6ef17369bfae7e2932f484c4f">getIncBetti</a> (bool graded=false)</td></tr>
-<tr class="memdesc:a23e90cb6ef17369bfae7e2932f484c4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the incremental Betti numbers obtained by adding the monomial to the ideal <br /></td></tr>
-<tr class="separator:a23e90cb6ef17369bfae7e2932f484c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26a40483e6f79118a5433ef255f77bb1"><td class="memItemLeft" align="right" valign="top"><a id="a26a40483e6f79118a5433ef255f77bb1"></a>
-<a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a26a40483e6f79118a5433ef255f77bb1">getHilbertNumerator</a> (bool graded=false)</td></tr>
-<tr class="memdesc:a26a40483e6f79118a5433ef255f77bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert numerator obtained by adding the monomial to the ideal (numerator is <em>not</em> reduced) <br /></td></tr>
-<tr class="separator:a26a40483e6f79118a5433ef255f77bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad703f1e2a2ee6f4f5862146f52d8b4e4"><td class="memItemLeft" align="right" valign="top"><a id="ad703f1e2a2ee6f4f5862146f52d8b4e4"></a>
-<a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad703f1e2a2ee6f4f5862146f52d8b4e4">getHilbertReducedNumerator</a> (bool graded=false)</td></tr>
-<tr class="memdesc:ad703f1e2a2ee6f4f5862146f52d8b4e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert numerator obtained by adding the monomial to the ideal (numerator <em>is</em> reduced) <br /></td></tr>
-<tr class="separator:ad703f1e2a2ee6f4f5862146f52d8b4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3816cc16c31cc0465f6e71b5499444"><td class="memItemLeft" align="right" valign="top"><a id="aea3816cc16c31cc0465f6e71b5499444"></a>
-<a class="el" href="group__polygroup.html#class_dense___univariate___rational___polynomial">Dense_Univariate_Rational_Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aea3816cc16c31cc0465f6e71b5499444">getHilbertPolynomial</a> ()</td></tr>
-<tr class="memdesc:aea3816cc16c31cc0465f6e71b5499444"><td class="mdescLeft">&#160;</td><td class="mdescRight">the Hilbert polynomial obtained by adding the monomial to the ideal <br /></td></tr>
-<tr class="separator:aea3816cc16c31cc0465f6e71b5499444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae56bffc5abc6e09e0f393d90687b91ab"><td class="memItemLeft" align="right" valign="top"><a id="ae56bffc5abc6e09e0f393d90687b91ab"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae56bffc5abc6e09e0f393d90687b91ab">howManyNewPairs</a> () const</td></tr>
-<tr class="memdesc:ae56bffc5abc6e09e0f393d90687b91ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">estimate of the number of new critical pairs generated by adding the monomial to the ideal <br /></td></tr>
-<tr class="separator:ae56bffc5abc6e09e0f393d90687b91ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa672d26c042569006512f3ac0fe1de34"><td class="memItemLeft" align="right" valign="top"><a id="aa672d26c042569006512f3ac0fe1de34"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa672d26c042569006512f3ac0fe1de34">degOfNewPairs</a> () const</td></tr>
-<tr class="memdesc:aa672d26c042569006512f3ac0fe1de34"><td class="mdescLeft">&#160;</td><td class="mdescRight">the degree of the new critical pairs generated by adding the monomial to the ideal <br /></td></tr>
-<tr class="separator:aa672d26c042569006512f3ac0fe1de34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dd8fea0916e829944f63107a288ed58"><td class="memItemLeft" align="right" valign="top"><a id="a7dd8fea0916e829944f63107a288ed58"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7dd8fea0916e829944f63107a288ed58">getDifferenceInDegree</a> ()</td></tr>
-<tr class="memdesc:a7dd8fea0916e829944f63107a288ed58"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the difference in degree between the first and last monomials of the ideal <br /></td></tr>
-<tr class="separator:a7dd8fea0916e829944f63107a288ed58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
-<tr class="memitem:ad3df0f54a6de6a86d0c61d8a14cbaed1"><td class="memItemLeft" align="right" valign="top"><a id="ad3df0f54a6de6a86d0c61d8a14cbaed1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad3df0f54a6de6a86d0c61d8a14cbaed1">computeNumberNewPairs</a> ()</td></tr>
-<tr class="memdesc:ad3df0f54a6de6a86d0c61d8a14cbaed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of critical pairs the monomial would add. <br /></td></tr>
-<tr class="separator:ad3df0f54a6de6a86d0c61d8a14cbaed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
-<tr class="memitem:a8420b03d8ff30fd0f59f9059a1c2ebf2"><td class="memItemLeft" align="right" valign="top"><a id="a8420b03d8ff30fd0f59f9059a1c2ebf2"></a>
-<a class="el" href="group__polygroup.html#class_monomial___ideal">Monomial_Ideal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a8420b03d8ff30fd0f59f9059a1c2ebf2">I</a></td></tr>
-<tr class="memdesc:a8420b03d8ff30fd0f59f9059a1c2ebf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">the ideal of leading terms <br /></td></tr>
-<tr class="separator:a8420b03d8ff30fd0f59f9059a1c2ebf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8271676ce9422ea311a93aac66e8470d"><td class="memItemLeft" align="right" valign="top"><a id="a8271676ce9422ea311a93aac66e8470d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a8271676ce9422ea311a93aac66e8470d">max_deg</a></td></tr>
-<tr class="memdesc:a8271676ce9422ea311a93aac66e8470d"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum weighted degree of monomials in ideal <br /></td></tr>
-<tr class="separator:a8271676ce9422ea311a93aac66e8470d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a698239aea883e7b53c9e670a91f0c30d"><td class="memItemLeft" align="right" valign="top"><a id="a698239aea883e7b53c9e670a91f0c30d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a698239aea883e7b53c9e670a91f0c30d">min_deg</a></td></tr>
-<tr class="memdesc:a698239aea883e7b53c9e670a91f0c30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum weighted degree of monomials in ideal <br /></td></tr>
-<tr class="separator:a698239aea883e7b53c9e670a91f0c30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25bad843201118123213603384f208ba"><td class="memItemLeft" align="right" valign="top"><a id="a25bad843201118123213603384f208ba"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a25bad843201118123213603384f208ba">num_new_pairs</a></td></tr>
-<tr class="memdesc:a25bad843201118123213603384f208ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">estimate of number of new pairs <br /></td></tr>
-<tr class="separator:a25bad843201118123213603384f208ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58f415a5c63a67ca1dfcec9bf060eec4"><td class="memItemLeft" align="right" valign="top"><a id="a58f415a5c63a67ca1dfcec9bf060eec4"></a>
-::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a58f415a5c63a67ca1dfcec9bf060eec4">ordering</a></td></tr>
-<tr class="memdesc:a58f415a5c63a67ca1dfcec9bf060eec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">the current ordering of the Gr&ouml;bner basis computation <br /></td></tr>
-<tr class="separator:a58f415a5c63a67ca1dfcec9bf060eec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95ee2432221feb207ae032a4e3946858"><td class="memItemLeft" align="right" valign="top"><a id="a95ee2432221feb207ae032a4e3946858"></a>
-const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a95ee2432221feb207ae032a4e3946858">pairs</a></td></tr>
-<tr class="memdesc:a95ee2432221feb207ae032a4e3946858"><td class="mdescLeft">&#160;</td><td class="mdescRight">the list of critical pairs of \(I\) at this point in the algorithm <br /></td></tr>
-<tr class="separator:a95ee2432221feb207ae032a4e3946858"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45e8e20417c6213edd71bc5ee6e2f6cd"><td class="memItemLeft" align="right" valign="top"><a id="a45e8e20417c6213edd71bc5ee6e2f6cd"></a>
-<a class="el" href="group__polygroup.html#class_monomial">Monomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a45e8e20417c6213edd71bc5ee6e2f6cd">t</a></td></tr>
-<tr class="memdesc:a45e8e20417c6213edd71bc5ee6e2f6cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">the last monomial added to \(I\) <br /></td></tr>
-<tr class="separator:a45e8e20417c6213edd71bc5ee6e2f6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
-<a id="a4aaab17f2c6c03dfe1b6cc6bb2ca3f73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4aaab17f2c6c03dfe1b6cc6bb2ca3f73">&#9670;&nbsp;</a></span>PPWithIdeal()</h2>
+<a id="ae75be9f5946c90ea68cbae7276dfd36c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae75be9f5946c90ea68cbae7276dfd36c">&#9670;&nbsp;</a></span>reduce_my_new_rows()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1464,22 +1616,74 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">PPWithIdeal::PPWithIdeal </td>
+          <td class="memname">void F4_Reduction_Data::reduce_my_new_rows </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__polygroup.html#class_monomial">Monomial</a>&#160;</td>
-          <td class="paramname"><em>u</em>, </td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>lhead_i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a> &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
+          <td class="paramtype">const set&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>to_reduce</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces the specified set of rows by the specified row, suitable for multithreading </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>row of the row to use when reducing </td></tr>
+    <tr><td class="paramname">lhead_i</td><td>the location of the (new) leading monomial of <code>i</code>; this may differ from <code>head[i]</code>! </td></tr>
+    <tr><td class="paramname">F</td><td>the underlying field </td></tr>
+    <tr><td class="paramname">to_reduce</td><td>which rows of the matrix this thread will reduce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00388">388</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a896aed2e69b7db0c0d7783bfcf7f3d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896aed2e69b7db0c0d7783bfcf7f3d03">&#9670;&nbsp;</a></span>select_dynamic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> * F4_Reduction_Data::select_dynamic </td>
+          <td>(</td>
+          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>T</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1490,8 +1694,20 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> *&#160;</td>
-          <td class="paramname"><em>h</em> = <code>nullptr</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td>
+          <td class="paramname"><em>curr_ord</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&amp;&#160;</td>
+          <td class="paramname"><em>skel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Dynamic_Heuristic&#160;</td>
+          <td class="paramname"><em>heur</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1499,26 +1715,23 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Construct a monomial/ideal pair. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>selects leading monomials for the remaining nonzero rows </p>
+<p>This functions basically fills the role that <a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a> fills in the dynamic Buchberger algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>proposed new <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a> for ideal </td></tr>
-    <tr><td class="paramname">F</td><td>current ideal </td></tr>
-    <tr><td class="paramname">w</td><td>current monomial ordering </td></tr>
-    <tr><td class="paramname">P</td><td>current list of critical pairs </td></tr>
-    <tr><td class="paramname">h</td><td>unreduced Hilbert numerator of <code>F</code> (does not verify correctness) </td></tr>
+    <tr><td class="paramname">T</td><td>list of current leading monomials </td></tr>
+    <tr><td class="paramname">G</td><td>list of current basis polynomials </td></tr>
+    <tr><td class="paramname">P</td><td>list of current critical pairs </td></tr>
+    <tr><td class="paramname">curr_ord</td><td>current monomial ordering </td></tr>
+    <tr><td class="paramname">skel</td><td>the current LP_Solver that defines the term ordering </td></tr>
+    <tr><td class="paramname">heur</td><td>which Dynamic_Heuristic to use when selecting a monomial </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>the recommended monomial ordering; this may be the same as <code>curr_ord</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00121">121</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00506">506</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1598,8 +1811,8 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="ga498e6d10e581ed9dca25264cbe825ce0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga498e6d10e581ed9dca25264cbe825ce0">&#9670;&nbsp;</a></span>DynamicHeuristic</h2>
+<a id="ga819b1fd40d9a40ff303df3b90647ecb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga819b1fd40d9a40ff303df3b90647ecb0">&#9670;&nbsp;</a></span>Dynamic_Heuristic</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1608,7 +1821,7 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a></td>
+          <td class="memname">enum <a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Engine::Dynamic_Heuristic</a></td>
         </tr>
       </table>
   </td>
@@ -1617,9 +1830,11 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>values for the heuristic, as in <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a></code> </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2014-2017</dd></dl>
-<p>Pass this value to SelectMonomial. The methods are:</p><ol type="1">
+<p>Pass this value to <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a></code>. The methods are:</p><ol type="1">
 <li><code>ORD_HILBERT_THEN_DEG</code> considers the standard Hilbert polynomial, breaking ties by the standard Hilbert series, breaking remaining ties by the (weighted) degree.</li>
 <li><code>DEG_THEN_ORD_HILBERT</code> considers the degree of the leading power products, breaking ties by the standard Hilbert polynomial, breaking remaining ties by the standard Hilbert series.</li>
 <li><code>GRAD_HILB_THEN_DEG</code> considers the standard Hilbert polynomial, breaking ties by the graded Hilbert series, breaking remaining ties by the (weighted) degree. (The graded Hilbert polynomial is actuall a quasi-polynomial, and we do not yet have a criterion to apply to this.)</li>
@@ -1629,9 +1844,9 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 <li><code>BIG_BETTI_HILBERT_DEG</code> tries to obtain a set of incremental Betti with the largest values, comparing from the top and stopping when not equal</li>
 <li><code>GRAD_BETTI_HILBERT_DEG</code> tries to obtain a set of incremental Betti numbers with the largest values, comparing from the bottom and stopping when not equal </li>
 </ol>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a1">test_4by4.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a17">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a1">test_4by4.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#a9">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#a9">user_interface.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00069">69</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00083">83</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
 
 </div>
 </div>
@@ -1647,17 +1862,17 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
       </table>
 </div><div class="memdoc">
 
-<p>used by <a class="el" href="group___g_b_computation.html#ga40140d94eac91d7337f553d362128cb7" title="implementation of the dynamic Buchberger algorithm ">buchberger_dynamic()</a> to decide which solver to use </p>
+<p>used by <a class="el" href="group___g_b_computation.html#ga2c05f4e2ea8b43bb696483469f4cce83" title="implementation of the dynamic Buchberger algorithm ">buchberger_dynamic()</a> to decide which solver to use </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017</dd></dl>
 <p>Current options include:</p><ul>
-<li>SKELETON_SOLVER use the skeleton class for an exact skeleton</li>
-<li>GLPK_SOLVER, use the <a class="el" href="group___c_l_s_solvers.html#class_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a> for an approximate skeleton</li>
-<li>PPL_SOLVER, use the <a class="el" href="group___c_l_s_solvers.html#class_p_p_l___solver" title="approximate skeleton of a polyhedral cone, using PPL linear solver ">PPL_Solver</a> for an exact skeleton</li>
-<li>GLPK_ORACLE_SOLVER, use the <a class="el" href="group___c_l_s_solvers.html#class_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a> to determine quickly if a solution exists, and use skeleton only when the solution does in fact exist (idea due to D. Lichtblau) </li>
+<li>SKELETON_SOLVER use the Skeleton class for an exact skeleton</li>
+<li>GLPK_SOLVER, use the GLPK_Solver for an approximate skeleton</li>
+<li>PPL_SOLVER, use the PPL_Solver for an exact skeleton</li>
+<li>GLPK_ORACLE_SOLVER, use the GLPK_Solver to determine quickly if a solution exists, and use Skeleton only when the solution does in fact exist (idea due to D. Lichtblau) </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8hpp_source.html#l00078">78</a> of file <a class="el" href="algorithm__buchberger__dynamic_8hpp_source.html">algorithm_buchberger_dynamic.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8hpp_source.html#l00082">82</a> of file <a class="el" href="algorithm__buchberger__dynamic_8hpp_source.html">algorithm_buchberger_dynamic.hpp</a>.</p>
 
 </div>
 </div>
@@ -1689,7 +1904,7 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 <li>GEOBUCKETS polynomials are created and manipulated in geobucket format <a class="el" href="citelist.html#CITEREF_YanGeobuckets">[10]</a></li>
 <li>DOUBLE_BUF polynomials are created and manipulated in a novel, doubled-buffered format </li>
 </ul>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a0">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#a0">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#a0">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#a0">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#a0">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#a0">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#a0">test_cab_es9.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#a9">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a16">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a0">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#a0">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#a0">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#a0">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#a0">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#a0">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#a0">test_cab_es9.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#a9">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a18">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00055">55</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
 
@@ -1750,8 +1965,8 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 
 </div>
 </div>
-<a id="ga40140d94eac91d7337f553d362128cb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga40140d94eac91d7337f553d362128cb7">&#9670;&nbsp;</a></span>buchberger_dynamic()</h2>
+<a id="ga2c05f4e2ea8b43bb696483469f4cce83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2c05f4e2ea8b43bb696483469f4cce83">&#9670;&nbsp;</a></span>buchberger_dynamic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1783,8 +1998,8 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a>&#160;</td>
-          <td class="paramname"><em>heuristic</em> = <code>DynamicHeuristic::ORD_HILBERT_THEN_DEG</code>, </td>
+          <td class="paramtype">Dynamic_Heuristic&#160;</td>
+          <td class="paramname"><em>heuristic</em> = <code>Dynamic_Heuristic::ORD_HILBERT_THEN_DEG</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1813,7 +2028,7 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
     <tr><td class="paramname">method</td><td>how to represent the S-polynomials during reduction </td></tr>
     <tr><td class="paramname">strategy</td><td>strategy to use while sorting pairs </td></tr>
     <tr><td class="paramname">strategy_weights</td><td>used by <code>strategy</code> </td></tr>
-    <tr><td class="paramname">heuristic</td><td>see DynamicHeuristic </td></tr>
+    <tr><td class="paramname">heuristic</td><td>see Dynamic_Heuristic </td></tr>
     <tr><td class="paramname">solver</td><td>how to compute possible monomial orderings (polyhedral skeleton) </td></tr>
     <tr><td class="paramname">analyze_inputs</td><td>set to <code>true</code> if you want the solver to analyze the inputs to find an initial ordering (see notes) </td></tr>
   </table>
@@ -1824,7 +2039,7 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 <dd>
 If desired, the algorithm can analyze the inputs to find a good global ordering. To do this, set <code>analyze_inputs</code> to <code>true</code>. This is probably a waste of time input polynomials where many polynomials can be reduced by others, so the default is <code>false</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00293">293</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00279">279</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1975,14 +2190,14 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
 
 </div>
 </div>
-<a id="gaa9f8343bd8b21f30062b2844e2772b5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa9f8343bd8b21f30062b2844e2772b5e">&#9670;&nbsp;</a></span>compatiblePP()</h2>
+<a id="gabe68a8de3b87f6cc69e64fff39b71a81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe68a8de3b87f6cc69e64fff39b71a81">&#9670;&nbsp;</a></span>compatible_pp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void compatiblePP </td>
+          <td class="memname">void Dynamic_Engine::compatible_pp </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__polygroup.html#class_monomial">Monomial</a>&#160;</td>
           <td class="paramname"><em>currentLPP</em>, </td>
@@ -1992,12 +2207,6 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
           <td></td>
           <td class="paramtype">const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>allPPs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const set&lt;::<a class="el" href="group___c_l_s_solvers.html#classray">ray</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>bndrys</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2014,7 +2223,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&#160;</td>
           <td class="paramname"><em>skel</em>&#160;</td>
         </tr>
         <tr>
@@ -2024,13 +2233,14 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the compatible leading monomials of a polynomial. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2014 Compute the compatible leading monomials of a polynomial. </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2014 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">currentLPP</td><td>the current leading power product of the polynomial </td></tr>
     <tr><td class="paramname">allPPs</td><td>set of all power products of the polynomial </td></tr>
-    <tr><td class="paramname">bndrys</td><td>boundary (or, &ldquo;corner&rdquo;) vectors of current cone </td></tr>
     <tr><td class="paramname">result</td><td>set of power products of the polynomial compatible with <code>bndrys</code> </td></tr>
     <tr><td class="paramname">skel</td><td>existing skeleton that defines currently-compatible orderings </td></tr>
     <tr><td class="paramname">boundary_mons</td><td>boundary monomials (no apparent purpose at the moment) </td></tr>
@@ -2038,20 +2248,20 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00510">510</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00512">512</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
-<a id="gacd95145d20157a5f9656384ec2b3c932"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacd95145d20157a5f9656384ec2b3c932">&#9670;&nbsp;</a></span>ConstraintsForNewPP()</h2>
+<a id="gaf0ec0ad4f8430c46fc90c16104020f16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0ec0ad4f8430c46fc90c16104020f16">&#9670;&nbsp;</a></span>constraints_for_new_pp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConstraintsForNewPP </td>
+          <td class="memname">void Dynamic_Engine::constraints_for_new_pp </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group___g_b_computation.html#class_p_p_with_ideal">PPWithIdeal</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;&#160;</td>
           <td class="paramname"><em>pp_I</em>, </td>
         </tr>
         <tr>
@@ -2063,7 +2273,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="group___c_l_s_solvers.html#classconstraint">constraint</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>result</em>&#160;</td>
         </tr>
         <tr>
@@ -2073,8 +2283,10 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create constraints for a candidate LPP. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2014 Create constraints for a candidate LPP. </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2014 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pp_I</td><td>pair of PP with the ideal it would have. </td></tr>
@@ -2084,7 +2296,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00701">701</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00703">703</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -2113,7 +2325,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a Gr&ouml;bner basis of the ideal generated by \( F \) with respect to the ordering already assigned to its polynomials </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00359">359</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00625">625</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2269,7 +2481,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00099">99</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00085">85</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2407,14 +2619,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga70044fbc239244cda86cc6be0657bd0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga70044fbc239244cda86cc6be0657bd0d">&#9670;&nbsp;</a></span>hilbertCmp()</h2>
+<a id="ga9be1af3b4560bec7a8f17c5716e33ee7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9be1af3b4560bec7a8f17c5716e33ee7">&#9670;&nbsp;</a></span>hilbert_cmp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int hilbertCmp </td>
+          <td class="memname">int Dynamic_Engine::hilbert_cmp </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> &amp;&#160;</td>
           <td class="paramname"><em>hn1</em>, </td>
@@ -2444,6 +2656,8 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>compares two Hilbert functions, using polynomial and numerator </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017 </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>-1 if the first Hilbert function is smaller than the second, 0 if they are indistinguishable, and 1 if the second is smaller than the first. For details, see <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. </dd></dl>
@@ -2458,7 +2672,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>None of these should be <code>nullptr</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00032">32</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00034">34</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -2665,7 +2879,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <p>This is a complete reduction, not just the head, so the value of *sp may change. </p>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00035">35</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html#l00032">32</a> of file <a class="el" href="algorithm__buchberger__dynamic_8cpp_source.html">algorithm_buchberger_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2710,14 +2924,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga2b4a95f98249b5b6b6f48586463fcd3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2b4a95f98249b5b6b6f48586463fcd3b">&#9670;&nbsp;</a></span>SelectMonomial()</h2>
+<a id="gaa01d88c431b84deabf51ee116d7d2a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa01d88c431b84deabf51ee116d7d2a0e">&#9670;&nbsp;</a></span>select_monomial() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SelectMonomial </td>
+          <td class="memname">void Dynamic_Engine::select_monomial </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&#160;</td>
           <td class="paramname"><em>r</em>, </td>
@@ -2737,19 +2951,19 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;&#160;</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>CurrentPolys</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;&#160;</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>critpairs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&#160;</td>
           <td class="paramname"><em>currSkel</em>, </td>
         </tr>
         <tr>
@@ -2761,8 +2975,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___g_b_computation.html#ga498e6d10e581ed9dca25264cbe825ce0">DynamicHeuristic</a>&#160;</td>
-          <td class="paramname"><em>method</em> = <code>DynamicHeuristic::ORD_HILBERT_THEN_DEG</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Heuristic</a>&#160;</td>
+          <td class="paramname"><em>method</em> = <code>Dynamic_Heuristic::ORD_HILBERT_THEN_DEG</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2775,7 +2989,7 @@ template&lt;typename T &gt; </div>
 <p>Selects a leading power product for a polynomial. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2014</dd></dl>
-<p>Applies a particular DynamicHeuristic (default is <code>ORD_HILBERT_THEN_DEG</code>) and ensures compatibility with previous choices of LPP for other monomials. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Applies a particular Dynamic_Heuristic (default is <code>ORD_HILBERT_THEN_DEG</code>) and ensures compatibility with previous choices of LPP for other monomials. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">r</td><td>the polynomial in need of a new choice of LPP </td></tr>
     <tr><td class="paramname">CurrentLPPs</td><td>the current choices of LPPs for <code>CurrentPolys</code> </td></tr>
@@ -2783,13 +2997,103 @@ template&lt;typename T &gt; </div>
     <tr><td class="paramname">critpairs</td><td>the current list of critical pairs </td></tr>
     <tr><td class="paramname">currSkel</td><td>the current skeleton, corresponding to the choices <code>CurrentLPPs</code> </td></tr>
     <tr><td class="paramname">ordering_changed</td><td>whether the monomial selected changes the ordering </td></tr>
-    <tr><td class="paramname">method</td><td>the method to apply; see <code>DynamicHeuristic</code> </td></tr>
+    <tr><td class="paramname">method</td><td>the method to apply; see <code>Dynamic_Heuristic</code> </td></tr>
     <tr><td class="paramname">current_hilbert_numerator</td><td>Hilbert numerator for CurrentLPPs (changes to match new monomial, hence the double reference) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00730">730</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00732">732</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga8b938265dccdb6d410ed2906de4ed5e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b938265dccdb6d410ed2906de4ed5e5">&#9670;&nbsp;</a></span>select_monomial() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Dynamic_Engine::select_monomial </td>
+          <td>(</td>
+          <td class="paramtype">const set&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>currentLPP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CurrentLPPs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__polygroup.html#class_dense___univariate___integer___polynomial">Dense_Univariate_Integer_Polynomial</a> **&#160;</td>
+          <td class="paramname"><em>current_hilbert_numerator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CurrentPolys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>critpairs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&#160;</td>
+          <td class="paramname"><em>currSkel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>ordering_changed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">Dynamic_Heuristic</a>&#160;</td>
+          <td class="paramname"><em>method</em> = <code>Dynamic_Heuristic::ORD_HILBERT_THEN_DEG</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>same as <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial(Abstract_Polynomial *, list&lt;Monomial&gt; &amp;, Dense_Univariate_Integer_Polynomial **, const list&lt;Abstract_Polynomial *&gt; &amp;, const list&lt;Critical_Pair_Dynamic *&gt; &amp;,LP_Solver *, bool &amp;, Dynamic_Heuristic)</a></code> but with the monomials already extracted </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>the polynomial in need of a new choice of LPP </td></tr>
+    <tr><td class="paramname">currentLPP</td><td>the current leading monomial </td></tr>
+    <tr><td class="paramname">CurrentLPPs</td><td>the current choices of LPPs for <code>CurrentPolys</code> </td></tr>
+    <tr><td class="paramname">current_hilbert_numerator</td><td>Hilbert numerator for CurrentLPPs (changes to match new monomial, hence the double reference) </td></tr>
+    <tr><td class="paramname">CurrentPolys</td><td>the current basis of the ideal </td></tr>
+    <tr><td class="paramname">critpairs</td><td>the current list of critical pairs </td></tr>
+    <tr><td class="paramname">currSkel</td><td>the current skeleton, corresponding to the choices <code>CurrentLPPs</code> </td></tr>
+    <tr><td class="paramname">ordering_changed</td><td>whether the monomial selected changes the ordering </td></tr>
+    <tr><td class="paramname">method</td><td>the method to apply; see <code>Dynamic_Heuristic</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2017 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00759">759</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -2870,22 +3174,22 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga7d0ce10bf904206db71f7e011ba551b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7d0ce10bf904206db71f7e011ba551b3">&#9670;&nbsp;</a></span>verifyAndModifyIfNecessary()</h2>
+<a id="gaf3c21c23093fae5467dd770f790540f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf3c21c23093fae5467dd770f790540f6">&#9670;&nbsp;</a></span>verify_and_modify_if_necessary()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool verifyAndModifyIfNecessary </td>
+          <td class="memname">bool Dynamic_Engine::verify_and_modify_if_necessary </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solver">LP_Solver</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *&#160;</td>
           <td class="paramname"><em>skel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;&#160;</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>currentPolys</em>&#160;</td>
         </tr>
         <tr>
@@ -2895,8 +3199,10 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Verifies that the leading power products of the current basis remain compatible with the proposed refinement of ordering. </p>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2014 Verifies that the leading power products of the current basis remain compatible with the proposed refinement of ordering. </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2014 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">skel</td><td>the skeleton corresponding to the choice of \(w\) </td></tr>
@@ -2906,7 +3212,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if we were able to make this skeleton (and thus the corresponding choice of a leading monomial) consistent with the existing basis. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00622">622</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00624">624</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>

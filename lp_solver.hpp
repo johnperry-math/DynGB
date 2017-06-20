@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -34,23 +34,42 @@ using std::ostream; using std::cout; using std::endl;
   @brief classes that solve constrained linear systems
   @details Classes in this group solve constrained linear systems;
   that is, they solve systems of the form
-  \f$\left\{\sum_{j=1}^na_{ij}x_j\leq b_i\right\}_{i=1}^m\f$ (where the inequality
+  @f$\left\{\sum_{j=1}^na_{ij}x_j\leq b_i\right\}_{i=1}^m@f$ (where the inequality
   may or may not be strict).
 */
 
 /**
-  \brief a constraint \f$ c_1 x_1 + \ldots + c_n x_n \geq 0 \f$
-  \author John Perry
+  @namespace LP_Solvers
+  @ingroup CLSSolvers 
+  @brief classes that solve constrained linear systems
+  @details Classes in this group solve constrained linear systems;
+  that is, they solve systems of the form
+  @f$\left\{\sum_{j=1}^na_{ij}x_j\leq b_i\right\}_{i=1}^m@f$ (where the inequality
+  may or may not be strict).
+*/
+namespace LP_Solvers {
+
+/**
+  @brief memory manager for ray entries
+  @ingroup memorygroup
+  @details Automatically initialized, but clients need to call the destructor
+    when finished.
+*/
+extern Grading_Order_Data_Allocator<DEG_TYPE> * doda;
+
+/**
+  @brief a constraint @f$ c_1 x_1 + \ldots + c_n x_n \geq 0 @f$
+  @author John Perry
   \version 1.0
-  \date October 2014
-  \copyright The University of Southern Mississippi
-  \details This class encapsulates a simple constraint for a skeleton; that is,
-  an inequality of the form \f$ c_1 x_1 + \ldots + c_n x_n \geq 0 \f$.
+  @date October 2014
+  @copyright The University of Southern Mississippi
+  @details This class encapsulates a simple constraint for a skeleton; that is,
+  an inequality of the form @f$ c_1 x_1 + \ldots + c_n x_n \geq 0 @f$.
   Constraints can be ordered lexicographically using the less-than operator,
   allowing for their inclusion in ordered collections, such as sets.
   @ingroup CLSSolvers
 */
-class constraint
+class Constraint
 {
 
 public:
@@ -61,29 +80,29 @@ public:
   /**
     @brief Initialize constraint to the given coefficients.
 
-    The resulting constraint is \f$ c_1x_1 + \cdots + c_nx_n \geq 0, \f$
-    where \f$ c_i \f$ is the coefficient of \f$ x_i \f$.
-    \param num_variables length of coeffs
-    \param coeffs copies this array of coefficients
-    \pre the size of the array needs to be at least as long as the dimension!
+    The resulting constraint is @f$ c_1x_1 + \cdots + c_nx_n \geq 0, @f$
+    where @f$ c_i @f$ is the coefficient of @f$ x_i @f$.
+    @param num_variables length of coeffs
+    @param coeffs copies this array of coefficients
+    @pre the size of the array needs to be at least as long as the dimension!
   */
-  constraint(NVAR_TYPE, CONSTR_TYPE []);
+  Constraint(NVAR_TYPE, CONSTR_TYPE []);
 
   /**
     @brief Initialize constraint to the given coefficients.
 
-    The resulting constraint is \f$ c_1x_1 + \cdots + c_nx_n \geq 0, \f$
-    where \f$ c_i \f$ is the coefficient of \f$ x_i \f$.
-    \param coeffs copies thiis vector of coefficients
-    \post \c nvars will have the value equal to `coeffs.size()`
+    The resulting constraint is @f$ c_1x_1 + \cdots + c_nx_n \geq 0, @f$
+    where @f$ c_i @f$ is the coefficient of @f$ x_i @f$.
+    @param coeffs copies thiis vector of coefficients
+    @post @c nvars will have the value equal to `coeffs.size()`
   */
-  constraint(vector<CONSTR_TYPE> &);
+  Constraint(vector<CONSTR_TYPE> &);
 
   /**
     @brief Copies the coefficients of the other constraint,
     including the allocation of new memory.
   */
-  constraint(const constraint &);
+  Constraint(const Constraint &);
 
   ///@}
 
@@ -95,7 +114,7 @@ public:
 
     Currently, that means it deletes an array created by the constructors.
   */
-  ~constraint();
+  ~Constraint();
 
   ///@}
 
@@ -115,49 +134,23 @@ public:
   /** @brief Returns the coefficients that determine this constraints. */
   inline const CONSTR_TYPE * coeffs() const { return coefficients; }
 
-  /**
-    @brief Lexicographic comparison of constraints.
-    @param a a constraint
-    @param b a constraint
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator<(const constraint &a, const constraint &b);
+  ///@}
 
-  /** @brief check for constraint equality
-    @param a a constraint
-    @param b a constraint
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator==(const constraint &a, const constraint &b);
-  /** @brief check for constraint inequality
-    @param a a constraint
-    @param b a constraint
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator!=(const constraint &a, const constraint &b);
+  /** @name Comparisons */
+  ///@{
 
-  /** @brief check for constraint inequality
-    @param a a constraint
-    @param b a constraint
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator!=(constraint &a, constraint &b);
+  friend bool operator<(const Constraint & a, const Constraint & b);
+
+  friend bool operator==(const Constraint & a, const Constraint & b);
+
+  friend bool operator!=(const Constraint & a, const Constraint & b);
 
   ///@}
 
   /** @name I/O */
   ///@{
 
-  /** @brief print a representation of the constraint to the stream
-
-    Output is of the form \f$ c_1 x_1 + \ldots + c_n x_n \f$ , where \f$ c_i \f$
-    is the coefficient of \f$ x_i \f$.
-  */
-  friend ostream & operator<<(ostream &, const constraint &);
+  friend ostream & operator<<(ostream & os, const Constraint & c);
 
   ///@}
 
@@ -171,13 +164,52 @@ private:
 };
 
 /**
-  \brief a ray defined by nonnegative coordinates \f$(a_1,\ldots,a_n)\f$
-  \author John Perry
+  @brief Lexicographic comparison of constraints.
+  @warning This is unsafe when number of variables is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first constraint
+  @param b second constraint
+  @return @c true if and only if @p a and @p b have different entries
+*/
+bool operator<(const Constraint & a, const Constraint & b);
+
+/** @brief check for constraint equality
+  @warning This is unsafe when number of variables is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first constraint
+  @param b second constraint
+  @return @c true if and only if @p a and @p b have the same entries
+*/
+bool operator==(const Constraint & a, const Constraint & b);
+
+/** @brief check for constraint inequality
+  @warning This is unsafe when number of variables is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first constraint
+  @param b second constraint
+  @return @c true if and only if @p a and @p b have different entries
+*/
+bool operator!=(const Constraint & a, const Constraint & b);
+
+/** @brief print a representation of the constraint to the stream
+
+  @details Output is of the form @f$ c_1 x_1 + \ldots + c_n x_n @f$ ,
+    where @f$ c_i @f$ is the coefficient of @f$ x_i @f$.
+  
+  @param os output stream
+  @param c constraint to print
+  @return the output stream
+*/
+ostream & operator<<(ostream & os, const Constraint & c);
+
+/**
+  @brief a ray defined by nonnegative coordinates @f$(a_1,\ldots,a_n)@f$
+  @author John Perry
   \version 1.0
-  \date October 2014
-  \copyright The University of Southern Mississippi
+  @date October 2014
+  @copyright The University of Southern Mississippi
   @ingroup CLSSolvers
-  \details This class encapsulates a ray, one major part of the definition of a skeleton.
+  @details This class encapsulates a ray, one major part of the definition of a skeleton.
   Rays can be initialized to a particular set of coefficients, or to a particular
   axis (which is then translated into the corresponding coefficients).
 
@@ -187,7 +219,7 @@ private:
   checking whether the constraint actually is active, so this should be done
   with care.
 */
-class ray
+class Ray
 {
 
 public:
@@ -201,42 +233,42 @@ public:
     The optional second argument specifies a direction, and sets that coordinate
     to 1. In this case, there is no need to set the ray's known active constraints,
     as this is known and populated automatically.
-    \pre The dimension should be greater than zero. While the direction need not
+    @pre The dimension should be greater than zero. While the direction need not
       be specified&hellip; (see postcondition)
-    \post &hellip;the result when the direction is zero is a zero ray.
-      If the direction is \f$ i \f$, then the result is the \f$i\f$th canonical vector.
+    @post &hellip;the result when the direction is zero is a zero ray.
+      If the direction is @f$ i @f$, then the result is the @f$i@f$th canonical vector.
   */
-  ray(NVAR_TYPE, long = -1);
+  Ray(NVAR_TYPE, long = -1);
 
   /**
     @brief Creates a ray with the given number of variables,
     with coordinates set to the value of the array.
-    \pre the size of the array needs to be at least as long
+    @pre the size of the array needs to be at least as long
       as the number of variables!
   */
-  ray(NVAR_TYPE, const RAYENT_TYPE []);
+  Ray(NVAR_TYPE, const RAYENT_TYPE []);
 
   /**
     @brief Creates a ray with the given number of variables,
     with coordinates set to the value of the array.
-    \pre the size of the array needs to be at least as long
+    @pre the size of the array needs to be at least as long
       as the number of variables!
   */
-  ray(NVAR_TYPE, const EXP_TYPE []);
+  Ray(NVAR_TYPE, const EXP_TYPE []);
 
   /**
     @brief Creates a ray whose coordinates are given by the vector.
-    \post The dimension of this ray will equal the number of entries in the vector,
+    @post The dimension of this ray will equal the number of entries in the vector,
       and the values of their entries will be equal.
   */
-  ray(const vector<RAYENT_TYPE> &);
+  Ray(const vector<RAYENT_TYPE> &);
 
   /**
     @brief Copies the coordinates of the other ray.
 
     Allocates new memory, and copies the active constraints.
   */
-  ray(const ray &);
+  Ray(const Ray &);
 
   ///@}
 
@@ -248,7 +280,7 @@ public:
 
     Currently, that means it deletes `coords`.
   */
-  ~ray();
+  ~Ray();
 
   ///@}
 
@@ -273,10 +305,10 @@ public:
         on it
     @return true if and only if @p this lies on @p constraint
     @details Practically speaking, if the hyperplane is defined by the vector
-    \f$ \mathbf c \f$ and the ray is defined by \f$ \mathbf r \f$ ,
-    this function returns true if and only if \f$ c\cdot r = 0 \f$.
+    @f$ \mathbf c @f$ and the ray is defined by @f$ \mathbf r @f$ ,
+    this function returns true if and only if @f$ c\cdot r = 0 @f$.
   */
-  inline bool is_active_at(const constraint &hyperplane) const
+  inline bool is_active_at(const Constraint &hyperplane) const
   {
     return 0 == obtain_dot_product(hyperplane);
   };
@@ -287,10 +319,10 @@ public:
         above it
     @return true if and only if @p this is above @p constraint
     @details Practically speaking, if the hyperplane is defined by the vector
-    \f$ \mathbf c \f$ and the ray is defined by \f$ \mathbf r \f$ ,
-    this function returns true if and only if \f$ c\cdot r > 0 \f$.
+    @f$ \mathbf c @f$ and the ray is defined by @f$ \mathbf r @f$ ,
+    this function returns true if and only if @f$ c\cdot r > 0 @f$.
   */
-  inline bool is_above(constraint &hyperplane)
+  inline bool is_above(Constraint &hyperplane)
   {
     return 0 < obtain_dot_product(hyperplane);
   };
@@ -301,10 +333,10 @@ public:
         below it
     @return true if and only if @p this is below @p constraint
     @details Practically speaking, if the hyperplane is defined by the vector
-    \f$ \mathbf c \f$ and the ray is defined by \f$ \mathbf r \f$ ,
-    this function returns true if and only if \f$ c\cdot r < 0 \f$.
+    @f$ \mathbf c @f$ and the ray is defined by @f$ \mathbf r @f$ ,
+    this function returns true if and only if @f$ c\cdot r < 0 @f$.
   */
-  inline bool is_below(constraint &hyperplane)
+  inline bool is_below(Constraint &hyperplane)
   {
     return 0 > obtain_dot_product(hyperplane);
   };
@@ -314,40 +346,11 @@ public:
   /** @name Comparison */
   ///@{
 
-  /**
-    @brief Indicates whether the two rays are equal.
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator==(const ray &, const ray &);
-  /**
-    @brief Indicates whether the two rays are unequal.
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator!=(const ray &, const ray &);
+  friend bool operator==(const Ray & a, const Ray & b);
 
-  /**
-    @brief Indicates whether the two rays are unequal.
-    @param r a ray
-    @param s a ray
-    \warning This is unsafe when number of variables is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  inline friend bool operator!=(ray &r, ray &s) { return !(r==s); }
+  friend bool operator!=(const Ray & a, const Ray & b);
 
-  /**
-    @brief Returns \c true if and only if the coordinates of the two rays
-    are equal.
-  */
-  friend bool operator == (const ray &, const ray &);
-
-  /**
-    @brief Lexicographic comparison of rays.
-    \warning This is unsafe when dimension is not the same.
-      It does not check, since the assumption is that you know what you're doing.
-  */
-  friend bool operator < (const ray &, const ray &);
+  friend bool operator < (const Ray & a, const Ray & b);
 
   ///@}
 
@@ -358,10 +361,10 @@ public:
     @brief Convenience function to compute dot product between ray
         and the given constraint.
     @return the dot product of @p this and @p constraint
-    \warning This is unsafe when dimension is not the same.
+    @warning This is unsafe when dimension is not the same.
       It does not check, since the assumption is that you know what you're doing.
   */
-  DOTPROD_TYPE obtain_dot_product(const constraint &) const;
+  DOTPROD_TYPE obtain_dot_product(const Constraint &) const;
 
   ///@}
 
@@ -377,81 +380,138 @@ public:
   /**
     @brief Assignment operator; assigns the value of `other` to `this`.
     @return @p this
-    \warning This is unsafe when dimension is not the same.
+    @warning This is unsafe when dimension is not the same.
       It does not check, since the assumption is that you know what you're doing.
   */
-  ray & operator=(const ray &);
+  Ray & operator=(const Ray &);
 
   /**
     @brief Swap two rays of equal dimension by swapping their data,
       avoiding memory reallocation.
-    \warning This is unsafe when dimension is not the same.
+    @warning This is unsafe when dimension is not the same.
       It does not check, since the assumption is that you know what you're doing.
   */
-  void swap(ray &);
+  void swap(Ray &);
 
   ///@}
 
   /** @name I/O */
   ///@{
 
-  /** @brief Output is of the form \f$(r_1, \ldots, r_n)\f$. */
-  friend ostream & operator<<(ostream &, const ray &);
+  friend ostream & operator<<(ostream & os, const Ray & r);
 
   ///@}
 
 private:
 
-  NVAR_TYPE dim; /**< number of entries in \c coords */
+  NVAR_TYPE dim; /**< number of entries in @c coords */
 
   RAYENT_TYPE * coords; /**< coordinates of the ray */
 
 };
 
 /**
+  @brief Output is of the form @f$(r_1, \ldots, r_n)@f$.
+  @param os output stream
+  @param r ray to print
+  @return the output stream
+*/
+ostream & operator<<(ostream & os, const Ray & r);
+
+/**
+  @brief indicates whether the two rays are equal
+  @warning This is unsafe when number of variables is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first ray
+  @param b second ray
+  @return @c true if and only if the rays&rsquo; entries have the same values
+  @details Notice that the rays can point in the same direction,
+    but still be considered unequal.
+*/
+bool operator==(const Ray & a, const Ray & b);
+
+/**
+  @brief Indicates whether the two rays are unequal.
+  @warning This is unsafe when number of variables is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first ray
+  @param b second ray
+  @return @c true if and only if the rays&rsquo; entries have different values
+  @details Notice that the rays can point in the same direction,
+    but still be considered unequal.
+*/
+bool operator!=(const Ray & a, const Ray & b);
+
+/**
+  @brief Lexicographic comparison of rays.
+  @warning This is unsafe when dimension is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+  @param a first ray
+  @param b second ray
+  @return @c true if and only if @p a is lexicographically smaller than @p b
+*/
+bool operator < (const Ray & a, const Ray & b);
+
+/**
   \ingroup CLSSolvers
   @brief Multiply every coordinate in the given ray by the given scalar.
   @return a copy of the ray, scaled by the requesed amount
-  \warning This is unsafe when dimension is not the same.
+*/
+Ray operator*(const RAYENT_TYPE, const Ray &);
+
+/**
+  @ingroup CLSSolvers
+  @brief compute the dot product of the specified rays, one of which is a vector
+  @return the dot product
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-ray operator*(RAYENT_TYPE, ray &);
+RAYENT_TYPE operator*(const Ray &, const vector<long> &);
+
+/**
+  @ingroup CLSSolvers
+  @brief compute the dot product of the specified rays, one of which is a vector
+  @return the dot product
+  @warning This is unsafe when dimension is not the same.
+    It does not check, since the assumption is that you know what you're doing.
+*/
+RAYENT_TYPE operator*( const vector<long> &, const Ray &);
 
 /**
   \ingroup CLSSolvers
   @brief Add the two rays.
   @return the sum of the two rays
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-ray operator+(ray &, ray &);
+Ray operator+(const Ray &, const Ray &);
 
 /**
   \ingroup CLSSolvers
   @brief Subtract the two rays.
   @return the difference of the two rays
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-ray operator-(const ray &, const ray &);
+Ray operator-(const Ray &, const Ray &);
 
 /**
   \ingroup CLSSolvers
   @brief Add all the rays in a set.
   @return a ray that is the sum of all rays in the given set
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-ray ray_sum(const set<ray> &);
+Ray ray_sum(const set<Ray> &);
 
 /**
   \ingroup CLSSolvers
   @brief Compute the dot product on the rays.
   @return the dot product of the rays
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-RAYENT_TYPE operator*(const ray &, const ray &);
+RAYENT_TYPE operator*(const Ray &, const Ray &);
 
 /**
   \ingroup CLSSolvers
@@ -459,44 +519,44 @@ RAYENT_TYPE operator*(const ray &, const ray &);
   @param r a ray
   @param c a constraint
   @return the dot product of the ray and the constraint
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-inline DOTPROD_TYPE operator*(const ray &r, const constraint &c)
+inline DOTPROD_TYPE operator*(const Ray &r, const Constraint &c)
 { return r.obtain_dot_product(c); }
 
 /**
   \ingroup CLSSolvers
   @brief Compute the dot product between the ray and the constraint.
-  @param c a constraint
+  @param c a Constraint
   @param r a ray
   @return the dot product of the ray and the constraint
-  \warning This is unsafe when dimension is not the same.
+  @warning This is unsafe when dimension is not the same.
     It does not check, since the assumption is that you know what you're doing.
 */
-inline DOTPROD_TYPE operator*(constraint &c, ray &r)
+inline DOTPROD_TYPE operator*(Constraint &c, Ray &r)
 { return r.obtain_dot_product(c); }
 
 /**
-  \brief exact or approximate polyhedral cone solution,
+  @brief exact or approximate polyhedral cone solution,
       with methods allowing definition and refinement
-  \author John Perry
+  @author John Perry
   \version 1.0
-  \date January 2017
-  \copyright The University of Southern Mississippi
+  @date January 2017
+  @copyright The University of Southern Mississippi
   @ingroup CLSSolvers
-  \details  This class encapsulates the skeleton of a polyhedral cone,
+  @details  This class encapsulates the skeleton of a polyhedral cone,
   defined by a sequence of inequalities of the form
-  \f$ c_1 x_1 + \cdots c_n x_n \geq 0 \f$.
+  @f$ c_1 x_1 + \cdots c_n x_n \geq 0 @f$.
 
-  \warning Some classes may provide only an <i>approximate</i> cone; see, for
+  @warning Some classes may provide only an <i>approximate</i> cone; see, for
     example, GLPK_Solver. In addition, Clients must ensure two things.
       -# The rays must
-         have the same number \f$ m \f$ of dimensions, constraints must have
-         the same number \f$ n \f$ of variables, and \f$ m=n \f$. Violating any
+         have the same number @f$ m @f$ of dimensions, constraints must have
+         the same number @f$ n @f$ of variables, and @f$ m=n @f$. Violating any
          of these three conditions will lead to undesirable behavior.
       -# When refining the cone, it is essential to check that
-         the return value of solve() is \c true; for if it is not,
+         the return value of solve() is @c true; for if it is not,
          then the cone is no longer be consistent.
          Please read the relevant documentation.
 */
@@ -524,11 +584,11 @@ public:
   /**
     @brief Adds the indicated constraint (singular!) and re-computes the solution.
 
-    \return \c true if and only if the new constraint is consistent with the
+    \return @c true if and only if the new constraint is consistent with the
       current constraints
 
-    \warning Checking the return value is crucial!
-      If the function returns \c false, you have an inconsistent system!
+    @warning Checking the return value is crucial!
+      If the function returns @c false, you have an inconsistent system!
       While the <i>present</i> cone will remain consistent,
       <b>the function will not roll back previous changes you have made</b>,
       so if you want to iterate again,
@@ -536,15 +596,15 @@ public:
       Accept the new constraints only if that copy succeeds,
       in which case, you might as well discard the original, and keep the copy.
   */
-  virtual bool solve(constraint &) = 0;
+  virtual bool solve(const Constraint &) = 0;
   /**
     @brief Adds the indicated constraints (plural!) and re-computes the solution.
 
-    \return \c true if and only if the new constraints are consistent with the
+    \return @c true if and only if the new constraints are consistent with the
       current constraints
 
-    \warning Checking the return value is crucial!
-      If the function returns \c false, you have an inconsistent system!
+    @warning Checking the return value is crucial!
+      If the function returns @c false, you have an inconsistent system!
       While the <i>present</i> cone will remain consistent,
       <b>the function will not roll back previous changes you have made</b>,
       so if you want to iterate again,
@@ -552,13 +612,8 @@ public:
       Accept the new constraints only if that copy succeeds,
       in which case, you might as well discard the original, and keep the copy.
   */
-  virtual bool solve(vector<constraint> &) = 0;
+  virtual bool solve(const vector<Constraint> &) = 0;
 
-  /**
-    @brief Returns rays that define a skeleton.
-    @details When using an approximate solver such as GLPK_Solver,
-      this will give only an approximate skeleton.
-  */
   ///@}
 
   /** @name Basic properies */
@@ -567,8 +622,17 @@ public:
   virtual NVAR_TYPE get_dimension() const = 0;
   /** @brief Returns the number of rays defining the skeleton. */
   virtual unsigned long get_number_of_rays() { return rays.size(); }
-  /** @brief Returns the rays that define the skeleton. */
-  virtual const set<ray> & get_rays();
+  /**
+    @brief Returns rays that define a skeleton.
+    @return a set of Ray that define the given skeleton
+    @details When using an approximate solver such as GLPK_Solver,
+      this will give only an approximate skeleton.
+  */
+  virtual const set<Ray> & get_rays();
+  /**
+    @brief returns the number of constraints used by the skeleton
+    @return number of constraints
+  */
   virtual unsigned long get_number_of_constraints() = 0;
   ///@}
 
@@ -599,7 +663,9 @@ public:
   }
   ///@}
 protected:
-  set<ray> rays; /**< the skeleton (may be approximate, depending on solver) */
+  set<Ray> rays; /**< the skeleton (may be approximate, depending on solver) */
 };
+
+}
 
 #endif

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -25,21 +25,23 @@ namespace PPL = Parma_Polyhedra_Library;
 
 #include "lp_solver.hpp"
 
+namespace LP_Solvers {
+
 /**
-  \brief approximate skeleton of a polyhedral cone, using PPL linear solver
-  \author John Perry
+  @brief approximate skeleton of a polyhedral cone, using PPL linear solver
+  @author John Perry
   \version 1.0
-  \date January 2017
-  \copyright The University of Southern Mississippi
+  @date January 2017
+  @copyright The University of Southern Mississippi
   @ingroup CLSSolvers
-  \details This class serves as an interface to PPL \cite BagnaraHZ08SCP,
+  @details This class serves as an interface to PPL @cite BagnaraHZ08SCP,
       which we can use to find the skeleton to a polyhedral cone.
 */
 class PPL_Solver : public LP_Solver {
 public:
   /** @name Construction */
   ///@{
-  /** @brief initializes solver for \f$ n \f$ variables */
+  /** @brief initializes solver for @f$ n @f$ variables */
   PPL_Solver(NVAR_TYPE n);
   /** @brief copy constructor (deep copy) */
   PPL_Solver(const PPL_Solver &);
@@ -56,8 +58,8 @@ public:
   ///@}
   /** @name Modification */
   ///@{
-  virtual bool solve(constraint &);
-  virtual bool solve(vector<constraint> &);
+  virtual bool solve(const Constraint &);
+  virtual bool solve(const vector<Constraint> &);
   /** @brief clear the current set of rays and extracts the ones contained in lp */
   virtual void setup_rays();
   ///@}
@@ -69,5 +71,7 @@ protected:
   PPL::Variable ** X; /**< @brief array of variables */
   RAYENT_TYPE * ray_data; /**< @brief used to retrieve rays */
 };
+
+}
 
 #endif

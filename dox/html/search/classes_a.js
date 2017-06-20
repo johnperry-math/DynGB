@@ -11,8 +11,8 @@ var searchData=
   ['polynomial_5flinked_5flist',['Polynomial_Linked_List',['../group__polygroup.html#class_polynomial___linked___list',1,'']]],
   ['polynomial_5fring',['Polynomial_Ring',['../group__polygroup.html#class_polynomial___ring',1,'']]],
   ['polynomial_5fterm',['Polynomial_Term',['../group___iterator_group.html#class_polynomial___term',1,'']]],
-  ['ppl_5fsolver',['PPL_Solver',['../group___c_l_s_solvers.html#class_p_p_l___solver',1,'']]],
-  ['ppwithideal',['PPWithIdeal',['../group___g_b_computation.html#class_p_p_with_ideal',1,'']]],
+  ['pp_5fwith_5fideal',['PP_With_Ideal',['../group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal',1,'Dynamic_Engine']]],
+  ['ppl_5fsolver',['PPL_Solver',['../group___c_l_s_solvers.html#class_l_p___solvers_1_1_p_p_l___solver',1,'LP_Solvers']]],
   ['prime_5ffield',['Prime_Field',['../group___fields_group.html#class_prime___field',1,'']]],
   ['prime_5ffield_5felement',['Prime_Field_Element',['../group___fields_group.html#class_prime___field___element',1,'']]]
 ];

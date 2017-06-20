@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -22,7 +22,7 @@
 
 Prime_Field::Prime_Field(UCOEF_TYPE modulus, bool show_modulus) {
   m = modulus;
-  Fi = new COEF_TYPE [m] {0};
+  Fi.resize(m);
   Fi[1] = 1;
   Fi[m-1] = m - 1;
   for (UCOEF_TYPE a = 2; a < m - 1; ++a) {
@@ -44,28 +44,24 @@ Prime_Field::Prime_Field(UCOEF_TYPE modulus, bool show_modulus) {
 
 Prime_Field::Prime_Field(const Prime_Field & F) {
   m = F.m;
-  Fi = new COEF_TYPE [m];
+  Fi.resize(m);
   for (unsigned i = 0; i < m; ++i)
     Fi[i] = F.Fi[i];
   print_modulus = F.print_modulus;
 }
 
-Prime_Field::~Prime_Field() { delete [] Fi; }
-
-COEF_TYPE Prime_Field::inverse(COEF_TYPE a) {
-  return Fi[a];
-}
+Prime_Field::~Prime_Field() { }
 
 void Prime_Field::set_print_modulus(bool b) { print_modulus = b; }
 
-bool Prime_Field::get_print_modulus() { return print_modulus; }
+bool Prime_Field::get_print_modulus() const { return print_modulus; }
 
-Prime_Field_Element::Prime_Field_Element(Prime_Field *field)
-    : F(field)
+Prime_Field_Element::Prime_Field_Element(const Prime_Field *field) : F(field)
 { a = 0; m = F->modulus(); }
 
-Prime_Field_Element::Prime_Field_Element(COEF_TYPE value, Prime_Field *field)
-    : F(field)
+Prime_Field_Element::Prime_Field_Element(
+    COEF_TYPE value, const Prime_Field *field
+) : F(field)
 {
   a = value;
   m = F->modulus();
@@ -77,9 +73,11 @@ COEF_TYPE Prime_Field_Element::value() const { return a; }
 
 unsigned Prime_Field_Element::modulus() const { return m; }
 
-Prime_Field * Prime_Field_Element::field() const { return F; }
+const Prime_Field * Prime_Field_Element::field() const { return F; }
 
-bool Prime_Field_Element::like(const Prime_Field_Element & b) const { return m == b.m; }
+bool Prime_Field_Element::like(const Prime_Field_Element & b) const {
+  return m == b.m;
+}
 
 COEF_TYPE Prime_Field_Element::inverse() const { return F->inverse(a); }
 
@@ -185,11 +183,11 @@ ostream & operator <<(ostream & os, const Prime_Field_Element &a)
   return os;
 }
 
-Prime_Field_Element Prime_Field::unity() {
+Prime_Field_Element Prime_Field::unity() const {
   return Prime_Field_Element(1,this);
 }
 
-Prime_Field_Element Prime_Field::zero() {
+Prime_Field_Element Prime_Field::zero() const {
   return Prime_Field_Element(0,this);
 }
 

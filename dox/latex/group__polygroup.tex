@@ -93,8 +93,8 @@ Inheritance diagram for Abstract\+\_\+\+Polynomial\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group__polygroup_a5082a214ab62d3d5aad6d294926be8e2}\label{group__polygroup_a5082a214ab62d3d5aad6d294926be8e2}} 
-virtual {\bfseries $\sim$\+Abstract\+\_\+\+Polynomial} ()
-\end{DoxyCompactItemize}
+virtual \hyperlink{group__polygroup_a5082a214ab62d3d5aad6d294926be8e2}{$\sim$\+Abstract\+\_\+\+Polynomial} ()
+\begin{DoxyCompactList}\small\item\em deletes the strategy, if there is one \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
@@ -102,8 +102,8 @@ virtual {\bfseries $\sim$\+Abstract\+\_\+\+Polynomial} ()
 \mbox{\Hypertarget{group__polygroup_abf1f531c0004bf37874e98eee42dc0f4}\label{group__polygroup_abf1f531c0004bf37874e98eee42dc0f4}} 
 \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \& \hyperlink{group__polygroup_abf1f531c0004bf37874e98eee42dc0f4}{base\+\_\+ring} () const
 \begin{DoxyCompactList}\small\item\em ring in which this polynomial resides \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a5bd4f2c1ef7a4f090afd6cd55bc2604f}\label{group__polygroup_a5bd4f2c1ef7a4f090afd6cd55bc2604f}} 
-\hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \& \hyperlink{group__polygroup_a5bd4f2c1ef7a4f090afd6cd55bc2604f}{ground\+\_\+field} ()
+\mbox{\Hypertarget{group__polygroup_a9569282b79afba5d6393a75844437702}\label{group__polygroup_a9569282b79afba5d6393a75844437702}} 
+const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \& \hyperlink{group__polygroup_a9569282b79afba5d6393a75844437702}{ground\+\_\+field} () const
 \begin{DoxyCompactList}\small\item\em ground field -- all coefficients should be in this field \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a4419bbe47e14683f2903c47bee8e04af}\label{group__polygroup_a4419bbe47e14683f2903c47bee8e04af}} 
 unsigned \hyperlink{group__polygroup_a4419bbe47e14683f2903c47bee8e04af}{number\+\_\+of\+\_\+variables} () const
@@ -166,11 +166,11 @@ virtual void \hyperlink{group__polygroup_a1fcdd29c324c660ea935197c39e682f2}{sort
 virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a9cb8460694b7fceaa5a22ae58c73ebe7}{new\+\_\+iterator} () const =0
 \begin{DoxyCompactList}\small\item\em An iterator that poses no risk of modifying the polynomial. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_ad8da27c2d5e41d6e81d15d756eebf868}\label{group__polygroup_ad8da27c2d5e41d6e81d15d756eebf868}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries begin} () const =0
-\item 
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_ad8da27c2d5e41d6e81d15d756eebf868}{begin} () const =0
+\begin{DoxyCompactList}\small\item\em returns an iterator to the polynomial's leading monomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_aa769b074a39e5eac6526101d77e2e53f}\label{group__polygroup_aa769b074a39e5eac6526101d77e2e53f}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries end} () const =0
-\end{DoxyCompactItemize}
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_aa769b074a39e5eac6526101d77e2e53f}{end} () const =0
+\begin{DoxyCompactList}\small\item\em iterator to last monomial \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -185,14 +185,14 @@ virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomia
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group__polygroup_adbbb6af1fb79d5794af42e28d584641b}\label{group__polygroup_adbbb6af1fb79d5794af42e28d584641b}} 
-virtual void {\bfseries print} (ostream \&os=cout) const
-\item 
+virtual void \hyperlink{group__polygroup_adbbb6af1fb79d5794af42e28d584641b}{print} (ostream \&os=cout) const
+\begin{DoxyCompactList}\small\item\em prints the polynomial to {\ttfamily os} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a597dc990980f1936e86dbf8940dbeecd}\label{group__polygroup_a597dc990980f1936e86dbf8940dbeecd}} 
-virtual void {\bfseries println} (ostream \&os=cout) const
-\item 
+virtual void \hyperlink{group__polygroup_a597dc990980f1936e86dbf8940dbeecd}{println} (ostream \&os=cout) const
+\begin{DoxyCompactList}\small\item\em prints the polynomial to {\ttfamily os}, followed by a carriage return \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a69dfd6bd725e126d2476826fb345c5f6}\label{group__polygroup_a69dfd6bd725e126d2476826fb345c5f6}} 
-virtual void {\bfseries printlncout} () const
-\item 
+virtual void \hyperlink{group__polygroup_a69dfd6bd725e126d2476826fb345c5f6}{printlncout} () const
+\begin{DoxyCompactList}\small\item\em prints the polynomial to {\ttfamily cout}, followed by a carriage return \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_aadc14212f0cbdb81df9977916cc13798}\label{group__polygroup_aadc14212f0cbdb81df9977916cc13798}} 
 ostream \& \hyperlink{group__polygroup_aadc14212f0cbdb81df9977916cc13798}{operator$<$$<$} (ostream \&os, const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} \&p)
 \begin{DoxyCompactList}\small\item\em output \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -255,7 +255,7 @@ sort according to the leading monomial's ordering
 
 Note that it makes sense to sort even \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}'s, as it is not the polynomial that changes, only the order of its monomials. 
 
-Implemented in \hyperlink{group__polygroup_a254bec60707b34bd26ef9d9bb08a4fe9}{Polynomial\+\_\+\+Linked\+\_\+\+List}, \hyperlink{group__polygroup_a41e751eee1614e26ebba39a9f81f7993}{Double\+\_\+\+Buffered\+\_\+\+Polynomial}, \hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{Constant\+\_\+\+Polynomial}, and \hyperlink{group__polygroup_ad3c705cb5c03be2ed62fea65101d1195}{Polynomial\+\_\+\+Geobucket}.
+Implemented in \hyperlink{group__polygroup_a254bec60707b34bd26ef9d9bb08a4fe9}{Polynomial\+\_\+\+Linked\+\_\+\+List}, \hyperlink{group__polygroup_a808018b52eca472a7a1b2995e403f35a}{Constant\+\_\+\+Polynomial}, \hyperlink{group__polygroup_a41e751eee1614e26ebba39a9f81f7993}{Double\+\_\+\+Buffered\+\_\+\+Polynomial}, and \hyperlink{group__polygroup_ad3c705cb5c03be2ed62fea65101d1195}{Polynomial\+\_\+\+Geobucket}.
 
 \begin{Desc}
 \item[Examples\+: ]\par
@@ -276,7 +276,7 @@ largest weighted sum of exponents for any monomial
 \end{DoxyParams}
 Equivalent to \hyperlink{group__polygroup_aa619f56a2df5d0077335709ac11de039}{standard\+\_\+degree()} if {\ttfamily w == nullptr}. 
 
-Definition at line 108 of file polynomial.\+cpp.
+Definition at line 110 of file polynomial.\+cpp.
 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}\label{class_constant___polynomial}
 \Hypertarget{group__polygroup_class_constant___polynomial}
@@ -294,7 +294,7 @@ We do allow on change at this level\+: to resort the monomials. We do not consid
 \hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cab_es1_8cpp-example}{test\+\_\+cab\+\_\+es1.\+cpp}, \hyperlink{test_cab_es2_8cpp-example}{test\+\_\+cab\+\_\+es2.\+cpp}, \hyperlink{test_cab_es4_8cpp-example}{test\+\_\+cab\+\_\+es4.\+cpp}, \hyperlink{test_cab_es5_8cpp-example}{test\+\_\+cab\+\_\+es5.\+cpp}, \hyperlink{test_cab_es6_8cpp-example}{test\+\_\+cab\+\_\+es6.\+cpp}, \hyperlink{test_cab_es9_8cpp-example}{test\+\_\+cab\+\_\+es9.\+cpp}, \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}, \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}, \hyperlink{test_dynamic_8cpp-example}{test\+\_\+dynamic.\+cpp}, and \hyperlink{user_interface_8cpp-example}{user\+\_\+interface.\+cpp}.\end{Desc}
 
 
-Definition at line 87 of file polynomial\+\_\+array.\+hpp.
+Definition at line 89 of file polynomial\+\_\+array.\+hpp.
 
 Inheritance diagram for Constant\+\_\+\+Polynomial\+:\begin{figure}[H]
 \begin{center}
@@ -307,6 +307,8 @@ Inheritance diagram for Constant\+\_\+\+Polynomial\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{group__polygroup_a17e78adc39df3472a0610b17c906898f}{Constant\+\_\+\+Polynomial} (unsigned \hyperlink{group__polygroup_a9a6bcfaf1f4d6260b39f6abfb2b646ea}{length}, \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&\hyperlink{group__polygroup_a551ade20b7dcd96c227dd0401f6ffbbe}{R}, const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$mons, const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} $\ast$coeffs, const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$order=nullptr)
+\item 
+\hyperlink{group__polygroup_aa64fa434a206b1b29f27b09d36060dac}{Constant\+\_\+\+Polynomial} (unsigned \hyperlink{group__polygroup_a9a6bcfaf1f4d6260b39f6abfb2b646ea}{length}, \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&\hyperlink{group__polygroup_a551ade20b7dcd96c227dd0401f6ffbbe}{R}, const vector$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$ mons, const C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$coeffs, unsigned start)
 \item 
 \hyperlink{group__polygroup_ac8bd342911678053e14cf72af46819c5}{Constant\+\_\+\+Polynomial} (\hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&\hyperlink{group__polygroup_a551ade20b7dcd96c227dd0401f6ffbbe}{R}, const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&mons, const list$<$ \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} $>$ \&coeffs, const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$order=nullptr)
 \item 
@@ -401,7 +403,7 @@ class \hyperlink{group__polygroup_aefeb273b3b448966d0c8b5041a420d20}{Mutable\+\_
 \mbox{\Hypertarget{group__polygroup_a17e78adc39df3472a0610b17c906898f}\label{group__polygroup_a17e78adc39df3472a0610b17c906898f}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily Constant\+\_\+\+Polynomial\+::\+Constant\+\_\+\+Polynomial (\begin{DoxyParamCaption}\item[{unsigned}]{length,  }\item[{\hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&}]{R,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{mons,  }\item[{const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} $\ast$}]{coeffs,  }\item[{const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 
@@ -421,10 +423,33 @@ We assume that mons and coeffs both have length n. We do not check that the mono
 
 Definition at line 54 of file polynomial\+\_\+array.\+cpp.
 
+\mbox{\Hypertarget{group__polygroup_aa64fa434a206b1b29f27b09d36060dac}\label{group__polygroup_aa64fa434a206b1b29f27b09d36060dac}} 
+\index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
+\index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
+\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Constant\+\_\+\+Polynomial\+::\+Constant\+\_\+\+Polynomial (\begin{DoxyParamCaption}\item[{unsigned}]{length,  }\item[{\hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&}]{R,  }\item[{const vector$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$}]{mons,  }\item[{const C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$}]{coeffs,  }\item[{unsigned}]{start }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & how long {\ttfamily this} should be \\
+\hline
+{\em R} & parent ring \\
+\hline
+{\em mons} & vector of pointers to \hyperlink{group__polygroup_class_monomial}{Monomial} to populate the terms \\
+\hline
+{\em coeffs} & array of coefficients to populate the terms, in same order as {\ttfamily mons} \\
+\hline
+{\em start} & where in the array to start populating the polynomial\textquotesingle{}s coefficients\\
+\hline
+\end{DoxyParams}
+This initializes a polynomial from {\ttfamily mons} and {\ttfamily coeffs}. It is assumed that {\ttfamily coeffs} may have some zero elements; we do not add these to the polynomial. It is also assumed that the monomials are already in correct order, so that no sorting is required. The monomial ordering is taken from the first monomial. 
+
+Definition at line 82 of file polynomial\+\_\+array.\+cpp.
+
 \mbox{\Hypertarget{group__polygroup_ac8bd342911678053e14cf72af46819c5}\label{group__polygroup_ac8bd342911678053e14cf72af46819c5}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily Constant\+\_\+\+Polynomial\+::\+Constant\+\_\+\+Polynomial (\begin{DoxyParamCaption}\item[{\hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&}]{R,  }\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{mons,  }\item[{const list$<$ \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} $>$ \&}]{coeffs,  }\item[{const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 
@@ -440,12 +465,12 @@ Definition at line 54 of file polynomial\+\_\+array.\+cpp.
 \end{DoxyParams}
 We assume that mons and coeffs have the same length. We do not check that the monomials have the same number of variables, nor that the coefficients come from the same field, nor do we sort the monomials. The client needs to do this! 
 
-Definition at line 82 of file polynomial\+\_\+array.\+cpp.
+Definition at line 109 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_abbc487b48dbf5d0dc25dfb419a341ea5}\label{group__polygroup_abbc487b48dbf5d0dc25dfb419a341ea5}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\subparagraph{\texorpdfstring{Constant\+\_\+\+Polynomial()}{Constant\_Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily Constant\+\_\+\+Polynomial\+::\+Constant\+\_\+\+Polynomial (\begin{DoxyParamCaption}\item[{unsigned}]{length,  }\item[{\hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \&}]{R,  }\item[{const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order = {\ttfamily generic\+\_\+grevlex\+\_\+ptr} }\end{DoxyParamCaption})}
 
 
@@ -459,7 +484,7 @@ Definition at line 82 of file polynomial\+\_\+array.\+cpp.
 \end{DoxyParams}
 This is a pretty useless constructor unless you know what you're doing. Unless you're a child of \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}, you don't know what you're doing. Even then, you {\itshape probably} don't know what you're doing. 
 
-Definition at line 113 of file polynomial\+\_\+array.\+cpp.
+Definition at line 140 of file polynomial\+\_\+array.\+cpp.
 
 
 
@@ -479,7 +504,7 @@ Implements \hyperlink{group__polygroup_afb4895702dd56895a792850a831c2f51}{Abstra
 
 
 
-Definition at line 209 of file polynomial\+\_\+array.\+cpp.
+Definition at line 236 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_ab1451de8d6d9f9b0c7df2aef7b32625d}\label{group__polygroup_ab1451de8d6d9f9b0c7df2aef7b32625d}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!leading\+\_\+coefficient@{leading\+\_\+coefficient}}
@@ -496,7 +521,7 @@ Implements \hyperlink{group__polygroup_a511ce8e997fe3fd1141293d256e25fad}{Abstra
 
 
 
-Definition at line 203 of file polynomial\+\_\+array.\+cpp.
+Definition at line 230 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a08a102d5d0f33bc9cc604316e6256788}\label{group__polygroup_a08a102d5d0f33bc9cc604316e6256788}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!leading\+\_\+monomial@{leading\+\_\+monomial}}
@@ -513,7 +538,7 @@ Implements \hyperlink{group__polygroup_a9186ed0f55c5cc4ecb1b9bc11ba9f679}{Abstra
 
 
 
-Definition at line 201 of file polynomial\+\_\+array.\+cpp.
+Definition at line 228 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a9a6bcfaf1f4d6260b39f6abfb2b646ea}\label{group__polygroup_a9a6bcfaf1f4d6260b39f6abfb2b646ea}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!length@{length}}
@@ -530,7 +555,7 @@ Implements \hyperlink{group__polygroup_a48f4c3c030ca66a9386cd71f71d5def7}{Abstra
 
 
 
-Definition at line 207 of file polynomial\+\_\+array.\+cpp.
+Definition at line 234 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_ae0af1a1cf7c7eed390b25a951a685da2}\label{group__polygroup_ae0af1a1cf7c7eed390b25a951a685da2}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!monomial\+\_\+multiple@{monomial\+\_\+multiple}}
@@ -552,7 +577,7 @@ Implements \hyperlink{group__polygroup_aacee94ef63116201c91c7d65779097d8}{Abstra
 
 
 
-Definition at line 221 of file polynomial\+\_\+array.\+cpp.
+Definition at line 248 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_afd8bdd523c36fbde64df0bf36a0f4e77}\label{group__polygroup_afd8bdd523c36fbde64df0bf36a0f4e77}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!scalar\+\_\+multiple@{scalar\+\_\+multiple}}
@@ -574,7 +599,7 @@ Implements \hyperlink{group__polygroup_a53b0ed425ff4bbbf01818005d6003d59}{Abstra
 
 
 
-Definition at line 229 of file polynomial\+\_\+array.\+cpp.
+Definition at line 256 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_aafc581313f33e812add8db45cfaa1492}\label{group__polygroup_aafc581313f33e812add8db45cfaa1492}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!serialized@{serialized}}
@@ -592,7 +617,7 @@ an array of {\ttfamily uint64\+\_\+t} containing the polynomial data and assigns
 \end{DoxyParams}
 The data is stored in the form \mbox{[} A1 M11 M12 ... M1n A2 M21 M22 ... M2n ... \mbox{]} where Ai is the ith coefficient (lead is first) and Mij is the exponent of xj in the ith monomial 
 
-Definition at line 152 of file polynomial\+\_\+array.\+cpp.
+Definition at line 179 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a539835f92490fbbb5ba3b37e4f80ef49}\label{group__polygroup_a539835f92490fbbb5ba3b37e4f80ef49}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!set\+\_\+monomial\+\_\+ordering@{set\+\_\+monomial\+\_\+ordering}}
@@ -617,7 +642,7 @@ Implements \hyperlink{group__polygroup_a12e023570eb675343c4b7ed635a031dc}{Abstra
 
 
 
-Definition at line 174 of file polynomial\+\_\+array.\+cpp.
+Definition at line 201 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a808018b52eca472a7a1b2995e403f35a}\label{group__polygroup_a808018b52eca472a7a1b2995e403f35a}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!sort\+\_\+by\+\_\+order@{sort\+\_\+by\+\_\+order}}
@@ -638,7 +663,7 @@ Implements \hyperlink{group__polygroup_a1fcdd29c324c660ea935197c39e682f2}{Abstra
 \hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cab_es1_8cpp-example}{test\+\_\+cab\+\_\+es1.\+cpp}, \hyperlink{test_cab_es2_8cpp-example}{test\+\_\+cab\+\_\+es2.\+cpp}, \hyperlink{test_cab_es4_8cpp-example}{test\+\_\+cab\+\_\+es4.\+cpp}, \hyperlink{test_cab_es5_8cpp-example}{test\+\_\+cab\+\_\+es5.\+cpp}, \hyperlink{test_cab_es6_8cpp-example}{test\+\_\+cab\+\_\+es6.\+cpp}, \hyperlink{test_cab_es9_8cpp-example}{test\+\_\+cab\+\_\+es9.\+cpp}, and \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}.\end{Desc}
 
 
-Definition at line 183 of file polynomial\+\_\+array.\+cpp.
+Definition at line 210 of file polynomial\+\_\+array.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_af7933d269e23525f1f357c0e00bc71ea}\label{group__polygroup_af7933d269e23525f1f357c0e00bc71ea}} 
 \index{Constant\+\_\+\+Polynomial@{Constant\+\_\+\+Polynomial}!zero\+\_\+polynomial@{zero\+\_\+polynomial}}
@@ -655,7 +680,7 @@ Implements \hyperlink{group__polygroup_ab50acaac5654329c0299d5694a25b1ed}{Abstra
 
 
 
-Definition at line 213 of file polynomial\+\_\+array.\+cpp.
+Definition at line 240 of file polynomial\+\_\+array.\+cpp.
 
 \index{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial}}\label{class_dense___univariate___integer___polynomial}
 \Hypertarget{group__polygroup_class_dense___univariate___integer___polynomial}
@@ -1104,11 +1129,11 @@ virtual \hyperlink{group___iterator_group_class_d_b___polynomial___iterator}{D\+
 virtual \hyperlink{group___iterator_group_class_d_b___polynomial___iterator}{D\+B\+\_\+\+Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_aabbde4f088511cb480e959eaac056784}{new\+\_\+mutable\+\_\+iterator} () override
 \begin{DoxyCompactList}\small\item\em An iterator that may modify the current position. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a85169b0b1146537bb69127f3c1a866ff}\label{group__polygroup_a85169b0b1146537bb69127f3c1a866ff}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries begin} () const override
-\item 
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a85169b0b1146537bb69127f3c1a866ff}{begin} () const override
+\begin{DoxyCompactList}\small\item\em returns an iterator to the polynomial's leading monomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_ad89a902fa53246364fbef37eefa44080}\label{group__polygroup_ad89a902fa53246364fbef37eefa44080}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries end} () const override
-\end{DoxyCompactItemize}
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_ad89a902fa53246364fbef37eefa44080}{end} () const override
+\begin{DoxyCompactList}\small\item\em iterator to last monomial \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
@@ -1226,13 +1251,13 @@ P = \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring}(2, F,
 \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} x(\hyperlink{group__polygroup_a78f5339712602f11e29a091d228032c4}{R}, 0);
 \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} y(\hyperlink{group__polygroup_a78f5339712602f11e29a091d228032c4}{R}, 1);
 \hyperlink{group__polygroup_class_monomial}{Monomial} x3y = (x^3) * (x*y);
-x3y.\hyperlink{group__polygroup_a339f1927077ab6d92b050d222d945f72}{printlncout}();
+x3y.\hyperlink{group__polygroup_a34143922dd6ce2d44a62777a8948bf97}{printlncout}();
 \end{DoxyCode}
  {$\dots$}and the result should be $x^3y$. Alternately, you could do\+: 
 \begin{DoxyCode}
 \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} * X = P.indeterminates();
 \hyperlink{group__polygroup_class_monomial}{Monomial} x3y = (X[0]^3) * (X[0]*X[1]);
-x3y.\hyperlink{group__polygroup_a339f1927077ab6d92b050d222d945f72}{printlncout}();
+x3y.\hyperlink{group__polygroup_a34143922dd6ce2d44a62777a8948bf97}{printlncout}();
 free(X);
 \end{DoxyCode}
  {$\dots$}with the same result. Just be careful in the second case to destroy the evidence. \begin{Desc}
@@ -1414,6 +1439,9 @@ int \hyperlink{group__polygroup_adf3fd71374a0058b653edd441b8dfb5d}{cmp} (const \
 \mbox{\Hypertarget{group__polygroup_a563c96b359a1faa97d73be48576c1d42}\label{group__polygroup_a563c96b359a1faa97d73be48576c1d42}} 
 bool \hyperlink{group__polygroup_a563c96b359a1faa97d73be48576c1d42}{is\+\_\+like} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&other) const
 \begin{DoxyCompactList}\small\item\em Have same variables, same powers? Synonymous with \hyperlink{group__polygroup_a063e7166a4bf8abc8748f8758cc31d73}{operator==()}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__polygroup_ac68d2650242d00ab6c26c3f01f31414a}\label{group__polygroup_ac68d2650242d00ab6c26c3f01f31414a}} 
+bool \hyperlink{group__polygroup_ac68d2650242d00ab6c26c3f01f31414a}{is\+\_\+like} (const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$e) const
+\begin{DoxyCompactList}\small\item\em Have same variables, same powers? Comparison of exponent vectors. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}\label{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}} 
 bool \hyperlink{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}{like\+\_\+multiple} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&v) const
 \begin{DoxyCompactList}\small\item\em is {\ttfamily this} like $uv$? \end{DoxyCompactList}\item 
@@ -1505,9 +1533,9 @@ const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\
 \item 
 \mbox{\Hypertarget{group__polygroup_ad428399071b7e7b63604d506b5dfdf93}\label{group__polygroup_ad428399071b7e7b63604d506b5dfdf93}} 
 void \hyperlink{group__polygroup_ad428399071b7e7b63604d506b5dfdf93}{print} (bool=true, ostream \&=cout, const string $\ast$names=nullptr) const
-\begin{DoxyCompactList}\small\item\em prints the monomial to the give stream with the given names; adds a newline if the boolean is true \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a339f1927077ab6d92b050d222d945f72}\label{group__polygroup_a339f1927077ab6d92b050d222d945f72}} 
-void \hyperlink{group__polygroup_a339f1927077ab6d92b050d222d945f72}{printlncout} ()
+\begin{DoxyCompactList}\small\item\em prints the monomial with the given names; adds a newline if the boolean is true \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__polygroup_a34143922dd6ce2d44a62777a8948bf97}\label{group__polygroup_a34143922dd6ce2d44a62777a8948bf97}} 
+void \hyperlink{group__polygroup_a34143922dd6ce2d44a62777a8948bf97}{printlncout} () const
 \begin{DoxyCompactList}\small\item\em equivalent to {\ttfamily \hyperlink{group__polygroup_ad428399071b7e7b63604d506b5dfdf93}{print()}} with default values \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a76dc21e1d0624ecd913ce3e2f83c0f13}\label{group__polygroup_a76dc21e1d0624ecd913ce3e2f83c0f13}} 
 ostream \& \hyperlink{group__polygroup_a76dc21e1d0624ecd913ce3e2f83c0f13}{operator$<$$<$} (ostream \&, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
@@ -1534,7 +1562,7 @@ Constructor from initializer list.
 \end{DoxyParams}
 The list should contains the powers of the exponents, in order. 
 
-Definition at line 120 of file monomial.\+cpp.
+Definition at line 134 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a85d91b1a13592c849394c26c5ad294d8}\label{group__polygroup_a85d91b1a13592c849394c26c5ad294d8}} 
 \index{Monomial@{Monomial}!Monomial@{Monomial}}
@@ -1557,7 +1585,7 @@ Constructor from array of exponents.
 \end{DoxyParams}
 Copies exponents so you can reuse yours. 
 
-Definition at line 147 of file monomial.\+cpp.
+Definition at line 161 of file monomial.\+cpp.
 
 
 
@@ -1585,7 +1613,7 @@ Does not check if {\ttfamily this} is divisible by other. See \hyperlink{group__
 \end{DoxyReturn}
 
 
-Definition at line 351 of file monomial.\+cpp.
+Definition at line 370 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_afe6df62857d9f58634d5f6c668f12d35}\label{group__polygroup_afe6df62857d9f58634d5f6c668f12d35}} 
 \index{Monomial@{Monomial}!total\+\_\+degree@{total\+\_\+degree}}
@@ -1607,7 +1635,7 @@ total standard degree of this \hyperlink{group__polygroup_class_monomial}{Monomi
 \end{DoxyReturn}
 
 
-Definition at line 190 of file monomial.\+cpp.
+Definition at line 208 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a5b19863967dc9801997d2d1058f312a3}\label{group__polygroup_a5b19863967dc9801997d2d1058f312a3}} 
 \index{Monomial@{Monomial}!weighted\+\_\+degree@{weighted\+\_\+degree}}
@@ -1627,7 +1655,7 @@ weighted sum of first {\ttfamily m} exponents, using given {\ttfamily weights}
 \end{DoxyParams}
 If {\ttfamily weights} is {\ttfamily nullptr} then returns total\+\_\+degree(m). If {\ttfamily m} is zero (default), computes for all indeterminates. 
 
-Definition at line 199 of file monomial.\+cpp.
+Definition at line 217 of file monomial.\+cpp.
 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}\label{class_monomial___ideal}
 \Hypertarget{group__polygroup_class_monomial___ideal}
@@ -1642,7 +1670,7 @@ John Perry
 \end{DoxyDate}
 Mostly a convenience class to encapsulate basic operations. I am in the process of moving some functions outside this class into it. 
 
-Definition at line 78 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 77 of file monomial\+\_\+ideal.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -1778,7 +1806,7 @@ the colon ideal
 \end{DoxyReturn}
 This does not recompute Hilbert data even if already known. It is probably better to do that explicitly, anyhow. 
 
-Definition at line 321 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 320 of file monomial\+\_\+ideal.\+hpp.
 
 \mbox{\Hypertarget{group__polygroup_a2ae67955874f0a461952a89f6fb25647}\label{group__polygroup_a2ae67955874f0a461952a89f6fb25647}} 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!colon\+\_\+with@{colon\+\_\+with}}
@@ -1800,7 +1828,7 @@ does not delete the old Hilbert numerator (as this could be a copy) so delete ma
 \end{DoxyWarning}
 
 
-Definition at line 331 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 330 of file monomial\+\_\+ideal.\+hpp.
 
 \mbox{\Hypertarget{group__polygroup_a4baf5da74da622fa61e048552e873733}\label{group__polygroup_a4baf5da74da622fa61e048552e873733}} 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!hilbert\+\_\+numerator@{hilbert\+\_\+numerator}}
@@ -1821,7 +1849,7 @@ Destroys the old Hilbert numerator if it was assigned a different grading. The c
 \end{DoxyWarning}
 
 
-Definition at line 227 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 226 of file monomial\+\_\+ideal.\+hpp.
 
 \mbox{\Hypertarget{group__polygroup_a2f5e73c22e492ea016a4c7ff117cc7a3}\label{group__polygroup_a2f5e73c22e492ea016a4c7ff117cc7a3}} 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!hilbert\+\_\+poly@{hilbert\+\_\+poly}}
@@ -1834,7 +1862,7 @@ the Hilbert Polynomial for this ideal
 \end{DoxyReturn}
 A ``Hilbert Polynomial'' does not exist in the non-\/standard graded case, so there is no option to supply a grading here, and if the Hilbert numerators have been computed for a different grading, this function re-\/computes them for the standard grading, without however losing the ones computed for the non-\/standard grading. 
 
-Definition at line 291 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 290 of file monomial\+\_\+ideal.\+hpp.
 
 \mbox{\Hypertarget{group__polygroup_a814e71b7c8df465869708bbcdf8f6007}\label{group__polygroup_a814e71b7c8df465869708bbcdf8f6007}} 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}!reduced\+\_\+hilbert\+\_\+numerator@{reduced\+\_\+hilbert\+\_\+numerator}}
@@ -1859,7 +1887,7 @@ the reduced Hilbert numberator of this ideal, which is computed by canceling com
 \end{DoxySeeAlso}
 
 
-Definition at line 259 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 258 of file monomial\+\_\+ideal.\+hpp.
 
 \index{Monomial\+\_\+\+Ideal\+\_\+\+Variables\+\_\+\+Exception@{Monomial\+\_\+\+Ideal\+\_\+\+Variables\+\_\+\+Exception}}\label{class_monomial___ideal___variables___exception}
 \Hypertarget{group__polygroup_class_monomial___ideal___variables___exception}
@@ -1874,7 +1902,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 46 of file monomial\+\_\+ideal.\+hpp.
+Definition at line 45 of file monomial\+\_\+ideal.\+hpp.
 
 Inheritance diagram for Monomial\+\_\+\+Ideal\+\_\+\+Variables\+\_\+\+Exception\+:\begin{figure}[H]
 \begin{center}
@@ -1967,7 +1995,7 @@ John Perry
 \end{DoxyDate}
 This class extends \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} to allow for basic arithmetic of a polynomial. 
 
-Definition at line 305 of file polynomial.\+hpp.
+Definition at line 313 of file polynomial.\+hpp.
 
 Inheritance diagram for Mutable\+\_\+\+Polynomial\+:\begin{figure}[H]
 \begin{center}
@@ -2107,11 +2135,11 @@ virtual bool \hyperlink{group__polygroup_af6fc5e1931972bd9e5f296ca719a1815}{can\
 virtual \hyperlink{group___iterator_group_class_geobucket___iterator}{Geobucket\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a08a6bd3fd143c05e1b2762a7f239b371}{new\+\_\+iterator} () const override
 \begin{DoxyCompactList}\small\item\em An iterator that poses no risk of modifying the polynomial. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a0c5f05f041e6d2c462d1dcb2bdd39df0}\label{group__polygroup_a0c5f05f041e6d2c462d1dcb2bdd39df0}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries begin} () const override
-\item 
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a0c5f05f041e6d2c462d1dcb2bdd39df0}{begin} () const override
+\begin{DoxyCompactList}\small\item\em returns an iterator to the polynomial's leading monomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a28dde5c7941ad0636f17054cd80bbd8e}\label{group__polygroup_a28dde5c7941ad0636f17054cd80bbd8e}} 
-virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ {\bfseries end} () const override
-\item 
+virtual \hyperlink{group___iterator_group_class_polynomial___iterator}{Polynomial\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a28dde5c7941ad0636f17054cd80bbd8e}{end} () const override
+\begin{DoxyCompactList}\small\item\em iterator to last monomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a630c245914a9235dd84af2b34deb778d}\label{group__polygroup_a630c245914a9235dd84af2b34deb778d}} 
 virtual \hyperlink{group___iterator_group_class_geobucket___iterator}{Geobucket\+\_\+\+Iterator} $\ast$ \hyperlink{group__polygroup_a630c245914a9235dd84af2b34deb778d}{new\+\_\+mutable\+\_\+iterator} () override
 \begin{DoxyCompactList}\small\item\em An iterator that may modify the current position. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -2383,7 +2411,7 @@ prints the polynomial with an explicitly bucket form
 \end{DoxyParams}
 Prints the polynomial in the form \[(b_1) + (b_2) + \cdots + (b_\textrm{last}).\] Parentheses separate buckets, whose sums have not (yet) been simplified. Uninitiated and nonzero buckets are not printed. 
 
-Reimplemented from \hyperlink{group__polygroup}{Abstract\+\_\+\+Polynomial}.
+Reimplemented from \hyperlink{group__polygroup_adbbb6af1fb79d5794af42e28d584641b}{Abstract\+\_\+\+Polynomial}.
 
 
 

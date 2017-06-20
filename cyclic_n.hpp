@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -37,22 +37,22 @@ extern Monomial_Ordering * generic_grevlex_ptr;
 
 /**
   @ingroup polygroup
-  @brief generates the Cyclic-\f$ n \f$ system
-  @return a set of generators of the Cyclic-\f$ n \f$ system, as pointers to
+  @brief generates the Cyclic-@f$ n @f$ system
+  @return a set of generators of the Cyclic-@f$ n @f$ system, as pointers to
       Constant_Polynomial
   @param n number of variables
   @param F ground field
   @param homog whether to homogenize the system
       (affects only the last polynomial)
   @param mord a Monomial_Ordering
-  @details Generates the Cyclic-\f$ n \f$ system, \f[
+  @details Generates the Cyclic-@f$ n @f$ system, @f[
       x_0 + x_1 + ... + x_n,\\
       x_0 x_1 + x_1 x_2 + x_2 x_3 + ... + x_n x_1,\\
       x_0 x_1 x_2 + x_1 x_2 x_3 + x_2 x_3 x_4 + x_n x_1 x_2,\\
       \ldots\\
-      x_0 x_1 \ldots x_n - 1.\f]
-  Use \f$n > 2\f$.
-  If <c>homog</c> is <c>true</c>, the last monomial is \f$h^5\f$ instead of 1.
+      x_0 x_1 \ldots x_n - 1.@f]
+  Use @f$n > 2@f$.
+  If <c>homog</c> is <c>true</c>, the last monomial is @f$h^5@f$ instead of 1.
 */
 list<Abstract_Polynomial *> cyclic_n(
     NVAR_TYPE n, Prime_Field & F, bool homog,

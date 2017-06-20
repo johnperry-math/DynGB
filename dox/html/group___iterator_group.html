@@ -141,7 +141,7 @@ Classes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00037">37</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00039">39</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Constant_Polynomial_Iterator:</div>
 <div class="dyncontent">
@@ -899,7 +899,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>Sometimes we want to be able to change particular monomials in a <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a>. This a bit naughty, since it violates the spirit of a <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a>. I guess I need a different name for the latter. This generally mimics a <a class="el" href="group___iterator_group.html#class_constant___polynomial___iterator" title="Iterates through a Constant_Polynomial. ">Constant_Polynomial_Iterator</a>, but cannot inherit from it due to issues with the <code>const</code> keyword. This may reflect bad design. </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00253">253</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8hpp_source.html#l00277">277</a> of file <a class="el" href="polynomial__array_8hpp_source.html">polynomial_array.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Mutable_Constant_Polynomial_Iterator:</div>
 <div class="dyncontent">
@@ -1020,7 +1020,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00267">267</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00294">294</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1052,7 +1052,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
 
 <p>Implements <a class="el" href="group___iterator_group.html#ac571e120134088d6067718bbad513e2d">Polynomial_Iterator</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00282">282</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial__array_8cpp_source.html#l00309">309</a> of file <a class="el" href="polynomial__array_8cpp_source.html">polynomial_array.cpp</a>.</p>
 
 </div>
 </div>
@@ -1074,7 +1074,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00283">283</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00291">291</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Mutable_Polynomial_Iterator:</div>
 <div class="dyncontent">
@@ -1175,7 +1175,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>This class encapsulates the basic functionality needed to iterate through the monomials of a polynomial. A <a class="el" href="group___iterator_group.html#class_polynomial___iterator" title="Used to iterate through a polynomial. ">Polynomial_Iterator</a> cannot modify a polynomial, however; to do that, you need a <a class="el" href="group___iterator_group.html#class_mutable___polynomial___iterator" title="A Mutable_Polynomial_Iterator allows one to modify the terms of a polynomial. ">Mutable_Polynomial_Iterator</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00224">224</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="polynomial_8hpp_source.html#l00232">232</a> of file <a class="el" href="polynomial_8hpp_source.html">polynomial.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Polynomial_Iterator:</div>
 <div class="dyncontent">
@@ -1273,7 +1273,7 @@ const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abs
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Can this iterator move left, or would it fall off? </dd></dl>
 
-<p>Implemented in <a class="el" href="group___iterator_group.html#a2df38ef3fd64b5e90432c754ce21f0c4">LLPolynomial_Iterator</a>, <a class="el" href="group___iterator_group.html#a6c3db5961d5faf1b465c51e8935e0b89">Geobucket_Iterator</a>, <a class="el" href="group___iterator_group.html#a4094a88fd6d77894ff04960efd492ec6">DB_Polynomial_Iterator</a>, and <a class="el" href="group___iterator_group.html#ade22e36aead8eca568dbd99c6ab73cc2">Constant_Polynomial_Iterator</a>.</p>
+<p>Implemented in <a class="el" href="group___iterator_group.html#a2df38ef3fd64b5e90432c754ce21f0c4">LLPolynomial_Iterator</a>, <a class="el" href="group___iterator_group.html#a6c3db5961d5faf1b465c51e8935e0b89">Geobucket_Iterator</a>, <a class="el" href="group___iterator_group.html#ade22e36aead8eca568dbd99c6ab73cc2">Constant_Polynomial_Iterator</a>, and <a class="el" href="group___iterator_group.html#a4094a88fd6d77894ff04960efd492ec6">DB_Polynomial_Iterator</a>.</p>
 
 </div>
 </div>

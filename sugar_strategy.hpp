@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -33,19 +33,19 @@ class Critical_Pair_Basic;
 class Poly_Sugar_Data : public Poly_Strategy_Data {
 public:
   /**
-    @brief records \c poly as the reference for \c this
+    @brief records @c poly as the reference for @c this
     @param poly the polynomial whose sugar data @p this should be
   */
   Poly_Sugar_Data(const Abstract_Polynomial * poly);
   /**
-    @brief returns \c true iff the sugars are equal
+    @brief returns @c true iff the sugars are equal
     @param sd strategy data containing sugar
     @return @p true if and only if the sugar of @p this is equivalent to the
       sugar of @p sd
   */
   virtual bool equivalent(const Poly_Strategy_Data & sd) const;
   /**
-    @brief returns \c true iff \c this sugar is larger than \c sd &rsquo;s
+    @brief returns @c true iff @c this sugar is larger than @c sd &rsquo;s
     @param sd strategy data containing sugar
     @return @p true if and only if @p this sugar is larger than @p sd &rsquo;s
   */
@@ -103,7 +103,7 @@ public:
   /** @name Construction */
   ///@{
   /**
-    @brief all the information we need is in \c cpb already so no additional
+    @brief all the information we need is in @c cpb already so no additional
       processing is necessary
   */
   Pair_Sugar_Data(Critical_Pair_Basic & cpb);
@@ -120,7 +120,7 @@ public:
   DEG_TYPE pair_sugar() const { return sugar; }
   ///@}
 protected:
-  /** @brief the critical pair to which this \c Normal_Strategy belongs */
+  /** @brief the critical pair to which this @c Normal_Strategy belongs */
   Critical_Pair_Basic * cp;
   /** @brief the pair*rsquo;s sugar */
   DEG_TYPE sugar;

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -39,7 +39,7 @@ class Critical_Pair_Basic;
 class Poly_WSugar_Data : public Poly_Strategy_Data {
 public:
   /**
-    @brief records \c poly as the reference for \c this
+    @brief records @c poly as the reference for @c this
     @details This expects the weights to be as long as the number of monomials.
       It copies the list, so you can subsequently modify it without subsequently
       affecting correctness.
@@ -51,13 +51,13 @@ public:
   */
   Poly_WSugar_Data(const Abstract_Polynomial * poly, const WT_TYPE * w);
   /**
-    @brief returns \c true iff the sugars are equal
+    @brief returns @c true iff the sugars are equal
     @param sd sugar data to compare with @c this
     @return true if and only if @c this has sugar comparable to @p sd
   */
   virtual bool equivalent(const Poly_Strategy_Data & sd) const;
   /**
-    @brief returns \c true iff \c this sugar is larger than \c sd &rsquo;s
+    @brief returns @c true iff @c this sugar is larger than @c sd &rsquo;s
     @param sd sugar data to compare with @c this
     @return @p true if and only if @c this has larger sugar than @p sd
   */
@@ -92,7 +92,7 @@ public:
   ///@}
   /** @name Modification */
   ///@{
-  /** @brief changes the weights used to compute the sugar to \c w */
+  /** @brief changes the weights used to compute the sugar to @c w */
   void change_weights(const WT_TYPE * w) { weights = w; }
   ///@}
   /** @name I/O */
@@ -143,7 +143,7 @@ public:
   virtual void adjust_sugar(DEG_TYPE new_sugar) { sugar = new_sugar; }
   ///@}
 protected:
-  /** @brief the critical pair to which this \c Normal_Strategy belongs */
+  /** @brief the critical pair to which this @c Normal_Strategy belongs */
   Critical_Pair_Basic * cp;
   /** @brief the pair*rsquo;s sugar */
   DEG_TYPE sugar;

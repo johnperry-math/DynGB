@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -30,8 +30,8 @@ using std::cout; using std::endl;
   @brief Classes and other structures related to memory management
   @details These classes create memory pools that allocate large blocks of
     memory, each of which contains an enormous number of subblocks that can
-    be obtained and released in \f$O(1)\f$ time
-    (or at least much more efficiently than \c new() and \c delete()).
+    be obtained and released in @f$O(1)@f$ time
+    (or at least much more efficiently than @c new() and @c delete()).
 */
 
 /**
@@ -57,7 +57,7 @@ union goda_block {
   @brief special memory pool allocator for Grevlex_Order_Data and
     WGrevlex_Order_Data
   @details This is a quick-n-dirty memory pool allocator for Grevlex_Order_Data
-    and WGrevlex_Order_Data. It isn't quite \f$O(1)\f$ but the plan is to fix
+    and WGrevlex_Order_Data. It isn't quite @f$O(1)@f$ but the plan is to fix
     that eventually (I have to locate my notes from class).
   @warning This is initialized to a certain number of variables, which cannot
     change. If you want to do this for a different number of variables,
@@ -82,7 +82,7 @@ public:
     return result;
   }
   /**
-    @brief sets allocator up for blocks of \f$n\f$ of type @c TYPE.
+    @brief sets allocator up for blocks of @f$n@f$ of type @c TYPE.
     @param n number of objects of type @c TYPE that should be allocated initially
     @details The Grading_Order_Data_Allocator can and will allocate new blocks
       of @p n objects when it runs out of room.

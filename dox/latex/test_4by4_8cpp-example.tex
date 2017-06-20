@@ -11,7 +11,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the $4\times4$ system des
 \textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
 \textcolor{comment}{* (at your option) any later version.                                         *}
 \textcolor{comment}{*                                                                             *}
-\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* DynGB is distributed in the hope that it will be useful,                    *}
 \textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
 \textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
 \textcolor{comment}{* GNU General Public License for more details.                                *}
@@ -50,7 +50,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the $4\times4$ system des
   \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} method = (\hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{SPolyCreationFlags} )atoi(argv[1]);
   \textcolor{keywordtype}{bool} static\_algorithm = \textcolor{keyword}{true};
   \hyperlink{group___g_b_computation_ga28fbbb9eb7d8b80ced05c8fa89b2bdac}{DynamicSolver} solver = GLPK\_SOLVER;
-  \hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} heuristic;
+  \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} heuristic;
   \textcolor{keywordflow}{if} (!strcmp(argv[2],\textcolor{stringliteral}{"dyn"})) \{
     \textcolor{keywordtype}{unsigned} heur\_opt\_location = 4;
     \textcolor{keywordflow}{if} (
@@ -73,12 +73,12 @@ This illustrates how to compute a Gr\"{o}bner basis of the $4\times4$ system des
       cout << \textcolor{stringliteral}{"Need to know heuristic. Use format heur=...\(\backslash\)n"};
       \textcolor{keywordflow}{return} 1;
     \}
-    heuristic = (\hyperlink{group___g_b_computation_ga498e6d10e581ed9dca25264cbe825ce0}{DynamicHeuristic} )atoi(&(argv[heur\_opt\_location][5]));
+    heuristic = (\hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\_Heuristic} )atoi(&(argv[heur\_opt\_location][5]));
   \}
  \textcolor{comment}{// set up the field}
   \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F17 = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(32003);
   \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R(32, F17);
-  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = F17.\hyperlink{group___fields_group_ad9e3622a14de40faa75056ed40d67bb2}{unity}();
+  \hyperlink{group___fields_group_class_prime___field___element}{Prime\_Field\_Element} a = F17.\hyperlink{group___fields_group_a97534ab1050f0b34023300f1bd3a97f5}{unity}();
   \textcolor{comment}{// set up our polynomials}
   \textcolor{comment}{// first poly}
   EXP\_TYPE e11 [] \{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0\}; 
@@ -252,7 +252,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the $4\times4$ system des
   F.push\_back(&f5); F.push\_back(&f6); F.push\_back(&f7); F.push\_back(&f8);
   list<Constant\_Polynomial *> G;
   \textcolor{keywordflow}{if} (static\_algorithm) G = \hyperlink{group___g_b_computation_ga37aa7e2fec96fac6c914934a4243f603}{buchberger}(F, method, StrategyFlags::SUGAR\_STRATEGY);
-  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga40140d94eac91d7337f553d362128cb7}{buchberger\_dynamic}(
+  \textcolor{keywordflow}{else} G = \hyperlink{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}{buchberger\_dynamic}(
       F, method, StrategyFlags::SUGAR\_STRATEGY, \textcolor{keyword}{nullptr}, heuristic, solver, \textcolor{keyword}{true}
   );
   \textcolor{keyword}{auto} ordering = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\hyperlink{group__orderinggroup_class_cached_w_grevlex___ordering}{CachedWGrevlex\_Ordering} *\textcolor{keyword}{>}(

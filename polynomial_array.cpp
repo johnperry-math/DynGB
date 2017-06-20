@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -80,6 +80,33 @@ Constant_Polynomial::Constant_Polynomial(
 }
 
 Constant_Polynomial::Constant_Polynomial(
+    unsigned length,
+    Polynomial_Ring & R,
+    const vector<Monomial *> mons,
+    const COEF_TYPE *coeffs,
+    unsigned start
+) : Abstract_Polynomial(R, mons[0]->monomial_ordering())
+{
+  m = length;
+  M = (Monomial *)calloc(m, sizeof(Monomial));
+  A = (Prime_Field_Element *)calloc(m, sizeof(Prime_Field_Element));
+  auto F = R.ground_field();
+  auto n = R.number_of_variables();
+  Prime_Field_Element scale(F.inverse(coeffs[start]), &F);
+  unsigned j = 0;
+  for (unsigned i = start; j < m and i < mons.size(); ++i) {
+    if (coeffs[i] != 0) {
+      M[j].common_initialization();
+      M[j].initialize_exponents(n);
+      M[j] = *(mons[i]);
+      A[j] = scale * coeffs[i];
+      ++j;
+    }
+  }
+  head = 0;
+}
+
+Constant_Polynomial::Constant_Polynomial(
     Polynomial_Ring & R,
     const list<Monomial> & mons,
     const list<Prime_Field_Element> & coeffs,
@@ -134,7 +161,7 @@ Constant_Polynomial::Constant_Polynomial(
   uint64_t * AM
 ) : Abstract_Polynomial(R, order) {
   m = size;
-  Prime_Field & F = R.ground_field();
+  const Prime_Field & F = R.ground_field();
   M = (Monomial *)malloc(m*sizeof(Monomial));
   A = (Prime_Field_Element *)malloc(m*sizeof(Prime_Field_Element));
   unsigned j = 0;

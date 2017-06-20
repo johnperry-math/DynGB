@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -60,8 +60,6 @@ int main()
   string var_names [] = { "x", "y" };
   Polynomial_Ring R = Polynomial_Ring(2, F, var_names);
   Indeterminate * X = R.indeterminates();
-  //Indeterminate x(R, 0);
-  //Indeterminate y(R, 1);
   Monomial x2 = X[0]^2;
   x2.print(true, cout, var_names);
   Monomial xy = X[0]*X[1];

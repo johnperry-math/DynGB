@@ -1,17 +1,17 @@
 /**
-  \mainpage DynGB: Dynamic Gr&ouml;bner basis project files
+  @mainpage DynGB: Dynamic Gr&ouml;bner basis project files
 
-  \author John Perry, john.perry@usm.edu
-  \date 2014-present
-  \copyright <a href="../../COPYING.txt">GNU Public License</a>; see \ref Copyright below
+  @author John Perry, john.perry@usm.edu
+  @date 2014-present
+  @copyright <a href="../../COPYING.txt">GNU Public License</a>; see @ref Copyright below
 
-  \tableofcontents
+  @tableofcontents
 
-  \section Overview Overview
+  @section Overview Overview
 
   This project is designed to be a testbed/reference implementation
   for dynamic Gr&ouml;bner basis computation,
-  using the algorithms described in \cite CaboaraDynAlg and \cite CaboaraPerry,
+  using the algorithms described in @cite CaboaraDynAlg and @cite CaboaraPerry,
   along with some newer ideas.
 
   No claim to high efficiency or exemplary programming is implied.
@@ -19,17 +19,17 @@
   and <i>easy to modify</i>, especially as regards modularity, polymorphism,
   and getting detailed data.
 
-  \section Install Installation and dependencies
+  @section Install Installation and dependencies
 
   For @em this program, a simple `make BUILD=build` should do.
   However, there are several prerequisite programs you need to install first:
     - a C++ compiler that understands C++11; 
     - <a href="https://gmplib.org/" target="_blank">GMP</a>,
-      the Gnu Multi-Precision library \cite gmp;
+      the Gnu Multi-Precision library @cite gmp;
     - <a href="https://www.gnu.org/software/glpk/" target="_blank">GLPK</a>,
-      the Gnu Linear Programming Kit \cite glpk;
+      the Gnu Linear Programming Kit @cite glpk;
     - <a href="http://bugseng.com/products/ppl" target="_blank">PPL</a>,
-      the Parma Polyhedra Library \cite BagnaraHZ08SCP.
+      the Parma Polyhedra Library @cite BagnaraHZ08SCP.
 
   The codebase also contains some unrelated forays into parallel programming,
   which are probably of no interest to the average user, but require:
@@ -43,7 +43,7 @@
   I have not tried to build on Windows, but I don&rsquo;t use hardware magic,
   so it @em ought to build.
 
-  \section Usage Usage
+  @section Usage Usage
 
   There are two ways to use the system.
     -# Write a program that builds a polynomial system and accesses the library
@@ -55,20 +55,20 @@
        documentation to user_interface(). This is still annoying,
        but not quite so difficult.
 
-  \section Status Current status
+  @section Status Current status
 
   As of January 2017:
-  \li The code works consistently on many different examples.
+  @li The code works consistently on many different examples.
     However, it is slow: I am not trying to reach
     <span style="font-variant:small-caps;">Singular</span>-level optimization
     (not at the current time, anyway). Typically, this code is one to two orders
     of magnitude slower than <span style="font-variant:small-caps;">Singular</span>.
-  \li Nevertheless, it outperforms <span style="font-variant:small-caps;">Singular</span>
+  @li Nevertheless, it outperforms <span style="font-variant:small-caps;">Singular</span>
     on at least one system: Caboara&rsquo;s Example 2.
-  \li Unless I&rsquo;m doing something very stupid, the weighted sugar strategy
+  @li Unless I&rsquo;m doing something very stupid, the weighted sugar strategy
     is an unmitigated disaster and should be avoided.
-  \li The code is slow, though in the last week of July the implementation of an
-    \f$O(1)\f$ memory manager cut the time required for the dynamic
+  @li The code is slow, though in the last week of July the implementation of an
+    @f$O(1)@f$ memory manager cut the time required for the dynamic
     implementation by nearly 2/3. A very simple optimization of assigning an
     object&rsquo;s array to a local variable before entering a loop cut the time
     required for both dynamic and static by roughly 40%.
@@ -78,9 +78,9 @@
 
   @warning
     I implemented the exponent-packing in rather shoddy fashion:
-    the first 8 exponents are cast to \c uint8_t , then shifted appropriately.
-    Comparisons for \em other are made explicitly. Trouble will arise when one of
-    the first 8 exponents exceeds \f$2^8-1\f$, though practically that
+    the first 8 exponents are cast to @c uint8_t , then shifted appropriately.
+    Comparisons for @em other are made explicitly. Trouble will arise when one of
+    the first 8 exponents exceeds @f$2^8-1@f$, though practically that
     hasn&rsquo;t been a problem until now. This may be easy to fix: if the
     exponent comparison passes, test all the variables explicitly, not just those
     after the first 8. But there are issues with arithmetic operations that
@@ -89,37 +89,37 @@
     that the exponents are valid. So problems could arise there even in the case
     where we fix the equality comparison.
 
-  \section Todo To-do list
+  @section Todo To-do list
   In no particular order, aside from the indicated priority.
   See the <a href="todo.html">to-do page</a> for a full list
   (I may have missed some things).
 
-  \subsection hipri Higher priority
-  \todo These are the highest priority items:
+  @subsection hipri Higher priority
+  @todo These are the highest priority items:
   things I think are needed before I&rsquo;d call it &ldquo;ready.&rdquo;
   - Organize files into directories.
   - General improvements to efficiency based on profiling. (ongoing)
   - Implement simplex solver as oracle for DDM, compare with DDM
     (idea due to D. Lichtblau).
   - Optimize length() in Polynomial_Linked_List.
-  - Add Fukuda and Prodon&rsquo;s cdd as an LP_Solver. \cite Fukuda_DoubleDescriptionRevisited
+  - Add Fukuda and Prodon&rsquo;s cdd as an LP_Solver. @cite Fukuda_DoubleDescriptionRevisited
   - Bring polynomial iterators in line with C++ convention.
   - Implement other C++11 modernizations (<tt>auto</tt>, <tt>noexcept</tt>,
     <tt>override</tt>, &hellip;).
   - Generalize/improve the memory manager.
-  - <span style="text-decoration:line-through;">Add PPL as an LP_Solver. \cite BagnaraHZ08SCP</span>
+  - <span style="text-decoration:line-through;">Add PPL as an LP_Solver. @cite BagnaraHZ08SCP</span>
   - <span style="text-decoration:line-through;">Implement Caboara&rsquo;s examples.</span>
   - <span style="text-decoration:line-through;">Implement graded Hilbert numerators.</span>
   - <span style="text-decoration:line-through;">Implement or link to a simplex solver, compare with DDM.</span>
-  - <span style="text-decoration:line-through;">Determine what's wrong with the \f$4\times4\f$ system. (Turns out nothing was wrong: the system is simply not amenable to polyhedra.)</span>
+  - <span style="text-decoration:line-through;">Determine what's wrong with the @f$4\times4@f$ system. (Turns out nothing was wrong: the system is simply not amenable to polyhedra.)</span>
   - <span style="text-decoration:line-through;">Implement a global analysis at the beginning of the algorithm.</span>
   - <span style="text-decoration:line-through;">Implement Hilbert polynomials using multiple-precision arithmetic. (Denominators get too large for `long long`!!!)</span>
 
-  \subsection mdpri Medium priority
+  @subsection mdpri Medium priority
 
-  \todo These items would be nice, but aren&rsquo;t a big deal for me at present.
+  @todo These items would be nice, but aren&rsquo;t a big deal for me at present.
   - Improve rings and fields:
-    - Create a general \c Ring class.
+    - Create a general @c Ring class.
       - Build polynomial rings off rings, not off fields.
         This could be difficult, since we typically
         want polynomials to have invertible coefficients.
@@ -127,13 +127,13 @@
         S-polynomials and top-reductions, for instance, can be computed
         by multiplying by the leading coefficient of the other polynomial,
         rather than by dividing by one&rsquo;s own coefficient.
-      - Implement Dense_Univariate_Integer_Polynomial as a proper \c Polynomial representation.
-      - Create a general \c Euclidean_Ring class. Add to it the
+      - Implement Dense_Univariate_Integer_Polynomial as a proper @c Polynomial representation.
+      - Create a general @c Euclidean_Ring class. Add to it the
         divide_by_common_term() function.
-    - Create a general \c Field class.
-      - Subclass Prime_Field to be \c Field.
-      - Implement Dense_Univariate_Rational_Polynomial as a proper \c Polynomial representation.
-      - Implement \f$\mathbb Q\f$ as a field.
+    - Create a general @c Field class.
+      - Subclass Prime_Field to be @c Field.
+      - Implement Dense_Univariate_Rational_Polynomial as a proper @c Polynomial representation.
+      - Implement @f$\mathbb Q@f$ as a field.
   - Reimplement Double_Buffered_Polynomial so its arrays contain
     pointers to Monomial, rather than an expanded Monomial.
     See if that changes things.
@@ -142,23 +142,23 @@
   - Implement marked polynomials with a dynamic algorithm that works
     practically in the grevlex order, with the marked term being the true leading
     monomial. This may be very inefficient to reduce.
-  - Implement a \c Dictionary_Linked_Polynomial class, where any term points
+  - Implement a @c Dictionary_Linked_Polynomial class, where any term points
     to one unique instance of a monomial, rather than having many copies of
     monomials in different polynomials. Upside is that equality test during
     canonicalization is instantaneous (compare pointers).
     Downsides may include finding/sorting the monomials, indirection.
   - Detach monomial ordering from monomials,
     since caching ordering data doesn&rsquo;t seem to help much?
-  - <span style="text-decoration:line-through;">Implement a \c Polynomial_Builder
+  - <span style="text-decoration:line-through;">Implement a @c Polynomial_Builder
     class to help build polynomials more easily
     by reading from an input file. That way we don&rsquo;t have to write a fresh
     control program for each example system.</span> (see user_interface())
   - <span style="text-decoration:line-through;">Implement an Indeterminate class
-    and a \c Polynomial_Builder class to help build polynomials more easily.</span>
+    and a @c Polynomial_Builder class to help build polynomials more easily.</span>
 
-  \subsection lopri Lower priority
+  @subsection lopri Lower priority
 
-  \todo I&rsquo;m not sure these are worth doing.
+  @todo I&rsquo;m not sure these are worth doing.
   - Most skeleton code seems to have little overhead, so most
     &ldquo;improvements&rdquo; related to that falls here:
     - Implement DDM with the Fukuda-Prodon criterion, compare to Zolotykh&rsquo;s.
@@ -166,14 +166,14 @@
     - Compare each potential PP with all other potential PP&rsquo;s,
       reducing the number of false positives. [This does not seem to be necessary
       at the moment, as the overhead is quite small, but it is still a thought.]
-    - Add a hash mechanism to the \c constraint class to help avoid redundnacy.
+    - Add a hash mechanism to the @c constraint class to help avoid redundnacy.
   - Create a Matrix_Ordering_Data class as a subset of Monomial_Order_Data.
-  - Add an \c insert() function to Monomial_Node to insert another
+  - Add an @c insert() function to Monomial_Node to insert another
     Polynomial_Linked_List, subsequently to be destroyed.
   - Think about computing all inverses of a small prime field immediately at startup.
   - Test matrix orderings more thoroughly.
 
-  \section Apologia Apologia pro labora sua
+  @section Apologia Apologia pro labora sua
 
   This probably has bugs I haven&rsquo;t yet worked out,
   but I have done a lot of bug-fixing, including the use of `valgrind`
@@ -183,11 +183,11 @@
   That was purely a proof-of-concept product;
   it was very slow, and I wanted to improve on it. Unfortunately:
 
-  \li It is not easy to use the guts of
+  @li It is not easy to use the guts of
   <span style="font-variant:small-caps;">Singular</span> from Sage.
   In particular, the geobuckets.
   But even if that were possible&hellip;
-  \li In all the computer algebra systems I&rsquo;ve looked at,
+  @li In all the computer algebra systems I&rsquo;ve looked at,
   a monomial ordering is part of the ring structure.
   At least in <span style="font-variant:small-caps;">Singular</span>,
   a &ldquo;wgrevlex&rdquo; ordering received a different structure than a
@@ -208,7 +208,7 @@
   but to provide a more robust launchpad to implement the algorithm there
   than I had before.
 
-  \section Copyright Copyright details
+  @section Copyright Copyright details
 
   This file is part of DynGB.
 
@@ -227,54 +227,54 @@
 */
 
 /**
-  \example test_cyclic4.cpp
+  @example test_cyclic4.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the Cyclic-4 system
-  \f[
+  @f[
     x_1 + x_2 + x_3 + x_4,\\ x_1 x_2 + x_2 x_3 + x_3 x_4 + x_4 x_1,\\
     x_1 x_2 x_3 + x_2 x_3 x_4 + x_3 x_4 x_1 + x_4 x_1 x_2,\\ x_1 x_2 x_3 x_4 - 1
-  \f]
+  @f]
   using this package.
 */
 
 /**
-  \example test_cyclicn.cpp
-  This illustrates how to compute a Gr&ouml;bner basis of the Cyclic-\f$n\f$
-  system \f[
+  @example test_cyclicn.cpp
+  This illustrates how to compute a Gr&ouml;bner basis of the Cyclic-@f$n@f$
+  system @f[
     x_1 + \cdots + x_n,\\
     x_1 x_2 + x_2 x_3 + \cdots + x_n x_1,\\
     x_1 x_2 x_3 + x_2 x_3 x_4 + \cdots + x_n x_1 x_2,\\
     \vdots\\
     x_1 \cdots x_{n-1} + x_2 \cdots x_n + \cdots + x_n x_1 \cdots x_{n-2},\\
     x_1 \cdots x_n - 1
-  \f]
+  @f]
   using this package. This version uses the @b static Buchberger algorithm.
   See test_dynamic.cpp for the dynamic version.
 */
 
 /**
-  \example test_dynamic.cpp
-  This illustrates how to compute a Gr&ouml;bner basis of the Cyclic-\f$n\f$
-  system \f[
+  @example test_dynamic.cpp
+  This illustrates how to compute a Gr&ouml;bner basis of the Cyclic-@f$n@f$
+  system @f[
     x_1 + \cdots + x_n,\\
     x_1 x_2 + x_2 x_3 + \cdots + x_n x_1,\\
     x_1 x_2 x_3 + x_2 x_3 x_4 + \cdots + x_n x_1 x_2,\\
     \vdots\\
     x_1 \cdots x_{n-1} + x_2 \cdots x_n + \cdots + x_n x_1 \cdots x_{n-2},\\
     x_1 \cdots x_n - 1
-  \f]
+  @f]
   using this package. This version uses the @b dynamic Buchberger algorithm.
   See test_cyclicn.cpp for the dynamic version.
 */
 
 /**
-  \example test_4by4.cpp
-  This illustrates how to compute a Gr&ouml;bner basis of the \f$4\times4\f$
-  system described \cite YanGeobuckets. The \f$4\times4\f$ system consists
+  @example test_4by4.cpp
+  This illustrates how to compute a Gr&ouml;bner basis of the @f$4\times4@f$
+  system described @cite YanGeobuckets. The @f$4\times4@f$ system consists
   of the entries of the equation
-  \f[AB-BA,\f]
-  where each entry in \f$A\f$ and \f$B\f$ is a unique variable.
-  For instance, the first entry in \f$AB-BA\f$ is
-  \f[-x_{12}x_{19} + x_1x_{20} + x_2x_{24} + x_{28}x_3 - x_{17}x_4 - x_{18}x_8.\f]
+  @f[AB-BA,@f]
+  where each entry in @f$A@f$ and @f$B@f$ is a unique variable.
+  For instance, the first entry in @f$AB-BA@f$ is
+  @f[-x_{12}x_{19} + x_1x_{20} + x_2x_{24} + x_{28}x_3 - x_{17}x_4 - x_{18}x_8.@f]
   This system is notable because our code outperforms
   <span style="font-variant:small-caps;">Singular</span> on this system,
   and because the Hilbert heuristic will not work here despite the fact that
@@ -282,75 +282,106 @@
 */
 
 /**
-  \example test_cab_es1.cpp
+  @example test_cab_es1.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the first example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     t^4 z b  + x^3 y a ,\\
     t x^8 y z  + 32002 a b^4 c d e ,\\
     x y^2 z^2 d  + z c^2 e^2 ,\\
     t x^2 y^3 z^4  + a b^2 c^3 e^2
-  \f]
+  @f]
 */
 
 /**
-  \example test_cab_es2.cpp
+  @example test_cab_es2.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the second example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     32002 y^82 a  + x^32 z^32 ,\\
     x^45  + 32002 y^13 z^21 b ,\\
     32002 y^33 z^12  + x^41 c ,\\
     32002 y^33 z^12 d  + x^22 ,\\
     x^5 y^17 z^22 e  + 32002 ,\\
     t x y z  + 32002
-  \f] This system is notable because it was the first time our code outperformed
+  @f] This system is notable because it was the first time our code outperformed
   <span style="font-variant:small-caps;">Singular</span> on a polynomial system.
 */
 
 /**
-  \example test_cab_es4.cpp
+  @example test_cab_es4.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the second example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     31838 B  + 45 P  + 35 S  + 31967 ,\\
     35 P  + 31976 S  + 25 T  + 40 Z ,\\
     31838 B^2  + 25 P S  + 31985 T  + 15 W  + 30 Z ,\\
     15 P T  + 20 S Z  + 31994 W ,\\
     31992 B^3  + P W  + 2 T Z ,\\
     3 B^2  + 31992 B S  + 99 W
-  \f]
+  @f]
 */
 
 /**
-  \example test_cab_es5.cpp
+  @example test_cab_es5.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the second example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     b x  + 32002 a y ,
     d x  + 32002 c y  + 32002 d  + y ,\\
     a^2  + b^2  + 32002 r^2 ,\\
     c^2  + d^2  + 32002 s^2  + 32001 c  + 1 ,\\
     a^2  + b^2  + 32001 a c  + c^2  + 32001 b d  + d^2  + 32002 t^2
-  \f]
+  @f]
 */
 
 /**
-  \example test_cab_es6.cpp
+  @example test_cab_es6.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the second example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     u  + v  + y  + 32002 ,\\
     t  + 2 u  + z  + -3 ,\\
     t  + 2 v  + y  + 32002 ,\\
     32002 t  + 32002 u  + 32002 v  + x  + 32002 y  + 32002 z ,\\
     t u x^2  + 26650 y z^3 ,\\
     28222 t y  + v z
-  \f]
+  @f]
 */
 
 /**
-  \example test_cab_es9.cpp
+  @example test_cab_es9.cpp
   This illustrates how to compute a Gr&ouml;bner basis of the second example
-  in @cite CaboaraDynAlg, \f[
+  in @cite CaboaraDynAlg, @f[
     32002 x^2 y z^4  + t ,\\
     32002 x^5 y^7  + u z^2 ,\\
     v x^3 z  + 32002 y^2 ,\\
     w z^5  + 32002 x y^3
-  \f]
+  @f]
+*/
+
+/**
+  @example user_interface.cpp
+  This illustrates how to compute a G&ouml;bner basis of an arbitrary polynomial
+  ideal (within the bounds this system can handle). The program is suitable for
+  running stand-alone, as it prompts the user for all information, but it is
+  probably better to pipe as input a file formatted similarly to those in
+  the directory <tt>example_systems_for_user_interface</tt>. The basic format is:
+  <ol>
+    <li>field characteristic (should be prime)</li>
+    <li>number of indeterminates</li>
+    <li>whether to specify the indeterminates&rsquo; names (<tt>y</tt> or <tt>n</tt>)
+      <br/>&mdash; If <tt>y</tt>, follow this with the list of names
+    </li>
+    <li>number of generators supplied</li>
+    <li>the generators, one per line, specified in expanded format
+      (no parentheses, grouping, etc.)
+    </li>
+    <li>dynamic (<tt>d</tt>) or static (<tt>s</tt>) algorithm; if dynamic, add
+      in this order:
+    <ol type='a'>
+      <li>which solver to use (<tt>skel</tt>, <tt>ppl</tt>, <tt>glpk</tt>)</li>
+      <li>which heuristic to use (<tt>h</tt> for hilbert,
+        <tt>c</tt> for minimal critical pairs, <tt>b</tt> for graded Betti,
+        <tt>d</tt> for minimal degree)</li>
+      <li>whether to perform a global analysis of the generators at the outset
+        (<tt>y</tt> or <tt>n</tt>)</li>
+    </ol>
+    </li>
+  </ol>
 */

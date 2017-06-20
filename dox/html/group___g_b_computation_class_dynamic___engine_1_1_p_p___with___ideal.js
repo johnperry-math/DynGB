@@ -1,0 +1,25 @@
+var group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal =
+[
+    [ "PP_With_Ideal", "group___g_b_computation.html#ab79e52cd576b29fc48e7d9ad49303ae7", null ],
+    [ "PP_With_Ideal", "group___g_b_computation.html#ac71ad235934d824958a14443be77789e", null ],
+    [ "~PP_With_Ideal", "group___g_b_computation.html#a1dd0ce9a355f10837a180b1599a2666f", null ],
+    [ "compute_number_new_pairs", "group___g_b_computation.html#abedc9cad9413fc7727e1b93d6eea16af", null ],
+    [ "deg_of_new_pairs", "group___g_b_computation.html#a68c0ece8174abdb6d2955d63f04cd437", null ],
+    [ "get_difference_in_degree", "group___g_b_computation.html#addbeaeb67edfe33d4b4d71d7a4aa1aac", null ],
+    [ "get_hilbert_numerator", "group___g_b_computation.html#a1b8a9832df7be67f0e623870433577f8", null ],
+    [ "get_hilbert_polynomial", "group___g_b_computation.html#a63962938c3dfef78afe80e4e86eb9c78", null ],
+    [ "get_hilbert_reduced_numerator", "group___g_b_computation.html#a1ad52b5a6782aa3e1434f7d4084c289f", null ],
+    [ "get_ideal", "group___g_b_computation.html#acb57c1467a4d6e622143057fde1ba1b6", null ],
+    [ "get_inc_betti", "group___g_b_computation.html#acc39727c4e1ef77c8fb74bca7955e9c4", null ],
+    [ "get_ordering", "group___g_b_computation.html#a9d01761e8d285ddbaa35214d8214a74b", null ],
+    [ "get_pp", "group___g_b_computation.html#a0b70c63442c37067103f9939b17ef4ec", null ],
+    [ "how_many_new_pairs", "group___g_b_computation.html#afb9a43c24f2d0405d1c60e12983c8003", null ],
+    [ "set_hilbert_numerator", "group___g_b_computation.html#a20bb441439236bcce2d9e87b8486553f", null ],
+    [ "I", "group___g_b_computation.html#a812c0be78a80ef2ecdd76e944a310363", null ],
+    [ "max_deg", "group___g_b_computation.html#a4fa101d6caf52005d20e4398c5ff5607", null ],
+    [ "min_deg", "group___g_b_computation.html#ae0ede63491bf929c811c31d8ecf1051e", null ],
+    [ "num_new_pairs", "group___g_b_computation.html#a79e7e4059e2ea811bc14a4c02de96c52", null ],
+    [ "ordering", "group___g_b_computation.html#ad4bc39f15f722a821f59db51b48a5d0f", null ],
+    [ "pairs", "group___g_b_computation.html#a9254ab1c3c33afeb73786f3a10719e3f", null ],
+    [ "t", "group___g_b_computation.html#abbb33a00772961f2fa9d851dae8a2e07", null ]
+];

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -94,11 +94,11 @@ list<Constant_Polynomial *> buchberger_explorer(
   {
     Constant_Polynomial * f = new Constant_Polynomial(*fo);
     switch(strategy) {
-      case NORMAL_STRATEGY: break; // don't need polynomial data
-      case SUGAR_STRATEGY:
+      case StrategyFlags::NORMAL_STRATEGY: break; // don't need polynomial data
+      case StrategyFlags::SUGAR_STRATEGY:
         f->set_strategy(new Poly_Sugar_Data(f));
         break;
-      case WSUGAR_STRATEGY:
+      case StrategyFlags::WSUGAR_STRATEGY:
         f->set_strategy(new Poly_WSugar_Data(f, strategy_weights));
         break;
       default: break; // assume normal strategy

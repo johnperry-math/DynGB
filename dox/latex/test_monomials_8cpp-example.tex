@@ -12,7 +12,7 @@ Keep in mind that the constructor's index should correspond to a valid number; t
 \textcolor{comment}{* the Free Software Foundation, either version 2 of the License, or           *}
 \textcolor{comment}{* (at your option) any later version.                                         *}
 \textcolor{comment}{*                                                                             *}
-\textcolor{comment}{* Foobar is distributed in the hope that it will be useful,                   *}
+\textcolor{comment}{* DynGB is distributed in the hope that it will be useful,                    *}
 \textcolor{comment}{* but WITHOUT ANY WARRANTY; without even the implied warranty of              *}
 \textcolor{comment}{* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *}
 \textcolor{comment}{* GNU General Public License for more details.                                *}
@@ -66,8 +66,6 @@ Keep in mind that the constructor's index should correspond to a valid number; t
   \textcolor{keywordtype}{string} var\_names [] = \{ \textcolor{stringliteral}{"x"}, \textcolor{stringliteral}{"y"} \};
   \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R = \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring}(2, F, var\_names);
   \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} * X = R.\hyperlink{group__polygroup_afea6c3a4fd9f3f04f312579a94a3cc1b}{indeterminates}();
-  \textcolor{comment}{//Indeterminate x(R, 0);}
-  \textcolor{comment}{//Indeterminate y(R, 1);}
   \hyperlink{group__polygroup_class_monomial}{Monomial} x2 = X[0]^2;
   x2.\hyperlink{group__polygroup_ad428399071b7e7b63604d506b5dfdf93}{print}(\textcolor{keyword}{true}, cout, var\_names);
   \hyperlink{group__polygroup_class_monomial}{Monomial} xy = X[0]*X[1];

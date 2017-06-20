@@ -1,0 +1,438 @@
+\hypertarget{namespace_l_p___solvers}{}\section{L\+P\+\_\+\+Solvers Namespace Reference}
+\label{namespace_l_p___solvers}\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+
+
+classes that solve constrained linear systems  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint}
+\begin{DoxyCompactList}\small\item\em a constraint $ c_1 x_1 + \ldots + c_n x_n \geq 0 $  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge}
+\begin{DoxyCompactList}\small\item\em an edge $(r_1,r_2)$ connecting the two rays $ r_1 $ and $ r_2 $  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using G\+L\+PK linear solver  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em exact or approximate polyhedral cone solution, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver}
+\begin{DoxyCompactList}\small\item\em approximate skeleton of a polyhedral cone, using P\+PL linear solver  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}
+\begin{DoxyCompactList}\small\item\em a ray defined by nonnegative coordinates $(a_1,\ldots,a_n)$  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton}
+\begin{DoxyCompactList}\small\item\em skeleton of a polyhedral cone, with methods allowing definition and refinement  \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespace_l_p___solvers_a79355cedbe1e86a93a1d5673b7081f0d}\label{namespace_l_p___solvers_a79355cedbe1e86a93a1d5673b7081f0d}} 
+typedef P\+P\+L\+::\+Constraint \hyperlink{namespace_l_p___solvers_a79355cedbe1e86a93a1d5673b7081f0d}{P\+P\+L\+\_\+\+Constraint}
+\begin{DoxyCompactList}\small\item\em shorthand for {\ttfamily P\+P\+L\+::\+Constraint} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespace_l_p___solvers_af3683d6db493de447cbed079aa8f8a36}\label{namespace_l_p___solvers_af3683d6db493de447cbed079aa8f8a36}} 
+typedef P\+P\+L\+::\+Generator \hyperlink{namespace_l_p___solvers_af3683d6db493de447cbed079aa8f8a36}{P\+P\+L\+\_\+\+Generator}
+\begin{DoxyCompactList}\small\item\em shorthand for {\ttfamily P\+P\+L\+::\+Generator} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ bool $>$ \hyperlink{group___c_l_s_solvers_gaf3434d5c281c16ef7a09d8f73445ea00}{intersections\+\_\+of\+\_\+active\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em indicates which constraints are active for both sets \end{DoxyCompactList}\item 
+void \hyperlink{group___c_l_s_solvers_ga1f87ac127ced7d681b3e51e38eef0cf4}{intersections\+\_\+of\+\_\+active\+\_\+constraints} (bool $\ast$a, bool $\ast$b, bool $\ast$result, unsigned m)
+\begin{DoxyCompactList}\small\item\em indicates which constraints are active for both sets \end{DoxyCompactList}\item 
+bool \hyperlink{group___c_l_s_solvers_ga0a997634a9b11bec9c54d0243ac29008}{is\+\_\+first\+\_\+subset\+\_\+of\+\_\+second} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em determines whether the first set of active constraints is a subset of the second \end{DoxyCompactList}\item 
+int \hyperlink{group___c_l_s_solvers_gad030de457424bef601e2903eb619926e}{number\+\_\+of\+\_\+common\+\_\+constraints} (bool $\ast$, bool $\ast$, unsigned)
+\begin{DoxyCompactList}\small\item\em counts the number of constraints active in both sets \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_a49c6d0c3337c5bc3379a273ec332ba5c}{operator!=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint inequality \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_a20a1994c15aacbfd4215abf13fdf1e6d}{operator!=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
+\begin{DoxyCompactList}\small\item\em Indicates whether the two rays are unequal. \end{DoxyCompactList}\item 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gaf71a7e68f920518b02b6a58660594ca2}{operator$\ast$} (const R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em Multiply every coordinate in the given ray by the given scalar. \end{DoxyCompactList}\item 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}{operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em Compute the dot product on the rays. \end{DoxyCompactList}\item 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}{operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const vector$<$ long $>$ \&)
+\begin{DoxyCompactList}\small\item\em compute the dot product of the specified rays, one of which is a vector \end{DoxyCompactList}\item 
+R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}{operator$\ast$} (const vector$<$ long $>$ \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em compute the dot product of the specified rays, one of which is a vector \end{DoxyCompactList}\item 
+D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}{operator$\ast$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c)
+\begin{DoxyCompactList}\small\item\em Compute the dot product between the ray and the constraint. \end{DoxyCompactList}\item 
+D\+O\+T\+P\+R\+O\+D\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}{operator$\ast$} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r)
+\begin{DoxyCompactList}\small\item\em Compute the dot product between the ray and the constraint. \end{DoxyCompactList}\item 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}{operator+} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em Add the two rays. \end{DoxyCompactList}\item 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}{operator-\/} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&)
+\begin{DoxyCompactList}\small\item\em Subtract the two rays. \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_a28f6cde3df8ed19a4195584ace43c9d9}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em Lexicographic comparison of constraints. \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_aa582ccdb98a58f0c688aefa89bb7cdf1}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e1, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e2)
+\begin{DoxyCompactList}\small\item\em Compares two edges lexicographically. \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_a28498e1aa874114a1ae27876d309b0d1}{operator$<$} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
+\begin{DoxyCompactList}\small\item\em Lexicographic comparison of rays. \end{DoxyCompactList}\item 
+ostream \& \hyperlink{namespace_l_p___solvers_a839482d44b36df2b4b70e5ab99662e45}{operator$<$$<$} (ostream \&ostr, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e)
+\begin{DoxyCompactList}\small\item\em Output has the form $ \{ \mathbf{r}_1, \mathbf{r}_2 \} $ where $ \mathbf{r}_1 $ is the first ray in this edge, etc. \end{DoxyCompactList}\item 
+ostream \& \hyperlink{namespace_l_p___solvers_aa62089e763b2d098ba78d6f25b296d1a}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&c)
+\begin{DoxyCompactList}\small\item\em print a representation of the constraint to the stream \end{DoxyCompactList}\item 
+ostream \& \hyperlink{namespace_l_p___solvers_a7f4d40aebb685ca6ddc48f91939bb523}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&r)
+\begin{DoxyCompactList}\small\item\em Output is of the form $(r_1, \ldots, r_n)$. \end{DoxyCompactList}\item 
+ostream \& \hyperlink{namespace_l_p___solvers_afdd12afffaacd4070fc0aa3b1297d47d}{operator$<$$<$} (ostream \&os, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&s)
+\begin{DoxyCompactList}\small\item\em prints out the constraints, then the rays, then the edges of {\ttfamily s}. \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_a4f4058fe5f5231e90bf5f864c8cc06f2}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e1, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&e2)
+\begin{DoxyCompactList}\small\item\em Equal if and only if. \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_ac547de44c030843952f4dd715accaf1d}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&b)
+\begin{DoxyCompactList}\small\item\em check for constraint equality \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_l_p___solvers_abda74dc37387f370329de0f20b63f124}{operator==} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&a, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&b)
+\begin{DoxyCompactList}\small\item\em indicates whether the two rays are equal \end{DoxyCompactList}\item 
+D\+E\+G\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{namespace_l_p___solvers_a7e1accee51d4f9339ef83bf93d653544}{ray\+\_\+data\+\_\+allocation} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n)
+\begin{DoxyCompactList}\small\item\em allocates data for a ray \end{DoxyCompactList}\item 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}{ray\+\_\+sum} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Add all the rays in a set. \end{DoxyCompactList}\item 
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}{union\+\_\+of\+\_\+edge\+\_\+sets} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&, const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \&)
+\begin{DoxyCompactList}\small\item\em computes the union of the specified edge sets \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}$<$ D\+E\+G\+\_\+\+T\+Y\+PE $>$ $\ast$ \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda} = nullptr
+\begin{DoxyCompactList}\small\item\em memory manager for ray entries \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespace_l_p___solvers_a389e3d1ce5c76dad0e21f232ab720a84}\label{namespace_l_p___solvers_a389e3d1ce5c76dad0e21f232ab720a84}} 
+unsigned \hyperlink{namespace_l_p___solvers_a389e3d1ce5c76dad0e21f232ab720a84}{invocations} = 0
+\begin{DoxyCompactList}\small\item\em used to count the number of invocations of \hyperlink{namespace_l_p___solvers_a7e1accee51d4f9339ef83bf93d653544}{ray\+\_\+data\+\_\+allocation()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+classes that solve constrained linear systems 
+
+Classes in this group solve constrained linear systems; that is, they solve systems of the form $\left\{\sum_{j=1}^na_{ij}x_j\leq b_i\right\}_{i=1}^m$ (where the inequality may or may not be strict). 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespace_l_p___solvers_a49c6d0c3337c5bc3379a273ec332ba5c}\label{namespace_l_p___solvers_a49c6d0c3337c5bc3379a273ec332ba5c}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+check for constraint inequality 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have different entries 
+\end{DoxyReturn}
+
+
+Definition at line 73 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a20a1994c15aacbfd4215abf13fdf1e6d}\label{namespace_l_p___solvers_a20a1994c15aacbfd4215abf13fdf1e6d}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Indicates whether the two rays are unequal. 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first ray \\
+\hline
+{\em b} & second ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the rays' entries have different values
+\end{DoxyReturn}
+Notice that the rays can point in the same direction, but still be considered unequal. 
+
+Definition at line 314 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a28f6cde3df8ed19a4195584ace43c9d9}\label{namespace_l_p___solvers_a28f6cde3df8ed19a4195584ace43c9d9}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Lexicographic comparison of constraints. 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have different entries 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_aa582ccdb98a58f0c688aefa89bb7cdf1}\label{namespace_l_p___solvers_aa582ccdb98a58f0c688aefa89bb7cdf1}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e1,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e2 }\end{DoxyParamCaption})}
+
+
+
+Compares two edges lexicographically. 
+
+If the first ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller. Otherwise, if the first rays are equal, and the second ray in {\ttfamily this} edge is smaller, then {\ttfamily this} edge is smaller.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the first edge is lexicographically smaller
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em e1} & an edge \\
+\hline
+{\em e2} & an edge \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a28498e1aa874114a1ae27876d309b0d1}\label{namespace_l_p___solvers_a28498e1aa874114a1ae27876d309b0d1}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Lexicographic comparison of rays. 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when dimension is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first ray \\
+\hline
+{\em b} & second ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} is lexicographically smaller than {\ttfamily b} 
+\end{DoxyReturn}
+
+
+Definition at line 363 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a839482d44b36df2b4b70e5ab99662e45}\label{namespace_l_p___solvers_a839482d44b36df2b4b70e5ab99662e45}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily ostream \& L\+P\+\_\+\+Solvers\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{ostr,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e }\end{DoxyParamCaption})}
+
+
+
+Output has the form $ \{ \mathbf{r}_1, \mathbf{r}_2 \} $ where $ \mathbf{r}_1 $ is the first ray in this edge, etc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ostr} & output stream to write to \\
+\hline
+{\em e} & edge to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_aa62089e763b2d098ba78d6f25b296d1a}\label{namespace_l_p___solvers_aa62089e763b2d098ba78d6f25b296d1a}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily ostream \& L\+P\+\_\+\+Solvers\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{c }\end{DoxyParamCaption})}
+
+
+
+print a representation of the constraint to the stream 
+
+Output is of the form $ c_1 x_1 + \ldots + c_n x_n $ , where $ c_i $ is the coefficient of $ x_i $.
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+{\em c} & constraint to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 83 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a7f4d40aebb685ca6ddc48f91939bb523}\label{namespace_l_p___solvers_a7f4d40aebb685ca6ddc48f91939bb523}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily ostream \& L\+P\+\_\+\+Solvers\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Output is of the form $(r_1, \ldots, r_n)$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream \\
+\hline
+{\em r} & ray to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 322 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_afdd12afffaacd4070fc0aa3b1297d47d}\label{namespace_l_p___solvers_afdd12afffaacd4070fc0aa3b1297d47d}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily ostream \& L\+P\+\_\+\+Solvers\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&}]{s }\end{DoxyParamCaption})}
+
+
+
+prints out the constraints, then the rays, then the edges of {\ttfamily s}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream to print to \\
+\hline
+{\em s} & skeleton to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 440 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a4f4058fe5f5231e90bf5f864c8cc06f2}\label{namespace_l_p___solvers_a4f4058fe5f5231e90bf5f864c8cc06f2}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e1,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} \&}]{e2 }\end{DoxyParamCaption})}
+
+
+
+Equal if and only if. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e1} & an edge \\
+\hline
+{\em e2} & an edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the edges have identical entries 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file skeleton.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_ac547de44c030843952f4dd715accaf1d}\label{namespace_l_p___solvers_ac547de44c030843952f4dd715accaf1d}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+check for constraint equality 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first constraint \\
+\hline
+{\em b} & second constraint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily a} and {\ttfamily b} have the same entries 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_abda74dc37387f370329de0f20b63f124}\label{namespace_l_p___solvers_abda74dc37387f370329de0f20b63f124}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!operator==@{operator==}}
+\index{operator==@{operator==}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{a,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+indicates whether the two rays are equal 
+
+\begin{DoxyWarning}{Warning}
+This is unsafe when number of variables is not the same. It does not check, since the assumption is that you know what you\textquotesingle{}re doing. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & first ray \\
+\hline
+{\em b} & second ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if the rays' entries have the same values
+\end{DoxyReturn}
+Notice that the rays can point in the same direction, but still be considered unequal. 
+
+Definition at line 306 of file lp\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{namespace_l_p___solvers_a7e1accee51d4f9339ef83bf93d653544}\label{namespace_l_p___solvers_a7e1accee51d4f9339ef83bf93d653544}} 
+\index{L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}!ray\+\_\+data\+\_\+allocation@{ray\+\_\+data\+\_\+allocation}}
+\index{ray\+\_\+data\+\_\+allocation@{ray\+\_\+data\+\_\+allocation}!L\+P\+\_\+\+Solvers@{L\+P\+\_\+\+Solvers}}
+\subsubsection{\texorpdfstring{ray\+\_\+data\+\_\+allocation()}{ray\_data\_allocation()}}
+{\footnotesize\ttfamily D\+E\+G\+\_\+\+T\+Y\+PE$\ast$ L\+P\+\_\+\+Solvers\+::ray\+\_\+data\+\_\+allocation (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+allocates data for a ray 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of entries needed for the ray \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new block of memory for a ray 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file lp\+\_\+solver.\+cpp.
+

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -21,6 +21,8 @@
 #include <cmath>
 
 #include "glpk_solver.hpp"
+
+namespace LP_Solvers {
 
 #define MIN_X 0.01
 
@@ -82,7 +84,7 @@ GLPK_Solver::~GLPK_Solver() {
   glp_delete_prob(lp);
 }
 
-bool GLPK_Solver::solve(vector<constraint> & newvecs) {
+bool GLPK_Solver::solve(const vector<Constraint> & newvecs) {
   dirty = true;
   int glp_result = 0;
   int new_m = newvecs.size();
@@ -113,7 +115,7 @@ bool GLPK_Solver::solve(vector<constraint> & newvecs) {
   return (glp_result == 0 and (status == GLP_OPT or status == GLP_FEAS));
 }
 
-bool GLPK_Solver::solve(constraint & newvec) {
+bool GLPK_Solver::solve(const Constraint & newvec) {
   dirty = true;
   glp_add_rows(lp, 1);
   int num_valid = 0;
@@ -139,7 +141,7 @@ bool GLPK_Solver::solve(constraint & newvec) {
   return (glp_result == 0 and (status == GLP_OPT or status == GLP_FEAS));
 }
 
-const set<ray> & GLPK_Solver::get_rays() {
+const set<Ray> & GLPK_Solver::get_rays() {
   if (dirty) {
     rays.clear();
     // the next few lines add a row
@@ -191,6 +193,8 @@ const set<ray> & GLPK_Solver::get_rays() {
     dirty = false;
   }
   return rays;
+}
+
 }
 
 #endif

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['head',['head',['../group__polygroup.html#ab82cd79a8965d04717a0c82ae79ff4b4',1,'Constant_Polynomial::head()'],['../group___iterator_group.html#a6d2f1a91150d12a8835395a678260968',1,'DB_Polynomial_Iterator::head()'],['../group__polygroup.html#a55c2905ab5c77fb51ff1c282ec3ce9e5',1,'Polynomial_Linked_List::head()']]],
-  ['heads',['heads',['../group___g_b_computation.html#ae5e8393488f6c58e3a5ca2a7c622f854',1,'F4_Reduction_Data']]],
+  ['head',['head',['../group___g_b_computation.html#a1679f8bda319a602672bc866220bb7fb',1,'F4_Reduction_Data::head()'],['../group__polygroup.html#ab82cd79a8965d04717a0c82ae79ff4b4',1,'Constant_Polynomial::head()'],['../group___iterator_group.html#a6d2f1a91150d12a8835395a678260968',1,'DB_Polynomial_Iterator::head()'],['../group__polygroup.html#a55c2905ab5c77fb51ff1c282ec3ce9e5',1,'Polynomial_Linked_List::head()']]],
   ['hgradnum',['hGradNum',['../group__polygroup.html#a958dee87e6d37079b72c095b79ff0347',1,'Monomial_Ideal']]],
   ['hgradrednum',['hGradRedNum',['../group__polygroup.html#a383828c3e1596abe05b6184d45cd7f7a',1,'Monomial_Ideal']]],
   ['hnum',['hNum',['../group__polygroup.html#a2613e425082e968058426465d309abbc',1,'Monomial_Ideal']]],

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -20,6 +20,8 @@
 
 #include <cstring>
 #include <bitset>
+#include <mutex>
+using std::mutex;
 
 #include "monomial.hpp"
 
@@ -44,6 +46,7 @@
     when finished.
 */
 Grading_Order_Data_Allocator<EXP_TYPE> * moda = nullptr;
+mutex moda_mutex;
 /**
   @brief memory manager for monomials (not their exponents; see moda for that).
   @ingroup memorygroup
@@ -51,27 +54,36 @@ Grading_Order_Data_Allocator<EXP_TYPE> * moda = nullptr;
     when finished.
 */
 Grading_Order_Data_Allocator<Monomial> * monoda = nullptr;
+mutex monoda_mutex;
 
 void * Monomial::operator new(size_t size) {
+  //monoda_mutex.lock();
   if (monoda == nullptr) monoda = new Grading_Order_Data_Allocator<Monomial>(size);
   Monomial * result = monoda->get_new_block();
+  //monoda_mutex.unlock();
   return result;
 }
 
 void Monomial::operator delete(void *t) {
+  //monoda_mutex.lock();
   monoda->return_used_block(static_cast<Monomial *>(t));
+  //monoda_mutex.unlock();
 }
 
 void Monomial::initialize_exponents(NVAR_TYPE number_of_vars) {
   n = number_of_vars;
+  //moda_mutex.lock();
   if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n);
   exponents = moda->get_new_block();
+  //moda_mutex.unlock();
   for (NVAR_TYPE i = 0; i < n; ++i) exponents[i] = 0;
   mask = 0;
 }
 
 void Monomial::deinitialize() {
+  //moda_mutex.lock();
   moda->return_used_block(exponents);
+  //moda_mutex.unlock();
   if (ordering_data != nullptr) delete ordering_data;
 }
 
@@ -110,7 +122,9 @@ Monomial::Monomial(const Monomial &other) {
   #if EPACK
   emask = other.emask;
   #endif
+  //moda_mutex.lock();
   exponents = moda->get_new_block();
+  //moda_mutex.unlock();
   memcpy(exponents, other.exponents, n*sizeof(EXP_TYPE));
   ordering_data = (other.ordering_data == nullptr) ? nullptr
       : ordering_data = other.monomial_ordering_data()->clone();
@@ -153,8 +167,10 @@ Monomial::Monomial(
   #if EPACK
   emask = 0;
   #endif
+  //moda_mutex.lock();
   if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n);
   exponents = moda->get_new_block();
+  //moda_mutex.unlock();
   for (NVAR_TYPE i = 0; i < n; ++i) {
     exponents[i] = powers[i];
     if (exponents[i] != 0) {
@@ -168,7 +184,9 @@ Monomial::Monomial(
 }
 
 Monomial::~Monomial() {
+  //moda_mutex.lock();
   moda->return_used_block(exponents);
+  //moda_mutex.unlock();
   if (ordering_data != nullptr)
     delete ordering_data; 
 }
@@ -248,8 +266,9 @@ bool Monomial::is_like(const Monomial &other) const { return *this == other; }
 
 bool Monomial::like_multiple(EXP_TYPE * e, const Monomial & v) const {
   bool result = (n == v.n);
+  auto ve = v.exponents;
   for (NVAR_TYPE i = 0; result and i < n; ++i)
-    result = result and exponents[i] == e[i] + v.exponents[i];
+    result = exponents[i] == e[i] + ve[i];
   return result;
 }
 

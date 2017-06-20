@@ -6,7 +6,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -86,7 +86,7 @@ int main() {
   F.push_back(&f1); F.push_back(&f2); F.push_back(&f3);
   F.push_back(&f4); F.push_back(&f5); F.push_back(&f6);
   Monomial_Ordering * mord;
-  skeleton * skel = new skeleton(9);
+  Skeleton * skel = new Skeleton(9);
   initial_analysis(F, mord, skel);
   cout << "Chose leading monomials:\n";
   for (auto f : F) {

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -48,14 +48,14 @@ public:
   /** @name Construction */
   ///@{
   /** @brief create critical pair (f,0) where f is at index @c i */ 
-  Critical_Pair_XPlor(int i, unsigned strategy, Abstract_Polynomial * f)
+  Critical_Pair_XPlor(int i, StrategyFlags strategy, Abstract_Polynomial * f)
   : Critical_Pair_Basic(f, strategy)
   {
     pi = i; qi = XPLOR_GENERATOR; proc = PROC_UNASSIGNED;
   }
   /** @brief create critical pair (f,g) where f, g are at indices @c i, @c j */
   Critical_Pair_XPlor(
-      int i, int j, unsigned strategy, vector<Abstract_Polynomial *>G
+      int i, int j, StrategyFlags strategy, vector<Abstract_Polynomial *>G
   )
   : Critical_Pair_Basic(G[i], G[j], strategy)
   {
@@ -63,7 +63,7 @@ public:
   }
   /** @brief create critical pair (f,g) where f is at index @c i */
   Critical_Pair_XPlor(
-      int i, Abstract_Polynomial *g, unsigned strategy,
+      int i, Abstract_Polynomial *g, StrategyFlags strategy,
       vector<Abstract_Polynomial *>G
   )
   : Critical_Pair_Basic(G[i], g, strategy)
@@ -299,7 +299,7 @@ void gm_update_explorer(
     list<Critical_Pair_XPlor *> * Pcancel,
     vector<Abstract_Polynomial *> & G,
     Abstract_Polynomial * r,
-    unsigned strategy
+    StrategyFlags strategy
 ) {
   //cout << "----------------------\n";
   list<Critical_Pair_XPlor *> C;
@@ -601,9 +601,13 @@ list<Constant_Polynomial *> buchberger_explorer(
     for (unsigned i = 0; i < number_in_package; ++i) {
       Critical_Pair_Communication & Pin = Pnew[i];
       if (Pin.second == XPLOR_GENERATOR)
-        R.push_back(new Critical_Pair_XPlor(Pin.first, SUGAR_STRATEGY, F[Pin.first]));
+        R.push_back(new Critical_Pair_XPlor(
+            Pin.first, StrategyFlags::SUGAR_STRATEGY, F[Pin.first]
+        ));
       else
-        R.push_back(new Critical_Pair_XPlor(Pin.first, Pin.second, SUGAR_STRATEGY, G));
+        R.push_back(new Critical_Pair_XPlor(
+            Pin.first, Pin.second, StrategyFlags::SUGAR_STRATEGY, G
+        ));
     }
     if (number_in_package > 0)
       delete [] Pnew;
@@ -612,9 +616,9 @@ list<Constant_Polynomial *> buchberger_explorer(
     if (p_in.first != XPLOR_GENERATOR) {
       if (p_in.second == XPLOR_GENERATOR)
         //R.push_back(new Critical_Pair_XPlor(p_in.first, p_in.second, p_in.sugar, F));
-        R.push_back(new Critical_Pair_XPlor(p_in.first, SUGAR_STRATEGY, F[p_in.first]));
+        R.push_back(new Critical_Pair_XPlor(p_in.first, StrategyFlags::SUGAR_STRATEGY, F[p_in.first]));
       else
-        R.push_back(new Critical_Pair_XPlor(p_in.first, p_in.second, SUGAR_STRATEGY, G));
+        R.push_back(new Critical_Pair_XPlor(p_in.first, p_in.second, StrategyFlags::SUGAR_STRATEGY, G));
     } */
     /*for (unsigned i = 0; i < comm_size; ++i) {
       if (comm_id == i) {

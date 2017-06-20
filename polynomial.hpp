@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -113,6 +113,9 @@ public:
   ///@}
   /** @name Destruction */
   ///@{
+  /**
+    @brief deletes the strategy, if there is one
+  */
   virtual ~Abstract_Polynomial() { if (strat != nullptr) delete strat; };
   ///@}
   /** @name Basic properties */
@@ -120,7 +123,7 @@ public:
   /** @brief ring in which this polynomial resides */
   Polynomial_Ring & base_ring() const;
   /** @brief ground field -- all coefficients should be in this field */
-  Prime_Field & ground_field();
+  const Prime_Field & ground_field() const;
   /**
     @brief number of variables -- all monomials should agree with this
       (though it is never tested by the class)
@@ -155,9 +158,9 @@ public:
   ///@{
   /** @brief new zero polynomial of this same type */
   virtual Abstract_Polynomial * zero_polynomial() const = 0;
-  /** @brief multiple of this and \f$u\f$ */
+  /** @brief multiple of this and @f$u@f$ */
   virtual Abstract_Polynomial * monomial_multiple(const Monomial &) const = 0;
-  /** @brief multiple of this and \f$c\f$ */
+  /** @brief multiple of this and @f$c@f$ */
   virtual Abstract_Polynomial * scalar_multiple(const Prime_Field_Element &)
       const = 0;
   /** @brief sets the polynomial&rsquo;s strategy to @c psd */
@@ -190,7 +193,9 @@ public:
   ///@{
   /** @brief An iterator that poses no risk of modifying the polynomial */
   virtual Polynomial_Iterator * new_iterator() const = 0;
+  /** @brief returns an iterator to the polynomial&rsquo;s leading monomial */
   virtual Polynomial_Iterator * begin() const = 0;
+  /** @brief iterator to last monomial */
   virtual Polynomial_Iterator * end() const = 0;
   ///@}
   /** @name I/O */
@@ -198,8 +203,11 @@ public:
   /** @brief output */
   friend ostream & operator << (ostream & os,
       const Abstract_Polynomial & p);
+  /** @brief prints the polynomial to @p os */
   virtual void print(ostream & os=cout) const;
+  /** @brief prints the polynomial to @p os, followed by a carriage return */
   virtual void println(ostream & os=cout) const;
+  /** @brief prints the polynomial to @c cout, followed by a carriage return */
   virtual void printlncout() const { println(); }
   ///@}
 protected:
@@ -210,10 +218,10 @@ protected:
 };
 
 /**
-  \class Polynomial_Iterator
-  \author John Perry
-  \date 2015
-  \brief Used to iterate through a polynomial.
+  @class Polynomial_Iterator
+  @author John Perry
+  @date 2015
+  @brief Used to iterate through a polynomial.
   @ingroup IteratorGroup
 
   @details This class encapsulates the basic functionality needed to iterate through
@@ -253,7 +261,7 @@ public:
   ///@}
   /** @name Data access */
   ///@{
-  /** @brief Reports the polynomial on which \c this is iterating. */
+  /** @brief Reports the polynomial on which @c this is iterating. */
   virtual const Abstract_Polynomial * my_poly() const { return p; }
   /** @brief Reports the monomial at the current position. */
   virtual const Monomial & currMonomial() const = 0;
@@ -268,7 +276,7 @@ public:
   }
   ///@}
 protected:
-  /** @brief the polynomial \c this points to */
+  /** @brief the polynomial @c this points to */
   const Abstract_Polynomial * p;
 };
 
@@ -336,7 +344,7 @@ public:
   virtual void multiply_by_scalar(const Prime_Field_Element &a);
   /** @brief multiply by monomial */
   virtual void multiply_by_monomial(const Monomial &t);
-  /** @brief reduce by \f$p\f$ until no further reduction possible */
+  /** @brief reduce by @f$p@f$ until no further reduction possible */
   virtual void reduce_by(const Abstract_Polynomial &p);
   // utility
   /** @brief multiple of this and u */

@@ -124,9 +124,9 @@ Classes</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>This class encapsulates the information necessary for a field modulo a prime: both the modulus \(m\) and a list of inverses of non-zero elements. The constructors do not verify that \(m\) is prime, but expect misbehavior if not.</p>
 <dl class="section warning"><dt>Warning</dt><dd>The constructor does not check whether the supplied modulus is prime. If \(m\) is not prime, behavior is undefined, and probably spectacularly bad. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a2">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a1">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a1">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a1">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a1">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a1">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a1">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a0">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a1">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a9">test_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a4">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a1">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a2">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a1">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a1">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a1">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a1">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a1">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a1">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a0">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a1">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a11">test_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a4">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a1">user_interface.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00049">49</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00051">51</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
@@ -147,31 +147,31 @@ Classes</h2></td></tr>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a342ee34fa19d33919f772669a637f31e">modulus</a> () const</td></tr>
 <tr class="memdesc:a342ee34fa19d33919f772669a637f31e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the field's modulus. <br /></td></tr>
 <tr class="separator:a342ee34fa19d33919f772669a637f31e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab14cab08e6c2862e8470193112b69868"><td class="memItemLeft" align="right" valign="top">COEF_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ab14cab08e6c2862e8470193112b69868">inverse</a> (COEF_TYPE a)</td></tr>
-<tr class="memdesc:ab14cab08e6c2862e8470193112b69868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of \(a\), modulo \(m\).  <a href="#ab14cab08e6c2862e8470193112b69868">More...</a><br /></td></tr>
-<tr class="separator:ab14cab08e6c2862e8470193112b69868"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9e3622a14de40faa75056ed40d67bb2"><td class="memItemLeft" align="right" valign="top"><a id="ad9e3622a14de40faa75056ed40d67bb2"></a>
-<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ad9e3622a14de40faa75056ed40d67bb2">unity</a> ()</td></tr>
-<tr class="memdesc:ad9e3622a14de40faa75056ed40d67bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">&ldquo;unity&rdquo; is the multiplicative identity. <br /></td></tr>
-<tr class="separator:ad9e3622a14de40faa75056ed40d67bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc12c3a50f6368a1c2f7cc1bddcb9eb"><td class="memItemLeft" align="right" valign="top"><a id="a9dc12c3a50f6368a1c2f7cc1bddcb9eb"></a>
-<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a9dc12c3a50f6368a1c2f7cc1bddcb9eb">zero</a> ()</td></tr>
-<tr class="memdesc:a9dc12c3a50f6368a1c2f7cc1bddcb9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">&ldquo;zero&rdquo; is the additive identity. <br /></td></tr>
-<tr class="separator:a9dc12c3a50f6368a1c2f7cc1bddcb9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a106e74e004b18c899cd9b9e90ce01f6e"><td class="memItemLeft" align="right" valign="top">COEF_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a106e74e004b18c899cd9b9e90ce01f6e">inverse</a> (COEF_TYPE a) const</td></tr>
+<tr class="memdesc:a106e74e004b18c899cd9b9e90ce01f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of \(a\), modulo \(m\).  <a href="#a106e74e004b18c899cd9b9e90ce01f6e">More...</a><br /></td></tr>
+<tr class="separator:a106e74e004b18c899cd9b9e90ce01f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97534ab1050f0b34023300f1bd3a97f5"><td class="memItemLeft" align="right" valign="top"><a id="a97534ab1050f0b34023300f1bd3a97f5"></a>
+<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a97534ab1050f0b34023300f1bd3a97f5">unity</a> () const</td></tr>
+<tr class="memdesc:a97534ab1050f0b34023300f1bd3a97f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">&ldquo;unity&rdquo; is the multiplicative identity. <br /></td></tr>
+<tr class="separator:a97534ab1050f0b34023300f1bd3a97f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8eaaf37b9239428a9c9aedc8ab35a12"><td class="memItemLeft" align="right" valign="top"><a id="ad8eaaf37b9239428a9c9aedc8ab35a12"></a>
+<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ad8eaaf37b9239428a9c9aedc8ab35a12">zero</a> () const</td></tr>
+<tr class="memdesc:ad8eaaf37b9239428a9c9aedc8ab35a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">&ldquo;zero&rdquo; is the additive identity. <br /></td></tr>
+<tr class="separator:ad8eaaf37b9239428a9c9aedc8ab35a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">I/O</div></td></tr>
 <tr class="memitem:a1ff3ec98ffb33a35c51eb3ce99ae7ebd"><td class="memItemLeft" align="right" valign="top"><a id="a1ff3ec98ffb33a35c51eb3ce99ae7ebd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a1ff3ec98ffb33a35c51eb3ce99ae7ebd">set_print_modulus</a> (bool b)</td></tr>
 <tr class="memdesc:a1ff3ec98ffb33a35c51eb3ce99ae7ebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines whether to print the modulus <br /></td></tr>
 <tr class="separator:a1ff3ec98ffb33a35c51eb3ce99ae7ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4814e8ada9b0f2248eb65af7d6346244"><td class="memItemLeft" align="right" valign="top"><a id="a4814e8ada9b0f2248eb65af7d6346244"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a4814e8ada9b0f2248eb65af7d6346244">get_print_modulus</a> ()</td></tr>
-<tr class="memdesc:a4814e8ada9b0f2248eb65af7d6346244"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether to print the modulus <br /></td></tr>
-<tr class="separator:a4814e8ada9b0f2248eb65af7d6346244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac5cf31e741cc6d250176163bde658c"><td class="memItemLeft" align="right" valign="top"><a id="a5ac5cf31e741cc6d250176163bde658c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a5ac5cf31e741cc6d250176163bde658c">get_print_modulus</a> () const</td></tr>
+<tr class="memdesc:a5ac5cf31e741cc6d250176163bde658c"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether to print the modulus <br /></td></tr>
+<tr class="separator:a5ac5cf31e741cc6d250176163bde658c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
-<tr class="memitem:ac89c28052f4f4a90263c810f85c81d37"><td class="memItemLeft" align="right" valign="top"><a id="ac89c28052f4f4a90263c810f85c81d37"></a>
-COEF_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ac89c28052f4f4a90263c810f85c81d37">Fi</a></td></tr>
-<tr class="memdesc:ac89c28052f4f4a90263c810f85c81d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">for \(i\neq0\), \(Fi_i\) is multiplicative inverse of \(i\), mod \(m\) <br /></td></tr>
-<tr class="separator:ac89c28052f4f4a90263c810f85c81d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcc0858cd26489bd5837d491788a734"><td class="memItemLeft" align="right" valign="top"><a id="acbcc0858cd26489bd5837d491788a734"></a>
+vector&lt; COEF_TYPE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#acbcc0858cd26489bd5837d491788a734">Fi</a></td></tr>
+<tr class="memdesc:acbcc0858cd26489bd5837d491788a734"><td class="mdescLeft">&#160;</td><td class="mdescRight">for \(i\neq0\), \(Fi_i\) is multiplicative inverse of \(i\), mod \(m\) <br /></td></tr>
+<tr class="separator:acbcc0858cd26489bd5837d491788a734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fa882a2952f67bf7e071b6f491d6075"><td class="memItemLeft" align="right" valign="top"><a id="a0fa882a2952f67bf7e071b6f491d6075"></a>
 UCOEF_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0fa882a2952f67bf7e071b6f491d6075">m</a></td></tr>
 <tr class="memdesc:a0fa882a2952f67bf7e071b6f491d6075"><td class="mdescLeft">&#160;</td><td class="mdescRight">characteristic/modulus of the field <br /></td></tr>
@@ -252,20 +252,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div>
 </div>
 <h4 class="groupheader">Member Function Documentation</h4>
-<a id="ab14cab08e6c2862e8470193112b69868"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab14cab08e6c2862e8470193112b69868">&#9670;&nbsp;</a></span>inverse()</h2>
+<a id="a106e74e004b18c899cd9b9e90ce01f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a106e74e004b18c899cd9b9e90ce01f6e">&#9670;&nbsp;</a></span>inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">COEF_TYPE Prime_Field::inverse </td>
           <td>(</td>
           <td class="paramtype">COEF_TYPE&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Returns the inverse of \(a\), modulo \(m\). </p>
@@ -276,9 +284,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( a^{-1} \)</dd></dl>
-<p>Looks up the inverse in a table. If the inverse is not yet known, this function computes it using the Extended Euclidean Algorithm. </p>
+<p>Looks up the inverse in a table. </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00055">55</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00094">94</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
 
 </div>
 </div>
@@ -307,12 +315,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
-<tr class="memitem:a52db0c88a43489efba10059b71d832ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a52db0c88a43489efba10059b71d832ec">Prime_Field_Element</a> (<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *<a class="el" href="group___fields_group.html#af9641451c05d26a2016e21a6ef054c40">field</a>)</td></tr>
-<tr class="memdesc:a52db0c88a43489efba10059b71d832ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prime field element in the specified field, with the value 0.  <a href="#a52db0c88a43489efba10059b71d832ec">More...</a><br /></td></tr>
-<tr class="separator:a52db0c88a43489efba10059b71d832ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6868c9957c5ddb60b2313d51b0565636"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a6868c9957c5ddb60b2313d51b0565636">Prime_Field_Element</a> (COEF_TYPE <a class="el" href="group___fields_group.html#aa9c68761643afa0b22863904bdfe7e83">value</a>, <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *<a class="el" href="group___fields_group.html#af9641451c05d26a2016e21a6ef054c40">field</a>)</td></tr>
-<tr class="memdesc:a6868c9957c5ddb60b2313d51b0565636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prime field element in the specified field, with the specified value.  <a href="#a6868c9957c5ddb60b2313d51b0565636">More...</a><br /></td></tr>
-<tr class="separator:a6868c9957c5ddb60b2313d51b0565636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a46053696a327bc62038e1cf92c20a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ac4a46053696a327bc62038e1cf92c20a">Prime_Field_Element</a> (const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *<a class="el" href="group___fields_group.html#a30f455dd34d4e795c63791cdc7ea1f46">field</a>)</td></tr>
+<tr class="memdesc:ac4a46053696a327bc62038e1cf92c20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prime field element in the specified field, with the value 0.  <a href="#ac4a46053696a327bc62038e1cf92c20a">More...</a><br /></td></tr>
+<tr class="separator:ac4a46053696a327bc62038e1cf92c20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bad5ba05aadbaf14876b2590e300861"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0bad5ba05aadbaf14876b2590e300861">Prime_Field_Element</a> (COEF_TYPE <a class="el" href="group___fields_group.html#aa9c68761643afa0b22863904bdfe7e83">value</a>, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *<a class="el" href="group___fields_group.html#a30f455dd34d4e795c63791cdc7ea1f46">field</a>)</td></tr>
+<tr class="memdesc:a0bad5ba05aadbaf14876b2590e300861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prime field element in the specified field, with the specified value.  <a href="#a0bad5ba05aadbaf14876b2590e300861">More...</a><br /></td></tr>
+<tr class="separator:a0bad5ba05aadbaf14876b2590e300861"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>The following functions give information about the monomial, but do not modify it. </p>
 </div></td></tr>
@@ -324,10 +332,10 @@ COEF_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a4c003344235901132386663a9f28ac1d">modulus</a> () const</td></tr>
 <tr class="memdesc:a4c003344235901132386663a9f28ac1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The field's modulus. <br /></td></tr>
 <tr class="separator:a4c003344235901132386663a9f28ac1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9641451c05d26a2016e21a6ef054c40"><td class="memItemLeft" align="right" valign="top"><a id="af9641451c05d26a2016e21a6ef054c40"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#af9641451c05d26a2016e21a6ef054c40">field</a> () const</td></tr>
-<tr class="memdesc:af9641451c05d26a2016e21a6ef054c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">The field this element lies in. <br /></td></tr>
-<tr class="separator:af9641451c05d26a2016e21a6ef054c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f455dd34d4e795c63791cdc7ea1f46"><td class="memItemLeft" align="right" valign="top"><a id="a30f455dd34d4e795c63791cdc7ea1f46"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a30f455dd34d4e795c63791cdc7ea1f46">field</a> () const</td></tr>
+<tr class="memdesc:a30f455dd34d4e795c63791cdc7ea1f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">The field this element lies in. <br /></td></tr>
+<tr class="separator:a30f455dd34d4e795c63791cdc7ea1f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d75c69f785c122bf9b3b803c22393dc"><td class="memItemLeft" align="right" valign="top"><a id="a0d75c69f785c122bf9b3b803c22393dc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0d75c69f785c122bf9b3b803c22393dc">like</a> (const <a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> &amp;b) const</td></tr>
 <tr class="memdesc:a0d75c69f785c122bf9b3b803c22393dc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>true</code> iff <code>this</code> and <code>b</code> have the same modulus. <br /></td></tr>
@@ -345,10 +353,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a69c26a37c2d6d3c996360d4f37cf6d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <code>this</code> the multiplicative identity? <br /></td></tr>
 <tr class="separator:a69c26a37c2d6d3c996360d4f37cf6d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
-<tr class="memitem:a4abca8a2002d098db965b77b17178f46"><td class="memItemLeft" align="right" valign="top"><a id="a4abca8a2002d098db965b77b17178f46"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a4abca8a2002d098db965b77b17178f46">assign</a> (COEF_TYPE val, <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *K)</td></tr>
-<tr class="memdesc:a4abca8a2002d098db965b77b17178f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">for initializing arrays of <a class="el" href="group___fields_group.html#class_prime___field___element" title="Element of a field of prime characteristic. ">Prime_Field_Element</a> <br /></td></tr>
-<tr class="separator:a4abca8a2002d098db965b77b17178f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e94844996cf153ba8c9bc9b9cf518d5"><td class="memItemLeft" align="right" valign="top"><a id="a5e94844996cf153ba8c9bc9b9cf518d5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a5e94844996cf153ba8c9bc9b9cf518d5">assign</a> (COEF_TYPE val, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *K)</td></tr>
+<tr class="memdesc:a5e94844996cf153ba8c9bc9b9cf518d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">for initializing arrays of <a class="el" href="group___fields_group.html#class_prime___field___element" title="Element of a field of prime characteristic. ">Prime_Field_Element</a> <br /></td></tr>
+<tr class="separator:a5e94844996cf153ba8c9bc9b9cf518d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Computation</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Computes something, and may modify <code>this</code>. </p>
 </div></td></tr>
@@ -376,10 +384,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 COEF_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0d7ddb9f8693a8b06c49157632384771">a</a></td></tr>
 <tr class="memdesc:a0d7ddb9f8693a8b06c49157632384771"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number&rsquo;s value; descendants should ensure \(0\leq a&lt;m\) <br /></td></tr>
 <tr class="separator:a0d7ddb9f8693a8b06c49157632384771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac727e179ad217f1672e7011e87fe4b51"><td class="memItemLeft" align="right" valign="top"><a id="ac727e179ad217f1672e7011e87fe4b51"></a>
-<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#ac727e179ad217f1672e7011e87fe4b51">F</a></td></tr>
-<tr class="memdesc:ac727e179ad217f1672e7011e87fe4b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">the field this element lives in; used to find inverses <br /></td></tr>
-<tr class="separator:ac727e179ad217f1672e7011e87fe4b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbb00d2748f5c2a85415461eb059a62"><td class="memItemLeft" align="right" valign="top"><a id="aacbb00d2748f5c2a85415461eb059a62"></a>
+const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#aacbb00d2748f5c2a85415461eb059a62">F</a></td></tr>
+<tr class="memdesc:aacbb00d2748f5c2a85415461eb059a62"><td class="mdescLeft">&#160;</td><td class="mdescRight">the field this element lives in; used to find inverses <br /></td></tr>
+<tr class="separator:aacbb00d2748f5c2a85415461eb059a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa08b53ecfdda7a777155758e6b0edc"><td class="memItemLeft" align="right" valign="top"><a id="a0aa08b53ecfdda7a777155758e6b0edc"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0aa08b53ecfdda7a777155758e6b0edc">m</a></td></tr>
 <tr class="memdesc:a0aa08b53ecfdda7a777155758e6b0edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">the number&rsquo; modulus, stored here to avoid the expense of accessing it in \(F\). <br /></td></tr>
@@ -421,8 +429,8 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <tr class="separator:a7b56125cbfdccee3e56a80ed7987d2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
-<a id="a52db0c88a43489efba10059b71d832ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52db0c88a43489efba10059b71d832ec">&#9670;&nbsp;</a></span>Prime_Field_Element() <span class="overload">[1/2]</span></h2>
+<a id="ac4a46053696a327bc62038e1cf92c20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a46053696a327bc62038e1cf92c20a">&#9670;&nbsp;</a></span>Prime_Field_Element() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -430,7 +438,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
         <tr>
           <td class="memname">Prime_Field_Element::Prime_Field_Element </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td>
           <td class="paramname"><em>field</em></td><td>)</td>
           <td></td>
         </tr>
@@ -446,12 +454,12 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <p>A pointer to <code>field</code> is attached to <code>this</code> in order to find inverses during arithmetic. </p><dl class="section warning"><dt>Warning</dt><dd>Do not delete this field while <code>this</code> is still active. Behavior is unpredictable in this circumstance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00063">63</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00059">59</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6868c9957c5ddb60b2313d51b0565636"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6868c9957c5ddb60b2313d51b0565636">&#9670;&nbsp;</a></span>Prime_Field_Element() <span class="overload">[2/2]</span></h2>
+<a id="a0bad5ba05aadbaf14876b2590e300861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bad5ba05aadbaf14876b2590e300861">&#9670;&nbsp;</a></span>Prime_Field_Element() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -465,7 +473,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *&#160;</td>
           <td class="paramname"><em>field</em>&#160;</td>
         </tr>
         <tr>
@@ -486,7 +494,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <p>A pointer to <code>field</code> is attached to <code>this</code> in order to find inverses during arithmetic. </p><dl class="section warning"><dt>Warning</dt><dd>Do not delete this field while <code>this</code> is still active. Behavior is unpredictable in this circumstance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00067">67</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00062">62</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +523,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00102">102</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00100">100</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -544,7 +552,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <p>This function is useful for avoiding the construction of a prime field element when you know what you want to multiply. </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00107">107</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00105">105</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +580,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00092">92</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00090">90</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +608,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00097">97</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00095">95</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +637,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <p>Multiplies by multiplicative inverse of <code>other</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00112">112</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00110">110</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +679,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <p>Does not modify <code>this</code>. </p>
 <p>Assume the terms have the same modulus. Behavior undefined if not! </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00138">138</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00136">136</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +720,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <p>Does not modify <code>this</code>. </p>
 <p>Assume the terms have the same modulus. Behavior undefined if not! </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00118">118</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00116">116</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>
@@ -753,7 +761,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <p>Does not modify <code>this</code>. </p>
 <p>Assume the terms have the same modulus. Behavior undefined if not! </p>
 
-<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00128">128</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8cpp_source.html#l00126">126</a> of file <a class="el" href="fields_8cpp_source.html">fields.cpp</a>.</p>
 
 </div>
 </div>

@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -20,7 +20,9 @@
 
 #include "lp_solver.hpp"
 
-constraint::constraint(NVAR_TYPE num_variables, CONSTR_TYPE coeffs [])
+namespace LP_Solvers {
+
+Constraint::Constraint(NVAR_TYPE num_variables, CONSTR_TYPE coeffs [])
 {
   nvars = num_variables;
   coefficients = new CONSTR_TYPE[nvars];
@@ -28,7 +30,7 @@ constraint::constraint(NVAR_TYPE num_variables, CONSTR_TYPE coeffs [])
     coefficients[i] = coeffs[i];
 }
 
-constraint::constraint(vector<CONSTR_TYPE> &coeffs)
+Constraint::Constraint(vector<CONSTR_TYPE> &coeffs)
 {
   nvars = coeffs.size();
   coefficients = new CONSTR_TYPE[nvars];
@@ -36,7 +38,7 @@ constraint::constraint(vector<CONSTR_TYPE> &coeffs)
     coefficients[i] = coeffs[i];
 }
 
-constraint::constraint(const constraint &old_constraint)
+Constraint::Constraint(const Constraint &old_constraint)
 {
   nvars = old_constraint.nvars;
   coefficients = new CONSTR_TYPE[nvars];
@@ -45,7 +47,7 @@ constraint::constraint(const constraint &old_constraint)
 }
 
 // ordering is lexicographic
-bool operator < (const constraint &first, const constraint &second)
+bool operator < (const Constraint &first, const Constraint &second)
 {
   bool result = !(first == second);
   bool checking = result;
@@ -58,7 +60,7 @@ bool operator < (const constraint &first, const constraint &second)
   return result;
 }
 
-bool operator == (const constraint &first, const constraint &second)
+bool operator == (const Constraint &first, const Constraint &second)
 {
   bool result = true;
   for (NVAR_TYPE i = 0; result and i < first.get_number_of_variables(); ++i) {
@@ -68,7 +70,7 @@ bool operator == (const constraint &first, const constraint &second)
   return result;
 }
 
-bool operator != (constraint &first, constraint &second)
+bool operator != (const Constraint &first, const Constraint &second)
 {
   bool result = true;
   for (NVAR_TYPE i = 0; result and i < first.get_number_of_variables(); ++i)
@@ -78,7 +80,7 @@ bool operator != (constraint &first, constraint &second)
 }
 
 // formatted as sum of products of coefficients and variables
-ostream & operator<<(ostream & ostr, const constraint &c)
+ostream & operator<<(ostream & ostr, const Constraint &c)
 {
   bool first = true;
   ostr << "0 ≤ ";
@@ -108,28 +110,28 @@ ostream & operator<<(ostream & ostr, const constraint &c)
   return ostr;
 }
 
-constraint::~constraint()
+Constraint::~Constraint()
 {
   delete [] coefficients;
 }
 
-/**
-  @brief memory manager for ray entries
-  @ingroup memorygroup
-  @details Automatically initialized, but clients need to call the destructor
-    when finished.
-*/
 Grading_Order_Data_Allocator<DEG_TYPE> * doda = nullptr;
 
+/** @brief used to count the number of invocations of ray_data_allocation() */
 unsigned invocations = 0;
 
+/**
+  @brief allocates data for a ray
+  @param n number of entries needed for the ray
+  @return a new block of memory for a ray
+*/
 inline DEG_TYPE * ray_data_allocation(NVAR_TYPE n) {
   invocations++;
   if (doda == nullptr) doda = new Grading_Order_Data_Allocator<DEG_TYPE>(n);
   return doda->get_new_block();
 }
 
-ray::ray(NVAR_TYPE dimension, long direction)
+Ray::Ray(NVAR_TYPE dimension, long direction)
 {
   dim = dimension;
   //coords = new RAYENT_TYPE[dim];
@@ -140,7 +142,7 @@ ray::ray(NVAR_TYPE dimension, long direction)
   }
 }
 
-ray::ray(NVAR_TYPE dimension, const RAYENT_TYPE entries [])
+Ray::Ray(NVAR_TYPE dimension, const RAYENT_TYPE entries [])
 {
   dim = dimension;
   //coords = new RAYENT_TYPE[dim];
@@ -149,7 +151,7 @@ ray::ray(NVAR_TYPE dimension, const RAYENT_TYPE entries [])
     coords[i] = entries[i];
 }
 
-ray::ray(NVAR_TYPE dimension, const EXP_TYPE entries [])
+Ray::Ray(NVAR_TYPE dimension, const EXP_TYPE entries [])
 {
   dim = dimension;
   //coords = new RAYENT_TYPE[dim];
@@ -158,7 +160,7 @@ ray::ray(NVAR_TYPE dimension, const EXP_TYPE entries [])
     coords[i] = entries[i];
 }
 
-ray::ray(const vector<RAYENT_TYPE> &entries)
+Ray::Ray(const vector<RAYENT_TYPE> &entries)
 {
   dim = entries.size();
   //coords = new RAYENT_TYPE[dim];
@@ -167,7 +169,7 @@ ray::ray(const vector<RAYENT_TYPE> &entries)
     coords[i] = entries[i];
 }
 
-ray::ray(const ray &old_ray)
+Ray::Ray(const Ray &old_ray)
         : dim(old_ray.dim)
 {
   //coords = new RAYENT_TYPE[dim];
@@ -177,13 +179,13 @@ ray::ray(const ray &old_ray)
     coords[i] = old_ray.coords[i];
 }
 
-ray::~ray()
+Ray::~Ray()
 {
   //delete [] coords;
   doda->return_used_block(coords);
 }
 
-void ray::simplify_ray()
+void Ray::simplify_ray()
 {
   RAYENT_TYPE * w = coords;
   RAYENT_TYPE gcd = 0;
@@ -209,7 +211,7 @@ void ray::simplify_ray()
       w[i] /= gcd;
 }
 
-DOTPROD_TYPE ray::obtain_dot_product(const constraint &hyperplane) const
+DOTPROD_TYPE Ray::obtain_dot_product(const Constraint &hyperplane) const
 {
   DOTPROD_TYPE result = 0;
   const CONSTR_TYPE * coeffs = hyperplane.coeffs();
@@ -219,20 +221,20 @@ DOTPROD_TYPE ray::obtain_dot_product(const constraint &hyperplane) const
   return result;
 }
 
-ray operator*(RAYENT_TYPE a, ray &r)
+Ray operator*(const RAYENT_TYPE a, const Ray &r)
 {
   NVAR_TYPE d = r.get_dimension();
   //RAYENT_TYPE *coords = new RAYENT_TYPE[d];
   RAYENT_TYPE *coords = ray_data_allocation(d);
   for (NVAR_TYPE i = 0; i < d; ++i)
     coords[i] = a*r[i];
-  ray result(d, coords);
+  Ray result(d, coords);
   //delete [] coords;
   doda->return_used_block(coords);
   return result;
 }
 
-RAYENT_TYPE operator*(const ray &r1, const ray &r2)
+RAYENT_TYPE operator*(const Ray &r1, const Ray &r2)
 {
   RAYENT_TYPE result = 0;
   for (NVAR_TYPE i = 0; i < r1.get_dimension(); ++i)
@@ -240,7 +242,7 @@ RAYENT_TYPE operator*(const ray &r1, const ray &r2)
   return result;
 }
 
-RAYENT_TYPE operator*(ray &r1, vector<long> &r2)
+RAYENT_TYPE operator*(const Ray &r1, const vector<long> &r2)
 {
   RAYENT_TYPE result = 0;
   for (NVAR_TYPE i = 0; i < r1.get_dimension(); ++i)
@@ -248,7 +250,7 @@ RAYENT_TYPE operator*(ray &r1, vector<long> &r2)
   return result;
 }
 
-RAYENT_TYPE operator*( vector<long> &r1, ray &r2)
+RAYENT_TYPE operator*( const vector<long> & r1, const Ray &r2)
 {
   RAYENT_TYPE result = 0;
   for (NVAR_TYPE i = 0; i < r1.size(); ++i)
@@ -256,35 +258,35 @@ RAYENT_TYPE operator*( vector<long> &r1, ray &r2)
   return result;
 }
 
-ray operator+(ray &r1, ray &r2)
+Ray operator+(const Ray &r1, const Ray &r2)
 {
   NVAR_TYPE d = r1.get_dimension();
   RAYENT_TYPE * coords = ray_data_allocation(d);
   for (NVAR_TYPE i = 0; i < d; ++i)
     coords[i] = r1[i] + r2[i];
-  ray result(d, coords);
+  Ray result(d, coords);
   doda->return_used_block(coords);
   return result;
 }
 
-ray operator-(const ray &r1, const ray &r2)
+Ray operator-(const Ray &r1, const Ray &r2)
 {
   NVAR_TYPE d = r1.get_dimension();
   RAYENT_TYPE *coords = ray_data_allocation(d);
   for (NVAR_TYPE i = 0; i < d; ++i)
     coords[i] = r1[i] - r2[i];
-  ray result(d, coords);
+  Ray result(d, coords);
   doda->return_used_block(coords);
   return result;
 }
 
-ray ray_sum(const set<ray> &rs)
+Ray ray_sum(const set<Ray> &rs)
 {
   NVAR_TYPE d = 0;
   RAYENT_TYPE *coords = nullptr;
   for (auto riter = rs.begin(); riter != rs.end(); ++riter)
   {
-    ray r = *riter;
+    Ray r = *riter;
     if (coords == nullptr)
     {
       d = r.get_dimension();
@@ -296,12 +298,12 @@ ray ray_sum(const set<ray> &rs)
       coords[i] += r[i];
     }
   }
-  ray result(d, coords);
+  Ray result(d, coords);
   doda->return_used_block(coords);
   return result;
 }
 
-bool operator==(const ray &r1, const ray &r2)
+bool operator==(const Ray &r1, const Ray &r2)
 {
   bool result = true;
   for (NVAR_TYPE i = 0; result and i < r1.get_dimension(); ++i)
@@ -309,7 +311,7 @@ bool operator==(const ray &r1, const ray &r2)
   return result;
 }
 
-bool operator!=(const ray &r1, const ray &r2)
+bool operator!=(const Ray &r1, const Ray &r2)
 {
   bool result = true;
   for (NVAR_TYPE i = 0; result and i < r1.get_dimension(); ++i)
@@ -317,7 +319,7 @@ bool operator!=(const ray &r1, const ray &r2)
   return !result;
 }
 
-ostream & operator<<(ostream & ostr, const ray &r)
+ostream & operator<<(ostream & ostr, const Ray &r)
 {
   ostr << "( ";
   NVAR_TYPE i;
@@ -327,7 +329,7 @@ ostream & operator<<(ostream & ostr, const ray &r)
   return ostr;
 }
 
-ray & ray::operator=(const ray &other)
+Ray & Ray::operator=(const Ray &other)
 {
   if (!(*this == other))
   {
@@ -347,7 +349,7 @@ ray & ray::operator=(const ray &other)
   return *this;
 }
 
-void ray::swap(ray &other)
+void Ray::swap(Ray &other)
 {
   RAYENT_TYPE tmpval;
   for (NVAR_TYPE i = 0; i < dim; ++i)
@@ -358,7 +360,7 @@ void ray::swap(ray &other)
   }
 }
 
-bool operator<(const ray &first_ray, const ray &second_ray)
+bool operator<(const Ray &first_ray, const Ray &second_ray)
 {
   bool result = true;
   NVAR_TYPE i = 0;
@@ -375,6 +377,8 @@ bool operator<(const ray &first_ray, const ray &second_ray)
   return result and (not equal);
 }
 
-const set<ray> & LP_Solver::get_rays() { return rays; }
+const set<Ray> & LP_Solver::get_rays() { return rays; }
+
+}
 
 #endif

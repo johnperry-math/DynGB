@@ -160,9 +160,9 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The weighted grevlex ordering first compares weighted sums of all exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. Whether the weights are applied to more than one sum can be decided at construction. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a8">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a10">test_dynamic.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00454">454</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00465">465</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for CachedWGrevlex_Ordering:</div>
 <div class="dyncontent">
@@ -184,6 +184,10 @@ Inheritance diagram for CachedWGrevlex_Ordering:</div>
 virtual const WT_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a4997585d5bc84222551e555eac13ebf9">order_weights</a> () const override</td></tr>
 <tr class="memdesc:a4997585d5bc84222551e555eac13ebf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">the weights that define this ordering <br /></td></tr>
 <tr class="separator:a4997585d5bc84222551e555eac13ebf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabbf09fabf721a0f894110b0f5651730"><td class="memItemLeft" align="right" valign="top"><a id="aabbf09fabf721a0f894110b0f5651730"></a>
+virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#aabbf09fabf721a0f894110b0f5651730">number_of_weights</a> () const override</td></tr>
+<tr class="memdesc:aabbf09fabf721a0f894110b0f5651730"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of weights (same as number of indeterminates) <br /></td></tr>
+<tr class="separator:aabbf09fabf721a0f894110b0f5651730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Comparison</div></td></tr>
 <tr class="memitem:afcba2ade4149724f666064643e502769"><td class="memItemLeft" align="right" valign="top"><a id="afcba2ade4149724f666064643e502769"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#afcba2ade4149724f666064643e502769">cmp</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;) const override</td></tr>
@@ -288,7 +292,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00423">423</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00431">431</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -327,7 +331,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00519">519</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00527">527</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -374,7 +378,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>Be sure that <code>t</code> has the correct ordering! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00504">504</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00517">517</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -397,7 +401,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The difference between <a class="el" href="group__orderinggroup.html#class_generic___grevlex" title="generic grevlex ordering, works with any number of variables ">Generic_Grevlex</a> and <a class="el" href="group__orderinggroup.html#class_grevlex___ordering" title="the grevlex ordering for a specified number of variables ">Grevlex_Ordering</a> is that the former doesn&rsquo;t track any <a class="el" href="group__orderinggroup.html#class_monomial___order___data" title="data for a monomial ordering: optional, but stored in Monomial ">Monomial_Order_Data</a>, while the latter relies on it. The latter should, as a result, be more time efficient, while the former is more space efficient. <a class="el" href="group__orderinggroup.html#class_generic___grevlex" title="generic grevlex ordering, works with any number of variables ">Generic_Grevlex</a> will also order monomials which by design have a different number of variables, though that should not in general be something one encounters, and it&rsquo;s rather dangerous with <a class="el" href="group__orderinggroup.html#a1696724ba30a8565b759bb2c8aeefde4" title="returns true iff the first Monomial is larger than the product of the second and the third ...">first_larger_than_multiple()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00043">43</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00046">46</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Generic_Grevlex:</div>
 <div class="dyncontent">
@@ -491,7 +495,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 
 <p>Implements <a class="el" href="group__orderinggroup.html#a9bc3155fc98b4d40c26118fa2114b827">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00063">63</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00066">66</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -547,7 +551,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The data involves an array of \(n\) <code>DEG_TYPE</code>, where the first entry is the sum of the first \(n\) variables, the second entry is the sum of all but the last variable, etc. </p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00097">97</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00100">100</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Grevlex_Order_Data:</div>
 <div class="dyncontent">
@@ -629,7 +633,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00223">223</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00231">231</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -653,7 +657,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <p>assigns gradings to a pre-allocated array </p>
 <dl class="section warning"><dt>Warning</dt><dd>This does not create the array if it does not exist already! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00215">215</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00223">223</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -677,7 +681,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <p>The grevlex ordering first compares the sums of the exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. </p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a10">test_cyclicn.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00150">150</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00153">153</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Grevlex_Ordering:</div>
 <div class="dyncontent">
@@ -784,7 +788,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#a9bc3155fc98b4d40c26118fa2114b827">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00190">190</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00193">193</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -839,7 +843,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#aacb0439b908d45cc5f2635567c6633fd">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00287">287</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00295">295</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -878,7 +882,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00306">306</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00314">314</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -902,7 +906,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <p>The lex ordering is a dictionary ordering. The first variable is considered largest, and monomials with a larger degree in the first variable will be considered larger than monomials with a smaller degree in the first variable, regardless of the overall degree in all variables. </p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a11">test_cyclicn.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00328">328</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00339">339</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Lex_Ordering:</div>
 <div class="dyncontent">
@@ -976,7 +980,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00329">329</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00337">337</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1025,7 +1029,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#a9bc3155fc98b4d40c26118fa2114b827">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00366">366</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00377">377</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -1073,7 +1077,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00332">332</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00340">340</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1128,7 +1132,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#aacb0439b908d45cc5f2635567c6633fd">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00364">364</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00372">372</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1176,7 +1180,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <p>Implements <a class="el" href="group__orderinggroup.html#ab6c02638f87382f7a9a95b994e9a5dfb">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00348">348</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00356">356</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1198,7 +1202,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00556">556</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00569">569</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Matrix_Ordering:</div>
 <div class="dyncontent">
@@ -1278,7 +1282,7 @@ const WT_TYPE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00620">620</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00628">628</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1327,7 +1331,7 @@ const WT_TYPE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p>Implements <a class="el" href="group__orderinggroup.html#a9bc3155fc98b4d40c26118fa2114b827">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00592">592</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00605">605</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -1375,7 +1379,7 @@ const WT_TYPE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p>Implements <a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00627">627</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00635">635</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1430,7 +1434,7 @@ const WT_TYPE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p>Implements <a class="el" href="group__orderinggroup.html#aacb0439b908d45cc5f2635567c6633fd">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00673">673</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00681">681</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1482,7 @@ const WT_TYPE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p>Implements <a class="el" href="group__orderinggroup.html#ab6c02638f87382f7a9a95b994e9a5dfb">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00650">650</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00658">658</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1553,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 <dl class="section warning"><dt>Warning</dt><dd>Avoid changing the monomial ordering data in the comparison functions, as the user may wish to compare two monomials according to a different ordering than the current value. This is the reason those functions are marked to leave the Monomials constant. The expected behavior is that <a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> does whatever the ordering wants, so if you need monomial data check first to decide whether it exists, and applies to this ordering! Use <a class="el" href="group__orderinggroup.html#a22b08dffd1cdf3a655ca18d604cfcee1" title="sets monomial ordering’s data; default is to do nothing ">set_data()</a> if you want to change the monomials first.</dd>
 <dd>
 There is no strict need to check whether the monomials are associated to the same ordering, but if the ordering uses <a class="el" href="group__orderinggroup.html#class_monomial___order___data" title="data for a monomial ordering: optional, but stored in Monomial ">Monomial_Order_Data</a> one would be foolhardy not to check first. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a0">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a0">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a0">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a1">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="monomial__ordering_8hpp_source.html#l00077">77</a> of file <a class="el" href="monomial__ordering_8hpp_source.html">monomial_ordering.hpp</a>.</p>
 </div><div class="dynheader">
@@ -1718,7 +1722,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not override unless you know what you&rsquo;re doing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00471">471</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00490">490</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -1757,7 +1761,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not override unless you know what you&rsquo;re doing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00477">477</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00496">496</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -1940,7 +1944,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <p>Reimplemented in <a class="el" href="group__orderinggroup.html#a65f1e27ee52413c91ffcb87632dcb27c">CachedWGrevlex_Ordering</a>, <a class="el" href="group__orderinggroup.html#a18ba60cd0a76da002303a11d362142d9">WGrevlex</a>, <a class="el" href="group__orderinggroup.html#a83abd3e7505fe2096b01b8146bfdd83f">Grevlex_Ordering</a>, and <a class="el" href="group__orderinggroup.html#a14c344858da03d16c8019afdae3da5dc">Generic_Grevlex</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00467">467</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00486">486</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -1962,7 +1966,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00545">545</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00558">558</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Nonsingular_Matrix_Ordering_Exception:</div>
 <div class="dyncontent">
@@ -2010,6 +2014,10 @@ Inheritance diagram for Weighted_Ordering:</div>
 virtual const WT_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a5916f1631d5c30fe39dedcef96a3944e">order_weights</a> () const =0</td></tr>
 <tr class="memdesc:a5916f1631d5c30fe39dedcef96a3944e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the weights used by this orderings <br /></td></tr>
 <tr class="separator:a5916f1631d5c30fe39dedcef96a3944e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f13d8c571e36bc29d2de39ace88bdd8"><td class="memItemLeft" align="right" valign="top"><a id="a7f13d8c571e36bc29d2de39ace88bdd8"></a>
+virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a7f13d8c571e36bc29d2de39ace88bdd8">number_of_weights</a> () const =0</td></tr>
+<tr class="memdesc:a7f13d8c571e36bc29d2de39ace88bdd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of weights (same as number of indeterminates) <br /></td></tr>
+<tr class="separator:a7f13d8c571e36bc29d2de39ace88bdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_group__orderinggroup"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_group__orderinggroup')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a></td></tr>
 <tr class="memitem:a6f507bd325e959ce867880d4696a99cc inherit pub_methods_group__orderinggroup"><td class="memItemLeft" align="right" valign="top"><a id="a6f507bd325e959ce867880d4696a99cc"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a6f507bd325e959ce867880d4696a99cc">~Monomial_Ordering</a> ()</td></tr>
@@ -2059,7 +2067,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
 <p>The grevlex ordering first compares the sums of the exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. </p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00226">226</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00229">229</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for WGrevlex:</div>
 <div class="dyncontent">
@@ -2077,11 +2085,19 @@ Inheritance diagram for WGrevlex:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a0ac3e66fb20c098427f6a08c92fd3771">WGrevlex</a> (NVAR_TYPE, WT_TYPE *, bool=true)</td></tr>
 <tr class="memdesc:a0ac3e66fb20c098427f6a08c92fd3771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a grevlex ordering specific to the specified number of variables, with the given weights. The final parameter indicates whether to apply the weights when breaking ties. <br /></td></tr>
 <tr class="separator:a0ac3e66fb20c098427f6a08c92fd3771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f58ee49c04e416085a096c4e5798c1"><td class="memItemLeft" align="right" valign="top"><a id="a60f58ee49c04e416085a096c4e5798c1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a60f58ee49c04e416085a096c4e5798c1">WGrevlex</a> (<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> r, bool=true)</td></tr>
+<tr class="memdesc:a60f58ee49c04e416085a096c4e5798c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a weighted grevlex ordering using the specified ray. The final parameter indicates whether to apply the weights when breaking ties. <br /></td></tr>
+<tr class="separator:a60f58ee49c04e416085a096c4e5798c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
 <tr class="memitem:a2eb6db0248ec4b205d15b5b1b2261db6"><td class="memItemLeft" align="right" valign="top"><a id="a2eb6db0248ec4b205d15b5b1b2261db6"></a>
 virtual const WT_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a2eb6db0248ec4b205d15b5b1b2261db6">order_weights</a> () const override</td></tr>
 <tr class="memdesc:a2eb6db0248ec4b205d15b5b1b2261db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">this weighted ordering&rsquo;s weights <br /></td></tr>
 <tr class="separator:a2eb6db0248ec4b205d15b5b1b2261db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd715e453ad062b40578438b1bbe10e9"><td class="memItemLeft" align="right" valign="top"><a id="afd715e453ad062b40578438b1bbe10e9"></a>
+virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#afd715e453ad062b40578438b1bbe10e9">number_of_weights</a> () const override</td></tr>
+<tr class="memdesc:afd715e453ad062b40578438b1bbe10e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of weights (same as number of indeterminates) <br /></td></tr>
+<tr class="separator:afd715e453ad062b40578438b1bbe10e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Comparison</div></td></tr>
 <tr class="memitem:a547c267540f69917cadbeba621642f2a"><td class="memItemLeft" align="right" valign="top"><a id="a547c267540f69917cadbeba621642f2a"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#a547c267540f69917cadbeba621642f2a">first_larger</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u) const override</td></tr>
@@ -2188,7 +2204,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 
 <p>Implements <a class="el" href="group__orderinggroup.html#a9bc3155fc98b4d40c26118fa2114b827">Monomial_Ordering</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00273">273</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00284">284</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 
 </div>
 </div>
@@ -2248,7 +2264,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The data involves an array of \(n\) <code>DEG_TYPE</code>, where the first entry is a weighted sum of the first \(n\) variables, the second entry is the <em>ordinary</em> sum of all but the last variable, etc. </p>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00390">390</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00401">401</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for WGrevlex_Order_Data:</div>
 <div class="dyncontent">
@@ -2277,7 +2293,7 @@ virtual <a class="el" href="group__orderinggroup.html#class_w_grevlex___order___
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__orderinggroup.html#aad8299f5ca80ad008cd62ba9e802abae">~WGrevlex_Order_Data</a> ()</td></tr>
 <tr class="memdesc:aad8299f5ca80ad008cd62ba9e802abae"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes the array of partial weights <br /></td></tr>
 <tr class="separator:aad8299f5ca80ad008cd62ba9e802abae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">returns the weighted sum of the first \f$i\f$ variables</div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">returns the weighted sum of the first @f$i@f$ variables</div></td></tr>
 <tr class="memitem:a91af5dd81fbb141ab08be35acbd001a1"><td class="memItemLeft" align="right" valign="top"><a id="a91af5dd81fbb141ab08be35acbd001a1"></a>
 DEG_TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (NVAR_TYPE i) const</td></tr>
 <tr class="separator:a91af5dd81fbb141ab08be35acbd001a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2339,7 +2355,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00397">397</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00405">405</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -2369,7 +2385,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00383">383</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00391">391</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>
@@ -2422,7 +2438,7 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if the matrix referenced by <code>A</code> is nonsingular </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00558">558</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="particular__orderings_8cpp_source.html#l00566">566</a> of file <a class="el" href="particular__orderings_8cpp_source.html">particular_orderings.cpp</a>.</p>
 
 </div>
 </div>

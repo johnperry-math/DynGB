@@ -9,7 +9,7 @@
 * the Free Software Foundation, either version 2 of the License, or           *
 * (at your option) any later version.                                         *
 *                                                                             *
-* Foobar is distributed in the hope that it will be useful,                   *
+* DynGB is distributed in the hope that it will be useful,                    *
 * but WITHOUT ANY WARRANTY; without even the implied warranty of              *
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               *
 * GNU General Public License for more details.                                *
@@ -34,7 +34,7 @@ public:
   /** @name Construction */
   ///@{
   /**
-    @brief all the information we need is in \c cpb already so no additional
+    @brief all the information we need is in @c cpb already so no additional
       processing is necessary
   */
   Normal_Strategy(Critical_Pair_Basic & cpb);
@@ -55,7 +55,7 @@ public:
   friend ostream & operator <<(ostream &, const Normal_Strategy &);
   ///@}
 protected:
-  /** @brief the critical pair to which this \c Normal_Strategy belongs */
+  /** @brief the critical pair to which this @c Normal_Strategy belongs */
   Critical_Pair_Basic * cp;
 };
 
