@@ -116,11 +116,19 @@ Pair_WSugar_Strategy::Pair_WSugar_Strategy(Critical_Pair_Basic & cpb)
 
 bool Pair_WSugar_Strategy::equivalent(const Pair_Strategy_Data & sd) const {
   const Pair_WSugar_Strategy * nsd = static_cast<const Pair_WSugar_Strategy *>(&sd);
-  return (sugar == nsd->sugar)
+  bool result = (sugar == nsd->sugar)
     and (cp->lcm() == nsd->cp->lcm())
-    and (cp->first()->leading_monomial() == nsd->cp->first()->leading_monomial())
-    and (cp->second()->leading_monomial()
-            == nsd->cp->second()->leading_monomial());
+    and (cp->first_multiplier() == nsd->cp->first_multiplier());
+  if (result) {
+    if (cp->second() == nullptr) result = (nsd->cp->second() == nullptr);
+    else {
+      if (nsd->cp->second() != nullptr) result = false;
+      else 
+      result = ((cp->second() == nsd->cp->second())
+          and (cp->second_multiplier() == nsd->cp->second_multiplier()));
+    }
+  }
+  return result;
 }
 
 bool Pair_WSugar_Strategy::first_larger(const Pair_Strategy_Data & sd) const {
@@ -131,18 +139,16 @@ bool Pair_WSugar_Strategy::first_larger(const Pair_Strategy_Data & sd) const {
   else if (sugar == nsd->sugar and cp->lcm() > nsd->cp->lcm())
     result = true;
   else if (sugar == nsd->sugar and cp->lcm().is_like(nsd->cp->lcm())) {
-    if (cp->first()->leading_monomial() > nsd->cp->first()->leading_monomial())
+    if (cp->first_multiplier() > nsd->cp->first_multiplier())
       result = true;
     else if (
-        cp->first()->leading_monomial().is_like(
-          nsd->cp->first()->leading_monomial()
-        )
+        cp->first_multiplier().is_like(nsd->cp->first_multiplier())
     ) {
-      if (
-        cp->second()->leading_monomial() > nsd->cp->second()->leading_monomial()
-      ) {
+      if (cp->second() == nullptr) result = false;
+      else if (nsd->cp->second() == nullptr)
         result = true;
-      }
+      else
+        result = (cp->second_multiplier() > nsd->cp->second_multiplier());
     }
   }
   return result;

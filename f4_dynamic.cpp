@@ -74,9 +74,7 @@ F4_Reduction_Data::F4_Reduction_Data(
   auto mi = M_build.begin();
   auto ri = R_build.begin();
   NVAR_TYPE n = Rx.number_of_variables();
-  WT_TYPE * wts = new WT_TYPE[n];
-  for (NVAR_TYPE i = 0; i < n; ++i) wts[i] = 1;
-  mord = new WGrevlex(n, wts);
+  mord = curr_ord;
   for (auto p : P) {
     Poly_Sugar_Data * new_sugar = new Poly_Sugar_Data(p->first());
     strategies.push_back(new_sugar);
@@ -258,8 +256,8 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
-  delete [] mord->order_weights();
-  delete mord;
+  //delete [] mord->order_weights();
+  //delete mord;
 }
 
 void F4_Reduction_Data::print_matrix(bool show_data) {
@@ -334,8 +332,8 @@ void F4_Reduction_Data::reduce_my_rows(
               r.emplace_back(j, gi->currCoeff().value());
               gi->moveRight();
             }
-            delete gi;
           }
+          delete gi;
           red_mutex.unlock();
           // prepare for reduction
           new_nonzero_entries = nonzero_entries[k];
@@ -394,23 +392,23 @@ void F4_Reduction_Data::reduce_my_new_rows(
   auto mod = F.modulus();
   const auto & Ai = A[i];
   for (auto j : to_reduce) {
-    auto ci = head[i];
+    auto ci = lhead_i - offset[i];
     auto & Aj = A[j];
-    auto c = ci + offset[i] - offset[j]; // pos in A[j] of A[i]'s head
-    auto a = Aj[c];
+    auto cj = lhead_i - offset[j]; // pos in A[j] of A[i]'s head
+    auto a = Aj[cj];
     unsigned ops = 0;
-    a *= mod - F.inverse(Ai[lhead_i]);
-    while (c < Aj.size() and ops < nonzero_entries[i]) {
+    a *= mod - F.inverse(Ai[ci]);
+    while (cj < Aj.size() and ops < nonzero_entries[i]) {
       if (Ai[ci] != 0) {
-        bool was_zero = (Aj[c] == 0);
-        Aj[c] += a*Ai[ci]; Aj[c] %= mod;
+        bool was_zero = (Aj[cj] == 0);
+        Aj[cj] += a*Ai[ci]; Aj[cj] %= mod;
         if (was_zero)
           ++nonzero_entries[j];
-        else if (Aj[c] == 0)
+        else if (Aj[cj] == 0)
           --nonzero_entries[j];
         ++ops;
       }
-      ++c; ++ci;
+      ++cj; ++ci;
     }
     unsigned & hj = head[j];
     while (hj < Aj.size() and Aj[hj] == 0) ++hj;
@@ -527,96 +525,109 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
   // select most advantageous unprocessed poly, reduce others
   while (unprocessed.size() != 0) {
     unsigned winning_row = *(unprocessed.begin());
+    Monomial winning_lm { *M[offset[winning_row] + head[winning_row]] };
     for (unsigned i : unprocessed) {
-      unsigned j; // will store location of new leading monomial
       // copy skeleton
-      LP_Solver * new_lp;
-      list<Monomial> T {U};
-      if (dynamic_cast<Skeleton *>(skel) != nullptr)
-        new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
-      else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
-        new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
-      else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
-        new_lp = new PPL_Solver(*dynamic_cast<PPL_Solver *>(skel));
-      // see if we can obtain a better ordering from this polynomial
-      vector<Dense_Univariate_Integer_Polynomial*> H(number_of_rows());
-      for (auto h : H)
-        h = hn == nullptr ?
-          nullptr : new Dense_Univariate_Integer_Polynomial(*hn);
-      bool new_ordering = false;
-      select_monomial(
-          potential_pps[i], *M[offset[i] + head[i]], U, &H[i], G, P, new_lp,
-          new_ordering, heur
-      );
-      // if we have a new ordering, compare the result to current preference
-      // we use PP_With_Ideal to hold relevant dynamic information
-      if (!new_ordering) {
-        delete new_lp;
-      } else {
-        // first find the index of the leading monomial (need for reduction)
-        Monomial t = U.back();
-        U.pop_back();
-        bool found_mon = false;
-        for (unsigned k = offset[i]; not found_mon; ++k) {
-          if (*M[k] == t) {
-            j = k;
-            found_mon = true;
-          }
-        }
-        // if tempideal beats newideal, reassign newideal
-        Ray r(mord->number_of_weights(), mord->order_weights());
-        if (newideal == nullptr) { // always true in this case
-          ordering_changed = true;
-          winning_row = i;
-          winning_skel = new_lp;
-          delete skel;
-          skel = winning_skel;
-          newideal = new PP_With_Ideal(t, T, r, P, nullptr);
-          newideal->set_hilbert_numerator(H[i]);
+      if (nonzero_entries[i] != 0) {
+        LP_Solver * new_lp;
+        list<Monomial> T {U};
+        if (dynamic_cast<Skeleton *>(skel) != nullptr)
+          new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
+        else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
+          new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
+        else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
+          new_lp = new PPL_Solver(*dynamic_cast<PPL_Solver *>(skel));
+        // see if we can obtain a better ordering from this polynomial
+        vector<Dense_Univariate_Integer_Polynomial*> H(number_of_rows());
+        for (auto h : H)
+          h = hn == nullptr ?
+            nullptr : new Dense_Univariate_Integer_Polynomial(*hn);
+        bool new_ordering = false;
+        select_monomial(
+            potential_pps[i], *M[offset[i] + head[i]], U, &H[i], G, P, new_lp,
+            new_ordering, heur
+        );
+        // if we have a new ordering, compare the result to current preference
+        // we use PP_With_Ideal to hold relevant dynamic information
+        if (not new_ordering) {
+          for (auto h : H) delete h;
+          delete new_lp;
         } else {
-          PP_With_Ideal * tempideal = new PP_With_Ideal(t, T, r, P, nullptr);
-          tempideal->set_hilbert_numerator(H[i]);
-          bool change_winner;
-          switch(heur) {
-            case Dynamic_Heuristic::ORD_HILBERT_THEN_DEG:
-              change_winner = less_by_hilbert_then_degree(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
-              change_winner = less_by_hilbert(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::DEG_THEN_ORD_HILBERT:
-              change_winner = less_by_degree_then_hilbert(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::GRAD_HILB_THEN_DEG:
-              change_winner = less_by_grad_hilbert_then_degree(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::SMOOTHEST_DEGREES:
-              change_winner = less_by_smoothest_degrees(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::LARGEST_MAX_COMPONENT:
-              change_winner = less_by_largest_max_component(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::MIN_CRIT_PAIRS:
-              change_winner = less_by_num_crit_pairs(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::BETTI_HILBERT_DEG:
-              change_winner = less_by_betti(*tempideal, *newideal); break;
-            case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
-              change_winner = less_by_grad_betti(*tempideal, *newideal); break;
-            default:
-              change_winner = less_by_hilbert(*tempideal, *newideal); break;
-          }
-          if (change_winner) { // winner has changed; reduce matrix by it
+          // first save the index of the leading monomial (need for reduction)
+          Monomial row_lm { U.back() };
+          U.pop_back();
+          // if tempideal beats newideal, reassign newideal
+          Ray r(mord->number_of_weights(), mord->order_weights());
+          if (newideal == nullptr) { // always true in this case
             ordering_changed = true;
-            delete newideal;
             winning_row = i;
-            newideal = tempideal;
             winning_skel = new_lp;
             delete skel;
             skel = winning_skel;
-            reduce_by_new(i, j);
-          } // change_winner?
-        } // newideal == nullptr?
-      } // ordering changed?
+            newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
+            newideal->set_hilbert_numerator(H[i]);
+          } else {
+            PP_With_Ideal * tempideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
+            tempideal->set_hilbert_numerator(H[i]);
+            bool change_winner;
+            switch(heur) {
+              case Dynamic_Heuristic::ORD_HILBERT_THEN_DEG:
+                change_winner = less_by_hilbert_then_degree(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
+                change_winner = less_by_hilbert(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::DEG_THEN_ORD_HILBERT:
+                change_winner = less_by_degree_then_hilbert(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::GRAD_HILB_THEN_DEG:
+                change_winner = less_by_grad_hilbert_then_degree(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::SMOOTHEST_DEGREES:
+                change_winner = less_by_smoothest_degrees(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::LARGEST_MAX_COMPONENT:
+                change_winner = less_by_largest_max_component(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::MIN_CRIT_PAIRS:
+                change_winner = less_by_num_crit_pairs(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::BETTI_HILBERT_DEG:
+                change_winner = less_by_betti(*tempideal, *newideal); break;
+              case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
+                change_winner = less_by_grad_betti(*tempideal, *newideal); break;
+              default:
+                change_winner = less_by_hilbert(*tempideal, *newideal); break;
+            }
+            if (not change_winner) {
+              delete new_lp;
+              delete tempideal;
+            } else { // winner has changed; reduce matrix by it
+              ordering_changed = true;
+              delete newideal;
+              winning_row = i;
+              winning_lm = row_lm;
+              newideal = tempideal;
+              winning_skel = new_lp;
+              delete skel;
+              skel = winning_skel;
+            } // change_winner?
+          } // newideal == nullptr?
+        } // ordering changed?
+      }
     } // loop through rows
+    // find current lm and use for reduction
+    bool found_mon = false;
+    unsigned j = offset[winning_row] + head[winning_row];
+    for (unsigned k = offset[winning_row]; not found_mon; ++k) {
+      if (*M[k] == winning_lm) {
+        j = k;
+        found_mon = true;
+      }
+    }
+    reduce_by_new(winning_row, j);
     unprocessed.erase(winning_row);
+    for (unsigned i = 0; i < number_of_rows(); ++i)
+      if (unprocessed.count(i) > 0 and nonzero_entries[i] == 0)
+        unprocessed.erase(i);
   }
   if (ordering_changed) {
     skel = winning_skel;
     result = new WGrevlex(ray_sum(skel->get_rays()));
+    cout << "new ordering " << result << endl;
   }
   delete newideal;
   return result;
@@ -706,6 +717,8 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         cout << "new ordering: " << *new_ord << endl;
         for (auto p : P)
           p->change_ordering(new_ord);
+        for (auto & t : T)
+          t.set_monomial_ordering(new_ord);
         all_orderings_used.push_front(curr_ord);
         curr_ord = new_ord;
       }

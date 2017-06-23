@@ -11,7 +11,7 @@ John Perry, \href{mailto:john.perry@usm.edu}{\tt john.\+perry@usm.\+edu}
 This project is designed to be a testbed/reference implementation for dynamic Gr\"{o}bner basis computation, using the algorithms described in \cite{CaboaraDynAlg} and \cite{CaboaraPerry}, along with some newer ideas.
 
 No claim to high efficiency or exemplary programming is implied. I wrote this to be relatively usable (compared to an earlier Sage implementation) and {\itshape easy to modify}, especially as regards modularity, polymorphism, and getting detailed data.\hypertarget{index_Install}{}\section{Installation and dependencies}\label{index_Install}
-For {\itshape this} program, a simple {\ttfamily make B\+U\+I\+LD=build} should do. However, there are several prerequisite programs you need to install first\+:
+The first release required something akin to {\ttfamily make B\+U\+I\+LD=build}. I am now using autotools, so the usual {\ttfamily ./configure} followed by {\ttfamily make} should work. However, there are several prerequisite programs you need to install first\+:
 \begin{DoxyItemize}
 \item a C++ compiler that understands C++11;
 \item \href{https://gmplib.org/}{\tt G\+MP}, the Gnu Multi-\/\+Precision library \cite{gmp};

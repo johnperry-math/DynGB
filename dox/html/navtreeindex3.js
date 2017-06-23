@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"group__polygroup.html#a539835f92490fbbb5ba3b37e4f80ef49":[3,7,1,17],
-"group__polygroup.html#a53b0ed425ff4bbbf01818005d6003d59":[3,7,0,18],
 "group__polygroup.html#a5410d31236ca04dfca3fe27acb7553f4":[3,7,7,16],
 "group__polygroup.html#a551ade20b7dcd96c227dd0401f6ffbbe":[3,7,0,27],
 "group__polygroup.html#a556f9f54dca0f5407ec03c2ee88bac4b":[3,7,9,5],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "group__strategygroup.html#a10eaa72d8dd9d02be47c7450d0358911":[3,8,4,9],
 "group__strategygroup.html#a10f553f550739a68fe90fa3318942134":[3,8,4,14],
 "group__strategygroup.html#a125902ea0a800d9545937930e4537040":[3,8,5,10],
-"group__strategygroup.html#a15fdaa9fa3cc0a259e7dd29df1940819":[3,8,1,8]
+"group__strategygroup.html#a15fdaa9fa3cc0a259e7dd29df1940819":[3,8,1,8],
+"group__strategygroup.html#a177d4749902d7c94d8e48340a64d87b7":[3,8,1,0],
+"group__strategygroup.html#a19030cdc7b1f92c5941a78276e298f67":[3,8,1,4]
 };

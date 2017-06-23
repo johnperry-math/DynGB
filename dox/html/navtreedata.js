@@ -48,10 +48,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "algorithm__buchberger__basic_8cpp_source.html",
-"group___g_b_computation.html#a038d8389aa28cdbc63a3e132bd226cfc",
-"group___iterator_group.html#ae94baa36d6b096c1144068dc21108c23",
-"group__polygroup.html#a539835f92490fbbb5ba3b37e4f80ef49",
-"group__strategygroup.html#a177d4749902d7c94d8e48340a64d87b7"
+"group___g_b_computation.html#a056c7e030d1bcb86444bf52405482964",
+"group___iterator_group.html#aec343a01bd5e134dba01f4acffb0dd45",
+"group__polygroup.html#a5410d31236ca04dfca3fe27acb7553f4",
+"group__strategygroup.html#a1b2e8a7fe4fcd57555fa58e48620b2bf"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

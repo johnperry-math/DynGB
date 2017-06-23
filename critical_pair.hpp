@@ -183,7 +183,7 @@ public:
     ordering = how_to_order;
     tpq.set_monomial_ordering(ordering);
     tp.set_monomial_ordering(ordering);
-    tp.set_monomial_ordering(ordering);
+    tq.set_monomial_ordering(ordering);
     delete key;
     switch(strategy) {
     case StrategyFlags::NORMAL_STRATEGY:
@@ -233,6 +233,8 @@ public:
   */
   void change_ordering(Weighted_Ordering * new_order) {
     ordering = new_order;
+    // the leading term may change when an input polynomial is involved,
+    // so we need to reconsider the leading monomial & "lcm" here
     if (is_generator()) {
       p->set_monomial_ordering(ordering);
       tpq = p->leading_monomial();

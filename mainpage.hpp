@@ -21,7 +21,9 @@
 
   @section Install Installation and dependencies
 
-  For @em this program, a simple `make BUILD=build` should do.
+  The first release required something akin to `make BUILD=build`.
+  I am now using autotools, so the usual `./configure` followed by `make`
+  should work.
   However, there are several prerequisite programs you need to install first:
     - a C++ compiler that understands C++11; 
     - <a href="https://gmplib.org/" target="_blank">GMP</a>,

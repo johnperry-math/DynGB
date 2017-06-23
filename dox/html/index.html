@@ -113,7 +113,7 @@ Overview</h1>
 <p>No claim to high efficiency or exemplary programming is implied. I wrote this to be relatively usable (compared to an earlier Sage implementation) and <em>easy to modify</em>, especially as regards modularity, polymorphism, and getting detailed data.</p>
 <h1><a class="anchor" id="Install"></a>
 Installation and dependencies</h1>
-<p>For <em>this</em> program, a simple <code>make BUILD=build</code> should do. However, there are several prerequisite programs you need to install first:</p><ul>
+<p>The first release required something akin to <code>make BUILD=build</code>. I am now using autotools, so the usual <code>./configure</code> followed by <code>make</code> should work. However, there are several prerequisite programs you need to install first:</p><ul>
 <li>a C++ compiler that understands C++11;</li>
 <li><a href="https://gmplib.org/" target="_blank">GMP</a>, the Gnu Multi-Precision library <a class="el" href="citelist.html#CITEREF_gmp">[5]</a>;</li>
 <li><a href="https://www.gnu.org/software/glpk/" target="_blank">GLPK</a>, the Gnu Linear Programming Kit <a class="el" href="citelist.html#CITEREF_glpk">[8]</a>;</li>

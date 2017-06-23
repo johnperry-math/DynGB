@@ -14,7 +14,7 @@
 
 
 
-
+VPATH = ..
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
     false; \
@@ -255,7 +255,7 @@ AM_V_at = $(am__v_at_$(V))
 am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I.
+DEFAULT_INCLUDES = -I. -I$(srcdir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -348,10 +348,10 @@ AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPPFLAGS = 
+CPPFLAGS = -DDEBUG
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -O0 -g
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -383,10 +383,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 2.0
-abs_builddir = /home/cantanima/common/c++/gbproject
-abs_srcdir = /home/cantanima/common/c++/gbproject
-abs_top_builddir = /home/cantanima/common/c++/gbproject
-abs_top_srcdir = /home/cantanima/common/c++/gbproject
+abs_builddir = /home/cantanima/common/c++/gbproject/debug
+abs_srcdir = /home/cantanima/common/c++/gbproject/debug/..
+abs_top_builddir = /home/cantanima/common/c++/gbproject/debug
+abs_top_srcdir = /home/cantanima/common/c++/gbproject/debug/..
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -420,12 +420,12 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = .
+srcdir = ..
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = 
 top_builddir = .
-top_srcdir = .
+top_srcdir = ..
 DYNAMIC_LIB = algorithm_buchberger_dynamic.cpp dynamic_engine.cpp
 HILBERT_LIB = hilbert_functions.cpp dense_univariate_rational_poly.cpp dense_univariate_integer_poly.cpp
 LP_SOLVERS_LIB = lp_solver.cpp skeleton.cpp glpk_solver.cpp ppl_solver.cpp
