@@ -195,7 +195,7 @@ void initial_analysis(
   for (auto f : F) {
     set<Monomial> T;
     set<Monomial> U;
-    set<Monomial> V;
+    list<Monomial> V;
     Polynomial_Iterator * fi = f->new_iterator();
     while (not fi->fellOff()) {
       U.insert((fi->currMonomial()));

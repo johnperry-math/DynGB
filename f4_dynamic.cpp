@@ -47,6 +47,7 @@ using Dynamic_Engine::less_by_largest_max_component;
 using Dynamic_Engine::less_by_num_crit_pairs;
 using Dynamic_Engine::less_by_betti;
 using Dynamic_Engine::less_by_grad_betti;
+using Dynamic_Engine::compatible_pp;
 
 void find_position(
   list<Monomial *>::iterator & ti,
@@ -517,18 +518,22 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
   vector<set<Monomial> > potential_pps(number_of_rows());
   for (unsigned i = 0; i < number_of_rows(); ++i) {
     if (nonzero_entries[i] != 0) {
+      set<Monomial> all_pps;
+      list<Monomial> boundary_pps;
+      monomials_in_row(i, all_pps);
+      compatible_pp(*M[offset[i] + head[i]], all_pps, potential_pps[i], boundary_pps, skel);
       unprocessed.insert(i);
-      monomials_in_row(i, potential_pps[i]);
     }
   }
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   while (unprocessed.size() != 0) {
+    cout << unprocessed.size() << " rows to consider\n";
     unsigned winning_row = *(unprocessed.begin());
     Monomial winning_lm { *M[offset[winning_row] + head[winning_row]] };
     for (unsigned i : unprocessed) {
       // copy skeleton
-      if (nonzero_entries[i] != 0) {
+      if (nonzero_entries[i] != 0 and potential_pps[i].size() > 1) {
         LP_Solver * new_lp;
         list<Monomial> T {U};
         if (dynamic_cast<Skeleton *>(skel) != nullptr)
@@ -759,6 +764,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   cout << "computation ended at " << asctime(localtime(&end_f4)) << endl;
   cout << "parallel f4 took " << duration << " seconds\n";
   cout << "parallel f4 spent " << total_time << " seconds in timed section\n";
+  check_correctness(B);
   return B;
 }
 

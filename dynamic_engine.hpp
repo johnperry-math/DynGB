@@ -274,13 +274,13 @@ class PP_With_Ideal {
   @param boundary_mons boundary monomials (no apparent purpose at the moment)
 */
 void compatible_pp(
-  Monomial currentLPP,            // the current LPP
+  const Monomial & currentLPP,            // the current LPP
   const set<Monomial> &allPPs,    // the monomials to consider;
                                   // some will be removed
   set<Monomial> &result,          // returned as PPs for Hilbert function
                                   // ("easy" (& efficient?) to extract exps
-  set<Monomial> &boundary_mons,   // boundary monomials
-  LP_Solver *skel                 // used for alternate refinement
+  list<Monomial> &boundary_mons,  // boundary monomials
+  const LP_Solver *skel                 // used for alternate refinement
 );
 
 /**
@@ -306,13 +306,13 @@ bool verify_and_modify_if_necessary(
   @date 2014
   @brief Create constraints for a candidate LPP.
   @param pp_I pair of PP with the ideal it would have.
-  @param monomialsForComparison monomials used to generate constraints with LPP
+  @param monomials_for_comparison monomials used to generate constraints with LPP
   @param result the new constraints
 */
 void constraints_for_new_pp(
-  const PP_With_Ideal &pp_I,
-  const set<Monomial> &monomialsForComparison,
-  vector<Constraint> &result
+  const PP_With_Ideal & pp_I,
+  const set<Monomial> & monomials_for_comparison,
+  vector<Constraint> & result
 );
 
 /**
@@ -349,7 +349,8 @@ void select_monomial(
   @brief same as
     <c>select_monomial(Abstract_Polynomial *, list<Monomial> &, Dense_Univariate_Integer_Polynomial **, const list<Abstract_Polynomial *> &, const list<Critical_Pair_Dynamic *> &,LP_Solver *, bool &, Dynamic_Heuristic)</c>
     but with the monomials already extracted
-  @param r the polynomial in need of a new choice of LPP
+  @param r the polynomial in need of a new choice of LPP;
+      this will change to the monomials that are actually compatible
   @param currentLPP the current leading monomial
   @param CurrentLPPs the current choices of LPPs for `CurrentPolys`
   @param current_hilbert_numerator Hilbert numerator for CurrentLPPs (changes to
@@ -363,7 +364,7 @@ void select_monomial(
   @date 2017
 */
 void select_monomial(
-    const set<Monomial> r,
+    const set<Monomial> & r,
     const Monomial & currentLPP,
     list<Monomial> &CurrentLPPs,      // changes
     Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
@@ -372,6 +373,34 @@ void select_monomial(
     LP_Solver * currSkel,                // possibly changes
     bool &ordering_changed,
     Dynamic_Heuristic method = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG
+);
+
+/**
+  @ingroup GBComputation
+  @brief similar to
+    <c>select_monomial(Abstract_Polynomial *, list<Monomial> &, Dense_Univariate_Integer_Polynomial **, const list<Abstract_Polynomial *> &, const list<Critical_Pair_Dynamic *> &,LP_Solver *, bool &, Dynamic_Heuristic)</c>
+    but see details
+  @param I PP_With_Ideal for each compatible monomial
+  @param monomials_to_compare monomials in the boundary and interior of cone
+  @param currentLPP the current leading monomial
+  @param CurrentPolys the current basis of the ideal (to verify correctness)
+  @param currSkel the current skeleton
+  @param ordering_changed whether the monomial selected changes the ordering
+  @author John Perry
+  @date 2017
+  @details In this usage, the monomials should already be arranged into a set
+    that is ordered by the function you wish to use
+    (e.g., <c>less_by_hilbert()</c>). If @p check_compatibility is set,
+    then the algorithm will check @p I for compatibility; otherwise it will
+    assume that the monomials corresponding to each @c I are already compatible.
+*/
+void select_monomial(
+    set<PP_With_Ideal, bool(*)(PP_With_Ideal &, PP_With_Ideal &)> & I,
+    const list<Monomial> & monomials_to_compare,
+    Monomial & currentLPP,
+    const list<Abstract_Polynomial *> &CurrentPolys,
+    LP_Solver * currSkel,                // possibly changes
+    bool &ordering_changed
 );
 
 /**

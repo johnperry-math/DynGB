@@ -159,7 +159,10 @@ struct smaller_lm {
   @param G list of generators of an ideal
   @param strategy how to select critical pairs 
 */
-void check_correctness(list<Constant_Polynomial *>G, StrategyFlags strategy);
+void check_correctness(
+  list<Constant_Polynomial *>G,
+  StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY
+);
 
 /**
   @brief prints the number of polynomials in the basis

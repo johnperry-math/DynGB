@@ -377,7 +377,7 @@ bool operator<(const Ray &first_ray, const Ray &second_ray)
   return result and (not equal);
 }
 
-const set<Ray> & LP_Solver::get_rays() { return rays; }
+const set<Ray> & LP_Solver::get_rays() const { return rays; }
 
 }
 

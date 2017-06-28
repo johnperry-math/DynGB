@@ -510,12 +510,12 @@ bool less_by_grad_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
 }
 
 void compatible_pp(
-  Monomial currentLPP,            // the current LPP
+  const Monomial & currentLPP,            // the current LPP
   const set<Monomial> & allPPs,   // the monomials to consider; some removed
   set<Monomial> &result,          // returned as PPs for Hilbert function
                                   // ("easy" (& efficient?) to extract exps
-  set<Monomial> &boundary_mons,   // boundary monomials
-  LP_Solver *skel                 // used for alternate refinement
+  list<Monomial> &boundary_mons,   // boundary monomials
+  const LP_Solver *skel                 // used for alternate refinement
 )
 {
   // known boundary vectors
@@ -523,8 +523,8 @@ void compatible_pp(
   // get the exponent vector of the current LPP, insert it
   NVAR_TYPE n = currentLPP.num_vars();
   Ray aray(n, currentLPP.log());
-  set<Monomial> initial_candidates;
-  initial_candidates.insert(currentLPP);
+  list<Monomial> initial_candidates;
+  initial_candidates.push_back(currentLPP);
   // compare other monomials with LPP
   /*for (
         auto b_ptr = allPPs.begin();
@@ -558,7 +558,7 @@ void compatible_pp(
   }*/
   for (const Monomial & b : allPPs)
     if (not b.is_like(currentLPP) and skel->makes_consistent_constraint(b, currentLPP))
-      initial_candidates.insert(b);
+      initial_candidates.push_back(b);
   for (const Monomial & t : initial_candidates)
     result.insert(t);
   // (new) alternate refinement: compare remaining monomials against each other,
@@ -582,7 +582,7 @@ void compatible_pp(
         }
     if (good_constraints)
     {
-      boundary_mons.insert(t);
+      boundary_mons.push_back(t);
       // cout << "\tconsistent!\n";
     }
   }
@@ -702,7 +702,7 @@ bool verify_and_modify_if_necessary(
 
 void constraints_for_new_pp(
   const PP_With_Ideal &I,
-  const set<Monomial> &monomialsForComparison,
+  const set<Monomial> &monomials_for_comparison,
   vector<Constraint> &result
 )
 {
@@ -714,7 +714,7 @@ void constraints_for_new_pp(
   CONSTR_TYPE *c = new CONSTR_TYPE[n];  // space for coefficients of constraint
   a = I.get_pp().log();  // exponent vector of candidate
   // loop through exponent vectors of other 
-  for (const Monomial & t : monomialsForComparison)
+  for (const Monomial & t : monomials_for_comparison)
   {
     // insert only different PPs (since I->t should also be in that set)
     if (t != I.get_pp())
@@ -757,7 +757,7 @@ void select_monomial(
 }
 
 void select_monomial(
-    set<Monomial> allPPs,
+    const set<Monomial> & allPPs,
     const Monomial & currentLPP,
     list<Monomial> & CurrentLPPs,       // changes
     Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
@@ -778,13 +778,12 @@ void select_monomial(
   vector<WT_TYPE> ord(w.get_dimension());
   for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
   //cout << "comparing against: "; p_Write(currentLPP, Rx);
-  set<Monomial> boundaryPPs, compatible_pps;
+  list<Monomial> boundaryPPs;
+  set<Monomial> compatible_pps;
   // loop through all exponent vectors
   cout << allPPs.size() << " possible monomials\n";
   compatible_pp(currentLPP, allPPs, compatible_pps, boundaryPPs, currSkel);
   cout << compatible_pps.size() << " compatible monomials\n";
-  //for (auto piter = compatible_pps.begin(); piter != compatible_pps.end(); ++piter)
-  //  p_Write(*piter, Rx);
   // list possible future ideals, sort by Hilbert Function
   list<PP_With_Ideal> possibleIdealsBasic;
   for (const Monomial & t : compatible_pps)
@@ -910,6 +909,75 @@ void select_monomial(
   cout << currSkel; */
   //cout << "returning from selmon\n";
 }
+
+void select_monomial(
+    set<PP_With_Ideal, bool(*)(PP_With_Ideal &, PP_With_Ideal &)> & possibleIdeals,
+    const set<Monomial> & monomials_to_compare,
+    Monomial & currentLPP,
+    const list<Abstract_Polynomial *> &CurrentPolys,
+    LP_Solver * currSkel,                // possibly changes
+    bool &ordering_changed
+) {
+  Skeleton * src_skel = dynamic_cast<Skeleton *>(currSkel);
+  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *>(currSkel);
+  PPL_Solver * src_PPL = dynamic_cast<PPL_Solver *>(currSkel);
+  Ray w = ray_sum(currSkel->get_rays());
+  //cout << "Have ray " << w << endl;
+  vector<WT_TYPE> ord(w.get_dimension());
+  for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
+  // list possible future ideals, sort by Hilbert Function
+  bool searching = false;
+  const PP_With_Ideal * winner = & (*possibleIdeals.begin());
+  while (not searching) {
+    LP_Solver * newSkeleton;
+    if (src_skel != nullptr)
+      newSkeleton = new Skeleton(*src_skel);
+    else if (src_GLPK != nullptr)
+      newSkeleton = new GLPK_Solver(*src_GLPK);
+    else if (src_PPL != nullptr)
+      newSkeleton = new PPL_Solver(*src_PPL);
+    vector<Constraint> newvecs;
+    constraints_for_new_pp(*winner, monomials_to_compare, newvecs);
+    if (newSkeleton->solve(newvecs)) {
+      //cout << "consistent\n";
+      if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
+      {
+        searching = false;
+        if (src_skel != nullptr)
+          src_skel -> copy(newSkeleton);
+        else if (src_GLPK != nullptr)
+          src_GLPK -> copy(newSkeleton);
+        else if (src_PPL != nullptr)
+          src_PPL -> copy(newSkeleton);
+        delete newSkeleton;
+        break;
+      }
+    } else {
+      // this monomial is not, in fact, compatible
+      possibleIdeals.erase(possibleIdeals.begin());
+      winner = & (*possibleIdeals.begin());
+    }
+    delete newSkeleton;
+  }
+   
+  // set marked lpp, new Hilbert numerator
+  currentLPP = winner->get_pp();
+  // TODO: delete elements of allPPs (not clear how: elements are in a set)
+  Ray new_weight = ray_sum(currSkel->get_rays());
+  //cout << "Have ray " << w << endl;
+  new_weight.simplify_ray();
+  ordering_changed = false;
+  for (
+        int i = 0;
+        not ordering_changed and i < (int )(new_weight.get_dimension());
+        ++i
+  ) {
+    // w is the old ordering
+    ordering_changed = ordering_changed or (new_weight[i] != w[i]);
+  }
+  cout << "ordering changed? " << ordering_changed << endl;
+}
+
 
 }
 
