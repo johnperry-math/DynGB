@@ -63,8 +63,7 @@ int hilbert_cmp(
   return result;
 }
 
-bool less_by_hilbert (PP_With_Ideal &a, PP_With_Ideal &b)
-{
+bool less_by_hilbert (PP_With_Ideal &a, PP_With_Ideal &b) {
   //cout << "Less by Hilbert then Lex\n";
   bool result;
   int n = a.get_pp().num_vars();
@@ -88,13 +87,11 @@ bool less_by_smoothest_degrees (PP_With_Ideal &a, PP_With_Ideal &b)
   return a.get_difference_in_degree() < b.get_difference_in_degree();
 };
 
-bool less_by_largest_max_component (PP_With_Ideal &a, PP_With_Ideal &b)
-{
+bool less_by_largest_max_component (PP_With_Ideal &a, PP_With_Ideal &b) {
   return a.get_difference_in_degree() < b.get_difference_in_degree();
 }
 
-void PP_With_Ideal::compute_number_new_pairs()
-{
+void PP_With_Ideal::compute_number_new_pairs() const {
   int n = t.num_vars();
   int m = I.size();
   const list<Monomial> T = I.generators();
@@ -526,36 +523,6 @@ void compatible_pp(
   list<Monomial> initial_candidates;
   initial_candidates.push_back(currentLPP);
   // compare other monomials with LPP
-  /*for (
-        auto b_ptr = allPPs.begin();
-        b_ptr != allPPs.end();
-        ++b_ptr
-      )
-  {
-    // take the dot product of each monomial's exponents with pp,
-    // add the ones that pass muster to initial_candidates
-    //cout << '\t'; p_Write(*b_ptr, Rx);
-    p_GetExpV(*b_ptr, b, Rx);
-    for (unsigned long i = 1; i <= n; ++i) { along[i-1] = b[i]; }
-    Ray bray(n, along);
-    bool searching = true;
-    for (
-         auto w_ptr = bndrys.begin();
-         searching and w_ptr != bndrys.end();
-         ++w_ptr
-        )
-    {
-      // check b against a with all rays
-      //cout << "checking " << bray << " against " << aray << " via " << *w_ptr << ": " << (*w_ptr) * bray << ' ' << (*w_ptr) * aray << endl;
-      if ((*w_ptr) * bray > (*w_ptr) * aray)
-      {
-        // only need one success
-        initial_candidates.insert(*b_ptr);
-        cout << "succeeded with " << bray << endl;
-        searching = false;
-      }
-    }
-  }*/
   for (const Monomial & b : allPPs)
     if (not b.is_like(currentLPP) and skel->makes_consistent_constraint(b, currentLPP))
       initial_candidates.push_back(b);
@@ -586,39 +553,6 @@ void compatible_pp(
       // cout << "\tconsistent!\n";
     }
   }
-  // second refinement: compare remaining monomials with each other
-  /*for (auto p_ptr = initial_candidates.begin(); p_ptr != initial_candidates.end(); ++p_ptr)
-  {
-    p_GetExpV(*p_ptr, a, Rx);
-    for (unsigned long i = 1; i <= n; ++i) { along[i-1] = a[i]; }
-    Ray pray(n, along);
-    bool cleared_the_hurdle = false;
-    for (auto w_ptr = bndrys.begin();
-         not cleared_the_hurdle and w_ptr != bndrys.end(); ++w_ptr)
-    {
-      bool maybe_this_vector = true;
-      Ray w = *w_ptr;
-      for (auto q_ptr = initial_candidates.begin();
-           maybe_this_vector and not cleared_the_hurdle and q_ptr != initial_candidates.end(); ++q_ptr)
-        if (*p_ptr != *q_ptr)
-        {
-          p_GetExpV(*q_ptr, b, Rx);
-          for (unsigned long i = 1; i <= n; ++i) { along[i-1] = b[i]; }
-          Ray qray(n, along);
-          // guard against invalid exclusions
-          unsigned long long wt = (*w_ptr) * qray;
-          if ((((*w_ptr) * pray) <= wt) and wt != 0) { maybe_this_vector = false; }
-        }
-      cleared_the_hurdle = maybe_this_vector;
-      if (not cleared_the_hurdle) boundary_mons.insert(*p_ptr);
-    }
-    if (cleared_the_hurdle) result.insert(*p_ptr);
-  } */
-  //cout << "boundary monomials:\n";
-  //for (auto piter = boundary_mons.begin(); piter != boundary_mons.end(); ++piter) pWrite(*piter);
-  //cout << "compatible monomials:\n";
-  //for (auto piter = result.begin(); piter != result.end(); ++piter) pWrite(*piter);
-  //result = initial_candidates;
 }
 
 bool verify_and_modify_if_necessary(
@@ -677,12 +611,11 @@ bool verify_and_modify_if_necessary(
           else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
             newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
           consistent = newskel->solve(new_constraint);
-          w = ray_sum(skel->get_rays());
+          w = ray_sum(newskel->get_rays());
           //cout << "Have ray " << w << endl;
           // if we're consistent, we need to recompute the ordering
           if (consistent and a*w > b*w)
           {
-            w = ray_sum(skel->get_rays());
             //cout << "Have ray " << w << endl;
             *skel = *newskel;
           } // if consistent
@@ -770,9 +703,9 @@ void select_monomial(
 {
   //cout << "entering selmon\n";
   //cout << "skeleton before: " << currSkel << endl;
-  Skeleton * src_skel = dynamic_cast<Skeleton *>(currSkel);
-  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *>(currSkel);
-  PPL_Solver * src_PPL = dynamic_cast<PPL_Solver *>(currSkel);
+  Skeleton * src_skel    = dynamic_cast<Skeleton *>    (currSkel);
+  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *> (currSkel);
+  PPL_Solver * src_PPL   = dynamic_cast<PPL_Solver *>  (currSkel);
   Ray w = ray_sum(currSkel->get_rays());
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
@@ -909,75 +842,6 @@ void select_monomial(
   cout << currSkel; */
   //cout << "returning from selmon\n";
 }
-
-void select_monomial(
-    set<PP_With_Ideal, bool(*)(PP_With_Ideal &, PP_With_Ideal &)> & possibleIdeals,
-    const set<Monomial> & monomials_to_compare,
-    Monomial & currentLPP,
-    const list<Abstract_Polynomial *> &CurrentPolys,
-    LP_Solver * currSkel,                // possibly changes
-    bool &ordering_changed
-) {
-  Skeleton * src_skel = dynamic_cast<Skeleton *>(currSkel);
-  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *>(currSkel);
-  PPL_Solver * src_PPL = dynamic_cast<PPL_Solver *>(currSkel);
-  Ray w = ray_sum(currSkel->get_rays());
-  //cout << "Have ray " << w << endl;
-  vector<WT_TYPE> ord(w.get_dimension());
-  for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
-  // list possible future ideals, sort by Hilbert Function
-  bool searching = false;
-  const PP_With_Ideal * winner = & (*possibleIdeals.begin());
-  while (not searching) {
-    LP_Solver * newSkeleton;
-    if (src_skel != nullptr)
-      newSkeleton = new Skeleton(*src_skel);
-    else if (src_GLPK != nullptr)
-      newSkeleton = new GLPK_Solver(*src_GLPK);
-    else if (src_PPL != nullptr)
-      newSkeleton = new PPL_Solver(*src_PPL);
-    vector<Constraint> newvecs;
-    constraints_for_new_pp(*winner, monomials_to_compare, newvecs);
-    if (newSkeleton->solve(newvecs)) {
-      //cout << "consistent\n";
-      if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
-      {
-        searching = false;
-        if (src_skel != nullptr)
-          src_skel -> copy(newSkeleton);
-        else if (src_GLPK != nullptr)
-          src_GLPK -> copy(newSkeleton);
-        else if (src_PPL != nullptr)
-          src_PPL -> copy(newSkeleton);
-        delete newSkeleton;
-        break;
-      }
-    } else {
-      // this monomial is not, in fact, compatible
-      possibleIdeals.erase(possibleIdeals.begin());
-      winner = & (*possibleIdeals.begin());
-    }
-    delete newSkeleton;
-  }
-   
-  // set marked lpp, new Hilbert numerator
-  currentLPP = winner->get_pp();
-  // TODO: delete elements of allPPs (not clear how: elements are in a set)
-  Ray new_weight = ray_sum(currSkel->get_rays());
-  //cout << "Have ray " << w << endl;
-  new_weight.simplify_ray();
-  ordering_changed = false;
-  for (
-        int i = 0;
-        not ordering_changed and i < (int )(new_weight.get_dimension());
-        ++i
-  ) {
-    // w is the old ordering
-    ordering_changed = ordering_changed or (new_weight[i] != w[i]);
-  }
-  cout << "ordering changed? " << ordering_changed << endl;
-}
-
 
 }
 

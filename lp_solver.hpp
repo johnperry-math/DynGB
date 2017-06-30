@@ -633,7 +633,7 @@ public:
     @brief returns the number of constraints used by the skeleton
     @return number of constraints
   */
-  virtual unsigned long get_number_of_constraints() = 0;
+  virtual unsigned long get_number_of_constraints() const = 0;
   ///@}
 
   /** @name Computation */

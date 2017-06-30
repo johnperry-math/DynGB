@@ -160,7 +160,7 @@ class PP_With_Ideal {
     /** @brief the old ideal of leading monomials */
     inline const Monomial_Ideal & get_ideal() const { return I; };
     /** @brief the current monomial ordering */
-    inline Ray get_ordering() { return ordering; };
+    inline const Ray get_ordering() const { return ordering; };
     /**
       @brief the incremental Betti numbers obtained by adding the monomial to
       the ideal
@@ -178,7 +178,7 @@ class PP_With_Ideal {
     */
     inline Dense_Univariate_Integer_Polynomial * get_hilbert_numerator(
         bool graded = false
-    ) {
+    ) const {
       if (graded)
         return I.hilbert_numerator(ordering.weights());
       else 
@@ -190,7 +190,7 @@ class PP_With_Ideal {
     */
     inline Dense_Univariate_Integer_Polynomial * get_hilbert_reduced_numerator(
         bool graded = false
-    ) {
+    ) const {
       if (graded)
         return I.reduced_hilbert_numerator(ordering.weights());
       else
@@ -199,7 +199,7 @@ class PP_With_Ideal {
     /**
       @brief the Hilbert polynomial obtained by adding the monomial to the ideal
     */
-    inline Dense_Univariate_Rational_Polynomial * get_hilbert_polynomial() {
+    inline Dense_Univariate_Rational_Polynomial * get_hilbert_polynomial() const {
       return I.hilbert_poly();
     };
     /**
@@ -216,8 +216,7 @@ class PP_With_Ideal {
       @brief computes the difference in degree between the first and last
       monomials of the ideal
     */
-    inline int get_difference_in_degree()
-    {
+    inline int get_difference_in_degree() const {
       if (min_deg < 0)
       {
         const list<Monomial> & G = I.generators();
@@ -234,7 +233,7 @@ class PP_With_Ideal {
     /** @name Modification */
     ///@{
     /** @brief Computes the number of critical pairs the monomial would add */
-    void compute_number_new_pairs();
+    void compute_number_new_pairs() const;
     /**
       @brief assigns a value to the hilbert numerator when it&rsquo;s
         already known
@@ -247,7 +246,7 @@ class PP_With_Ideal {
     /** @brief the last monomial added to @f$I@f$ */
     Monomial t;
     /** @brief the ideal of leading terms */
-    Monomial_Ideal I;
+    mutable Monomial_Ideal I;
     /**
       @brief the list of critical pairs of @f$I@f$ at this point in the algorithm
     */
@@ -255,11 +254,11 @@ class PP_With_Ideal {
     /** @brief the current ordering of the Gr&ouml;bner basis computation */
     Ray ordering;
     /** @brief estimate of number of new pairs */
-    int num_new_pairs;
+    mutable int num_new_pairs;
     /** @brief minimum weighted degree of monomials in ideal */
-    int min_deg;
+    mutable int min_deg;
     /** @brief minimum weighted degree of monomials in ideal */
-    int max_deg;
+    mutable int max_deg;
 };
 
 /**
@@ -373,34 +372,6 @@ void select_monomial(
     LP_Solver * currSkel,                // possibly changes
     bool &ordering_changed,
     Dynamic_Heuristic method = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG
-);
-
-/**
-  @ingroup GBComputation
-  @brief similar to
-    <c>select_monomial(Abstract_Polynomial *, list<Monomial> &, Dense_Univariate_Integer_Polynomial **, const list<Abstract_Polynomial *> &, const list<Critical_Pair_Dynamic *> &,LP_Solver *, bool &, Dynamic_Heuristic)</c>
-    but see details
-  @param I PP_With_Ideal for each compatible monomial
-  @param monomials_to_compare monomials in the boundary and interior of cone
-  @param currentLPP the current leading monomial
-  @param CurrentPolys the current basis of the ideal (to verify correctness)
-  @param currSkel the current skeleton
-  @param ordering_changed whether the monomial selected changes the ordering
-  @author John Perry
-  @date 2017
-  @details In this usage, the monomials should already be arranged into a set
-    that is ordered by the function you wish to use
-    (e.g., <c>less_by_hilbert()</c>). If @p check_compatibility is set,
-    then the algorithm will check @p I for compatibility; otherwise it will
-    assume that the monomials corresponding to each @c I are already compatible.
-*/
-void select_monomial(
-    set<PP_With_Ideal, bool(*)(PP_With_Ideal &, PP_With_Ideal &)> & I,
-    const list<Monomial> & monomials_to_compare,
-    Monomial & currentLPP,
-    const list<Abstract_Polynomial *> &CurrentPolys,
-    LP_Solver * currSkel,                // possibly changes
-    bool &ordering_changed
 );
 
 /**

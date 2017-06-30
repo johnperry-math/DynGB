@@ -249,7 +249,7 @@ public:
   /** @brief Performs a deep copy of `other`. */
   Skeleton(Skeleton &);
 
-  virtual bool copy(const LP_Solver *);
+  virtual bool copy(const LP_Solver *) override;
 
   ///@}
 
@@ -266,7 +266,7 @@ public:
   /** @name Basic properties */
   ///@{
 
-  inline NVAR_TYPE get_dimension() const { return dim; };
+  inline NVAR_TYPE get_dimension() const override { return dim; };
 
   /** @brief Returns the number of edges defining the skeleton. */
   inline unsigned long get_number_of_edges() { return edges.size(); };
@@ -275,12 +275,14 @@ public:
   inline set<Edge> get_edges() { return edges; };
 
   /** @brief Returns the number of constraints defining the skeleton. */
-  inline unsigned long get_number_of_constraints() {
+  inline unsigned long get_number_of_constraints() const override {
     return constraints.size();
   };
 
   /** @brief Returns the constraints that define the skeleton. */
-  inline const vector<Constraint> & get_constraints() { return constraints; };
+  inline const vector<Constraint> & get_constraints() {
+    return constraints;
+  };
 
   /** @brief Returns the indicated constraint. Numbering starts at 0. */
   inline const Constraint & get_constraint(int index) {
@@ -307,8 +309,7 @@ public:
   }
 
   /** @brief tests for consistency of a potentially new constraint. */
-  inline bool is_consistent(const Constraint & c) const
-  {
+  inline bool is_consistent(const Constraint & c) const {
     bool inconsistent = true;
     for (
           auto riter = rays.begin();
@@ -341,7 +342,7 @@ public:
       Accept the new constraints only if that copy succeeds,
       in which case, you might as well discard the original, and keep the copy.
   */
-  virtual bool solve(const vector<Constraint> &);
+  virtual bool solve(const vector<Constraint> &) override;
 
   /**
     @brief Adds the indicated constraint (singular!) and re-computes the skeleton.
@@ -358,7 +359,7 @@ public:
       Accept the new constraints only if that copy succeeds,
       in which case, you might as well discard the original, and keep the copy.
   */
-  virtual bool solve(const Constraint &);
+  virtual bool solve(const Constraint &) override;
 
   /**
     @brief Re-computes the edges in the skeleton

@@ -141,7 +141,7 @@ bool GLPK_Solver::solve(const Constraint & newvec) {
   return (glp_result == 0 and (status == GLP_OPT or status == GLP_FEAS));
 }
 
-const set<Ray> & GLPK_Solver::get_rays() {
+const set<Ray> & GLPK_Solver::get_rays() const {
   if (dirty) {
     rays.clear();
     // the next few lines add a row

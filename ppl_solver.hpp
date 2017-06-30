@@ -45,7 +45,7 @@ public:
   PPL_Solver(NVAR_TYPE n);
   /** @brief copy constructor (deep copy) */
   PPL_Solver(const PPL_Solver &);
-  virtual bool copy(const LP_Solver *);
+  virtual bool copy(const LP_Solver *) override;
   ///@}
   /** @name Destruction */
   ///@{
@@ -53,13 +53,13 @@ public:
   ///@}
   /** @name Basic properties */
   ///@{
-  virtual NVAR_TYPE get_dimension() const { return n; }
-  virtual unsigned long get_number_of_constraints() { return m; }
+  virtual NVAR_TYPE get_dimension() const override { return n; }
+  virtual unsigned long get_number_of_constraints() const override { return m; }
   ///@}
   /** @name Modification */
   ///@{
-  virtual bool solve(const Constraint &);
-  virtual bool solve(const vector<Constraint> &);
+  virtual bool solve(const Constraint &) override;
+  virtual bool solve(const vector<Constraint> &) override;
   /** @brief clear the current set of rays and extracts the ones contained in lp */
   virtual void setup_rays();
   ///@}

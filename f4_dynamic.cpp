@@ -37,7 +37,6 @@ using LP_Solvers::GLPK_Solver;
 #include "ppl_solver.hpp"
 using LP_Solvers::PPL_Solver;
 
-using Dynamic_Engine::PP_With_Ideal;
 using Dynamic_Engine::less_by_hilbert_then_degree;
 using Dynamic_Engine::less_by_hilbert;
 using Dynamic_Engine::less_by_degree_then_hilbert;
@@ -48,6 +47,7 @@ using Dynamic_Engine::less_by_num_crit_pairs;
 using Dynamic_Engine::less_by_betti;
 using Dynamic_Engine::less_by_grad_betti;
 using Dynamic_Engine::compatible_pp;
+using Dynamic_Engine::verify_and_modify_if_necessary;
 
 void find_position(
   list<Monomial *>::iterator & ti,
@@ -64,9 +64,34 @@ void find_position(
 F4_Reduction_Data::F4_Reduction_Data(
     const WGrevlex * curr_ord,
     const list<Critical_Pair_Dynamic *> & P,
-    const list<Abstract_Polynomial *> & B
-) : G(B), Rx(P.front()->first()->base_ring()) {
+    const list<Abstract_Polynomial *> & B,
+    Dynamic_Heuristic method
+) : G(B), Rx(P.front()->first()->base_ring()), heur(method) {
   num_cols = 0;
+  // set up the heuristic
+  switch(heur) {
+    case Dynamic_Heuristic::ORD_HILBERT_THEN_DEG:
+      heuristic_judges_smaller = less_by_hilbert_then_degree; break;
+    case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
+      heuristic_judges_smaller = less_by_hilbert; break;
+    case Dynamic_Heuristic::DEG_THEN_ORD_HILBERT:
+      heuristic_judges_smaller = less_by_degree_then_hilbert; break;
+    case Dynamic_Heuristic::GRAD_HILB_THEN_DEG:
+      heuristic_judges_smaller = less_by_grad_hilbert_then_degree; break;
+    case Dynamic_Heuristic::SMOOTHEST_DEGREES:
+      heuristic_judges_smaller = less_by_smoothest_degrees; break;
+    case Dynamic_Heuristic::LARGEST_MAX_COMPONENT:
+      heuristic_judges_smaller = less_by_largest_max_component; break;
+    case Dynamic_Heuristic::MIN_CRIT_PAIRS:
+      heuristic_judges_smaller = less_by_num_crit_pairs; break;
+    case Dynamic_Heuristic::BETTI_HILBERT_DEG:
+      heuristic_judges_smaller = less_by_betti; break;
+    case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
+      heuristic_judges_smaller = less_by_grad_betti; break;
+    default:
+      heuristic_judges_smaller = less_by_hilbert; break;
+  }
+  // set up the matrix
   A.clear();
   head.clear();
   R_build.clear();
@@ -76,6 +101,7 @@ F4_Reduction_Data::F4_Reduction_Data(
   auto ri = R_build.begin();
   NVAR_TYPE n = Rx.number_of_variables();
   mord = curr_ord;
+  // sugar data for each row of the matrix
   for (auto p : P) {
     Poly_Sugar_Data * new_sugar = new Poly_Sugar_Data(p->first());
     strategies.push_back(new_sugar);
@@ -111,6 +137,7 @@ F4_Reduction_Data::F4_Reduction_Data(
     ++mi;
     ++ri;
   }
+  // populate
   initialize_many(P);
   unsigned els = 0;
   for (auto Ak : A) els += Ak.size();
@@ -257,17 +284,15 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
-  //delete [] mord->order_weights();
-  //delete mord;
 }
 
 void F4_Reduction_Data::print_matrix(bool show_data) {
-  if (show_data) {
+  if (show_data) { // print monomials
     for (auto m : M)
       cout << *m << ", ";
     cout << endl;
   }
-  for (unsigned i = 0; i < num_rows; ++i) {
+  for (unsigned i = 0; i < num_rows; ++i) { // print entries
     cout << "A[" << i << "]: ( ";
     unsigned j;
     for (j = 0; j < offset[i] + head[i]; ++j)
@@ -416,36 +441,34 @@ void F4_Reduction_Data::reduce_my_new_rows(
   }
 }
 
-void F4_Reduction_Data::reduce_by_new(unsigned i, unsigned lhead_i) {
+void F4_Reduction_Data::reduce_by_new(
+    unsigned i, unsigned lhead_i, const set<unsigned> & unprocessed
+) {
   auto F = Rx.ground_field();
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
   thread * workers = new thread[num_threads];
-  //for (unsigned i = 0; i < num_rows; ++i) {
-  //  if (nonzero_entries[i] > 0) {
-      COEF_TYPE Ai0 = lhead_i; // abs pos of A[i]'s head
-      for (unsigned j = 0; j < num_threads; ++j)
-        thread_rows[j].clear();
-      unsigned k = 0;
-      for (unsigned j = 0; j < num_rows; ++j) {
-        if (
-            j != i and Ai0 > offset[j]
-            and (A[j][Ai0 - offset[j]] != 0)
-        ) {
-          thread_rows[k].insert(j);
-          ++k; k %= num_threads;
-        }
-      }
-      for (unsigned c = 0; c < num_threads; ++c)
-        workers[c] = thread(
-            &F4_Reduction_Data::reduce_my_new_rows, this,
-            i, lhead_i, std::cref(F), std::cref(thread_rows[c])
-        );
-      for (unsigned c = 0; c < num_threads; ++c)
-        workers[c].join();
-  //  }
-  //}
+  COEF_TYPE Ai0 = lhead_i; // abs pos of A[i]'s head
+  for (unsigned j = 0; j < num_threads; ++j)
+    thread_rows[j].clear();
+  unsigned k = 0;
+  for (unsigned j : unprocessed) {
+    if (j != i and nonzero_entries[j] != 0
+        and Ai0 > offset[j]
+        and (A[j][Ai0 - offset[j]] != 0)
+    ) {
+      thread_rows[k].insert(j);
+      ++k; k %= num_threads;
+    }
+  }
+  for (unsigned c = 0; c < num_threads; ++c)
+    workers[c] = thread(
+        &F4_Reduction_Data::reduce_my_new_rows, this,
+        i, lhead_i, std::cref(F), std::cref(thread_rows[c])
+    );
+  for (unsigned c = 0; c < num_threads; ++c)
+    workers[c].join();
   delete [] workers;
   delete [] thread_rows;
 }
@@ -491,6 +514,40 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
   return result;
 }
 
+Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
+  Constant_Polynomial * result;
+  const Prime_Field & F = Rx.ground_field();
+  UCOEF_TYPE mod = F.modulus();
+  NVAR_TYPE n = M[0]->num_vars();
+  vector<COEF_TYPE> & Ai = A[i];
+  Monomial * M_final = (Monomial *)malloc(sizeof(Monomial)*nonzero_entries[i]);
+  Prime_Field_Element * A_final
+      = (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element)*nonzero_entries[i]);
+  COEF_TYPE scale = F.inverse(Ai[head[i]]);
+  unsigned k = 0;
+  for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
+    if (Ai[j] != 0) {
+      A_final[k].assign(Ai[j]*scale % mod, &F);
+      M_final[k].common_initialization();
+      M_final[k].initialize_exponents(n);
+      M_final[k].set_monomial_ordering(mord);
+      M_final[k] = *M[offset[i] + j];
+      ++k;
+    }
+  }
+  result = new Constant_Polynomial(
+      nonzero_entries[i],
+      Rx,
+      M_final, A_final,
+      mord
+  );
+  result->set_strategy(strategies[i]);
+  strategies[i] = nullptr;
+  free(M_final);
+  free(A_final);
+  return result;
+}
+
 void F4_Reduction_Data::monomials_in_row(unsigned i, set<Monomial> & result) const {
   unsigned processed = 0;
   unsigned k = head[i];
@@ -502,19 +559,255 @@ void F4_Reduction_Data::monomials_in_row(unsigned i, set<Monomial> & result) con
   }
 }
 
+void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
+  set<unsigned> removed;
+  // identify redundants
+  for (auto i : in_use) {
+    unsigned i0 = offset[i] + head[i];
+    for (unsigned j = i + 1; j < number_of_rows(); ++j) {
+      if (offset[j] + head[j] == i0 and nonzero_entries[j] == nonzero_entries[i]) {
+        bool still_equal = true;
+        for (unsigned k = i0; still_equal and k < M.size(); ++k) {
+          unsigned ik = k - offset[i];
+          unsigned jk = k - offset[j];
+          still_equal = A[i][ik] == A[j][jk];
+        }
+        if (still_equal) {
+          nonzero_entries[j] = 0;
+          head[j] = M.size();
+          removed.insert(j);
+        }
+      }
+    }
+  }
+  cout << "identified " << removed.size() << " redundant rows\n";
+  // now remove
+  for (auto i : removed) in_use.erase(i);
+}
+
+bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
+  bool consistent = true; // innocent until proven guilty
+  Ray w = ray_sum(skel->get_rays()); // our tentative ordering
+  NVAR_TYPE n = w.get_dimension();
+  CONSTR_TYPE *coefficients = new CONSTR_TYPE [n]; // used for coefficients for new constraints
+  // cout << "Have ray " << w << endl;
+  // loop through all polynomials; verify leading power product is unchanged
+  for (auto i : dynamic_processed) {
+    // create a ray for the current LPP's exponents
+    const Monomial & t = *M[l_head[i]];
+    DEG_TYPE td = t.weighted_degree(w.weights());
+    // loop through the polynomial's remaining monomials
+    //for (poly titer = (*piter)->next; consistent and titer != nullptr; titer = titer->next)
+    unsigned k = head[i];
+    unsigned mons_considered = 1; // accounting for l_head[i]
+    while (mons_considered < nonzero_entries[i]) {
+      // don't compare with LPP; that would be Bad (TM)
+      if (k + offset[i] != l_head[i])
+      {
+        ++mons_considered;
+        Monomial & u = *M[k + offset[i]];
+        // compare weights between a and b; if this fails,
+        // recompute the skeleton with a new constraint
+        if (td <= u.weighted_degree(w.weights())) {
+          if (coefficients == nullptr) // ensure we have space
+            coefficients = new CONSTR_TYPE[n];
+          for (NVAR_TYPE i = 0; i < n; ++i)
+            coefficients[i] = t[i] - u[i];
+          Constraint new_constraint(n, coefficients);
+          LP_Solver * newskel;
+          if (dynamic_cast<Skeleton *>(skel) != nullptr)
+            newskel = new Skeleton(*static_cast<Skeleton *>(skel));
+          else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr) {
+            newskel = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
+          }
+          else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
+            newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
+          consistent = newskel->solve(new_constraint);
+          //cout << "Have ray " << w << endl;
+          // if we're consistent, we need to recompute the ordering
+          if (consistent) { // if consistent
+            w = ray_sum(newskel->get_rays());
+            //cout << "Have ray " << w << endl;
+            *skel = *newskel;
+          } else delete newskel;
+        } // if LPP changed
+      } // if PP != LPP
+      ++k;
+    } // loop through PPs
+  } // loop through processed
+  // cleanup
+  delete [] coefficients;
+  // finally done
+  return consistent;
+}
+
+bool F4_Reduction_Data::row_would_change_ordering(unsigned i) {
+  auto possibleIdeals = I[i];
+  auto currSkel = row_skel[i];
+  Ray w = ray_sum(currSkel->get_rays());
+  Skeleton * src_skel    = dynamic_cast<Skeleton *>    (currSkel);
+  GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *> (currSkel);
+  PPL_Solver * src_PPL   = dynamic_cast<PPL_Solver *>  (currSkel);
+  // main loop: look for a leading monomial that is compatible with skeleton
+  // and other chosen monomials
+  bool searching = true;
+  const PP_With_Ideal * winner = & (*(possibleIdeals.begin()));
+  while (searching) {
+    LP_Solver * newSkeleton;
+    if (src_skel != nullptr)
+      newSkeleton = new Skeleton(*src_skel);
+    else if (src_GLPK != nullptr)
+      newSkeleton = new GLPK_Solver(*src_GLPK);
+    else if (src_PPL != nullptr)
+      newSkeleton = new PPL_Solver(*src_PPL);
+    vector<Constraint> newvecs;
+    set<Monomial> monomials_to_compare;
+    for (auto & ideal : I[i]) monomials_to_compare.insert(ideal.get_pp());
+    constraints_for_new_pp(*winner, monomials_to_compare, newvecs);
+    if (newSkeleton->solve(newvecs)) {
+      //cout << "consistent\n";
+      if (
+          verify_and_modify_if_necessary(newSkeleton, G)
+          and verify_and_modify_processed_rows(newSkeleton)
+      ) {
+        searching = false;
+        delete row_skel[i];
+        if (src_skel != nullptr)
+          row_skel[i] = newSkeleton;
+        else if (src_GLPK != nullptr)
+          row_skel[i] = newSkeleton;
+        else if (src_PPL != nullptr)
+          row_skel[i] = newSkeleton;
+        break;
+        currSkel = row_skel[i];
+      }
+    } else {
+      // this monomial is not, in fact, compatible
+      delete newSkeleton;
+      possibleIdeals.erase(possibleIdeals.begin());
+      winner = & (*possibleIdeals.begin());
+    }
+  }
+  // check whether winner would change ordering
+  Ray new_weight = ray_sum(currSkel->get_rays());
+  //cout << "Have ray " << w << endl;
+  new_weight.simplify_ray();
+  bool ordering_changed = false;
+  for (
+        int i = 0;
+        not ordering_changed and i < (int )(new_weight.get_dimension());
+        ++i
+  ) {
+    // w is the old ordering
+    ordering_changed = ordering_changed or (new_weight[i] != w[i]);
+  }
+  cout << "row " << i << "would change ordering? " << ordering_changed << endl;
+  return ordering_changed;
+}
+
+WGrevlex * F4_Reduction_Data::reduce_and_select_order(
+  const list<Monomial> & T, const list<Critical_Pair_Dynamic *> & P,
+  LP_Solver * skel
+) {
+  WGrevlex * result = nullptr;
+  bool ordering_changed = false;
+  // set up the logical heads, the ideals, ...
+  I.resize(number_of_rows());
+  row_skel.resize(number_of_rows(), nullptr);
+  Ray w(mord->number_of_weights(), mord->order_weights());
+  Dense_Univariate_Integer_Polynomial * hn = hilbert_numerator_bigatti(T);
+  for (unsigned i = 0; i < number_of_rows(); ++i) {
+    if (dynamic_cast<Skeleton *>(skel) != nullptr)
+      row_skel[i] = new Skeleton(*static_cast<Skeleton *>(skel));
+    else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
+      row_skel[i] = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
+    else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
+      row_skel[i] = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
+    l_head[i] = head[i];
+    if (nonzero_entries[i] != 0) {
+      set<Monomial> all_pps, potential_pps;
+      list<Monomial> boundary_pps;
+      monomials_in_row(i, all_pps);
+      compatible_pp(*M[offset[i] + head[i]], all_pps, potential_pps, boundary_pps, row_skel[i]);
+      for (auto t : potential_pps) {
+        I[i].emplace_front(t, T, w, P, hn);
+      }
+      I[i].sort(heuristic_judges_smaller);
+      dynamic_unprocessed.insert(i);
+    }
+  }
+  list<Monomial> U(T);
+  // main loop
+  vector<bool> row_changes_ordering(number_of_rows());
+  while (dynamic_unprocessed.size() != 0) {
+    for (unsigned i = 0; i < number_of_rows(); ++i)
+      row_changes_ordering[i] = false;
+    simplify_identical_rows(dynamic_unprocessed);
+    set<Monomial> considered_monomials;
+    unsigned winning_row = *dynamic_unprocessed.begin();
+    for (auto i : dynamic_unprocessed) {
+      if (
+          considered_monomials.count(I[i].front().get_pp()) == 0
+          and row_would_change_ordering(i)
+      ) {
+        row_changes_ordering[i] = true;
+        if (heuristic_judges_smaller(I[i].front(), I[winning_row].front())) {
+          winning_row = i;
+        }
+      }
+      considered_monomials.insert(I[i].front().get_pp());
+    }
+    dynamic_processed.insert(winning_row);
+    dynamic_unprocessed.erase(winning_row);
+    if (row_changes_ordering[winning_row]) {
+      ordering_changed = true;
+      // update skeleton
+      skel->copy(row_skel[winning_row]);
+      // update ordering
+      if (result != nullptr) delete result;
+      Ray r(ray_sum(skel->get_rays()));
+      r.simplify_ray();
+      result = new WGrevlex(r);
+      // update row skeletons and PP_With_Ideal's
+      U.push_back(I[winning_row].front().get_pp());
+      for (auto i : dynamic_unprocessed) {
+        delete row_skel[i];
+        if (dynamic_cast<Skeleton *>(skel) != nullptr)
+          row_skel[i] = new Skeleton(*static_cast<Skeleton *>(skel));
+        else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
+          row_skel[i] = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
+        else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
+          row_skel[i] = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
+        list<PP_With_Ideal> J;
+        for (auto PI : I[i])
+          J.emplace_back(PI.get_pp(), U, r, P, hn);
+        I[i].clear();
+        I[i].insert(I[i].begin(), J.begin(), J.end());
+      }
+      // reconsider compatible monomials?
+    }
+    set<unsigned> singletons;
+    for (auto i : dynamic_unprocessed)
+      if (I[i].size() == 1) singletons.insert(i);
+    for (auto i : singletons) {
+      dynamic_unprocessed.erase(i);
+      dynamic_processed.insert(i);
+    }
+  }
+}
+
 WGrevlex * F4_Reduction_Data::select_dynamic(
     list<Monomial> & U,
     const list<Abstract_Polynomial *> G,
     const list<Critical_Pair_Dynamic *> & P,
     WGrevlex * curr_ord,
-    LP_Solver * & skel,
-    Dynamic_Heuristic heur
+    LP_Solver * & skel
 ) {
   bool ordering_changed = false;
   WGrevlex * result = curr_ord;
   PP_With_Ideal * newideal = nullptr;
   LP_Solver * winning_skel = nullptr;
-  set<unsigned> unprocessed;
+  set<unsigned> processed, unprocessed;
   vector<set<Monomial> > potential_pps(number_of_rows());
   for (unsigned i = 0; i < number_of_rows(); ++i) {
     if (nonzero_entries[i] != 0) {
@@ -528,6 +821,7 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   while (unprocessed.size() != 0) {
+    simplify_identical_rows(unprocessed);
     cout << unprocessed.size() << " rows to consider\n";
     unsigned winning_row = *(unprocessed.begin());
     Monomial winning_lm { *M[offset[winning_row] + head[winning_row]] };
@@ -549,7 +843,7 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
             nullptr : new Dense_Univariate_Integer_Polynomial(*hn);
         bool new_ordering = false;
         select_monomial(
-            potential_pps[i], *M[offset[i] + head[i]], U, &H[i], G, P, new_lp,
+            potential_pps[i], *potential_pps[i].begin(), U, &H[i], G, P, new_lp,
             new_ordering, heur
         );
         // if we have a new ordering, compare the result to current preference
@@ -574,30 +868,7 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
           } else {
             PP_With_Ideal * tempideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
             tempideal->set_hilbert_numerator(H[i]);
-            bool change_winner;
-            switch(heur) {
-              case Dynamic_Heuristic::ORD_HILBERT_THEN_DEG:
-                change_winner = less_by_hilbert_then_degree(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
-                change_winner = less_by_hilbert(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::DEG_THEN_ORD_HILBERT:
-                change_winner = less_by_degree_then_hilbert(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::GRAD_HILB_THEN_DEG:
-                change_winner = less_by_grad_hilbert_then_degree(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::SMOOTHEST_DEGREES:
-                change_winner = less_by_smoothest_degrees(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::LARGEST_MAX_COMPONENT:
-                change_winner = less_by_largest_max_component(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::MIN_CRIT_PAIRS:
-                change_winner = less_by_num_crit_pairs(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::BETTI_HILBERT_DEG:
-                change_winner = less_by_betti(*tempideal, *newideal); break;
-              case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
-                change_winner = less_by_grad_betti(*tempideal, *newideal); break;
-              default:
-                change_winner = less_by_hilbert(*tempideal, *newideal); break;
-            }
-            if (not change_winner) {
+          if (not heuristic_judges_smaller(*tempideal, *newideal)) {
               delete new_lp;
               delete tempideal;
             } else { // winner has changed; reduce matrix by it
@@ -614,28 +885,148 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
         } // ordering changed?
       }
     } // loop through rows
+    if (ordering_changed) {
+      skel = winning_skel;
+      result = new WGrevlex(ray_sum(skel->get_rays()));
+      cout << "new ordering " << result << endl;
+    }
     // find current lm and use for reduction
-    bool found_mon = false;
     unsigned j = offset[winning_row] + head[winning_row];
-    for (unsigned k = offset[winning_row]; not found_mon; ++k) {
-      if (*M[k] == winning_lm) {
-        j = k;
-        found_mon = true;
+    DEG_TYPE d = M[j]->weighted_degree(result->order_weights());
+    vector<COEF_TYPE> & Ai = A[winning_row];
+    for (unsigned k = j; k < M.size(); ++k) {
+      if (not Ai[k - offset[winning_row]] == 0) {
+        DEG_TYPE e = M[k]->weighted_degree(result->order_weights());
+        if (e > d) {
+          d = e;
+          j = k;
+        }
       }
     }
-    reduce_by_new(winning_row, j);
+    reduce_by_new(winning_row, j, unprocessed);
     unprocessed.erase(winning_row);
+    processed.insert(winning_row);
     for (unsigned i = 0; i < number_of_rows(); ++i)
-      if (unprocessed.count(i) > 0 and nonzero_entries[i] == 0)
-        unprocessed.erase(i);
-  }
-  if (ordering_changed) {
-    skel = winning_skel;
-    result = new WGrevlex(ray_sum(skel->get_rays()));
-    cout << "new ordering " << result << endl;
+      if (unprocessed.count(i) > 0) {
+        if (nonzero_entries[i] == 0)
+          unprocessed.erase(i);
+        else {
+          if (ordering_changed and potential_pps[i].size() > 1) {
+            set<Monomial> new_pps;
+            list<Monomial> boundary_pps;
+            compatible_pp(
+              *(potential_pps[i].begin()), potential_pps[i], new_pps, boundary_pps, skel
+            );
+            if (potential_pps[i].size() != new_pps.size())
+              cout << "changed from " << potential_pps[i].size() << " to " << new_pps.size() << endl;
+            potential_pps[i] = new_pps;
+          }
+        }
+      }
   }
   delete newideal;
   return result;
+}
+
+unsigned F4_Reduction_Data::select_dynamic_single(
+    set<unsigned> & unprocessed,
+    list<Monomial> & U,
+    const list<Abstract_Polynomial *> G,
+    const list<Critical_Pair_Dynamic *> & P,
+    WGrevlex * curr_ord,
+    LP_Solver * & skel
+) {
+  bool ordering_changed = false;
+  PP_With_Ideal * newideal = nullptr;
+  LP_Solver * winning_skel = nullptr;
+  Dense_Univariate_Integer_Polynomial *hn = nullptr;
+  // select most advantageous unprocessed poly, reduce others
+  simplify_identical_rows(unprocessed);
+  unsigned winning_row = *(unprocessed.begin());
+  Monomial winning_lm { *M[offset[winning_row] + head[winning_row]] };
+  set<unsigned> remove;
+  for (unsigned i : unprocessed) {
+    if (nonzero_entries[i] == 0)
+      remove.insert(i);
+    else {
+      set<Monomial> all_pps, potential_pps;
+      list<Monomial> boundary_pps;
+      monomials_in_row(i, all_pps);
+      compatible_pp(*M[offset[i] + head[i]], all_pps, potential_pps, boundary_pps, skel);
+      if (potential_pps.size() == 1) {
+        // we process rows with only one potential pp first
+        // this helps avoid wrong paths
+        winning_row = i;
+        winning_lm = *M[offset[winning_row] + head[winning_row]];
+        break;
+      } else {
+        LP_Solver * new_lp;
+        list<Monomial> T {U};
+        if (dynamic_cast<Skeleton *>(skel) != nullptr)
+          new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
+        else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
+          new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
+        else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
+          new_lp = new PPL_Solver(*dynamic_cast<PPL_Solver *>(skel));
+        // see if we can obtain a better ordering from this polynomial
+        bool new_ordering = false;
+        Dense_Univariate_Integer_Polynomial * hn = nullptr;
+        select_monomial(
+            potential_pps, *potential_pps.begin(), U, & hn, G, P, new_lp,
+            new_ordering, heur
+        );
+        // first save the index of the leading monomial (need for reduction)
+        Monomial row_lm { U.back() };
+        U.pop_back();
+        // if tempideal beats newideal, reassign newideal
+        Ray r(ray_sum(new_lp->get_rays()));
+        r.simplify_ray();
+        if (newideal == nullptr) { // always true in this case
+          ordering_changed = new_ordering;
+          winning_row = i;
+          winning_skel = new_lp;
+          newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
+          newideal->set_hilbert_numerator(hn);
+        } else {
+          PP_With_Ideal * tempideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
+          tempideal->set_hilbert_numerator(hn);
+          if (not heuristic_judges_smaller(*tempideal, *newideal)) {
+            delete new_lp;
+            delete tempideal;
+          } else { // winner has changed; reduce matrix by it
+            ordering_changed = ordering_changed or new_ordering;
+            delete newideal;
+            winning_row = i;
+            winning_lm = row_lm;
+            newideal = tempideal;
+            winning_skel = new_lp;
+          } // change_winner?
+        } // newideal == nullptr?
+      } // row has more than one potential pp
+    } // row has nonzero entries
+  } // loop through rows
+  if (ordering_changed) {
+    delete skel;
+    skel = winning_skel;
+  }
+  // find current lm and use for reduction
+  unsigned j = offset[winning_row] + head[winning_row];
+  vector<COEF_TYPE> & Ai = A[winning_row];
+  bool searching = true;
+  for (unsigned k = j; searching; ++k) {
+    if (not Ai[k - offset[winning_row]] == 0) {
+      searching = (*(M[k])) != winning_lm;
+      if (not searching) j = k;
+    }
+  }
+  reduce_by_new(winning_row, j, unprocessed);
+  unprocessed.erase(winning_row);
+  for (unsigned i = 0; i < number_of_rows(); ++i)
+    if (unprocessed.count(i) > 0)
+      if (nonzero_entries[i] == 0)
+        unprocessed.erase(i);
+  delete newideal;
+  return winning_row;
 }
 
 list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
@@ -704,7 +1095,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
     }
     // make s-poly
     time_t start_time = time(nullptr);
-    F4_Reduction_Data s(curr_ord, Pnew, G);
+    F4_Reduction_Data s(curr_ord, Pnew, G, heur);
     time_t end_time = time(nullptr);
     total_time += difftime(end_time, start_time);
     number_of_spolys += Pnew.size();
@@ -715,7 +1106,8 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
       cout << "\tmatrix reduced to zero\n";
       // delete s;
     } else {
-      WGrevlex * new_ord = s.select_dynamic(T, G, P, curr_ord, skel, heur);
+      /* OLD WAY
+      WGrevlex * new_ord = s.select_dynamic(T, G, P, curr_ord, skel);
       bool ordering_changed = new_ord != curr_ord;
       vector<Constant_Polynomial *> Rvec = s.finalize();
       if (ordering_changed) {
@@ -732,6 +1124,35 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
           r->set_monomial_ordering(new_ord);
         T.push_back(r->leading_monomial());
         cout << "\tadded " << r->leading_monomial() << endl;
+        very_verbose = false;
+        if (very_verbose) { cout << "\tadded "; r->println(); }
+        gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+      }
+      OLD WAY */
+      set<unsigned> unprocessed;
+      for (unsigned i = 0; i < s.number_of_rows(); ++i) unprocessed.insert(i);
+      while (unprocessed.size() != 0) {
+        LP_Solver * old_skel = skel;
+        unsigned completed_row = s.select_dynamic_single(
+            unprocessed, T, G, P, curr_ord, skel
+        );
+        Constant_Polynomial * r = s.finalize(completed_row);
+        bool ordering_changed = skel != old_skel;
+        if (ordering_changed) {
+          Ray w(ray_sum(skel->get_rays()));
+          w.simplify_ray();
+          WGrevlex * new_ord = new WGrevlex(w);
+          cout << "new ordering: " << *new_ord << endl;
+          for (auto p : P)
+            p->change_ordering(new_ord);
+          for (auto & t : T)
+            t.set_monomial_ordering(new_ord);
+          all_orderings_used.push_front(curr_ord);
+          curr_ord = new_ord;
+          r->set_monomial_ordering(curr_ord);
+        }
+        T.push_back(r->leading_monomial());
+        cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
         very_verbose = false;
         if (very_verbose) { cout << "\tadded "; r->println(); }
         gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);

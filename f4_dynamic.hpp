@@ -27,6 +27,8 @@ using std::vector;
 #include <cstdlib>
 #include <utility>
 using std::pair;
+#include <functional>
+using std::function;
 
 #include "system_constants.hpp"
 
@@ -39,6 +41,7 @@ using std::pair;
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
 #include "dynamic_engine.hpp"
+using Dynamic_Engine::PP_With_Ideal;
 using Dynamic_Engine::Dynamic_Heuristic;
 
 /**
@@ -78,11 +81,13 @@ public:
     @param P list of critical pairs that will create a new basis; matrix will
         have this many rows
     @param B list of polynomials currently in the basis
+    @param method heuristic the system should use in choosing leading monomials
   */
   F4_Reduction_Data(
       const WGrevlex * curr_ord,
       const list<Critical_Pair_Dynamic *> & P,
-      const list<Abstract_Polynomial *> & B
+      const list<Abstract_Polynomial *> & B,
+      Dynamic_Heuristic method
   );
   /**
     @brief adds monomials of @f$ ug @f$ to @c M_build
@@ -154,6 +159,10 @@ public:
       and returns the result
   */
   vector<Constant_Polynomial *> finalize();
+  /**
+    @brief converts indicated row to a Constant_Polynomial, returns result
+  */
+  Constant_Polynomial * finalize(unsigned);
   ///@}
   /** @name Modification */
   ///@{
@@ -167,7 +176,7 @@ public:
   /** @brief reduces polynomials */
   void reduce_by_old();
   /** @brief reduces polynomials */
-  void reduce_by_new(unsigned i, unsigned lhead_i);
+  void reduce_by_new(unsigned i, unsigned lhead_i, const set<unsigned> &);
   /**
     @brief selects leading monomials for the remaining nonzero rows
     @details This functions basically fills the role that select_monomial()
@@ -177,7 +186,6 @@ public:
     @param P list of current critical pairs
     @param curr_ord current monomial ordering
     @param skel the current LP_Solver that defines the term ordering
-    @param heur which Dynamic_Heuristic to use when selecting a monomial
     @return the recommended monomial ordering;
       this may be the same as @p curr_ord
   */
@@ -186,9 +194,65 @@ public:
       const list<Abstract_Polynomial *> G,
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
-      LP_Solver * & skel,
-      Dynamic_Heuristic heur
+      LP_Solver * & skel
   );
+  /**
+    @brief selects leading monomials for one remaining nonzero rows
+    @details This functions basically fills the role that select_monomial()
+      fills in the dynamic Buchberger algorithm.
+      Unlike the other select_dynamic(), however,
+      it chooses only one row at a time.
+    @param T list of current leading monomials
+    @param G list of current basis polynomials
+    @param P list of current critical pairs
+    @param curr_ord current monomial ordering
+    @param skel the current LP_Solver that defines the term ordering
+    @return the row with the recommended new ordering
+  */
+  unsigned select_dynamic_single(
+      set<unsigned> & unprocessed,
+      list<Monomial> & T,
+      const list<Abstract_Polynomial *> G,
+      const list<Critical_Pair_Dynamic *> & P,
+      WGrevlex * curr_ord,
+      LP_Solver * & skel
+  );
+  /**
+    @brief selects an ordering that would be best for the indicated row,
+      verifying that the ordering is compatible not only with the basis
+      heretofore, but also with previously processed rows of the matrix
+    @return whether the preferred, compatible monomial
+      would change the current ordering
+  */
+  bool row_would_change_ordering(unsigned);
+  /**
+    @brief see details
+    @param T list of current monomials
+    @param P list of current critical pairs
+    @param skel skeleton corresponding to current monomial ordering
+    @details This step falls between @c reduce_by_old() and @c finalize().
+      After reduction of rows by the existing basis,
+      this step analyzes the matrix for a new ordering, proceeding row-by-row.
+  */
+  WGrevlex * reduce_and_select_order(
+    const list<Monomial> & T, const list<Critical_Pair_Dynamic *> & P,
+    LP_Solver * skel
+  );
+  /**
+    @brief verify the processed rows against @p skel and modify @p skel
+      if necessary to preserve previous choices
+    @param skel pending new @c LP_Solver (best have a copy of the old one
+      if this turns out bad)
+    @return @c false if and only if @p newSkel cannot be modified
+      to compatibility with @p newSkel
+  */
+  bool verify_and_modify_processed_rows(LP_Solver * skel);
+  /**
+    @brief eliminates duplicates of rows:
+      later rows that are identical to earlier rows will be eliminated
+    @param in_use rows that are currently still in use by the matrix
+  */
+  void simplify_identical_rows(set<unsigned> & in_use);
   ///@}
   /** @name I/O */
   ///@{
@@ -250,6 +314,8 @@ protected:
       (counted from offset)
   */
   vector<unsigned> head;
+  /** @brief index of the logical head term of this row (absolute index) */
+  vector<unsigned> l_head;
   /** @brief monomials while building */
   list<Monomial *> M_build;
   /** @brief indices of reducers for the corresponding elements of @c M */
@@ -270,6 +336,24 @@ protected:
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */
   vector<Poly_Sugar_Data *> strategies;
+  /** @brief rows which have already contributed to the ordering */
+  set<unsigned> dynamic_processed;
+  /** @brief rows which still have to be considered for the ordering */
+  set<unsigned> dynamic_unprocessed;
+  /**
+    @brief each entry contains a set of monomials that could be a leading
+      monomial of the corresponding row of the matrix
+  */
+  vector<list<PP_With_Ideal> > I;
+  /**
+    @brief copies of the current skeleton, modified according to the preferred
+      monomial of this row
+  */
+  vector<LP_Solver *> row_skel;
+  /** @brief heuristic the system should use in choosing leading monomials */
+  Dynamic_Heuristic heur;
+  /** @brief function corresponding to @c heur */
+  function <bool(PP_With_Ideal &, PP_With_Ideal &)> heuristic_judges_smaller;
 };
 
 #endif
