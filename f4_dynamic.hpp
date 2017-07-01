@@ -141,6 +141,8 @@ public:
     @brief returns @c true iff all the entries are 0
   */
   bool is_zero();
+  /** @brief returns the number of nonzero entries on the indicated row */
+  unsigned number_of_nonzero_entries(unsigned i) { return nonzero_entries[i]; }
   /**
     @brief returns the strategies currently in use
   */
@@ -263,6 +265,10 @@ public:
     @param show_data whether to show the monomials that correspond to each column
   */
   void print_matrix(bool show_data=false);
+  /**
+    @brief prints indicated row of the matrix as a polynomial
+  */
+  void print_row(unsigned);
   ///@}
 protected:
   /*void check_consistency() {

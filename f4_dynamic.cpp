@@ -113,6 +113,10 @@ F4_Reduction_Data::F4_Reduction_Data(
     add_monomials(curr_ord, mi, ri, p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
       *ri = const_cast<Abstract_Polynomial *>(p->second());
+      /*cout << "for " << **mi << " selected " << p->second()->leading_monomial() << endl;
+      cout << '\t' << p->lcm() << endl;
+      cout << '\t' << p->first()->leading_monomial() << ", " << p->first_multiplier() << endl;
+      cout << '\t' << p->second()->leading_monomial() << ", " << p->second_multiplier() << endl;*/
       ++ri; ++mi;
       add_monomials(curr_ord, mi, ri, p->second(), p->second_multiplier());
     }
@@ -126,6 +130,7 @@ F4_Reduction_Data::F4_Reduction_Data(
     while (not found and g != G.end()) {
       if ((**mi).divisible_by((*g)->leading_monomial())) {
         found = true;
+        cout << "for " << **mi << " selected " << (*g)->leading_monomial() << endl;
         *ri = *g;
         Monomial u(**mi);
         u /= (*g)->leading_monomial();
@@ -189,6 +194,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   unsigned row = 0;
   A.resize(P.size());
   head.resize(P.size());
+  l_head.resize(P.size());
   offset.resize(P.size());
   R.resize(R_build.size());
   unsigned i = 0;
@@ -242,6 +248,7 @@ void F4_Reduction_Data::add_monomials(
     r1 = R_build.begin();
     Monomial * t = new Monomial(g->leading_monomial());
     (*t) *= u;
+    //cout << "adding " << *t << " from " << g->leading_monomial() << " and " << u << endl;
     find_position(t1, M_build.end(), r1, *t);
     if (t1 == M_build.end()) {
       M_build.push_back(t);
@@ -266,6 +273,7 @@ void F4_Reduction_Data::add_monomials(
   while (not (pi->fellOff())) {
     Monomial * t = new Monomial(pi->currMonomial());
     (*t) *= u;
+    // cout << "adding " << *t << " from " << pi->currMonomial() << " and " << u << endl;
     find_position(t2, M_build.end(), r2, *t);
     if (t2 == M_build.end()) {
       M_build.push_back(t);
@@ -284,6 +292,15 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
+}
+
+void F4_Reduction_Data::print_row(unsigned i) {
+  for (unsigned j = offset[i] + head[i]; j < M.size(); ++j) {
+    if (A[i][j - offset[i]] != 0) {
+      cout << " + " << A[i][j - offset[i]] << " " << *M[j];
+    }
+  }
+  cout << endl;
 }
 
 void F4_Reduction_Data::print_matrix(bool show_data) {
@@ -344,6 +361,7 @@ void F4_Reduction_Data::reduce_my_rows(
           // get reducer for this monomial
           const Abstract_Polynomial * g = R[mi];
           Polynomial_Iterator * gi = g->new_iterator();
+          if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
           // determine multiplier
           for (NVAR_TYPE l = 0; l < n; ++l)
             u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
@@ -382,6 +400,7 @@ void F4_Reduction_Data::reduce_my_rows(
           unsigned & hk = head[k];
           while (hk < Ak.size() and Ak[hk] == 0) ++hk;
           nonzero_entries[k] = new_nonzero_entries;
+          if (k == 0) { cout << '\t'; print_row(k); }
         }
       }
     }
@@ -418,12 +437,12 @@ void F4_Reduction_Data::reduce_my_new_rows(
   auto mod = F.modulus();
   const auto & Ai = A[i];
   for (auto j : to_reduce) {
-    auto ci = lhead_i - offset[i];
+    auto ci = head[i];
     auto & Aj = A[j];
-    auto cj = lhead_i - offset[j]; // pos in A[j] of A[i]'s head
-    auto a = Aj[cj];
+    auto cj = head[i] + offset[i] - offset[j]; // pos in A[j] of A[i]'s head
+    auto a = Aj[lhead_i - offset[j]];
     unsigned ops = 0;
-    a *= mod - F.inverse(Ai[ci]);
+    a *= mod - F.inverse(Ai[lhead_i - offset[i]]);
     while (cj < Aj.size() and ops < nonzero_entries[i]) {
       if (Ai[ci] != 0) {
         bool was_zero = (Aj[cj] == 0);
@@ -438,6 +457,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
     }
     unsigned & hj = head[j];
     while (hj < Aj.size() and Aj[hj] == 0) ++hj;
+    if (j == 0) { cout << "reduced row " << j << " by new: "; print_row(j); }
   }
 }
 
@@ -523,7 +543,7 @@ Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
   Monomial * M_final = (Monomial *)malloc(sizeof(Monomial)*nonzero_entries[i]);
   Prime_Field_Element * A_final
       = (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element)*nonzero_entries[i]);
-  COEF_TYPE scale = F.inverse(Ai[head[i]]);
+  COEF_TYPE scale = F.inverse(Ai[l_head[i]]);
   unsigned k = 0;
   for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
     if (Ai[j] != 0) {
@@ -953,11 +973,14 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       list<Monomial> boundary_pps;
       monomials_in_row(i, all_pps);
       compatible_pp(*M[offset[i] + head[i]], all_pps, potential_pps, boundary_pps, skel);
+      cout << "compatible monomials for row " << i << ": ";
+      for (auto t : potential_pps) cout << t << ", "; cout << endl;
       if (potential_pps.size() == 1) {
         // we process rows with only one potential pp first
         // this helps avoid wrong paths
         winning_row = i;
-        winning_lm = *M[offset[winning_row] + head[winning_row]];
+        //winning_lm = *M[offset[winning_row] + head[winning_row]];
+        winning_lm = *potential_pps.begin();
         break;
       } else {
         LP_Solver * new_lp;
@@ -977,6 +1000,13 @@ unsigned F4_Reduction_Data::select_dynamic_single(
         );
         // first save the index of the leading monomial (need for reduction)
         Monomial row_lm { U.back() };
+        /*if (not new_ordering) {
+          // it's possible we don't have a new ordering
+          // because the preferred choices fail
+          // in this case, we take whatever the current ordering prefers
+          // (I'm not sure why this is necessary -- need to look into it more)
+          row_lm = *M[head[i] + offset[i]];
+        }*/
         U.pop_back();
         // if tempideal beats newideal, reassign newideal
         Ray r(ray_sum(new_lp->get_rays()));
@@ -985,6 +1015,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           ordering_changed = new_ordering;
           winning_row = i;
           winning_skel = new_lp;
+          winning_lm = row_lm;
           newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
           newideal->set_hilbert_numerator(hn);
         } else {
@@ -1016,7 +1047,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   for (unsigned k = j; searching; ++k) {
     if (not Ai[k - offset[winning_row]] == 0) {
       searching = (*(M[k])) != winning_lm;
-      if (not searching) j = k;
+      if (not searching) {
+        j = k;
+        l_head[winning_row] = k - offset[winning_row];
+      }
     }
   }
   reduce_by_new(winning_row, j, unprocessed);
@@ -1130,7 +1164,9 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
       }
       OLD WAY */
       set<unsigned> unprocessed;
-      for (unsigned i = 0; i < s.number_of_rows(); ++i) unprocessed.insert(i);
+      for (unsigned i = 0; i < s.number_of_rows(); ++i)
+        if (s.number_of_nonzero_entries(i) != 0)
+          unprocessed.insert(i);
       while (unprocessed.size() != 0) {
         LP_Solver * old_skel = skel;
         unsigned completed_row = s.select_dynamic_single(
@@ -1149,13 +1185,19 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
             t.set_monomial_ordering(new_ord);
           all_orderings_used.push_front(curr_ord);
           curr_ord = new_ord;
-          r->set_monomial_ordering(curr_ord);
+          s.set_ordering(curr_ord);
         }
+        r->set_monomial_ordering(curr_ord);
         T.push_back(r->leading_monomial());
         cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
-        very_verbose = false;
+        cout << "SANITY CHECK: ordering changed? " << ordering_changed << endl;
+        for (auto t : T) cout << t << " "; cout << endl;
+        very_verbose = true;
         if (very_verbose) { cout << "\tadded "; r->println(); }
         gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+        for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
+        for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
+        cout << "continuing\n";
       }
     }
   }
