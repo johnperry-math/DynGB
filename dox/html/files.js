@@ -12,7 +12,6 @@ var files =
     [ "algorithm_buchberger_explorer_serial.hpp", "algorithm__buchberger__explorer__serial_8hpp_source.html", null ],
     [ "betti.cpp", "betti_8cpp_source.html", null ],
     [ "betti.hpp", "betti_8hpp_source.html", null ],
-    [ "config.h", "config_8h_source.html", null ],
     [ "critical_pair.cpp", "critical__pair_8cpp_source.html", null ],
     [ "critical_pair.hpp", "critical__pair_8hpp_source.html", null ],
     [ "cyclic_n.hpp", "cyclic__n_8hpp_source.html", null ],

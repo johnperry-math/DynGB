@@ -69,11 +69,11 @@ list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\
 \begin{DoxyCompactList}\small\item\em Alternate implementation of Buchberger's algorithm, for parallelization. \end{DoxyCompactList}\item 
 list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_ga40495dfdaa22897e1dfe33aaaec35429}{buchberger\+\_\+explorer} (const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&F, \hyperlink{group___g_b_computation_ga73257b8a2d5cc826853a71b77d0cebf2}{S\+Poly\+Creation\+Flags} method=S\+Poly\+Creation\+Flags\+::\+G\+E\+O\+B\+U\+C\+K\+E\+TS, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy=Strategy\+Flags\+::\+N\+O\+R\+M\+A\+L\+\_\+\+S\+T\+R\+A\+T\+E\+GY, W\+T\+\_\+\+T\+Y\+PE $\ast$strategy\+\_\+weights=nullptr, const unsigned number\+\_\+to\+\_\+advance=2)
 \begin{DoxyCompactList}\small\item\em Alternate implementation of Buchberger's algorithm, for parallelization. \end{DoxyCompactList}\item 
-void \hyperlink{group___g_b_computation_gaf48f43667991b8526303601bbc0709cf}{check\+\_\+correctness} (list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$$>$G, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy)
+void \hyperlink{group___g_b_computation_gaf6fbdbd140d159527bfa757575f74560}{check\+\_\+correctness} (list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$$>$G, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy=Strategy\+Flags\+::\+N\+O\+R\+M\+A\+L\+\_\+\+S\+T\+R\+A\+T\+E\+GY)
 \begin{DoxyCompactList}\small\item\em checks that {\ttfamily G} is a Gr\"{o}bner basis by verifying each s-\/polynomial reduces to zero \end{DoxyCompactList}\item 
-void \hyperlink{group___g_b_computation_gabe68a8de3b87f6cc69e64fff39b71a81}{Dynamic\+\_\+\+Engine\+::compatible\+\_\+pp} (\hyperlink{group__polygroup_class_monomial}{Monomial} current\+L\+PP, const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&all\+P\+Ps, set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&result, set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&boundary\+\_\+mons, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$skel)
+void \hyperlink{group___g_b_computation_ga798232a9bc6d93f8a0ad69d5af6b349f}{Dynamic\+\_\+\+Engine\+::compatible\+\_\+pp} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&current\+L\+PP, const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&all\+P\+Ps, set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&result, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&boundary\+\_\+mons, const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$skel)
 \begin{DoxyCompactList}\small\item\em Compute the compatible leading monomials of a polynomial. \end{DoxyCompactList}\item 
-void \hyperlink{group___g_b_computation_gaf0ec0ad4f8430c46fc90c16104020f16}{Dynamic\+\_\+\+Engine\+::constraints\+\_\+for\+\_\+new\+\_\+pp} (const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&pp\+\_\+I, const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&monomials\+For\+Comparison, vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&result)
+void \hyperlink{group___g_b_computation_ga6184088d03d37694f86acf5ac99cf75e}{Dynamic\+\_\+\+Engine\+::constraints\+\_\+for\+\_\+new\+\_\+pp} (const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&pp\+\_\+I, const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&monomials\+\_\+for\+\_\+comparison, vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Create constraints for a candidate L\+PP. \end{DoxyCompactList}\item 
 list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_ga24647e1e20f18283bc931e723ba9fc22}{f4\+\_\+control} (const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&F)
 \begin{DoxyCompactList}\small\item\em equivalent to {\ttfamily \hyperlink{group___g_b_computation_ga37aa7e2fec96fac6c914934a4243f603}{buchberger()}}, but for Faug\`{e}re's F4 algorithm \end{DoxyCompactList}\item 
@@ -103,7 +103,7 @@ void \hyperlink{group___g_b_computation_gacc7cc5e063ab751ac50cc8c7009d3dbd}{redu
 \begin{DoxyCompactList}\small\item\em A brief report on the number of critical pairs. If {\ttfamily verbose} is true, also lists them. \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee116d7d2a0e}{Dynamic\+\_\+\+Engine\+::select\+\_\+monomial} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$r, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&Current\+L\+P\+Ps, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$$\ast$current\+\_\+hilbert\+\_\+numerator, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \&Current\+Polys, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$ $>$ \&critpairs, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$curr\+Skel, bool \&ordering\+\_\+changed, \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\+\_\+\+Heuristic} method=Dynamic\+\_\+\+Heuristic\+::\+O\+R\+D\+\_\+\+H\+I\+L\+B\+E\+R\+T\+\_\+\+T\+H\+E\+N\+\_\+\+D\+EG)
 \begin{DoxyCompactList}\small\item\em Selects a leading power product for a polynomial. \end{DoxyCompactList}\item 
-void \hyperlink{group___g_b_computation_ga8b938265dccdb6d410ed2906de4ed5e5}{Dynamic\+\_\+\+Engine\+::select\+\_\+monomial} (const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ r, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&current\+L\+PP, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&Current\+L\+P\+Ps, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$$\ast$current\+\_\+hilbert\+\_\+numerator, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \&Current\+Polys, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$ $>$ \&critpairs, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$curr\+Skel, bool \&ordering\+\_\+changed, \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\+\_\+\+Heuristic} method=Dynamic\+\_\+\+Heuristic\+::\+O\+R\+D\+\_\+\+H\+I\+L\+B\+E\+R\+T\+\_\+\+T\+H\+E\+N\+\_\+\+D\+EG)
+void \hyperlink{group___g_b_computation_gabe3fa16acb0927bac0b16e3a4cf4b4f5}{Dynamic\+\_\+\+Engine\+::select\+\_\+monomial} (const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&r, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&current\+L\+PP, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&Current\+L\+P\+Ps, \hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$$\ast$current\+\_\+hilbert\+\_\+numerator, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \&Current\+Polys, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$ $>$ \&critpairs, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$curr\+Skel, bool \&ordering\+\_\+changed, \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\+\_\+\+Heuristic} method=Dynamic\+\_\+\+Heuristic\+::\+O\+R\+D\+\_\+\+H\+I\+L\+B\+E\+R\+T\+\_\+\+T\+H\+E\+N\+\_\+\+D\+EG)
 \begin{DoxyCompactList}\small\item\em same as {\ttfamily \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee116d7d2a0e}{select\+\_\+monomial(\+Abstract\+\_\+\+Polynomial $\ast$, list$<$\+Monomial$>$ \&, Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial $\ast$$\ast$, const list$<$\+Abstract\+\_\+\+Polynomial $\ast$$>$ \&, const list$<$\+Critical\+\_\+\+Pair\+\_\+\+Dynamic $\ast$$>$ \&,\+L\+P\+\_\+\+Solver $\ast$, bool \&, Dynamic\+\_\+\+Heuristic)}} but with the monomials already extracted \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\void \hyperlink{group___g_b_computation_ga428f97f3978ba1eb759b8381a523dfe7}{sort\+\_\+pairs\+\_\+by\+\_\+strategy} (list$<$ T $\ast$$>$ \&P)
 \begin{DoxyCompactList}\small\item\em Applies the strategy to find the ``smallest'' critical pair. \end{DoxyCompactList}\item 
@@ -523,20 +523,20 @@ const \hyperlink{group__polygroup_class_monomial}{Monomial} \& \hyperlink{group_
 \mbox{\Hypertarget{group___g_b_computation_acb57c1467a4d6e622143057fde1ba1b6}\label{group___g_b_computation_acb57c1467a4d6e622143057fde1ba1b6}} 
 const \hyperlink{group__polygroup_class_monomial___ideal}{Monomial\+\_\+\+Ideal} \& \hyperlink{group___g_b_computation_acb57c1467a4d6e622143057fde1ba1b6}{get\+\_\+ideal} () const
 \begin{DoxyCompactList}\small\item\em the old ideal of leading monomials \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a9d01761e8d285ddbaa35214d8214a74b}\label{group___g_b_computation_a9d01761e8d285ddbaa35214d8214a74b}} 
-\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___g_b_computation_a9d01761e8d285ddbaa35214d8214a74b}{get\+\_\+ordering} ()
+\mbox{\Hypertarget{group___g_b_computation_af63c24b930505b1a57914234d202417c}\label{group___g_b_computation_af63c24b930505b1a57914234d202417c}} 
+const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} \hyperlink{group___g_b_computation_af63c24b930505b1a57914234d202417c}{get\+\_\+ordering} () const
 \begin{DoxyCompactList}\small\item\em the current monomial ordering \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_acc39727c4e1ef77c8fb74bca7955e9c4}\label{group___g_b_computation_acc39727c4e1ef77c8fb74bca7955e9c4}} 
 const map$<$ D\+E\+G\+\_\+\+T\+Y\+PE, unsigned long $>$ \& \hyperlink{group___g_b_computation_acc39727c4e1ef77c8fb74bca7955e9c4}{get\+\_\+inc\+\_\+betti} (bool graded=false)
 \begin{DoxyCompactList}\small\item\em the incremental Betti numbers obtained by adding the monomial to the ideal \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a1b8a9832df7be67f0e623870433577f8}\label{group___g_b_computation_a1b8a9832df7be67f0e623870433577f8}} 
-\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_a1b8a9832df7be67f0e623870433577f8}{get\+\_\+hilbert\+\_\+numerator} (bool graded=false)
+\mbox{\Hypertarget{group___g_b_computation_aaef635310e198cfa9f9da6fd50c4bc84}\label{group___g_b_computation_aaef635310e198cfa9f9da6fd50c4bc84}} 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_aaef635310e198cfa9f9da6fd50c4bc84}{get\+\_\+hilbert\+\_\+numerator} (bool graded=false) const
 \begin{DoxyCompactList}\small\item\em the Hilbert numerator obtained by adding the monomial to the ideal (numerator is {\itshape not} reduced) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a1ad52b5a6782aa3e1434f7d4084c289f}\label{group___g_b_computation_a1ad52b5a6782aa3e1434f7d4084c289f}} 
-\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_a1ad52b5a6782aa3e1434f7d4084c289f}{get\+\_\+hilbert\+\_\+reduced\+\_\+numerator} (bool graded=false)
+\mbox{\Hypertarget{group___g_b_computation_af9df84889effb9b5805413e8a0affa88}\label{group___g_b_computation_af9df84889effb9b5805413e8a0affa88}} 
+\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_af9df84889effb9b5805413e8a0affa88}{get\+\_\+hilbert\+\_\+reduced\+\_\+numerator} (bool graded=false) const
 \begin{DoxyCompactList}\small\item\em the Hilbert numerator obtained by adding the monomial to the ideal (numerator {\itshape is} reduced) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a63962938c3dfef78afe80e4e86eb9c78}\label{group___g_b_computation_a63962938c3dfef78afe80e4e86eb9c78}} 
-\hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_a63962938c3dfef78afe80e4e86eb9c78}{get\+\_\+hilbert\+\_\+polynomial} ()
+\mbox{\Hypertarget{group___g_b_computation_a6fa88df78315031c9bfcc58b8d8acb1a}\label{group___g_b_computation_a6fa88df78315031c9bfcc58b8d8acb1a}} 
+\hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_a6fa88df78315031c9bfcc58b8d8acb1a}{get\+\_\+hilbert\+\_\+polynomial} () const
 \begin{DoxyCompactList}\small\item\em the Hilbert polynomial obtained by adding the monomial to the ideal \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_afb9a43c24f2d0405d1c60e12983c8003}\label{group___g_b_computation_afb9a43c24f2d0405d1c60e12983c8003}} 
 int \hyperlink{group___g_b_computation_afb9a43c24f2d0405d1c60e12983c8003}{how\+\_\+many\+\_\+new\+\_\+pairs} () const
@@ -544,15 +544,15 @@ int \hyperlink{group___g_b_computation_afb9a43c24f2d0405d1c60e12983c8003}{how\+\
 \mbox{\Hypertarget{group___g_b_computation_a68c0ece8174abdb6d2955d63f04cd437}\label{group___g_b_computation_a68c0ece8174abdb6d2955d63f04cd437}} 
 int \hyperlink{group___g_b_computation_a68c0ece8174abdb6d2955d63f04cd437}{deg\+\_\+of\+\_\+new\+\_\+pairs} () const
 \begin{DoxyCompactList}\small\item\em the degree of the new critical pairs generated by adding the monomial to the ideal \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_addbeaeb67edfe33d4b4d71d7a4aa1aac}\label{group___g_b_computation_addbeaeb67edfe33d4b4d71d7a4aa1aac}} 
-int \hyperlink{group___g_b_computation_addbeaeb67edfe33d4b4d71d7a4aa1aac}{get\+\_\+difference\+\_\+in\+\_\+degree} ()
+\mbox{\Hypertarget{group___g_b_computation_af9a60da2d124f45b884b93704b45cc45}\label{group___g_b_computation_af9a60da2d124f45b884b93704b45cc45}} 
+int \hyperlink{group___g_b_computation_af9a60da2d124f45b884b93704b45cc45}{get\+\_\+difference\+\_\+in\+\_\+degree} () const
 \begin{DoxyCompactList}\small\item\em computes the difference in degree between the first and last monomials of the ideal \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___g_b_computation_abedc9cad9413fc7727e1b93d6eea16af}\label{group___g_b_computation_abedc9cad9413fc7727e1b93d6eea16af}} 
-void \hyperlink{group___g_b_computation_abedc9cad9413fc7727e1b93d6eea16af}{compute\+\_\+number\+\_\+new\+\_\+pairs} ()
+\mbox{\Hypertarget{group___g_b_computation_a8549c4626e69e8488078892f993a39c2}\label{group___g_b_computation_a8549c4626e69e8488078892f993a39c2}} 
+void \hyperlink{group___g_b_computation_a8549c4626e69e8488078892f993a39c2}{compute\+\_\+number\+\_\+new\+\_\+pairs} () const
 \begin{DoxyCompactList}\small\item\em Computes the number of critical pairs the monomial would add. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a20bb441439236bcce2d9e87b8486553f}\label{group___g_b_computation_a20bb441439236bcce2d9e87b8486553f}} 
 void \hyperlink{group___g_b_computation_a20bb441439236bcce2d9e87b8486553f}{set\+\_\+hilbert\+\_\+numerator} (\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$h)
@@ -619,13 +619,13 @@ Implementation of Faug\`{e}re's F4 algorithm.
 
 Currently computes a Gr\"{o}bner basis by selecting several s-\/polynomials of lowest lcm degree. Data is stored in a semi-\/sparse matrix format, with each row a contiguous array of entries ({\ttfamily A}). Each row of {\ttfamily A} begins at the position indicated by the corresponding {\ttfamily offset}, and its first non-\/zero entry appears at the position indicated by the corresponding {\ttfamily head}. So the leading coefficient of the polynomial in row {\ttfamily k} appears in {\ttfamily A\mbox{[}head\mbox{[}k\mbox{]}\mbox{]}} and the leading monomial appears in {\ttfamily M\mbox{[}offset\mbox{[}k\mbox{]}+head\mbox{[}k\mbox{]}\mbox{]}}. Starting from {\ttfamily head\mbox{[}k\mbox{]}}, row {\ttfamily k} is actually dense. While this is not sparse, it does succeed in saving more space than one might expect. 
 
-Definition at line 70 of file f4\+\_\+dynamic.\+hpp.
+Definition at line 73 of file f4\+\_\+dynamic.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group___g_b_computation_ab908becf5415be27dd0d4e4391ee2c3b}{F4\+\_\+\+Reduction\+\_\+\+Data} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&B)
+\hyperlink{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}{F4\+\_\+\+Reduction\+\_\+\+Data} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&B, Dynamic\+\_\+\+Heuristic method)
 \begin{DoxyCompactList}\small\item\em encapsulation of one step of the F4 algorithm for the polynomials indicated by {\ttfamily P} and {\ttfamily B} \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}{add\+\_\+monomials} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&ti, list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&ri, const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool new\+\_\+row=false)
 \begin{DoxyCompactList}\small\item\em adds monomials of $ ug $ to {\ttfamily M\+\_\+build} \end{DoxyCompactList}\item 
@@ -654,6 +654,9 @@ void \hyperlink{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}{initi
 \mbox{\Hypertarget{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}\label{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}} 
 bool \hyperlink{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}{is\+\_\+zero} ()
 \begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff all the entries are 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a4ab787b92eb2f66d529d7ecf6d5942bb}\label{group___g_b_computation_a4ab787b92eb2f66d529d7ecf6d5942bb}} 
+unsigned \hyperlink{group___g_b_computation_a4ab787b92eb2f66d529d7ecf6d5942bb}{number\+\_\+of\+\_\+nonzero\+\_\+entries} (unsigned i)
+\begin{DoxyCompactList}\small\item\em returns the number of nonzero entries on the indicated row \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}\label{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}} 
 vector$<$ \hyperlink{group__strategygroup_class_poly___sugar___data}{Poly\+\_\+\+Sugar\+\_\+\+Data} $\ast$ $>$ \hyperlink{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}{get\+\_\+strategies} ()
 \begin{DoxyCompactList}\small\item\em returns the strategies currently in use \end{DoxyCompactList}\item 
@@ -682,6 +685,9 @@ unsigned \hyperlink{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}{n
 \mbox{\Hypertarget{group___g_b_computation_a6f70b5f5779e7aa262d454b9f2bbd2d1}\label{group___g_b_computation_a6f70b5f5779e7aa262d454b9f2bbd2d1}} 
 vector$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_a6f70b5f5779e7aa262d454b9f2bbd2d1}{finalize} ()
 \begin{DoxyCompactList}\small\item\em converts {\ttfamily this} to a vector of \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} and returns the result \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a8281d8f4316037e2bd53caf9e1930cb0}\label{group___g_b_computation_a8281d8f4316037e2bd53caf9e1930cb0}} 
+\hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ \hyperlink{group___g_b_computation_a8281d8f4316037e2bd53caf9e1930cb0}{finalize} (unsigned)
+\begin{DoxyCompactList}\small\item\em converts indicated row to a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}, returns result \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}\label{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}} 
 vector$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}{finalize} ()
 \begin{DoxyCompactList}\small\item\em converts {\ttfamily this} to a vector of \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} and returns the result \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -705,11 +711,21 @@ void \hyperlink{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}{clear
 \mbox{\Hypertarget{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}\label{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}} 
 void \hyperlink{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}{reduce\+\_\+by\+\_\+old} ()
 \begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a680a5ada15ae93cdc757e802170e4b4e}\label{group___g_b_computation_a680a5ada15ae93cdc757e802170e4b4e}} 
-void \hyperlink{group___g_b_computation_a680a5ada15ae93cdc757e802170e4b4e}{reduce\+\_\+by\+\_\+new} (unsigned i, unsigned lhead\+\_\+i)
+\mbox{\Hypertarget{group___g_b_computation_a2344b7981a040e2a620b22fc19ef05ec}\label{group___g_b_computation_a2344b7981a040e2a620b22fc19ef05ec}} 
+void \hyperlink{group___g_b_computation_a2344b7981a040e2a620b22fc19ef05ec}{reduce\+\_\+by\+\_\+new} (unsigned i, unsigned lhead\+\_\+i, const set$<$ unsigned $>$ \&)
 \begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
-\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ \hyperlink{group___g_b_computation_a896aed2e69b7db0c0d7783bfcf7f3d03}{select\+\_\+dynamic} (list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \hyperlink{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}{G}, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&skel, Dynamic\+\_\+\+Heuristic heur)
+\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ \hyperlink{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}{select\+\_\+dynamic} (list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \hyperlink{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}{G}, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&skel)
 \begin{DoxyCompactList}\small\item\em selects leading monomials for the remaining nonzero rows \end{DoxyCompactList}\item 
+unsigned \hyperlink{group___g_b_computation_af50b3f58764474df16c466034515b63e}{select\+\_\+dynamic\+\_\+single} (set$<$ unsigned $>$ \&unprocessed, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \hyperlink{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}{G}, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&skel)
+\begin{DoxyCompactList}\small\item\em selects leading monomials for one remaining nonzero rows \end{DoxyCompactList}\item 
+bool \hyperlink{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}{row\+\_\+would\+\_\+change\+\_\+ordering} (unsigned)
+\begin{DoxyCompactList}\small\item\em selects an ordering that would be best for the indicated row, verifying that the ordering is compatible not only with the basis heretofore, but also with previously processed rows of the matrix \end{DoxyCompactList}\item 
+\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ \hyperlink{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}{reduce\+\_\+and\+\_\+select\+\_\+order} (const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&T, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$skel)
+\begin{DoxyCompactList}\small\item\em see details \end{DoxyCompactList}\item 
+bool \hyperlink{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$skel)
+\begin{DoxyCompactList}\small\item\em verify the processed rows against {\ttfamily skel} and modify {\ttfamily skel} if necessary to preserve previous choices \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}{simplify\+\_\+identical\+\_\+rows} (set$<$ unsigned $>$ \&in\+\_\+use)
+\begin{DoxyCompactList}\small\item\em eliminates duplicates of rows\+: later rows that are identical to earlier rows will be eliminated \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}\label{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}} 
 void \hyperlink{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}{reduce\+\_\+by\+\_\+old} ()
 \begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
@@ -725,6 +741,9 @@ void \hyperlink{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}{list\
 \begin{DoxyCompactList}\small\item\em lists the reducers selected for each column, in order \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}{print\+\_\+matrix} (bool show\+\_\+data=false)
 \begin{DoxyCompactList}\small\item\em prints the matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a11e756a43276426735929d09976d7337}\label{group___g_b_computation_a11e756a43276426735929d09976d7337}} 
+void \hyperlink{group___g_b_computation_a11e756a43276426735929d09976d7337}{print\+\_\+row} (unsigned)
+\begin{DoxyCompactList}\small\item\em prints indicated row of the matrix as a polynomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}\label{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}} 
 void \hyperlink{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}{list\+\_\+reducers} ()
 \begin{DoxyCompactList}\small\item\em lists the reducers selected for each column, in order \end{DoxyCompactList}\item 
@@ -757,12 +776,30 @@ void \hyperlink{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}{reduc
 \mbox{\Hypertarget{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}\label{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}} 
 vector$<$ vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \hyperlink{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}{A}
 \begin{DoxyCompactList}\small\item\em coefficient data in sparse representation; each vector entry is a subrow of the dense matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}\label{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}} 
+set$<$ unsigned $>$ \hyperlink{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}{dynamic\+\_\+processed}
+\begin{DoxyCompactList}\small\item\em rows which have already contributed to the ordering \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ae0c89b189358ae0d5f11599f6e40cdd4}\label{group___g_b_computation_ae0c89b189358ae0d5f11599f6e40cdd4}} 
+set$<$ unsigned $>$ \hyperlink{group___g_b_computation_ae0c89b189358ae0d5f11599f6e40cdd4}{dynamic\+\_\+unprocessed}
+\begin{DoxyCompactList}\small\item\em rows which still have to be considered for the ordering \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}\label{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}} 
 const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \& \hyperlink{group___g_b_computation_a3dbc8c690c4a21ba195ae32c19982f79}{G}
 \begin{DoxyCompactList}\small\item\em current basis of ideal \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a1679f8bda319a602672bc866220bb7fb}\label{group___g_b_computation_a1679f8bda319a602672bc866220bb7fb}} 
 vector$<$ unsigned $>$ \hyperlink{group___g_b_computation_a1679f8bda319a602672bc866220bb7fb}{head}
 \begin{DoxyCompactList}\small\item\em index of the first non-\/zero entry of this row in the dense matrix (counted from offset) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a31a62db75649e409aa5b9f374c260ba5}\label{group___g_b_computation_a31a62db75649e409aa5b9f374c260ba5}} 
+Dynamic\+\_\+\+Heuristic \hyperlink{group___g_b_computation_a31a62db75649e409aa5b9f374c260ba5}{heur}
+\begin{DoxyCompactList}\small\item\em heuristic the system should use in choosing leading monomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_afccb03cc2471080d322e6b68f763e24b}\label{group___g_b_computation_afccb03cc2471080d322e6b68f763e24b}} 
+function$<$ bool(\hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&, \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&)$>$ \hyperlink{group___g_b_computation_afccb03cc2471080d322e6b68f763e24b}{heuristic\+\_\+judges\+\_\+smaller}
+\begin{DoxyCompactList}\small\item\em function corresponding to {\ttfamily heur} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a1d3e35d9bf43d93ba740b6bd8f5237dd}\label{group___g_b_computation_a1d3e35d9bf43d93ba740b6bd8f5237dd}} 
+vector$<$ list$<$ \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} $>$ $>$ \hyperlink{group___g_b_computation_a1d3e35d9bf43d93ba740b6bd8f5237dd}{I}
+\begin{DoxyCompactList}\small\item\em each entry contains a set of monomials that could be a leading monomial of the corresponding row of the matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a740d4262bc2b5fdfcf2bf23bf05bf866}\label{group___g_b_computation_a740d4262bc2b5fdfcf2bf23bf05bf866}} 
+vector$<$ unsigned $>$ \hyperlink{group___g_b_computation_a740d4262bc2b5fdfcf2bf23bf05bf866}{l\+\_\+head}
+\begin{DoxyCompactList}\small\item\em index of the logical head term of this row (absolute index) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a7dac72addf3ef8ff2c87c247a90eaa9d}\label{group___g_b_computation_a7dac72addf3ef8ff2c87c247a90eaa9d}} 
 vector$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ $>$ \hyperlink{group___g_b_computation_a7dac72addf3ef8ff2c87c247a90eaa9d}{M}
 \begin{DoxyCompactList}\small\item\em monomials for each matrix \end{DoxyCompactList}\item 
@@ -799,6 +836,9 @@ list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\
 \mbox{\Hypertarget{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}\label{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}} 
 vector$<$ vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ $>$ \hyperlink{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}{R\+\_\+built}
 \begin{DoxyCompactList}\small\item\em reducers actually generated \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}\label{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}} 
+vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$ $>$ \hyperlink{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}{row\+\_\+skel}
+\begin{DoxyCompactList}\small\item\em copies of the current skeleton, modified according to the preferred monomial of this row \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a4a1dcdff469ec1061109dc33aaceb011}\label{group___g_b_computation_a4a1dcdff469ec1061109dc33aaceb011}} 
 \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\+\_\+\+Ring} \& \hyperlink{group___g_b_computation_a4a1dcdff469ec1061109dc33aaceb011}{Rx}
 \begin{DoxyCompactList}\small\item\em polynomial ring \end{DoxyCompactList}\item 
@@ -808,11 +848,11 @@ vector$<$ \hyperlink{group__strategygroup_class_poly___sugar___data}{Poly\+\_\+\
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group___g_b_computation_ab908becf5415be27dd0d4e4391ee2c3b}\label{group___g_b_computation_ab908becf5415be27dd0d4e4391ee2c3b}} 
+\mbox{\Hypertarget{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}\label{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
 \subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily F4\+\_\+\+Reduction\+\_\+\+Data\+::\+F4\+\_\+\+Reduction\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&}]{B }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily F4\+\_\+\+Reduction\+\_\+\+Data\+::\+F4\+\_\+\+Reduction\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&}]{B,  }\item[{Dynamic\+\_\+\+Heuristic}]{method }\end{DoxyParamCaption})}
 
 
 
@@ -826,10 +866,12 @@ encapsulation of one step of the F4 algorithm for the polynomials indicated by {
 \hline
 {\em B} & list of polynomials currently in the basis \\
 \hline
+{\em method} & heuristic the system should use in choosing leading monomials \\
+\hline
 \end{DoxyParams}
 
 
-Definition at line 63 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 64 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}\label{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
@@ -913,7 +955,7 @@ If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} shou
 \end{DoxyParams}
 
 
-Definition at line 204 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 236 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}\label{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
@@ -951,7 +993,7 @@ called internally by constructor, which has already performed some setup; inadvi
 \end{DoxyParams}
 
 
-Definition at line 153 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 184 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}\label{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!print\+\_\+matrix@{print\+\_\+matrix}}
@@ -985,7 +1027,36 @@ prints the matrix
 \end{DoxyParams}
 
 
-Definition at line 265 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 306 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}\label{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+and\+\_\+select\+\_\+order@{reduce\+\_\+and\+\_\+select\+\_\+order}}
+\index{reduce\+\_\+and\+\_\+select\+\_\+order@{reduce\+\_\+and\+\_\+select\+\_\+order}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+and\+\_\+select\+\_\+order()}{reduce\_and\_select\_order()}}
+{\footnotesize\ttfamily \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+and\+\_\+select\+\_\+order (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{skel }\end{DoxyParamCaption})}
+
+
+
+see details 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & list of current monomials \\
+\hline
+{\em P} & list of current critical pairs \\
+\hline
+{\em skel} & skeleton corresponding to current monomial ordering\\
+\hline
+\end{DoxyParams}
+This step falls between {\ttfamily \hyperlink{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}{reduce\+\_\+by\+\_\+old()}} and {\ttfamily \hyperlink{group___g_b_computation_a6f70b5f5779e7aa262d454b9f2bbd2d1}{finalize()}}. It attempts to perform a more global analysis of the matrix than select\+\_\+dynamic\+\_\+single. After reduction of rows by the existing basis, this step analyzes the matrix for a new ordering, proceeding row-\/by-\/row. \begin{DoxyReturn}{Returns}
+a \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} ordering that is considered optimal for the matrix and consistent with past choices 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not currently in use and has not been tested. 
+\end{DoxyWarning}
+
+
+Definition at line 729 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}\label{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
@@ -1010,13 +1081,33 @@ reduces the specified set of rows by the specified row, suitable for multithread
 \end{DoxyParams}
 
 
-Definition at line 388 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 431 of file f4\+\_\+dynamic.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_a896aed2e69b7db0c0d7783bfcf7f3d03}\label{group___g_b_computation_a896aed2e69b7db0c0d7783bfcf7f3d03}} 
+\mbox{\Hypertarget{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}\label{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!row\+\_\+would\+\_\+change\+\_\+ordering@{row\+\_\+would\+\_\+change\+\_\+ordering}}
+\index{row\+\_\+would\+\_\+change\+\_\+ordering@{row\+\_\+would\+\_\+change\+\_\+ordering}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{row\+\_\+would\+\_\+change\+\_\+ordering()}{row\_would\_change\_ordering()}}
+{\footnotesize\ttfamily bool F4\+\_\+\+Reduction\+\_\+\+Data\+::row\+\_\+would\+\_\+change\+\_\+ordering (\begin{DoxyParamCaption}\item[{unsigned}]{i }\end{DoxyParamCaption})}
+
+
+
+selects an ordering that would be best for the indicated row, verifying that the ordering is compatible not only with the basis heretofore, but also with previously processed rows of the matrix 
+
+\begin{DoxyReturn}{Returns}
+whether the preferred, compatible monomial would change the current ordering 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not currently in use and has not been tested. 
+\end{DoxyWarning}
+
+
+Definition at line 665 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}\label{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic@{select\+\_\+dynamic}}
 \index{select\+\_\+dynamic@{select\+\_\+dynamic}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
 \subparagraph{\texorpdfstring{select\+\_\+dynamic()}{select\_dynamic()}}
-{\footnotesize\ttfamily \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ F4\+\_\+\+Reduction\+\_\+\+Data\+::select\+\_\+dynamic (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$}]{G,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&}]{skel,  }\item[{Dynamic\+\_\+\+Heuristic}]{heur }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ F4\+\_\+\+Reduction\+\_\+\+Data\+::select\+\_\+dynamic (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$}]{G,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&}]{skel }\end{DoxyParamCaption})}
 
 
 
@@ -1034,15 +1125,89 @@ This functions basically fills the role that \hyperlink{group___g_b_computation_
 \hline
 {\em skel} & the current L\+P\+\_\+\+Solver that defines the term ordering \\
 \hline
-{\em heur} & which Dynamic\+\_\+\+Heuristic to use when selecting a monomial \\
-\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the recommended monomial ordering; this may be the same as {\ttfamily curr\+\_\+ord} 
 \end{DoxyReturn}
 
 
-Definition at line 506 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 820 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_af50b3f58764474df16c466034515b63e}\label{group___g_b_computation_af50b3f58764474df16c466034515b63e}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic\+\_\+single@{select\+\_\+dynamic\+\_\+single}}
+\index{select\+\_\+dynamic\+\_\+single@{select\+\_\+dynamic\+\_\+single}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{select\+\_\+dynamic\+\_\+single()}{select\_dynamic\_single()}}
+{\footnotesize\ttfamily unsigned F4\+\_\+\+Reduction\+\_\+\+Data\+::select\+\_\+dynamic\+\_\+single (\begin{DoxyParamCaption}\item[{set$<$ unsigned $>$ \&}]{unprocessed,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{T,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$}]{G,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{\hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$\&}]{skel }\end{DoxyParamCaption})}
+
+
+
+selects leading monomials for one remaining nonzero rows 
+
+This functions basically fills the role that \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee116d7d2a0e}{select\+\_\+monomial()} fills in the dynamic Buchberger algorithm. Unlike the other \hyperlink{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}{select\+\_\+dynamic()}, however, it chooses only one row at a time. 
+\begin{DoxyParams}{Parameters}
+{\em unprocessed} & set of unprocessed rows; the result will from from this set \\
+\hline
+{\em T} & list of current leading monomials \\
+\hline
+{\em G} & list of current basis polynomials \\
+\hline
+{\em P} & list of current critical pairs \\
+\hline
+{\em curr\+\_\+ord} & current monomial ordering \\
+\hline
+{\em skel} & the current L\+P\+\_\+\+Solver that defines the term ordering \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the row with the recommended new ordering 
+\end{DoxyReturn}
+
+
+Definition at line 952 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}\label{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!simplify\+\_\+identical\+\_\+rows@{simplify\+\_\+identical\+\_\+rows}}
+\index{simplify\+\_\+identical\+\_\+rows@{simplify\+\_\+identical\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{simplify\+\_\+identical\+\_\+rows()}{simplify\_identical\_rows()}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::simplify\+\_\+identical\+\_\+rows (\begin{DoxyParamCaption}\item[{set$<$ unsigned $>$ \&}]{in\+\_\+use }\end{DoxyParamCaption})}
+
+
+
+eliminates duplicates of rows\+: later rows that are identical to earlier rows will be eliminated 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+use} & rows that are currently still in use by the matrix \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 583 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}\label{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows@{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows}}
+\index{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows@{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows()}{verify\_and\_modify\_processed\_rows()}}
+{\footnotesize\ttfamily bool F4\+\_\+\+Reduction\+\_\+\+Data\+::verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows (\begin{DoxyParamCaption}\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{skel }\end{DoxyParamCaption})}
+
+
+
+verify the processed rows against {\ttfamily skel} and modify {\ttfamily skel} if necessary to preserve previous choices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em skel} & pending new {\ttfamily L\+P\+\_\+\+Solver} (best have a copy of the old one if this turns out bad) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily false} if and only if {\ttfamily new\+Skel} cannot be modified to compatibility with {\ttfamily new\+Skel} 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This function is not currently in use and has not been tested. 
+\end{DoxyWarning}
+
+
+Definition at line 609 of file f4\+\_\+dynamic.\+cpp.
 
 \index{smaller\+\_\+lm@{smaller\+\_\+lm}}\label{structsmaller__lm}
 \Hypertarget{group___g_b_computation_structsmaller__lm}
@@ -1271,11 +1436,11 @@ Computes a Gr\"{o}bner basis by selecting {\ttfamily number\+\_\+to\+\_\+advance
 
 Definition at line 82 of file algorithm\+\_\+buchberger\+\_\+explorer\+\_\+serial.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_gaf48f43667991b8526303601bbc0709cf}\label{group___g_b_computation_gaf48f43667991b8526303601bbc0709cf}} 
+\mbox{\Hypertarget{group___g_b_computation_gaf6fbdbd140d159527bfa757575f74560}\label{group___g_b_computation_gaf6fbdbd140d159527bfa757575f74560}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!check\+\_\+correctness@{check\+\_\+correctness}}
 \index{check\+\_\+correctness@{check\+\_\+correctness}!Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}}
 \subsubsection{\texorpdfstring{check\+\_\+correctness()}{check\_correctness()}}
-{\footnotesize\ttfamily void check\+\_\+correctness (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$$>$}]{G,  }\item[{\hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags}}]{strategy }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void check\+\_\+correctness (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$$>$}]{G,  }\item[{\hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags}}]{strategy = {\ttfamily StrategyFlags\+:\+:NORMAL\+\_\+STRATEGY} }\end{DoxyParamCaption})}
 
 
 
@@ -1292,11 +1457,11 @@ checks that {\ttfamily G} is a Gr\"{o}bner basis by verifying each s-\/polynomia
 
 Definition at line 69 of file algorithm\+\_\+buchberger\+\_\+basic.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_gabe68a8de3b87f6cc69e64fff39b71a81}\label{group___g_b_computation_gabe68a8de3b87f6cc69e64fff39b71a81}} 
+\mbox{\Hypertarget{group___g_b_computation_ga798232a9bc6d93f8a0ad69d5af6b349f}\label{group___g_b_computation_ga798232a9bc6d93f8a0ad69d5af6b349f}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!compatible\+\_\+pp@{compatible\+\_\+pp}}
 \index{compatible\+\_\+pp@{compatible\+\_\+pp}!Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}}
 \subsubsection{\texorpdfstring{compatible\+\_\+pp()}{compatible\_pp()}}
-{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::compatible\+\_\+pp (\begin{DoxyParamCaption}\item[{\hyperlink{group__polygroup_class_monomial}{Monomial}}]{current\+L\+PP,  }\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{all\+P\+Ps,  }\item[{set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{result,  }\item[{set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{boundary\+\_\+mons,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{skel }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::compatible\+\_\+pp (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{current\+L\+PP,  }\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{all\+P\+Ps,  }\item[{set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{result,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{boundary\+\_\+mons,  }\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{skel }\end{DoxyParamCaption})}
 
 
 
@@ -1323,13 +1488,13 @@ John Perry
 \end{DoxyParams}
 
 
-Definition at line 512 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 509 of file dynamic\+\_\+engine.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_gaf0ec0ad4f8430c46fc90c16104020f16}\label{group___g_b_computation_gaf0ec0ad4f8430c46fc90c16104020f16}} 
+\mbox{\Hypertarget{group___g_b_computation_ga6184088d03d37694f86acf5ac99cf75e}\label{group___g_b_computation_ga6184088d03d37694f86acf5ac99cf75e}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!constraints\+\_\+for\+\_\+new\+\_\+pp@{constraints\+\_\+for\+\_\+new\+\_\+pp}}
 \index{constraints\+\_\+for\+\_\+new\+\_\+pp@{constraints\+\_\+for\+\_\+new\+\_\+pp}!Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}}
 \subsubsection{\texorpdfstring{constraints\+\_\+for\+\_\+new\+\_\+pp()}{constraints\_for\_new\_pp()}}
-{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::constraints\+\_\+for\+\_\+new\+\_\+pp (\begin{DoxyParamCaption}\item[{const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&}]{pp\+\_\+I,  }\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{monomials\+For\+Comparison,  }\item[{vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{result }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::constraints\+\_\+for\+\_\+new\+\_\+pp (\begin{DoxyParamCaption}\item[{const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&}]{pp\+\_\+I,  }\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{monomials\+\_\+for\+\_\+comparison,  }\item[{vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{result }\end{DoxyParamCaption})}
 
 
 
@@ -1345,14 +1510,14 @@ John Perry
 \begin{DoxyParams}{Parameters}
 {\em pp\+\_\+I} & pair of PP with the ideal it would have. \\
 \hline
-{\em monomials\+For\+Comparison} & monomials used to generate constraints with L\+PP \\
+{\em monomials\+\_\+for\+\_\+comparison} & monomials used to generate constraints with L\+PP \\
 \hline
 {\em result} & the new constraints \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line 703 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 636 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga24647e1e20f18283bc931e723ba9fc22}\label{group___g_b_computation_ga24647e1e20f18283bc931e723ba9fc22}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!f4\+\_\+control@{f4\+\_\+control}}
@@ -1374,7 +1539,7 @@ a Gr\"{o}bner basis of the ideal generated by $ F $ with respect to the ordering
 \end{DoxyReturn}
 
 
-Definition at line 625 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 1067 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}\label{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!find\+\_\+reducer@{find\+\_\+reducer}}
@@ -1727,13 +1892,13 @@ Applies a particular Dynamic\+\_\+\+Heuristic (default is {\ttfamily O\+R\+D\+\_
 \end{DoxyParams}
 
 
-Definition at line 732 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 665 of file dynamic\+\_\+engine.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_ga8b938265dccdb6d410ed2906de4ed5e5}\label{group___g_b_computation_ga8b938265dccdb6d410ed2906de4ed5e5}} 
+\mbox{\Hypertarget{group___g_b_computation_gabe3fa16acb0927bac0b16e3a4cf4b4f5}\label{group___g_b_computation_gabe3fa16acb0927bac0b16e3a4cf4b4f5}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!select\+\_\+monomial@{select\+\_\+monomial}}
 \index{select\+\_\+monomial@{select\+\_\+monomial}!Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}}
 \subsubsection{\texorpdfstring{select\+\_\+monomial()}{select\_monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::select\+\_\+monomial (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$}]{r,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{current\+L\+PP,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{Current\+L\+P\+Ps,  }\item[{\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$$\ast$}]{current\+\_\+hilbert\+\_\+numerator,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \&}]{Current\+Polys,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$ $>$ \&}]{critpairs,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{curr\+Skel,  }\item[{bool \&}]{ordering\+\_\+changed,  }\item[{\hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\+\_\+\+Heuristic}}]{method = {\ttfamily Dynamic\+\_\+Heuristic\+:\+:ORD\+\_\+HILBERT\+\_\+THEN\+\_\+DEG} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dynamic\+\_\+\+Engine\+::select\+\_\+monomial (\begin{DoxyParamCaption}\item[{const set$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{r,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{current\+L\+PP,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $>$ \&}]{Current\+L\+P\+Ps,  }\item[{\hyperlink{group__polygroup_class_dense___univariate___integer___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Integer\+\_\+\+Polynomial} $\ast$$\ast$}]{current\+\_\+hilbert\+\_\+numerator,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \&}]{Current\+Polys,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$ $>$ \&}]{critpairs,  }\item[{\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{curr\+Skel,  }\item[{bool \&}]{ordering\+\_\+changed,  }\item[{\hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dynamic\+\_\+\+Heuristic}}]{method = {\ttfamily Dynamic\+\_\+Heuristic\+:\+:ORD\+\_\+HILBERT\+\_\+THEN\+\_\+DEG} }\end{DoxyParamCaption})}
 
 
 
@@ -1741,7 +1906,7 @@ same as {\ttfamily \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee11
 
 
 \begin{DoxyParams}{Parameters}
-{\em r} & the polynomial in need of a new choice of L\+PP \\
+{\em r} & the polynomial in need of a new choice of L\+PP; this will change to the monomials that are actually compatible \\
 \hline
 {\em current\+L\+PP} & the current leading monomial \\
 \hline
@@ -1768,7 +1933,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 759 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 692 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga428f97f3978ba1eb759b8381a523dfe7}\label{group___g_b_computation_ga428f97f3978ba1eb759b8381a523dfe7}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!sort\+\_\+pairs\+\_\+by\+\_\+strategy@{sort\+\_\+pairs\+\_\+by\+\_\+strategy}}
@@ -1788,7 +1953,7 @@ Rather than sort each time, which typically shuffles about a lot of pairs that w
 \end{DoxyParams}
 
 
-Definition at line 212 of file algorithm\+\_\+buchberger\+\_\+basic.\+hpp.
+Definition at line 215 of file algorithm\+\_\+buchberger\+\_\+basic.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga459782e1aa0e3b2b4a6569bcd27150cc}\label{group___g_b_computation_ga459782e1aa0e3b2b4a6569bcd27150cc}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!top\+\_\+reduce@{top\+\_\+reduce}}
@@ -1841,5 +2006,5 @@ John Perry
 \end{DoxyReturn}
 
 
-Definition at line 624 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 558 of file dynamic\+\_\+engine.\+cpp.
 

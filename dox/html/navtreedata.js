@@ -3,7 +3,11 @@ var NAVTREE =
   [ "Gröbner basis project", "index.html", [
     [ "DynGB: Dynamic Gröbner basis project files", "index.html", [
       [ "Overview", "index.html#Overview", null ],
-      [ "Installation and dependencies", "index.html#Install", null ],
+      [ "Installation and dependencies", "index.html#Install", [
+        [ "Dependencies", "index.html#Dependencies", null ],
+        [ "For the Don Quixotes among us", "index.html#OpenMPI", null ],
+        [ "Actually installing it!", "index.html#Installation", null ]
+      ] ],
       [ "Usage", "index.html#Usage", null ],
       [ "Current status", "index.html#Status", null ],
       [ "To-do list", "index.html#Todo", [
@@ -49,9 +53,9 @@ var NAVTREEINDEX =
 [
 "algorithm__buchberger__basic_8cpp_source.html",
 "group___g_b_computation.html#a056c7e030d1bcb86444bf52405482964",
-"group___iterator_group.html#aec343a01bd5e134dba01f4acffb0dd45",
-"group__polygroup.html#a5410d31236ca04dfca3fe27acb7553f4",
-"group__strategygroup.html#a1b2e8a7fe4fcd57555fa58e48620b2bf"
+"group___iterator_group.html#ac443c5f24675fc7c8fb69bbd167b634b",
+"group__polygroup.html#a47ca76404bf5c97d1dadbf6c96638ac5",
+"group__polygroup.html#class_polynomial___linked___list"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

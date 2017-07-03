@@ -18,6 +18,8 @@ var searchData=
   ['double_5fbuffered_5fpolynomial',['Double_Buffered_Polynomial',['../group__polygroup.html#class_double___buffered___polynomial',1,'']]],
   ['dynamic_5fengine',['Dynamic_Engine',['../namespace_dynamic___engine.html',1,'']]],
   ['dynamic_5fheuristic',['Dynamic_Heuristic',['../group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0',1,'Dynamic_Engine']]],
+  ['dynamic_5fprocessed',['dynamic_processed',['../group___g_b_computation.html#aa0e72696183319ea37b7b88e4772037e',1,'F4_Reduction_Data']]],
+  ['dynamic_5funprocessed',['dynamic_unprocessed',['../group___g_b_computation.html#ae0c89b189358ae0d5f11599f6e40cdd4',1,'F4_Reduction_Data']]],
   ['dynamicsolver',['DynamicSolver',['../group___g_b_computation.html#ga28fbbb9eb7d8b80ced05c8fa89b2bdac',1,'algorithm_buchberger_dynamic.hpp']]],
   ['dyngb_3a_20dynamic_20gr_26ouml_3bbner_20basis_20project_20files',['DynGB: Dynamic Gr&amp;ouml;bner basis project files',['../index.html',1,'']]]
 ];

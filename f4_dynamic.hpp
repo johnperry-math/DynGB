@@ -204,6 +204,8 @@ public:
       fills in the dynamic Buchberger algorithm.
       Unlike the other select_dynamic(), however,
       it chooses only one row at a time.
+    @param unprocessed set of unprocessed rows;
+      the result will from from this set
     @param T list of current leading monomials
     @param G list of current basis polynomials
     @param P list of current critical pairs
@@ -225,6 +227,7 @@ public:
       heretofore, but also with previously processed rows of the matrix
     @return whether the preferred, compatible monomial
       would change the current ordering
+    @warning This function is not currently in use and has not been tested.
   */
   bool row_would_change_ordering(unsigned);
   /**
@@ -233,8 +236,13 @@ public:
     @param P list of current critical pairs
     @param skel skeleton corresponding to current monomial ordering
     @details This step falls between @c reduce_by_old() and @c finalize().
+      It attempts to perform a more global analysis of the matrix
+      than select_dynamic_single.
       After reduction of rows by the existing basis,
       this step analyzes the matrix for a new ordering, proceeding row-by-row.
+    @return a WGrevlex ordering that is considered optimal for the matrix and
+      consistent with past choices
+    @warning This function is not currently in use and has not been tested.
   */
   WGrevlex * reduce_and_select_order(
     const list<Monomial> & T, const list<Critical_Pair_Dynamic *> & P,
@@ -247,6 +255,7 @@ public:
       if this turns out bad)
     @return @c false if and only if @p newSkel cannot be modified
       to compatibility with @p newSkel
+    @warning This function is not currently in use and has not been tested.
   */
   bool verify_and_modify_processed_rows(LP_Solver * skel);
   /**

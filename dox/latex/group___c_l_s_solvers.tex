@@ -510,7 +510,7 @@ Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:G\+L\+P\+K\+\_\+\+Solver\+:\beg
 \mbox{\Hypertarget{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}\label{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}} 
 \hyperlink{group___c_l_s_solvers_acdba8634513aafff25e17d42e3f8261b}{G\+L\+P\+K\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver} \&)
 \begin{DoxyCompactList}\small\item\em copy constructor (deep copy) \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_a43a745172366a1dfd893dee00f0ce0fb}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$) override
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
@@ -523,41 +523,45 @@ virtual {\bfseries $\sim$\+G\+L\+P\+K\+\_\+\+Solver} ()
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}\label{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}} 
-virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a80092baf21b7c03891f5b326a6782e52}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_af6e6f37b09b2e4b1f45581c8a772f3eb}\label{group___c_l_s_solvers_af6e6f37b09b2e4b1f45581c8a772f3eb}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_af6e6f37b09b2e4b1f45581c8a772f3eb}{get\+\_\+dimension} () const override
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}\label{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}} 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_af10b4e8c079af45803e7e76f8d00d04d}{get\+\_\+number\+\_\+of\+\_\+rays} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_a4ee0b95d41c3861267176f5b249837e8}\label{group___c_l_s_solvers_a4ee0b95d41c3861267176f5b249837e8}} 
+virtual unsigned long \hyperlink{group___c_l_s_solvers_a4ee0b95d41c3861267176f5b249837e8}{get\+\_\+number\+\_\+of\+\_\+rays} () override
 \begin{DoxyCompactList}\small\item\em Returns the number of rays defining the skeleton. \end{DoxyCompactList}\item 
-virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}{get\+\_\+rays} ()
+virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_a9ded7ec7a82decb93132e10e25851528}{get\+\_\+rays} () const override
 \begin{DoxyCompactList}\small\item\em Returns rays that define a skeleton. \end{DoxyCompactList}\item 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+virtual unsigned long \hyperlink{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}{get\+\_\+number\+\_\+of\+\_\+constraints} () const override
 \begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}\label{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}} 
-virtual bool \hyperlink{group___c_l_s_solvers_a1c395efc09c537d49911656155487213}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
+\mbox{\Hypertarget{group___c_l_s_solvers_a23e950a4911f140ddffdcaeb062f7b80}\label{group___c_l_s_solvers_a23e950a4911f140ddffdcaeb062f7b80}} 
+virtual bool \hyperlink{group___c_l_s_solvers_a23e950a4911f140ddffdcaeb062f7b80}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false) const override
 \begin{DoxyCompactList}\small\item\em tests for consistency of a constraint generated by two monomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
-\subsection*{Additional Inherited Members}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \hyperlink{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}{rays}
+\begin{DoxyCompactList}\small\item\em overrides {\ttfamily rays} from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} ; necessary because for G\+L\+PK it is helpful to avoid updating the rays until they are needed \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}\label{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a43a745172366a1dfd893dee00f0ce0fb}\label{group___c_l_s_solvers_a43a745172366a1dfd893dee00f0ce0fb}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!copy@{copy}}
 \index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -577,11 +581,11 @@ Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L
 
 Definition at line 60 of file glpk\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}\label{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}\label{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
 \index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
-{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -592,17 +596,17 @@ number of constraints
 \end{DoxyReturn}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a1a220bc10c6d8696dd5885d7f3678e5f}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
 Definition at line 63 of file glpk\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}\label{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a9ded7ec7a82decb93132e10e25851528}\label{group___c_l_s_solvers_a9ded7ec7a82decb93132e10e25851528}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!get\+\_\+rays@{get\+\_\+rays}}
 \index{get\+\_\+rays@{get\+\_\+rays}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{get\+\_\+rays()}{get\_rays()}}
-{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -613,17 +617,17 @@ a set of \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} that
 \end{DoxyReturn}
 When using an approximate solver such as \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, this will give only an approximate skeleton. 
 
-Reimplemented from \hyperlink{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+Reimplemented from \hyperlink{group___c_l_s_solvers_a8328f67af66c81db467a6366f48ba3c8}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
 Definition at line 144 of file glpk\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}\label{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}\label{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -643,11 +647,11 @@ Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L
 
 Definition at line 118 of file glpk\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}\label{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}\label{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -666,6 +670,23 @@ Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L
 
 
 Definition at line 87 of file glpk\+\_\+solver.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}\label{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}} 
+\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!rays@{rays}}
+\index{rays@{rays}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
+\subparagraph{\texorpdfstring{rays}{rays}}
+{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}$>$ L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
+
+
+
+overrides {\ttfamily rays} from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} ; necessary because for G\+L\+PK it is helpful to avoid updating the rays until they are needed 
+
+You shouldn't care about the details, but here we go. When {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}} adds one or more constraints, it does not actually solve until requested. Until then, the rays are marked as ``dirty''. Any attempt to access dirty rays prompts the solver. In some cases, the solver will have been marked as ``const''; this is inherited from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} and I think it's A Good Idea\textsuperscript{TM} for exact solvers. So I mark the rays here as {\ttfamily mutable}. Arguably I should do that in {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} but I'm not really in the mood to argue at the moment. 
+
+Definition at line 110 of file glpk\+\_\+solver.\+hpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_l_p___solver}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}
@@ -734,16 +755,16 @@ virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a5801b4bd532
 \mbox{\Hypertarget{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}\label{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}} 
 virtual unsigned long \hyperlink{group___c_l_s_solvers_a7a8d455722e6ae8b0bc9928dcd1bfa48}{get\+\_\+number\+\_\+of\+\_\+rays} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of rays defining the skeleton. \end{DoxyCompactList}\item 
-virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}{get\+\_\+rays} ()
+virtual const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& \hyperlink{group___c_l_s_solvers_a8328f67af66c81db467a6366f48ba3c8}{get\+\_\+rays} () const
 \begin{DoxyCompactList}\small\item\em Returns rays that define a skeleton. \end{DoxyCompactList}\item 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{get\+\_\+number\+\_\+of\+\_\+constraints} ()=0
+virtual unsigned long \hyperlink{group___c_l_s_solvers_a1a220bc10c6d8696dd5885d7f3678e5f}{get\+\_\+number\+\_\+of\+\_\+constraints} () const =0
 \begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}\label{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}} 
-virtual bool \hyperlink{group___c_l_s_solvers_abb6c3f1320ea90c0a81960642a503b37}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false)
+\mbox{\Hypertarget{group___c_l_s_solvers_a4b2ef4e520631f5ad73d3cddffc832a1}\label{group___c_l_s_solvers_a4b2ef4e520631f5ad73d3cddffc832a1}} 
+virtual bool \hyperlink{group___c_l_s_solvers_a4b2ef4e520631f5ad73d3cddffc832a1}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false) const
 \begin{DoxyCompactList}\small\item\em tests for consistency of a constraint generated by two monomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Protected Attributes}
@@ -772,13 +793,13 @@ Do not mix-\/and-\/match solvers. At the present time, a \hyperlink{group___c_l_
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_aafcda320ace4a6892704b46af99ce446}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_a242f1dc35468e2326e6f7c10bc0d0fd4}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_acc03418759754dbeda266dba9eefe98b}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a43a745172366a1dfd893dee00f0ce0fb}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}\label{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a1a220bc10c6d8696dd5885d7f3678e5f}\label{group___c_l_s_solvers_a1a220bc10c6d8696dd5885d7f3678e5f}} 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
 \index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
-{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -789,13 +810,13 @@ number of constraints
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_acf743e235ac0476d8d739b139f76a0af}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_ac13c3eb80cc3a4fdee872c4c976da489}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}\label{group___c_l_s_solvers_a52f7a4068e9d36500d1dcdf35757cd06}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a8328f67af66c81db467a6366f48ba3c8}\label{group___c_l_s_solvers_a8328f67af66c81db467a6366f48ba3c8}} 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!get\+\_\+rays@{get\+\_\+rays}}
 \index{get\+\_\+rays@{get\+\_\+rays}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{get\+\_\+rays()}{get\_rays()}}
-{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \& L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::get\+\_\+rays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -806,7 +827,7 @@ a set of \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} that
 \end{DoxyReturn}
 When using an approximate solver such as \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}, this will give only an approximate skeleton. 
 
-Reimplemented in \hyperlink{group___c_l_s_solvers_ae011960777ca5e09d8c2b24c6ff66367}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
+Reimplemented in \hyperlink{group___c_l_s_solvers_a9ded7ec7a82decb93132e10e25851528}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}.
 
 
 
@@ -830,7 +851,7 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_a544cb09dfa211fae9adaacfd402af9a2}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_a3b0e821ab6a683ab4f936b7552074a15}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a9a4a7563d62e4394162aaa4bd08aae29}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}\label{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}} 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!solve@{solve}}
@@ -850,7 +871,7 @@ Checking the return value is crucial! If the function returns {\ttfamily false},
 \end{DoxyWarning}
 
 
-Implemented in \hyperlink{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_a1ceccb6fc4eff73cc4237c46ab9e7699}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
+Implemented in \hyperlink{group___c_l_s_solvers_adf50f125e2bfc6834fdd93e3fff22c48}{L\+P\+\_\+\+Solvers\+::\+Skeleton}, \hyperlink{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}, and \hyperlink{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}.
 
 
 
@@ -902,7 +923,7 @@ Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:P\+P\+L\+\_\+\+Solver\+:\begin{
 \mbox{\Hypertarget{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}\label{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}} 
 \hyperlink{group___c_l_s_solvers_a53d5564f046f82f07f58e557228f10c5}{P\+P\+L\+\_\+\+Solver} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \&)
 \begin{DoxyCompactList}\small\item\em copy constructor (deep copy) \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_acc03418759754dbeda266dba9eefe98b}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$) override
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
@@ -915,18 +936,18 @@ virtual {\bfseries $\sim$\+P\+P\+L\+\_\+\+Solver} ()
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}\label{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}} 
-virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_acc09a573b2ed49e2019d0c7a2f0c3b40}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a5a5f372696416caeae454ce78e9acb86}\label{group___c_l_s_solvers_a5a5f372696416caeae454ce78e9acb86}} 
+virtual N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a5a5f372696416caeae454ce78e9acb86}{get\+\_\+dimension} () const override
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
-virtual unsigned long \hyperlink{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+virtual unsigned long \hyperlink{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}{get\+\_\+number\+\_\+of\+\_\+constraints} () const override
 \begin{DoxyCompactList}\small\item\em returns the number of constraints used by the skeleton \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a9a4a7563d62e4394162aaa4bd08aae29}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}\label{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}} 
 virtual void \hyperlink{group___c_l_s_solvers_a1b50fd63c3032192d02d9a1b2411e33a}{setup\+\_\+rays} ()
@@ -959,11 +980,11 @@ static unsigned \hyperlink{group___c_l_s_solvers_a4c6a4a141e8c2eb4adbdef6ad73cec
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}\label{group___c_l_s_solvers_aa447a576420597eb9ff86b8875f5d30c}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_acc03418759754dbeda266dba9eefe98b}\label{group___c_l_s_solvers_acc03418759754dbeda266dba9eefe98b}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!copy@{copy}}
 \index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -983,11 +1004,11 @@ Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L
 
 Definition at line 86 of file ppl\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}\label{group___c_l_s_solvers_a8c8dbe226a971e62159888aecacce458}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}\label{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
 \index{get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{get\+\_\+number\+\_\+of\+\_\+constraints()}{get\_number\_of\_constraints()}}
-{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned long L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::get\+\_\+number\+\_\+of\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -998,17 +1019,17 @@ number of constraints
 \end{DoxyReturn}
 
 
-Implements \hyperlink{group___c_l_s_solvers_a05697a4527b15e26b5e0ae9088a46ed5}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
+Implements \hyperlink{group___c_l_s_solvers_a1a220bc10c6d8696dd5885d7f3678e5f}{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}.
 
 
 
 Definition at line 57 of file ppl\+\_\+solver.\+hpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}\label{group___c_l_s_solvers_affe1dce30ec7bad7c54e4edf9283235e}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a9a4a7563d62e4394162aaa4bd08aae29}\label{group___c_l_s_solvers_a9a4a7563d62e4394162aaa4bd08aae29}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -1028,11 +1049,11 @@ Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L
 
 Definition at line 117 of file ppl\+\_\+solver.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}\label{group___c_l_s_solvers_a6f73ee7b0d42f78fd95e399c474b3eb4}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}\label{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -1529,7 +1550,7 @@ void \hyperlink{group___c_l_s_solvers_aa63d9454338c84be898e1a604eba3527}{common\
 \mbox{\Hypertarget{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}\label{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}} 
 \hyperlink{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}{Skeleton} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&)
 \begin{DoxyCompactList}\small\item\em Performs a deep copy of {\ttfamily other}. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$)
+virtual bool \hyperlink{group___c_l_s_solvers_a242f1dc35468e2326e6f7c10bc0d0fd4}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$) override
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
@@ -1542,8 +1563,8 @@ virtual \hyperlink{group___c_l_s_solvers_a0da8ede73aea9089d7b81683c08cfc60}{$\si
 \begin{Indent}\textbf{ Basic properties}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}\label{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}} 
-N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_acc02076b2e475b60d31104e15d4c982c}{get\+\_\+dimension} () const
+\mbox{\Hypertarget{group___c_l_s_solvers_a97df76042269bc785c37f2315c353ed3}\label{group___c_l_s_solvers_a97df76042269bc785c37f2315c353ed3}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a97df76042269bc785c37f2315c353ed3}{get\+\_\+dimension} () const override
 \begin{DoxyCompactList}\small\item\em Returns the dimension of the underlying vector space. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}\label{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}} 
 unsigned long \hyperlink{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa}{get\+\_\+number\+\_\+of\+\_\+edges} ()
@@ -1551,8 +1572,8 @@ unsigned long \hyperlink{group___c_l_s_solvers_a310919f8faa248ffa479004d91c4defa
 \mbox{\Hypertarget{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}\label{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}} 
 set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_aac51e256cb56e7fe4844c206dcfcf35b}{get\+\_\+edges} ()
 \begin{DoxyCompactList}\small\item\em Returns the edges that define the skeleton. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}\label{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}} 
-unsigned long \hyperlink{group___c_l_s_solvers_a1fcb6873ce96085aa68f97064cd90c9d}{get\+\_\+number\+\_\+of\+\_\+constraints} ()
+\mbox{\Hypertarget{group___c_l_s_solvers_ac13c3eb80cc3a4fdee872c4c976da489}\label{group___c_l_s_solvers_ac13c3eb80cc3a4fdee872c4c976da489}} 
+unsigned long \hyperlink{group___c_l_s_solvers_ac13c3eb80cc3a4fdee872c4c976da489}{get\+\_\+number\+\_\+of\+\_\+constraints} () const override
 \begin{DoxyCompactList}\small\item\em Returns the number of constraints defining the skeleton. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}\label{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}} 
 const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \& \hyperlink{group___c_l_s_solvers_a7e1d8c1c056b9ec770f0c9abacdabe5d}{get\+\_\+constraints} ()
@@ -1574,9 +1595,9 @@ bool \hyperlink{group___c_l_s_solvers_a97d4c6e4864a90140728d664c8de12cf}{is\+\_\
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
-virtual bool \hyperlink{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
+virtual bool \hyperlink{group___c_l_s_solvers_adf50f125e2bfc6834fdd93e3fff22c48}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
-virtual bool \hyperlink{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
+virtual bool \hyperlink{group___c_l_s_solvers_a3b0e821ab6a683ab4f936b7552074a15}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the skeleton. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}\label{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}} 
 set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}{Edge} $>$ \hyperlink{group___c_l_s_solvers_a91e67ca8a8fc7a891534462c21051ea1}{adjacencies\+\_\+by\+\_\+graphs} (const set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \&)
@@ -1642,11 +1663,11 @@ Definition at line 129 of file skeleton.\+cpp.
 
 
 \paragraph{Member Function Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}\label{group___c_l_s_solvers_a33b1747069c512ad69e30cb0c8786577}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a242f1dc35468e2326e6f7c10bc0d0fd4}\label{group___c_l_s_solvers_a242f1dc35468e2326e6f7c10bc0d0fd4}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!copy@{copy}}
 \index{copy@{copy}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{copy()}{copy()}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::copy (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -1666,11 +1687,11 @@ Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L
 
 Definition at line 145 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}\label{group___c_l_s_solvers_aba082a338a2cb3ace612fd2dfba667c5}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_adf50f125e2bfc6834fdd93e3fff22c48}\label{group___c_l_s_solvers_adf50f125e2bfc6834fdd93e3fff22c48}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{new\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&}]{new\+\_\+constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -1690,11 +1711,11 @@ Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L
 
 Definition at line 275 of file skeleton.\+cpp.
 
-\mbox{\Hypertarget{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}\label{group___c_l_s_solvers_a202b0b37e0ea8a817ce6e29c93a39cd8}} 
+\mbox{\Hypertarget{group___c_l_s_solvers_a3b0e821ab6a683ab4f936b7552074a15}\label{group___c_l_s_solvers_a3b0e821ab6a683ab4f936b7552074a15}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!solve@{solve}}
 \index{solve@{solve}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool L\+P\+\_\+\+Solvers\+::\+Skeleton\+::solve (\begin{DoxyParamCaption}\item[{const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&}]{constraint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 

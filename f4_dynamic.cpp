@@ -361,7 +361,7 @@ void F4_Reduction_Data::reduce_my_rows(
           // get reducer for this monomial
           const Abstract_Polynomial * g = R[mi];
           Polynomial_Iterator * gi = g->new_iterator();
-          if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
+          //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
           // determine multiplier
           for (NVAR_TYPE l = 0; l < n; ++l)
             u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
@@ -400,7 +400,7 @@ void F4_Reduction_Data::reduce_my_rows(
           unsigned & hk = head[k];
           while (hk < Ak.size() and Ak[hk] == 0) ++hk;
           nonzero_entries[k] = new_nonzero_entries;
-          if (k == 0) { cout << '\t'; print_row(k); }
+          //if (k == 0) { cout << '\t'; print_row(k); }
         }
       }
     }
@@ -440,6 +440,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
     auto ci = head[i];
     auto & Aj = A[j];
     auto cj = head[i] + offset[i] - offset[j]; // pos in A[j] of A[i]'s head
+    if (offset[j] + head[j] > offset[i] + head[i]) head[j] = cj;
     auto a = Aj[lhead_i - offset[j]];
     unsigned ops = 0;
     a *= mod - F.inverse(Ai[lhead_i - offset[i]]);
@@ -1192,7 +1193,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
         cout << "SANITY CHECK: ordering changed? " << ordering_changed << endl;
         for (auto t : T) cout << t << " "; cout << endl;
-        very_verbose = true;
+        very_verbose = false;
         if (very_verbose) { cout << "\tadded "; r->println(); }
         gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
         for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;

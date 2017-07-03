@@ -812,55 +812,56 @@ Inheritance diagram for LP_Solvers::GLPK_Solver:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#acdba8634513aafff25e17d42e3f8261b">GLPK_Solver</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver">GLPK_Solver</a> &amp;)</td></tr>
 <tr class="memdesc:acdba8634513aafff25e17d42e3f8261b"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor (deep copy) <br /></td></tr>
 <tr class="separator:acdba8634513aafff25e17d42e3f8261b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcda320ace4a6892704b46af99ce446"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#aafcda320ace4a6892704b46af99ce446">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *)</td></tr>
-<tr class="memdesc:aafcda320ace4a6892704b46af99ce446"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#aafcda320ace4a6892704b46af99ce446">More...</a><br /></td></tr>
-<tr class="separator:aafcda320ace4a6892704b46af99ce446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a745172366a1dfd893dee00f0ce0fb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a43a745172366a1dfd893dee00f0ce0fb">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *) override</td></tr>
+<tr class="memdesc:a43a745172366a1dfd893dee00f0ce0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#a43a745172366a1dfd893dee00f0ce0fb">More...</a><br /></td></tr>
+<tr class="separator:a43a745172366a1dfd893dee00f0ce0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
 <tr class="memitem:a5712c834300cea2063aa932ad8a817d7"><td class="memItemLeft" align="right" valign="top"><a id="a5712c834300cea2063aa932ad8a817d7"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~GLPK_Solver</b> ()</td></tr>
 <tr class="separator:a5712c834300cea2063aa932ad8a817d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
-<tr class="memitem:a80092baf21b7c03891f5b326a6782e52"><td class="memItemLeft" align="right" valign="top"><a id="a80092baf21b7c03891f5b326a6782e52"></a>
-virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a80092baf21b7c03891f5b326a6782e52">get_dimension</a> () const</td></tr>
-<tr class="memdesc:a80092baf21b7c03891f5b326a6782e52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
-<tr class="separator:a80092baf21b7c03891f5b326a6782e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af10b4e8c079af45803e7e76f8d00d04d"><td class="memItemLeft" align="right" valign="top"><a id="af10b4e8c079af45803e7e76f8d00d04d"></a>
-virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#af10b4e8c079af45803e7e76f8d00d04d">get_number_of_rays</a> ()</td></tr>
-<tr class="memdesc:af10b4e8c079af45803e7e76f8d00d04d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rays defining the skeleton. <br /></td></tr>
-<tr class="separator:af10b4e8c079af45803e7e76f8d00d04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae011960777ca5e09d8c2b24c6ff66367"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ae011960777ca5e09d8c2b24c6ff66367">get_rays</a> ()</td></tr>
-<tr class="memdesc:ae011960777ca5e09d8c2b24c6ff66367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="#ae011960777ca5e09d8c2b24c6ff66367">More...</a><br /></td></tr>
-<tr class="separator:ae011960777ca5e09d8c2b24c6ff66367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf743e235ac0476d8d739b139f76a0af"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#acf743e235ac0476d8d739b139f76a0af">get_number_of_constraints</a> ()</td></tr>
-<tr class="memdesc:acf743e235ac0476d8d739b139f76a0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#acf743e235ac0476d8d739b139f76a0af">More...</a><br /></td></tr>
-<tr class="separator:acf743e235ac0476d8d739b139f76a0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e6f37b09b2e4b1f45581c8a772f3eb"><td class="memItemLeft" align="right" valign="top"><a id="af6e6f37b09b2e4b1f45581c8a772f3eb"></a>
+virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#af6e6f37b09b2e4b1f45581c8a772f3eb">get_dimension</a> () const override</td></tr>
+<tr class="memdesc:af6e6f37b09b2e4b1f45581c8a772f3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
+<tr class="separator:af6e6f37b09b2e4b1f45581c8a772f3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee0b95d41c3861267176f5b249837e8"><td class="memItemLeft" align="right" valign="top"><a id="a4ee0b95d41c3861267176f5b249837e8"></a>
+virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a4ee0b95d41c3861267176f5b249837e8">get_number_of_rays</a> () override</td></tr>
+<tr class="memdesc:a4ee0b95d41c3861267176f5b249837e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rays defining the skeleton. <br /></td></tr>
+<tr class="separator:a4ee0b95d41c3861267176f5b249837e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ded7ec7a82decb93132e10e25851528"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a9ded7ec7a82decb93132e10e25851528">get_rays</a> () const override</td></tr>
+<tr class="memdesc:a9ded7ec7a82decb93132e10e25851528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="#a9ded7ec7a82decb93132e10e25851528">More...</a><br /></td></tr>
+<tr class="separator:a9ded7ec7a82decb93132e10e25851528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28eb491140e583b453773ead208ae32"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#af28eb491140e583b453773ead208ae32">get_number_of_constraints</a> () const override</td></tr>
+<tr class="memdesc:af28eb491140e583b453773ead208ae32"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#af28eb491140e583b453773ead208ae32">More...</a><br /></td></tr>
+<tr class="separator:af28eb491140e583b453773ead208ae32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
-<tr class="memitem:a544cb09dfa211fae9adaacfd402af9a2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a544cb09dfa211fae9adaacfd402af9a2">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;)</td></tr>
-<tr class="memdesc:a544cb09dfa211fae9adaacfd402af9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the solution.  <a href="#a544cb09dfa211fae9adaacfd402af9a2">More...</a><br /></td></tr>
-<tr class="separator:a544cb09dfa211fae9adaacfd402af9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ceccb6fc4eff73cc4237c46ab9e7699"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1ceccb6fc4eff73cc4237c46ab9e7699">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;)</td></tr>
-<tr class="memdesc:a1ceccb6fc4eff73cc4237c46ab9e7699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the solution.  <a href="#a1ceccb6fc4eff73cc4237c46ab9e7699">More...</a><br /></td></tr>
-<tr class="separator:a1ceccb6fc4eff73cc4237c46ab9e7699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadfa4655b194b3b095db962c5900fee6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#aadfa4655b194b3b095db962c5900fee6">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;) override</td></tr>
+<tr class="memdesc:aadfa4655b194b3b095db962c5900fee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the solution.  <a href="#aadfa4655b194b3b095db962c5900fee6">More...</a><br /></td></tr>
+<tr class="separator:aadfa4655b194b3b095db962c5900fee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08fcdf86d0fcd8ac3e5da077b627e477"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;) override</td></tr>
+<tr class="memdesc:a08fcdf86d0fcd8ac3e5da077b627e477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the solution.  <a href="#a08fcdf86d0fcd8ac3e5da077b627e477">More...</a><br /></td></tr>
+<tr class="separator:a08fcdf86d0fcd8ac3e5da077b627e477"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Computation</div></td></tr>
-<tr class="memitem:a1c395efc09c537d49911656155487213"><td class="memItemLeft" align="right" valign="top"><a id="a1c395efc09c537d49911656155487213"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1c395efc09c537d49911656155487213">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false)</td></tr>
-<tr class="memdesc:a1c395efc09c537d49911656155487213"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
-<tr class="separator:a1c395efc09c537d49911656155487213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e950a4911f140ddffdcaeb062f7b80"><td class="memItemLeft" align="right" valign="top"><a id="a23e950a4911f140ddffdcaeb062f7b80"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a23e950a4911f140ddffdcaeb062f7b80">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false) const override</td></tr>
+<tr class="memdesc:a23e950a4911f140ddffdcaeb062f7b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
+<tr class="separator:a23e950a4911f140ddffdcaeb062f7b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_group___c_l_s_solvers"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_group___c_l_s_solvers')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solvers::LP_Solver</a></td></tr>
 <tr class="memitem:a1d530b23b2516c36cbc02173e667d0cf inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top"><a id="a1d530b23b2516c36cbc02173e667d0cf"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1d530b23b2516c36cbc02173e667d0cf">~LP_Solver</a> ()</td></tr>
 <tr class="memdesc:a1d530b23b2516c36cbc02173e667d0cf inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">the default destructor does nothing (this is an abstract class) <br /></td></tr>
 <tr class="separator:a1d530b23b2516c36cbc02173e667d0cf inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
+<tr class="memitem:ad748438e4625935b7c4ce4d677b2cdfd"><td class="memItemLeft" align="right" valign="top">set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ad748438e4625935b7c4ce4d677b2cdfd">rays</a></td></tr>
+<tr class="memdesc:ad748438e4625935b7c4ce4d677b2cdfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">overrides <code>rays</code> from <code><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver" title="exact or approximate polyhedral cone solution, with methods allowing definition and refinement ...">LP_Solver</a></code> ; necessary because for GLPK it is helpful to avoid updating the rays until they are needed  <a href="#ad748438e4625935b7c4ce4d677b2cdfd">More...</a><br /></td></tr>
+<tr class="separator:ad748438e4625935b7c4ce4d677b2cdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_group___c_l_s_solvers"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_group___c_l_s_solvers')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solvers::LP_Solver</a></td></tr>
 <tr class="memitem:ad4c9fb3708c156496c23515c8e841374 inherit pro_attribs_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top">set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374">rays</a></td></tr>
 <tr class="separator:ad4c9fb3708c156496c23515c8e841374 inherit pro_attribs_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h4 class="groupheader">Member Function Documentation</h4>
-<a id="aafcda320ace4a6892704b46af99ce446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafcda320ace4a6892704b46af99ce446">&#9670;&nbsp;</a></span>copy()</h2>
+<a id="a43a745172366a1dfd893dee00f0ce0fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a745172366a1dfd893dee00f0ce0fb">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -878,7 +879,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -893,8 +894,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="acf743e235ac0476d8d739b139f76a0af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf743e235ac0476d8d739b139f76a0af">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
+<a id="af28eb491140e583b453773ead208ae32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af28eb491140e583b453773ead208ae32">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -906,12 +907,12 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">virtual unsigned long LP_Solvers::GLPK_Solver::get_number_of_constraints </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -919,14 +920,14 @@ Additional Inherited Members</h2></td></tr>
 <p>returns the number of constraints used by the skeleton </p>
 <dl class="section return"><dt>Returns</dt><dd>number of constraints </dd></dl>
 
-<p>Implements <a class="el" href="group___c_l_s_solvers.html#a05697a4527b15e26b5e0ae9088a46ed5">LP_Solvers::LP_Solver</a>.</p>
+<p>Implements <a class="el" href="group___c_l_s_solvers.html#a1a220bc10c6d8696dd5885d7f3678e5f">LP_Solvers::LP_Solver</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="glpk__solver_8hpp_source.html#l00063">63</a> of file <a class="el" href="glpk__solver_8hpp_source.html">glpk_solver.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae011960777ca5e09d8c2b24c6ff66367"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae011960777ca5e09d8c2b24c6ff66367">&#9670;&nbsp;</a></span>get_rays()</h2>
+<a id="a9ded7ec7a82decb93132e10e25851528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ded7ec7a82decb93132e10e25851528">&#9670;&nbsp;</a></span>get_rays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -938,12 +939,12 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp; LP_Solvers::GLPK_Solver::get_rays </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -952,14 +953,14 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>a set of <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray" title="a ray defined by nonnegative coordinates  ">Ray</a> that define the given skeleton</dd></dl>
 <p>When using an approximate solver such as <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a>, this will give only an approximate skeleton. </p>
 
-<p>Reimplemented from <a class="el" href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">LP_Solvers::LP_Solver</a>.</p>
+<p>Reimplemented from <a class="el" href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">LP_Solvers::LP_Solver</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="glpk__solver_8cpp_source.html#l00144">144</a> of file <a class="el" href="glpk__solver_8cpp_source.html">glpk_solver.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a544cb09dfa211fae9adaacfd402af9a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a544cb09dfa211fae9adaacfd402af9a2">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
+<a id="aadfa4655b194b3b095db962c5900fee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadfa4655b194b3b095db962c5900fee6">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -977,7 +978,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -992,8 +993,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a1ceccb6fc4eff73cc4237c46ab9e7699"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ceccb6fc4eff73cc4237c46ab9e7699">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
+<a id="a08fcdf86d0fcd8ac3e5da077b627e477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08fcdf86d0fcd8ac3e5da077b627e477">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1011,7 +1012,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1023,6 +1024,34 @@ Additional Inherited Members</h2></td></tr>
 <p>Implements <a class="el" href="group___c_l_s_solvers.html#aea1a5bf98a2c4c06b0550cacdf8b88fd">LP_Solvers::LP_Solver</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="glpk__solver_8cpp_source.html#l00087">87</a> of file <a class="el" href="glpk__solver_8cpp_source.html">glpk_solver.cpp</a>.</p>
+
+</div>
+</div>
+<h4 class="groupheader">Member Data Documentation</h4>
+<a id="ad748438e4625935b7c4ce4d677b2cdfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad748438e4625935b7c4ce4d677b2cdfd">&#9670;&nbsp;</a></span>rays</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">set&lt;<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a>&gt; LP_Solvers::GLPK_Solver::rays</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>overrides <code>rays</code> from <code><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver" title="exact or approximate polyhedral cone solution, with methods allowing definition and refinement ...">LP_Solver</a></code> ; necessary because for GLPK it is helpful to avoid updating the rays until they are needed </p>
+<p>You shouldn&rsquo;t care about the details, but here we go. When <code><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a></code> adds one or more constraints, it does not actually solve until requested. Until then, the rays are marked as &ldquo;dirty&rdquo;. Any attempt to access dirty rays prompts the solver. In some cases, the solver will have been marked as &ldquo;const&rdquo;; this is inherited from <code><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver" title="exact or approximate polyhedral cone solution, with methods allowing definition and refinement ...">LP_Solver</a></code> and I think it&rsquo;s A Good Idea<sup>TM</sup> for exact solvers. So I mark the rays here as <code>mutable</code>. Arguably I should do that in <code><a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver" title="exact or approximate polyhedral cone solution, with methods allowing definition and refinement ...">LP_Solver</a></code> but I&rsquo;m not really in the mood to argue at the moment. </p>
+
+<p class="definition">Definition at line <a class="el" href="glpk__solver_8hpp_source.html#l00110">110</a> of file <a class="el" href="glpk__solver_8hpp_source.html">glpk_solver.hpp</a>.</p>
 
 </div>
 </div>
@@ -1091,17 +1120,17 @@ virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a7a8d455722e6ae8b0bc9928dcd1bfa48">get_number_of_rays</a> ()</td></tr>
 <tr class="memdesc:a7a8d455722e6ae8b0bc9928dcd1bfa48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rays defining the skeleton. <br /></td></tr>
 <tr class="separator:a7a8d455722e6ae8b0bc9928dcd1bfa48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52f7a4068e9d36500d1dcdf35757cd06"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">get_rays</a> ()</td></tr>
-<tr class="memdesc:a52f7a4068e9d36500d1dcdf35757cd06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="#a52f7a4068e9d36500d1dcdf35757cd06">More...</a><br /></td></tr>
-<tr class="separator:a52f7a4068e9d36500d1dcdf35757cd06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05697a4527b15e26b5e0ae9088a46ed5"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a05697a4527b15e26b5e0ae9088a46ed5">get_number_of_constraints</a> ()=0</td></tr>
-<tr class="memdesc:a05697a4527b15e26b5e0ae9088a46ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#a05697a4527b15e26b5e0ae9088a46ed5">More...</a><br /></td></tr>
-<tr class="separator:a05697a4527b15e26b5e0ae9088a46ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8328f67af66c81db467a6366f48ba3c8"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">get_rays</a> () const</td></tr>
+<tr class="memdesc:a8328f67af66c81db467a6366f48ba3c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="#a8328f67af66c81db467a6366f48ba3c8">More...</a><br /></td></tr>
+<tr class="separator:a8328f67af66c81db467a6366f48ba3c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a220bc10c6d8696dd5885d7f3678e5f"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1a220bc10c6d8696dd5885d7f3678e5f">get_number_of_constraints</a> () const =0</td></tr>
+<tr class="memdesc:a1a220bc10c6d8696dd5885d7f3678e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#a1a220bc10c6d8696dd5885d7f3678e5f">More...</a><br /></td></tr>
+<tr class="separator:a1a220bc10c6d8696dd5885d7f3678e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Computation</div></td></tr>
-<tr class="memitem:abb6c3f1320ea90c0a81960642a503b37"><td class="memItemLeft" align="right" valign="top"><a id="abb6c3f1320ea90c0a81960642a503b37"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#abb6c3f1320ea90c0a81960642a503b37">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false)</td></tr>
-<tr class="memdesc:abb6c3f1320ea90c0a81960642a503b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
-<tr class="separator:abb6c3f1320ea90c0a81960642a503b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2ef4e520631f5ad73d3cddffc832a1"><td class="memItemLeft" align="right" valign="top"><a id="a4b2ef4e520631f5ad73d3cddffc832a1"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a4b2ef4e520631f5ad73d3cddffc832a1">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false) const</td></tr>
+<tr class="memdesc:a4b2ef4e520631f5ad73d3cddffc832a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
+<tr class="separator:a4b2ef4e520631f5ad73d3cddffc832a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:ad4c9fb3708c156496c23515c8e841374"><td class="memItemLeft" align="right" valign="top">set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374">rays</a></td></tr>
 <tr class="separator:ad4c9fb3708c156496c23515c8e841374"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1135,12 +1164,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff copying was successful </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not mix-and-match solvers. At the present time, a <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_p_p_l___solver" title="approximate skeleton of a polyhedral cone, using PPL linear solver ">PPL_Solver</a> is not equipped to copy a <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a>, or vice versa. (This doesn't even make sense between exact and approximate solvers.) </dd></dl>
 
-<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#a33b1747069c512ad69e30cb0c8786577">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#aa447a576420597eb9ff86b8875f5d30c">LP_Solvers::PPL_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#aafcda320ace4a6892704b46af99ce446">LP_Solvers::GLPK_Solver</a>.</p>
+<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#a242f1dc35468e2326e6f7c10bc0d0fd4">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#acc03418759754dbeda266dba9eefe98b">LP_Solvers::PPL_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#a43a745172366a1dfd893dee00f0ce0fb">LP_Solvers::GLPK_Solver</a>.</p>
 
 </div>
 </div>
-<a id="a05697a4527b15e26b5e0ae9088a46ed5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05697a4527b15e26b5e0ae9088a46ed5">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
+<a id="a1a220bc10c6d8696dd5885d7f3678e5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a220bc10c6d8696dd5885d7f3678e5f">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1152,7 +1181,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
           <td class="memname">virtual unsigned long LP_Solvers::LP_Solver::get_number_of_constraints </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1165,12 +1194,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p>returns the number of constraints used by the skeleton </p>
 <dl class="section return"><dt>Returns</dt><dd>number of constraints </dd></dl>
 
-<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#a1fcb6873ce96085aa68f97064cd90c9d">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#acf743e235ac0476d8d739b139f76a0af">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#a8c8dbe226a971e62159888aecacce458">LP_Solvers::PPL_Solver</a>.</p>
+<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#ac13c3eb80cc3a4fdee872c4c976da489">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#af28eb491140e583b453773ead208ae32">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#afb7f014f84eb37026fe26f8c3114c0f0">LP_Solvers::PPL_Solver</a>.</p>
 
 </div>
 </div>
-<a id="a52f7a4068e9d36500d1dcdf35757cd06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52f7a4068e9d36500d1dcdf35757cd06">&#9670;&nbsp;</a></span>get_rays()</h2>
+<a id="a8328f67af66c81db467a6366f48ba3c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8328f67af66c81db467a6366f48ba3c8">&#9670;&nbsp;</a></span>get_rays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1182,7 +1211,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
           <td class="memname">const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp; LP_Solvers::LP_Solver::get_rays </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1196,7 +1225,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section return"><dt>Returns</dt><dd>a set of <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray" title="a ray defined by nonnegative coordinates  ">Ray</a> that define the given skeleton</dd></dl>
 <p>When using an approximate solver such as <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_g_l_p_k___solver" title="approximate skeleton of a polyhedral cone, using GLPK linear solver ">GLPK_Solver</a>, this will give only an approximate skeleton. </p>
 
-<p>Reimplemented in <a class="el" href="group___c_l_s_solvers.html#ae011960777ca5e09d8c2b24c6ff66367">LP_Solvers::GLPK_Solver</a>.</p>
+<p>Reimplemented in <a class="el" href="group___c_l_s_solvers.html#a9ded7ec7a82decb93132e10e25851528">LP_Solvers::GLPK_Solver</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="lp__solver_8cpp_source.html#l00380">380</a> of file <a class="el" href="lp__solver_8cpp_source.html">lp_solver.cpp</a>.</p>
 
@@ -1230,7 +1259,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if the new constraint is consistent with the current constraints</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Checking the return value is crucial! If the function returns <code>false</code>, you have an inconsistent system! While the <em>present</em> cone will remain consistent, <b>the function will not roll back previous changes you have made</b>, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#a202b0b37e0ea8a817ce6e29c93a39cd8">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#a544cb09dfa211fae9adaacfd402af9a2">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#affe1dce30ec7bad7c54e4edf9283235e">LP_Solvers::PPL_Solver</a>.</p>
+<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#a3b0e821ab6a683ab4f936b7552074a15">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#aadfa4655b194b3b095db962c5900fee6">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#a9a4a7563d62e4394162aaa4bd08aae29">LP_Solvers::PPL_Solver</a>.</p>
 
 </div>
 </div>
@@ -1262,7 +1291,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if the new constraints are consistent with the current constraints</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Checking the return value is crucial! If the function returns <code>false</code>, you have an inconsistent system! While the <em>present</em> cone will remain consistent, <b>the function will not roll back previous changes you have made</b>, so if you want to iterate again, your best bet is to copy the skeleton, and try that copy. Accept the new constraints only if that copy succeeds, in which case, you might as well discard the original, and keep the copy. </dd></dl>
 
-<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#aba082a338a2cb3ace612fd2dfba667c5">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#a1ceccb6fc4eff73cc4237c46ab9e7699">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#a6f73ee7b0d42f78fd95e399c474b3eb4">LP_Solvers::PPL_Solver</a>.</p>
+<p>Implemented in <a class="el" href="group___c_l_s_solvers.html#adf50f125e2bfc6834fdd93e3fff22c48">LP_Solvers::Skeleton</a>, <a class="el" href="group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477">LP_Solvers::GLPK_Solver</a>, and <a class="el" href="group___c_l_s_solvers.html#a3763d4bc551a98546f1f5be4df49390d">LP_Solvers::PPL_Solver</a>.</p>
 
 </div>
 </div>
@@ -1334,28 +1363,28 @@ Inheritance diagram for LP_Solvers::PPL_Solver:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a53d5564f046f82f07f58e557228f10c5">PPL_Solver</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_p_p_l___solver">PPL_Solver</a> &amp;)</td></tr>
 <tr class="memdesc:a53d5564f046f82f07f58e557228f10c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor (deep copy) <br /></td></tr>
 <tr class="separator:a53d5564f046f82f07f58e557228f10c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa447a576420597eb9ff86b8875f5d30c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#aa447a576420597eb9ff86b8875f5d30c">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *)</td></tr>
-<tr class="memdesc:aa447a576420597eb9ff86b8875f5d30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#aa447a576420597eb9ff86b8875f5d30c">More...</a><br /></td></tr>
-<tr class="separator:aa447a576420597eb9ff86b8875f5d30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc03418759754dbeda266dba9eefe98b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#acc03418759754dbeda266dba9eefe98b">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *) override</td></tr>
+<tr class="memdesc:acc03418759754dbeda266dba9eefe98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#acc03418759754dbeda266dba9eefe98b">More...</a><br /></td></tr>
+<tr class="separator:acc03418759754dbeda266dba9eefe98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
 <tr class="memitem:a2d4cd90b9e8bab2ff0fe3178bb894e75"><td class="memItemLeft" align="right" valign="top"><a id="a2d4cd90b9e8bab2ff0fe3178bb894e75"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~PPL_Solver</b> ()</td></tr>
 <tr class="separator:a2d4cd90b9e8bab2ff0fe3178bb894e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
-<tr class="memitem:acc09a573b2ed49e2019d0c7a2f0c3b40"><td class="memItemLeft" align="right" valign="top"><a id="acc09a573b2ed49e2019d0c7a2f0c3b40"></a>
-virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#acc09a573b2ed49e2019d0c7a2f0c3b40">get_dimension</a> () const</td></tr>
-<tr class="memdesc:acc09a573b2ed49e2019d0c7a2f0c3b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
-<tr class="separator:acc09a573b2ed49e2019d0c7a2f0c3b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c8dbe226a971e62159888aecacce458"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a8c8dbe226a971e62159888aecacce458">get_number_of_constraints</a> ()</td></tr>
-<tr class="memdesc:a8c8dbe226a971e62159888aecacce458"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#a8c8dbe226a971e62159888aecacce458">More...</a><br /></td></tr>
-<tr class="separator:a8c8dbe226a971e62159888aecacce458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5f372696416caeae454ce78e9acb86"><td class="memItemLeft" align="right" valign="top"><a id="a5a5f372696416caeae454ce78e9acb86"></a>
+virtual NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a5a5f372696416caeae454ce78e9acb86">get_dimension</a> () const override</td></tr>
+<tr class="memdesc:a5a5f372696416caeae454ce78e9acb86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
+<tr class="separator:a5a5f372696416caeae454ce78e9acb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7f014f84eb37026fe26f8c3114c0f0"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#afb7f014f84eb37026fe26f8c3114c0f0">get_number_of_constraints</a> () const override</td></tr>
+<tr class="memdesc:afb7f014f84eb37026fe26f8c3114c0f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of constraints used by the skeleton  <a href="#afb7f014f84eb37026fe26f8c3114c0f0">More...</a><br /></td></tr>
+<tr class="separator:afb7f014f84eb37026fe26f8c3114c0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
-<tr class="memitem:affe1dce30ec7bad7c54e4edf9283235e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#affe1dce30ec7bad7c54e4edf9283235e">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;)</td></tr>
-<tr class="memdesc:affe1dce30ec7bad7c54e4edf9283235e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the solution.  <a href="#affe1dce30ec7bad7c54e4edf9283235e">More...</a><br /></td></tr>
-<tr class="separator:affe1dce30ec7bad7c54e4edf9283235e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f73ee7b0d42f78fd95e399c474b3eb4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a6f73ee7b0d42f78fd95e399c474b3eb4">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;)</td></tr>
-<tr class="memdesc:a6f73ee7b0d42f78fd95e399c474b3eb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the solution.  <a href="#a6f73ee7b0d42f78fd95e399c474b3eb4">More...</a><br /></td></tr>
-<tr class="separator:a6f73ee7b0d42f78fd95e399c474b3eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4a7563d62e4394162aaa4bd08aae29"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a9a4a7563d62e4394162aaa4bd08aae29">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;) override</td></tr>
+<tr class="memdesc:a9a4a7563d62e4394162aaa4bd08aae29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the solution.  <a href="#a9a4a7563d62e4394162aaa4bd08aae29">More...</a><br /></td></tr>
+<tr class="separator:a9a4a7563d62e4394162aaa4bd08aae29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3763d4bc551a98546f1f5be4df49390d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a3763d4bc551a98546f1f5be4df49390d">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;) override</td></tr>
+<tr class="memdesc:a3763d4bc551a98546f1f5be4df49390d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the solution.  <a href="#a3763d4bc551a98546f1f5be4df49390d">More...</a><br /></td></tr>
+<tr class="separator:a3763d4bc551a98546f1f5be4df49390d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b50fd63c3032192d02d9a1b2411e33a"><td class="memItemLeft" align="right" valign="top"><a id="a1b50fd63c3032192d02d9a1b2411e33a"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1b50fd63c3032192d02d9a1b2411e33a">setup_rays</a> ()</td></tr>
 <tr class="memdesc:a1b50fd63c3032192d02d9a1b2411e33a"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the current set of rays and extracts the ones contained in lp <br /></td></tr>
@@ -1369,13 +1398,13 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a7a8d455722e6ae8b0bc9928dcd1bfa48">get_number_of_rays</a> ()</td></tr>
 <tr class="memdesc:a7a8d455722e6ae8b0bc9928dcd1bfa48 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rays defining the skeleton. <br /></td></tr>
 <tr class="separator:a7a8d455722e6ae8b0bc9928dcd1bfa48 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">get_rays</a> ()</td></tr>
-<tr class="memdesc:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">More...</a><br /></td></tr>
-<tr class="separator:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top"><a id="abb6c3f1320ea90c0a81960642a503b37"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#abb6c3f1320ea90c0a81960642a503b37">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false)</td></tr>
-<tr class="memdesc:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
-<tr class="separator:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">get_rays</a> () const</td></tr>
+<tr class="memdesc:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">More...</a><br /></td></tr>
+<tr class="separator:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top"><a id="a4b2ef4e520631f5ad73d3cddffc832a1"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a4b2ef4e520631f5ad73d3cddffc832a1">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false) const</td></tr>
+<tr class="memdesc:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
+<tr class="separator:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:ad85a1f4b919c2f4580b48360571aaf89"><td class="memItemLeft" align="right" valign="top"><a id="ad85a1f4b919c2f4580b48360571aaf89"></a>
 PPL::NNC_Polyhedron *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ad85a1f4b919c2f4580b48360571aaf89">lp</a></td></tr>
@@ -1407,8 +1436,8 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr class="separator:a4c6a4a141e8c2eb4adbdef6ad73cec21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h4 class="groupheader">Member Function Documentation</h4>
-<a id="aa447a576420597eb9ff86b8875f5d30c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa447a576420597eb9ff86b8875f5d30c">&#9670;&nbsp;</a></span>copy()</h2>
+<a id="acc03418759754dbeda266dba9eefe98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc03418759754dbeda266dba9eefe98b">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1426,7 +1455,7 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1441,8 +1470,8 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 </div>
 </div>
-<a id="a8c8dbe226a971e62159888aecacce458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c8dbe226a971e62159888aecacce458">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
+<a id="afb7f014f84eb37026fe26f8c3114c0f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb7f014f84eb37026fe26f8c3114c0f0">&#9670;&nbsp;</a></span>get_number_of_constraints()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1454,12 +1483,12 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
           <td class="memname">virtual unsigned long LP_Solvers::PPL_Solver::get_number_of_constraints </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1467,14 +1496,14 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <p>returns the number of constraints used by the skeleton </p>
 <dl class="section return"><dt>Returns</dt><dd>number of constraints </dd></dl>
 
-<p>Implements <a class="el" href="group___c_l_s_solvers.html#a05697a4527b15e26b5e0ae9088a46ed5">LP_Solvers::LP_Solver</a>.</p>
+<p>Implements <a class="el" href="group___c_l_s_solvers.html#a1a220bc10c6d8696dd5885d7f3678e5f">LP_Solvers::LP_Solver</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="ppl__solver_8hpp_source.html#l00057">57</a> of file <a class="el" href="ppl__solver_8hpp_source.html">ppl_solver.hpp</a>.</p>
 
 </div>
 </div>
-<a id="affe1dce30ec7bad7c54e4edf9283235e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affe1dce30ec7bad7c54e4edf9283235e">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
+<a id="a9a4a7563d62e4394162aaa4bd08aae29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4a7563d62e4394162aaa4bd08aae29">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1492,7 +1521,7 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1507,8 +1536,8 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 </div>
 </div>
-<a id="a6f73ee7b0d42f78fd95e399c474b3eb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f73ee7b0d42f78fd95e399c474b3eb4">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
+<a id="a3763d4bc551a98546f1f5be4df49390d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3763d4bc551a98546f1f5be4df49390d">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1526,7 +1555,7 @@ static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2244,19 +2273,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ae1d6983329c8624014fa5c9d66f75ac3">Skeleton</a> (<a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_skeleton">Skeleton</a> &amp;)</td></tr>
 <tr class="memdesc:ae1d6983329c8624014fa5c9d66f75ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a deep copy of <code>other</code>. <br /></td></tr>
 <tr class="separator:ae1d6983329c8624014fa5c9d66f75ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33b1747069c512ad69e30cb0c8786577"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a33b1747069c512ad69e30cb0c8786577">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *)</td></tr>
-<tr class="memdesc:a33b1747069c512ad69e30cb0c8786577"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#a33b1747069c512ad69e30cb0c8786577">More...</a><br /></td></tr>
-<tr class="separator:a33b1747069c512ad69e30cb0c8786577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a242f1dc35468e2326e6f7c10bc0d0fd4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a242f1dc35468e2326e6f7c10bc0d0fd4">copy</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> *) override</td></tr>
+<tr class="memdesc:a242f1dc35468e2326e6f7c10bc0d0fd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a deep copy, similar to a copy constructor  <a href="#a242f1dc35468e2326e6f7c10bc0d0fd4">More...</a><br /></td></tr>
+<tr class="separator:a242f1dc35468e2326e6f7c10bc0d0fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
 <tr class="memitem:a0da8ede73aea9089d7b81683c08cfc60"><td class="memItemLeft" align="right" valign="top"><a id="a0da8ede73aea9089d7b81683c08cfc60"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a0da8ede73aea9089d7b81683c08cfc60">~Skeleton</a> ()</td></tr>
 <tr class="memdesc:a0da8ede73aea9089d7b81683c08cfc60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Currently does nothing the compiler wouldn't do. <br /></td></tr>
 <tr class="separator:a0da8ede73aea9089d7b81683c08cfc60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
-<tr class="memitem:acc02076b2e475b60d31104e15d4c982c"><td class="memItemLeft" align="right" valign="top"><a id="acc02076b2e475b60d31104e15d4c982c"></a>
-NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#acc02076b2e475b60d31104e15d4c982c">get_dimension</a> () const</td></tr>
-<tr class="memdesc:acc02076b2e475b60d31104e15d4c982c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
-<tr class="separator:acc02076b2e475b60d31104e15d4c982c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97df76042269bc785c37f2315c353ed3"><td class="memItemLeft" align="right" valign="top"><a id="a97df76042269bc785c37f2315c353ed3"></a>
+NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a97df76042269bc785c37f2315c353ed3">get_dimension</a> () const override</td></tr>
+<tr class="memdesc:a97df76042269bc785c37f2315c353ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimension of the underlying vector space. <br /></td></tr>
+<tr class="separator:a97df76042269bc785c37f2315c353ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a310919f8faa248ffa479004d91c4defa"><td class="memItemLeft" align="right" valign="top"><a id="a310919f8faa248ffa479004d91c4defa"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a310919f8faa248ffa479004d91c4defa">get_number_of_edges</a> ()</td></tr>
 <tr class="memdesc:a310919f8faa248ffa479004d91c4defa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of edges defining the skeleton. <br /></td></tr>
@@ -2265,10 +2294,10 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_edge">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#aac51e256cb56e7fe4844c206dcfcf35b">get_edges</a> ()</td></tr>
 <tr class="memdesc:aac51e256cb56e7fe4844c206dcfcf35b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the edges that define the skeleton. <br /></td></tr>
 <tr class="separator:aac51e256cb56e7fe4844c206dcfcf35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fcb6873ce96085aa68f97064cd90c9d"><td class="memItemLeft" align="right" valign="top"><a id="a1fcb6873ce96085aa68f97064cd90c9d"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a1fcb6873ce96085aa68f97064cd90c9d">get_number_of_constraints</a> ()</td></tr>
-<tr class="memdesc:a1fcb6873ce96085aa68f97064cd90c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of constraints defining the skeleton. <br /></td></tr>
-<tr class="separator:a1fcb6873ce96085aa68f97064cd90c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac13c3eb80cc3a4fdee872c4c976da489"><td class="memItemLeft" align="right" valign="top"><a id="ac13c3eb80cc3a4fdee872c4c976da489"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#ac13c3eb80cc3a4fdee872c4c976da489">get_number_of_constraints</a> () const override</td></tr>
+<tr class="memdesc:ac13c3eb80cc3a4fdee872c4c976da489"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of constraints defining the skeleton. <br /></td></tr>
+<tr class="separator:ac13c3eb80cc3a4fdee872c4c976da489"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e1d8c1c056b9ec770f0c9abacdabe5d"><td class="memItemLeft" align="right" valign="top"><a id="a7e1d8c1c056b9ec770f0c9abacdabe5d"></a>
 const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a7e1d8c1c056b9ec770f0c9abacdabe5d">get_constraints</a> ()</td></tr>
 <tr class="memdesc:a7e1d8c1c056b9ec770f0c9abacdabe5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the constraints that define the skeleton. <br /></td></tr>
@@ -2287,12 +2316,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a97d4c6e4864a90140728d664c8de12cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a potentially new constraint. <br /></td></tr>
 <tr class="separator:a97d4c6e4864a90140728d664c8de12cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
-<tr class="memitem:aba082a338a2cb3ace612fd2dfba667c5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#aba082a338a2cb3ace612fd2dfba667c5">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;)</td></tr>
-<tr class="memdesc:aba082a338a2cb3ace612fd2dfba667c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the skeleton.  <a href="#aba082a338a2cb3ace612fd2dfba667c5">More...</a><br /></td></tr>
-<tr class="separator:aba082a338a2cb3ace612fd2dfba667c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a202b0b37e0ea8a817ce6e29c93a39cd8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a202b0b37e0ea8a817ce6e29c93a39cd8">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;)</td></tr>
-<tr class="memdesc:a202b0b37e0ea8a817ce6e29c93a39cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the skeleton.  <a href="#a202b0b37e0ea8a817ce6e29c93a39cd8">More...</a><br /></td></tr>
-<tr class="separator:a202b0b37e0ea8a817ce6e29c93a39cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf50f125e2bfc6834fdd93e3fff22c48"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#adf50f125e2bfc6834fdd93e3fff22c48">solve</a> (const vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &gt; &amp;) override</td></tr>
+<tr class="memdesc:adf50f125e2bfc6834fdd93e3fff22c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraints (plural!) and re-computes the skeleton.  <a href="#adf50f125e2bfc6834fdd93e3fff22c48">More...</a><br /></td></tr>
+<tr class="separator:adf50f125e2bfc6834fdd93e3fff22c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0e821ab6a683ab4f936b7552074a15"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a3b0e821ab6a683ab4f936b7552074a15">solve</a> (const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_constraint">Constraint</a> &amp;) override</td></tr>
+<tr class="memdesc:a3b0e821ab6a683ab4f936b7552074a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the indicated constraint (singular!) and re-computes the skeleton.  <a href="#a3b0e821ab6a683ab4f936b7552074a15">More...</a><br /></td></tr>
+<tr class="separator:a3b0e821ab6a683ab4f936b7552074a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e67ca8a8fc7a891534462c21051ea1"><td class="memItemLeft" align="right" valign="top"><a id="a91e67ca8a8fc7a891534462c21051ea1"></a>
 set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_edge">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a91e67ca8a8fc7a891534462c21051ea1">adjacencies_by_graphs</a> (const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;)</td></tr>
 <tr class="memdesc:a91e67ca8a8fc7a891534462c21051ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-computes the edges in the skeleton using Zolotych's <code>GraphAdj</code> algorithm and returns the result. <br /></td></tr>
@@ -2310,13 +2339,13 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a7a8d455722e6ae8b0bc9928dcd1bfa48">get_number_of_rays</a> ()</td></tr>
 <tr class="memdesc:a7a8d455722e6ae8b0bc9928dcd1bfa48 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rays defining the skeleton. <br /></td></tr>
 <tr class="separator:a7a8d455722e6ae8b0bc9928dcd1bfa48 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">get_rays</a> ()</td></tr>
-<tr class="memdesc:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="group___c_l_s_solvers.html#a52f7a4068e9d36500d1dcdf35757cd06">More...</a><br /></td></tr>
-<tr class="separator:a52f7a4068e9d36500d1dcdf35757cd06 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top"><a id="abb6c3f1320ea90c0a81960642a503b37"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#abb6c3f1320ea90c0a81960642a503b37">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false)</td></tr>
-<tr class="memdesc:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
-<tr class="separator:abb6c3f1320ea90c0a81960642a503b37 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top">virtual const set&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray">Ray</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">get_rays</a> () const</td></tr>
+<tr class="memdesc:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns rays that define a skeleton.  <a href="group___c_l_s_solvers.html#a8328f67af66c81db467a6366f48ba3c8">More...</a><br /></td></tr>
+<tr class="separator:a8328f67af66c81db467a6366f48ba3c8 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="memItemLeft" align="right" valign="top"><a id="a4b2ef4e520631f5ad73d3cddffc832a1"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a4b2ef4e520631f5ad73d3cddffc832a1">makes_consistent_constraint</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool show_data=false) const</td></tr>
+<tr class="memdesc:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="mdescLeft">&#160;</td><td class="mdescRight">tests for consistency of a constraint generated by two monomials. <br /></td></tr>
+<tr class="separator:a4b2ef4e520631f5ad73d3cddffc832a1 inherit pub_methods_group___c_l_s_solvers"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Friends</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">I/O</div></td></tr>
 <tr class="memitem:a54f8dc187ec3e238ccc80d7a44b9ca82"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_l_s_solvers.html#a54f8dc187ec3e238ccc80d7a44b9ca82">operator&lt;&lt;</a> (ostream &amp;os, const <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_skeleton">Skeleton</a> &amp;s)</td></tr>
@@ -2390,8 +2419,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h4 class="groupheader">Member Function Documentation</h4>
-<a id="a33b1747069c512ad69e30cb0c8786577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33b1747069c512ad69e30cb0c8786577">&#9670;&nbsp;</a></span>copy()</h2>
+<a id="a242f1dc35468e2326e6f7c10bc0d0fd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a242f1dc35468e2326e6f7c10bc0d0fd4">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2409,7 +2438,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2424,8 +2453,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="aba082a338a2cb3ace612fd2dfba667c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba082a338a2cb3ace612fd2dfba667c5">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
+<a id="adf50f125e2bfc6834fdd93e3fff22c48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf50f125e2bfc6834fdd93e3fff22c48">&#9670;&nbsp;</a></span>solve() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2443,7 +2472,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2458,8 +2487,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a202b0b37e0ea8a817ce6e29c93a39cd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a202b0b37e0ea8a817ce6e29c93a39cd8">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
+<a id="a3b0e821ab6a683ab4f936b7552074a15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b0e821ab6a683ab4f936b7552074a15">&#9670;&nbsp;</a></span>solve() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2477,7 +2506,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

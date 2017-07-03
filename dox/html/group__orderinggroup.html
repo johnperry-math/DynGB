@@ -160,7 +160,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The weighted grevlex ordering first compares weighted sums of all exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. Whether the weights are applied to more than one sum can be decided at construction. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a10">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a10">test_dynamic.cpp</a>, and <a class="el" href="test_f4_8cpp-example.html#_a11">test_f4.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00465">465</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
@@ -1553,7 +1553,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="g
 <dl class="section warning"><dt>Warning</dt><dd>Avoid changing the monomial ordering data in the comparison functions, as the user may wish to compare two monomials according to a different ordering than the current value. This is the reason those functions are marked to leave the Monomials constant. The expected behavior is that <a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> does whatever the ordering wants, so if you need monomial data check first to decide whether it exists, and applies to this ordering! Use <a class="el" href="group__orderinggroup.html#a22b08dffd1cdf3a655ca18d604cfcee1" title="sets monomial ordering’s data; default is to do nothing ">set_data()</a> if you want to change the monomials first.</dd>
 <dd>
 There is no strict need to check whether the monomials are associated to the same ordering, but if the ordering uses <a class="el" href="group__orderinggroup.html#class_monomial___order___data" title="data for a monomial ordering: optional, but stored in Monomial ">Monomial_Order_Data</a> one would be foolhardy not to check first. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a0">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a1">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_cyclicn_8cpp-example.html#_a0">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a1">test_dynamic.cpp</a>, <a class="el" href="test_f4_8cpp-example.html#_a0">test_f4.cpp</a>, and <a class="el" href="test_f4_dynamic_8cpp-example.html#_a0">test_f4_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="monomial__ordering_8hpp_source.html#l00077">77</a> of file <a class="el" href="monomial__ordering_8hpp_source.html">monomial_ordering.hpp</a>.</p>
 </div><div class="dynheader">
@@ -2066,7 +2066,8 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
 <p>The grevlex ordering first compares the sums of the exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_f4_dynamic_8cpp-example.html#_a12">test_f4_dynamic.cpp</a>.</dd>
+</dl>
 <p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00229">229</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for WGrevlex:</div>

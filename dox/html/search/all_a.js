@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['l_5fhead',['l_head',['../group___g_b_computation.html#a740d4262bc2b5fdfcf2bf23bf05bf866',1,'F4_Reduction_Data']]],
   ['larger_5fthan',['larger_than',['../group__polygroup.html#ab50a4f90c210bcaf6e21fc16028a121a',1,'Monomial']]],
   ['larger_5fthan_5fmultiple',['larger_than_multiple',['../group__polygroup.html#a1cac303db5d3cc66247137172cf84145',1,'Monomial']]],
   ['lcm',['lcm',['../group___g_b_computation.html#a336387d4ddd4f184399212599dbcb130',1,'Critical_Pair_Basic::lcm()'],['../group__polygroup.html#a168381ee5e477d90f59dec9f26b24cc6',1,'Monomial::lcm()']]],

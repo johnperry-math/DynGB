@@ -101,6 +101,12 @@ $(document).ready(function(){initNavTree('todo.html','');});
 <li>Bring polynomial iterators in line with C++ convention.</li>
 <li>Implement other C++11 modernizations (<code>auto</code>, <code>noexcept</code>, <code>override</code>, &hellip;).</li>
 <li>Generalize/improve the memory manager.</li>
+<li>In dynamic F4, improve the efficiency of the selection of an ordering. In particular, this includes:<ul>
+<li>use arrays to model the solver data, rather than sets and lists;</li>
+<li>think about how to retain and modify data from each pass through the matrix, rather than starting anew after selecting a row;</li>
+<li>how to parallelize the selection of rows? this should be doable with, for instance, a parallel reduction operation or something similar.</li>
+</ul>
+</li>
 <li><span style="text-decoration:line-through;">Add PPL as an LP_Solver. <a class="el" href="citelist.html#CITEREF_BagnaraHZ08SCP">[1]</a></span></li>
 <li><span style="text-decoration:line-through;">Implement Caboara&rsquo;s examples.</span></li>
 <li><span style="text-decoration:line-through;">Implement graded Hilbert numerators.</span></li>
@@ -127,10 +133,10 @@ $(document).ready(function(){initNavTree('todo.html','');});
 </li>
 <li>Reimplement <a class="el" href="group__polygroup.html#class_double___buffered___polynomial" title="Polynomials implemented using double buffers.A double-buffered polynomial maintains at all times two ...">Double_Buffered_Polynomial</a> so its arrays contain pointers to <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a>, rather than an expanded <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a>. See if that changes things.</li>
 <li>Re-examine what&rsquo;s going on with masks, since the plus to efficiency doesn&rsquo;t seem worth the effort.</li>
-<li>Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce.</li>
+<li>Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce. (<b>Remark:</b> This is precisely what we do in the dynamic F4 algorithm, and in that case it is not only not inefficient, it is frankly necessary.)</li>
 <li>Implement a <code>Dictionary_Linked_Polynomial</code> class, where any term points to one unique instance of a monomial, rather than having many copies of monomials in different polynomials. Upside is that equality test during canonicalization is instantaneous (compare pointers). Downsides may include finding/sorting the monomials, indirection.</li>
 <li>Detach monomial ordering from monomials, since caching ordering data doesn&rsquo;t seem to help much?</li>
-<li><span style="text-decoration:line-through;">Implement a <code>Polynomial_Builder</code> class to help build polynomials more easily by reading from an input file. That way we don&rsquo;t have to write a fresh control program for each example system.</span> (see <a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a>)</li>
+<li><span style="text-decoration:line-through;">Implement a <code>Polynomial_Builder</code> class to help build polynomials more easily by reading from an input file. That way we don&rsquo;t have to write a fresh control program for each example system.</span> (see <code><a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a></code>)</li>
 <li><span style="text-decoration:line-through;">Implement an <a class="el" href="group__polygroup.html#class_indeterminate" title="Implementation of indeterminates, for easier building of polynomials. ">Indeterminate</a> class and a <code>Polynomial_Builder</code> class to help build polynomials more easily.</span></li>
 </ul>
 <p class="enddd">I&rsquo;m not sure these are worth doing.</p><ul>
@@ -138,7 +144,7 @@ $(document).ready(function(){initNavTree('todo.html','');});
 <li>Implement DDM with the Fukuda-Prodon criterion, compare to Zolotykh&rsquo;s.</li>
 <li>Implement Roune&rsquo;s algorithms for Hilbert functions.</li>
 <li>Compare each potential PP with all other potential PP&rsquo;s, reducing the number of false positives. [This does not seem to be necessary at the moment, as the overhead is quite small, but it is still a thought.]</li>
-<li>Add a hash mechanism to the <code>constraint</code> class to help avoid redundnacy.</li>
+<li>Add a hash mechanism to the <code>constraint</code> class to help avoid redundancy.</li>
 </ul>
 </li>
 <li>Create a Matrix_Ordering_Data class as a subset of <a class="el" href="group__orderinggroup.html#class_monomial___order___data" title="data for a monomial ordering: optional, but stored in Monomial ">Monomial_Order_Data</a>.</li>

@@ -32,6 +32,7 @@ var searchData=
   ['print',['print',['../group__polygroup.html#ad428399071b7e7b63604d506b5dfdf93',1,'Monomial::print()'],['../group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b',1,'Abstract_Polynomial::print()'],['../group__polygroup.html#a672dd35e16935aaa5d5334283eab918e',1,'Polynomial_Geobucket::print(unsigned i, ostream &amp;os=cout) const'],['../group__polygroup.html#a3c8cb0c53e9acf4d60345fb4b4dbb807',1,'Polynomial_Geobucket::print(ostream &amp;os=cout) const override']]],
   ['print_5fmatrix',['print_matrix',['../group___g_b_computation.html#a9f3e9b5617084c34f97acd23d6e67a43',1,'F4_Reduction_Data::print_matrix(bool show_data=false)'],['../group___g_b_computation.html#a9f3e9b5617084c34f97acd23d6e67a43',1,'F4_Reduction_Data::print_matrix(bool show_data=false)']]],
   ['print_5fmodulus',['print_modulus',['../group___fields_group.html#ab9ea57c2214d84d29908b445423bb57b',1,'Prime_Field']]],
+  ['print_5frow',['print_row',['../group___g_b_computation.html#a11e756a43276426735929d09976d7337',1,'F4_Reduction_Data']]],
   ['println',['println',['../group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd',1,'Abstract_Polynomial']]],
   ['printlncout',['printlncout',['../group__polygroup.html#a34143922dd6ce2d44a62777a8948bf97',1,'Monomial::printlncout()'],['../group__polygroup.html#a69dfd6bd725e126d2476826fb345c5f6',1,'Abstract_Polynomial::printlncout()']]],
   ['proc',['proc',['../group___g_b_computation.html#a4e0a3c515ad3d9e29cec832d95ab2caa',1,'Critical_Pair_XPlor']]]

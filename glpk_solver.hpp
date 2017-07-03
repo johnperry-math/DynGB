@@ -94,6 +94,19 @@ public:
   }
   ///@}
 protected:
+  /**
+    @brief overrides @c rays from @c LP_Solver ; necessary because for GLPK
+      it is helpful to avoid updating the rays until they are needed
+    @details You shouldn&rsquo;t care about the details, but here we go.
+      When @c GLPK_Solver adds one or more constraints, it does not actually
+      solve until requested. Until then, the rays are marked as
+      &ldquo;dirty&rdquo;. Any attempt to access dirty rays prompts the
+      solver. In some cases, the solver will have been marked as
+      &ldquo;const&rdquo;; this is inherited from @c LP_Solver and I think
+      it&rsquo;s A Good Idea<sup>TM</sup> for exact solvers.
+      So I mark the rays here as @c mutable. Arguably I should do that in
+      @c LP_Solver but I&rsquo;m not really in the mood to argue at the moment.
+  */
   mutable set<Ray> rays;
 private:
   glp_prob * lp; /**< GLPK problem interface */
