@@ -130,7 +130,7 @@ F4_Reduction_Data::F4_Reduction_Data(
     while (not found and g != G.end()) {
       if ((**mi).divisible_by((*g)->leading_monomial())) {
         found = true;
-        cout << "for " << **mi << " selected " << (*g)->leading_monomial() << endl;
+        //cout << "for " << **mi << " selected " << (*g)->leading_monomial() << endl;
         *ri = *g;
         Monomial u(**mi);
         u /= (*g)->leading_monomial();
@@ -440,7 +440,21 @@ void F4_Reduction_Data::reduce_my_new_rows(
     auto ci = head[i];
     auto & Aj = A[j];
     auto cj = head[i] + offset[i] - offset[j]; // pos in A[j] of A[i]'s head
-    if (offset[j] + head[j] > offset[i] + head[i]) head[j] = cj;
+    // adjust head
+    if (offset[j] + head[j] > offset[i] + head[i]) {
+      // first make sure row is large enough; if not, resize & copy correctly
+      unsigned old_size = A[j].size();
+      if (old_size < M.size() - (offset[i] + head[i]) + 1) {
+        A[j].resize(M.size());
+        unsigned k = 1;
+        for (/* */; k <= old_size; ++k)
+          A[j][M.size() - k] = A[j][old_size - k];
+        for (/* */; k <= M.size(); ++k)
+          A[j][M.size() - k] = 0;
+        offset[j] = 0; cj = offset[i] + head[i];
+      }
+      head[j] = cj;
+    }
     auto a = Aj[lhead_i - offset[j]];
     unsigned ops = 0;
     a *= mod - F.inverse(Ai[lhead_i - offset[i]]);
@@ -1228,7 +1242,6 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   cout << "computation ended at " << asctime(localtime(&end_f4)) << endl;
   cout << "parallel f4 took " << duration << " seconds\n";
   cout << "parallel f4 spent " << total_time << " seconds in timed section\n";
-  check_correctness(B);
   return B;
 }
 
