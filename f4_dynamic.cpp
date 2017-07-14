@@ -1000,8 +1000,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       } else {
         LP_Solver * new_lp;
         list<Monomial> T {U};
-        if (dynamic_cast<Skeleton *>(skel) != nullptr)
+        if (dynamic_cast<Skeleton *>(skel) != nullptr) {
           new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
+          cout << "allocated skeleton " << new_lp << endl;
+        }
         else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
           new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
         else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
@@ -1030,6 +1032,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           ordering_changed = new_ordering;
           winning_row = i;
           winning_skel = new_lp;
+          cout << "saving skeleton " << new_lp << endl;
           winning_lm = row_lm;
           newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
           newideal->set_hilbert_numerator(hn);
@@ -1038,6 +1041,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           tempideal->set_hilbert_numerator(hn);
           if (not heuristic_judges_smaller(*tempideal, *newideal)) {
             delete new_lp;
+            cout << "deleting new skeleton " << new_lp << endl;
             delete tempideal;
           } else { // winner has changed; reduce matrix by it
             ordering_changed = ordering_changed or new_ordering;
@@ -1045,13 +1049,18 @@ unsigned F4_Reduction_Data::select_dynamic_single(
             winning_row = i;
             winning_lm = row_lm;
             newideal = tempideal;
+            delete winning_skel;
+            cout << "deleting old skeleton " << winning_skel << endl;
             winning_skel = new_lp;
           } // change_winner?
         } // newideal == nullptr?
       } // row has more than one potential pp
     } // row has nonzero entries
   } // loop through rows
-  if (ordering_changed) {
+  if (not ordering_changed and winning_skel == nullptr)
+    delete winning_skel;
+  else {
+    cout << "deleting " << skel << endl;
     delete skel;
     skel = winning_skel;
   }
@@ -1217,6 +1226,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
     }
   }
   delete skel;
+  cout << "deleting " << skel << endl;
   cout << number_of_spolys << " s-polynomials computed and reduced\n";
   // cleanup
   cout << G.size() << " polynomials before interreduction\n";
