@@ -829,7 +829,6 @@ WGrevlex * F4_Reduction_Data::reduce_and_select_order(
       dynamic_processed.insert(i);
     }
   }
-  return result;
 }
 
 WGrevlex * F4_Reduction_Data::select_dynamic(
@@ -931,7 +930,7 @@ WGrevlex * F4_Reduction_Data::select_dynamic(
     DEG_TYPE d = M[j]->weighted_degree(result->order_weights());
     vector<COEF_TYPE> & Ai = A[winning_row];
     for (unsigned k = j; k < M.size(); ++k) {
-      if (Ai[k - offset[winning_row]] != 0) {
+      if (not Ai[k - offset[winning_row]] == 0) {
         DEG_TYPE e = M[k]->weighted_degree(result->order_weights());
         if (e > d) {
           d = e;
@@ -1070,7 +1069,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   vector<COEF_TYPE> & Ai = A[winning_row];
   bool searching = true;
   for (unsigned k = j; searching; ++k) {
-    if (Ai[k - offset[winning_row]] != 0) {
+    if (not Ai[k - offset[winning_row]] == 0) {
       searching = (*(M[k])) != winning_lm;
       if (not searching) {
         j = k;

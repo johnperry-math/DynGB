@@ -97,7 +97,10 @@ bin_PROGRAMS = test_monomials$(EXEEXT) test_hilbert_functions$(EXEEXT) \
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/ac_checking_ppl.m4 \
-	$(top_srcdir)/ac_checking_gmp.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/ac_checking_gmp.m4 \
+	$(top_srcdir)/ax_require_defined.m4 \
+	$(top_srcdir)/ax_cxx_compile_stdcxx.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -338,27 +341,28 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/cantanima/common/c++/gbproject/missing aclocal-1.15
+ACLOCAL = ${SHELL} /Users/cantanima/common/c++/DynGB/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /home/cantanima/common/c++/gbproject/missing autoconf
-AUTOHEADER = ${SHELL} /home/cantanima/common/c++/gbproject/missing autoheader
-AUTOMAKE = ${SHELL} /home/cantanima/common/c++/gbproject/missing automake-1.15
-AWK = gawk
+AUTOCONF = ${SHELL} /Users/cantanima/common/c++/DynGB/missing autoconf
+AUTOHEADER = ${SHELL} /Users/cantanima/common/c++/DynGB/missing autoheader
+AUTOMAKE = ${SHELL} /Users/cantanima/common/c++/DynGB/missing automake-1.15
+AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPPFLAGS = -DDEBUG
-CXX = g++
+CPPFLAGS = 
+CXX = g++ -std=gnu++11
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -O0 -g
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-ECHO_C = 
-ECHO_N = -n
+ECHO_C = \c
+ECHO_N = 
 ECHO_T = 
 EXEEXT = 
+HAVE_CXX11 = 1
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -368,8 +372,8 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -lglpk  -lppl
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/cantanima/common/c++/gbproject/missing makeinfo
-MKDIR_P = /usr/bin/mkdir -p
+MAKEINFO = ${SHELL} /Users/cantanima/common/c++/DynGB/missing makeinfo
+MKDIR_P = ../install-sh -c -d
 OBJEXT = o
 PACKAGE = dyngb
 PACKAGE_BUGREPORT = john.perry@usm.edu
@@ -383,10 +387,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 2.0
-abs_builddir = /home/cantanima/common/c++/gbproject/debug
-abs_srcdir = /home/cantanima/common/c++/gbproject/debug/..
-abs_top_builddir = /home/cantanima/common/c++/gbproject/debug
-abs_top_srcdir = /home/cantanima/common/c++/gbproject/debug/..
+abs_builddir = /Users/cantanima/common/c++/DynGB/debug
+abs_srcdir = /Users/cantanima/common/c++/DynGB/debug/..
+abs_top_builddir = /Users/cantanima/common/c++/DynGB/debug
+abs_top_srcdir = /Users/cantanima/common/c++/DynGB/debug/..
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -406,7 +410,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/cantanima/common/c++/gbproject/install-sh
+install_sh = ${SHELL} /Users/cantanima/common/c++/DynGB/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -811,7 +815,7 @@ distdir: $(DISTFILES)
 	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
 	|| chmod -R a+r "$(distdir)"
 dist-gzip: distdir
-	tardir=$(distdir) && $(am__tar) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).tar.gz
+	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
 	$(am__post_remove_distdir)
 
 dist-bzip2: distdir
@@ -837,7 +841,7 @@ dist-shar: distdir
 	@echo WARNING: "Support for shar distribution archives is" \
 	               "deprecated." >&2
 	@echo WARNING: "It will be removed altogether in Automake 2.0" >&2
-	shar $(distdir) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).shar.gz
+	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
 	$(am__post_remove_distdir)
 
 dist-zip: distdir
@@ -855,7 +859,7 @@ dist dist-all:
 distcheck: dist
 	case '$(DIST_ARCHIVES)' in \
 	*.tar.gz*) \
-	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).tar.gz | $(am__untar) ;;\
+	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).tar.gz | $(am__untar) ;;\
 	*.tar.bz2*) \
 	  bzip2 -dc $(distdir).tar.bz2 | $(am__untar) ;;\
 	*.tar.lz*) \
@@ -865,7 +869,7 @@ distcheck: dist
 	*.tar.Z*) \
 	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
 	*.shar.gz*) \
-	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).shar.gz | unshar ;;\
+	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).shar.gz | unshar ;;\
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac

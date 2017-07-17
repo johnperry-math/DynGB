@@ -15,6 +15,9 @@ SAVE_LIBS="$LIBS"
 LIBS="$LIBS -lppl"
 m4_include([ac_checking_ppl.m4])
 m4_include([ac_checking_gmp.m4])
+m4_include([ax_require_defined.m4])
+m4_include([ax_cxx_compile_stdcxx.m4])
+AX_CXX_COMPILE_STDCXX(11)
 # no way to check gmpxx yet...
 #AC_SEARCH_LIBS([__gmpz_init], [gmp])
 #AC_SEARCH_LIBS([version], [ppl])
@@ -22,3 +25,4 @@ m4_include([ac_checking_gmp.m4])
 #AC_CHECK_HEADER([gmpxx.h])
 #AC_SEARCH_LIBS([__gmpz_init], [gmpxx])
 AC_OUTPUT
+
