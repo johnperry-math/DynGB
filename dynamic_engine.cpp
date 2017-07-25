@@ -589,14 +589,15 @@ bool verify_and_modify_if_necessary(
       // don't compare with LPP; that would be Bad (TM)
       if (t != ti->currMonomial())
       {
+        //cout << "\tagainst " << ti->currMonomial() << ": ";
         // create a ray for the PP's exponents
         for (NVAR_TYPE i = 0; i < n; ++i) entries[i] = ti->currMonomial()[i];
         Ray b(n, entries);
         // compare weights between a and b; if this fails,
         // recompute the skeleton with a new constraint
+        //cout << a*w << ',' << b*w << endl;
         if (a*w <= b*w)
         {
-          cout << "\tregenerating\n";
           if (coefficients == nullptr) // ensure we have space
             coefficients = new CONSTR_TYPE[n];
           for (NVAR_TYPE i = 0; i < n; ++i)
@@ -615,10 +616,13 @@ bool verify_and_modify_if_necessary(
           w = ray_sum(newskel->get_rays());
           //cout << "Have ray " << w << endl;
           // if we're consistent, we need to recompute the ordering
+          //cout << "\t\t" << a*w << ',' << b*w << endl;
           if (consistent and a*w > b*w)
           {
             //*skel = *newskel;
             skel->copy(newskel);
+            piter = currentPolys.begin();
+            break;
           } // if consistent
           else consistent = false;
           delete newskel;
@@ -712,6 +716,7 @@ void select_monomial(
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
   for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
+  //cout << "comparing against: "; p_Write(currentLPP, Rx);
   list<Monomial> boundaryPPs;
   set<Monomial> compatible_pps;
   // loop through all exponent vectors
