@@ -85,7 +85,7 @@ int main() {
   list<Abstract_Polynomial *> F;
   F.push_back(&f1); F.push_back(&f2); F.push_back(&f3);
   F.push_back(&f4); F.push_back(&f5); F.push_back(&f6);
-  Monomial_Ordering * mord;
+  Monomial_Ordering * mord = nullptr;
   Skeleton * skel = new Skeleton(9);
   initial_analysis(F, &mord, skel);
   cout << "Chose leading monomials:\n";
@@ -94,4 +94,7 @@ int main() {
     cout << f->leading_monomial() << ", ";
   }
   cout << endl;
+  delete [] ((WGrevlex *)mord)->order_weights();
+  delete mord;
+  delete skel;
 }

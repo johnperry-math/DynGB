@@ -274,6 +274,8 @@ void initial_analysis(
   if (*mord != nullptr)
     delete *mord;
   *mord = new ORDERING_TYPE(n, weights);
+  if (win_hn != nullptr) delete win_hn;
+  if (win_hp != nullptr) delete win_hp;
 }
 
 list<Constant_Polynomial *> buchberger_dynamic(
