@@ -271,8 +271,6 @@ void initial_analysis(
   cout << interior_ray << endl;
   auto wt_ptr = interior_ray.weights();
   for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
-  if (*mord != nullptr)
-    delete *mord;
   *mord = new ORDERING_TYPE(n, weights);
   if (win_hn != nullptr) delete win_hn;
   if (win_hp != nullptr) delete win_hp;

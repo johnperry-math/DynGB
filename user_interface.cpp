@@ -231,6 +231,7 @@ void user_interface() {
         nullptr, heuristic, solver, analyze_first
     );
   }
+  //check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
   cout << "have basis with " << B.size() << " elements:\n";
   for (auto b : B) {
     cout << b->leading_monomial() << ", ";
