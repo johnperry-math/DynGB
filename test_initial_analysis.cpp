@@ -87,7 +87,7 @@ int main() {
   F.push_back(&f4); F.push_back(&f5); F.push_back(&f6);
   Monomial_Ordering * mord;
   Skeleton * skel = new Skeleton(9);
-  initial_analysis(F, mord, skel);
+  initial_analysis(F, &mord, skel);
   cout << "Chose leading monomials:\n";
   for (auto f : F) {
     f->set_monomial_ordering(mord);

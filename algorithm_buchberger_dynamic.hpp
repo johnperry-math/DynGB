@@ -96,7 +96,7 @@ enum DynamicSolver {
 */
 void initial_analysis(
     const list<Abstract_Polynomial *> & F,
-    Monomial_Ordering * & mord,
+    Monomial_Ordering ** mord,
     LP_Solver * solver
 );
 

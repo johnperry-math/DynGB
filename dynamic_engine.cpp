@@ -40,8 +40,12 @@ bool less_by_random(const PP_With_Ideal & a, const PP_With_Ideal & b) {
   if (weights == nullptr) {
     srand(time(nullptr));
     weights = new WT_TYPE[n];
-    for (NVAR_TYPE i = i; i < n; ++i)
+    cout << "evil random: ";
+    for (NVAR_TYPE i = 0; i < n; ++i) {
       weights[i] = rand() % 1000;
+      cout << weights[i] << ' ';
+    }
+    cout << endl;
   }
   bool result = false;
   if (t.weighted_degree(weights) < u.weighted_degree(weights))

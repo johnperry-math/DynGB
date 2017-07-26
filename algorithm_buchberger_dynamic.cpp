@@ -184,11 +184,11 @@ list<list<Monomial>> recursive_select(list<list<Monomial>> & Ms) {
 
 void initial_analysis(
     const list<Abstract_Polynomial *> & F,
-    Monomial_Ordering * & mord,
+    Monomial_Ordering ** mord,
     LP_Solver * solver
 ) {
   NVAR_TYPE n = (*F.begin())->leading_monomial().num_vars();
-  WT_TYPE weights[n];
+  WT_TYPE * weights = new WT_TYPE[n];
   // arrange possible monomial chains
   list<list<Monomial>> mons;
   list<list<Monomial>> saved_mons;
@@ -271,9 +271,9 @@ void initial_analysis(
   cout << interior_ray << endl;
   auto wt_ptr = interior_ray.weights();
   for (NVAR_TYPE i = 0; i < n; ++i) weights[i] = wt_ptr[i];
-  if (mord != nullptr)
-    delete mord;
-  mord = new ORDERING_TYPE(n, weights);
+  if (*mord != nullptr)
+    delete *mord;
+  *mord = new ORDERING_TYPE(n, weights);
 }
 
 list<Constant_Polynomial *> buchberger_dynamic(
@@ -306,6 +306,8 @@ list<Constant_Polynomial *> buchberger_dynamic(
     case PPL_SOLVER: solver = new PPL_Solver(n); break;
     default: solver = new Skeleton(n); break;
   }
+  Monomial_Ordering * dummy = curr_ord;
+  initial_analysis(F, &dummy, solver);
   //G.push_back(*(F.begin()));
   // set up initial ordering
   Abstract_Polynomial * g = new Constant_Polynomial(**(F.begin()));

@@ -197,7 +197,7 @@ void user_interface() {
       heur_choice.compare("h") and heur_choice.compare("gh")
       and heur_choice.compare("b") and heur_choice.compare("bb")
       and heur_choice.compare("gb") and heur_choice.compare("c")
-      and heur_choice.compare("d")
+      and heur_choice.compare("d") and heur_choice.compare("r")
     ) {
       cout << "available heuristics are\n";
       cout << "\t h = hilbert with standard grading\n";
@@ -207,6 +207,7 @@ void user_interface() {
       cout << "\tgb = betti with order-based grading\n";
       cout << "\t c = minimal number of critical pairs\n";
       cout << "\t d = minimal degree, ties broken by hilbert\n";
+      cout << "\t r = random choice\n";
       cout << "which heuristic would you like? ";
       getline(cin, heur_choice);
     }
@@ -217,6 +218,7 @@ void user_interface() {
     else if (not heur_choice.compare("gb")) heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
     else if (not heur_choice.compare( "c")) heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
     else if (not heur_choice.compare( "d")) heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
+    else if (not heur_choice.compare( "r")) heuristic = Dynamic_Heuristic::EVIL_RANDOM;
     string whether_analysis;
     bool analyze_first = false;
     while (whether_analysis.compare("y") and whether_analysis.compare("n")) {
