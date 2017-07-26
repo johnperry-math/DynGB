@@ -307,7 +307,8 @@ list<Constant_Polynomial *> buchberger_dynamic(
     default: solver = new Skeleton(n); break;
   }
   Monomial_Ordering * dummy = curr_ord;
-  initial_analysis(F, &dummy, solver);
+  if (analyze_inputs)
+    initial_analysis(F, &dummy, solver);
   //G.push_back(*(F.begin()));
   // set up initial ordering
   Abstract_Polynomial * g = new Constant_Polynomial(**(F.begin()));
