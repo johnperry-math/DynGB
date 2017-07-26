@@ -19,10 +19,11 @@
 \*****************************************************************************/
 
 #include <iostream>
-#include <list>
-
 using std::cout; using std::endl;
+#include <list>
 using std::list;
+#include <cstdlib>
+#include <ctime>
 
 #include "betti.hpp"
 #include "monomial.hpp"
@@ -30,6 +31,23 @@ using std::list;
 #include "dynamic_engine.hpp"
 
 namespace Dynamic_Engine {
+
+bool less_by_random(const PP_With_Ideal & a, const PP_With_Ideal & b) {
+  static WT_TYPE * weights = nullptr;
+  const Monomial & t = a.get_pp();
+  const Monomial & u = b.get_pp();
+  NVAR_TYPE n = t.num_vars();
+  if (weights == nullptr) {
+    srand(time(nullptr));
+    weights = new WT_TYPE[n];
+    for (NVAR_TYPE i = i; i < n; ++i)
+      weights[i] = rand() % 1000;
+  }
+  bool result = false;
+  if (t.weighted_degree(weights) < u.weighted_degree(weights))
+    result = true;
+  return result;
+}
 
 int hilbert_cmp(
   const Dense_Univariate_Integer_Polynomial & hn1,
@@ -762,6 +780,9 @@ void select_monomial(
       break;
     case Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG:
       possibleIdealsBasic.sort(less_by_grad_betti);
+      break;
+    case Dynamic_Heuristic::EVIL_RANDOM:
+      possibleIdealsBasic.sort(less_by_random);
       break;
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }

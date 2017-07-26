@@ -268,6 +268,10 @@ public:
     @return a copy of <c>this</c> in a simplified linear form
   */
   Abstract_Polynomial * canonicalize(bool constant_result=false);
+  /**
+    @brief condenses all buckets to one
+  */
+  void condense_buckets();
   ///@}
   /** @name I/O */
   ///@{
@@ -308,6 +312,10 @@ protected:
     @brief Array of ptrs to linked list polys; most initialized to <c>nullptr</c>.
   */
   Polynomial_Linked_List ** buckets;
+  /**
+    @brief number of arithmetic operations (for condensations)
+  */
+  unsigned long long aops_performed = 0;
 };
 
 #endif

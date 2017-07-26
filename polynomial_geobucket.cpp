@@ -243,6 +243,12 @@ void Polynomial_Geobucket::recompute_leading_monomial() {
       delete buckets[0];
     buckets[0] = buckets[i]->detach_head();
   }
+  // condensation does not seem to help
+  /*++aops_performed;
+  if (aops_performed > 50) {
+    aops_performed = 0;
+    condense_buckets();
+  }*/
 }
 
 Polynomial_Geobucket * Polynomial_Geobucket::monomial_multiple(const Monomial &t) const {
@@ -394,6 +400,32 @@ Abstract_Polynomial * Polynomial_Geobucket::canonicalize(bool constant_result) {
     delete f;
   }
   return result;
+}
+
+void Polynomial_Geobucket::condense_buckets() {
+  if (not is_zero()) {
+    Polynomial_Linked_List * f;
+    unsigned i = 1;
+    while (i < NUM_BUCKETS and (buckets[i] == nullptr or buckets[i]->is_zero()))
+      ++i;
+    if (i < NUM_BUCKETS) {
+      f = new Polynomial_Linked_List(*(buckets[i]));
+      buckets[i] = new Polynomial_Linked_List(base_ring());
+      ++i;
+      while (i < NUM_BUCKETS) {
+        if (buckets[i] != nullptr and (not buckets[i]->is_zero())) {
+          *f += *(buckets[i]);
+          delete buckets[i];
+          buckets[i] = new Polynomial_Linked_List(base_ring());
+        }
+        ++i;
+      }
+      unsigned i = lglen(f->length() + 1);
+      if (i >= NUM_BUCKETS) throw(new runtime_error("too large for buckets"));
+      delete buckets[i];
+      buckets[i] = f;
+    }
+  }
 }
 
 void Polynomial_Geobucket::print(unsigned i, ostream & os) const {
