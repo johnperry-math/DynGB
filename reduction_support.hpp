@@ -34,7 +34,6 @@ template <typename T>
 Abstract_Polynomial * find_reducer(Abstract_Polynomial * r, const T & G) {
   Abstract_Polynomial * result = nullptr;
   const Monomial & t = r->leading_monomial();
-  bool found = false;
   // loop through G until we find a result, if one exists
   for (Abstract_Polynomial * g : G)
   {
@@ -43,7 +42,6 @@ Abstract_Polynomial * find_reducer(Abstract_Polynomial * r, const T & G) {
         and (r->strategy() == nullptr or r->strategy()->valid_reduction(*r, *g)))
     {
       result = g;
-      found = true;
       break;
     }
   }
@@ -69,7 +67,6 @@ void top_reduce(Mutable_Polynomial *s, Abstract_Polynomial * g, int comm_id = 0)
 */
 template <typename T>
 void reduce_over_basis(Mutable_Polynomial **sp, const T & G, int comm_id=0) {
-  Abstract_Polynomial * g; // used to loop through G
   Mutable_Polynomial * s = *sp; // s-poly
   Mutable_Polynomial * r = s->zero_polynomial(); // remainder / residue
   bool verbose = false;
@@ -78,6 +75,7 @@ void reduce_over_basis(Mutable_Polynomial **sp, const T & G, int comm_id=0) {
   while (!s->is_zero()) {
     if (verbose) cout << comm_id << " reducing " << s->leading_monomial() << "?\n"; 
     if (very_verbose) s->println();
+    Abstract_Polynomial * g;
     if ((g = find_reducer<T>(s, G))) {
       if (verbose) cout << comm_id << " yes! by " << g->leading_monomial() << endl;
       if (very_verbose) { cout << "yes! by "; g->println(); }

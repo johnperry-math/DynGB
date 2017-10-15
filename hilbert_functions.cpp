@@ -259,7 +259,6 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     }
   }
   Dense_Univariate_Integer_Polynomial * result;
-  int i;
   list<Monomial>::const_iterator ti;
   if (T.size() == 1)
     result = solve_one_monomial_case(T, grading);
@@ -311,8 +310,8 @@ Dense_Univariate_Integer_Polynomial * hilbert_second_numerator(
 ) {
   Dense_Univariate_Integer_Polynomial * hn
     = new Dense_Univariate_Integer_Polynomial(*first);
-  unsigned r = 0;
   if (grading == nullptr) {
+    unsigned r = 0;
     NVAR_TYPE i = 0;
     // perform synthetic division on the Hilbert numerator
     for (/* */; r == 0 and i < n; ++i) {

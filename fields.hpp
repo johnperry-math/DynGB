@@ -148,7 +148,7 @@ public:
     @warning Do not delete this field while <c>this</c> is still active.
     Behavior is unpredictable in this circumstance.
   */
-  Prime_Field_Element(const Prime_Field *field);
+  explicit Prime_Field_Element(const Prime_Field *field);
   /**
     @brief Constructs a prime field element in the specified field,
     with the specified value.
@@ -160,6 +160,10 @@ public:
     Behavior is unpredictable in this circumstance.
   */
   Prime_Field_Element(COEF_TYPE value, const Prime_Field *field);
+  /** @brief constructs a prime field element from another */
+  Prime_Field_Element(const Prime_Field_Element & other) {
+    a = other.a; F = other.F; m = other.m;
+  }
   ///@}
   /** @name Basic properties
     The following functions give information about the monomial,
@@ -183,6 +187,11 @@ public:
   ///@}
   /** @name Modification */
   ///@{
+  /** @brief assignment to other */
+  Prime_Field_Element & operator = (const Prime_Field_Element & other) {
+    a = other.a; F = other.F; m = other.m;
+    return *this;
+  }
   /** @brief for initializing arrays of Prime_Field_Element */
   void assign(COEF_TYPE val, const Prime_Field * K) {
     a = val; F = K; m = F->modulus();

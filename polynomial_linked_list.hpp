@@ -199,7 +199,7 @@ public:
   /** @brief copy constructor: deep copy of monomials */
   Polynomial_Linked_List(const Polynomial_Linked_List & other);
   /** @brief constructor from abstract polynomial: deep copy of monomials */
-  Polynomial_Linked_List(const Abstract_Polynomial & p);
+  explicit Polynomial_Linked_List(const Abstract_Polynomial & p);
   ///@}
   /** @name Destruction */
   ///@{

@@ -32,7 +32,6 @@
 void top_reduce(Mutable_Polynomial *s, Abstract_Polynomial * g, int comm_id) {
   bool verbose = false;
   bool very_verbose = false;
-  Monomial & u = g->leading_monomial();
   while ((not s->is_zero()) and g->leading_monomial() | (s->leading_monomial())) {
     Monomial t(s->leading_monomial());
     if (verbose) cout << "top-reducing " << s->leading_coefficient() << ' ' << t << " by " << g->leading_monomial() << endl;

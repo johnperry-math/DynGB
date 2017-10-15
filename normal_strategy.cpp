@@ -28,7 +28,6 @@ Normal_Strategy::Normal_Strategy(Critical_Pair_Basic & cpb)
 
 bool Normal_Strategy::equivalent(const Pair_Strategy_Data & sd) const {
   const Normal_Strategy * nsd = static_cast<const Normal_Strategy *>(&sd);
-  bool result = true;
   if (cp->second() == nullptr or nsd->cp->second() == nullptr)
     return false;
   else {

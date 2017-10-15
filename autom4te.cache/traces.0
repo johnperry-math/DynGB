@@ -951,12 +951,116 @@ m4trace:configure.ac:17: -1- m4_include([ac_checking_gmp.m4])
 m4trace:ac_checking_gmp.m4:4: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is expanded from...
 ac_checking_gmp.m4:4: the top level])
-m4trace:configure.ac:24: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:24: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.ac:24: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
-m4trace:configure.ac:24: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
-m4trace:configure.ac:24: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
-m4trace:configure.ac:24: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
-m4trace:configure.ac:24: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
-m4trace:configure.ac:24: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
-m4trace:configure.ac:24: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:18: -1- m4_include([ax_require_defined.m4])
+m4trace:ax_require_defined.m4:35: -1- AC_DEFUN([AX_REQUIRE_DEFINED], [dnl
+  m4_ifndef([$1], [m4_fatal([macro ]$1[ is not defined; is a m4 file missing?])])
+])
+m4trace:configure.ac:19: -1- m4_include([ax_cxx_compile_stdcxx.m4])
+m4trace:ax_cxx_compile_stdcxx.m4:48: -1- AX_REQUIRE_DEFINED([AC_MSG_WARN])
+m4trace:ax_cxx_compile_stdcxx.m4:49: -1- AC_DEFUN([AX_CXX_COMPILE_STDCXX], [dnl
+  m4_if([$1], [11], [ax_cxx_compile_alternatives="11 0x"],
+        [$1], [14], [ax_cxx_compile_alternatives="14 1y"],
+        [$1], [17], [ax_cxx_compile_alternatives="17 1z"],
+        [m4_fatal([invalid first argument `$1' to AX_CXX_COMPILE_STDCXX])])dnl
+  m4_if([$2], [], [],
+        [$2], [ext], [],
+        [$2], [noext], [],
+        [m4_fatal([invalid second argument `$2' to AX_CXX_COMPILE_STDCXX])])dnl
+  m4_if([$3], [], [ax_cxx_compile_cxx$1_required=true],
+        [$3], [mandatory], [ax_cxx_compile_cxx$1_required=true],
+        [$3], [optional], [ax_cxx_compile_cxx$1_required=false],
+        [m4_fatal([invalid third argument `$3' to AX_CXX_COMPILE_STDCXX])])
+  AC_LANG_PUSH([C++])dnl
+  ac_success=no
+  AC_CACHE_CHECK(whether $CXX supports C++$1 features by default,
+  ax_cv_cxx_compile_cxx$1,
+  [AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_testbody_$1])],
+    [ax_cv_cxx_compile_cxx$1=yes],
+    [ax_cv_cxx_compile_cxx$1=no])])
+  if test x$ax_cv_cxx_compile_cxx$1 = xyes; then
+    ac_success=yes
+  fi
+
+  m4_if([$2], [noext], [], [dnl
+  if test x$ac_success = xno; then
+    for alternative in ${ax_cxx_compile_alternatives}; do
+      switch="-std=gnu++${alternative}"
+      cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx$1_$switch])
+      AC_CACHE_CHECK(whether $CXX supports C++$1 features with $switch,
+                     $cachevar,
+        [ac_save_CXX="$CXX"
+         CXX="$CXX $switch"
+         AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_testbody_$1])],
+          [eval $cachevar=yes],
+          [eval $cachevar=no])
+         CXX="$ac_save_CXX"])
+      if eval test x\$$cachevar = xyes; then
+        CXX="$CXX $switch"
+        if test -n "$CXXCPP" ; then
+          CXXCPP="$CXXCPP $switch"
+        fi
+        ac_success=yes
+        break
+      fi
+    done
+  fi])
+
+  m4_if([$2], [ext], [], [dnl
+  if test x$ac_success = xno; then
+    dnl HP's aCC needs +std=c++11 according to:
+    dnl http://h21007.www2.hp.com/portal/download/files/unprot/aCxx/PDF_Release_Notes/769149-001.pdf
+    dnl Cray's crayCC needs "-h std=c++11"
+    for alternative in ${ax_cxx_compile_alternatives}; do
+      for switch in -std=c++${alternative} +std=c++${alternative} "-h std=c++${alternative}"; do
+        cachevar=AS_TR_SH([ax_cv_cxx_compile_cxx$1_$switch])
+        AC_CACHE_CHECK(whether $CXX supports C++$1 features with $switch,
+                       $cachevar,
+          [ac_save_CXX="$CXX"
+           CXX="$CXX $switch"
+           AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_testbody_$1])],
+            [eval $cachevar=yes],
+            [eval $cachevar=no])
+           CXX="$ac_save_CXX"])
+        if eval test x\$$cachevar = xyes; then
+          CXX="$CXX $switch"
+          if test -n "$CXXCPP" ; then
+            CXXCPP="$CXXCPP $switch"
+          fi
+          ac_success=yes
+          break
+        fi
+      done
+      if test x$ac_success = xyes; then
+        break
+      fi
+    done
+  fi])
+  AC_LANG_POP([C++])
+  if test x$ax_cxx_compile_cxx$1_required = xtrue; then
+    if test x$ac_success = xno; then
+      AC_MSG_ERROR([*** A compiler with support for C++$1 language features is required.])
+    fi
+  fi
+  if test x$ac_success = xno; then
+    HAVE_CXX$1=0
+    AC_MSG_NOTICE([No compiler with C++$1 support was found])
+  else
+    HAVE_CXX$1=1
+    AC_DEFINE(HAVE_CXX$1,1,
+              [define if the compiler supports basic C++$1 syntax])
+  fi
+  AC_SUBST(HAVE_CXX$1)
+  m4_if([$1], [17], [AC_MSG_WARN([C++17 is not yet standardized, so the checks may change in incompatible ways anytime])])
+])
+m4trace:configure.ac:20: -1- AX_CXX_COMPILE_STDCXX([11])
+m4trace:configure.ac:20: -1- m4_pattern_allow([^HAVE_CXX11$])
+m4trace:configure.ac:20: -1- m4_pattern_allow([^HAVE_CXX11$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:27: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
+m4trace:configure.ac:27: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
+m4trace:configure.ac:27: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
+m4trace:configure.ac:27: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS

@@ -59,7 +59,7 @@ void DB_Polynomial_Iterator::set_currMonomial(const Monomial & t) {
 DB_Polynomial_Iterator::DB_Polynomial_Iterator(
     const Double_Buffered_Polynomial * f, bool at_end
 ) {
-  p = f;
+  p_base = p = f;
   A = f->coeffs[f->active_buffer];
   T = f->mons[f->active_buffer];
   if (at_end) current_position = f->tail;

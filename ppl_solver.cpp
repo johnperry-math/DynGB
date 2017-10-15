@@ -73,6 +73,7 @@ PPL_Solver::PPL_Solver(NVAR_TYPE num_vars) {
 }
 
 PPL_Solver::PPL_Solver(const PPL_Solver & other) {
+  m = 0;
   n = other.n;
   rays = other.rays;
   ray_data = new RAYENT_TYPE[n];

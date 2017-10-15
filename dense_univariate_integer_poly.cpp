@@ -136,7 +136,6 @@ Dense_Univariate_Integer_Polynomial
 Dense_Univariate_Integer_Polynomial::operator-(
   const Dense_Univariate_Integer_Polynomial & q
 ) const {
-  DEG_TYPE m = (deg < q.degree()) ? deg : q.degree();
   DEG_TYPE n = (deg > q.degree()) ? deg : q.degree();
   Dense_Univariate_Integer_Polynomial r(n+1);
   DEG_TYPE i = 0;

@@ -168,7 +168,7 @@ public:
   /**
     @brief Creates a constant polynomial copy of p.
   */
-  Constant_Polynomial(const Abstract_Polynomial & p);
+  explicit Constant_Polynomial(const Abstract_Polynomial & p);
   /** @brief from serial data */
   Constant_Polynomial(Polynomial_Ring &, const Monomial_Ordering *, uint64_t, uint64_t *);
   ///@}
@@ -284,7 +284,7 @@ public:
     @param poly the polynomial @c this will iterate over
     @brief Creates an iterator for <c>poly</c> and starts at its leading term.
   */
-  Mutable_Constant_Polynomial_Iterator(Constant_Polynomial * poly);
+  explicit Mutable_Constant_Polynomial_Iterator(Constant_Polynomial * poly);
   ///@}
   /** @name Destruction */
   ///@{

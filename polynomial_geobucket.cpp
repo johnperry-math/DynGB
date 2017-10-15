@@ -68,7 +68,7 @@ Geobucket_Iterator * Polynomial_Geobucket::new_mutable_iterator() {
 Geobucket_Iterator::Geobucket_Iterator(
   const Polynomial_Geobucket * poly, bool at_end
 ) {
-  p = g = const_cast<Polynomial_Geobucket *>(poly);
+  p_base = g = const_cast<Polynomial_Geobucket *>(poly);
   bucket_number = 0;
   if (at_end)
     for (unsigned i = 0; i < NUM_BUCKETS; ++i)
@@ -79,7 +79,7 @@ Geobucket_Iterator::Geobucket_Iterator(
 
 Geobucket_Iterator::Geobucket_Iterator(Polynomial_Geobucket * poly, bool at_end)
 {
-  p = g = poly;
+  p_base = g = poly;
   bucket_number = 0;
   if (at_end)
     for (unsigned i = 0; i < NUM_BUCKETS; ++i)
@@ -146,7 +146,6 @@ Polynomial_Geobucket::Polynomial_Geobucket(
 Polynomial_Geobucket::Polynomial_Geobucket(Abstract_Polynomial & p)
 : Mutable_Polynomial(p.base_ring(), p.monomial_ordering())
 {
-  unsigned n = p.number_of_variables();
   buckets = (Polynomial_Linked_List **)malloc(
       NUM_BUCKETS*sizeof(Polynomial_Linked_List *));
   for (unsigned i = 1; i < NUM_BUCKETS; ++i)

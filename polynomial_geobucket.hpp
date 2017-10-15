@@ -125,7 +125,7 @@ public:
   /**
     @brief Initializes a geobucket that is a copy of @f$p@f$.
   */
-  Polynomial_Geobucket(Abstract_Polynomial & p);
+  explicit Polynomial_Geobucket(Abstract_Polynomial & p);
   ///@}
   /** @name Destruction */
   ///@{

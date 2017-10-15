@@ -81,11 +81,12 @@ Pair_Sugar_Data::Pair_Sugar_Data(Critical_Pair_Basic & cpb)
   if (cpb.first()->strategy() == nullptr)
     sugar = cpb.first()->standard_degree();
   else
-    sugar = ((Poly_Sugar_Data *)(cpb.first()->strategy()))->poly_sugar()
-              + cpb.first_multiplier().total_degree();
+    sugar = (static_cast<Poly_Sugar_Data *>(
+                  (cpb.first()->strategy()))->poly_sugar()
+              ) + cpb.first_multiplier().total_degree();
   if (cpb.second() != nullptr) {
     DEG_TYPE second_sugar =
-        ((Poly_Sugar_Data *)(cpb.second()->strategy()))->poly_sugar()
+        (static_cast<Poly_Sugar_Data *>((cpb.second()->strategy()))->poly_sugar())
       + cpb.second_multiplier().total_degree();
     sugar = (sugar >= second_sugar) ? sugar : second_sugar;
   }

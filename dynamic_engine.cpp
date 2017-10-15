@@ -88,7 +88,6 @@ int hilbert_cmp(
 bool less_by_hilbert (PP_With_Ideal &a, PP_With_Ideal &b) {
   //cout << "Less by Hilbert then Lex\n";
   bool result;
-  int n = a.get_pp().num_vars();
   // first check the coefficients of the Hilbert polynomial
   int hilcheck = hilbert_cmp(
     *a.get_hilbert_numerator(), *a.get_hilbert_polynomial(),
@@ -216,7 +215,6 @@ void PP_With_Ideal::compute_number_new_pairs() const {
 bool less_by_num_crit_pairs (PP_With_Ideal &a, PP_With_Ideal &b)
 {
   bool result;
-  NVAR_TYPE n = a.get_ideal().number_of_variables();
   // first check if the number of critical pairs has been computed
   if (a.how_many_new_pairs() < 0) a.compute_number_new_pairs();
   if (b.how_many_new_pairs() < 0) b.compute_number_new_pairs();
@@ -239,7 +237,6 @@ bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Hilbert then Deg\n";
   bool result;
-  int n = a.get_ideal().number_of_variables();
   // first check the coefficients of the Hilbert polynomial
   int hilcheck = hilbert_cmp(
       *a.get_hilbert_numerator(), *a.get_hilbert_polynomial(),
@@ -259,8 +256,7 @@ bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
 };
 
 bool less_by_grad_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b) {
-  bool result;
-  int n = a.get_ideal().number_of_variables();
+  bool result = false;
   // first check the coefficients of the Hilbert polynomial
   Dense_Univariate_Rational_Polynomial * hp1 = a.get_hilbert_polynomial();
   Dense_Univariate_Rational_Polynomial * hp2 = b.get_hilbert_polynomial();
@@ -791,7 +787,6 @@ void select_monomial(
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
   PP_With_Ideal * winner = & possibleIdealsBasic.front();
-  bool searching = true;
   if (possibleIdealsBasic.size() != 1)
   {
     // test each combination of LPPs for consistency
@@ -818,7 +813,6 @@ void select_monomial(
         //cout << "consistent\n";
         if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
         {
-          searching = false;
           if (src_skel != nullptr)
             src_skel -> copy(newSkeleton);
           else if (src_GLPK != nullptr)

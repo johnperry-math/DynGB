@@ -78,6 +78,8 @@ public:
 
 protected:
 
+  /** @brief pointer to polynomial */
+  const Double_Buffered_Polynomial * p;
   /** @brief pointer to coefficients */
   Prime_Field_Element * A;
   /** @brief pointer to monomials */
@@ -119,7 +121,7 @@ public:
     Monomial_Ordering * order = generic_grevlex_ptr
   );
 
-  Double_Buffered_Polynomial(Abstract_Polynomial const & p);
+  explicit Double_Buffered_Polynomial(Abstract_Polynomial const & p);
 
   ///@}
   /** @name Destruction */
@@ -220,10 +222,14 @@ protected:
     }
     unsigned new_size = 2*n;
     sizes[b] = new_size;
-    mons[b] = (Monomial *)malloc(new_size*sizeof(Monomial));
-    for (unsigned k = 0; k < new_size; ++k)
-      mons[b][k].initialize_exponents(n);
-    coeffs[b] = (Prime_Field_Element *)malloc(new_size*sizeof(Prime_Field_Element));
+    mons[b] = static_cast<Monomial *>(malloc(new_size*sizeof(Monomial)));
+    for (unsigned k = 0; k < new_size; ++k) {
+      mons[b][k].initialize_exponents(number_of_variables());
+      mons[b][k].clear_ordering_data();
+    }
+    coeffs[b] = static_cast<Prime_Field_Element *>(
+      malloc(new_size*sizeof(Prime_Field_Element))
+    );
   }
 
   ///@}

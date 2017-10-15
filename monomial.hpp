@@ -74,6 +74,8 @@ public:
   inline void common_initialization(const Monomial_Ordering * ord = nullptr) {
     exponents = nullptr; ordering_data = nullptr; ordering = ord;
   }
+  /** @brief clears ordering data */
+  inline void clear_ordering_data() { ordering_data = nullptr; }
   /**
     @brief allocates memory for exponents
     This is useful when you want to allocate an array of monomials.

@@ -173,7 +173,6 @@ Ray::Ray(const Ray &old_ray)
         : dim(old_ray.dim)
 {
   //coords = new RAYENT_TYPE[dim];
-  static unsigned long invocations;
   coords = ray_data_allocation(dim);
   for (RAYENT_TYPE i = 0; i < dim; ++i)
     coords[i] = old_ray.coords[i];
@@ -351,10 +350,9 @@ Ray & Ray::operator=(const Ray &other)
 
 void Ray::swap(Ray &other)
 {
-  RAYENT_TYPE tmpval;
   for (NVAR_TYPE i = 0; i < dim; ++i)
   {
-    tmpval = coords[i];
+    RAYENT_TYPE tmpval = coords[i];
     coords[i] = other.coords[i];
     other.coords[i] = tmpval;
   }

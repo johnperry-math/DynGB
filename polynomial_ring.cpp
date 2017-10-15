@@ -53,7 +53,9 @@ bool Polynomial_Ring::set_names(string * new_names, NVAR_TYPE length) {
 NVAR_TYPE Polynomial_Ring::number_of_variables() const { return n; }
 
 Indeterminate * Polynomial_Ring::indeterminates() {
-  Indeterminate * result = (Indeterminate *)malloc(sizeof(Indeterminate) * n);
+  Indeterminate * result = static_cast<Indeterminate *>(
+      malloc(sizeof(Indeterminate) * n)
+  );
   for (NVAR_TYPE i = 0; i < n; ++i)
     result[i] = Indeterminate(*this, i);
   return result;
@@ -62,8 +64,8 @@ Indeterminate * Polynomial_Ring::indeterminates() {
 Prime_Field & Polynomial_Ring::ground_field() const { return F; }
 
 const string Polynomial_Ring::name(NVAR_TYPE i) const {
-  static char my_name[2];
   if (names == nullptr) {
+    char my_name[2];
     my_name[0] = 'x';
     my_name[1] = i + char(i);
     return my_name;

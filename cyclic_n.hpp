@@ -63,9 +63,10 @@ list<Abstract_Polynomial *> cyclic_n(
   Polynomial_Ring * R = (homog) ? new Polynomial_Ring(n+1, F)
                                 : new Polynomial_Ring(n, F);
   NVAR_TYPE max_n = (homog) ? n + 1 : n;
-  Prime_Field_Element * A =
-      (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element) * n);
-  Monomial * M = (Monomial *)calloc(n, sizeof(Monomial));
+  Prime_Field_Element * A = static_cast<Prime_Field_Element *>(
+      malloc(sizeof(Prime_Field_Element) * n)
+  );
+  Monomial * M = static_cast<Monomial *>(calloc(n, sizeof(Monomial)));
   for (NVAR_TYPE i = 0; i < n; ++i) {
     M[i].common_initialization();
     M[i].initialize_exponents(max_n);

@@ -39,7 +39,7 @@ public:
   /** @name Construction */
   ///@{
   /** @brief construct with the number of expected terms */
-  Dense_Univariate_Integer_Polynomial(DEG_TYPE);
+  explicit Dense_Univariate_Integer_Polynomial(DEG_TYPE);
   /** @brief copy constructor */
   Dense_Univariate_Integer_Polynomial(
       const Dense_Univariate_Integer_Polynomial &

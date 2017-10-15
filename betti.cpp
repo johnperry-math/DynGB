@@ -47,9 +47,15 @@ map<DEG_TYPE, unsigned long> incremental_betti(
   for (auto p : S) {
     bool found = false;
     if (
-        not found and u | p.first.lcm(p.second) and
-        any_of(S2.begin(), S2.end(), [p,u](pair<Monomial, Monomial> q){return (q.first == u or q.second == u) and (q.first == p.first or q.second==p.first);}) and
-        any_of(S2.begin(), S2.end(), [p,u](pair<Monomial, Monomial> q){return (q.first == u or q.second == u) and (q.first == p.second or q.second==p.second);})
+        u | p.first.lcm(p.second) and
+        any_of(S2.begin(), S2.end(), [p,u](pair<Monomial, Monomial> q) {
+            return (q.first == u or q.second == u) and
+                (q.first == p.first or q.second==p.first);
+        }) and
+        any_of(S2.begin(), S2.end(), [p,u](pair<Monomial, Monomial> q) {
+            return (q.first == u or q.second == u) and
+                (q.first == p.second or q.second==p.second);
+        })
     ) {
       found = true;
     }

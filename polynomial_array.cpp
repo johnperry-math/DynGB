@@ -23,7 +23,7 @@
 Constant_Polynomial_Iterator::Constant_Polynomial_Iterator(
       const Constant_Polynomial * poly, bool at_end
 ) {
-  p = poly;
+  p_base = p = poly;
   if (at_end) i = p->m - 1;
   else i = p->head;
 }
@@ -66,8 +66,8 @@ Constant_Polynomial::Constant_Polynomial(
       order = mons[0].monomial_ordering();
   }
   m = length;
-  M = (Monomial *)calloc(m, sizeof(Monomial));
-  A = (Prime_Field_Element *)calloc(m, sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(calloc(m, sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(calloc(m, sizeof(Prime_Field_Element)));
   for (unsigned i = 0; i < m; ++i) {
     M[i].common_initialization();
     M[i].initialize_exponents(mons[i].num_vars());
@@ -88,8 +88,8 @@ Constant_Polynomial::Constant_Polynomial(
 ) : Abstract_Polynomial(R, mons[0]->monomial_ordering())
 {
   m = length;
-  M = (Monomial *)calloc(m, sizeof(Monomial));
-  A = (Prime_Field_Element *)calloc(m, sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(calloc(m, sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(calloc(m, sizeof(Prime_Field_Element)));
   auto F = R.ground_field();
   auto n = R.number_of_variables();
   Prime_Field_Element scale(F.inverse(coeffs[start]), &F);
@@ -120,8 +120,8 @@ Constant_Polynomial::Constant_Polynomial(
       order = mons.front().monomial_ordering();
   }
   m = mons.size();
-  M = (Monomial *)calloc(m, sizeof(Monomial));
-  A = (Prime_Field_Element *)calloc(m, sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(calloc(m, sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(calloc(m, sizeof(Prime_Field_Element)));
   auto Mi = mons.begin();
   auto Ai = coeffs.begin();
   unsigned i = 0;
@@ -144,8 +144,8 @@ Constant_Polynomial::Constant_Polynomial(
 ) : Abstract_Polynomial(R, order)
 {
   m = length;
-  M = (Monomial *)malloc(m*sizeof(Monomial));
-  A = (Prime_Field_Element *)malloc(m*sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(malloc(m*sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(malloc(m*sizeof(Prime_Field_Element)));
   for (unsigned i = 0; i < m; ++i) {
     M[i].common_initialization();
     M[i].initialize_exponents(number_of_variables());
@@ -162,8 +162,8 @@ Constant_Polynomial::Constant_Polynomial(
 ) : Abstract_Polynomial(R, order) {
   m = size;
   const Prime_Field & F = R.ground_field();
-  M = (Monomial *)malloc(m*sizeof(Monomial));
-  A = (Prime_Field_Element *)malloc(m*sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(malloc(m*sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(malloc(m*sizeof(Prime_Field_Element)));
   unsigned j = 0;
   for (unsigned i = 0; i < m; ++i) {
     A[i].assign(AM[j++], &F);
@@ -277,8 +277,8 @@ Constant_Polynomial::Constant_Polynomial(const Abstract_Polynomial & p)
 {
   Polynomial_Iterator * pi = p.new_iterator();
   m = p.length();
-  M = (Monomial *)malloc(m*sizeof(Monomial));
-  A = (Prime_Field_Element *)malloc(m*sizeof(Prime_Field_Element));
+  M = static_cast<Monomial *>(malloc(m*sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(malloc(m*sizeof(Prime_Field_Element)));
   for (unsigned i = 0; i < m and !pi->fellOff(); pi->moveRight())
   {
     M[i].common_initialization();

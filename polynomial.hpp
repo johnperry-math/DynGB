@@ -262,7 +262,7 @@ public:
   /** @name Data access */
   ///@{
   /** @brief Reports the polynomial on which @c this is iterating. */
-  virtual const Abstract_Polynomial * my_poly() const { return p; }
+  virtual const Abstract_Polynomial * my_poly() const { return p_base; }
   /** @brief Reports the monomial at the current position. */
   virtual const Monomial & currMonomial() const = 0;
   /** @brief Reports the coefficient at the current position. */
@@ -277,7 +277,7 @@ public:
   ///@}
 protected:
   /** @brief the polynomial @c this points to */
-  const Abstract_Polynomial * p;
+  const Abstract_Polynomial * p_base;
 };
 
 /**

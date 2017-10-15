@@ -80,7 +80,7 @@ void LLPolynomial_Iterator::set_currMonomial(const Monomial & t) {
 LLPolynomial_Iterator::LLPolynomial_Iterator(
     Polynomial_Linked_List * poly, bool at_end
 ) {
-  p = poly;
+  p_base = p = poly;
   iter_curr = p->head;
   if (at_end and iter_curr != nullptr)
     while (iter_curr->next != nullptr)
@@ -90,7 +90,7 @@ LLPolynomial_Iterator::LLPolynomial_Iterator(
 LLPolynomial_Iterator::LLPolynomial_Iterator(
     const Polynomial_Linked_List * poly, bool at_end)
 {
-  p = const_cast<Polynomial_Linked_List *>(poly);
+  p_base = p = const_cast<Polynomial_Linked_List *>(poly);
   iter_curr = p->head;
   if (at_end and iter_curr != nullptr)
     while (iter_curr->next != nullptr)
@@ -514,7 +514,7 @@ void Polynomial_Linked_List::add_last(
     head->prev = head->next = nullptr;
   } else {
     Monomial_Node * tail = head;
-    while (tail != nullptr and tail->next != nullptr) { tail = tail->next; }
+    while (tail->next != nullptr) { tail = tail->next; }
     tail->next = new Monomial_Node(c, t);
     tail->next->prev = tail;
     tail->next->next = nullptr;

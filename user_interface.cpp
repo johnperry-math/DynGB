@@ -98,7 +98,6 @@ void user_interface() {
       COEF_TYPE a = 1;
       EXP_TYPE exp[n];
       for (NVAR_TYPE i = 0; i < n; ++i) exp[i] = 0;
-      bool positive = true;
       while (inpoly[i] == ' ') ++i;
       while (reading_term and i < inpoly.size()) {
         unsigned j = i;
@@ -153,7 +152,6 @@ void user_interface() {
         if (inpoly[i] == '+' or inpoly[i] == '-') reading_term = false;
       }
       ++nt;
-      if (not positive) a *= -1;
       Monomial t(n, exp);
       M.push_back(t);
       A.emplace_back(a, &F);
