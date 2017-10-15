@@ -174,7 +174,7 @@ void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy) {
       strategy == StrategyFlags::WSUGAR_STRATEGY
   ) {
     cout << "\tsugar: "
-         << (static_cast<Pair_Sugar_Data *>((p->pair_key()))->pair_sugar())
+         << (static_cast<const Pair_Sugar_Data *>((p->pair_key()))->pair_sugar())
          << endl;
   }
 }
