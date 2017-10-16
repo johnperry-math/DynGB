@@ -66,7 +66,7 @@ void user_interface() {
   cout << "do you want to specify the indeterminates' names? (y/n) ";
   cin >> specify_names;
   string * names = new string[n];
-  Prime_Field F = Prime_Field(p);
+  Prime_Field F(p);
   Polynomial_Ring * P;
   if (not specify_names) {
     P = new Polynomial_Ring(n, F);

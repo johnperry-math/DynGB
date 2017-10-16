@@ -81,6 +81,8 @@ public:
   Critical_Pair_Basic(
       Abstract_Polynomial * f, Abstract_Polynomial * g, StrategyFlags strategy
   );
+  /** @brief copy constructor */
+  explicit Critical_Pair_Basic(const Critical_Pair_Basic &);
   ///@}
   /** @name Destruction */
   ///@{
@@ -173,6 +175,10 @@ public:
   ) : Critical_Pair_Basic(f, strategy) {
     ordering = how_to_order;
   };
+  /** @brief copy constructor */
+  Critical_Pair_Dynamic(const Critical_Pair_Dynamic & other) :
+      Critical_Pair_Basic(other), ordering(other.ordering)
+  { /* done */ }
   /**
     @brief create critical pair (f,g) for two polynomials, with given ordering
   */

@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     heuristic = (Dynamic_Heuristic )atoi(&(argv[heur_opt_location][5]));
   }
  // set up the field
-  Prime_Field F17 = Prime_Field(32003);
+  Prime_Field F17(32003);
   Polynomial_Ring R(32, F17);
   Prime_Field_Element a = F17.unity();
   // set up our polynomials

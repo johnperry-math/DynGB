@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
   bool static_algorithm = true;
   if (!strcmp(argv[2],"dyn")) static_algorithm = false;
   // set up the field
-  Prime_Field FF = Prime_Field(32003);
+  Prime_Field FF(32003);
   string X [9] = {"t", "x", "y", "z", "a", "b", "c", "d", "e"} ;
   Polynomial_Ring R(9, FF, X );
   Prime_Field_Element a = FF.unity();

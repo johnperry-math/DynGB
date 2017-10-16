@@ -231,7 +231,7 @@ public:
     @pre the argument should be at least two
     @post the skeleton of the positive orthant
   */
-  Skeleton(NVAR_TYPE);
+  explicit Skeleton(NVAR_TYPE);
 
   /**
     @brief Constructs a skeleton described by the given system of constraints.
@@ -247,7 +247,7 @@ public:
   Skeleton(NVAR_TYPE, const vector<Constraint> &);
 
   /** @brief Performs a deep copy of `other`. */
-  Skeleton(Skeleton &);
+  explicit Skeleton(const Skeleton &);
 
   virtual bool copy(const LP_Solver *) override;
 
@@ -297,15 +297,12 @@ public:
   /** @brief returns the set of constraints in the skeleton active at @c u */
   //inline vector<bool> which_constraints_active_at(const Ray & u) const {
   inline void which_constraints_active_at(const Ray & u, bool * result) const {
-    static unsigned invocations;
-    //vector<bool> result(constraints.size());
     for (unsigned i = 0; i < constraints.size(); ++i) {
       if (u.is_active_at(constraints[i]))
         result[i] = true;
       else
         result[i] = false;
     }
-    //return result;
   }
 
   /** @brief tests for consistency of a potentially new constraint. */

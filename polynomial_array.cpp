@@ -90,7 +90,7 @@ Constant_Polynomial::Constant_Polynomial(
   m = length;
   M = static_cast<Monomial *>(calloc(m, sizeof(Monomial)));
   A = static_cast<Prime_Field_Element *>(calloc(m, sizeof(Prime_Field_Element)));
-  auto F = R.ground_field();
+  auto F(R.ground_field());
   auto n = R.number_of_variables();
   Prime_Field_Element scale(F.inverse(coeffs[start]), &F);
   unsigned j = 0;

@@ -25,7 +25,7 @@
 #include "algorithm_buchberger_dynamic.hpp"
 
 int main() {
-  Prime_Field FF = Prime_Field(32003);
+  Prime_Field FF(32003);
   string X [9] = {"t", "x", "y", "z", "a", "b", "c", "d", "e"} ;
   Polynomial_Ring R(9, FF, X );
   Prime_Field_Element a = FF.unity();

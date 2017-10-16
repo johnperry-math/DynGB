@@ -56,7 +56,7 @@ int main()
   cout << smaller << " < " << larger << " ? " << (smaller < larger) << endl;
   cout << larger << " < " << smaller << " ? " << (larger < smaller) << endl;
 
-  Prime_Field F = Prime_Field(43);
+  Prime_Field F(43);
   string var_names [] = { "x", "y" };
   Polynomial_Ring R = Polynomial_Ring(2, F, var_names);
   Indeterminate * X = R.indeterminates();

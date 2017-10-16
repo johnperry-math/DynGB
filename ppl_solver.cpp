@@ -84,6 +84,11 @@ PPL_Solver::PPL_Solver(const PPL_Solver & other) {
   ++instances;
 }
 
+PPL_Solver & PPL_Solver::operator = (const PPL_Solver & other) {
+  if (this != &other) copy(&other);
+  return *this;
+}
+
 bool PPL_Solver::copy(const LP_Solver * old_solver) {
   const PPL_Solver * other = dynamic_cast<const PPL_Solver *>(old_solver);
   if (other != nullptr) {

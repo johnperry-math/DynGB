@@ -37,7 +37,7 @@ public:
     @brief all the information we need is in @c cpb already so no additional
       processing is necessary
   */
-  Normal_Strategy(Critical_Pair_Basic & cpb);
+  explicit Normal_Strategy(Critical_Pair_Basic & cpb);
   ///@}
   /** @name Comparison */
   ///@{

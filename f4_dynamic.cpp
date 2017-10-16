@@ -479,7 +479,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
 void F4_Reduction_Data::reduce_by_new(
     unsigned i, unsigned lhead_i, const set<unsigned> & unprocessed
 ) {
-  auto F = Rx.ground_field();
+  auto & F = Rx.ground_field();
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];

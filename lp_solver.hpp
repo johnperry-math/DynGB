@@ -96,7 +96,7 @@ public:
     @param coeffs copies thiis vector of coefficients
     @post @c nvars will have the value equal to `coeffs.size()`
   */
-  Constraint(vector<CONSTR_TYPE> &);
+  explicit Constraint(vector<CONSTR_TYPE> &);
 
   /**
     @brief Copies the coefficients of the other constraint,
@@ -144,6 +144,13 @@ public:
   friend bool operator==(const Constraint & a, const Constraint & b);
 
   friend bool operator!=(const Constraint & a, const Constraint & b);
+
+  ///@}
+
+  /** @name Modification */
+  ///@{
+
+  Constraint & operator = (const Constraint &);
 
   ///@}
 
@@ -261,7 +268,7 @@ public:
     @post The dimension of this ray will equal the number of entries in the vector,
       and the values of their entries will be equal.
   */
-  Ray(const vector<RAYENT_TYPE> &);
+  explicit Ray(const vector<RAYENT_TYPE> &);
 
   /**
     @brief Copies the coordinates of the other ray.
@@ -663,7 +670,7 @@ public:
   }
   ///@}
 protected:
-  set<Ray> rays; /**< the skeleton (may be approximate, depending on solver) */
+  mutable set<Ray> rays; /**< the skeleton (may be approximate, depending on solver) */
 };
 
 }

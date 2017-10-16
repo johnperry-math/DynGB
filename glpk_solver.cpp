@@ -57,6 +57,15 @@ GLPK_Solver::GLPK_Solver(const GLPK_Solver &other) {
   rays = other.rays;
 }
 
+GLPK_Solver & GLPK_Solver::operator = (const GLPK_Solver & other) {
+  if (row_data != nullptr) delete [] row_data;
+  if (row_indx != nullptr) delete [] row_indx;
+  if (ray_data != nullptr) delete [] ray_data;
+  if (lp != nullptr) glp_delete_prob(lp);
+  copy(&other);
+  return *this;
+}
+
 bool GLPK_Solver::copy(const LP_Solver * old_solver) {
   const GLPK_Solver * other = dynamic_cast<const GLPK_Solver *>(old_solver);
   if (other != nullptr) {

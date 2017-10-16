@@ -621,7 +621,7 @@ bool verify_and_modify_if_necessary(
           for (NVAR_TYPE i = 0; i < n; ++i)
             coefficients[i] = a[i] - b[i];
           Constraint new_constraint(n, coefficients);
-          LP_Solver * newskel;
+          LP_Solver * newskel = nullptr;
           if (dynamic_cast<Skeleton *>(skel) != nullptr)
             newskel = new Skeleton(*static_cast<Skeleton *>(skel));
           else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr) {

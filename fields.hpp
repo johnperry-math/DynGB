@@ -71,7 +71,7 @@ public:
 
     Allocates new data, so you can discard <c>F</c> later if you want.
   */
-  Prime_Field(const Prime_Field & F);
+  explicit Prime_Field(const Prime_Field & F);
   ///@}
   /** @name Destruction */
   ///@{
@@ -103,6 +103,15 @@ public:
   void set_print_modulus(bool b);
   /** @brief indicates whether to print the modulus */
   bool get_print_modulus() const;
+  ///@}
+  /** @name Modification */
+  Prime_Field & operator = (const Prime_Field & other) {
+    m = other.m;
+    print_modulus = other.print_modulus;
+    Fi = other.Fi;
+    return *this;
+  }
+  ///@{
   ///@}
 protected:
   /** @brief characteristic/modulus of the field */

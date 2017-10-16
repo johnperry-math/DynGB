@@ -97,7 +97,6 @@ void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Basic *> & P, unsigned row
 ) {
   const unsigned num_cols = M_build.size();
-  const Prime_Field & F = P.front()->first()->ground_field();
   const COEF_TYPE F0 = 0;
   for (auto cp : P) {
     auto p = cp->first();
@@ -138,7 +137,6 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
     M.push_back(*mi);
   for (unsigned i = 0; i < strategies.size(); ++i)
     strategies[i] = nullptr;
-  unsigned row = 0;
   A.resize(P.size());
   head.resize(P.size());
   offset.resize(P.size());
@@ -391,7 +389,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
 }
 
 void F4_Reduction_Data::reduce_by_new() {
-  auto F = Rx.ground_field();
+  Prime_Field F(Rx.ground_field());
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
@@ -436,9 +434,13 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
       strategies[i] = nullptr;
     } else {
       vector<COEF_TYPE> & Ai = A[i];
-      Monomial * M_final = (Monomial *)malloc(sizeof(Monomial)*nonzero_entries[i]);
+      Monomial * M_final = static_cast<Monomial *>(
+          malloc(sizeof(Monomial)*nonzero_entries[i])
+      );
       Prime_Field_Element * A_final
-          = (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element)*nonzero_entries[i]);
+          = static_cast<Prime_Field_Element *>(
+                malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
+            );
       COEF_TYPE scale = F.inverse(Ai[head[i]]);
       unsigned k = 0;
       for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {

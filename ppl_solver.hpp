@@ -42,9 +42,9 @@ public:
   /** @name Construction */
   ///@{
   /** @brief initializes solver for @f$ n @f$ variables */
-  PPL_Solver(NVAR_TYPE n);
+  explicit PPL_Solver(NVAR_TYPE n);
   /** @brief copy constructor (deep copy) */
-  PPL_Solver(const PPL_Solver &);
+  explicit PPL_Solver(const PPL_Solver &);
   virtual bool copy(const LP_Solver *) override;
   ///@}
   /** @name Destruction */
@@ -58,6 +58,7 @@ public:
   ///@}
   /** @name Modification */
   ///@{
+  PPL_Solver & operator = (const PPL_Solver &);
   virtual bool solve(const Constraint &) override;
   virtual bool solve(const vector<Constraint> &) override;
   /** @brief clear the current set of rays and extracts the ones contained in lp */

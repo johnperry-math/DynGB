@@ -81,7 +81,7 @@ public:
   /**
     @brief Creates a zero ideal
   */
-  Monomial_Ideal(NVAR_TYPE nvars) {
+  explicit Monomial_Ideal(NVAR_TYPE nvars) {
     n = nvars; hPol = nullptr;
     hNum = hRedNum = hGradNum = hGradRedNum = nullptr;
     current_grading = nullptr;
@@ -143,7 +143,7 @@ public:
     current_grading = h_grading;
   }
   /** @brief copy constructor */
-  Monomial_Ideal(const Monomial_Ideal & I) 
+  explicit Monomial_Ideal(const Monomial_Ideal & I) 
   : n(I.n), gens(I.gens)
   {
     hNum = (I.hNum == nullptr) ? nullptr
@@ -337,6 +337,23 @@ public:
   ///@}
   /** @name Modification */
   ///@{
+  /** @brief assignment operator */
+  Monomial_Ideal & operator = (const Monomial_Ideal &I) {
+    n = I.n;
+    gens = I.gens;
+    hNum = (I.hNum == nullptr) ? nullptr
+        : new Dense_Univariate_Integer_Polynomial(*(I.hNum));
+    hRedNum = (I.hRedNum == nullptr) ? nullptr
+        : new Dense_Univariate_Integer_Polynomial(*(I.hRedNum));
+    hGradNum = (I.hGradNum == nullptr) ? nullptr
+        : new Dense_Univariate_Integer_Polynomial(*(I.hGradNum));
+    hGradRedNum = (I.hGradRedNum == nullptr) ? nullptr
+        : new Dense_Univariate_Integer_Polynomial(*(I.hGradRedNum));
+    hPol = (I.hPol == nullptr) ? nullptr
+        : new Dense_Univariate_Rational_Polynomial(*(I.hPol));
+    current_grading = I.current_grading;
+    return *this;
+  }
   /** @brief adds @c t to the basis */
   void add_generator(const Monomial & t) {
     if (hNum != nullptr) {

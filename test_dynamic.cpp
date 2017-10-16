@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     grading = new WT_TYPE [true_numvars];
     for (NVAR_TYPE i = 0; i < true_numvars; ++i) grading[i] = 1;
     mord = new CachedWGrevlex_Ordering(true_numvars, grading);
-    Prime_Field FF = Prime_Field(modulus);
+    Prime_Field FF(modulus);
     // set up the basis
     list<Abstract_Polynomial *> F = cyclic_n(numvars, FF, homog, mord);
     // message

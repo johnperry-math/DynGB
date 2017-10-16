@@ -36,7 +36,7 @@ public:
     @brief records @c poly as the reference for @c this
     @param poly the polynomial whose sugar data @p this should be
   */
-  Poly_Sugar_Data(const Abstract_Polynomial * poly);
+  explicit Poly_Sugar_Data(const Abstract_Polynomial * poly);
   /**
     @brief returns @c true iff the sugars are equal
     @param sd strategy data containing sugar
@@ -106,7 +106,7 @@ public:
     @brief all the information we need is in @c cpb already so no additional
       processing is necessary
   */
-  Pair_Sugar_Data(Critical_Pair_Basic & cpb);
+  explicit Pair_Sugar_Data(Critical_Pair_Basic & cpb);
   ///@}
   /** @name Comparison */
   ///@{

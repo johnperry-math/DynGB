@@ -121,7 +121,7 @@ public:
     @brief creates a pair whose weighted sugar is the maximum of that
       of the products of the polynomials in the critical pair
   */
-  Pair_WSugar_Strategy(Critical_Pair_Basic &);
+  explicit Pair_WSugar_Strategy(Critical_Pair_Basic &);
   ///@}
   /** @name Comparison */
   ///@{

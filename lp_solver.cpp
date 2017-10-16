@@ -46,6 +46,16 @@ Constraint::Constraint(const Constraint &old_constraint)
     coefficients[i] = old_constraint.coefficients[i];
 }
 
+Constraint & Constraint::operator = (const Constraint & other) {
+  if (this != &other) {
+    nvars = other.nvars;
+    coefficients = new CONSTR_TYPE[nvars];
+    for (NVAR_TYPE i = 0; i < nvars; ++i)
+      coefficients[i] = other.coefficients[i];
+  }
+  return *this;
+}
+
 // ordering is lexicographic
 bool operator < (const Constraint &first, const Constraint &second)
 {

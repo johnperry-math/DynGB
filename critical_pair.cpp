@@ -97,6 +97,12 @@ Critical_Pair_Basic::Critical_Pair_Basic(
   }
 }
 
+Critical_Pair_Basic::Critical_Pair_Basic(const Critical_Pair_Basic & other) :
+    tpq(other.tpq), tp(other.tp), tq(other.tq),
+    p(other.p), q(other.q), s(other.s),
+    key(other.key)
+{ /* done */ }
+
 Mutable_Polynomial * Critical_Pair_Basic::s_polynomial(
     SPolyCreationFlags method, StrategyFlags strategy
 ) {

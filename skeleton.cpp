@@ -133,7 +133,7 @@ Skeleton::Skeleton(NVAR_TYPE dimension, const vector<Constraint> &constraints)
   solve(constraints);
 }
 
-Skeleton::Skeleton(Skeleton &old_skeleton)
+Skeleton::Skeleton(const Skeleton &old_skeleton)
         : constraints(old_skeleton.constraints),
           edges(old_skeleton.edges), dim(old_skeleton.dim)
           

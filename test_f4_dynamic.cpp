@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     give_help();
   } else {
     int true_numvars = (homog) ? numvars + 1 : numvars;
-    Prime_Field FF = Prime_Field(modulus);
+    Prime_Field FF(modulus);
     // set up the basis
     list<Abstract_Polynomial *> F = cyclic_n(numvars, FF, homog);
     // message

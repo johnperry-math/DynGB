@@ -41,9 +41,9 @@ public:
   /** @name Construction */
   ///@{
   /** @brief initializes solver for @f$ n @f$ variables */
-  GLPK_Solver(NVAR_TYPE n);
+  explicit GLPK_Solver(NVAR_TYPE n);
   /** @brief copy constructor (deep copy) */
-  GLPK_Solver(const GLPK_Solver &);
+  explicit GLPK_Solver(const GLPK_Solver &);
   virtual bool copy(const LP_Solver *) override;
   ///@}
   /** @name Destruction */
@@ -66,6 +66,7 @@ public:
   ///@{
   virtual bool solve(const Constraint &) override;
   virtual bool solve(const vector<Constraint> &) override;
+  GLPK_Solver & operator=(const GLPK_Solver &);
   ///@}
   /** @name Computation */
   ///@{
@@ -107,7 +108,7 @@ protected:
       So I mark the rays here as @c mutable. Arguably I should do that in
       @c LP_Solver but I&rsquo;m not really in the mood to argue at the moment.
   */
-  mutable set<Ray> rays;
+  //mutable set<Ray> rays;
 private:
   glp_prob * lp; /**< GLPK problem interface */
   glp_smcp smcp; /**< GLPK solver options */
