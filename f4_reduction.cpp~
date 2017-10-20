@@ -20,7 +20,6 @@ double copy_time = 0;
 * along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *
 \*****************************************************************************/
 
-#include "f4_hash.hpp"
 #include "f4_reduction.hpp"
 #include "algorithm_buchberger_basic.hpp"
 

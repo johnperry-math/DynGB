@@ -364,8 +364,6 @@ Monomial Monomial::operator *(const Monomial & other) const {
   Monomial u(n);
   for (NVAR_TYPE i = 0; i < n; ++i)
     u.set_exponent(i, exponents[i] + other.exponents[i]);
-  u.mask = mask | other.mask;
-  ordering->set_data(u);
   return u;
 }
 

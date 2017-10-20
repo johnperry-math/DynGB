@@ -93,7 +93,7 @@ bin_PROGRAMS = test_monomials$(EXEEXT) test_hilbert_functions$(EXEEXT) \
 	test_4by4$(EXEEXT) test_cab_es1$(EXEEXT) test_cab_es2$(EXEEXT) \
 	test_cab_es4$(EXEEXT) test_cab_es5$(EXEEXT) \
 	test_cab_es6$(EXEEXT) test_cab_es9$(EXEEXT) test_f4$(EXEEXT) \
-	test_f4_dynamic$(EXEEXT)
+	test_f4_dynamic$(EXEEXT) test_hash$(EXEEXT)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/ac_checking_ppl.m4 \
@@ -218,6 +218,10 @@ test_gmp_OBJECTS = $(am_test_gmp_OBJECTS)
 test_gmp_LDADD = $(LDADD)
 test_gmp_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
 	$(test_gmp_LDFLAGS) $(LDFLAGS) -o $@
+am_test_hash_OBJECTS = $(am__objects_5) $(am__objects_4) \
+	test_hash.$(OBJEXT)
+test_hash_OBJECTS = $(am_test_hash_OBJECTS)
+test_hash_LDADD = $(LDADD)
 am_test_hilbert_functions_OBJECTS = test_hilbert_functions.$(OBJEXT) \
 	$(am__objects_2) $(am__objects_5) $(am__objects_4) \
 	polynomial_linked_list.$(OBJEXT) polynomial.$(OBJEXT) \
@@ -275,13 +279,26 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_@AM_V@)
+am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 SOURCES = $(test_4by4_SOURCES) $(test_cab_es1_SOURCES) \
 	$(test_cab_es2_SOURCES) $(test_cab_es4_SOURCES) \
 	$(test_cab_es5_SOURCES) $(test_cab_es6_SOURCES) \
 	$(test_cab_es9_SOURCES) $(test_cyclicn_SOURCES) \
 	$(test_dynamic_SOURCES) $(test_f4_SOURCES) \
 	$(test_f4_dynamic_SOURCES) $(test_glpk_solver_SOURCES) \
-	$(test_gmp_SOURCES) $(test_hilbert_functions_SOURCES) \
+	$(test_gmp_SOURCES) $(test_hash_SOURCES) \
+	$(test_hilbert_functions_SOURCES) \
 	$(test_incremental_betti_SOURCES) \
 	$(test_initial_analysis_SOURCES) $(test_monomials_SOURCES) \
 	$(user_interface_SOURCES)
@@ -291,7 +308,8 @@ DIST_SOURCES = $(test_4by4_SOURCES) $(test_cab_es1_SOURCES) \
 	$(test_cab_es9_SOURCES) $(test_cyclicn_SOURCES) \
 	$(test_dynamic_SOURCES) $(test_f4_SOURCES) \
 	$(test_f4_dynamic_SOURCES) $(test_glpk_solver_SOURCES) \
-	$(test_gmp_SOURCES) $(test_hilbert_functions_SOURCES) \
+	$(test_gmp_SOURCES) $(test_hash_SOURCES) \
+	$(test_hilbert_functions_SOURCES) \
 	$(test_incremental_betti_SOURCES) \
 	$(test_initial_analysis_SOURCES) $(test_monomials_SOURCES) \
 	$(user_interface_SOURCES)
@@ -473,6 +491,7 @@ test_cab_es6_SOURCES = test_cab_es6.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es6_LDFLAGS = $(DYNAMIC_LINK)
 test_cab_es9_SOURCES = test_cab_es9.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es9_LDFLAGS = $(DYNAMIC_LINK)
+test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.hpp test_hash.cpp
 test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp monomial_ideal.cpp
 test_f4_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
 test_f4_dynamic_SOURCES = test_f4_dynamic.cpp  $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_dynamic.cpp monomial_ideal.cpp betti.cpp
@@ -625,6 +644,10 @@ test_gmp$(EXEEXT): $(test_gmp_OBJECTS) $(test_gmp_DEPENDENCIES) $(EXTRA_test_gmp
 	@rm -f test_gmp$(EXEEXT)
 	$(AM_V_CXXLD)$(test_gmp_LINK) $(test_gmp_OBJECTS) $(test_gmp_LDADD) $(LIBS)
 
+test_hash$(EXEEXT): $(test_hash_OBJECTS) $(test_hash_DEPENDENCIES) $(EXTRA_test_hash_DEPENDENCIES) 
+	@rm -f test_hash$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_hash_OBJECTS) $(test_hash_LDADD) $(LIBS)
+
 test_hilbert_functions$(EXEEXT): $(test_hilbert_functions_OBJECTS) $(test_hilbert_functions_DEPENDENCIES) $(EXTRA_test_hilbert_functions_DEPENDENCIES) 
 	@rm -f test_hilbert_functions$(EXEEXT)
 	$(AM_V_CXXLD)$(test_hilbert_functions_LINK) $(test_hilbert_functions_OBJECTS) $(test_hilbert_functions_LDADD) $(LIBS)
@@ -695,6 +718,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_f4_dynamic.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_glpk_solver.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_gmp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_hash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_hilbert_functions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_incremental_betti.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_initial_analysis.Po@am__quote@

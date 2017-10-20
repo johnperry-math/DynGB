@@ -1,5 +1,5 @@
 #bin_PROGRAMS = test_cyclicn_mpi
-bin_PROGRAMS = test_monomials test_hilbert_functions test_incremental_betti test_glpk_solver test_gmp test_cyclicn test_dynamic test_initial_analysis user_interface test_4by4 test_cab_es1 test_cab_es2 test_cab_es4 test_cab_es5 test_cab_es6 test_cab_es9 test_f4 test_f4_dynamic test_hash
+bin_PROGRAMS = test_monomials test_hilbert_functions test_incremental_betti test_glpk_solver test_gmp test_cyclicn test_dynamic test_initial_analysis user_interface test_4by4 test_cab_es1 test_cab_es2 test_cab_es4 test_cab_es5 test_cab_es6 test_cab_es9 test_f4 test_f4_dynamic
 
 DYNAMIC_LIB = algorithm_buchberger_dynamic.cpp dynamic_engine.cpp
 HILBERT_LIB = hilbert_functions.cpp dense_univariate_rational_poly.cpp dense_univariate_integer_poly.cpp
@@ -62,8 +62,6 @@ test_cab_es6_LDFLAGS = $(DYNAMIC_LINK)
 
 test_cab_es9_SOURCES = test_cab_es9.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es9_LDFLAGS = $(DYNAMIC_LINK)
-
-test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.hpp test_hash.cpp
 
 test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp monomial_ideal.cpp
 test_f4_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
