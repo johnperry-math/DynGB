@@ -18,16 +18,16 @@ int main() {
   list<Monomial *> products;
 
   srand(time(NULL));
-  for (unsigned i = 0; i < 100; ++i) {
+  for (unsigned i = 0; i < 500; ++i) {
     auto t = new Monomial({
-      (unsigned int) rand() % 5, (unsigned int) rand() % 5,
-      (unsigned int) rand() % 5, (unsigned int) rand() % 5,
-      (unsigned int) rand() % 5
+      (unsigned int) rand() % 2, (unsigned int) rand() % 2,
+      (unsigned int) rand() % 2, (unsigned int) rand() % 2,
+      (unsigned int) rand() % 2
     });
     auto u = new Monomial({
-      (unsigned int) rand() % 5, (unsigned int) rand() % 5,
-      (unsigned int) rand() % 5, (unsigned int) rand() % 5,
-      (unsigned int) rand() % 5
+      (unsigned int) rand() % 2, (unsigned int) rand() % 2,
+      (unsigned int) rand() % 2, (unsigned int) rand() % 2,
+      (unsigned int) rand() % 2
     });
     factors.emplace_back(t, u);
     auto v = new Monomial((*t)*(*u));

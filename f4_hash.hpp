@@ -24,11 +24,12 @@ class F4_Hash {
     NVAR_TYPE n;
     WT_TYPE * weights;
     static const size_t MAXIMUM = 1 << 18;
-    list<pair<const Monomial *, size_t> > table[MAXIMUM];
+    list<pair<const Monomial *, size_t> > * table;
 
   public:
 
     F4_Hash(NVAR_TYPE num_vars) {
+      table = new list<pair<const Monomial *, size_t> > [MAXIMUM];
       n = num_vars;
       weights = new WT_TYPE[n];
       default_random_engine generator(
@@ -39,7 +40,10 @@ class F4_Hash {
         weights[i] = rand(generator);
     }
 
-    ~F4_Hash() { delete [] weights; }
+    ~F4_Hash() {
+      delete [] weights;
+      delete [] table;
+    }
 
     /**
       @brief determines the index of @p t in the lookup table
