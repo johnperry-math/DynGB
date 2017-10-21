@@ -17,17 +17,28 @@ using std::pair;
 
 #include "monomial.hpp"
 
+/**
+  @ingroup GBComputation
+  @brief hash table class, based on discussions with Christian Eder
+  @details For a homogeneous system it is advisable to recreate this for each
+    matrix. For inhomogeneous systems it may be advantageous to reuse the table
+    as one proceeds through the system.
+*/
 class F4_Hash {
 
   protected:
 
-    NVAR_TYPE n;
-    WT_TYPE * weights;
-    static const size_t MAXIMUM = 1 << 18;
-    list<pair<const Monomial *, size_t> > * table;
+    NVAR_TYPE n; /**< @brief number of variables in the monomials stored */
+    WT_TYPE * weights; /**< @brief randomized weighting for each exponent */
+    static const size_t MAXIMUM = 1 << 18; /**< @brief number of entries in table */
+    list<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
 
   public:
 
+    /**
+      @brief allocates the table and sets up randomized hash function
+      @param num_vars number of variables in the monomials this table will check
+    */
     F4_Hash(NVAR_TYPE num_vars) {
       table = new list<pair<const Monomial *, size_t> > [MAXIMUM];
       n = num_vars;
@@ -40,6 +51,9 @@ class F4_Hash {
         weights[i] = rand(generator);
     }
 
+    /**
+      @brief releases the table and the randomized hash function
+    */
     ~F4_Hash() {
       delete [] weights;
       delete [] table;
@@ -48,6 +62,7 @@ class F4_Hash {
     /**
       @brief determines the index of @p t in the lookup table
       @param t @c Monomial
+      @return which table entry contains the list that contains @p t
     */
     size_t get_index(const Monomial & t) {
       DEG_TYPE index = 0;
@@ -60,6 +75,7 @@ class F4_Hash {
       @brief determines the index of \f$tu\f$ in the lookup table
       @param t @c Monomial
       @param u @c Monomial
+      @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
       DEG_TYPE index = 0;
@@ -81,11 +97,13 @@ class F4_Hash {
     }
 
     /**
-      @brief looks up the location of \f$tu\f$ in the array
+      @brief looks up the location of \f$tu\f$ in the array; that is,
+        the second argument to @c add_monomial() when \f$tu\f$ was the first
       @details This will not add \f$tu\f$ if it isn't already there, so
         call it only after the table has been completely set up!
       @param t @c Monomial
-      @param t @c Monomial
+      @param u @c Monomial
+      @return location of \f$tu\f$ in the array
     */
     size_t lookup_product(
         const Monomial & t, const Monomial & u
@@ -101,6 +119,9 @@ class F4_Hash {
 
 };
 
+/**
+  @brief prints the non-empty locations as a list of tuples (monomial, location)
+*/
 ostream & operator << (ostream & os, const F4_Hash & ht) {
   for (size_t i = 0; i < ht.MAXIMUM; ++i) {
     if (ht.table[i].size() != 0) {
@@ -110,6 +131,7 @@ ostream & operator << (ostream & os, const F4_Hash & ht) {
       os << endl;
     }
   }
+  return os;
 }
 
 #endif

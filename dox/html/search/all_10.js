@@ -7,7 +7,7 @@ var searchData=
   ['ray_5fdata',['ray_data',['../group___c_l_s_solvers.html#a7e2dd1cfc4bea9e765b405b7297a6838',1,'LP_Solvers::PPL_Solver']]],
   ['ray_5fdata_5fallocation',['ray_data_allocation',['../namespace_l_p___solvers.html#a7e1accee51d4f9339ef83bf93d653544',1,'LP_Solvers']]],
   ['ray_5fsum',['ray_sum',['../group___c_l_s_solvers.html#ga42f6aa14b6c3adb4df26f8338d486401',1,'LP_Solvers']]],
-  ['rays',['rays',['../group___c_l_s_solvers.html#ad748438e4625935b7c4ce4d677b2cdfd',1,'LP_Solvers::GLPK_Solver::rays()'],['../group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374',1,'LP_Solvers::LP_Solver::rays()']]],
+  ['rays',['rays',['../group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374',1,'LP_Solvers::LP_Solver']]],
   ['recompute_5fleading_5fmonomial',['recompute_leading_monomial',['../group__polygroup.html#ab57dbe8d5f0d3860997775d9f354ab0c',1,'Polynomial_Geobucket']]],
   ['reduce_5fand_5fselect_5forder',['reduce_and_select_order',['../group___g_b_computation.html#a8c98bfecfd48902809a64411729cabe6',1,'F4_Reduction_Data']]],
   ['reduce_5fbasis',['reduce_basis',['../group___g_b_computation.html#gaf4fe293e7cdc8ec2fd8b13df3318cb4a',1,'reduce_basis(list&lt; Abstract_Polynomial *&gt;G):&#160;algorithm_buchberger_basic.cpp'],['../group___g_b_computation.html#gaf4fe293e7cdc8ec2fd8b13df3318cb4a',1,'reduce_basis(list&lt; Abstract_Polynomial *&gt;G):&#160;algorithm_buchberger_basic.cpp']]],

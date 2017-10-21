@@ -123,6 +123,7 @@ Enumerations</h2></td></tr>
 <b>DEG_THEN_GRAD_HILB</b>, 
 <br />
 &#160;&#160;<b>DEG_THEN_ORD_HILBERT</b>, 
+<b>EVIL_RANDOM</b>, 
 <b>MAX_HEURISTIC</b>
 <br />
  }<tr class="memdesc:ga819b1fd40d9a40ff303df3b90647ecb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">values for the heuristic, as in <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a></code>  <a href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">More...</a><br /></td></tr>
@@ -170,6 +171,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab4b77c648c1c2892cffba4dcf2a6d80a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_dynamic___engine.html#ab4b77c648c1c2892cffba4dcf2a6d80a">less_by_num_crit_pairs</a> (<a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;a, <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;b)</td></tr>
 <tr class="memdesc:ab4b77c648c1c2892cffba4dcf2a6d80a"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares the desirability of two potential expansions of a monomial ideal via the basic Betti heuristic  <a href="#ab4b77c648c1c2892cffba4dcf2a6d80a">More...</a><br /></td></tr>
 <tr class="separator:ab4b77c648c1c2892cffba4dcf2a6d80a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a119c751f93ea0a16eb27f4b08de65bb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_dynamic___engine.html#a119c751f93ea0a16eb27f4b08de65bb0">less_by_random</a> (const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;a, const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;b)</td></tr>
+<tr class="memdesc:a119c751f93ea0a16eb27f4b08de65bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares the desirability of two potential expansions of a monomial ideal, selecting one at random  <a href="#a119c751f93ea0a16eb27f4b08de65bb0">More...</a><br /></td></tr>
+<tr class="separator:a119c751f93ea0a16eb27f4b08de65bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa27b3fbb646d1d0f5d35de5a69e1cb29"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_dynamic___engine.html#aa27b3fbb646d1d0f5d35de5a69e1cb29">less_by_smoothest_degrees</a> (<a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;a, <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;b)</td></tr>
 <tr class="memdesc:aa27b3fbb646d1d0f5d35de5a69e1cb29"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares the desirability of two potential expansions of a monomial ideal by a &ldquo;smoothest degree&rdquo; heuristic  <a href="#aa27b3fbb646d1d0f5d35de5a69e1cb29">More...</a><br /></td></tr>
 <tr class="separator:aa27b3fbb646d1d0f5d35de5a69e1cb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,7 +229,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The graded Betti heuristic compares the Betti numbers from the standard grading, breaking ties with the Hilbert+degree heuristic. For the Betti part, it proceeds through the list of critical pairs at each degree, quitting when it either runs out or finds a difference. In this case it prefers the ideal that has more pairs at lower degree. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00410">410</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00428">428</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +269,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00443">443</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00461">461</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +309,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>This heuristic first compares the monomials&rsquo; weighted degrees. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00362">362</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00380">380</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -345,7 +349,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>This heuristic compares first the total degrees of the monomials. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00264">264</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00282">282</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +388,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00476">476</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00494">494</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +428,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The Hilbert heuristic compares first the Hilbert polynomial, then the graded Hilbert numerator. It tries to break ties using the weighted degree of the monomials. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00239">239</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00258">258</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +468,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00066">66</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00088">88</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +508,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. It tries to break ties by total degree of the monomials. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00216">216</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00236">236</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -544,7 +548,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The largest maximal component heuristic aims to maximize the subset of the support that has largest degree. This aims for polynomials that are &ldquo;close to regular.&rdquo; </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00090">90</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00111">111</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +588,47 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The Betti heuristic compares the number of critical pairs. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00194">194</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00215">215</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a119c751f93ea0a16eb27f4b08de65bb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a119c751f93ea0a16eb27f4b08de65bb0">&#9670;&nbsp;</a></span>less_by_random()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Dynamic_Engine::less_by_random </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">PP_With_Ideal</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>compares the desirability of two potential expansions of a monomial ideal, selecting one at random </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a,b</td><td>ideals to compare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
+<p>This heuristic is useful to show that on sufficiently complex systems the other heuristics actually do something intelligent. On some simple systems this heuristic can sometimes beat the others, because there are not very many bases possible, and the greedy algorithms inevitable fail to find the "best." Once you get out of those, however, this heuristic inevitably turns disastrous. </p>
+
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00035">35</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -624,7 +668,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>The smoothest degree heuristic looks for a minimal change in weighted degree. It aims for polynomials that are &ldquo;close to homogeneous.&rdquo; </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00085">85</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00106">106</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -664,7 +708,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> iff the first ideal is considered smaller</dd></dl>
 <p>This heuristic first compares the monomials&rsquo; weighted degrees. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a>. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. </p>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00312">312</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00330">330</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>

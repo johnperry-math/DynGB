@@ -8,49 +8,28 @@ John Perry, \href{mailto:john.perry@usm.edu}{\tt john.\+perry@usm.\+edu}
 \href{../../COPYING.txt}{\tt G\+NU Public License}; see \hyperlink{index_Copyright}{Copyright details} below
 \end{DoxyCopyright}
 \hypertarget{index_Overview}{}\section{Overview}\label{index_Overview}
-This project is designed to be a testbed/reference implementation for dynamic Gr\"{o}bner basis computation, using the algorithms described in \cite{CaboaraDynAlg} and \cite{CaboaraPerry}, along with some newer ideas\+:
-
-
-\begin{DoxyItemize}
-\item alternate heuristics;
-\item adaptations of more recent algorithms (e.\+g., F4);
-\item and, to adapt an Italian phrase, {\itshape come mi gira la testa.} (``However my head turns.'' I'm not sure it will make sense to anyone except me, though.)
-\end{DoxyItemize}
+This project is designed to be a testbed/reference implementation for dynamic Gr\"{o}bner basis computation, using the algorithms described in \cite{CaboaraDynAlg} and \cite{CaboaraPerry}, along with some newer ideas.
 
 No claim to high efficiency or exemplary programming is implied. I wrote this to be relatively usable (compared to an earlier Sage implementation) and {\itshape easy to modify}, especially as regards modularity, polymorphism, and getting detailed data.\hypertarget{index_Install}{}\section{Installation and dependencies}\label{index_Install}
-\hypertarget{index_Dependencies}{}\subsection{Dependencies}\label{index_Dependencies}
-You need several prerequisite programs, which are not included\+:
+The first release required something akin to {\ttfamily make B\+U\+I\+LD=build}. I am now using autotools, so the usual {\ttfamily ./configure} followed by {\ttfamily make} should work. However, there are several prerequisite programs you need to install first\+:
 \begin{DoxyItemize}
 \item a C++ compiler that understands C++11;
 \item \href{https://gmplib.org/}{\tt G\+MP}, the Gnu Multi-\/\+Precision library \cite{gmp};
 \item \href{https://www.gnu.org/software/glpk/}{\tt G\+L\+PK}, the Gnu Linear Programming Kit \cite{glpk};
-\item \href{http://bugseng.com/products/ppl}{\tt P\+PL}, the Parma Polyhedra Library \cite{BagnaraHZ08SCP}. A recent version is a good idea\+: updates to the Gnu compiler broke an earlier version.
+\item \href{http://bugseng.com/products/ppl}{\tt P\+PL}, the Parma Polyhedra Library \cite{BagnaraHZ08SCP}.
 \end{DoxyItemize}
 
-On a Linux system you can install these very easily (in Fedora I used {\ttfamily Apper}). All dependencies should build without difficulty on a Macintosh, or they did the last time I checked. I have not tried to build on Windows, but I don't use hardware magic, so it {\itshape ought} to build.
-
-\begin{DoxyWarning}{Warning}
-For whatever it's worth, this uses a lot of 64-\/bit integers. I'm not sure that means you need a 64-\/bit operating system, but you probably need a compiler capable of 64-\/bit types ({\ttfamily long long}).
-
-The dynamic code will not configure without these prerequisites, let alone compile. Honestly, I can't think of any reason anyone would be interested in this project except to study the dynamic code, and even then you'd be wise to avoid it unless you're trying to spring yourself out of purgatory a bit early.
-\end{DoxyWarning}
-\hypertarget{index_OpenMPI}{}\subsection{For the Don Quixotes among us}\label{index_OpenMPI}
-The codebase also contains some unrelated forays into Open\+M\+PI programming. These are of little interest to the average{$\dots$} honestly, they're of little interest to {\itshape me} anymore. In any case they require\+:
+The codebase also contains some unrelated forays into parallel programming, which are probably of no interest to the average user, but require\+:
 \begin{DoxyItemize}
-\item the \href{https://www.open-mpi.org/}{\tt Open\+M\+PI} toolchain. If you do not have Open\+M\+PI and are not interested in these (and I can't imagine why you should be), well! fret not. Right now it's disabled. You'd have to modify {\ttfamily Makefile.\+am} anyway, and you don't want to do that. I'm not 100\% sure it works anymore, anyway.
-\end{DoxyItemize}\hypertarget{index_Installation}{}\subsection{Actually installing it!}\label{index_Installation}
-Thanks to \href{https://www.gnu.org/software/automake/}{\tt {\ttfamily autotools}}, the stereotypical {\ttfamily ./configure}, followed by {\ttfamily make}, should work. It definitely works on my Linux laptop at the moment. I should check it against my Mac laptop but I'm not in the mood. (No, really, I'm not. I've read enough of the Sage developers' mailing list, and dealt a bit with some development on Apple myself. It's not fun.)\hypertarget{index_Usage}{}\section{Usage}\label{index_Usage}
-There are three ways to use the system.
-\begin{DoxyEnumerate}
-\item Use one of the several {\ttfamily test} files included. You can learn how to work them by running them without arguments, in which case they'll deliver a help message which, thanks to the glories of copy and paste, is probably just wrong to require you to study the source code to figure out how it works. I know this is annoying; sorry.
-\item Use the {\ttfamily user\+\_\+interface} file. A number of systems are defined in the directory {\ttfamily examples\+\_\+for\+\_\+user\+\_\+interface}. The format is defined in the documentation to {\ttfamily \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()}}. This is still annoying, but should not be so bad. \begin{DoxyNote}{Note}
-At the present time, {\ttfamily user\+\_\+interface} uses only the Buchberger variants of the Gr\"{o}bner basis algorithms.
-\end{DoxyNote}
+\item the \href{https://www.open-mpi.org/}{\tt Open\+M\+PI} toolchain. If you do not have Open\+M\+PI and are not interested in these (and I don't see why you should be) just comment out any line that involves {\ttfamily mpicxx}.
+\end{DoxyItemize}
 
-\item Write a program that builds a polynomial system and accesses the library directly. Most of the \href{examples.html}{\tt examples} provided illustrate that approach. This is annoying and rather difficult, though not as difficult as it was before the {\ttfamily \hyperlink{group__polygroup_class_indeterminate}{Indeterminate}} class.
+On a Linux system you can install these very easily (in Fedora I used {\ttfamily Apper}). All dependencies should build without difficulty on a Macintosh. I have not tried to build on Windows, but I don't use hardware magic, so it {\itshape ought} to build.\hypertarget{index_Usage}{}\section{Usage}\label{index_Usage}
+There are two ways to use the system.
+\begin{DoxyEnumerate}
+\item Write a program that builds a polynomial system and accesses the library directly. Most of the \href{examples.html}{\tt examples} provided illustrate that approach. This is annoying and a rather difficult, though not as difficult as it was before the \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} class.
+\item Use the {\ttfamily user\+\_\+interface} file. A number of systems are defined in the directory {\ttfamily examples\+\_\+for\+\_\+user\+\_\+interface}. The format is defined in the documentation to \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()}. This is still annoying, but not quite so difficult.
 \end{DoxyEnumerate}\hypertarget{index_Status}{}\section{Current status}\label{index_Status}
-s As of US Independence Day 2017\+: \begin{DoxyItemize}
-\item We have a working implementation of a static F4, though frankly even Singular is faster, so don't go getting ideas. That's not the point. \item We have an implementation of a dynamic F4, but it's only been tested through the homogeneous Cyclic-\/7 system, so again, don't go getting ideas. That said, I think it looks promising. \item Some of the problems identified below have been fixed, or at least mitigated.\end{DoxyItemize}
 As of January 2017\+: \begin{DoxyItemize}
 \item The code works consistently on many different examples. However, it is slow\+: I am not trying to reach Singular-\/level optimization (not at the current time, anyway). Typically, this code is one to two orders of magnitude slower than Singular. \item Nevertheless, it outperforms Singular on at least one system\+: Caboara's Example 2. \item Unless I'm doing something very stupid, the weighted sugar strategy is an unmitigated disaster and should be avoided. \item The code is slow, though in the last week of July the implementation of an $O(1)$ memory manager cut the time required for the dynamic implementation by nearly 2/3. A very simple optimization of assigning an object's array to a local variable before entering a loop cut the time required for both dynamic and static by roughly 40\%.\end{DoxyItemize}
 \begin{DoxyNote}{Note}
@@ -72,12 +51,6 @@ In no particular order, aside from the indicated priority. See the \href{todo.ht
 \item Bring polynomial iterators in line with C++ convention.
 \item Implement other C++11 modernizations ({\ttfamily auto}, {\ttfamily noexcept}, {\ttfamily override}, {$\dots$}).
 \item Generalize/improve the memory manager.
-\item In dynamic F4, improve the efficiency of the selection of an ordering. In particular, this includes\+:
-\begin{DoxyItemize}
-\item use arrays to model the solver data, rather than sets and lists;
-\item think about how to retain and modify data from each pass through the matrix, rather than starting anew after selecting a row;
-\item how to parallelize the selection of rows? this should be doable with, for instance, a parallel reduction operation or something similar.
-\end{DoxyItemize}
 \item Add P\+PL as an L\+P\+\_\+\+Solver. \cite{BagnaraHZ08SCP}
 \item Implement Caboara's examples.
 \item Implement graded Hilbert numerators.
@@ -107,10 +80,10 @@ In no particular order, aside from the indicated priority. See the \href{todo.ht
 \end{DoxyItemize}
 \item Reimplement \hyperlink{group__polygroup_class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} so its arrays contain pointers to \hyperlink{group__polygroup_class_monomial}{Monomial}, rather than an expanded \hyperlink{group__polygroup_class_monomial}{Monomial}. See if that changes things.
 \item Re-\/examine what's going on with masks, since the plus to efficiency doesn't seem worth the effort.
-\item Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce. ({\bfseries Remark\+:} This is precisely what we do in the dynamic F4 algorithm, and in that case it is not only not inefficient, it is frankly necessary.)
+\item Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce.
 \item Implement a {\ttfamily Dictionary\+\_\+\+Linked\+\_\+\+Polynomial} class, where any term points to one unique instance of a monomial, rather than having many copies of monomials in different polynomials. Upside is that equality test during canonicalization is instantaneous (compare pointers). Downsides may include finding/sorting the monomials, indirection.
 \item Detach monomial ordering from monomials, since caching ordering data doesn't seem to help much?
-\item Implement a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily by reading from an input file. That way we don't have to write a fresh control program for each example system. (see {\ttfamily \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()}})
+\item Implement a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily by reading from an input file. That way we don't have to write a fresh control program for each example system. (see \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()})
 \item Implement an \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} class and a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily.
 \end{DoxyItemize}\end{DoxyRefDesc}
 \hypertarget{index_lopri}{}\subsection{Lower priority}\label{index_lopri}
@@ -122,7 +95,7 @@ In no particular order, aside from the indicated priority. See the \href{todo.ht
 \item Implement D\+DM with the Fukuda-\/\+Prodon criterion, compare to Zolotykh's.
 \item Implement Roune's algorithms for Hilbert functions.
 \item Compare each potential PP with all other potential PP's, reducing the number of false positives. \mbox{[}This does not seem to be necessary at the moment, as the overhead is quite small, but it is still a thought.\mbox{]}
-\item Add a hash mechanism to the {\ttfamily constraint} class to help avoid redundancy.
+\item Add a hash mechanism to the {\ttfamily constraint} class to help avoid redundnacy.
 \end{DoxyItemize}
 \item Create a Matrix\+\_\+\+Ordering\+\_\+\+Data class as a subset of \hyperlink{group__orderinggroup_class_monomial___order___data}{Monomial\+\_\+\+Order\+\_\+\+Data}.
 \item Add an {\ttfamily insert()} function to \hyperlink{group__polygroup_class_monomial___node}{Monomial\+\_\+\+Node} to insert another \hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List}, subsequently to be destroyed.
@@ -135,14 +108,14 @@ This probably has bugs I haven't yet worked out, but I have done a lot of bug-\/
 I originally implemented this in Sage. That was purely a proof-\/of-\/concept product; it was very slow, and I wanted to improve on it. Unfortunately\+:
 
 \begin{DoxyItemize}
-\item It is not easy to use the guts of Singular from Sage. In particular, the geobuckets. But even if that were possible{$\dots$} \item In all the computer algebra systems I've looked at, a monomial ordering is part of the ring structure. At least in Singular, a ``wgrevlex'' ordering received a different structure than a ``grevlex'' ordering, and the structure was computationally disadvantageous. So my preliminary implementation in Singular worked, but tended to be a lot slower than {\ttfamily std()} {\itshape even though it did less work!} (Here, ``work'' is measured by number of s-\/polynomials, number of reduction operations, length of the polynomials involved, etc.) In addition, the implementation crashed often, for reasons I wasn't able to sort out, even with help from the developers.\end{DoxyItemize}
-That is when I decided to adapt some code I had written for a class to this project. That turned out to be a good thing, because the original Sage version had a number of bugs that I discovered only while developing later versions.
+\item It is not easy to use the guts of Singular from Sage. In particular, the geobuckets. But even if that were possible{$\dots$} \item In all the computer algebra systems I've looked at, a monomial ordering is part of the ring structure. At least in Singular, a ``wgrevlex'' ordering received a different structure than a ``grevlex'' ordering, in particular a disadvantageous structure. So my preliminary implementation in Singular worked, but tended to be a lot slower than {\ttfamily std()} {\itshape even though it did less work.} In addition, the implementation crashed often, for reasons I wasn't able to sort out, even with help from the developers.\end{DoxyItemize}
+That is when I decided to develop this code. As it turns out, that was a good thing, because the original Sage version had a number of bugs that I discovered only while developing later versions.
 
-Although I wrote it from scratch, without a doubt it reflects what I saw in Co\+CoA and Singular. {\bfseries No great claim to originality or even usability is implied.} The intent of this software is not to compete with those, but to provide a more robust launchpad to implement the algorithm there than I had before.\hypertarget{index_Copyright}{}\section{Copyright details}\label{index_Copyright}
+Although I wrote it from scratch, without a doubt it reflects what I saw in Co\+CoA and Singular. No great claim to originality or even usability is implied. The intent of this software is not to compete with those, but to provide a more robust launchpad to implement the algorithm there than I had before.\hypertarget{index_Copyright}{}\section{Copyright details}\label{index_Copyright}
 This file is part of Dyn\+GB.
 
 Dyn\+GB is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
 
-Dyn\+GB is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+Foobar is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
 
 You should have received a copy of the G\+NU General Public License along with Dyn\+GB. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. 

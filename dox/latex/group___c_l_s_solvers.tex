@@ -118,6 +118,13 @@ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE \hyperlink{group___c_l_s_solvers_a286fb7825aa45
 const C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___c_l_s_solvers_a4e6dd23c317ce6865167b30d1d75de19}{coeffs} () const
 \begin{DoxyCompactList}\small\item\em Returns the coefficients that determine this constraints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___c_l_s_solvers_a7040b1a4ebddf3deb58b22219904d43e}\label{group___c_l_s_solvers_a7040b1a4ebddf3deb58b22219904d43e}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \& {\bfseries operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&)
+\end{DoxyCompactItemize}
+\end{Indent}
 \subsubsection*{Friends}
 \begin{Indent}\textbf{ Comparisons}\par
 \begin{DoxyCompactItemize}
@@ -166,7 +173,7 @@ Definition at line 25 of file lp\+\_\+solver.\+cpp.
 \index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!Constraint@{Constraint}}
 \index{Constraint@{Constraint}!L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}}
 \subparagraph{\texorpdfstring{Constraint()}{Constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Constraint\+::\+Constraint (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&}]{coeffs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Constraint\+::\+Constraint (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+N\+S\+T\+R\+\_\+\+T\+Y\+PE $>$ \&}]{coeffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -196,7 +203,7 @@ Deletes memory allocated by the constructor.
 
 Currently, that means it deletes an array created by the constructors. 
 
-Definition at line 113 of file lp\+\_\+solver.\+cpp.
+Definition at line 123 of file lp\+\_\+solver.\+cpp.
 
 
 
@@ -226,7 +233,7 @@ This is unsafe when number of variables is not the same. It does not check, sinc
 \end{DoxyReturn}
 
 
-Definition at line 73 of file lp\+\_\+solver.\+cpp.
+Definition at line 83 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ad7246226080bd15a0d477cd905b4b71c}\label{group___c_l_s_solvers_ad7246226080bd15a0d477cd905b4b71c}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator$<$@{operator$<$}}
@@ -253,7 +260,7 @@ This is unsafe when number of variables is not the same. It does not check, sinc
 \end{DoxyReturn}
 
 
-Definition at line 50 of file lp\+\_\+solver.\+cpp.
+Definition at line 60 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a7233f9b589a413e310991431039b05b6}\label{group___c_l_s_solvers_a7233f9b589a413e310991431039b05b6}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator$<$$<$@{operator$<$$<$}}
@@ -279,7 +286,7 @@ the output stream
 \end{DoxyReturn}
 
 
-Definition at line 83 of file lp\+\_\+solver.\+cpp.
+Definition at line 93 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a9411a8f6505608b523a4d5f28014d4c2}\label{group___c_l_s_solvers_a9411a8f6505608b523a4d5f28014d4c2}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Constraint@{L\+P\+\_\+\+Solvers\+::\+Constraint}!operator==@{operator==}}
@@ -306,7 +313,7 @@ This is unsafe when number of variables is not the same. It does not check, sinc
 \end{DoxyReturn}
 
 
-Definition at line 63 of file lp\+\_\+solver.\+cpp.
+Definition at line 73 of file lp\+\_\+solver.\+cpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+Edge@{L\+P\+\_\+\+Solvers\+::\+Edge}}\label{class_l_p___solvers_1_1_edge}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_edge}
@@ -540,7 +547,10 @@ virtual unsigned long \hyperlink{group___c_l_s_solvers_af28eb491140e583b453773ea
 virtual bool \hyperlink{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
 virtual bool \hyperlink{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&) override
-\begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Adds the indicated constraints (plural!) and re-\/computes the solution. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___c_l_s_solvers_a3e13ece396c9c302c185167d9364e701}\label{group___c_l_s_solvers_a3e13ece396c9c302c185167d9364e701}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver} \& {\bfseries operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver} \&)
+\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
@@ -549,11 +559,7 @@ virtual bool \hyperlink{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}
 virtual bool \hyperlink{group___c_l_s_solvers_a23e950a4911f140ddffdcaeb062f7b80}{makes\+\_\+consistent\+\_\+constraint} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool show\+\_\+data=false) const override
 \begin{DoxyCompactList}\small\item\em tests for consistency of a constraint generated by two monomials. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
-\subsubsection*{Protected Attributes}
-\begin{DoxyCompactItemize}
-\item 
-set$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray} $>$ \hyperlink{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}{rays}
-\begin{DoxyCompactList}\small\item\em overrides {\ttfamily rays} from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} ; necessary because for G\+L\+PK it is helpful to avoid updating the rays until they are needed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
 
 
 \paragraph{Member Function Documentation}
@@ -579,7 +585,7 @@ Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L
 
 
 
-Definition at line 60 of file glpk\+\_\+solver.\+cpp.
+Definition at line 69 of file glpk\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}\label{group___c_l_s_solvers_af28eb491140e583b453773ead208ae32}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
@@ -621,7 +627,7 @@ Reimplemented from \hyperlink{group___c_l_s_solvers_a8328f67af66c81db467a6366f48
 
 
 
-Definition at line 144 of file glpk\+\_\+solver.\+cpp.
+Definition at line 153 of file glpk\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}\label{group___c_l_s_solvers_aadfa4655b194b3b095db962c5900fee6}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
@@ -645,7 +651,7 @@ Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L
 
 
 
-Definition at line 118 of file glpk\+\_\+solver.\+cpp.
+Definition at line 127 of file glpk\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}\label{group___c_l_s_solvers_a08fcdf86d0fcd8ac3e5da077b627e477}} 
 \index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!solve@{solve}}
@@ -669,24 +675,7 @@ Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L
 
 
 
-Definition at line 87 of file glpk\+\_\+solver.\+cpp.
-
-
-
-\paragraph{Member Data Documentation}
-\mbox{\Hypertarget{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}\label{group___c_l_s_solvers_ad748438e4625935b7c4ce4d677b2cdfd}} 
-\index{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}!rays@{rays}}
-\index{rays@{rays}!L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver}}
-\subparagraph{\texorpdfstring{rays}{rays}}
-{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}$>$ L\+P\+\_\+\+Solvers\+::\+G\+L\+P\+K\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
-
-
-
-overrides {\ttfamily rays} from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} ; necessary because for G\+L\+PK it is helpful to avoid updating the rays until they are needed 
-
-You shouldn't care about the details, but here we go. When {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver}{G\+L\+P\+K\+\_\+\+Solver}} adds one or more constraints, it does not actually solve until requested. Until then, the rays are marked as ``dirty''. Any attempt to access dirty rays prompts the solver. In some cases, the solver will have been marked as ``const''; this is inherited from {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} and I think it's A Good Idea\textsuperscript{TM} for exact solvers. So I mark the rays here as {\ttfamily mutable}. Arguably I should do that in {\ttfamily \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver}} but I'm not really in the mood to argue at the moment. 
-
-Definition at line 110 of file glpk\+\_\+solver.\+hpp.
+Definition at line 96 of file glpk\+\_\+solver.\+cpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_l_p___solver}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}
@@ -716,7 +705,7 @@ Some classes may provide only an {\itshape approximate} cone; see, for example, 
 \end{DoxyWarning}
 
 
-Definition at line 564 of file lp\+\_\+solver.\+hpp.
+Definition at line 571 of file lp\+\_\+solver.\+hpp.
 
 Inheritance diagram for L\+P\+\_\+\+Solvers\+:\+:L\+P\+\_\+\+Solver\+:\begin{figure}[H]
 \begin{center}
@@ -831,7 +820,7 @@ Reimplemented in \hyperlink{group___c_l_s_solvers_a9ded7ec7a82decb93132e10e25851
 
 
 
-Definition at line 380 of file lp\+\_\+solver.\+cpp.
+Definition at line 388 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}\label{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}} 
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!solve@{solve}}
@@ -880,11 +869,11 @@ Implemented in \hyperlink{group___c_l_s_solvers_adf50f125e2bfc6834fdd93e3fff22c4
 \index{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}!rays@{rays}}
 \index{rays@{rays}!L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver}}
 \subparagraph{\texorpdfstring{rays}{rays}}
-{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}$>$ L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily set$<$\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}{Ray}$>$ L\+P\+\_\+\+Solvers\+::\+L\+P\+\_\+\+Solver\+::rays\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
 
 the skeleton (may be approximate, depending on solver) 
 
-Definition at line 666 of file lp\+\_\+solver.\+hpp.
+Definition at line 673 of file lp\+\_\+solver.\+hpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}}\label{class_l_p___solvers_1_1_p_p_l___solver}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}
@@ -945,6 +934,9 @@ virtual unsigned long \hyperlink{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{group___c_l_s_solvers_af6edf0872b391fbbbe67d02a49795238}\label{group___c_l_s_solvers_af6edf0872b391fbbbe67d02a49795238}} 
+\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \& {\bfseries operator=} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver}{P\+P\+L\+\_\+\+Solver} \&)
+\item 
 virtual bool \hyperlink{group___c_l_s_solvers_a9a4a7563d62e4394162aaa4bd08aae29}{solve} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} \&) override
 \begin{DoxyCompactList}\small\item\em Adds the indicated constraint (singular!) and re-\/computes the solution. \end{DoxyCompactList}\item 
 virtual bool \hyperlink{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}{solve} (const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&) override
@@ -1002,7 +994,7 @@ Implements \hyperlink{group___c_l_s_solvers_a36c14a88e9d3ae9d9321acc7877236d0}{L
 
 
 
-Definition at line 86 of file ppl\+\_\+solver.\+cpp.
+Definition at line 92 of file ppl\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}\label{group___c_l_s_solvers_afb7f014f84eb37026fe26f8c3114c0f0}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!get\+\_\+number\+\_\+of\+\_\+constraints@{get\+\_\+number\+\_\+of\+\_\+constraints}}
@@ -1047,7 +1039,7 @@ Implements \hyperlink{group___c_l_s_solvers_a8b9979fb228ac9ccfe037ad6ca48b314}{L
 
 
 
-Definition at line 117 of file ppl\+\_\+solver.\+cpp.
+Definition at line 123 of file ppl\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}\label{group___c_l_s_solvers_a3763d4bc551a98546f1f5be4df49390d}} 
 \index{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver@{L\+P\+\_\+\+Solvers\+::\+P\+P\+L\+\_\+\+Solver}!solve@{solve}}
@@ -1071,7 +1063,7 @@ Implements \hyperlink{group___c_l_s_solvers_aea1a5bf98a2c4c06b0550cacdf8b88fd}{L
 
 
 
-Definition at line 129 of file ppl\+\_\+solver.\+cpp.
+Definition at line 135 of file ppl\+\_\+solver.\+cpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}\label{class_l_p___solvers_1_1_ray}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_ray}
@@ -1094,7 +1086,7 @@ This class encapsulates a ray, one major part of the definition of a skeleton. R
 
 A special feature is that a rays can track the constraints known to be active at the ray, allowing for more efficient computation in the double description method. Adding known constraints can be done with or without checking whether the constraint actually is active, so this should be done with care. 
 
-Definition at line 222 of file lp\+\_\+solver.\+hpp.
+Definition at line 229 of file lp\+\_\+solver.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -1194,7 +1186,7 @@ The dimension should be greater than zero. While the direction need not be speci
 \end{DoxyPostcond}
 
 
-Definition at line 134 of file lp\+\_\+solver.\+cpp.
+Definition at line 144 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ad69015f04db3f988b47cd05bae4f41a8}\label{group___c_l_s_solvers_ad69015f04db3f988b47cd05bae4f41a8}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
@@ -1211,7 +1203,7 @@ the size of the array needs to be at least as long as the number of variables!
 \end{DoxyPrecond}
 
 
-Definition at line 145 of file lp\+\_\+solver.\+cpp.
+Definition at line 155 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_aecc046b9f6a47f40ffddfc3334a47079}\label{group___c_l_s_solvers_aecc046b9f6a47f40ffddfc3334a47079}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
@@ -1228,13 +1220,13 @@ the size of the array needs to be at least as long as the number of variables!
 \end{DoxyPrecond}
 
 
-Definition at line 154 of file lp\+\_\+solver.\+cpp.
+Definition at line 164 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_adb1e6f09dbb5081c8f34d245b1880ccc}\label{group___c_l_s_solvers_adb1e6f09dbb5081c8f34d245b1880ccc}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
 \index{Ray@{Ray}!L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}}
 \subparagraph{\texorpdfstring{Ray()}{Ray()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
-{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&}]{entries }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Ray\+::\+Ray (\begin{DoxyParamCaption}\item[{const vector$<$ R\+A\+Y\+E\+N\+T\+\_\+\+T\+Y\+PE $>$ \&}]{entries }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -1245,7 +1237,7 @@ The dimension of this ray will equal the number of entries in the vector, and th
 \end{DoxyPostcond}
 
 
-Definition at line 163 of file lp\+\_\+solver.\+cpp.
+Definition at line 173 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a3a98b2f969408ba0fa58b46a3dccb9bf}\label{group___c_l_s_solvers_a3a98b2f969408ba0fa58b46a3dccb9bf}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!Ray@{Ray}}
@@ -1259,7 +1251,7 @@ Copies the coordinates of the other ray.
 
 Allocates new memory, and copies the active constraints. 
 
-Definition at line 172 of file lp\+\_\+solver.\+cpp.
+Definition at line 182 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a4819e44c9151ea96204a5ca5233646f6}\label{group___c_l_s_solvers_a4819e44c9151ea96204a5ca5233646f6}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!````~Ray@{$\sim$\+Ray}}
@@ -1273,7 +1265,7 @@ Deletes memory allocated by the constructor.
 
 Currently, that means it deletes {\ttfamily coords}. 
 
-Definition at line 182 of file lp\+\_\+solver.\+cpp.
+Definition at line 191 of file lp\+\_\+solver.\+cpp.
 
 
 
@@ -1298,7 +1290,7 @@ true if and only if {\ttfamily this} is above {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r > 0 $. 
 
-Definition at line 325 of file lp\+\_\+solver.\+hpp.
+Definition at line 332 of file lp\+\_\+solver.\+hpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a935fd2cf258315c989cd4edce32371e7}\label{group___c_l_s_solvers_a935fd2cf258315c989cd4edce32371e7}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!is\+\_\+active\+\_\+at@{is\+\_\+active\+\_\+at}}
@@ -1320,7 +1312,7 @@ true if and only if {\ttfamily this} lies on {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r = 0 $. 
 
-Definition at line 311 of file lp\+\_\+solver.\+hpp.
+Definition at line 318 of file lp\+\_\+solver.\+hpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a4bdad8c5669c06827f3984583e764353}\label{group___c_l_s_solvers_a4bdad8c5669c06827f3984583e764353}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!is\+\_\+below@{is\+\_\+below}}
@@ -1342,7 +1334,7 @@ true if and only if {\ttfamily this} is below {\ttfamily constraint}
 \end{DoxyReturn}
 Practically speaking, if the hyperplane is defined by the vector $ \mathbf c $ and the ray is defined by $ \mathbf r $ , this function returns true if and only if $ c\cdot r < 0 $. 
 
-Definition at line 339 of file lp\+\_\+solver.\+hpp.
+Definition at line 346 of file lp\+\_\+solver.\+hpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a431363fc157d5a8df8b180ac671e19ea}\label{group___c_l_s_solvers_a431363fc157d5a8df8b180ac671e19ea}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!obtain\+\_\+dot\+\_\+product@{obtain\+\_\+dot\+\_\+product}}
@@ -1362,7 +1354,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 214 of file lp\+\_\+solver.\+cpp.
+Definition at line 223 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ae70a9ad73b8788c53e0b1cc7c2cdae27}\label{group___c_l_s_solvers_ae70a9ad73b8788c53e0b1cc7c2cdae27}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator=@{operator=}}
@@ -1382,7 +1374,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 332 of file lp\+\_\+solver.\+cpp.
+Definition at line 341 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_acea89ef5df0792e64ce9003ad19913d4}\label{group___c_l_s_solvers_acea89ef5df0792e64ce9003ad19913d4}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!swap@{swap}}
@@ -1399,7 +1391,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 352 of file lp\+\_\+solver.\+cpp.
+Definition at line 361 of file lp\+\_\+solver.\+cpp.
 
 
 
@@ -1429,7 +1421,7 @@ This is unsafe when number of variables is not the same. It does not check, sinc
 \end{DoxyReturn}
 Notice that the rays can point in the same direction, but still be considered unequal. 
 
-Definition at line 314 of file lp\+\_\+solver.\+cpp.
+Definition at line 323 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a4c3d0a1adb5408b59013e6533e144b98}\label{group___c_l_s_solvers_a4c3d0a1adb5408b59013e6533e144b98}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator$<$@{operator$<$}}
@@ -1456,7 +1448,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyReturn}
 
 
-Definition at line 363 of file lp\+\_\+solver.\+cpp.
+Definition at line 371 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a58ab17142b3c74a8d39c1e42dfa7a3f4}\label{group___c_l_s_solvers_a58ab17142b3c74a8d39c1e42dfa7a3f4}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator$<$$<$@{operator$<$$<$}}
@@ -1480,7 +1472,7 @@ the output stream
 \end{DoxyReturn}
 
 
-Definition at line 322 of file lp\+\_\+solver.\+cpp.
+Definition at line 331 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_a12e1a3322151c1d6bbbce9efeeec40ae}\label{group___c_l_s_solvers_a12e1a3322151c1d6bbbce9efeeec40ae}} 
 \index{L\+P\+\_\+\+Solvers\+::\+Ray@{L\+P\+\_\+\+Solvers\+::\+Ray}!operator==@{operator==}}
@@ -1507,7 +1499,7 @@ This is unsafe when number of variables is not the same. It does not check, sinc
 \end{DoxyReturn}
 Notice that the rays can point in the same direction, but still be considered unequal. 
 
-Definition at line 306 of file lp\+\_\+solver.\+cpp.
+Definition at line 315 of file lp\+\_\+solver.\+cpp.
 
 \index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}\label{class_l_p___solvers_1_1_skeleton}
 \Hypertarget{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}
@@ -1547,8 +1539,8 @@ void \hyperlink{group___c_l_s_solvers_aa63d9454338c84be898e1a604eba3527}{common\
 \begin{DoxyCompactList}\small\item\em Constructs a basic skeleton in the given number of dimensions, initialized to the axes, or (equivalently) to the set of constraints $ x_i \geq 0 $. \end{DoxyCompactList}\item 
 \hyperlink{group___c_l_s_solvers_ad61d70c2397e93141de3ad3c987b1828}{Skeleton} (N\+V\+A\+R\+\_\+\+T\+Y\+PE, const vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_constraint}{Constraint} $>$ \&)
 \begin{DoxyCompactList}\small\item\em Constructs a skeleton described by the given system of constraints. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}\label{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}} 
-\hyperlink{group___c_l_s_solvers_ae1d6983329c8624014fa5c9d66f75ac3}{Skeleton} (\hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&)
+\mbox{\Hypertarget{group___c_l_s_solvers_a4f9ed09dbe0b7fe8bc9972ce5488eb48}\label{group___c_l_s_solvers_a4f9ed09dbe0b7fe8bc9972ce5488eb48}} 
+\hyperlink{group___c_l_s_solvers_a4f9ed09dbe0b7fe8bc9972ce5488eb48}{Skeleton} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton}{Skeleton} \&)
 \begin{DoxyCompactList}\small\item\em Performs a deep copy of {\ttfamily other}. \end{DoxyCompactList}\item 
 virtual bool \hyperlink{group___c_l_s_solvers_a242f1dc35468e2326e6f7c10bc0d0fd4}{copy} (const \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$) override
 \begin{DoxyCompactList}\small\item\em performs a deep copy, similar to a copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -1621,7 +1613,7 @@ ostream \& \hyperlink{group___c_l_s_solvers_a54f8dc187ec3e238ccc80d7a44b9ca82}{o
 \index{L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}!Skeleton@{Skeleton}}
 \index{Skeleton@{Skeleton}!L\+P\+\_\+\+Solvers\+::\+Skeleton@{L\+P\+\_\+\+Solvers\+::\+Skeleton}}
 \subparagraph{\texorpdfstring{Skeleton()}{Skeleton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Skeleton\+::\+Skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily L\+P\+\_\+\+Solvers\+::\+Skeleton\+::\+Skeleton (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{dimension }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -1855,7 +1847,7 @@ a copy of the ray, scaled by the requesed amount
 \end{DoxyReturn}
 
 
-Definition at line 224 of file lp\+\_\+solver.\+cpp.
+Definition at line 233 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}\label{group___c_l_s_solvers_gaae1f5d07b6d0f4c12b4c7835977b64eb}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
@@ -1875,7 +1867,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 237 of file lp\+\_\+solver.\+cpp.
+Definition at line 246 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}\label{group___c_l_s_solvers_ga9b4f6991b325c2a42e1f14fc09346277}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
@@ -1895,7 +1887,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 245 of file lp\+\_\+solver.\+cpp.
+Definition at line 254 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}\label{group___c_l_s_solvers_gab64c33abcc54e5b175b7b567e099c75b}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
@@ -1915,7 +1907,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 253 of file lp\+\_\+solver.\+cpp.
+Definition at line 262 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}\label{group___c_l_s_solvers_gaea75db1559315f35242d62e9e5f66e92}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
@@ -1942,7 +1934,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 525 of file lp\+\_\+solver.\+hpp.
+Definition at line 532 of file lp\+\_\+solver.\+hpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}\label{group___c_l_s_solvers_gaf9f83e5d45bfc080fbffde26ebb93892}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator$\ast$@{operator$\ast$}}
@@ -1969,7 +1961,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 537 of file lp\+\_\+solver.\+hpp.
+Definition at line 544 of file lp\+\_\+solver.\+hpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}\label{group___c_l_s_solvers_gaf293c6d803dc697897463525aa1d1d44}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator+@{operator+}}
@@ -1989,7 +1981,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 261 of file lp\+\_\+solver.\+cpp.
+Definition at line 270 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}\label{group___c_l_s_solvers_gac20f6443d37909c326bb31c0399ea634}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!operator-\/@{operator-\/}}
@@ -2009,7 +2001,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 272 of file lp\+\_\+solver.\+cpp.
+Definition at line 281 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}\label{group___c_l_s_solvers_ga42f6aa14b6c3adb4df26f8338d486401}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!ray\+\_\+sum@{ray\+\_\+sum}}
@@ -2029,7 +2021,7 @@ This is unsafe when dimension is not the same. It does not check, since the assu
 \end{DoxyWarning}
 
 
-Definition at line 283 of file lp\+\_\+solver.\+cpp.
+Definition at line 292 of file lp\+\_\+solver.\+cpp.
 
 \mbox{\Hypertarget{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}\label{group___c_l_s_solvers_ga8b57096f9dac0f00912dd248cfdc89db}} 
 \index{Constrained Linear System Solvers@{Constrained Linear System Solvers}!union\+\_\+of\+\_\+edge\+\_\+sets@{union\+\_\+of\+\_\+edge\+\_\+sets}}

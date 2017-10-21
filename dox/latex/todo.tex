@@ -12,12 +12,6 @@ page \hyperlink{index}{Dyn\+GB\+: Dynamic Gr\"{o}bner basis project files} ]Thes
 \item Bring polynomial iterators in line with C++ convention.
 \item Implement other C++11 modernizations ({\ttfamily auto}, {\ttfamily noexcept}, {\ttfamily override}, {$\dots$}).
 \item Generalize/improve the memory manager.
-\item In dynamic F4, improve the efficiency of the selection of an ordering. In particular, this includes\+:
-\begin{DoxyItemize}
-\item use arrays to model the solver data, rather than sets and lists;
-\item think about how to retain and modify data from each pass through the matrix, rather than starting anew after selecting a row;
-\item how to parallelize the selection of rows? this should be doable with, for instance, a parallel reduction operation or something similar.
-\end{DoxyItemize}
 \item Add P\+PL as an L\+P\+\_\+\+Solver. \cite{BagnaraHZ08SCP}
 \item Implement Caboara's examples.
 \item Implement graded Hilbert numerators.
@@ -46,10 +40,10 @@ These items would be nice, but aren't a big deal for me at present.
 \end{DoxyItemize}
 \item Reimplement \hyperlink{group__polygroup_class_double___buffered___polynomial}{Double\+\_\+\+Buffered\+\_\+\+Polynomial} so its arrays contain pointers to \hyperlink{group__polygroup_class_monomial}{Monomial}, rather than an expanded \hyperlink{group__polygroup_class_monomial}{Monomial}. See if that changes things.
 \item Re-\/examine what's going on with masks, since the plus to efficiency doesn't seem worth the effort.
-\item Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce. ({\bfseries Remark\+:} This is precisely what we do in the dynamic F4 algorithm, and in that case it is not only not inefficient, it is frankly necessary.)
+\item Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce.
 \item Implement a {\ttfamily Dictionary\+\_\+\+Linked\+\_\+\+Polynomial} class, where any term points to one unique instance of a monomial, rather than having many copies of monomials in different polynomials. Upside is that equality test during canonicalization is instantaneous (compare pointers). Downsides may include finding/sorting the monomials, indirection.
 \item Detach monomial ordering from monomials, since caching ordering data doesn't seem to help much?
-\item Implement a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily by reading from an input file. That way we don't have to write a fresh control program for each example system. (see {\ttfamily \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()}})
+\item Implement a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily by reading from an input file. That way we don't have to write a fresh control program for each example system. (see \hyperlink{group__utils_ga72d205e8226d578b892515edc527cc83}{user\+\_\+interface()})
 \item Implement an \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} class and a {\ttfamily Polynomial\+\_\+\+Builder} class to help build polynomials more easily.
 \end{DoxyItemize}
 
@@ -60,7 +54,7 @@ I'm not sure these are worth doing.
 \item Implement D\+DM with the Fukuda-\/\+Prodon criterion, compare to Zolotykh's.
 \item Implement Roune's algorithms for Hilbert functions.
 \item Compare each potential PP with all other potential PP's, reducing the number of false positives. \mbox{[}This does not seem to be necessary at the moment, as the overhead is quite small, but it is still a thought.\mbox{]}
-\item Add a hash mechanism to the {\ttfamily constraint} class to help avoid redundancy.
+\item Add a hash mechanism to the {\ttfamily constraint} class to help avoid redundnacy.
 \end{DoxyItemize}
 \item Create a Matrix\+\_\+\+Ordering\+\_\+\+Data class as a subset of \hyperlink{group__orderinggroup_class_monomial___order___data}{Monomial\+\_\+\+Order\+\_\+\+Data}.
 \item Add an {\ttfamily insert()} function to \hyperlink{group__polygroup_class_monomial___node}{Monomial\+\_\+\+Node} to insert another \hyperlink{group__polygroup_class_polynomial___linked___list}{Polynomial\+\_\+\+Linked\+\_\+\+List}, subsequently to be destroyed.

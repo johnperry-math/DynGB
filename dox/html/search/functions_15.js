@@ -3,6 +3,7 @@ var searchData=
   ['_7eabstract_5fpolynomial',['~Abstract_Polynomial',['../group__polygroup.html#a5082a214ab62d3d5aad6d294926be8e2',1,'Abstract_Polynomial']]],
   ['_7econstraint',['~Constraint',['../group___c_l_s_solvers.html#a2949083e68c41842b613bd8cf78c6389',1,'LP_Solvers::Constraint']]],
   ['_7eedge',['~Edge',['../group___c_l_s_solvers.html#a752de1869e522b7b7a1eb9ef67664c9f',1,'LP_Solvers::Edge']]],
+  ['_7ef4_5fhash',['~F4_Hash',['../group___g_b_computation.html#a25d18c80d34ca2b2113d0a49c92748a7',1,'F4_Hash']]],
   ['_7ef4_5freduction_5fdata',['~F4_Reduction_Data',['../group___g_b_computation.html#a6806b4da4f0bc2753ba5a775794f9165',1,'F4_Reduction_Data::~F4_Reduction_Data()'],['../group___g_b_computation.html#a6806b4da4f0bc2753ba5a775794f9165',1,'F4_Reduction_Data::~F4_Reduction_Data()']]],
   ['_7egrading_5forder_5fdata_5fallocator',['~Grading_Order_Data_Allocator',['../group__memorygroup.html#a01de71b688612c55185fc1fb7fd531b9',1,'Grading_Order_Data_Allocator']]],
   ['_7egrevlex_5forder_5fdata',['~Grevlex_Order_Data',['../group__orderinggroup.html#a275afe22c3514d5602eda962402821c3',1,'Grevlex_Order_Data']]],

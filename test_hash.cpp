@@ -12,13 +12,14 @@ using std::list;
 int main() {
 
   const NVAR_TYPE n=5;
+  const size_t num_mons=500;
 
   F4_Hash table(n);
   list<pair<Monomial *, Monomial *> > factors;
   list<Monomial *> products;
 
   srand(time(NULL));
-  for (unsigned i = 0; i < 500; ++i) {
+  for (unsigned i = 0; i < num_mons; ++i) {
     auto t = new Monomial({
       (unsigned int) rand() % 2, (unsigned int) rand() % 2,
       (unsigned int) rand() % 2, (unsigned int) rand() % 2,
@@ -50,7 +51,7 @@ int main() {
   for (auto v : products)
     table.add_monomial(v, i++);
 
-  Monomial * M[i] { nullptr };
+  Monomial * M[num_mons] { nullptr };
   i = 0;
   for (auto v : products) {
     cout << i << ": " << *v << endl;

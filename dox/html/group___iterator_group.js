@@ -30,6 +30,7 @@ var group___iterator_group =
       [ "A", "group___iterator_group.html#a4fef20479db4c9bc1434ddacdbb67590", null ],
       [ "current_position", "group___iterator_group.html#a3f81b1022526da1586eec443e4846ae2", null ],
       [ "head", "group___iterator_group.html#a6d2f1a91150d12a8835395a678260968", null ],
+      [ "p", "group___iterator_group.html#a4feb09e51919eed714bc479f8860a6a2", null ],
       [ "T", "group___iterator_group.html#aba055182673176b6390aecd4a5bb31d4", null ],
       [ "tail", "group___iterator_group.html#a57a302fde5b37005fc52d8d022d7284f", null ]
     ] ],
@@ -99,7 +100,7 @@ var group___iterator_group =
       [ "operator*", "group___iterator_group.html#a119cd2937a0cacd43585dee8dc95505f", null ],
       [ "operator++", "group___iterator_group.html#a934c291b780f91efefea23880827d5dc", null ],
       [ "restart_iteration", "group___iterator_group.html#a7135fd6c3a90134741abc2da51467a43", null ],
-      [ "p", "group___iterator_group.html#ab35e9b9c4d7ed12dabce5057a4c2a1b5", null ]
+      [ "p_base", "group___iterator_group.html#aeb3da0d0f8b60eb68b1ffacb1b511417", null ]
     ] ],
     [ "Polynomial_Term", "group___iterator_group.html#class_polynomial___term", [
       [ "Polynomial_Term", "group___iterator_group.html#a62dc1c5f38a989c0bfe40520ebc76d74", null ],

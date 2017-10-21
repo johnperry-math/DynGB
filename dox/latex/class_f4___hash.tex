@@ -1,0 +1,181 @@
+\hypertarget{class_f4___hash}{}\section{F4\+\_\+\+Hash Class Reference}
+\label{class_f4___hash}\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+
+
+hash table class, based on discussions with Christian Eder  
+
+
+
+
+{\ttfamily \#include $<$f4\+\_\+hash.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_f4___hash_a3983b59e08fa7ad90bba989850f9850f}{F4\+\_\+\+Hash} (N\+V\+A\+R\+\_\+\+T\+Y\+PE num\+\_\+vars)
+\begin{DoxyCompactList}\small\item\em allocates the table and sets up randomized hash function \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_f4___hash_a25d18c80d34ca2b2113d0a49c92748a7}\label{class_f4___hash_a25d18c80d34ca2b2113d0a49c92748a7}} 
+\hyperlink{class_f4___hash_a25d18c80d34ca2b2113d0a49c92748a7}{$\sim$\+F4\+\_\+\+Hash} ()
+\begin{DoxyCompactList}\small\item\em releases the table and the randomized hash function \end{DoxyCompactList}\item 
+void \hyperlink{class_f4___hash_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t, const size\+\_\+t location)
+\begin{DoxyCompactList}\small\item\em adds a monomial to the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{class_f4___hash_a7b22f6999f276e58087fe668a01f240a}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em determines the index of {\ttfamily t} in the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{class_f4___hash_a12cff698cefa0375ab76ee6c36a0ce6c}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em determines the index of $tu$ in the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{class_f4___hash_a539f858e09579b9119941795e42cdc4f}{lookup\+\_\+product} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{class_f4___hash_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_f4___hash_ab0d30e19b178ed579bd97fc98c4e3de5}\label{class_f4___hash_ab0d30e19b178ed579bd97fc98c4e3de5}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{class_f4___hash_ab0d30e19b178ed579bd97fc98c4e3de5}{n}
+\begin{DoxyCompactList}\small\item\em number of variables in the monomials stored \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_f4___hash_a80d0b9f0d0f2edb34659b27e2520f083}\label{class_f4___hash_a80d0b9f0d0f2edb34659b27e2520f083}} 
+list$<$ pair$<$ const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$, size\+\_\+t $>$ $>$ $\ast$ \hyperlink{class_f4___hash_a80d0b9f0d0f2edb34659b27e2520f083}{table}
+\begin{DoxyCompactList}\small\item\em the actual table \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_f4___hash_a894a6279c130dd1cdfea12845448e331}\label{class_f4___hash_a894a6279c130dd1cdfea12845448e331}} 
+W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{class_f4___hash_a894a6279c130dd1cdfea12845448e331}{weights}
+\begin{DoxyCompactList}\small\item\em randomized weighting for each exponent \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_f4___hash_acf7ba1127b19f75bfcd7177c4de99d01}\label{class_f4___hash_acf7ba1127b19f75bfcd7177c4de99d01}} 
+static const size\+\_\+t \hyperlink{class_f4___hash_acf7ba1127b19f75bfcd7177c4de99d01}{M\+A\+X\+I\+M\+UM} = 1 $<$$<$ 18
+\begin{DoxyCompactList}\small\item\em number of entries in table \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_f4___hash_a979748da85dd3012fb925b0ff6b9b71c}\label{class_f4___hash_a979748da85dd3012fb925b0ff6b9b71c}} 
+ostream \& \hyperlink{class_f4___hash_a979748da85dd3012fb925b0ff6b9b71c}{operator$<$$<$} (ostream \&, const \hyperlink{class_f4___hash}{F4\+\_\+\+Hash} \&)
+\begin{DoxyCompactList}\small\item\em prints the non-\/empty locations as a list of tuples (monomial, location) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+hash table class, based on discussions with Christian Eder 
+
+For a homogeneous system it is advisable to recreate this for each matrix. For inhomogeneous systems it may be advantageous to reuse the table as one proceeds through the system. 
+
+Definition at line 26 of file f4\+\_\+hash.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_f4___hash_a3983b59e08fa7ad90bba989850f9850f}\label{class_f4___hash_a3983b59e08fa7ad90bba989850f9850f}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subsubsection{\texorpdfstring{F4\+\_\+\+Hash()}{F4\_Hash()}}
+{\footnotesize\ttfamily F4\+\_\+\+Hash\+::\+F4\+\_\+\+Hash (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+vars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+allocates the table and sets up randomized hash function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+vars} & number of variables in the monomials this table will check \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file f4\+\_\+hash.\+hpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_f4___hash_a86a18244162325e3d792ea39525b23f8}\label{class_f4___hash_a86a18244162325e3d792ea39525b23f8}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!add\+\_\+monomial@{add\+\_\+monomial}}
+\index{add\+\_\+monomial@{add\+\_\+monomial}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subsubsection{\texorpdfstring{add\+\_\+monomial()}{add\_monomial()}}
+{\footnotesize\ttfamily void F4\+\_\+\+Hash\+::add\+\_\+monomial (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t,  }\item[{const size\+\_\+t}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+adds a monomial to the lookup table 
+
+Use only when creating the hash table. This does not check for uniqueness; it simply adds monomials! So make sure you are adding a monomial that isn\textquotesingle{}t already there. 
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} for future lookup \\
+\hline
+{\em location} & column for coefficients of {\ttfamily t} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 94 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{class_f4___hash_a7b22f6999f276e58087fe668a01f240a}\label{class_f4___hash_a7b22f6999f276e58087fe668a01f240a}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subsubsection{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+determines the index of {\ttfamily t} in the lookup table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+which table entry contains the list that contains {\ttfamily t} 
+\end{DoxyReturn}
+
+
+Definition at line 66 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{class_f4___hash_a12cff698cefa0375ab76ee6c36a0ce6c}\label{class_f4___hash_a12cff698cefa0375ab76ee6c36a0ce6c}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subsubsection{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+determines the index of $tu$ in the lookup table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+which table entry contains the list that contains $tu$ 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{class_f4___hash_a539f858e09579b9119941795e42cdc4f}\label{class_f4___hash_a539f858e09579b9119941795e42cdc4f}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!lookup\+\_\+product@{lookup\+\_\+product}}
+\index{lookup\+\_\+product@{lookup\+\_\+product}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subsubsection{\texorpdfstring{lookup\+\_\+product()}{lookup\_product()}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::lookup\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{class_f4___hash_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first 
+
+This will not add $tu$ if it isn\textquotesingle{}t already there, so call it only after the table has been completely set up! 
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+location of $tu$ in the array 
+\end{DoxyReturn}
+
+
+Definition at line 107 of file f4\+\_\+hash.\+hpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+f4\+\_\+hash.\+hpp\end{DoxyCompactItemize}

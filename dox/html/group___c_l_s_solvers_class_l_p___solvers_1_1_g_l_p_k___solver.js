@@ -9,7 +9,7 @@ var group___c_l_s_solvers_class_l_p___solvers_1_1_g_l_p_k___solver =
     [ "get_number_of_rays", "group___c_l_s_solvers.html#a4ee0b95d41c3861267176f5b249837e8", null ],
     [ "get_rays", "group___c_l_s_solvers.html#a9ded7ec7a82decb93132e10e25851528", null ],
     [ "makes_consistent_constraint", "group___c_l_s_solvers.html#a23e950a4911f140ddffdcaeb062f7b80", null ],
+    [ "operator=", "group___c_l_s_solvers.html#a3e13ece396c9c302c185167d9364e701", null ],
     [ "solve", "group___c_l_s_solvers.html#aadfa4655b194b3b095db962c5900fee6", null ],
-    [ "solve", "group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477", null ],
-    [ "rays", "group___c_l_s_solvers.html#ad748438e4625935b7c4ce4d677b2cdfd", null ]
+    [ "solve", "group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477", null ]
 ];

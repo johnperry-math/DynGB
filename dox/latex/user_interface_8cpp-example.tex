@@ -61,7 +61,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
   cout << \textcolor{stringliteral}{"do you want to specify the indeterminates' names? (y/n) "};
   cin >> specify\_names;
   \textcolor{keywordtype}{string} * names = \textcolor{keyword}{new} \textcolor{keywordtype}{string}[n];
-  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(p);
+  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F(p);
   \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} * P;
   \textcolor{keywordflow}{if} (not specify\_names) \{
     P = \textcolor{keyword}{new} \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring}(n, F);
@@ -93,7 +93,6 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
       COEF\_TYPE a = 1;
       EXP\_TYPE exp[n];
       \textcolor{keywordflow}{for} (NVAR\_TYPE i = 0; i < n; ++i) exp[i] = 0;
-      \textcolor{keywordtype}{bool} positive = \textcolor{keyword}{true};
       \textcolor{keywordflow}{while} (inpoly[i] == \textcolor{charliteral}{' '}) ++i;
       \textcolor{keywordflow}{while} (reading\_term and i < inpoly.size()) \{
         \textcolor{keywordtype}{unsigned} j = i;
@@ -148,7 +147,6 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
         \textcolor{keywordflow}{if} (inpoly[i] == \textcolor{charliteral}{'+'} or inpoly[i] == \textcolor{charliteral}{'-'}) reading\_term = \textcolor{keyword}{false};
       \}
       ++nt;
-      \textcolor{keywordflow}{if} (not positive) a *= -1;
       \hyperlink{group__polygroup_class_monomial}{Monomial} t(n, exp);
       M.push\_back(t);
       A.emplace\_back(a, &F);
@@ -192,7 +190,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
       heur\_choice.compare(\textcolor{stringliteral}{"h"}) and heur\_choice.compare(\textcolor{stringliteral}{"gh"})
       and heur\_choice.compare(\textcolor{stringliteral}{"b"}) and heur\_choice.compare(\textcolor{stringliteral}{"bb"})
       and heur\_choice.compare(\textcolor{stringliteral}{"gb"}) and heur\_choice.compare(\textcolor{stringliteral}{"c"})
-      and heur\_choice.compare(\textcolor{stringliteral}{"d"})
+      and heur\_choice.compare(\textcolor{stringliteral}{"d"}) and heur\_choice.compare(\textcolor{stringliteral}{"r"})
     ) \{
       cout << \textcolor{stringliteral}{"available heuristics are\(\backslash\)n"};
       cout << \textcolor{stringliteral}{"\(\backslash\)t h = hilbert with standard grading\(\backslash\)n"};
@@ -202,6 +200,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
       cout << \textcolor{stringliteral}{"\(\backslash\)tgb = betti with order-based grading\(\backslash\)n"};
       cout << \textcolor{stringliteral}{"\(\backslash\)t c = minimal number of critical pairs\(\backslash\)n"};
       cout << \textcolor{stringliteral}{"\(\backslash\)t d = minimal degree, ties broken by hilbert\(\backslash\)n"};
+      cout << \textcolor{stringliteral}{"\(\backslash\)t r = random choice\(\backslash\)n"};
       cout << \textcolor{stringliteral}{"which heuristic would you like? "};
       getline(cin, heur\_choice);
     \}
@@ -212,6 +211,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare(\textcolor{stringliteral}{"gb"})) heuristic = Dynamic\_Heuristic::GRAD\_BETTI\_HILBERT\_DEG;
     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"c"})) heuristic = Dynamic\_Heuristic::MIN\_CRIT\_PAIRS;
     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"d"})) heuristic = Dynamic\_Heuristic::DEG\_THEN\_ORD\_HILBERT;
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (not heur\_choice.compare( \textcolor{stringliteral}{"r"})) heuristic = Dynamic\_Heuristic::EVIL\_RANDOM;
     \textcolor{keywordtype}{string} whether\_analysis;
     \textcolor{keywordtype}{bool} analyze\_first = \textcolor{keyword}{false};
     \textcolor{keywordflow}{while} (whether\_analysis.compare(\textcolor{stringliteral}{"y"}) and whether\_analysis.compare(\textcolor{stringliteral}{"n"})) \{
@@ -224,6 +224,7 @@ This illustrates how to compute a G\"{o}bner basis of an arbitrary polynomial id
         \textcolor{keyword}{nullptr}, heuristic, solver, analyze\_first
     );
   \}
+  \textcolor{comment}{//check\_correctness(B, StrategyFlags::NORMAL\_STRATEGY);}
   cout << \textcolor{stringliteral}{"have basis with "} << B.size() << \textcolor{stringliteral}{" elements:\(\backslash\)n"};
   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} b : B) \{
     cout << b->leading\_monomial() << \textcolor{stringliteral}{", "};

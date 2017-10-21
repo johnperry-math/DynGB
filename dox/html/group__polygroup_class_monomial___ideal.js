@@ -15,6 +15,7 @@ var group__polygroup_class_monomial___ideal =
     [ "hilbert_poly", "group__polygroup.html#a2f5e73c22e492ea016a4c7ff117cc7a3", null ],
     [ "inc_betti", "group__polygroup.html#a26ee2a655376a72284cd08ce64cbbfaa", null ],
     [ "number_of_variables", "group__polygroup.html#a606b7dd86fedd848182e6a4a6d18c77d", null ],
+    [ "operator=", "group__polygroup.html#a6c98e802ae88111ff5f4c9b5e57a991c", null ],
     [ "reduced_hilbert_numerator", "group__polygroup.html#a814e71b7c8df465869708bbcdf8f6007", null ],
     [ "remove_newest", "group__polygroup.html#a5410d31236ca04dfca3fe27acb7553f4", null ],
     [ "set_hilbert_numerator", "group__polygroup.html#ab0c510ed85328199cce722831143165e", null ],

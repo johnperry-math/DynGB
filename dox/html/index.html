@@ -92,11 +92,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#Overview">Overview</a></li>
-<li class="level1"><a href="#Install">Installation and dependencies</a><ul><li class="level2"><a href="#Dependencies">Dependencies</a></li>
-<li class="level2"><a href="#OpenMPI">For the Don Quixotes among us</a></li>
-<li class="level2"><a href="#Installation">Actually installing it!</a></li>
-</ul>
-</li>
+<li class="level1"><a href="#Install">Installation and dependencies</a></li>
 <li class="level1"><a href="#Usage">Usage</a></li>
 <li class="level1"><a href="#Status">Current status</a></li>
 <li class="level1"><a href="#Todo">To-do list</a><ul><li class="level2"><a href="#hipri">Higher priority</a></li>
@@ -113,50 +109,28 @@ $(document).ready(function(){initNavTree('index.html','');});
 <dl class="section copyright"><dt>Copyright</dt><dd><a href="../../COPYING.txt">GNU Public License</a>; see <a class="el" href="index.html#Copyright">Copyright details</a> below</dd></dl>
 <h1><a class="anchor" id="Overview"></a>
 Overview</h1>
-<p>This project is designed to be a testbed/reference implementation for dynamic Gr&ouml;bner basis computation, using the algorithms described in <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a> and <a class="el" href="citelist.html#CITEREF_CaboaraPerry">[3]</a>, along with some newer ideas:</p>
-<ul>
-<li>alternate heuristics;</li>
-<li>adaptations of more recent algorithms (e.g., F4);</li>
-<li>and, to adapt an Italian phrase, <em>come mi gira la testa.</em> (&ldquo;However my head turns.&rdquo; I&rsquo;m not sure it will make sense to anyone except me, though.)</li>
-</ul>
+<p>This project is designed to be a testbed/reference implementation for dynamic Gr&ouml;bner basis computation, using the algorithms described in <a class="el" href="citelist.html#CITEREF_CaboaraDynAlg">[4]</a> and <a class="el" href="citelist.html#CITEREF_CaboaraPerry">[3]</a>, along with some newer ideas.</p>
 <p>No claim to high efficiency or exemplary programming is implied. I wrote this to be relatively usable (compared to an earlier Sage implementation) and <em>easy to modify</em>, especially as regards modularity, polymorphism, and getting detailed data.</p>
 <h1><a class="anchor" id="Install"></a>
 Installation and dependencies</h1>
-<h2><a class="anchor" id="Dependencies"></a>
-Dependencies</h2>
-<p>You need several prerequisite programs, which are not included:</p><ul>
+<p>The first release required something akin to <code>make BUILD=build</code>. I am now using autotools, so the usual <code>./configure</code> followed by <code>make</code> should work. However, there are several prerequisite programs you need to install first:</p><ul>
 <li>a C++ compiler that understands C++11;</li>
 <li><a href="https://gmplib.org/" target="_blank">GMP</a>, the Gnu Multi-Precision library <a class="el" href="citelist.html#CITEREF_gmp">[5]</a>;</li>
 <li><a href="https://www.gnu.org/software/glpk/" target="_blank">GLPK</a>, the Gnu Linear Programming Kit <a class="el" href="citelist.html#CITEREF_glpk">[8]</a>;</li>
-<li><a href="http://bugseng.com/products/ppl" target="_blank">PPL</a>, the Parma Polyhedra Library <a class="el" href="citelist.html#CITEREF_BagnaraHZ08SCP">[1]</a>. A recent version is a good idea: updates to the Gnu compiler broke an earlier version.</li>
+<li><a href="http://bugseng.com/products/ppl" target="_blank">PPL</a>, the Parma Polyhedra Library <a class="el" href="citelist.html#CITEREF_BagnaraHZ08SCP">[1]</a>.</li>
 </ul>
-<p>On a Linux system you can install these very easily (in Fedora I used <code>Apper</code>). All dependencies should build without difficulty on a Macintosh, or they did the last time I checked. I have not tried to build on Windows, but I don&rsquo;t use hardware magic, so it <em>ought</em> to build.</p>
-<dl class="section warning"><dt>Warning</dt><dd>For whatever it&rsquo;s worth, this uses a lot of 64-bit integers. I&rsquo;m not sure that means you need a 64-bit operating system, but you probably need a compiler capable of 64-bit types (<code>long long</code>).</dd>
-<dd>
-The dynamic code will not configure without these prerequisites, let alone compile. Honestly, I can&rsquo;t think of any reason anyone would be interested in this project except to study the dynamic code, and even then you&rsquo;d be wise to avoid it unless you&rsquo;re trying to spring yourself out of purgatory a bit early.</dd></dl>
-<h2><a class="anchor" id="OpenMPI"></a>
-For the Don Quixotes among us</h2>
-<p>The codebase also contains some unrelated forays into OpenMPI programming. These are of little interest to the average&hellip; honestly, they&rsquo;re of little interest to <em>me</em> anymore. In any case they require:</p><ul>
-<li>the <a href="https://www.open-mpi.org/" target="_blank">OpenMPI</a> toolchain. If you do not have OpenMPI and are not interested in these (and I can&rsquo;t imagine why you should be), well! fret not. Right now it&rsquo;s disabled. You&rsquo;d have to modify <code>Makefile.am</code> anyway, and you don&rsquo;t want to do that. I&rsquo;m not 100% sure it works anymore, anyway.</li>
+<p>The codebase also contains some unrelated forays into parallel programming, which are probably of no interest to the average user, but require:</p><ul>
+<li>the <a href="https://www.open-mpi.org/" target="_blank">OpenMPI</a> toolchain. If you do not have OpenMPI and are not interested in these (and I don&rsquo;t see why you should be) just comment out any line that involves <code>mpicxx</code>.</li>
 </ul>
-<h2><a class="anchor" id="Installation"></a>
-Actually installing it!</h2>
-<p>Thanks to <a href="https://www.gnu.org/software/automake/" target="_blank"><code>autotools</code></a>, the stereotypical <code>./configure</code>, followed by <code>make</code>, should work. It definitely works on my Linux laptop at the moment. I should check it against my Mac laptop but I&rsquo;m not in the mood. (No, really, I&rsquo;m not. I&rsquo;ve read enough of the Sage developers&rsquo; mailing list, and dealt a bit with some development on Apple myself. It&rsquo;s not fun.)</p>
+<p>On a Linux system you can install these very easily (in Fedora I used <code>Apper</code>). All dependencies should build without difficulty on a Macintosh. I have not tried to build on Windows, but I don&rsquo;t use hardware magic, so it <em>ought</em> to build.</p>
 <h1><a class="anchor" id="Usage"></a>
 Usage</h1>
-<p>There are three ways to use the system.</p><ol type="1">
-<li>Use one of the several <code>test</code> files included. You can learn how to work them by running them without arguments, in which case they&rsquo;ll deliver a help message which, thanks to the glories of copy and paste, is probably just wrong to require you to study the source code to figure out how it works. I know this is annoying; sorry.</li>
-<li>Use the <code>user_interface</code> file. A number of systems are defined in the directory <code>examples_for_user_interface</code>. The format is defined in the documentation to <code><a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a></code>. This is still annoying, but should not be so bad. <dl class="section note"><dt>Note</dt><dd>At the present time, <code>user_interface</code> uses only the Buchberger variants of the Gr&ouml;bner basis algorithms.</dd></dl>
-</li>
-<li>Write a program that builds a polynomial system and accesses the library directly. Most of the <a href="examples.html">examples</a> provided illustrate that approach. This is annoying and rather difficult, though not as difficult as it was before the <code><a class="el" href="group__polygroup.html#class_indeterminate" title="Implementation of indeterminates, for easier building of polynomials. ">Indeterminate</a></code> class.</li>
+<p>There are two ways to use the system.</p><ol type="1">
+<li>Write a program that builds a polynomial system and accesses the library directly. Most of the <a href="examples.html">examples</a> provided illustrate that approach. This is annoying and a rather difficult, though not as difficult as it was before the <a class="el" href="group__polygroup.html#class_indeterminate" title="Implementation of indeterminates, for easier building of polynomials. ">Indeterminate</a> class.</li>
+<li>Use the <code>user_interface</code> file. A number of systems are defined in the directory <code>examples_for_user_interface</code>. The format is defined in the documentation to <a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a>. This is still annoying, but not quite so difficult.</li>
 </ol>
 <h1><a class="anchor" id="Status"></a>
 Current status</h1>
-<p>s As of US Independence Day 2017: </p><ul>
-<li>We have a working implementation of a static F4, though frankly even <span style="font-variant: small-caps;">Singular</span> is faster, so don&rsquo;t go getting ideas. That&rsquo;s not the point. </li>
-<li>We have an implementation of a dynamic F4, but it&rsquo;s only been tested through the homogeneous Cyclic-7 system, so again, don&rsquo;t go getting ideas. That said, I think it looks promising. </li>
-<li>Some of the problems identified below have been fixed, or at least mitigated.</li>
-</ul>
 <p>As of January 2017: </p><ul>
 <li>The code works consistently on many different examples. However, it is slow: I am not trying to reach <span style="font-variant:small-caps;">Singular</span>-level optimization (not at the current time, anyway). Typically, this code is one to two orders of magnitude slower than <span style="font-variant:small-caps;">Singular</span>. </li>
 <li>Nevertheless, it outperforms <span style="font-variant:small-caps;">Singular</span> on at least one system: Caboara&rsquo;s Example 2. </li>
@@ -179,12 +153,6 @@ Higher priority</h2>
 <li>Bring polynomial iterators in line with C++ convention.</li>
 <li>Implement other C++11 modernizations (<code>auto</code>, <code>noexcept</code>, <code>override</code>, &hellip;).</li>
 <li>Generalize/improve the memory manager.</li>
-<li>In dynamic F4, improve the efficiency of the selection of an ordering. In particular, this includes:<ul>
-<li>use arrays to model the solver data, rather than sets and lists;</li>
-<li>think about how to retain and modify data from each pass through the matrix, rather than starting anew after selecting a row;</li>
-<li>how to parallelize the selection of rows? this should be doable with, for instance, a parallel reduction operation or something similar.</li>
-</ul>
-</li>
 <li><span style="text-decoration:line-through;">Add PPL as an LP_Solver. <a class="el" href="citelist.html#CITEREF_BagnaraHZ08SCP">[1]</a></span></li>
 <li><span style="text-decoration:line-through;">Implement Caboara&rsquo;s examples.</span></li>
 <li><span style="text-decoration:line-through;">Implement graded Hilbert numerators.</span></li>
@@ -214,10 +182,10 @@ Medium priority</h2>
 </li>
 <li>Reimplement <a class="el" href="group__polygroup.html#class_double___buffered___polynomial" title="Polynomials implemented using double buffers.A double-buffered polynomial maintains at all times two ...">Double_Buffered_Polynomial</a> so its arrays contain pointers to <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a>, rather than an expanded <a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a>. See if that changes things.</li>
 <li>Re-examine what&rsquo;s going on with masks, since the plus to efficiency doesn&rsquo;t seem worth the effort.</li>
-<li>Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce. (<b>Remark:</b> This is precisely what we do in the dynamic F4 algorithm, and in that case it is not only not inefficient, it is frankly necessary.)</li>
+<li>Implement marked polynomials with a dynamic algorithm that works practically in the grevlex order, with the marked term being the true leading monomial. This may be very inefficient to reduce.</li>
 <li>Implement a <code>Dictionary_Linked_Polynomial</code> class, where any term points to one unique instance of a monomial, rather than having many copies of monomials in different polynomials. Upside is that equality test during canonicalization is instantaneous (compare pointers). Downsides may include finding/sorting the monomials, indirection.</li>
 <li>Detach monomial ordering from monomials, since caching ordering data doesn&rsquo;t seem to help much?</li>
-<li><span style="text-decoration:line-through;">Implement a <code>Polynomial_Builder</code> class to help build polynomials more easily by reading from an input file. That way we don&rsquo;t have to write a fresh control program for each example system.</span> (see <code><a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a></code>)</li>
+<li><span style="text-decoration:line-through;">Implement a <code>Polynomial_Builder</code> class to help build polynomials more easily by reading from an input file. That way we don&rsquo;t have to write a fresh control program for each example system.</span> (see <a class="el" href="group__utils.html#ga72d205e8226d578b892515edc527cc83" title="reads ideal definition from cin, then reads options for computation, writes Gröbner basis to cout ...">user_interface()</a>)</li>
 <li><span style="text-decoration:line-through;">Implement an <a class="el" href="group__polygroup.html#class_indeterminate" title="Implementation of indeterminates, for easier building of polynomials. ">Indeterminate</a> class and a <code>Polynomial_Builder</code> class to help build polynomials more easily.</span></li>
 </ul>
 </dd></dl>
@@ -228,7 +196,7 @@ Lower priority</h2>
 <li>Implement DDM with the Fukuda-Prodon criterion, compare to Zolotykh&rsquo;s.</li>
 <li>Implement Roune&rsquo;s algorithms for Hilbert functions.</li>
 <li>Compare each potential PP with all other potential PP&rsquo;s, reducing the number of false positives. [This does not seem to be necessary at the moment, as the overhead is quite small, but it is still a thought.]</li>
-<li>Add a hash mechanism to the <code>constraint</code> class to help avoid redundancy.</li>
+<li>Add a hash mechanism to the <code>constraint</code> class to help avoid redundnacy.</li>
 </ul>
 </li>
 <li>Create a Matrix_Ordering_Data class as a subset of <a class="el" href="group__orderinggroup.html#class_monomial___order___data" title="data for a monomial ordering: optional, but stored in Monomial ">Monomial_Order_Data</a>.</li>
@@ -243,15 +211,15 @@ Apologia pro labora sua</h1>
 <p>I originally implemented this in Sage. That was purely a proof-of-concept product; it was very slow, and I wanted to improve on it. Unfortunately:</p>
 <ul>
 <li>It is not easy to use the guts of <span style="font-variant:small-caps;">Singular</span> from Sage. In particular, the geobuckets. But even if that were possible&hellip; </li>
-<li>In all the computer algebra systems I&rsquo;ve looked at, a monomial ordering is part of the ring structure. At least in <span style="font-variant:small-caps;">Singular</span>, a &ldquo;wgrevlex&rdquo; ordering received a different structure than a &ldquo;grevlex&rdquo; ordering, and the structure was computationally disadvantageous. So my preliminary implementation in Singular worked, but tended to be a lot slower than <code>std()</code> <em>even though it did less work!</em> (Here, &ldquo;work&rdquo; is measured by number of s-polynomials, number of reduction operations, length of the polynomials involved, etc.) In addition, the implementation crashed often, for reasons I wasn&rsquo;t able to sort out, even with help from the developers.</li>
+<li>In all the computer algebra systems I&rsquo;ve looked at, a monomial ordering is part of the ring structure. At least in <span style="font-variant:small-caps;">Singular</span>, a &ldquo;wgrevlex&rdquo; ordering received a different structure than a &ldquo;grevlex&rdquo; ordering, in particular a disadvantageous structure. So my preliminary implementation in Singular worked, but tended to be a lot slower than <code>std()</code> <em>even though it did less work.</em> In addition, the implementation crashed often, for reasons I wasn&rsquo;t able to sort out, even with help from the developers.</li>
 </ul>
-<p>That is when I decided to adapt some code I had written for a class to this project. That turned out to be a good thing, because the original Sage version had a number of bugs that I discovered only while developing later versions.</p>
-<p>Although I wrote it from scratch, without a doubt it reflects what I saw in CoCoA and <span style="font-variant:small-caps;">Singular</span>. <b>No great claim to originality or even usability is implied.</b> The intent of this software is not to compete with those, but to provide a more robust launchpad to implement the algorithm there than I had before.</p>
+<p>That is when I decided to develop this code. As it turns out, that was a good thing, because the original Sage version had a number of bugs that I discovered only while developing later versions.</p>
+<p>Although I wrote it from scratch, without a doubt it reflects what I saw in CoCoA and <span style="font-variant:small-caps;">Singular</span>. No great claim to originality or even usability is implied. The intent of this software is not to compete with those, but to provide a more robust launchpad to implement the algorithm there than I had before.</p>
 <h1><a class="anchor" id="Copyright"></a>
 Copyright details</h1>
 <p>This file is part of DynGB.</p>
 <p>DynGB is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.</p>
-<p>DynGB is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along with DynGB. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

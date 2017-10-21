@@ -38,7 +38,7 @@ The constructor does not check whether the supplied modulus is prime. If $m$ is 
 \end{DoxyWarning}
 \begin{Desc}
 \item[Examples\+: ]\par
-\hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cab_es1_8cpp-example}{test\+\_\+cab\+\_\+es1.\+cpp}, \hyperlink{test_cab_es2_8cpp-example}{test\+\_\+cab\+\_\+es2.\+cpp}, \hyperlink{test_cab_es4_8cpp-example}{test\+\_\+cab\+\_\+es4.\+cpp}, \hyperlink{test_cab_es5_8cpp-example}{test\+\_\+cab\+\_\+es5.\+cpp}, \hyperlink{test_cab_es6_8cpp-example}{test\+\_\+cab\+\_\+es6.\+cpp}, \hyperlink{test_cab_es9_8cpp-example}{test\+\_\+cab\+\_\+es9.\+cpp}, \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}, \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}, \hyperlink{test_dynamic_8cpp-example}{test\+\_\+dynamic.\+cpp}, \hyperlink{test_f4_8cpp-example}{test\+\_\+f4.\+cpp}, \hyperlink{test_f4_dynamic_8cpp-example}{test\+\_\+f4\+\_\+dynamic.\+cpp}, \hyperlink{test_monomials_8cpp-example}{test\+\_\+monomials.\+cpp}, and \hyperlink{user_interface_8cpp-example}{user\+\_\+interface.\+cpp}.\end{Desc}
+\hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cab_es1_8cpp-example}{test\+\_\+cab\+\_\+es1.\+cpp}, \hyperlink{test_cab_es2_8cpp-example}{test\+\_\+cab\+\_\+es2.\+cpp}, \hyperlink{test_cab_es4_8cpp-example}{test\+\_\+cab\+\_\+es4.\+cpp}, \hyperlink{test_cab_es5_8cpp-example}{test\+\_\+cab\+\_\+es5.\+cpp}, \hyperlink{test_cab_es6_8cpp-example}{test\+\_\+cab\+\_\+es6.\+cpp}, \hyperlink{test_cab_es9_8cpp-example}{test\+\_\+cab\+\_\+es9.\+cpp}, \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}, \hyperlink{test_cyclicn_8cpp-example}{test\+\_\+cyclicn.\+cpp}, \hyperlink{test_dynamic_8cpp-example}{test\+\_\+dynamic.\+cpp}, \hyperlink{test_monomials_8cpp-example}{test\+\_\+monomials.\+cpp}, and \hyperlink{user_interface_8cpp-example}{user\+\_\+interface.\+cpp}.\end{Desc}
 
 
 Definition at line 51 of file fields.\+hpp.
@@ -84,6 +84,13 @@ void \hyperlink{group___fields_group_a1ff3ec98ffb33a35c51eb3ce99ae7ebd}{set\+\_\
 bool \hyperlink{group___fields_group_a5ac5cf31e741cc6d250176163bde658c}{get\+\_\+print\+\_\+modulus} () const
 \begin{DoxyCompactList}\small\item\em indicates whether to print the modulus \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
+\begin{Indent}\textbf{ Modification}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___fields_group_ae61b0c053fc94313ca06cbaf88068252}\label{group___fields_group_ae61b0c053fc94313ca06cbaf88068252}} 
+\hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \& {\bfseries operator=} (const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&other)
+\end{DoxyCompactItemize}
+\end{Indent}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -127,7 +134,7 @@ Definition at line 23 of file fields.\+cpp.
 \index{Prime\+\_\+\+Field@{Prime\+\_\+\+Field}!Prime\+\_\+\+Field@{Prime\+\_\+\+Field}}
 \index{Prime\+\_\+\+Field@{Prime\+\_\+\+Field}!Prime\+\_\+\+Field@{Prime\+\_\+\+Field}}
 \subparagraph{\texorpdfstring{Prime\+\_\+\+Field()}{Prime\_Field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Prime\+\_\+\+Field\+::\+Prime\+\_\+\+Field (\begin{DoxyParamCaption}\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&}]{F }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Prime\+\_\+\+Field\+::\+Prime\+\_\+\+Field (\begin{DoxyParamCaption}\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&}]{F }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -188,7 +195,7 @@ Do not delete the prime field that {\ttfamily this} lives in while {\ttfamily th
 \hyperlink{test_4by4_8cpp-example}{test\+\_\+4by4.\+cpp}, \hyperlink{test_cab_es1_8cpp-example}{test\+\_\+cab\+\_\+es1.\+cpp}, \hyperlink{test_cab_es2_8cpp-example}{test\+\_\+cab\+\_\+es2.\+cpp}, \hyperlink{test_cab_es4_8cpp-example}{test\+\_\+cab\+\_\+es4.\+cpp}, \hyperlink{test_cab_es5_8cpp-example}{test\+\_\+cab\+\_\+es5.\+cpp}, \hyperlink{test_cab_es6_8cpp-example}{test\+\_\+cab\+\_\+es6.\+cpp}, \hyperlink{test_cab_es9_8cpp-example}{test\+\_\+cab\+\_\+es9.\+cpp}, and \hyperlink{test_cyclic4_8cpp-example}{test\+\_\+cyclic4.\+cpp}.\end{Desc}
 
 
-Definition at line 137 of file fields.\+hpp.
+Definition at line 146 of file fields.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -197,7 +204,10 @@ Definition at line 137 of file fields.\+hpp.
 \hyperlink{group___fields_group_ac4a46053696a327bc62038e1cf92c20a}{Prime\+\_\+\+Field\+\_\+\+Element} (const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} $\ast$\hyperlink{group___fields_group_a30f455dd34d4e795c63791cdc7ea1f46}{field})
 \begin{DoxyCompactList}\small\item\em Constructs a prime field element in the specified field, with the value 0. \end{DoxyCompactList}\item 
 \hyperlink{group___fields_group_a0bad5ba05aadbaf14876b2590e300861}{Prime\+\_\+\+Field\+\_\+\+Element} (C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{group___fields_group_aa9c68761643afa0b22863904bdfe7e83}{value}, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} $\ast$\hyperlink{group___fields_group_a30f455dd34d4e795c63791cdc7ea1f46}{field})
-\begin{DoxyCompactList}\small\item\em Constructs a prime field element in the specified field, with the specified value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a prime field element in the specified field, with the specified value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___fields_group_a2d138dd43fec2bec179cbc6eea6ca3a7}\label{group___fields_group_a2d138dd43fec2bec179cbc6eea6ca3a7}} 
+\hyperlink{group___fields_group_a2d138dd43fec2bec179cbc6eea6ca3a7}{Prime\+\_\+\+Field\+\_\+\+Element} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&other)
+\begin{DoxyCompactList}\small\item\em constructs a prime field element from another \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Basic properties}\par
 {\em The following functions give information about the monomial, but do not modify it. }\begin{DoxyCompactItemize}
@@ -227,6 +237,9 @@ bool \hyperlink{group___fields_group_a69c26a37c2d6d3c996360d4f37cf6d98}{is\+\_\+
 \begin{Indent}\textbf{ Modification}\par
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{group___fields_group_abdfe63d82185e9512775e129080d6023}\label{group___fields_group_abdfe63d82185e9512775e129080d6023}} 
+\hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \& \hyperlink{group___fields_group_abdfe63d82185e9512775e129080d6023}{operator=} (const \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \&other)
+\begin{DoxyCompactList}\small\item\em assignment to other \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___fields_group_a5e94844996cf153ba8c9bc9b9cf518d5}\label{group___fields_group_a5e94844996cf153ba8c9bc9b9cf518d5}} 
 void \hyperlink{group___fields_group_a5e94844996cf153ba8c9bc9b9cf518d5}{assign} (C\+O\+E\+F\+\_\+\+T\+Y\+PE val, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} $\ast$K)
 \begin{DoxyCompactList}\small\item\em for initializing arrays of \hyperlink{group___fields_group_class_prime___field___element}{Prime\+\_\+\+Field\+\_\+\+Element} \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -297,7 +310,7 @@ ostream \& {\bfseries operator$<$$<$} (ostream \&, const \hyperlink{group___fiel
 \index{Prime\+\_\+\+Field\+\_\+\+Element@{Prime\+\_\+\+Field\+\_\+\+Element}!Prime\+\_\+\+Field\+\_\+\+Element@{Prime\+\_\+\+Field\+\_\+\+Element}}
 \index{Prime\+\_\+\+Field\+\_\+\+Element@{Prime\+\_\+\+Field\+\_\+\+Element}!Prime\+\_\+\+Field\+\_\+\+Element@{Prime\+\_\+\+Field\+\_\+\+Element}}
 \subparagraph{\texorpdfstring{Prime\+\_\+\+Field\+\_\+\+Element()}{Prime\_Field\_Element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Prime\+\_\+\+Field\+\_\+\+Element\+::\+Prime\+\_\+\+Field\+\_\+\+Element (\begin{DoxyParamCaption}\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} $\ast$}]{field }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Prime\+\_\+\+Field\+\_\+\+Element\+::\+Prime\+\_\+\+Field\+\_\+\+Element (\begin{DoxyParamCaption}\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} $\ast$}]{field }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 

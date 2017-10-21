@@ -8,6 +8,7 @@ var group__polygroup_class_polynomial___geobucket =
     [ "begin", "group__polygroup.html#a0c5f05f041e6d2c462d1dcb2bdd39df0", null ],
     [ "can_reduce", "group__polygroup.html#af6fc5e1931972bd9e5f296ca719a1815", null ],
     [ "canonicalize", "group__polygroup.html#aa76d2c0dce16690b01e8a8c4862b11c5", null ],
+    [ "condense_buckets", "group__polygroup.html#a6ecc65eb2ee52cf7c174dd7daf9f57b3", null ],
     [ "detach_head", "group__polygroup.html#a57606623bed3fcd4f7b38530af211346", null ],
     [ "end", "group__polygroup.html#a28dde5c7941ad0636f17054cd80bbd8e", null ],
     [ "is_zero", "group__polygroup.html#ac71d7f640ebdf764c5b81bf8d9a5686d", null ],
@@ -29,5 +30,6 @@ var group__polygroup_class_polynomial___geobucket =
     [ "zero_polynomial", "group__polygroup.html#a7723d297ad268bb7139b1592f4e2eaff", null ],
     [ "Geobucket_Iterator", "group__polygroup.html#a45580077827a8fdbd6d2fabdbb2a2d7f", null ],
     [ "operator<<", "group__polygroup.html#af97062198c6ade3e8d3077308e89669d", null ],
+    [ "aops_performed", "group__polygroup.html#a487500b2baa783bde0b286c56130221b", null ],
     [ "buckets", "group__polygroup.html#abfbb6cf257943fb08e03ea4601cf3134", null ]
 ];

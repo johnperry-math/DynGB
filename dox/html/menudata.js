@@ -108,7 +108,13 @@ var menudata={children:[
 {text:"t",url:"functions_vars.html#index_t"},
 {text:"w",url:"functions_vars.html#index_w"},
 {text:"x",url:"functions_vars.html#index_x"}]},
-{text:"Related Functions",url:"functions_rela.html"}]}]},
+{text:"Related Functions",url:"functions_rela.html",children:[
+{text:"c",url:"functions_rela.html#index_c"},
+{text:"d",url:"functions_rela.html#index_d"},
+{text:"g",url:"functions_rela.html#index_g"},
+{text:"l",url:"functions_rela.html#index_l"},
+{text:"m",url:"functions_rela.html#index_m"},
+{text:"o",url:"functions_rela.html#index_o"}]}]}]},
 {text:"Files",url:"files.html",children:[
 {text:"File List",url:"files.html"}]},
 {text:"Examples",url:"examples.html"}]}

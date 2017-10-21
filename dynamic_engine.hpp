@@ -377,6 +377,20 @@ void select_monomial(
 
 /**
   @brief compares the desirability of two potential expansions
+    of a monomial ideal, selecting one at random
+  @param a,b ideals to compare
+  @return @c true iff the first ideal is considered smaller
+  @details This heuristic is useful to show that on sufficiently complex
+    systems the other heuristics actually do something intelligent.
+    On some simple systems this heuristic can sometimes beat the others,
+    because there are not very many bases possible, and the greedy algorithms
+    inevitable fail to find the "best." Once you get out of those, however,
+    this heuristic inevitably turns disastrous.
+*/
+bool less_by_random(const PP_With_Ideal & a, const PP_With_Ideal & b);
+
+/**
+  @brief compares the desirability of two potential expansions
     of a monomial ideal via the Hilbert heuristic
   @param a,b ideals to compare
   @return @c true iff the first ideal is considered smaller

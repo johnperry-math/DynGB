@@ -4,7 +4,7 @@ var searchData=
   ['r_5fbuild',['R_build',['../group___g_b_computation.html#a03bda496da1d09c73151ba42b6db7bc4',1,'F4_Reduction_Data']]],
   ['r_5fbuilt',['R_built',['../group___g_b_computation.html#a341e74dadaec6a56cd944f17be9b9320',1,'F4_Reduction_Data']]],
   ['ray_5fdata',['ray_data',['../group___c_l_s_solvers.html#a7e2dd1cfc4bea9e765b405b7297a6838',1,'LP_Solvers::PPL_Solver']]],
-  ['rays',['rays',['../group___c_l_s_solvers.html#ad748438e4625935b7c4ce4d677b2cdfd',1,'LP_Solvers::GLPK_Solver::rays()'],['../group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374',1,'LP_Solvers::LP_Solver::rays()']]],
+  ['rays',['rays',['../group___c_l_s_solvers.html#ad4c9fb3708c156496c23515c8e841374',1,'LP_Solvers::LP_Solver']]],
   ['row_5fskel',['row_skel',['../group___g_b_computation.html#a9e8822d7ececb2271ebbef4ec62f986e',1,'F4_Reduction_Data']]],
   ['rx',['Rx',['../group___g_b_computation.html#a4a1dcdff469ec1061109dc33aaceb011',1,'F4_Reduction_Data']]]
 ];

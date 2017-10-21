@@ -5,6 +5,7 @@ var group__polygroup_class_monomial =
     [ "Monomial", "group__polygroup.html#a8b9c7bc9d5b286adb11ccc39471b00c4", null ],
     [ "Monomial", "group__polygroup.html#a85d91b1a13592c849394c26c5ad294d8", null ],
     [ "~Monomial", "group__polygroup.html#a7c56cfe0292638732d60169d960f877c", null ],
+    [ "clear_ordering_data", "group__polygroup.html#a1f26973f28728c3da599f42afccb29bc", null ],
     [ "cmp", "group__polygroup.html#adf3fd71374a0058b653edd441b8dfb5d", null ],
     [ "colon", "group__polygroup.html#ae9e3375ea8144c587957d34979709310", null ],
     [ "common_initialization", "group__polygroup.html#a7d50554f29ff84177270316088772397", null ],

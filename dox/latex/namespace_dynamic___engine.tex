@@ -30,6 +30,7 @@ enum \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dyna
 {\bfseries D\+E\+G\+\_\+\+T\+H\+E\+N\+\_\+\+G\+R\+A\+D\+\_\+\+H\+I\+LB}, 
 \newline
 {\bfseries D\+E\+G\+\_\+\+T\+H\+E\+N\+\_\+\+O\+R\+D\+\_\+\+H\+I\+L\+B\+E\+RT}, 
+{\bfseries E\+V\+I\+L\+\_\+\+R\+A\+N\+D\+OM}, 
 {\bfseries M\+A\+X\+\_\+\+H\+E\+U\+R\+I\+S\+T\+IC}
  \}\begin{DoxyCompactList}\small\item\em values for the heuristic, as in {\ttfamily \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee116d7d2a0e}{select\+\_\+monomial()}} \end{DoxyCompactList}
 \end{DoxyCompactItemize}
@@ -62,6 +63,8 @@ bool \hyperlink{namespace_dynamic___engine_acbc39a829236f4021485cc631f030264}{le
 \begin{DoxyCompactList}\small\item\em compares the desirability of two potential expansions of a monomial ideal via the largest maximal component heuristic \end{DoxyCompactList}\item 
 bool \hyperlink{namespace_dynamic___engine_ab4b77c648c1c2892cffba4dcf2a6d80a}{less\+\_\+by\+\_\+num\+\_\+crit\+\_\+pairs} (\hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&a, \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&b)
 \begin{DoxyCompactList}\small\item\em compares the desirability of two potential expansions of a monomial ideal via the basic Betti heuristic \end{DoxyCompactList}\item 
+bool \hyperlink{namespace_dynamic___engine_a119c751f93ea0a16eb27f4b08de65bb0}{less\+\_\+by\+\_\+random} (const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&a, const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&b)
+\begin{DoxyCompactList}\small\item\em compares the desirability of two potential expansions of a monomial ideal, selecting one at random \end{DoxyCompactList}\item 
 bool \hyperlink{namespace_dynamic___engine_aa27b3fbb646d1d0f5d35de5a69e1cb29}{less\+\_\+by\+\_\+smoothest\+\_\+degrees} (\hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&a, \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&b)
 \begin{DoxyCompactList}\small\item\em compares the desirability of two potential expansions of a monomial ideal by a ``smoothest degree'' heuristic \end{DoxyCompactList}\item 
 bool \hyperlink{namespace_dynamic___engine_a06310dff730cbb5b133b3c907ceb6053}{less\+\_\+by\+\_\+wdegree\+\_\+then\+\_\+hilbert} (\hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&a, \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&b)
@@ -98,7 +101,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The graded Betti heuristic compares the Betti numbers from the standard grading, breaking ties with the Hilbert+degree heuristic. For the Betti part, it proceeds through the list of critical pairs at each degree, quitting when it either runs out or finds a difference. In this case it prefers the ideal that has more pairs at lower degree. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 410 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 428 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_a083c09fdc98db92614d126a5cca19a24}\label{namespace_dynamic___engine_a083c09fdc98db92614d126a5cca19a24}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+big\+\_\+betti@{less\+\_\+by\+\_\+big\+\_\+betti}}
@@ -120,7 +123,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 443 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 461 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_ab5f217efe789e73d511ab04ae93942f1}\label{namespace_dynamic___engine_ab5f217efe789e73d511ab04ae93942f1}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+degree\+\_\+then\+\_\+grad\+\_\+hilbert@{less\+\_\+by\+\_\+degree\+\_\+then\+\_\+grad\+\_\+hilbert}}
@@ -142,7 +145,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 This heuristic first compares the monomials' weighted degrees. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 362 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 380 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_ae94f12023f4a0c1bf246afc31cd0538e}\label{namespace_dynamic___engine_ae94f12023f4a0c1bf246afc31cd0538e}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+degree\+\_\+then\+\_\+hilbert@{less\+\_\+by\+\_\+degree\+\_\+then\+\_\+hilbert}}
@@ -164,7 +167,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 This heuristic compares first the total degrees of the monomials. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 264 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 282 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_a8c67515d04de029583ba590b2ca4d6e4}\label{namespace_dynamic___engine_a8c67515d04de029583ba590b2ca4d6e4}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+grad\+\_\+betti@{less\+\_\+by\+\_\+grad\+\_\+betti}}
@@ -186,7 +189,7 @@ the graded Betti heuristic with a non-\/standard grading
 \end{DoxyReturn}
 
 
-Definition at line 476 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 494 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_a9a6525d0f50053349c5573422f025c22}\label{namespace_dynamic___engine_a9a6525d0f50053349c5573422f025c22}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+grad\+\_\+hilbert\+\_\+then\+\_\+degree@{less\+\_\+by\+\_\+grad\+\_\+hilbert\+\_\+then\+\_\+degree}}
@@ -208,7 +211,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The Hilbert heuristic compares first the Hilbert polynomial, then the graded Hilbert numerator. It tries to break ties using the weighted degree of the monomials. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 239 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 258 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_acb9d5de295d3d96abfa40dd47ae41c1f}\label{namespace_dynamic___engine_acb9d5de295d3d96abfa40dd47ae41c1f}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+hilbert@{less\+\_\+by\+\_\+hilbert}}
@@ -230,7 +233,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 66 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 88 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_afe48703afece2137e511824b00ccad39}\label{namespace_dynamic___engine_afe48703afece2137e511824b00ccad39}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+hilbert\+\_\+then\+\_\+degree@{less\+\_\+by\+\_\+hilbert\+\_\+then\+\_\+degree}}
@@ -252,7 +255,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The Hilbert heuristic compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. It tries to break ties by total degree of the monomials. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 216 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 236 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_acbc39a829236f4021485cc631f030264}\label{namespace_dynamic___engine_acbc39a829236f4021485cc631f030264}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+largest\+\_\+max\+\_\+component@{less\+\_\+by\+\_\+largest\+\_\+max\+\_\+component}}
@@ -274,7 +277,7 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The largest maximal component heuristic aims to maximize the subset of the support that has largest degree. This aims for polynomials that are ``close to regular.'' 
 
-Definition at line 90 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 111 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_ab4b77c648c1c2892cffba4dcf2a6d80a}\label{namespace_dynamic___engine_ab4b77c648c1c2892cffba4dcf2a6d80a}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+num\+\_\+crit\+\_\+pairs@{less\+\_\+by\+\_\+num\+\_\+crit\+\_\+pairs}}
@@ -296,7 +299,29 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 The Betti heuristic compares the number of critical pairs. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 194 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 215 of file dynamic\+\_\+engine.\+cpp.
+
+\mbox{\Hypertarget{namespace_dynamic___engine_a119c751f93ea0a16eb27f4b08de65bb0}\label{namespace_dynamic___engine_a119c751f93ea0a16eb27f4b08de65bb0}} 
+\index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+random@{less\+\_\+by\+\_\+random}}
+\index{less\+\_\+by\+\_\+random@{less\+\_\+by\+\_\+random}!Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}}
+\subsubsection{\texorpdfstring{less\+\_\+by\+\_\+random()}{less\_by\_random()}}
+{\footnotesize\ttfamily bool Dynamic\+\_\+\+Engine\+::less\+\_\+by\+\_\+random (\begin{DoxyParamCaption}\item[{const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&}]{a,  }\item[{const \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{P\+P\+\_\+\+With\+\_\+\+Ideal} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+compares the desirability of two potential expansions of a monomial ideal, selecting one at random 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a,b} & ideals to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} iff the first ideal is considered smaller
+\end{DoxyReturn}
+This heuristic is useful to show that on sufficiently complex systems the other heuristics actually do something intelligent. On some simple systems this heuristic can sometimes beat the others, because there are not very many bases possible, and the greedy algorithms inevitable fail to find the \char`\"{}best.\char`\"{} Once you get out of those, however, this heuristic inevitably turns disastrous. 
+
+Definition at line 35 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_aa27b3fbb646d1d0f5d35de5a69e1cb29}\label{namespace_dynamic___engine_aa27b3fbb646d1d0f5d35de5a69e1cb29}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+smoothest\+\_\+degrees@{less\+\_\+by\+\_\+smoothest\+\_\+degrees}}
@@ -318,7 +343,7 @@ compares the desirability of two potential expansions of a monomial ideal by a `
 \end{DoxyReturn}
 The smoothest degree heuristic looks for a minimal change in weighted degree. It aims for polynomials that are ``close to homogeneous.'' 
 
-Definition at line 85 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 106 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{namespace_dynamic___engine_a06310dff730cbb5b133b3c907ceb6053}\label{namespace_dynamic___engine_a06310dff730cbb5b133b3c907ceb6053}} 
 \index{Dynamic\+\_\+\+Engine@{Dynamic\+\_\+\+Engine}!less\+\_\+by\+\_\+wdegree\+\_\+then\+\_\+hilbert@{less\+\_\+by\+\_\+wdegree\+\_\+then\+\_\+hilbert}}
@@ -340,5 +365,5 @@ compares the desirability of two potential expansions of a monomial ideal via th
 \end{DoxyReturn}
 This heuristic first compares the monomials' weighted degrees. In case of a tie, it applies the Hilbert heuristic, which compares first the Hilbert polynomial, then the Hilbert numerator. See \cite{CaboaraDynAlg}. In the case of a tie, it prefers the monomial that is smaller with respect to the current ordering. 
 
-Definition at line 312 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 330 of file dynamic\+\_\+engine.\+cpp.
 

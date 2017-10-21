@@ -7,6 +7,7 @@ var group___fields_group =
       [ "get_print_modulus", "group___fields_group.html#a5ac5cf31e741cc6d250176163bde658c", null ],
       [ "inverse", "group___fields_group.html#a106e74e004b18c899cd9b9e90ce01f6e", null ],
       [ "modulus", "group___fields_group.html#a342ee34fa19d33919f772669a637f31e", null ],
+      [ "operator=", "group___fields_group.html#ae61b0c053fc94313ca06cbaf88068252", null ],
       [ "set_print_modulus", "group___fields_group.html#a1ff3ec98ffb33a35c51eb3ce99ae7ebd", null ],
       [ "unity", "group___fields_group.html#a97534ab1050f0b34023300f1bd3a97f5", null ],
       [ "zero", "group___fields_group.html#ad8eaaf37b9239428a9c9aedc8ab35a12", null ],
@@ -17,6 +18,7 @@ var group___fields_group =
     [ "Prime_Field_Element", "group___fields_group.html#class_prime___field___element", [
       [ "Prime_Field_Element", "group___fields_group.html#ac4a46053696a327bc62038e1cf92c20a", null ],
       [ "Prime_Field_Element", "group___fields_group.html#a0bad5ba05aadbaf14876b2590e300861", null ],
+      [ "Prime_Field_Element", "group___fields_group.html#a2d138dd43fec2bec179cbc6eea6ca3a7", null ],
       [ "assign", "group___fields_group.html#a5e94844996cf153ba8c9bc9b9cf518d5", null ],
       [ "field", "group___fields_group.html#a30f455dd34d4e795c63791cdc7ea1f46", null ],
       [ "inverse", "group___fields_group.html#a7e5881bb8b3f94aa8686e38e7ac78d65", null ],
@@ -30,6 +32,7 @@ var group___fields_group =
       [ "operator+=", "group___fields_group.html#a28870a113aad5a9981512aca6c04d314", null ],
       [ "operator-=", "group___fields_group.html#a19e1cde9dd774d554d8a1d5889a23344", null ],
       [ "operator/=", "group___fields_group.html#a73d679e6a6f2f55ac8f2873cfb11f91b", null ],
+      [ "operator=", "group___fields_group.html#abdfe63d82185e9512775e129080d6023", null ],
       [ "value", "group___fields_group.html#aa9c68761643afa0b22863904bdfe7e83", null ],
       [ "operator*", "group___fields_group.html#a33507738ef00abb43ae64c900f7b807a", null ],
       [ "operator*", "group___fields_group.html#a71eef3b2216feb8fdb024cf603b7663a", null ],

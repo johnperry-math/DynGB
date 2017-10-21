@@ -2,7 +2,7 @@ var group___c_l_s_solvers_class_l_p___solvers_1_1_skeleton =
 [
     [ "Skeleton", "group___c_l_s_solvers.html#ad9f2f64c49dbf96ebd30852e670e7642", null ],
     [ "Skeleton", "group___c_l_s_solvers.html#ad61d70c2397e93141de3ad3c987b1828", null ],
-    [ "Skeleton", "group___c_l_s_solvers.html#ae1d6983329c8624014fa5c9d66f75ac3", null ],
+    [ "Skeleton", "group___c_l_s_solvers.html#a4f9ed09dbe0b7fe8bc9972ce5488eb48", null ],
     [ "~Skeleton", "group___c_l_s_solvers.html#a0da8ede73aea9089d7b81683c08cfc60", null ],
     [ "adjacencies_by_graphs", "group___c_l_s_solvers.html#a91e67ca8a8fc7a891534462c21051ea1", null ],
     [ "common_initialization", "group___c_l_s_solvers.html#aa63d9454338c84be898e1a604eba3527", null ],

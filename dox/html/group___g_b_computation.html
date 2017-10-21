@@ -112,6 +112,9 @@ Classes</h2></td></tr>
 <tr class="memitem:class_dynamic___engine_1_1_p_p___with___ideal"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">Dynamic_Engine::PP_With_Ideal</a></td></tr>
 <tr class="memdesc:class_dynamic___engine_1_1_p_p___with___ideal"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to associate a potential leading power product with the resulting monomial ideal if it were chosen as the actual leading power product.  <a href="group___g_b_computation.html#class_dynamic___engine_1_1_p_p___with___ideal">More...</a><br /></td></tr>
 <tr class="separator:class_dynamic___engine_1_1_p_p___with___ideal"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:class_f4___hash"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_f4___hash">F4_Hash</a></td></tr>
+<tr class="memdesc:class_f4___hash"><td class="mdescLeft">&#160;</td><td class="mdescRight">hash table class, based on discussions with Christian Eder  <a href="group___g_b_computation.html#class_f4___hash">More...</a><br /></td></tr>
+<tr class="separator:class_f4___hash"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:class_f4___reduction___data"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#class_f4___reduction___data">F4_Reduction_Data</a></td></tr>
 <tr class="memdesc:class_f4___reduction___data"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of Faug&egrave;re&rsquo;s F4 algorithm.  <a href="group___g_b_computation.html#class_f4___reduction___data">More...</a><br /></td></tr>
 <tr class="separator:class_f4___reduction___data"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +141,7 @@ Enumerations</h2></td></tr>
 <b>DEG_THEN_GRAD_HILB</b>, 
 <br />
 &#160;&#160;<b>DEG_THEN_ORD_HILBERT</b>, 
+<b>EVIL_RANDOM</b>, 
 <b>MAX_HEURISTIC</b>
 <br />
  }<tr class="memdesc:ga819b1fd40d9a40ff303df3b90647ecb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">values for the heuristic, as in <code><a class="el" href="group___g_b_computation.html#gaa01d88c431b84deabf51ee116d7d2a0e" title="Selects a leading power product for a polynomial. ">select_monomial()</a></code>  <a href="group___g_b_computation.html#ga819b1fd40d9a40ff303df3b90647ecb0">More...</a><br /></td></tr>
@@ -275,6 +279,7 @@ Inheritance diagram for Critical_Pair_Basic:</div>
 <area href="group___g_b_computation.html#class_critical___pair___x_plor" title="contains information on critical pairs by their index in the basis, in addition to the usual informat..." alt="Critical_Pair_XPlor" shape="rect" coords="148,56,286,80"/>
 <area href="group___g_b_computation.html#class_critical___pair___x_plor" title="contains information on critical pairs by their index in the basis, in addition to the usual informat..." alt="Critical_Pair_XPlor" shape="rect" coords="296,56,434,80"/>
 <area href="group___g_b_computation.html#class_critical___pair___x_plor" title="contains information on critical pairs by their index in the basis, in addition to the usual informat..." alt="Critical_Pair_XPlor" shape="rect" coords="444,56,582,80"/>
+<area href="group___g_b_computation.html#class_critical___pair___x_plor" title="contains information on critical pairs by their index in the basis, in addition to the usual informat..." alt="Critical_Pair_XPlor" shape="rect" coords="592,56,730,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -288,6 +293,10 @@ Inheritance diagram for Critical_Pair_Basic:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a393b8f7069c8e641a982ba4d704d349c">Critical_Pair_Basic</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy)</td></tr>
 <tr class="memdesc:a393b8f7069c8e641a982ba4d704d349c"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) for two polynomials <br /></td></tr>
 <tr class="separator:a393b8f7069c8e641a982ba4d704d349c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0feac9207d9b3a1575e0af88b5aa73e"><td class="memItemLeft" align="right" valign="top"><a id="ac0feac9207d9b3a1575e0af88b5aa73e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac0feac9207d9b3a1575e0af88b5aa73e">Critical_Pair_Basic</a> (const <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> &amp;)</td></tr>
+<tr class="memdesc:ac0feac9207d9b3a1575e0af88b5aa73e"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
+<tr class="separator:ac0feac9207d9b3a1575e0af88b5aa73e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
 <tr class="memitem:a5a3c9fa67ec45e8f9891d667c1ff43ec"><td class="memItemLeft" align="right" valign="top"><a id="a5a3c9fa67ec45e8f9891d667c1ff43ec"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Critical_Pair_Basic</b> ()</td></tr>
@@ -401,7 +410,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section warning"><dt>Warning</dt><dd>If you have not already created an s-polynomial using one of SPolyCreationFlags, then this returns <code>nullptr</code> and is useless. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>the s-polynomial of this pair </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00113">113</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00115">115</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +433,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section date"><dt>Date</dt><dd>2016</dd></dl>
 <p>This class encapsulates the information necessary to create an \(S\)-polynomial, including the actual generation of an \(S\)-polynomial, though it does not retain that information. The main difference with <code><a class="el" href="group___g_b_computation.html#class_critical___pair___basic" title="Controls the creation of s-polynomials. ">Critical_Pair_Basic</a></code> is the enabling of late re-sorting. </p>
 
-<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00162">162</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00164">164</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Critical_Pair_Dynamic:</div>
 <div class="dyncontent">
@@ -441,6 +450,10 @@ Inheritance diagram for Critical_Pair_Dynamic:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a121415e702ea63da6444839d9f59669a">Critical_Pair_Dynamic</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy, <a class="el" href="group__orderinggroup.html#class_weighted___ordering">Weighted_Ordering</a> *how_to_order)</td></tr>
 <tr class="memdesc:a121415e702ea63da6444839d9f59669a"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,0) for initial polynomial, with given ordering <br /></td></tr>
 <tr class="separator:a121415e702ea63da6444839d9f59669a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7462f310a8e56a1666294f2e2d799e6c"><td class="memItemLeft" align="right" valign="top"><a id="a7462f310a8e56a1666294f2e2d799e6c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7462f310a8e56a1666294f2e2d799e6c">Critical_Pair_Dynamic</a> (const <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> &amp;other)</td></tr>
+<tr class="memdesc:a7462f310a8e56a1666294f2e2d799e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
+<tr class="separator:a7462f310a8e56a1666294f2e2d799e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe29c049d24e98470ba7099d25a01b15"><td class="memItemLeft" align="right" valign="top"><a id="afe29c049d24e98470ba7099d25a01b15"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#afe29c049d24e98470ba7099d25a01b15">Critical_Pair_Dynamic</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy, <a class="el" href="group__orderinggroup.html#class_weighted___ordering">Weighted_Ordering</a> *how_to_order)</td></tr>
 <tr class="memdesc:afe29c049d24e98470ba7099d25a01b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) for two polynomials, with given ordering <br /></td></tr>
@@ -467,6 +480,10 @@ Inheritance diagram for Critical_Pair_Dynamic:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a393b8f7069c8e641a982ba4d704d349c">Critical_Pair_Basic</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy)</td></tr>
 <tr class="memdesc:a393b8f7069c8e641a982ba4d704d349c inherit pub_methods_group___g_b_computation"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) for two polynomials <br /></td></tr>
 <tr class="separator:a393b8f7069c8e641a982ba4d704d349c inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="memItemLeft" align="right" valign="top"><a id="ac0feac9207d9b3a1575e0af88b5aa73e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac0feac9207d9b3a1575e0af88b5aa73e">Critical_Pair_Basic</a> (const <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> &amp;)</td></tr>
+<tr class="memdesc:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
+<tr class="separator:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a3c9fa67ec45e8f9891d667c1ff43ec inherit pub_methods_group___g_b_computation"><td class="memItemLeft" align="right" valign="top"><a id="a5a3c9fa67ec45e8f9891d667c1ff43ec"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Critical_Pair_Basic</b> ()</td></tr>
 <tr class="separator:a5a3c9fa67ec45e8f9891d667c1ff43ec inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -584,7 +601,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00234">234</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00240">240</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
 
 </div>
 </div>
@@ -634,7 +651,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 <p>Reimplemented from <a class="el" href="group___g_b_computation.html#aedcb486aa7298a6ed5a1980890df0780">Critical_Pair_Basic</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="critical__pair_8cpp_source.html#l00152">152</a> of file <a class="el" href="critical__pair_8cpp_source.html">critical_pair.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="critical__pair_8cpp_source.html#l00158">158</a> of file <a class="el" href="critical__pair_8cpp_source.html">critical_pair.cpp</a>.</p>
 
 </div>
 </div>
@@ -664,6 +681,7 @@ Inheritance diagram for Critical_Pair_XPlor:</div>
 <area href="group___g_b_computation.html#class_critical___pair___basic" title="Controls the creation of s-polynomials. " alt="Critical_Pair_Basic" shape="rect" coords="0,0,121,24"/>
 <area href="group___g_b_computation.html#class_critical___pair___basic" title="Controls the creation of s-polynomials. " alt="Critical_Pair_Basic" shape="rect" coords="131,0,252,24"/>
 <area href="group___g_b_computation.html#class_critical___pair___basic" title="Controls the creation of s-polynomials. " alt="Critical_Pair_Basic" shape="rect" coords="262,0,383,24"/>
+<area href="group___g_b_computation.html#class_critical___pair___basic" title="Controls the creation of s-polynomials. " alt="Critical_Pair_Basic" shape="rect" coords="393,0,514,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -681,6 +699,18 @@ Inheritance diagram for Critical_Pair_XPlor:</div>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a01353f6df8dacecfbee9a9cc546fb0cc">Critical_Pair_XPlor</a> (int i, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy, vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;G)</td></tr>
 <tr class="memdesc:a01353f6df8dacecfbee9a9cc546fb0cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) where f is at index <code>i</code> <br /></td></tr>
 <tr class="separator:a01353f6df8dacecfbee9a9cc546fb0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1564546db9b4736444a614970c1796d"><td class="memItemLeft" align="right" valign="top"><a id="ac1564546db9b4736444a614970c1796d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac1564546db9b4736444a614970c1796d">Critical_Pair_XPlor</a> (int i, unsigned strategy, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f)</td></tr>
+<tr class="memdesc:ac1564546db9b4736444a614970c1796d"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,0) where f is at index <code>i</code> <br /></td></tr>
+<tr class="separator:ac1564546db9b4736444a614970c1796d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5d0947e70b4070f796f1b0d8ce75484"><td class="memItemLeft" align="right" valign="top"><a id="af5d0947e70b4070f796f1b0d8ce75484"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af5d0947e70b4070f796f1b0d8ce75484">Critical_Pair_XPlor</a> (int i, int j, unsigned strategy, vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;G)</td></tr>
+<tr class="memdesc:af5d0947e70b4070f796f1b0d8ce75484"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) where f, g are at indices <code>i</code>, <code>j</code> <br /></td></tr>
+<tr class="separator:af5d0947e70b4070f796f1b0d8ce75484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cafe8e84ec3bee5e63370b7b815ba71"><td class="memItemLeft" align="right" valign="top"><a id="a1cafe8e84ec3bee5e63370b7b815ba71"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1cafe8e84ec3bee5e63370b7b815ba71">Critical_Pair_XPlor</a> (int i, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, unsigned strategy, vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;G)</td></tr>
+<tr class="memdesc:a1cafe8e84ec3bee5e63370b7b815ba71"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) where f is at index <code>i</code> <br /></td></tr>
+<tr class="separator:a1cafe8e84ec3bee5e63370b7b815ba71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1564546db9b4736444a614970c1796d"><td class="memItemLeft" align="right" valign="top"><a id="ac1564546db9b4736444a614970c1796d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac1564546db9b4736444a614970c1796d">Critical_Pair_XPlor</a> (int i, unsigned strategy, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f)</td></tr>
 <tr class="memdesc:ac1564546db9b4736444a614970c1796d"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,0) where f is at index <code>i</code> <br /></td></tr>
@@ -742,7 +772,27 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 DEG_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a85d34fcde810b942744433d1311ac331">sugar</a> ()</td></tr>
 <tr class="memdesc:a85d34fcde810b942744433d1311ac331"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns sugar of this pair; use ONLY if with sugar strategy <br /></td></tr>
 <tr class="separator:a85d34fcde810b942744433d1311ac331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac163e7707177e0c8566903ffdedea821"><td class="memItemLeft" align="right" valign="top"><a id="ac163e7707177e0c8566903ffdedea821"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac163e7707177e0c8566903ffdedea821">first_index</a> ()</td></tr>
+<tr class="memdesc:ac163e7707177e0c8566903ffdedea821"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns index of first polynomial in pair <br /></td></tr>
+<tr class="separator:ac163e7707177e0c8566903ffdedea821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a201f10149987060902a3999e4db201b9"><td class="memItemLeft" align="right" valign="top"><a id="a201f10149987060902a3999e4db201b9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a201f10149987060902a3999e4db201b9">second_index</a> ()</td></tr>
+<tr class="memdesc:a201f10149987060902a3999e4db201b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns index of second polynomial in pair <br /></td></tr>
+<tr class="separator:a201f10149987060902a3999e4db201b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d34fcde810b942744433d1311ac331"><td class="memItemLeft" align="right" valign="top"><a id="a85d34fcde810b942744433d1311ac331"></a>
+DEG_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a85d34fcde810b942744433d1311ac331">sugar</a> ()</td></tr>
+<tr class="memdesc:a85d34fcde810b942744433d1311ac331"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns sugar of this pair; use ONLY if with sugar strategy <br /></td></tr>
+<tr class="separator:a85d34fcde810b942744433d1311ac331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Multiprocessing data</div></td></tr>
+<tr class="memitem:a4c0085660583e247f354735ee900f2d3"><td class="memItemLeft" align="right" valign="top"><a id="a4c0085660583e247f354735ee900f2d3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4c0085660583e247f354735ee900f2d3">set_processor</a> (int i)</td></tr>
+<tr class="memdesc:a4c0085660583e247f354735ee900f2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">record that this pair is assigned to processor <code>i</code> <br /></td></tr>
+<tr class="separator:a4c0085660583e247f354735ee900f2d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f07b8a991c138ad6c8de5deeb64ece6"><td class="memItemLeft" align="right" valign="top"><a id="a1f07b8a991c138ad6c8de5deeb64ece6"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1f07b8a991c138ad6c8de5deeb64ece6">get_processor</a> ()</td></tr>
+<tr class="memdesc:a1f07b8a991c138ad6c8de5deeb64ece6"><td class="mdescLeft">&#160;</td><td class="mdescRight">query whether this pair is assigned to a processor, and which (nonnegative value indicates assignment, and to which) <br /></td></tr>
+<tr class="separator:a1f07b8a991c138ad6c8de5deeb64ece6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c0085660583e247f354735ee900f2d3"><td class="memItemLeft" align="right" valign="top"><a id="a4c0085660583e247f354735ee900f2d3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4c0085660583e247f354735ee900f2d3">set_processor</a> (int i)</td></tr>
 <tr class="memdesc:a4c0085660583e247f354735ee900f2d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">record that this pair is assigned to processor <code>i</code> <br /></td></tr>
@@ -776,6 +826,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a393b8f7069c8e641a982ba4d704d349c">Critical_Pair_Basic</a> (<a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *f, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a> strategy)</td></tr>
 <tr class="memdesc:a393b8f7069c8e641a982ba4d704d349c inherit pub_methods_group___g_b_computation"><td class="mdescLeft">&#160;</td><td class="mdescRight">create critical pair (f,g) for two polynomials <br /></td></tr>
 <tr class="separator:a393b8f7069c8e641a982ba4d704d349c inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="memItemLeft" align="right" valign="top"><a id="ac0feac9207d9b3a1575e0af88b5aa73e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac0feac9207d9b3a1575e0af88b5aa73e">Critical_Pair_Basic</a> (const <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> &amp;)</td></tr>
+<tr class="memdesc:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
+<tr class="separator:ac0feac9207d9b3a1575e0af88b5aa73e inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a3c9fa67ec45e8f9891d667c1ff43ec inherit pub_methods_group___g_b_computation"><td class="memItemLeft" align="right" valign="top"><a id="a5a3c9fa67ec45e8f9891d667c1ff43ec"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Critical_Pair_Basic</b> ()</td></tr>
 <tr class="separator:a5a3c9fa67ec45e8f9891d667c1ff43ec inherit pub_methods_group___g_b_computation"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -883,7 +937,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2014 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00124">124</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00125">125</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
@@ -1044,7 +1098,288 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00136">136</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00137">137</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
+
+</div>
+</div>
+
+</div>
+</div>
+<a name="class_f4___hash" id="class_f4___hash"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#class_f4___hash">&#9670;&nbsp;</a></span>F4_Hash</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">class F4_Hash</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>hash table class, based on discussions with Christian Eder </p>
+<p>For a homogeneous system it is advisable to recreate this for each matrix. For inhomogeneous systems it may be advantageous to reuse the table as one proceeds through the system. </p>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00027">27</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
+<tr class="memitem:a3983b59e08fa7ad90bba989850f9850f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a3983b59e08fa7ad90bba989850f9850f">F4_Hash</a> (NVAR_TYPE num_vars)</td></tr>
+<tr class="memdesc:a3983b59e08fa7ad90bba989850f9850f"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocates the table and sets up randomized hash function  <a href="#a3983b59e08fa7ad90bba989850f9850f">More...</a><br /></td></tr>
+<tr class="separator:a3983b59e08fa7ad90bba989850f9850f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25d18c80d34ca2b2113d0a49c92748a7"><td class="memItemLeft" align="right" valign="top"><a id="a25d18c80d34ca2b2113d0a49c92748a7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a25d18c80d34ca2b2113d0a49c92748a7">~F4_Hash</a> ()</td></tr>
+<tr class="memdesc:a25d18c80d34ca2b2113d0a49c92748a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">releases the table and the randomized hash function <br /></td></tr>
+<tr class="separator:a25d18c80d34ca2b2113d0a49c92748a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86a18244162325e3d792ea39525b23f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8">add_monomial</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *t, const size_t location)</td></tr>
+<tr class="memdesc:a86a18244162325e3d792ea39525b23f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a monomial to the lookup table  <a href="#a86a18244162325e3d792ea39525b23f8">More...</a><br /></td></tr>
+<tr class="separator:a86a18244162325e3d792ea39525b23f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b22f6999f276e58087fe668a01f240a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7b22f6999f276e58087fe668a01f240a">get_index</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t)</td></tr>
+<tr class="memdesc:a7b22f6999f276e58087fe668a01f240a"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the index of <code>t</code> in the lookup table  <a href="#a7b22f6999f276e58087fe668a01f240a">More...</a><br /></td></tr>
+<tr class="separator:a7b22f6999f276e58087fe668a01f240a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a12cff698cefa0375ab76ee6c36a0ce6c">get_index</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
+<tr class="memdesc:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the index of \(tu\) in the lookup table  <a href="#a12cff698cefa0375ab76ee6c36a0ce6c">More...</a><br /></td></tr>
+<tr class="separator:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a539f858e09579b9119941795e42cdc4f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a539f858e09579b9119941795e42cdc4f">lookup_product</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
+<tr class="memdesc:a539f858e09579b9119941795e42cdc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8" title="adds a monomial to the lookup table ">add_monomial()</a></code> when \(tu\) was the first  <a href="#a539f858e09579b9119941795e42cdc4f">More...</a><br /></td></tr>
+<tr class="separator:a539f858e09579b9119941795e42cdc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
+<tr class="memitem:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="memItemLeft" align="right" valign="top"><a id="ab0d30e19b178ed579bd97fc98c4e3de5"></a>
+NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab0d30e19b178ed579bd97fc98c4e3de5">n</a></td></tr>
+<tr class="memdesc:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables in the monomials stored <br /></td></tr>
+<tr class="separator:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80d0b9f0d0f2edb34659b27e2520f083"><td class="memItemLeft" align="right" valign="top"><a id="a80d0b9f0d0f2edb34659b27e2520f083"></a>
+list&lt; pair&lt; const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *, size_t &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a80d0b9f0d0f2edb34659b27e2520f083">table</a></td></tr>
+<tr class="memdesc:a80d0b9f0d0f2edb34659b27e2520f083"><td class="mdescLeft">&#160;</td><td class="mdescRight">the actual table <br /></td></tr>
+<tr class="separator:a80d0b9f0d0f2edb34659b27e2520f083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894a6279c130dd1cdfea12845448e331"><td class="memItemLeft" align="right" valign="top"><a id="a894a6279c130dd1cdfea12845448e331"></a>
+WT_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a894a6279c130dd1cdfea12845448e331">weights</a></td></tr>
+<tr class="memdesc:a894a6279c130dd1cdfea12845448e331"><td class="mdescLeft">&#160;</td><td class="mdescRight">randomized weighting for each exponent <br /></td></tr>
+<tr class="separator:a894a6279c130dd1cdfea12845448e331"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><h3>Static Protected Attributes</h3></td></tr>
+<tr class="memitem:acf7ba1127b19f75bfcd7177c4de99d01"><td class="memItemLeft" align="right" valign="top"><a id="acf7ba1127b19f75bfcd7177c4de99d01"></a>
+static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acf7ba1127b19f75bfcd7177c4de99d01">MAXIMUM</a> = 1 &lt;&lt; 18</td></tr>
+<tr class="memdesc:acf7ba1127b19f75bfcd7177c4de99d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of entries in table <br /></td></tr>
+<tr class="separator:acf7ba1127b19f75bfcd7177c4de99d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><h3>Friends</h3></td></tr>
+<tr class="memitem:a979748da85dd3012fb925b0ff6b9b71c"><td class="memItemLeft" align="right" valign="top"><a id="a979748da85dd3012fb925b0ff6b9b71c"></a>
+ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a979748da85dd3012fb925b0ff6b9b71c">operator&lt;&lt;</a> (ostream &amp;, const <a class="el" href="group___g_b_computation.html#class_f4___hash">F4_Hash</a> &amp;)</td></tr>
+<tr class="memdesc:a979748da85dd3012fb925b0ff6b9b71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the non-empty locations as a list of tuples (monomial, location) <br /></td></tr>
+<tr class="separator:a979748da85dd3012fb925b0ff6b9b71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
+<a id="a3983b59e08fa7ad90bba989850f9850f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3983b59e08fa7ad90bba989850f9850f">&#9670;&nbsp;</a></span>F4_Hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">F4_Hash::F4_Hash </td>
+          <td>(</td>
+          <td class="paramtype">NVAR_TYPE&#160;</td>
+          <td class="paramname"><em>num_vars</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>allocates the table and sets up randomized hash function </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_vars</td><td>number of variables in the monomials this table will check </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00042">42</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<h4 class="groupheader">Member Function Documentation</h4>
+<a id="a86a18244162325e3d792ea39525b23f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86a18244162325e3d792ea39525b23f8">&#9670;&nbsp;</a></span>add_monomial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Hash::add_monomial </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>adds a monomial to the lookup table </p>
+<p>Use only when creating the hash table. This does not check for uniqueness; it simply adds monomials! So make sure you are adding a monomial that isn't already there. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> for future lookup </td></tr>
+    <tr><td class="paramname">location</td><td>column for coefficients of <code>t</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00095">95</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b22f6999f276e58087fe668a01f240a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b22f6999f276e58087fe668a01f240a">&#9670;&nbsp;</a></span>get_index() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t F4_Hash::get_index </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>determines the index of <code>t</code> in the lookup table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>which table entry contains the list that contains <code>t</code> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00067">67</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a12cff698cefa0375ab76ee6c36a0ce6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cff698cefa0375ab76ee6c36a0ce6c">&#9670;&nbsp;</a></span>get_index() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t F4_Hash::get_index </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>determines the index of \(tu\) in the lookup table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+    <tr><td class="paramname">u</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>which table entry contains the list that contains \(tu\) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00080">80</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a539f858e09579b9119941795e42cdc4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a539f858e09579b9119941795e42cdc4f">&#9670;&nbsp;</a></span>lookup_product()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t F4_Hash::lookup_product </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8" title="adds a monomial to the lookup table ">add_monomial()</a></code> when \(tu\) was the first </p>
+<p>This will not add \(tu\) if it isn't already there, so call it only after the table has been completely set up! </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+    <tr><td class="paramname">u</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>location of \(tu\) in the array </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00108">108</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1424,7 +1759,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00043">43</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00044">44</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
@@ -1486,7 +1821,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00182">182</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00181">181</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
@@ -1712,7 +2047,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <p>This step falls between <code><a class="el" href="group___g_b_computation.html#a841c43903004e8a8e355bfcf30dfd36c" title="reduces polynomials ">reduce_by_old()</a></code> and <code><a class="el" href="group___g_b_computation.html#a6f70b5f5779e7aa262d454b9f2bbd2d1" title="converts this to a vector of Constant_Polynomial and returns the result ">finalize()</a></code>. It attempts to perform a more global analysis of the matrix than select_dynamic_single. After reduction of rows by the existing basis, this step analyzes the matrix for a new ordering, proceeding row-by-row. </p><dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="group__orderinggroup.html#class_w_grevlex" title="the grevlex ordering for a specified number of variables ">WGrevlex</a> ordering that is considered optimal for the matrix and consistent with past choices </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00729">729</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00743">743</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1797,7 +2132,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <dl class="section return"><dt>Returns</dt><dd>whether the preferred, compatible monomial would change the current ordering </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00665">665</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00679">679</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1858,7 +2193,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the recommended monomial ordering; this may be the same as <code>curr_ord</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00820">820</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00835">835</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1926,7 +2261,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the row with the recommended new ordering </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00952">952</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00967">967</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1954,7 +2289,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00583">583</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00597">597</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -1984,7 +2319,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <dl class="section return"><dt>Returns</dt><dd><code>false</code> if and only if <code>newSkel</code> cannot be modified to compatibility with <code>newSkel</code> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00609">609</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00623">623</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2214,7 +2549,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>list of polynomials in a Gr&ouml;bner basis of <code>F</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__basic_8cpp_source.html#l00181">181</a> of file <a class="el" href="algorithm__buchberger__basic_8cpp_source.html">algorithm_buchberger_basic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__basic_8cpp_source.html#l00182">182</a> of file <a class="el" href="algorithm__buchberger__basic_8cpp_source.html">algorithm_buchberger_basic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2501,7 +2836,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00509">509</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00527">527</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -2549,7 +2884,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00636">636</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00660">660</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -2578,7 +2913,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a Gr&ouml;bner basis of the ideal generated by \( F \) with respect to the ordering already assigned to its polynomials </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l01067">1067</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l01091">1091</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2801,7 +3136,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__explorer__postcustomreduce_8cpp_source.html#l00239">239</a> of file <a class="el" href="algorithm__buchberger__explorer__postcustomreduce_8cpp_source.html">algorithm_buchberger_explorer_postcustomreduce.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="algorithm__buchberger__explorer__atlas_8cpp_source.html#l00225">225</a> of file <a class="el" href="algorithm__buchberger__explorer__atlas_8cpp_source.html">algorithm_buchberger_explorer_atlas.cpp</a>.</p>
 
 </div>
 </div>
@@ -2925,7 +3260,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>None of these should be <code>nullptr</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00034">34</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00056">56</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -3092,7 +3427,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <p>This is a complete reduction, not just the head, so the value of *sp may change. </p>
 
-<p class="definition">Definition at line <a class="el" href="reduction__support_8hpp_source.html#l00071">71</a> of file <a class="el" href="reduction__support_8hpp_source.html">reduction_support.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reduction__support_8hpp_source.html#l00069">69</a> of file <a class="el" href="reduction__support_8hpp_source.html">reduction_support.hpp</a>.</p>
 
 </div>
 </div>
@@ -3256,7 +3591,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00665">665</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00689">689</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -3346,7 +3681,7 @@ template&lt;typename T &gt; </div>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2017 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00692">692</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00716">716</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -3465,7 +3800,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if we were able to make this skeleton (and thus the corresponding choice of a leading monomial) consistent with the existing basis. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00558">558</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dynamic__engine_8cpp_source.html#l00576">576</a> of file <a class="el" href="dynamic__engine_8cpp_source.html">dynamic_engine.cpp</a>.</p>
 
 </div>
 </div>

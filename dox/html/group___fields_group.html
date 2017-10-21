@@ -124,7 +124,7 @@ Classes</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>This class encapsulates the information necessary for a field modulo a prime: both the modulus \(m\) and a list of inverses of non-zero elements. The constructors do not verify that \(m\) is prime, but expect misbehavior if not.</p>
 <dl class="section warning"><dt>Warning</dt><dd>The constructor does not check whether the supplied modulus is prime. If \(m\) is not prime, behavior is undefined, and probably spectacularly bad. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a2">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a1">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a1">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a1">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a1">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a1">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a1">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a0">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a1">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a11">test_dynamic.cpp</a>, <a class="el" href="test_f4_8cpp-example.html#_a6">test_f4.cpp</a>, <a class="el" href="test_f4_dynamic_8cpp-example.html#_a6">test_f4_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a4">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a1">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a2">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a1">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a1">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a1">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a1">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a1">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a1">test_cab_es9.cpp</a>, <a class="el" href="test_cyclic4_8cpp-example.html#_a0">test_cyclic4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a1">test_cyclicn.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#_a11">test_dynamic.cpp</a>, <a class="el" href="test_monomials_8cpp-example.html#_a4">test_monomials.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#_a1">user_interface.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00051">51</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
 </div><table class="memberdecls">
@@ -167,6 +167,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a5ac5cf31e741cc6d250176163bde658c">get_print_modulus</a> () const</td></tr>
 <tr class="memdesc:a5ac5cf31e741cc6d250176163bde658c"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether to print the modulus <br /></td></tr>
 <tr class="separator:a5ac5cf31e741cc6d250176163bde658c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
+<tr class="memitem:ae61b0c053fc94313ca06cbaf88068252"><td class="memItemLeft" align="right" valign="top"><a id="ae61b0c053fc94313ca06cbaf88068252"></a>
+<a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;other)</td></tr>
+<tr class="separator:ae61b0c053fc94313ca06cbaf88068252"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:acbcc0858cd26489bd5837d491788a734"><td class="memItemLeft" align="right" valign="top"><a id="acbcc0858cd26489bd5837d491788a734"></a>
 vector&lt; COEF_TYPE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#acbcc0858cd26489bd5837d491788a734">Fi</a></td></tr>
@@ -227,6 +231,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Prime_Field::Prime_Field </td>
@@ -236,6 +243,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Copy constructor: copies previously-computed inverses. </p>
@@ -311,7 +323,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <dl class="section warning"><dt>Warning</dt><dd>Do not delete the prime field that <code>this</code> lives in while <code>this</code> is still active. Behavior is unpredictable in this circumstance, as the field is necessary for some record keeping, e.g., to look up multiplicative inverses. </dd></dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a4">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#_a3">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#_a3">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#_a3">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#_a3">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#_a3">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#_a3">test_cab_es9.cpp</a>, and <a class="el" href="test_cyclic4_8cpp-example.html#_a2">test_cyclic4.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00137">137</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fields_8hpp_source.html#l00146">146</a> of file <a class="el" href="fields_8hpp_source.html">fields.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
@@ -321,6 +333,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memitem:a0bad5ba05aadbaf14876b2590e300861"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a0bad5ba05aadbaf14876b2590e300861">Prime_Field_Element</a> (COEF_TYPE <a class="el" href="group___fields_group.html#aa9c68761643afa0b22863904bdfe7e83">value</a>, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *<a class="el" href="group___fields_group.html#a30f455dd34d4e795c63791cdc7ea1f46">field</a>)</td></tr>
 <tr class="memdesc:a0bad5ba05aadbaf14876b2590e300861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prime field element in the specified field, with the specified value.  <a href="#a0bad5ba05aadbaf14876b2590e300861">More...</a><br /></td></tr>
 <tr class="separator:a0bad5ba05aadbaf14876b2590e300861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d138dd43fec2bec179cbc6eea6ca3a7"><td class="memItemLeft" align="right" valign="top"><a id="a2d138dd43fec2bec179cbc6eea6ca3a7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a2d138dd43fec2bec179cbc6eea6ca3a7">Prime_Field_Element</a> (const <a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> &amp;other)</td></tr>
+<tr class="memdesc:a2d138dd43fec2bec179cbc6eea6ca3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructs a prime field element from another <br /></td></tr>
+<tr class="separator:a2d138dd43fec2bec179cbc6eea6ca3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>The following functions give information about the monomial, but do not modify it. </p>
 </div></td></tr>
@@ -353,6 +369,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a69c26a37c2d6d3c996360d4f37cf6d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <code>this</code> the multiplicative identity? <br /></td></tr>
 <tr class="separator:a69c26a37c2d6d3c996360d4f37cf6d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
+<tr class="memitem:abdfe63d82185e9512775e129080d6023"><td class="memItemLeft" align="right" valign="top"><a id="abdfe63d82185e9512775e129080d6023"></a>
+<a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#abdfe63d82185e9512775e129080d6023">operator=</a> (const <a class="el" href="group___fields_group.html#class_prime___field___element">Prime_Field_Element</a> &amp;other)</td></tr>
+<tr class="memdesc:abdfe63d82185e9512775e129080d6023"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment to other <br /></td></tr>
+<tr class="separator:abdfe63d82185e9512775e129080d6023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e94844996cf153ba8c9bc9b9cf518d5"><td class="memItemLeft" align="right" valign="top"><a id="a5e94844996cf153ba8c9bc9b9cf518d5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___fields_group.html#a5e94844996cf153ba8c9bc9b9cf518d5">assign</a> (COEF_TYPE val, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> *K)</td></tr>
 <tr class="memdesc:a5e94844996cf153ba8c9bc9b9cf518d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">for initializing arrays of <a class="el" href="group___fields_group.html#class_prime___field___element" title="Element of a field of prime characteristic. ">Prime_Field_Element</a> <br /></td></tr>
@@ -434,6 +454,9 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Prime_Field_Element::Prime_Field_Element </td>
@@ -443,6 +466,11 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Constructs a prime field element in the specified field, with the value 0. </p>

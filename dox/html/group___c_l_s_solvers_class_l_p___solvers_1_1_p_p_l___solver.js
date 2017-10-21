@@ -6,6 +6,7 @@ var group___c_l_s_solvers_class_l_p___solvers_1_1_p_p_l___solver =
     [ "copy", "group___c_l_s_solvers.html#acc03418759754dbeda266dba9eefe98b", null ],
     [ "get_dimension", "group___c_l_s_solvers.html#a5a5f372696416caeae454ce78e9acb86", null ],
     [ "get_number_of_constraints", "group___c_l_s_solvers.html#afb7f014f84eb37026fe26f8c3114c0f0", null ],
+    [ "operator=", "group___c_l_s_solvers.html#af6edf0872b391fbbbe67d02a49795238", null ],
     [ "setup_rays", "group___c_l_s_solvers.html#a1b50fd63c3032192d02d9a1b2411e33a", null ],
     [ "solve", "group___c_l_s_solvers.html#a9a4a7563d62e4394162aaa4bd08aae29", null ],
     [ "solve", "group___c_l_s_solvers.html#a3763d4bc551a98546f1f5be4df49390d", null ],

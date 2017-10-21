@@ -2,6 +2,7 @@ var group___g_b_computation_class_critical___pair___basic =
 [
     [ "Critical_Pair_Basic", "group___g_b_computation.html#a54a4115589e1c46851167727b5d21578", null ],
     [ "Critical_Pair_Basic", "group___g_b_computation.html#a393b8f7069c8e641a982ba4d704d349c", null ],
+    [ "Critical_Pair_Basic", "group___g_b_computation.html#ac0feac9207d9b3a1575e0af88b5aa73e", null ],
     [ "~Critical_Pair_Basic", "group___g_b_computation.html#a5a3c9fa67ec45e8f9891d667c1ff43ec", null ],
     [ "first", "group___g_b_computation.html#a6e251e3724fde2c610d921f93889eb67", null ],
     [ "first_multiplier", "group___g_b_computation.html#a714e1ea76b993148dd55b05979b4b874", null ],

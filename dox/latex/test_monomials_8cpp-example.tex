@@ -62,7 +62,7 @@ Keep in mind that the constructor's index should correspond to a valid number; t
   cout << smaller << \textcolor{stringliteral}{" < "} << larger << \textcolor{stringliteral}{" ? "} << (smaller < larger) << endl;
   cout << larger << \textcolor{stringliteral}{" < "} << smaller << \textcolor{stringliteral}{" ? "} << (larger < smaller) << endl;
 
-  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F = \hyperlink{group___fields_group_class_prime___field}{Prime\_Field}(43);
+  \hyperlink{group___fields_group_class_prime___field}{Prime\_Field} F(43);
   \textcolor{keywordtype}{string} var\_names [] = \{ \textcolor{stringliteral}{"x"}, \textcolor{stringliteral}{"y"} \};
   \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring} R = \hyperlink{group__polygroup_class_polynomial___ring}{Polynomial\_Ring}(2, F, var\_names);
   \hyperlink{group__polygroup_class_indeterminate}{Indeterminate} * X = R.\hyperlink{group__polygroup_afea6c3a4fd9f3f04f312579a94a3cc1b}{indeterminates}();

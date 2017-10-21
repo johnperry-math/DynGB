@@ -14,6 +14,7 @@ var annotated_dup =
     [ "Dense_Univariate_Integer_Polynomial", "group__polygroup.html#class_dense___univariate___integer___polynomial", "group__polygroup_class_dense___univariate___integer___polynomial" ],
     [ "Dense_Univariate_Rational_Polynomial", "group__polygroup.html#class_dense___univariate___rational___polynomial", "group__polygroup_class_dense___univariate___rational___polynomial" ],
     [ "Double_Buffered_Polynomial", "group__polygroup.html#class_double___buffered___polynomial", "group__polygroup_class_double___buffered___polynomial" ],
+    [ "F4_Hash", "group___g_b_computation.html#class_f4___hash", "group___g_b_computation_class_f4___hash" ],
     [ "F4_Reduction_Data", "group___g_b_computation.html#class_f4___reduction___data", "group___g_b_computation_class_f4___reduction___data" ],
     [ "Generic_Grevlex", "group__orderinggroup.html#class_generic___grevlex", "group__orderinggroup_class_generic___grevlex" ],
     [ "Geobucket_Iterator", "group___iterator_group.html#class_geobucket___iterator", "group___iterator_group_class_geobucket___iterator" ],

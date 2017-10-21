@@ -13,5 +13,5 @@ var group___iterator_group_class_polynomial___iterator =
     [ "operator*", "group___iterator_group.html#a119cd2937a0cacd43585dee8dc95505f", null ],
     [ "operator++", "group___iterator_group.html#a934c291b780f91efefea23880827d5dc", null ],
     [ "restart_iteration", "group___iterator_group.html#a7135fd6c3a90134741abc2da51467a43", null ],
-    [ "p", "group___iterator_group.html#ab35e9b9c4d7ed12dabce5057a4c2a1b5", null ]
+    [ "p_base", "group___iterator_group.html#aeb3da0d0f8b60eb68b1ffacb1b511417", null ]
 ];

@@ -16,6 +16,8 @@ class \hyperlink{group___g_b_computation_class_critical___pair___x_plor}{Critica
 \begin{DoxyCompactList}\small\item\em contains information on critical pairs by their index in the basis, in addition to the usual information  \hyperlink{group___g_b_computation_class_critical___pair___x_plor}{More...}\end{DoxyCompactList}\item 
 class \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{Dynamic\+\_\+\+Engine\+::\+P\+P\+\_\+\+With\+\_\+\+Ideal}
 \begin{DoxyCompactList}\small\item\em Used to associate a potential leading power product with the resulting monomial ideal if it were chosen as the actual leading power product.  \hyperlink{group___g_b_computation_class_dynamic___engine_1_1_p_p___with___ideal}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group___g_b_computation_class_f4___hash}{F4\+\_\+\+Hash}
+\begin{DoxyCompactList}\small\item\em hash table class, based on discussions with Christian Eder  \hyperlink{group___g_b_computation_class_f4___hash}{More...}\end{DoxyCompactList}\item 
 class \hyperlink{group___g_b_computation_class_f4___reduction___data}{F4\+\_\+\+Reduction\+\_\+\+Data}
 \begin{DoxyCompactList}\small\item\em Implementation of Faug\`{e}re's F4 algorithm.  \hyperlink{group___g_b_computation_class_f4___reduction___data}{More...}\end{DoxyCompactList}\item 
 struct \hyperlink{group___g_b_computation_structsmaller__lm}{smaller\+\_\+lm}
@@ -40,6 +42,7 @@ enum \hyperlink{group___g_b_computation_ga819b1fd40d9a40ff303df3b90647ecb0}{Dyna
 {\bfseries D\+E\+G\+\_\+\+T\+H\+E\+N\+\_\+\+G\+R\+A\+D\+\_\+\+H\+I\+LB}, 
 \newline
 {\bfseries D\+E\+G\+\_\+\+T\+H\+E\+N\+\_\+\+O\+R\+D\+\_\+\+H\+I\+L\+B\+E\+RT}, 
+{\bfseries E\+V\+I\+L\+\_\+\+R\+A\+N\+D\+OM}, 
 {\bfseries M\+A\+X\+\_\+\+H\+E\+U\+R\+I\+S\+T\+IC}
  \}\begin{DoxyCompactList}\small\item\em values for the heuristic, as in {\ttfamily \hyperlink{group___g_b_computation_gaa01d88c431b84deabf51ee116d7d2a0e}{select\+\_\+monomial()}} \end{DoxyCompactList}
 \item 
@@ -137,7 +140,7 @@ Definition at line 74 of file critical\+\_\+pair.\+hpp.
 Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+Basic\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.917808cm]{group___g_b_computation}
+\includegraphics[height=1.534247cm]{group___g_b_computation}
 \end{center}
 \end{figure}
 \subsubsection*{Public Member Functions}
@@ -149,7 +152,10 @@ Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+Basic\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em create critical pair (f,0) for initial polynomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a393b8f7069c8e641a982ba4d704d349c}\label{group___g_b_computation_a393b8f7069c8e641a982ba4d704d349c}} 
 \hyperlink{group___g_b_computation_a393b8f7069c8e641a982ba4d704d349c}{Critical\+\_\+\+Pair\+\_\+\+Basic} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy)
-\begin{DoxyCompactList}\small\item\em create critical pair (f,g) for two polynomials \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em create critical pair (f,g) for two polynomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ac0feac9207d9b3a1575e0af88b5aa73e}\label{group___g_b_computation_ac0feac9207d9b3a1575e0af88b5aa73e}} 
+\hyperlink{group___g_b_computation_ac0feac9207d9b3a1575e0af88b5aa73e}{Critical\+\_\+\+Pair\+\_\+\+Basic} (const \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} \&)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
@@ -255,7 +261,7 @@ the s-\/polynomial of this pair
 \end{DoxyReturn}
 
 
-Definition at line 113 of file critical\+\_\+pair.\+hpp.
+Definition at line 115 of file critical\+\_\+pair.\+hpp.
 
 \index{Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}}\label{class_critical___pair___dynamic}
 \Hypertarget{group___g_b_computation_class_critical___pair___dynamic}
@@ -270,7 +276,7 @@ John Perry
 \end{DoxyDate}
 This class encapsulates the information necessary to create an $S$-\/polynomial, including the actual generation of an $S$-\/polynomial, though it does not retain that information. The main difference with {\ttfamily \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic}} is the enabling of late re-\/sorting. 
 
-Definition at line 162 of file critical\+\_\+pair.\+hpp.
+Definition at line 164 of file critical\+\_\+pair.\+hpp.
 
 Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+Dynamic\+:\begin{figure}[H]
 \begin{center}
@@ -285,6 +291,9 @@ Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+Dynamic\+:\begin{figure}[H]
 \mbox{\Hypertarget{group___g_b_computation_a121415e702ea63da6444839d9f59669a}\label{group___g_b_computation_a121415e702ea63da6444839d9f59669a}} 
 \hyperlink{group___g_b_computation_a121415e702ea63da6444839d9f59669a}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy, \hyperlink{group__orderinggroup_class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$how\+\_\+to\+\_\+order)
 \begin{DoxyCompactList}\small\item\em create critical pair (f,0) for initial polynomial, with given ordering \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a7462f310a8e56a1666294f2e2d799e6c}\label{group___g_b_computation_a7462f310a8e56a1666294f2e2d799e6c}} 
+\hyperlink{group___g_b_computation_a7462f310a8e56a1666294f2e2d799e6c}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} (const \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} \&other)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_afe29c049d24e98470ba7099d25a01b15}\label{group___g_b_computation_afe29c049d24e98470ba7099d25a01b15}} 
 \hyperlink{group___g_b_computation_afe29c049d24e98470ba7099d25a01b15}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} (\hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy, \hyperlink{group__orderinggroup_class_weighted___ordering}{Weighted\+\_\+\+Ordering} $\ast$how\+\_\+to\+\_\+order)
 \begin{DoxyCompactList}\small\item\em create critical pair (f,g) for two polynomials, with given ordering \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -342,7 +351,7 @@ This is necessary at least for critical pairs where one polynomial is a generato
 \end{DoxyParams}
 
 
-Definition at line 234 of file critical\+\_\+pair.\+hpp.
+Definition at line 240 of file critical\+\_\+pair.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a3146fa294ea814d5388e09b1c76c966b}\label{group___g_b_computation_a3146fa294ea814d5388e09b1c76c966b}} 
 \index{Critical\+\_\+\+Pair\+\_\+\+Dynamic@{Critical\+\_\+\+Pair\+\_\+\+Dynamic}!s\+\_\+polynomial@{s\+\_\+polynomial}}
@@ -370,7 +379,7 @@ Reimplemented from \hyperlink{group___g_b_computation_aedcb486aa7298a6ed5a198089
 
 
 
-Definition at line 152 of file critical\+\_\+pair.\+cpp.
+Definition at line 158 of file critical\+\_\+pair.\+cpp.
 
 \index{Critical\+\_\+\+Pair\+\_\+\+X\+Plor@{Critical\+\_\+\+Pair\+\_\+\+X\+Plor}}\label{class_critical___pair___x_plor}
 \Hypertarget{group___g_b_computation_class_critical___pair___x_plor}
@@ -397,6 +406,15 @@ Inheritance diagram for Critical\+\_\+\+Pair\+\_\+\+X\+Plor\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em create critical pair (f,g) where f, g are at indices {\ttfamily i}, {\ttfamily j} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a01353f6df8dacecfbee9a9cc546fb0cc}\label{group___g_b_computation_a01353f6df8dacecfbee9a9cc546fb0cc}} 
 \hyperlink{group___g_b_computation_a01353f6df8dacecfbee9a9cc546fb0cc}{Critical\+\_\+\+Pair\+\_\+\+X\+Plor} (int i, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, \hyperlink{group__strategygroup_ga0ee6c8e033547330e6b89929730007f4}{Strategy\+Flags} strategy, vector$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$G)
+\begin{DoxyCompactList}\small\item\em create critical pair (f,g) where f is at index {\ttfamily i} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ac1564546db9b4736444a614970c1796d}\label{group___g_b_computation_ac1564546db9b4736444a614970c1796d}} 
+\hyperlink{group___g_b_computation_ac1564546db9b4736444a614970c1796d}{Critical\+\_\+\+Pair\+\_\+\+X\+Plor} (int i, unsigned strategy, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f)
+\begin{DoxyCompactList}\small\item\em create critical pair (f,0) where f is at index {\ttfamily i} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_af5d0947e70b4070f796f1b0d8ce75484}\label{group___g_b_computation_af5d0947e70b4070f796f1b0d8ce75484}} 
+\hyperlink{group___g_b_computation_af5d0947e70b4070f796f1b0d8ce75484}{Critical\+\_\+\+Pair\+\_\+\+X\+Plor} (int i, int j, unsigned strategy, vector$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$G)
+\begin{DoxyCompactList}\small\item\em create critical pair (f,g) where f, g are at indices {\ttfamily i}, {\ttfamily j} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a1cafe8e84ec3bee5e63370b7b815ba71}\label{group___g_b_computation_a1cafe8e84ec3bee5e63370b7b815ba71}} 
+\hyperlink{group___g_b_computation_a1cafe8e84ec3bee5e63370b7b815ba71}{Critical\+\_\+\+Pair\+\_\+\+X\+Plor} (int i, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, unsigned strategy, vector$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$G)
 \begin{DoxyCompactList}\small\item\em create critical pair (f,g) where f is at index {\ttfamily i} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ac1564546db9b4736444a614970c1796d}\label{group___g_b_computation_ac1564546db9b4736444a614970c1796d}} 
 \hyperlink{group___g_b_computation_ac1564546db9b4736444a614970c1796d}{Critical\+\_\+\+Pair\+\_\+\+X\+Plor} (int i, unsigned strategy, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$f)
@@ -446,11 +464,26 @@ int \hyperlink{group___g_b_computation_a201f10149987060902a3999e4db201b9}{second
 \begin{DoxyCompactList}\small\item\em returns index of second polynomial in pair \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a85d34fcde810b942744433d1311ac331}\label{group___g_b_computation_a85d34fcde810b942744433d1311ac331}} 
 D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group___g_b_computation_a85d34fcde810b942744433d1311ac331}{sugar} ()
+\begin{DoxyCompactList}\small\item\em returns sugar of this pair; use O\+N\+LY if with sugar strategy \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ac163e7707177e0c8566903ffdedea821}\label{group___g_b_computation_ac163e7707177e0c8566903ffdedea821}} 
+int \hyperlink{group___g_b_computation_ac163e7707177e0c8566903ffdedea821}{first\+\_\+index} ()
+\begin{DoxyCompactList}\small\item\em returns index of first polynomial in pair \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a201f10149987060902a3999e4db201b9}\label{group___g_b_computation_a201f10149987060902a3999e4db201b9}} 
+int \hyperlink{group___g_b_computation_a201f10149987060902a3999e4db201b9}{second\+\_\+index} ()
+\begin{DoxyCompactList}\small\item\em returns index of second polynomial in pair \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a85d34fcde810b942744433d1311ac331}\label{group___g_b_computation_a85d34fcde810b942744433d1311ac331}} 
+D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group___g_b_computation_a85d34fcde810b942744433d1311ac331}{sugar} ()
 \begin{DoxyCompactList}\small\item\em returns sugar of this pair; use O\+N\+LY if with sugar strategy \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Multiprocessing data}\par
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}\label{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}} 
+void \hyperlink{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}{set\+\_\+processor} (int i)
+\begin{DoxyCompactList}\small\item\em record that this pair is assigned to processor {\ttfamily i} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a1f07b8a991c138ad6c8de5deeb64ece6}\label{group___g_b_computation_a1f07b8a991c138ad6c8de5deeb64ece6}} 
+int \hyperlink{group___g_b_computation_a1f07b8a991c138ad6c8de5deeb64ece6}{get\+\_\+processor} ()
+\begin{DoxyCompactList}\small\item\em query whether this pair is assigned to a processor, and which (nonnegative value indicates assignment, and to which) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}\label{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}} 
 void \hyperlink{group___g_b_computation_a4c0085660583e247f354735ee900f2d3}{set\+\_\+processor} (int i)
 \begin{DoxyCompactList}\small\item\em record that this pair is assigned to processor {\ttfamily i} \end{DoxyCompactList}\item 
@@ -495,7 +528,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 124 of file dynamic\+\_\+engine.\+hpp.
+Definition at line 125 of file dynamic\+\_\+engine.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -610,7 +643,172 @@ Construct a monomial/ideal pair.
 \end{DoxyParams}
 
 
-Definition at line 136 of file dynamic\+\_\+engine.\+hpp.
+Definition at line 137 of file dynamic\+\_\+engine.\+hpp.
+
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}\label{class_f4___hash}
+\Hypertarget{group___g_b_computation_class_f4___hash}
+\subsubsection{class F4\+\_\+\+Hash}
+hash table class, based on discussions with Christian Eder 
+
+For a homogeneous system it is advisable to recreate this for each matrix. For inhomogeneous systems it may be advantageous to reuse the table as one proceeds through the system. 
+
+Definition at line 27 of file f4\+\_\+hash.\+hpp.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___g_b_computation_a3983b59e08fa7ad90bba989850f9850f}{F4\+\_\+\+Hash} (N\+V\+A\+R\+\_\+\+T\+Y\+PE num\+\_\+vars)
+\begin{DoxyCompactList}\small\item\em allocates the table and sets up randomized hash function \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}\label{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}} 
+\hyperlink{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}{$\sim$\+F4\+\_\+\+Hash} ()
+\begin{DoxyCompactList}\small\item\em releases the table and the randomized hash function \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t, const size\+\_\+t location)
+\begin{DoxyCompactList}\small\item\em adds a monomial to the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t)
+\begin{DoxyCompactList}\small\item\em determines the index of {\ttfamily t} in the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em determines the index of $tu$ in the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}{lookup\+\_\+product} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}\label{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}} 
+N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}{n}
+\begin{DoxyCompactList}\small\item\em number of variables in the monomials stored \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}\label{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}} 
+list$<$ pair$<$ const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$, size\+\_\+t $>$ $>$ $\ast$ \hyperlink{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}{table}
+\begin{DoxyCompactList}\small\item\em the actual table \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}\label{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}} 
+W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}{weights}
+\begin{DoxyCompactList}\small\item\em randomized weighting for each exponent \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___g_b_computation_acf7ba1127b19f75bfcd7177c4de99d01}\label{group___g_b_computation_acf7ba1127b19f75bfcd7177c4de99d01}} 
+static const size\+\_\+t \hyperlink{group___g_b_computation_acf7ba1127b19f75bfcd7177c4de99d01}{M\+A\+X\+I\+M\+UM} = 1 $<$$<$ 18
+\begin{DoxyCompactList}\small\item\em number of entries in table \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___g_b_computation_a979748da85dd3012fb925b0ff6b9b71c}\label{group___g_b_computation_a979748da85dd3012fb925b0ff6b9b71c}} 
+ostream \& \hyperlink{group___g_b_computation_a979748da85dd3012fb925b0ff6b9b71c}{operator$<$$<$} (ostream \&, const \hyperlink{group___g_b_computation_class_f4___hash}{F4\+\_\+\+Hash} \&)
+\begin{DoxyCompactList}\small\item\em prints the non-\/empty locations as a list of tuples (monomial, location) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group___g_b_computation_a3983b59e08fa7ad90bba989850f9850f}\label{group___g_b_computation_a3983b59e08fa7ad90bba989850f9850f}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{F4\+\_\+\+Hash()}{F4\_Hash()}}
+{\footnotesize\ttfamily F4\+\_\+\+Hash\+::\+F4\+\_\+\+Hash (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+vars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+allocates the table and sets up randomized hash function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+vars} & number of variables in the monomials this table will check \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 42 of file f4\+\_\+hash.\+hpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}\label{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!add\+\_\+monomial@{add\+\_\+monomial}}
+\index{add\+\_\+monomial@{add\+\_\+monomial}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{add\+\_\+monomial()}{add\_monomial()}}
+{\footnotesize\ttfamily void F4\+\_\+\+Hash\+::add\+\_\+monomial (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t,  }\item[{const size\+\_\+t}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+adds a monomial to the lookup table 
+
+Use only when creating the hash table. This does not check for uniqueness; it simply adds monomials! So make sure you are adding a monomial that isn\textquotesingle{}t already there. 
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} for future lookup \\
+\hline
+{\em location} & column for coefficients of {\ttfamily t} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 95 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}\label{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+determines the index of {\ttfamily t} in the lookup table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+which table entry contains the list that contains {\ttfamily t} 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}\label{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+determines the index of $tu$ in the lookup table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+which table entry contains the list that contains $tu$ 
+\end{DoxyReturn}
+
+
+Definition at line 80 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}\label{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!lookup\+\_\+product@{lookup\+\_\+product}}
+\index{lookup\+\_\+product@{lookup\+\_\+product}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{lookup\+\_\+product()}{lookup\_product()}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::lookup\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first 
+
+This will not add $tu$ if it isn\textquotesingle{}t already there, so call it only after the table has been completely set up! 
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+location of $tu$ in the array 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file f4\+\_\+hash.\+hpp.
 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}\label{class_f4___reduction___data}
 \Hypertarget{group___g_b_computation_class_f4___reduction___data}
@@ -892,7 +1090,7 @@ encapsulation of one step of the F4 algorithm for the polynomials indicated by {
 \end{DoxyParams}
 
 
-Definition at line 43 of file f4\+\_\+reduction.\+cpp.
+Definition at line 44 of file f4\+\_\+reduction.\+cpp.
 
 
 
@@ -924,7 +1122,7 @@ If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} shou
 \end{DoxyParams}
 
 
-Definition at line 182 of file f4\+\_\+reduction.\+cpp.
+Definition at line 181 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}\label{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+monomials@{add\+\_\+monomials}}
@@ -1056,7 +1254,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 729 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 743 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}\label{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
@@ -1101,7 +1299,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 665 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 679 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}\label{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic@{select\+\_\+dynamic}}
@@ -1131,7 +1329,7 @@ the recommended monomial ordering; this may be the same as {\ttfamily curr\+\_\+
 \end{DoxyReturn}
 
 
-Definition at line 820 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 835 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_af50b3f58764474df16c466034515b63e}\label{group___g_b_computation_af50b3f58764474df16c466034515b63e}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic\+\_\+single@{select\+\_\+dynamic\+\_\+single}}
@@ -1163,7 +1361,7 @@ the row with the recommended new ordering
 \end{DoxyReturn}
 
 
-Definition at line 952 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 967 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}\label{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!simplify\+\_\+identical\+\_\+rows@{simplify\+\_\+identical\+\_\+rows}}
@@ -1182,7 +1380,7 @@ eliminates duplicates of rows\+: later rows that are identical to earlier rows w
 \end{DoxyParams}
 
 
-Definition at line 583 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 597 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}\label{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows@{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows}}
@@ -1207,7 +1405,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 609 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 623 of file f4\+\_\+dynamic.\+cpp.
 
 \index{smaller\+\_\+lm@{smaller\+\_\+lm}}\label{structsmaller__lm}
 \Hypertarget{group___g_b_computation_structsmaller__lm}
@@ -1367,7 +1565,7 @@ list of polynomials in a Gr\"{o}bner basis of {\ttfamily F}
 \end{DoxyReturn}
 
 
-Definition at line 181 of file algorithm\+\_\+buchberger\+\_\+basic.\+cpp.
+Definition at line 182 of file algorithm\+\_\+buchberger\+\_\+basic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}\label{group___g_b_computation_ga2c05f4e2ea8b43bb696483469f4cce83}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!buchberger\+\_\+dynamic@{buchberger\+\_\+dynamic}}
@@ -1488,7 +1686,7 @@ John Perry
 \end{DoxyParams}
 
 
-Definition at line 509 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 527 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga6184088d03d37694f86acf5ac99cf75e}\label{group___g_b_computation_ga6184088d03d37694f86acf5ac99cf75e}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!constraints\+\_\+for\+\_\+new\+\_\+pp@{constraints\+\_\+for\+\_\+new\+\_\+pp}}
@@ -1517,7 +1715,7 @@ John Perry
 \end{DoxyParams}
 
 
-Definition at line 636 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 660 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga24647e1e20f18283bc931e723ba9fc22}\label{group___g_b_computation_ga24647e1e20f18283bc931e723ba9fc22}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!f4\+\_\+control@{f4\+\_\+control}}
@@ -1539,7 +1737,7 @@ a Gr\"{o}bner basis of the ideal generated by $ F $ with respect to the ordering
 \end{DoxyReturn}
 
 
-Definition at line 1067 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 1091 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}\label{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!find\+\_\+reducer@{find\+\_\+reducer}}
@@ -1647,7 +1845,7 @@ Implementation of Gebauer-\/\+Moeller algorithm, with X\+P\+L\+OR critical pairs
 \end{DoxyParams}
 
 
-Definition at line 239 of file algorithm\+\_\+buchberger\+\_\+explorer\+\_\+postcustomreduce.\+cpp.
+Definition at line 225 of file algorithm\+\_\+buchberger\+\_\+explorer\+\_\+atlas.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_gab3006092b36dd11b4f06053e8dab6f19}\label{group___g_b_computation_gab3006092b36dd11b4f06053e8dab6f19}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!gm\+\_\+update\+\_\+explorer@{gm\+\_\+update\+\_\+explorer}}
@@ -1713,7 +1911,7 @@ None of these should be {\ttfamily nullptr}.
 \end{DoxyWarning}
 
 
-Definition at line 34 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 56 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_gaa94e7defe45b81c6e80138df0637c0dd}\label{group___g_b_computation_gaa94e7defe45b81c6e80138df0637c0dd}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!lcm\+\_\+alike@{lcm\+\_\+alike}}
@@ -1810,7 +2008,7 @@ Reduce the polynomial r over the basis G.
 \end{DoxyParams}
 This is a complete reduction, not just the head, so the value of $\ast$sp may change. 
 
-Definition at line 71 of file reduction\+\_\+support.\+hpp.
+Definition at line 69 of file reduction\+\_\+support.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_gacc7cc5e063ab751ac50cc8c7009d3dbd}\label{group___g_b_computation_gacc7cc5e063ab751ac50cc8c7009d3dbd}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!reduce\+\_\+over\+\_\+basis\+\_\+dynamic@{reduce\+\_\+over\+\_\+basis\+\_\+dynamic}}
@@ -1892,7 +2090,7 @@ Applies a particular Dynamic\+\_\+\+Heuristic (default is {\ttfamily O\+R\+D\+\_
 \end{DoxyParams}
 
 
-Definition at line 665 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 689 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_gabe3fa16acb0927bac0b16e3a4cf4b4f5}\label{group___g_b_computation_gabe3fa16acb0927bac0b16e3a4cf4b4f5}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!select\+\_\+monomial@{select\+\_\+monomial}}
@@ -1933,7 +2131,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 692 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 716 of file dynamic\+\_\+engine.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga428f97f3978ba1eb759b8381a523dfe7}\label{group___g_b_computation_ga428f97f3978ba1eb759b8381a523dfe7}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!sort\+\_\+pairs\+\_\+by\+\_\+strategy@{sort\+\_\+pairs\+\_\+by\+\_\+strategy}}
@@ -2006,5 +2204,5 @@ John Perry
 \end{DoxyReturn}
 
 
-Definition at line 558 of file dynamic\+\_\+engine.\+cpp.
+Definition at line 576 of file dynamic\+\_\+engine.\+cpp.
 

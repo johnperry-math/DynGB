@@ -10,7 +10,7 @@ var group__commalg =
     [ "is_one_base_case", "group__commalg.html#gaed5cfd21d305dfc0d912bab347a82f65", null ],
     [ "is_splitting_case", "group__commalg.html#ga26c5ece1df1c4db4873925f41ed8ee9c", null ],
     [ "is_zero_base_case", "group__commalg.html#gabf201296cecf6c31675c7e23bb58dbb4", null ],
-    [ "polynomial_binomial", "group__commalg.html#ga185ac534295dffe04f9af3e235e1d44a", null ],
+    [ "polynomial_binomial", "group__commalg.html#gab38a72ec7f6b744df95fd4a3058bafcb", null ],
     [ "solve_one_base_case", "group__commalg.html#ga806777263a7836e3dabc0349440c47db", null ],
     [ "solve_splitting_case", "group__commalg.html#gaf0830e37f5adaa15eb30b562acf31076", null ],
     [ "solve_zero_base_case", "group__commalg.html#gab4cfb96e87e5dd698f56498bb6ba5472", null ]

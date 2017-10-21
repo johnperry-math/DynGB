@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['t',['t',['../group___g_b_computation.html#abbb33a00772961f2fa9d851dae8a2e07',1,'Dynamic_Engine::PP_With_Ideal::t()'],['../group___iterator_group.html#a39c6314ec57dce98f2208d02d78e3402',1,'Polynomial_Term::t()'],['../group__polygroup.html#af30c51160297f65bb77d063e8e0ecaa6',1,'Monomial_Node::t()'],['../group___iterator_group.html#aba055182673176b6390aecd4a5bb31d4',1,'DB_Polynomial_Iterator::T()']]],
+  ['t',['T',['../group___iterator_group.html#aba055182673176b6390aecd4a5bb31d4',1,'DB_Polynomial_Iterator::T()'],['../group___g_b_computation.html#abbb33a00772961f2fa9d851dae8a2e07',1,'Dynamic_Engine::PP_With_Ideal::t()'],['../group___iterator_group.html#a39c6314ec57dce98f2208d02d78e3402',1,'Polynomial_Term::t()'],['../group__polygroup.html#af30c51160297f65bb77d063e8e0ecaa6',1,'Monomial_Node::t()']]],
+  ['table',['table',['../group___g_b_computation.html#a80d0b9f0d0f2edb34659b27e2520f083',1,'F4_Hash']]],
   ['tail',['tail',['../group___iterator_group.html#a57a302fde5b37005fc52d8d022d7284f',1,'DB_Polynomial_Iterator']]],
   ['test_5fbuffer',['test_buffer',['../group__polygroup.html#a399d8bc13840f21ab8a1b8c844053eb9',1,'Double_Buffered_Polynomial']]],
   ['thorough_5fweighting',['thorough_weighting',['../group__orderinggroup.html#a73b55333b66eae11ee2e781c166b2421',1,'WGrevlex']]],

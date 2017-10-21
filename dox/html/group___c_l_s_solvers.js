@@ -8,6 +8,7 @@ var group___c_l_s_solvers =
       [ "~Constraint", "group___c_l_s_solvers.html#a2949083e68c41842b613bd8cf78c6389", null ],
       [ "coeffs", "group___c_l_s_solvers.html#a4e6dd23c317ce6865167b30d1d75de19", null ],
       [ "get_number_of_variables", "group___c_l_s_solvers.html#a10b3789ede36e0b614fb76fbe0248476", null ],
+      [ "operator=", "group___c_l_s_solvers.html#a7040b1a4ebddf3deb58b22219904d43e", null ],
       [ "operator[]", "group___c_l_s_solvers.html#a286fb7825aa45114478110e17bef1ccc", null ],
       [ "operator!=", "group___c_l_s_solvers.html#ab67011dc88bf8927d50bf3806e792f8b", null ],
       [ "operator<", "group___c_l_s_solvers.html#ad7246226080bd15a0d477cd905b4b71c", null ],
@@ -35,9 +36,9 @@ var group___c_l_s_solvers =
       [ "get_number_of_rays", "group___c_l_s_solvers.html#a4ee0b95d41c3861267176f5b249837e8", null ],
       [ "get_rays", "group___c_l_s_solvers.html#a9ded7ec7a82decb93132e10e25851528", null ],
       [ "makes_consistent_constraint", "group___c_l_s_solvers.html#a23e950a4911f140ddffdcaeb062f7b80", null ],
+      [ "operator=", "group___c_l_s_solvers.html#a3e13ece396c9c302c185167d9364e701", null ],
       [ "solve", "group___c_l_s_solvers.html#aadfa4655b194b3b095db962c5900fee6", null ],
-      [ "solve", "group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477", null ],
-      [ "rays", "group___c_l_s_solvers.html#ad748438e4625935b7c4ce4d677b2cdfd", null ]
+      [ "solve", "group___c_l_s_solvers.html#a08fcdf86d0fcd8ac3e5da077b627e477", null ]
     ] ],
     [ "LP_Solver", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver", [
       [ "~LP_Solver", "group___c_l_s_solvers.html#a1d530b23b2516c36cbc02173e667d0cf", null ],
@@ -58,6 +59,7 @@ var group___c_l_s_solvers =
       [ "copy", "group___c_l_s_solvers.html#acc03418759754dbeda266dba9eefe98b", null ],
       [ "get_dimension", "group___c_l_s_solvers.html#a5a5f372696416caeae454ce78e9acb86", null ],
       [ "get_number_of_constraints", "group___c_l_s_solvers.html#afb7f014f84eb37026fe26f8c3114c0f0", null ],
+      [ "operator=", "group___c_l_s_solvers.html#af6edf0872b391fbbbe67d02a49795238", null ],
       [ "setup_rays", "group___c_l_s_solvers.html#a1b50fd63c3032192d02d9a1b2411e33a", null ],
       [ "solve", "group___c_l_s_solvers.html#a9a4a7563d62e4394162aaa4bd08aae29", null ],
       [ "solve", "group___c_l_s_solvers.html#a3763d4bc551a98546f1f5be4df49390d", null ],
@@ -93,7 +95,7 @@ var group___c_l_s_solvers =
     [ "Skeleton", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_skeleton", [
       [ "Skeleton", "group___c_l_s_solvers.html#ad9f2f64c49dbf96ebd30852e670e7642", null ],
       [ "Skeleton", "group___c_l_s_solvers.html#ad61d70c2397e93141de3ad3c987b1828", null ],
-      [ "Skeleton", "group___c_l_s_solvers.html#ae1d6983329c8624014fa5c9d66f75ac3", null ],
+      [ "Skeleton", "group___c_l_s_solvers.html#a4f9ed09dbe0b7fe8bc9972ce5488eb48", null ],
       [ "~Skeleton", "group___c_l_s_solvers.html#a0da8ede73aea9089d7b81683c08cfc60", null ],
       [ "adjacencies_by_graphs", "group___c_l_s_solvers.html#a91e67ca8a8fc7a891534462c21051ea1", null ],
       [ "common_initialization", "group___c_l_s_solvers.html#aa63d9454338c84be898e1a604eba3527", null ],

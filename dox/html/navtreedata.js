@@ -3,11 +3,7 @@ var NAVTREE =
   [ "Gröbner basis project", "index.html", [
     [ "DynGB: Dynamic Gröbner basis project files", "index.html", [
       [ "Overview", "index.html#Overview", null ],
-      [ "Installation and dependencies", "index.html#Install", [
-        [ "Dependencies", "index.html#Dependencies", null ],
-        [ "For the Don Quixotes among us", "index.html#OpenMPI", null ],
-        [ "Actually installing it!", "index.html#Installation", null ]
-      ] ],
+      [ "Installation and dependencies", "index.html#Install", null ],
       [ "Usage", "index.html#Usage", null ],
       [ "Current status", "index.html#Status", null ],
       [ "To-do list", "index.html#Todo", [
@@ -18,6 +14,7 @@ var NAVTREE =
       [ "Apologia pro labora sua", "index.html#Apologia", null ],
       [ "Copyright details", "index.html#Copyright", null ]
     ] ],
+    [ "DynGB", "md__r_e_a_d_m_e.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Bibliography", "citelist.html", null ],
     [ "Modules", "modules.html", "modules" ],
@@ -52,10 +49,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "algorithm__buchberger__basic_8cpp_source.html",
-"group___g_b_computation.html#a056c7e030d1bcb86444bf52405482964",
-"group___iterator_group.html#ac443c5f24675fc7c8fb69bbd167b634b",
-"group__polygroup.html#a47ca76404bf5c97d1dadbf6c96638ac5",
-"group__polygroup.html#class_polynomial___linked___list"
+"group___fields_group.html#aeaa863df01035eb31f147cfe7194e8e1",
+"group___iterator_group.html#a6d2f1a91150d12a8835395a678260968",
+"group__polygroup.html#a2b1793fec574a10d0c4d1f5979c81a48",
+"group__polygroup.html#adec4a37e9e36f821ae69ca00eb087961",
+"user__interface_8cpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
