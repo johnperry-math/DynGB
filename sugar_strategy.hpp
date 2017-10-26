@@ -83,7 +83,7 @@ public:
   /** @brief the sugar itself */
   DEG_TYPE poly_sugar() const;
   /** @brief the strategy type */
-  virtual StrategyFlags type() { return StrategyFlags::SUGAR_STRATEGY; }
+  virtual StrategyFlags type() override { return StrategyFlags::SUGAR_STRATEGY; }
   ///@}
   /** @name Modification */
   ///@{

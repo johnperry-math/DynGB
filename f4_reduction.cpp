@@ -138,7 +138,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   M.clear();
-  unsigned m = 0;
+  size_t m = 0;
   for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
     M.push_back(*mi);
     M_table.add_monomial(*mi, m);
@@ -286,8 +286,9 @@ void F4_Reduction_Data::reduce_my_rows(
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
-  //EXP_TYPE * u = new EXP_TYPE[n]; // exponents of multiplier
+  red_mutex.lock();
   Monomial u(n);
+  red_mutex.unlock();
   UCOEF_TYPE mod = F.modulus();
   unsigned new_nonzero_entries;
   for (unsigned mi = 0; mi < num_cols; ++mi) {
@@ -302,17 +303,16 @@ void F4_Reduction_Data::reduce_my_rows(
           const Abstract_Polynomial * g = R[mi];
           Polynomial_Iterator * gi = g->new_iterator();
           // determine multiplier
+          Monomial & t = *M[mi];
           for (NVAR_TYPE l = 0; l < n; ++l)
-            //u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
-            u.set_exponent(l, (*M[mi])[l] - (gi->currMonomial())[l]);
+            u.set_exponent(l, t[l] - (gi->currMonomial())[l]);
           red_mutex.lock();
           vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
           if (r.size() == 0) { // need to create reducer
-            unsigned j = mi;
+            size_t j = mi;
             // loop through g's terms
             while (not gi->fellOff()) {
               const Monomial & t = gi->currMonomial();
-              //while (not (M[j]->like_multiple(u, t))) ++j;
               j = M_table.lookup_product(u, t);
               r.emplace_back(j, gi->currCoeff().value());
               gi->moveRight();
@@ -345,7 +345,6 @@ void F4_Reduction_Data::reduce_my_rows(
       }
     }
   }
-  //delete [] u;
 }
 
 void F4_Reduction_Data::reduce_by_old() {
