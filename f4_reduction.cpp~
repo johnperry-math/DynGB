@@ -20,6 +20,7 @@ double copy_time = 0;
 * along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *
 \*****************************************************************************/
 
+#include "f4_hash.hpp"
 #include "f4_reduction.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
@@ -43,10 +44,7 @@ void find_position(
 F4_Reduction_Data::F4_Reduction_Data(
     const list<Critical_Pair_Basic *> & P,
     const list<Abstract_Polynomial *> & B
-) :
-    G(B), Rx(P.front()->first()->base_ring()),
-    M_table(P.front()->first()->base_ring().number_of_variables())
-{
+) : G(B), Rx(P.front()->first()->base_ring()) {
   num_cols = 0;
   A.clear();
   head.clear();
@@ -107,9 +105,8 @@ void F4_Reduction_Data::initialize_some_rows(
     auto pi = p->new_iterator();
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
-    //unsigned i = 0;
-    //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
-    unsigned i = M_table.lookup_product(pi->currMonomial(), t);
+    unsigned i = 0;
+    while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
     offset[row] = i;
@@ -117,8 +114,7 @@ void F4_Reduction_Data::initialize_some_rows(
     nonzero_entries[row] = 1;
     pi->moveRight();
     for (/* */; not pi->fellOff(); ++i) {
-      //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
-      i = M_table.lookup_product(pi->currMonomial(), t);
+      while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
       Arow[i - offset[row]] = pi->currCoeff().value();
       pi->moveRight();
       ++nonzero_entries[row];
@@ -138,12 +134,8 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   M.clear();
-  unsigned m = 0;
-  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
+  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi)
     M.push_back(*mi);
-    M_table.add_monomial(*mi, m);
-    ++m;
-  }
   for (unsigned i = 0; i < strategies.size(); ++i)
     strategies[i] = nullptr;
   A.resize(P.size());
@@ -180,6 +172,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   }
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c].join();
+  //reduce_my_rows(thread_rows[0], buffer[0], indices[0]);
   delete [] workers;
   delete [] thread_rows;
   //
@@ -286,8 +279,7 @@ void F4_Reduction_Data::reduce_my_rows(
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
-  //EXP_TYPE * u = new EXP_TYPE[n]; // exponents of multiplier
-  Monomial u(n);
+  EXP_TYPE * u = new EXP_TYPE[n]; // exponents of multiplier
   UCOEF_TYPE mod = F.modulus();
   unsigned new_nonzero_entries;
   for (unsigned mi = 0; mi < num_cols; ++mi) {
@@ -303,8 +295,7 @@ void F4_Reduction_Data::reduce_my_rows(
           Polynomial_Iterator * gi = g->new_iterator();
           // determine multiplier
           for (NVAR_TYPE l = 0; l < n; ++l)
-            //u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
-            u.set_exponent(l, (*M[mi])[l] - (gi->currMonomial())[l]);
+            u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
           red_mutex.lock();
           vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
           if (r.size() == 0) { // need to create reducer
@@ -312,8 +303,7 @@ void F4_Reduction_Data::reduce_my_rows(
             // loop through g's terms
             while (not gi->fellOff()) {
               const Monomial & t = gi->currMonomial();
-              //while (not (M[j]->like_multiple(u, t))) ++j;
-              j = M_table.lookup_product(u, t);
+              while (not (M[j]->like_multiple(u, t))) ++j;
               r.emplace_back(j, gi->currCoeff().value());
               gi->moveRight();
             }
@@ -345,7 +335,7 @@ void F4_Reduction_Data::reduce_my_rows(
       }
     }
   }
-  //delete [] u;
+  delete [] u;
 }
 
 void F4_Reduction_Data::reduce_by_old() {

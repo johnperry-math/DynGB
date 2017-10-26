@@ -176,7 +176,8 @@ am_test_cyclicn_OBJECTS = test_cyclicn.$(OBJEXT) $(am__objects_2) \
 	$(am__objects_4) $(am__objects_5) $(am__objects_6) \
 	$(am__objects_7) $(am__objects_8) $(am__objects_9) \
 	algorithm_buchberger_explorer_serial.$(OBJEXT) \
-	f4_reduction.$(OBJEXT) monomial_ideal.$(OBJEXT)
+	f4_reduction.$(OBJEXT) f4_hash.$(OBJEXT) \
+	monomial_ideal.$(OBJEXT)
 test_cyclicn_OBJECTS = $(am_test_cyclicn_OBJECTS)
 test_cyclicn_LDADD = $(LDADD)
 test_cyclicn_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -193,7 +194,8 @@ test_dynamic_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
 am_test_f4_OBJECTS = test_f4.$(OBJEXT) $(am__objects_2) \
 	$(am__objects_4) $(am__objects_5) $(am__objects_6) \
 	$(am__objects_7) $(am__objects_8) $(am__objects_9) \
-	f4_reduction.$(OBJEXT) monomial_ideal.$(OBJEXT)
+	f4_reduction.$(OBJEXT) f4_hash.$(OBJEXT) \
+	monomial_ideal.$(OBJEXT)
 test_f4_OBJECTS = $(am_test_f4_OBJECTS)
 test_f4_LDADD = $(LDADD)
 test_f4_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(test_f4_LDFLAGS) \
@@ -202,7 +204,8 @@ am_test_f4_dynamic_OBJECTS = test_f4_dynamic.$(OBJEXT) \
 	$(am__objects_1) $(am__objects_2) $(am__objects_3) \
 	$(am__objects_4) $(am__objects_5) $(am__objects_6) \
 	$(am__objects_7) $(am__objects_8) $(am__objects_9) \
-	f4_dynamic.$(OBJEXT) monomial_ideal.$(OBJEXT) betti.$(OBJEXT)
+	f4_dynamic.$(OBJEXT) f4_hash.$(OBJEXT) \
+	monomial_ideal.$(OBJEXT) betti.$(OBJEXT)
 test_f4_dynamic_OBJECTS = $(am_test_f4_dynamic_OBJECTS)
 test_f4_dynamic_LDADD = $(LDADD)
 test_f4_dynamic_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -219,7 +222,7 @@ test_gmp_LDADD = $(LDADD)
 test_gmp_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
 	$(test_gmp_LDFLAGS) $(LDFLAGS) -o $@
 am_test_hash_OBJECTS = $(am__objects_5) $(am__objects_4) \
-	test_hash.$(OBJEXT)
+	f4_hash.$(OBJEXT) test_hash.$(OBJEXT)
 test_hash_OBJECTS = $(am_test_hash_OBJECTS)
 test_hash_LDADD = $(LDADD)
 am_test_hilbert_functions_OBJECTS = test_hilbert_functions.$(OBJEXT) \
@@ -279,18 +282,6 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_@AM_V@)
-am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_@AM_V@)
-am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
 SOURCES = $(test_4by4_SOURCES) $(test_cab_es1_SOURCES) \
 	$(test_cab_es2_SOURCES) $(test_cab_es4_SOURCES) \
 	$(test_cab_es5_SOURCES) $(test_cab_es6_SOURCES) \
@@ -469,7 +460,7 @@ test_glpk_solver_SOURCES = test_glpk_solver.cpp $(LP_SOLVERS_LIB) $(MONOMIAL_LIB
 test_glpk_solver_LDFLAGS = $(DYNAMIC_LINK)
 test_gmp_SOURCES = test_gmp.cpp
 test_gmp_LDFLAGS = $(GMP_LINK)
-test_cyclicn_SOURCES = test_cyclicn.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) algorithm_buchberger_explorer_serial.cpp f4_reduction.cpp monomial_ideal.cpp
+test_cyclicn_SOURCES = test_cyclicn.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) algorithm_buchberger_explorer_serial.cpp f4_reduction.cpp f4_hash.cpp monomial_ideal.cpp
 test_cyclicn_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
 test_dynamic_SOURCES = test_dynamic.cpp $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) monomial_ideal.cpp betti.cpp
 test_dynamic_LDFLAGS = $(DYNAMIC_LINK)
@@ -491,10 +482,10 @@ test_cab_es6_SOURCES = test_cab_es6.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es6_LDFLAGS = $(DYNAMIC_LINK)
 test_cab_es9_SOURCES = test_cab_es9.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es9_LDFLAGS = $(DYNAMIC_LINK)
-test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.hpp test_hash.cpp
-test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp monomial_ideal.cpp
+test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.cpp test_hash.cpp
+test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp f4_hash.cpp monomial_ideal.cpp
 test_f4_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
-test_f4_dynamic_SOURCES = test_f4_dynamic.cpp  $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_dynamic.cpp monomial_ideal.cpp betti.cpp
+test_f4_dynamic_SOURCES = test_f4_dynamic.cpp  $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_dynamic.cpp f4_hash.cpp monomial_ideal.cpp betti.cpp
 test_f4_dynamic_LDFLAGS = $(DYNAMIC_LINK) $(GMP_LINK) $(PARALLEL_LINK)
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -683,6 +674,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dense_univariate_rational_poly.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamic_engine.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/f4_dynamic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/f4_hash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/f4_reduction.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fields.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glpk_solver.Po@am__quote@
@@ -839,7 +831,7 @@ distdir: $(DISTFILES)
 	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
 	|| chmod -R a+r "$(distdir)"
 dist-gzip: distdir
-	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	tardir=$(distdir) && $(am__tar) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).tar.gz
 	$(am__post_remove_distdir)
 
 dist-bzip2: distdir
@@ -865,7 +857,7 @@ dist-shar: distdir
 	@echo WARNING: "Support for shar distribution archives is" \
 	               "deprecated." >&2
 	@echo WARNING: "It will be removed altogether in Automake 2.0" >&2
-	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
+	shar $(distdir) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).shar.gz
 	$(am__post_remove_distdir)
 
 dist-zip: distdir
@@ -883,7 +875,7 @@ dist dist-all:
 distcheck: dist
 	case '$(DIST_ARCHIVES)' in \
 	*.tar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).tar.gz | $(am__untar) ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).tar.gz | $(am__untar) ;;\
 	*.tar.bz2*) \
 	  bzip2 -dc $(distdir).tar.bz2 | $(am__untar) ;;\
 	*.tar.lz*) \
@@ -893,7 +885,7 @@ distcheck: dist
 	*.tar.Z*) \
 	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
 	*.shar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).shar.gz | unshar ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).shar.gz | unshar ;;\
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac

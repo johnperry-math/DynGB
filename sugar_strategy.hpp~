@@ -43,24 +43,24 @@ public:
     @return @p true if and only if the sugar of @p this is equivalent to the
       sugar of @p sd
   */
-  virtual bool equivalent(const Poly_Strategy_Data & sd) const override;
+  virtual bool equivalent(const Poly_Strategy_Data & sd) const;
   /**
     @brief returns @c true iff @c this sugar is larger than @c sd &rsquo;s
     @param sd strategy data containing sugar
     @return @p true if and only if @p this sugar is larger than @p sd &rsquo;s
   */
-  virtual bool first_larger(const Poly_Strategy_Data & sd) const override;
+  virtual bool first_larger(const Poly_Strategy_Data & sd) const;
   /**
     @brief sets the sugar to the largest total degree of a monomial in
       the assigned previously polynomial
   */
-  virtual void at_generation_tasks() override;
+  virtual void at_generation_tasks();
   /**
     @brief sets the sugar to the largest total degree of a monomial in
       the product of the monomial and the previously assigned polynomial
     @param t a Monomial to multiply to @p this
   */
-  virtual void at_generation_tasks(const Monomial & t) override;
+  virtual void at_generation_tasks(const Monomial & t);
   /**
     @brief re-evaluates the sugar, if need be
     @param u exponent vector of a Monomial to multiply to @p g,
@@ -69,15 +69,7 @@ public:
   */
   virtual void pre_reduction_tasks(
     const EXP_TYPE * u, const Abstract_Polynomial & g
-  ) override;
-  /**
-    @brief re-evaluates the sugar, if need be
-    @param u Monomial to multiply to @p g, then subtract from @p this
-    @param g a polynomial
-  */
-  virtual void pre_reduction_tasks(const Monomial & u, const Abstract_Polynomial & g) override {
-    pre_reduction_tasks(u.log(), g);
-  }
+  );
   /** @name Basic properties */
   ///@{
   /** @brief the sugar itself */

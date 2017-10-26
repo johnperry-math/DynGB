@@ -30,7 +30,7 @@ test_glpk_solver_LDFLAGS = $(DYNAMIC_LINK)
 test_gmp_SOURCES = test_gmp.cpp
 test_gmp_LDFLAGS = $(GMP_LINK)
 
-test_cyclicn_SOURCES = test_cyclicn.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) algorithm_buchberger_explorer_serial.cpp f4_reduction.cpp f4_hash.cpp monomial_ideal.cpp
+test_cyclicn_SOURCES = test_cyclicn.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) algorithm_buchberger_explorer_serial.cpp f4_reduction.cpp monomial_ideal.cpp
 test_cyclicn_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
 
 test_dynamic_SOURCES = test_dynamic.cpp $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) monomial_ideal.cpp betti.cpp
@@ -63,10 +63,10 @@ test_cab_es6_LDFLAGS = $(DYNAMIC_LINK)
 test_cab_es9_SOURCES = test_cab_es9.cpp $(ALL_DYNAMIC_LIBS)
 test_cab_es9_LDFLAGS = $(DYNAMIC_LINK)
 
-test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.cpp test_hash.cpp
+test_hash_SOURCES = $(MONOMIAL_LIB) $(ORDERING_LIB) f4_hash.hpp test_hash.cpp
 
-test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp f4_hash.cpp monomial_ideal.cpp
+test_f4_SOURCES = test_f4.cpp $(HILBERT_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_reduction.cpp monomial_ideal.cpp
 test_f4_LDFLAGS = $(GMP_LINK) $(PARALLEL_LINK)
 
-test_f4_dynamic_SOURCES = test_f4_dynamic.cpp  $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_dynamic.cpp f4_hash.cpp monomial_ideal.cpp betti.cpp
+test_f4_dynamic_SOURCES = test_f4_dynamic.cpp  $(DYNAMIC_LIB) $(HILBERT_LIB) $(LP_SOLVERS_LIB) $(ORDERING_LIB) $(MONOMIAL_LIB) $(POLY_LIB) $(REDUCTION_LIB) $(STATIC_LIB) $(STRAT_LIB) f4_dynamic.cpp monomial_ideal.cpp betti.cpp
 test_f4_dynamic_LDFLAGS = $(DYNAMIC_LINK) $(GMP_LINK) $(PARALLEL_LINK)

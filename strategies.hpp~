@@ -108,15 +108,8 @@ public:
       const Abstract_Polynomial & r, const Abstract_Polynomial & g
   ) const;
   /**
-    @brief hook called immediately before performing reduction
-    @param g polynomial that reduces @c r (where @c r is @c this)
-    @param u monomial satisfying @f$u\textrm{lm}(g)=\textrm{lm}(r)@f$
-    @details The default is to do nothing, which is good for the normal strategy.
-      Other strategies, however, may require some processing before reduction;
-      the sugar strategy is an example, as reduction may increase
-      a polynomial&rsquo;s sugar
   */
-  virtual void pre_reduction_tasks(const Monomial & u, const Abstract_Polynomial & g) {
+  void pre_reduction_tasks(const Monomial & u, const Abstract_Polynomial & g) {
     pre_reduction_tasks(u.log(), g);
   }
   /**
