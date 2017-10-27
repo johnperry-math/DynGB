@@ -234,7 +234,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00145">145</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00152">152</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Pair_Strategy_Data:</div>
 <div class="dyncontent">
@@ -335,7 +335,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sugar__strategy_8hpp_source.html#l00101">101</a> of file <a class="el" href="sugar__strategy_8hpp_source.html">sugar_strategy.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sugar__strategy_8hpp_source.html#l00109">109</a> of file <a class="el" href="sugar__strategy_8hpp_source.html">sugar_strategy.hpp</a>.</p>
 </div><div class="dynheader">
 Inheritance diagram for Pair_Sugar_Data:</div>
 <div class="dyncontent">
@@ -573,9 +573,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memitem:a996754ff163b0ff32d783ec723ac35be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be">valid_reduction</a> (const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;r, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g) const</td></tr>
 <tr class="memdesc:a996754ff163b0ff32d783ec723ac35be"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called while finding a reducer  <a href="#a996754ff163b0ff32d783ec723ac35be">More...</a><br /></td></tr>
 <tr class="separator:a996754ff163b0ff32d783ec723ac35be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27fb1565f1c569ca28f01021551a1353"><td class="memItemLeft" align="right" valign="top"><a id="a27fb1565f1c569ca28f01021551a1353"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pre_reduction_tasks</b> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
-<tr class="separator:a27fb1565f1c569ca28f01021551a1353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a077b9fb020596f92ed0cb38fea2a0b71"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a077b9fb020596f92ed0cb38fea2a0b71">pre_reduction_tasks</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
+<tr class="memdesc:a077b9fb020596f92ed0cb38fea2a0b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called immediately before performing reduction  <a href="#a077b9fb020596f92ed0cb38fea2a0b71">More...</a><br /></td></tr>
+<tr class="separator:a077b9fb020596f92ed0cb38fea2a0b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d71db50c58a24f48f94eae6a48c2149"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a0d71db50c58a24f48f94eae6a48c2149">pre_reduction_tasks</a> (const EXP_TYPE *u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
 <tr class="memdesc:a0d71db50c58a24f48f94eae6a48c2149"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called immediately before performing reduction  <a href="#a0d71db50c58a24f48f94eae6a48c2149">More...</a><br /></td></tr>
 <tr class="separator:a0d71db50c58a24f48f94eae6a48c2149"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -618,7 +618,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>hook called while first generating polynomial </p>
 <p>The default is to do nothing, which is good for the normal strategy. Other strategies, however, may perform some record-keeping; the sugar strategy, for instance, will compute the polynomial&rsquo;s sugar. </p>
 
-<p>Reimplemented in <a class="el" href="group__strategygroup.html#ac07ee9ee15bd97e5e8befb3f6cec3929">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#ada533e5c56d7f53207a5e8093414dfb3">Poly_Sugar_Data</a>.</p>
+<p>Reimplemented in <a class="el" href="group__strategygroup.html#ac07ee9ee15bd97e5e8befb3f6cec3929">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#a527b105db3edecb8ccfb3f46bbfafe15">Poly_Sugar_Data</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00088">88</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
 
@@ -657,14 +657,64 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>The default is to do nothing, which is good for the normal strategy. Other strategies, however, may perform some record-keeping; the sugar strategy, for instance, will compute the polynomial&rsquo;s sugar. </p>
 
-<p>Reimplemented in <a class="el" href="group__strategygroup.html#ac58bd8d30e7e10dbbe8e86b1d9d04376">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#aa80c660f10b1c5d0dd2a305d598685f5">Poly_Sugar_Data</a>.</p>
+<p>Reimplemented in <a class="el" href="group__strategygroup.html#ac58bd8d30e7e10dbbe8e86b1d9d04376">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#a26a462d2dffa89942b82eeecf759bafa">Poly_Sugar_Data</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00096">96</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
 
 </div>
 </div>
+<a id="a077b9fb020596f92ed0cb38fea2a0b71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a077b9fb020596f92ed0cb38fea2a0b71">&#9670;&nbsp;</a></span>pre_reduction_tasks() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Poly_Strategy_Data::pre_reduction_tasks </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>hook called immediately before performing reduction </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>polynomial that reduces <code>r</code> (where <code>r</code> is <code>this</code>) </td></tr>
+    <tr><td class="paramname">u</td><td>monomial satisfying \(u\textrm{lm}(g)=\textrm{lm}(r)\)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The default is to do nothing, which is good for the normal strategy. Other strategies, however, may require some processing before reduction; the sugar strategy is an example, as reduction may increase a polynomial&rsquo;s sugar </p>
+
+<p>Reimplemented in <a class="el" href="group__strategygroup.html#a845d9c0d53954a50fe3112e94b1cdfa8">Poly_Sugar_Data</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00119">119</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a0d71db50c58a24f48f94eae6a48c2149"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d71db50c58a24f48f94eae6a48c2149">&#9670;&nbsp;</a></span>pre_reduction_tasks()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d71db50c58a24f48f94eae6a48c2149">&#9670;&nbsp;</a></span>pre_reduction_tasks() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -707,9 +757,9 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <p>The default is to do nothing, which is good for the normal strategy. Other strategies, however, may require some processing before reduction; the sugar strategy is an example, as reduction may increase a polynomial&rsquo;s sugar </p>
 
-<p>Reimplemented in <a class="el" href="group__strategygroup.html#a4a34039eb50a2294d2aaf6245c1833b8">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#a1b2e8a7fe4fcd57555fa58e48620b2bf">Poly_Sugar_Data</a>.</p>
+<p>Reimplemented in <a class="el" href="group__strategygroup.html#a4a34039eb50a2294d2aaf6245c1833b8">Poly_WSugar_Data</a>, and <a class="el" href="group__strategygroup.html#a284ca31b353017bdf4ea9b331218fff4">Poly_Sugar_Data</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00124">124</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="strategies_8hpp_source.html#l00131">131</a> of file <a class="el" href="strategies_8hpp_source.html">strategies.hpp</a>.</p>
 
 </div>
 </div>
@@ -795,31 +845,34 @@ Inheritance diagram for Poly_Sugar_Data:</div>
 <tr class="memitem:a0d9e2f66a44f2e10d26b977c55650f7f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a0d9e2f66a44f2e10d26b977c55650f7f">Poly_Sugar_Data</a> (const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *poly)</td></tr>
 <tr class="memdesc:a0d9e2f66a44f2e10d26b977c55650f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">records <code>poly</code> as the reference for <code>this</code>  <a href="#a0d9e2f66a44f2e10d26b977c55650f7f">More...</a><br /></td></tr>
 <tr class="separator:a0d9e2f66a44f2e10d26b977c55650f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada533e5c56d7f53207a5e8093414dfb3"><td class="memItemLeft" align="right" valign="top"><a id="ada533e5c56d7f53207a5e8093414dfb3"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#ada533e5c56d7f53207a5e8093414dfb3">at_generation_tasks</a> ()</td></tr>
-<tr class="memdesc:ada533e5c56d7f53207a5e8093414dfb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the sugar to the largest total degree of a monomial in the assigned previously polynomial <br /></td></tr>
-<tr class="separator:ada533e5c56d7f53207a5e8093414dfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa80c660f10b1c5d0dd2a305d598685f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#aa80c660f10b1c5d0dd2a305d598685f5">at_generation_tasks</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t)</td></tr>
-<tr class="memdesc:aa80c660f10b1c5d0dd2a305d598685f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the sugar to the largest total degree of a monomial in the product of the monomial and the previously assigned polynomial  <a href="#aa80c660f10b1c5d0dd2a305d598685f5">More...</a><br /></td></tr>
-<tr class="separator:aa80c660f10b1c5d0dd2a305d598685f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73df53a8da9e4cfaf66202a1451d5b2e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a73df53a8da9e4cfaf66202a1451d5b2e">equivalent</a> (const <a class="el" href="group__strategygroup.html#class_poly___strategy___data">Poly_Strategy_Data</a> &amp;sd) const</td></tr>
-<tr class="memdesc:a73df53a8da9e4cfaf66202a1451d5b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff the sugars are equal  <a href="#a73df53a8da9e4cfaf66202a1451d5b2e">More...</a><br /></td></tr>
-<tr class="separator:a73df53a8da9e4cfaf66202a1451d5b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ccb90a43591e465479258bdf10b5b20"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a9ccb90a43591e465479258bdf10b5b20">first_larger</a> (const <a class="el" href="group__strategygroup.html#class_poly___strategy___data">Poly_Strategy_Data</a> &amp;sd) const</td></tr>
-<tr class="memdesc:a9ccb90a43591e465479258bdf10b5b20"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff <code>this</code> sugar is larger than <code>sd</code> &rsquo;s  <a href="#a9ccb90a43591e465479258bdf10b5b20">More...</a><br /></td></tr>
-<tr class="separator:a9ccb90a43591e465479258bdf10b5b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b2e8a7fe4fcd57555fa58e48620b2bf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a1b2e8a7fe4fcd57555fa58e48620b2bf">pre_reduction_tasks</a> (const EXP_TYPE *u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
-<tr class="memdesc:a1b2e8a7fe4fcd57555fa58e48620b2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">re-evaluates the sugar, if need be  <a href="#a1b2e8a7fe4fcd57555fa58e48620b2bf">More...</a><br /></td></tr>
-<tr class="separator:a1b2e8a7fe4fcd57555fa58e48620b2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527b105db3edecb8ccfb3f46bbfafe15"><td class="memItemLeft" align="right" valign="top"><a id="a527b105db3edecb8ccfb3f46bbfafe15"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a527b105db3edecb8ccfb3f46bbfafe15">at_generation_tasks</a> () override</td></tr>
+<tr class="memdesc:a527b105db3edecb8ccfb3f46bbfafe15"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the sugar to the largest total degree of a monomial in the assigned previously polynomial <br /></td></tr>
+<tr class="separator:a527b105db3edecb8ccfb3f46bbfafe15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26a462d2dffa89942b82eeecf759bafa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a26a462d2dffa89942b82eeecf759bafa">at_generation_tasks</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t) override</td></tr>
+<tr class="memdesc:a26a462d2dffa89942b82eeecf759bafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the sugar to the largest total degree of a monomial in the product of the monomial and the previously assigned polynomial  <a href="#a26a462d2dffa89942b82eeecf759bafa">More...</a><br /></td></tr>
+<tr class="separator:a26a462d2dffa89942b82eeecf759bafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd535711760db4abd9851429184ac94c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#afd535711760db4abd9851429184ac94c">equivalent</a> (const <a class="el" href="group__strategygroup.html#class_poly___strategy___data">Poly_Strategy_Data</a> &amp;sd) const override</td></tr>
+<tr class="memdesc:afd535711760db4abd9851429184ac94c"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff the sugars are equal  <a href="#afd535711760db4abd9851429184ac94c">More...</a><br /></td></tr>
+<tr class="separator:afd535711760db4abd9851429184ac94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3473aac2bafb690a52670aa226fb47b2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a3473aac2bafb690a52670aa226fb47b2">first_larger</a> (const <a class="el" href="group__strategygroup.html#class_poly___strategy___data">Poly_Strategy_Data</a> &amp;sd) const override</td></tr>
+<tr class="memdesc:a3473aac2bafb690a52670aa226fb47b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff <code>this</code> sugar is larger than <code>sd</code> &rsquo;s  <a href="#a3473aac2bafb690a52670aa226fb47b2">More...</a><br /></td></tr>
+<tr class="separator:a3473aac2bafb690a52670aa226fb47b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284ca31b353017bdf4ea9b331218fff4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a284ca31b353017bdf4ea9b331218fff4">pre_reduction_tasks</a> (const EXP_TYPE *u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g) override</td></tr>
+<tr class="memdesc:a284ca31b353017bdf4ea9b331218fff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">re-evaluates the sugar, if need be  <a href="#a284ca31b353017bdf4ea9b331218fff4">More...</a><br /></td></tr>
+<tr class="separator:a284ca31b353017bdf4ea9b331218fff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845d9c0d53954a50fe3112e94b1cdfa8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a845d9c0d53954a50fe3112e94b1cdfa8">pre_reduction_tasks</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g) override</td></tr>
+<tr class="memdesc:a845d9c0d53954a50fe3112e94b1cdfa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">re-evaluates the sugar, if need be  <a href="#a845d9c0d53954a50fe3112e94b1cdfa8">More...</a><br /></td></tr>
+<tr class="separator:a845d9c0d53954a50fe3112e94b1cdfa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Basic properties</div></td></tr>
 <tr class="memitem:a3b6ef678b640a3138e43882b9d2dca5f"><td class="memItemLeft" align="right" valign="top"><a id="a3b6ef678b640a3138e43882b9d2dca5f"></a>
 DEG_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a3b6ef678b640a3138e43882b9d2dca5f">poly_sugar</a> () const</td></tr>
 <tr class="memdesc:a3b6ef678b640a3138e43882b9d2dca5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the sugar itself <br /></td></tr>
 <tr class="separator:a3b6ef678b640a3138e43882b9d2dca5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36704dfc77b9007bf5f249e55bfde0ef"><td class="memItemLeft" align="right" valign="top"><a id="a36704dfc77b9007bf5f249e55bfde0ef"></a>
-virtual <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a36704dfc77b9007bf5f249e55bfde0ef">type</a> ()</td></tr>
-<tr class="memdesc:a36704dfc77b9007bf5f249e55bfde0ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">the strategy type <br /></td></tr>
-<tr class="separator:a36704dfc77b9007bf5f249e55bfde0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e37acde82f22832ebbae2ab5fc8224"><td class="memItemLeft" align="right" valign="top"><a id="ac6e37acde82f22832ebbae2ab5fc8224"></a>
+virtual <a class="el" href="group__strategygroup.html#ga0ee6c8e033547330e6b89929730007f4">StrategyFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#ac6e37acde82f22832ebbae2ab5fc8224">type</a> () override</td></tr>
+<tr class="memdesc:ac6e37acde82f22832ebbae2ab5fc8224"><td class="mdescLeft">&#160;</td><td class="mdescRight">the strategy type <br /></td></tr>
+<tr class="separator:ac6e37acde82f22832ebbae2ab5fc8224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
 <tr class="memitem:a945416871509370e2222c8c7abe01759"><td class="memItemLeft" align="right" valign="top"><a id="a945416871509370e2222c8c7abe01759"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a945416871509370e2222c8c7abe01759">force_sugar</a> (DEG_TYPE new_sugar)</td></tr>
@@ -852,9 +905,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memitem:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be">valid_reduction</a> (const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;r, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g) const</td></tr>
 <tr class="memdesc:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called while finding a reducer  <a href="group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be">More...</a><br /></td></tr>
 <tr class="separator:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27fb1565f1c569ca28f01021551a1353 inherit pub_methods_group__strategygroup"><td class="memItemLeft" align="right" valign="top"><a id="a27fb1565f1c569ca28f01021551a1353"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pre_reduction_tasks</b> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
-<tr class="separator:a27fb1565f1c569ca28f01021551a1353 inherit pub_methods_group__strategygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:a125902ea0a800d9545937930e4537040"><td class="memItemLeft" align="right" valign="top"><a id="a125902ea0a800d9545937930e4537040"></a>
 unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a125902ea0a800d9545937930e4537040">sugar</a></td></tr>
@@ -910,8 +960,8 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 </div>
 </div>
 <h4 class="groupheader">Member Function Documentation</h4>
-<a id="aa80c660f10b1c5d0dd2a305d598685f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa80c660f10b1c5d0dd2a305d598685f5">&#9670;&nbsp;</a></span>at_generation_tasks()</h2>
+<a id="a26a462d2dffa89942b82eeecf759bafa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26a462d2dffa89942b82eeecf759bafa">&#9670;&nbsp;</a></span>at_generation_tasks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -929,7 +979,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -948,8 +998,8 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 
 </div>
 </div>
-<a id="a73df53a8da9e4cfaf66202a1451d5b2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73df53a8da9e4cfaf66202a1451d5b2e">&#9670;&nbsp;</a></span>equivalent()</h2>
+<a id="afd535711760db4abd9851429184ac94c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd535711760db4abd9851429184ac94c">&#9670;&nbsp;</a></span>equivalent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -967,7 +1017,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -987,8 +1037,8 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 
 </div>
 </div>
-<a id="a9ccb90a43591e465479258bdf10b5b20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ccb90a43591e465479258bdf10b5b20">&#9670;&nbsp;</a></span>first_larger()</h2>
+<a id="a3473aac2bafb690a52670aa226fb47b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3473aac2bafb690a52670aa226fb47b2">&#9670;&nbsp;</a></span>first_larger()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1006,7 +1056,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1026,8 +1076,8 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 
 </div>
 </div>
-<a id="a1b2e8a7fe4fcd57555fa58e48620b2bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b2e8a7fe4fcd57555fa58e48620b2bf">&#9670;&nbsp;</a></span>pre_reduction_tasks()</h2>
+<a id="a284ca31b353017bdf4ea9b331218fff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284ca31b353017bdf4ea9b331218fff4">&#9670;&nbsp;</a></span>pre_reduction_tasks() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1055,7 +1105,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1072,6 +1122,55 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;
 <p>Reimplemented from <a class="el" href="group__strategygroup.html#a0d71db50c58a24f48f94eae6a48c2149">Poly_Strategy_Data</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="sugar__strategy_8cpp_source.html#l00061">61</a> of file <a class="el" href="sugar__strategy_8cpp_source.html">sugar_strategy.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a845d9c0d53954a50fe3112e94b1cdfa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845d9c0d53954a50fe3112e94b1cdfa8">&#9670;&nbsp;</a></span>pre_reduction_tasks() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Poly_Sugar_Data::pre_reduction_tasks </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>re-evaluates the sugar, if need be </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a> to multiply to <code>g</code>, then subtract from <code>this</code> </td></tr>
+    <tr><td class="paramname">g</td><td>a polynomial </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="group__strategygroup.html#a077b9fb020596f92ed0cb38fea2a0b71">Poly_Strategy_Data</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="sugar__strategy_8hpp_source.html#l00078">78</a> of file <a class="el" href="sugar__strategy_8hpp_source.html">sugar_strategy.hpp</a>.</p>
 
 </div>
 </div>
@@ -1170,9 +1269,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memitem:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be">valid_reduction</a> (const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;r, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g) const</td></tr>
 <tr class="memdesc:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called while finding a reducer  <a href="group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be">More...</a><br /></td></tr>
 <tr class="separator:a996754ff163b0ff32d783ec723ac35be inherit pub_methods_group__strategygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27fb1565f1c569ca28f01021551a1353 inherit pub_methods_group__strategygroup"><td class="memItemLeft" align="right" valign="top"><a id="a27fb1565f1c569ca28f01021551a1353"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pre_reduction_tasks</b> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
-<tr class="separator:a27fb1565f1c569ca28f01021551a1353 inherit pub_methods_group__strategygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a077b9fb020596f92ed0cb38fea2a0b71 inherit pub_methods_group__strategygroup"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a077b9fb020596f92ed0cb38fea2a0b71">pre_reduction_tasks</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> &amp;g)</td></tr>
+<tr class="memdesc:a077b9fb020596f92ed0cb38fea2a0b71 inherit pub_methods_group__strategygroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">hook called immediately before performing reduction  <a href="group__strategygroup.html#a077b9fb020596f92ed0cb38fea2a0b71">More...</a><br /></td></tr>
+<tr class="separator:a077b9fb020596f92ed0cb38fea2a0b71 inherit pub_methods_group__strategygroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:a8a3f679ee5536587a4794a8c20b92cb9"><td class="memItemLeft" align="right" valign="top"><a id="a8a3f679ee5536587a4794a8c20b92cb9"></a>
 DEG_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__strategygroup.html#a8a3f679ee5536587a4794a8c20b92cb9">sugar</a></td></tr>

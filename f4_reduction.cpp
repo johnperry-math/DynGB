@@ -107,8 +107,6 @@ void F4_Reduction_Data::initialize_some_rows(
     auto pi = p->new_iterator();
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
-    //unsigned i = 0;
-    //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
     unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
@@ -117,7 +115,6 @@ void F4_Reduction_Data::initialize_some_rows(
     nonzero_entries[row] = 1;
     pi->moveRight();
     for (/* */; not pi->fellOff(); ++i) {
-      //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
       i = M_table.lookup_product(pi->currMonomial(), t);
       Arow[i - offset[row]] = pi->currCoeff().value();
       pi->moveRight();
@@ -531,10 +528,10 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         ++pi;
     }
     // make s-poly
-    time_t start_time = time(nullptr);
+    //time_t start_time = time(nullptr);
     F4_Reduction_Data s(Pnew, G); // cyc8h ~20sec
-    time_t end_time = time(nullptr);
-    total_time += difftime(end_time, start_time);
+    //time_t end_time = time(nullptr);
+    //total_time += difftime(end_time, start_time);
     number_of_spolys += Pnew.size();
     Pnew.clear();
     if (not s.is_zero()) {
@@ -545,7 +542,10 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
       cout << "\tmatrix reduced to zero\n";
       // delete s;
     } else {
+      time_t start_time = time(nullptr);
       vector<Constant_Polynomial *> R = s.finalize();
+      time_t end_time = time(nullptr);
+      total_time += difftime(end_time, start_time);
       for (auto r : R) {
         cout << "\tadded " << r->leading_monomial() << endl;
         very_verbose = false;

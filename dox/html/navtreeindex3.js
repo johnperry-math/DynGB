@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"group__polygroup.html#a28dde5c7941ad0636f17054cd80bbd8e":[4,7,11,10],
+"group__polygroup.html#a2ae67955874f0a461952a89f6fb25647":[4,7,7,7],
 "group__polygroup.html#a2b1793fec574a10d0c4d1f5979c81a48":[4,7,3,40],
 "group__polygroup.html#a2b7a092c8889479db32c76c0d2a65eae":[4,7,7,10],
 "group__polygroup.html#a2dc3d8ec3b25f3a17417883c890fbdce":[4,7,2,20],
@@ -64,8 +66,8 @@ var NAVTREEINDEX3 =
 "group__polygroup.html#a563c96b359a1faa97d73be48576c1d42":[4,7,6,15],
 "group__polygroup.html#a5653fee1985ec45e11c594d7de53385b":[4,7,7,9],
 "group__polygroup.html#a57606623bed3fcd4f7b38530af211346":[4,7,11,9],
-"group__polygroup.html#a57f7bbe1cd7ae1c2ca66d12f988a9c6d":[4,7,3,15],
 "group__polygroup.html#a57f7bbe1cd7ae1c2ca66d12f988a9c6d":[4,7,3,16],
+"group__polygroup.html#a57f7bbe1cd7ae1c2ca66d12f988a9c6d":[4,7,3,15],
 "group__polygroup.html#a58fc0f5eefa5d11cdd17d3453eb9ac0d":[4,7,2,8],
 "group__polygroup.html#a597dc990980f1936e86dbf8940dbeecd":[4,7,0,16],
 "group__polygroup.html#a5b19863967dc9801997d2d1058f312a3":[4,7,6,49],
@@ -225,8 +227,8 @@ var NAVTREEINDEX3 =
 "group__polygroup.html#ac980954e486906d80d08f4155254d186":[4,7,2,19],
 "group__polygroup.html#acb2070ec4ddcaca8ded1ff14856cf966":[4,7,5,3],
 "group__polygroup.html#acbd3e3d53eefdfae5b59431d40ccd11b":[4,7,1,25],
-"group__polygroup.html#accb38470c561da8878937486c9c3c4e7":[4,7,3,34],
 "group__polygroup.html#accb38470c561da8878937486c9c3c4e7":[4,7,3,36],
+"group__polygroup.html#accb38470c561da8878937486c9c3c4e7":[4,7,3,34],
 "group__polygroup.html#acd4d8a0d3e9e6704a6ea91e9c29cfea0":[4,7,2,14],
 "group__polygroup.html#acd9235d4fe5a56a3a0842a80b4efbdbb":[4,7,4,9],
 "group__polygroup.html#ace854a5e7d0fac35ad2d9469a34656a7":[4,7,4,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "group__polygroup.html#adbbb6af1fb79d5794af42e28d584641b":[4,7,0,15],
 "group__polygroup.html#adc04ceaa684cbc36bd6800c57364bd2e":[4,7,9,6],
 "group__polygroup.html#adc04ceaa684cbc36bd6800c57364bd2e":[4,7,12,25],
-"group__polygroup.html#adceeadff156d68eb4af0492d5cbd46b5":[4,7,11,20],
-"group__polygroup.html#add21309f55af6a58e1d9b1623a0bb09a":[4,7,10,3],
-"group__polygroup.html#add45ee2cac1598b8069d0375190461dc":[4,7,2,5]
+"group__polygroup.html#adceeadff156d68eb4af0492d5cbd46b5":[4,7,11,20]
 };

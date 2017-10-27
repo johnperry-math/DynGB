@@ -164,6 +164,7 @@ var group___g_b_computation =
       [ "l_head", "group___g_b_computation.html#a740d4262bc2b5fdfcf2bf23bf05bf866", null ],
       [ "M", "group___g_b_computation.html#a7dac72addf3ef8ff2c87c247a90eaa9d", null ],
       [ "M_build", "group___g_b_computation.html#aee58b978a10b26bbdf1d518e6eb25fb5", null ],
+      [ "M_table", "group___g_b_computation.html#ae0a76700237de2f2e4340f4f1a78c7ff", null ],
       [ "mord", "group___g_b_computation.html#a4f684766174bbefa4d04df3fa894ad1d", null ],
       [ "mord", "group___g_b_computation.html#a531a462792fba821e13a63c7376c35cf", null ],
       [ "nonzero_entries", "group___g_b_computation.html#a55db3cd23309e08acfbce3b6d2feec85", null ],

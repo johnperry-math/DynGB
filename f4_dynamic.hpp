@@ -37,6 +37,7 @@ using std::function;
 #include "monomial_ordering.hpp"
 #include "polynomial.hpp"
 #include "critical_pair.hpp"
+#include "f4_hash.hpp"
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -317,6 +318,8 @@ protected:
   unsigned num_rows;
   /** @brief monomials for each matrix */
   vector<Monomial *> M;
+  /** @brief hash table of the monomials in @c M */
+  F4_Hash M_table;
   /**
     @brief coefficient data in sparse representation; each vector entry is a
       subrow of the dense matrix

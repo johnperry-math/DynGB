@@ -817,7 +817,7 @@ Implementation of Faug\`{e}re's F4 algorithm.
 
 Currently computes a Gr\"{o}bner basis by selecting several s-\/polynomials of lowest lcm degree. Data is stored in a semi-\/sparse matrix format, with each row a contiguous array of entries ({\ttfamily A}). Each row of {\ttfamily A} begins at the position indicated by the corresponding {\ttfamily offset}, and its first non-\/zero entry appears at the position indicated by the corresponding {\ttfamily head}. So the leading coefficient of the polynomial in row {\ttfamily k} appears in {\ttfamily A\mbox{[}head\mbox{[}k\mbox{]}\mbox{]}} and the leading monomial appears in {\ttfamily M\mbox{[}offset\mbox{[}k\mbox{]}+head\mbox{[}k\mbox{]}\mbox{]}}. Starting from {\ttfamily head\mbox{[}k\mbox{]}}, row {\ttfamily k} is actually dense. While this is not sparse, it does succeed in saving more space than one might expect. 
 
-Definition at line 73 of file f4\+\_\+dynamic.\+hpp.
+Definition at line 74 of file f4\+\_\+dynamic.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -1004,6 +1004,9 @@ vector$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ $>$ \hype
 \mbox{\Hypertarget{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}\label{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}} 
 list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ $>$ \hyperlink{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}{M\+\_\+build}
 \begin{DoxyCompactList}\small\item\em monomials while building \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}\label{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}} 
+\hyperlink{group___g_b_computation_class_f4___hash}{F4\+\_\+\+Hash} \hyperlink{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}{M\+\_\+table}
+\begin{DoxyCompactList}\small\item\em hash table of the monomials in {\ttfamily M} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}\label{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}} 
 const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$ \hyperlink{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}{mord}
 \begin{DoxyCompactList}\small\item\em how the monomials are ordered \end{DoxyCompactList}\item 
@@ -1090,7 +1093,7 @@ encapsulation of one step of the F4 algorithm for the polynomials indicated by {
 \end{DoxyParams}
 
 
-Definition at line 44 of file f4\+\_\+reduction.\+cpp.
+Definition at line 43 of file f4\+\_\+reduction.\+cpp.
 
 
 
@@ -1122,7 +1125,7 @@ If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} shou
 \end{DoxyParams}
 
 
-Definition at line 181 of file f4\+\_\+reduction.\+cpp.
+Definition at line 185 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}\label{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+monomials@{add\+\_\+monomials}}
@@ -1153,7 +1156,7 @@ If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} shou
 \end{DoxyParams}
 
 
-Definition at line 236 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 245 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}\label{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
@@ -1172,7 +1175,7 @@ called internally by constructor, which has already performed some setup; inadvi
 \end{DoxyParams}
 
 
-Definition at line 129 of file f4\+\_\+reduction.\+cpp.
+Definition at line 130 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a9fa6a212375b9498ca86a2c18e94ca1e}\label{group___g_b_computation_a9fa6a212375b9498ca86a2c18e94ca1e}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
@@ -1191,7 +1194,7 @@ called internally by constructor, which has already performed some setup; inadvi
 \end{DoxyParams}
 
 
-Definition at line 184 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 189 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}\label{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!print\+\_\+matrix@{print\+\_\+matrix}}
@@ -1225,7 +1228,7 @@ prints the matrix
 \end{DoxyParams}
 
 
-Definition at line 306 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 315 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}\label{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+and\+\_\+select\+\_\+order@{reduce\+\_\+and\+\_\+select\+\_\+order}}
@@ -1254,7 +1257,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 743 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 754 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}\label{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
@@ -1279,7 +1282,7 @@ reduces the specified set of rows by the specified row, suitable for multithread
 \end{DoxyParams}
 
 
-Definition at line 431 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 442 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}\label{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!row\+\_\+would\+\_\+change\+\_\+ordering@{row\+\_\+would\+\_\+change\+\_\+ordering}}
@@ -1299,7 +1302,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 679 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 690 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}\label{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic@{select\+\_\+dynamic}}
@@ -1329,7 +1332,7 @@ the recommended monomial ordering; this may be the same as {\ttfamily curr\+\_\+
 \end{DoxyReturn}
 
 
-Definition at line 835 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 846 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_af50b3f58764474df16c466034515b63e}\label{group___g_b_computation_af50b3f58764474df16c466034515b63e}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic\+\_\+single@{select\+\_\+dynamic\+\_\+single}}
@@ -1361,7 +1364,7 @@ the row with the recommended new ordering
 \end{DoxyReturn}
 
 
-Definition at line 967 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 978 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}\label{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!simplify\+\_\+identical\+\_\+rows@{simplify\+\_\+identical\+\_\+rows}}
@@ -1380,7 +1383,7 @@ eliminates duplicates of rows\+: later rows that are identical to earlier rows w
 \end{DoxyParams}
 
 
-Definition at line 597 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 608 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}\label{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows@{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows}}
@@ -1405,7 +1408,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 623 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 634 of file f4\+\_\+dynamic.\+cpp.
 
 \index{smaller\+\_\+lm@{smaller\+\_\+lm}}\label{structsmaller__lm}
 \Hypertarget{group___g_b_computation_structsmaller__lm}
@@ -1737,7 +1740,7 @@ a Gr\"{o}bner basis of the ideal generated by $ F $ with respect to the ordering
 \end{DoxyReturn}
 
 
-Definition at line 1091 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 1102 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}\label{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!find\+\_\+reducer@{find\+\_\+reducer}}

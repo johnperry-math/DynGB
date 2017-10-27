@@ -66,7 +66,10 @@ F4_Reduction_Data::F4_Reduction_Data(
     const list<Critical_Pair_Dynamic *> & P,
     const list<Abstract_Polynomial *> & B,
     Dynamic_Heuristic method
-) : G(B), Rx(P.front()->first()->base_ring()), heur(method) {
+) :
+    G(B), Rx(P.front()->first()->base_ring()), heur(method),
+    M_table(P.front()->first()->base_ring().number_of_variables())
+{
   num_cols = 0;
   // set up the heuristic
   switch(heur) {
@@ -161,8 +164,9 @@ void F4_Reduction_Data::initialize_some_rows(
     auto pi = p->new_iterator();
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
-    unsigned i = 0;
-    while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
+    //unsigned i = 0;
+    //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
+    unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
     offset[row] = i;
@@ -170,7 +174,8 @@ void F4_Reduction_Data::initialize_some_rows(
     nonzero_entries[row] = 1;
     pi->moveRight();
     for (/* */; not pi->fellOff(); ++i) {
-      while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
+      //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
+      i = M_table.lookup_product(pi->currMonomial(), t);
       Arow[i - offset[row]] = pi->currCoeff().value();
       pi->moveRight();
       ++nonzero_entries[row];
@@ -189,8 +194,12 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   M.clear();
-  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi)
+  size_t m = 0;
+  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
     M.push_back(*mi);
+    M_table.add_monomial(*mi, m);
+    ++m;
+  }
   unsigned row = 0;
   A.resize(P.size());
   head.resize(P.size());
@@ -347,7 +356,9 @@ void F4_Reduction_Data::reduce_my_rows(
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
-  EXP_TYPE * u = new EXP_TYPE[n]; // exponents of multiplier
+  red_mutex.lock();
+  Monomial u(n);
+  red_mutex.unlock();
   UCOEF_TYPE mod = F.modulus();
   unsigned new_nonzero_entries;
   for (unsigned mi = 0; mi < num_cols; ++mi) {
@@ -363,16 +374,17 @@ void F4_Reduction_Data::reduce_my_rows(
           Polynomial_Iterator * gi = g->new_iterator();
           //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
           // determine multiplier
+          Monomial & t = *M[mi];
           for (NVAR_TYPE l = 0; l < n; ++l)
-            u[l] = (*M[mi])[l] - (gi->currMonomial())[l];
+            u.set_exponent(l, t[l] - (gi->currMonomial())[l]);
           red_mutex.lock();
           vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
           if (r.size() == 0) { // need to create reducer
-            unsigned j = mi;
+            size_t j = mi;
             // loop through g's terms
             while (not gi->fellOff()) {
               const Monomial & t = gi->currMonomial();
-              while (not (M[j]->like_multiple(u, t))) ++j;
+              j = M_table.lookup_product(u, t);
               r.emplace_back(j, gi->currCoeff().value());
               gi->moveRight();
             }
@@ -405,7 +417,6 @@ void F4_Reduction_Data::reduce_my_rows(
       }
     }
   }
-  delete [] u;
 }
 
 void F4_Reduction_Data::reduce_by_old() {

@@ -10,7 +10,7 @@ var group__strategygroup_class_poly___strategy___data =
     [ "operator==", "group__strategygroup.html#a5c88b8a0a17d4175bf43ccab5d7ded4f", null ],
     [ "operator>", "group__strategygroup.html#a4100b95343145b454dca2978545dd791", null ],
     [ "operator>=", "group__strategygroup.html#a10eaa72d8dd9d02be47c7450d0358911", null ],
-    [ "pre_reduction_tasks", "group__strategygroup.html#a27fb1565f1c569ca28f01021551a1353", null ],
+    [ "pre_reduction_tasks", "group__strategygroup.html#a077b9fb020596f92ed0cb38fea2a0b71", null ],
     [ "pre_reduction_tasks", "group__strategygroup.html#a0d71db50c58a24f48f94eae6a48c2149", null ],
     [ "type", "group__strategygroup.html#a305ffff282203eaccd7f1709634bc5d4", null ],
     [ "valid_reduction", "group__strategygroup.html#a996754ff163b0ff32d783ec723ac35be", null ],

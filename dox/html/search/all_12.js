@@ -11,5 +11,5 @@ var searchData=
   ['tp',['tp',['../group___g_b_computation.html#a9b232e6359525154a6d7865e607964bb',1,'Critical_Pair_Basic']]],
   ['tpq',['tpq',['../group___g_b_computation.html#a91d6dc4856d8fb137faf8ffe2b823ae8',1,'Critical_Pair_Basic']]],
   ['tq',['tq',['../group___g_b_computation.html#a7e67ffb4af6c13830c95253e464bc3a3',1,'Critical_Pair_Basic']]],
-  ['type',['type',['../group__strategygroup.html#a36704dfc77b9007bf5f249e55bfde0ef',1,'Poly_Sugar_Data::type()'],['../group__strategygroup.html#a472c39541209b6738cb497ebc3c9e205',1,'Poly_WSugar_Data::type()']]]
+  ['type',['type',['../group__strategygroup.html#ac6e37acde82f22832ebbae2ab5fc8224',1,'Poly_Sugar_Data::type()'],['../group__strategygroup.html#a472c39541209b6738cb497ebc3c9e205',1,'Poly_WSugar_Data::type()']]]
 ];
