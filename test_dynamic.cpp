@@ -37,7 +37,6 @@ using LP_Solvers::doda;
 
 extern Monomial_Ordering * generic_grevlex_ptr;
 extern Grading_Order_Data_Allocator<WT_TYPE> * goda;
-extern Grading_Order_Data_Allocator<DEG_TYPE> * doda;
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 extern Grading_Order_Data_Allocator<Monomial_Node> * monododa;

@@ -1164,10 +1164,10 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         ++pi;
     }
     // make s-poly
-    time_t start_time = time(nullptr);
+    //time_t start_time = time(nullptr);
     F4_Reduction_Data s(curr_ord, Pnew, G, heur);
-    time_t end_time = time(nullptr);
-    total_time += difftime(end_time, start_time);
+    //time_t end_time = time(nullptr);
+    //total_time += difftime(end_time, start_time);
     number_of_spolys += Pnew.size();
     Pnew.clear();
     if (not s.is_zero())
@@ -1204,10 +1204,13 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         if (s.number_of_nonzero_entries(i) != 0)
           unprocessed.insert(i);
       while (unprocessed.size() != 0) {
+        time_t start_time = time(nullptr);
         LP_Solver * old_skel = skel;
         unsigned completed_row = s.select_dynamic_single(
             unprocessed, T, G, P, curr_ord, skel
         );
+        time_t end_time = time(nullptr);
+        total_time += difftime(end_time, start_time);
         Constant_Polynomial * r = s.finalize(completed_row);
         bool ordering_changed = skel != old_skel;
         if (ordering_changed) {
