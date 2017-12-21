@@ -29,6 +29,8 @@ using std::vector;
 using std::pair;
 #include <functional>
 using std::function;
+#include <mutex>
+using std::mutex;
 
 #include "system_constants.hpp"
 
@@ -323,7 +325,7 @@ protected:
   /** @brief hash table of the monomials in @c M */
   F4_Hash M_table;
   /** @brief locks on the reducers */
-  vector<std::mutex> red_lock;
+  vector<mutex> red_lock;
   /**
     @brief coefficient data in sparse representation; each vector entry is a
       subrow of the dense matrix

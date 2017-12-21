@@ -402,7 +402,7 @@ void F4_Reduction_Data::reduce_my_rows(
   red_mutex.unlock();
   UCOEF_TYPE mod = F.modulus();
   unsigned new_nonzero_entries;
-  #define UNREDUCED_REDUCERS false
+  #define UNREDUCED_REDUCERS true
   if (UNREDUCED_REDUCERS) {
     for (unsigned mi = 0; mi < num_cols; ++mi) {
       // is this monomial reducible?
@@ -581,7 +581,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
     }
     unsigned & hj = head[j];
     while (hj < Aj.size() and Aj[hj] == 0) ++hj;
-    if (j == 0) { cout << "reduced row " << j << " by new: "; print_row(j); }
+    // if (j == 0) { cout << "reduced row " << j << " by new: "; print_row(j); }
   }
 }
 
