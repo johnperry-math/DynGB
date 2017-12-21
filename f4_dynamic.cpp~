@@ -409,10 +409,9 @@ void F4_Reduction_Data::reduce_my_rows(
       if (R[mi] != nullptr) {
         for (unsigned k : my_rows) {
           vector<COEF_TYPE> & Ak = A[k];
-          auto off_k = offset[k];
           // do we need to reduce this poly?
-          if (off_k <= mi and Ak[mi - off_k] != 0) {
-            unsigned i = mi - off_k;
+          if (offset[k] <= mi and Ak[mi - offset[k]] != 0) {
+            unsigned i = mi - offset[k];
             // get reducer for this monomial
             const Abstract_Polynomial * g = R[mi];
             Polynomial_Iterator * gi = g->new_iterator();
