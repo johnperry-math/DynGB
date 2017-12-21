@@ -295,8 +295,6 @@ protected:
       starting at the specified row
   */
   void initialize_some_rows(const list<Critical_Pair_Dynamic *> &, unsigned);
-  /** @brief builds a reducer for the specified column */
-  void build_reducer(unsigned, const Monomial &);
   /** @brief reduces the specified set of rows, suitable for multithreading */
   void reduce_my_rows(const set<unsigned> &);
   /**
