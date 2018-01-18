@@ -264,7 +264,7 @@ bool Monomial::is_coprime(const Monomial &other) const {
 
 bool Monomial::is_like(const Monomial &other) const { return *this == other; }
 
-bool Monomial::like_multiple(const EXP_TYPE * e, const Monomial & v) const {
+bool Monomial::like_multiple(EXP_TYPE * e, const Monomial & v) const {
   bool result = (n == v.n);
   auto ve = v.exponents;
   for (NVAR_TYPE i = 0; result and i < n; ++i)

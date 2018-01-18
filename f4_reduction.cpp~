@@ -126,6 +126,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   num_cols = M_build.size();
   num_rows = P.size();
   strategies.resize(num_rows);
+  nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   M.clear();
@@ -145,6 +146,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   //
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
+  A_buf.resize(num_threads);
   list<Critical_Pair_Basic *> * thread_rows
     = new list<Critical_Pair_Basic *>[num_threads];
   // loop through num_rows
@@ -231,12 +233,6 @@ F4_Reduction_Data::~F4_Reduction_Data() {
   }
 }
 
-void F4_Reduction_Data::print_row(unsigned i)  {
-  for (auto term : A[i])
-    cout << term.second << ' ' << *M[term.first] << " + ";
-  cout << endl;
-}
-
 void F4_Reduction_Data::print_matrix(bool show_data) {
   if (show_data) {
     for (auto m : M)
@@ -253,7 +249,7 @@ void F4_Reduction_Data::print_matrix(bool show_data) {
     }
     while (l < Ai.size()) {
       cout << Ai[l].second << ", ";
-      ++l; ++j;
+      ++l;
       if (l < Ai.size())
         while (j < Ai[l].first) {
           cout << "0, ";
@@ -321,9 +317,10 @@ void F4_Reduction_Data::sparsify_row(
 
 void F4_Reduction_Data::add_reductor(
     vector<COEF_TYPE> & buffer, COEF_TYPE a,
-    const vector<pair<unsigned, COEF_TYPE> > & reductor, COEF_TYPE mod
+    const vector<pair<unsigned, COEF_TYPE> > & reductor, COEF_TYPE mod,
+    unsigned start
 ) {
-  for (unsigned i = 0; i < reductor.size(); ++i) {
+  for (unsigned i = start; i < reductor.size(); ++i) {
     auto & ri = reductor[i];
     buffer[ri.first] += mod - (a * ri.second % mod);
     buffer[ri.first] %= mod;
@@ -354,13 +351,12 @@ void F4_Reduction_Data::build_reducer(vector<COEF_TYPE> & buffer, unsigned mi) {
     gi->moveLeft();
   }
   // having build all necessary reducers, we can now populate & reduce
-  buffer.resize(M.size());
   fill(buffer.begin(), buffer.end(), 0);
   gi->restart_iteration();
   while (not gi->fellOff()) {
-    auto j = M_table.lookup_product(gi->currMonomial(), v);
+    auto j = M_table.lookup_product(u, gi->currMonomial());
     if (R[j] == nullptr)
-      buffer[j] += gi->currCoeff().value();
+      buffer[j] = gi->currCoeff().value();
     else
       add_reductor(buffer, gi->currCoeff().value(), R_built[j], mod);
     gi->moveRight();
@@ -378,7 +374,6 @@ void F4_Reduction_Data::reduce_my_rows(
   const Prime_Field & F = Rx.ground_field();
   EXP_TYPE v[n];
   UCOEF_TYPE mod = F.modulus();
-  A_buffer.resize(M.size());
   for (unsigned i : my_rows) {
     auto & Ai = A[i];
     fill(A_buffer.begin(), A_buffer.end(), 0);
@@ -398,7 +393,7 @@ void F4_Reduction_Data::reduce_my_rows(
         if (r.size() == 0)
           build_reducer(R_buffer, mi);
         red_lock[mi].unlock();
-        add_reductor(A_buffer, a, r, mod);
+        add_reductor(A_buffer, a, R_built[mi], mod);
         auto & t = *M[mi];
         auto & u = R[mi]->leading_monomial();
         for (unsigned k = 0; k < n; ++k)
@@ -419,8 +414,6 @@ void F4_Reduction_Data::reduce_by_old() {
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
-  A_buf.resize(num_threads);
-  R_buf.resize(num_threads);
   // loop through num_rows
   for (unsigned k = 0; k < num_rows; ++k)
     thread_rows[k % num_threads].insert(k);
@@ -456,20 +449,17 @@ void F4_Reduction_Data::reduce_my_new_rows(
   auto & Ai = A[i];
   unsigned k = Ai[0].first;
   for (auto j : to_reduce) {
-    if (i != j) {
-      auto & Aj = A[j];
-      if (row_has_term_of_index(Aj, k)) {
-        densify_row(buffer, Aj);
-        reduce_buffer(buffer, Ai, mod);
-        sparsify_row(buffer, Aj);
-      }
+    auto & Aj = A[j];
+    if (row_has_term_of_index(Aj, k)) {
+      densify_row(buffer, Aj);
+      reduce_buffer(buffer, Aj, mod);
+      sparsify_row(buffer, Ai);
     }
   }
 }
 
 void F4_Reduction_Data::reduce_by_new() {
   Prime_Field F(Rx.ground_field());
-  auto mod = F.modulus();
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
@@ -479,10 +469,8 @@ void F4_Reduction_Data::reduce_by_new() {
     if (Ai.size() > 0) {
       COEF_TYPE a = Ai[0].second;
       COEF_TYPE b = F.inverse(a);
-      for (auto & term : Ai) {
+      for (auto & term : Ai)
         term.second *= b;
-        term.second %= mod;
-      }
       for (unsigned j = 0; j < num_threads; ++j)
         thread_rows[j].clear();
       unsigned k = 0;
@@ -512,7 +500,7 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
   UCOEF_TYPE mod = F.modulus();
   NVAR_TYPE n = M[0]->num_vars();
   for (unsigned i = 0; i < num_rows; ++i) {
-    if (A[i].size() == 0) {
+    if (nonzero_entries[i] == 0) {
       delete strategies[i];
       strategies[i] = nullptr;
     } else {
@@ -534,7 +522,7 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
           ++k;
       }
       result.push_back(new Constant_Polynomial(
-          A[i].size(),
+          nonzero_entries[i],
           Rx,
           M_final, A_final,
           mord

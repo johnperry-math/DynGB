@@ -168,10 +168,6 @@ public:
     @param show_data whether to show the monomials that correspond to each column
   */
   void print_matrix(bool show_data=false);
-  /**
-    @brief prints the indicated row of the matrix as an unformatted polynomial
-  **/
-  void print_row(unsigned);
   ///@}
 protected:
   /*void check_consistency() {
@@ -253,10 +249,12 @@ protected:
     @param target dense representation of a polynomial being reduced
     @param source sparse representation of a reductor
     @param mod modulus for all operations
+    @param start position in the source (default is 1)
   */
   void add_reductor(
       vector<COEF_TYPE> & target, COEF_TYPE a,
-      const vector<pair<unsigned, COEF_TYPE> > & source, COEF_TYPE mod
+      const vector<pair<unsigned, COEF_TYPE> > & source, COEF_TYPE mod,
+      unsigned start = 1
   );
   /**
     @brief build the sparse representation of the @b reduced polynomial chosen
@@ -299,6 +297,8 @@ protected:
   const list<Abstract_Polynomial *> & G;
   /** @brief how the monomials are ordered */
   const Monomial_Ordering * mord;
+  /** @brief number of nonzero entries of each row of A */
+  vector<unsigned> nonzero_entries;
   /** @brief polynomial ring */
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */

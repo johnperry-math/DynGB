@@ -28,18 +28,15 @@
 #include "f4_hash.hpp"
 
 #include <set>
-using std::set;
 #include <list>
-using std::list;
 #include <vector>
-using std::vector;
 #include <cstdlib>
 #include <utility>
+
+using std::set;
+using std::list;
 using std::pair;
-#include <thread>
-using std::thread;
-#include <mutex>
-using std::mutex;
+using std::vector;
 
 /**
   @ingroup GBComputation
@@ -168,10 +165,6 @@ public:
     @param show_data whether to show the monomials that correspond to each column
   */
   void print_matrix(bool show_data=false);
-  /**
-    @brief prints the indicated row of the matrix as an unformatted polynomial
-  **/
-  void print_row(unsigned);
   ///@}
 protected:
   /*void check_consistency() {
@@ -241,7 +234,7 @@ protected:
     @param target sparse representation of row
   */
   void sparsify_row(
-      const vector<COEF_TYPE> & source, vector<pair<unsigned, COEF_TYPE> > & target
+      vector<COEF_TYPE> & source, vector<pair<unsigned, COEF_TYPE> > & target
   );
   /**
     @brief reduce dense row using the sparse source, modulo the indicated value,
@@ -253,10 +246,12 @@ protected:
     @param target dense representation of a polynomial being reduced
     @param source sparse representation of a reductor
     @param mod modulus for all operations
+    @param start position in the source (default is 1)
   */
   void add_reductor(
       vector<COEF_TYPE> & target, COEF_TYPE a,
-      const vector<pair<unsigned, COEF_TYPE> > & source, COEF_TYPE mod
+      const vector<pair<unsigned, COEF_TYPE> > & source, COEF_TYPE mod,
+      unsigned start = 1
   );
   /**
     @brief build the sparse representation of the @b reduced polynomial chosen
@@ -274,15 +269,18 @@ protected:
   vector<Monomial *> M;
   /** @brief hash table of the monomials in @c M */
   F4_Hash M_table;
-  /** @brief locks on the reducers */
-  vector<mutex> red_lock;
   /**
     @brief coefficient data in sparse representation; each vector entry is a
       subrow of the dense matrix
   */
-  vector<vector<pair<unsigned, COEF_TYPE> > > A;
-  /** @brief buffers for rows of A during reduction; one per thread */
-  vector<vector<COEF_TYPE> > A_buf;
+  vector<vector<COEF_TYPE> > A;
+  /** @brief index of the starting point of this row in the dense matrix*/
+  vector<unsigned> offset;
+  /**
+    @brief index of the first non-zero entry of this row in the dense matrix
+      (counted from offset)
+  */
+  vector<unsigned> head;
   /** @brief monomials while building */
   list<Monomial *> M_build;
   /** @brief indices of reducers for the corresponding elements of @c M */
@@ -291,14 +289,14 @@ protected:
   vector<Abstract_Polynomial *> R;
   /** @brief reducers actually generated */
   vector<vector<pair<unsigned, COEF_TYPE> > > R_built;
-  /** @brief buffer to build reducers for the matrix */
-  vector<vector<COEF_TYPE> > R_buf;
   /** @brief count of threads that have actually read a generated actually built */
   vector<unsigned> num_readers;
   /** @brief current basis of ideal */
   const list<Abstract_Polynomial *> & G;
   /** @brief how the monomials are ordered */
   const Monomial_Ordering * mord;
+  /** @brief number of nonzero entries of each row of A */
+  vector<unsigned> nonzero_entries;
   /** @brief polynomial ring */
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */

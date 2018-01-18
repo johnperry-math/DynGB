@@ -78,16 +78,6 @@ class F4_Hash {
       @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
-      get_index(t, u.log());
-    }
-
-    /**
-      @brief determines the index of \f$tu\f$ in the lookup table
-      @param t @c Monomial
-      @param u @c exponent vector
-      @return which table entry contains the list that contains \f$tu\f$
-    */
-    size_t get_index(const Monomial & t, const EXP_TYPE * u) {
       DEG_TYPE index = 0;
       for (NVAR_TYPE i = 0; i < n; ++i)
         index += ((t[i] + u[i]) * weights[i]) % MAXIMUM;
@@ -115,27 +105,12 @@ class F4_Hash {
       @param u @c Monomial
       @return location of \f$tu\f$ in the array
     */
-    size_t lookup_product(const Monomial & t, const Monomial & u) {
+    size_t lookup_product(
+        const Monomial & t, const Monomial & u
+    ) {
       auto i = get_index(t, u);
       auto curr = table[i].begin();
       while (curr != table[i].end() and not curr->first->like_multiple(t, u))
-        ++curr;
-      return curr->second;
-    }
-
-    /**
-      @brief looks up the location of \f$tu\f$ in the array; that is,
-        the second argument to @c add_monomial() when \f$tu\f$ was the first
-      @details This will not add \f$tu\f$ if it isn't already there, so
-        call it only after the table has been completely set up!
-      @param t @c Monomial
-      @param u @c exponent vector
-      @return location of \f$tu\f$ in the array
-    */
-    size_t lookup_product(const Monomial & t, const EXP_TYPE * u) {
-      auto i = get_index(t, u);
-      auto curr = table[i].begin();
-      while (curr != table[i].end() and not curr->first->like_multiple(u, t))
         ++curr;
       return curr->second;
     }

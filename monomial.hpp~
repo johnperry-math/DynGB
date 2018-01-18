@@ -203,7 +203,7 @@ public:
     @brief is <c>this</c> like @f$uv@f$?
       (where @f$u@f$ is a monomial whose exponents are those of <c>e</c>
   */
-  bool like_multiple(const EXP_TYPE * e, const Monomial & v) const;
+  bool like_multiple(EXP_TYPE * e, const Monomial & v) const;
   /**
     @brief compares monomial with @f$u@f$ according to monomial ordering
   */
