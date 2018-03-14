@@ -274,7 +274,7 @@ void F4_Reduction_Data::add_monomials(
       M_build.insert(t1, t);
       R_build.insert(r1, nullptr);
       --t1; --r1;
-    }
+    } else delete t;
   }
   auto t2(t1); auto r2(r1);
   Polynomial_Iterator * pi = g->new_iterator();
@@ -290,7 +290,7 @@ void F4_Reduction_Data::add_monomials(
     } else if (**t2 != *t) {
       M_build.insert(t2, t);
       R_build.insert(r2, nullptr);
-    }
+    } else delete t;
     pi->moveRight();
   }
   delete pi;
@@ -301,6 +301,7 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
+  for (auto t : M_build) delete t;
 }
 
 void F4_Reduction_Data::print_row(unsigned i) {
@@ -651,6 +652,8 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
       ));
       result.back()->set_strategy(strategies[i]);
       strategies[i] = nullptr;
+      for (k = 0; k < nonzero_entries[i]; ++k)
+        M_final[k].deinitialize();
       free(M_final);
       free(A_final);
     }
@@ -687,6 +690,7 @@ Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
   );
   result->set_strategy(strategies[i]);
   strategies[i] = nullptr;
+  for (k = 0; k < nonzero_entries[i]; ++k) M_final[k].deinitialize();
   free(M_final);
   free(A_final);
   return result;
@@ -1151,7 +1155,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           tempideal->set_hilbert_numerator(hn);
           if (not heuristic_judges_smaller(*tempideal, *newideal)) {
             delete new_lp;
-            cout << "deleting new skeleton " << new_lp << endl;
+            //cout << "deleting new skeleton " << new_lp << endl;
             delete tempideal;
           } else { // winner has changed; reduce matrix by it
             ordering_changed = ordering_changed or new_ordering;
@@ -1160,7 +1164,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
             winning_lm = row_lm;
             newideal = tempideal;
             delete winning_skel;
-            cout << "deleting old skeleton " << winning_skel << endl;
+            //cout << "deleting old skeleton " << winning_skel << endl;
             winning_skel = new_lp;
           } // change_winner?
         } // newideal == nullptr?
@@ -1170,7 +1174,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   if (not ordering_changed and winning_skel == nullptr)
     delete winning_skel;
   else {
-    cout << "deleting " << skel << endl;
+    //cout << "deleting " << skel << endl;
     delete skel;
     skel = winning_skel;
   }
@@ -1196,6 +1200,9 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   delete newideal;
   return winning_row;
 }
+
+extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
+extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
 list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   list<Monomial> T;
@@ -1343,7 +1350,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
     }
   }
   delete skel;
-  cout << "deleting " << skel << endl;
+  //cout << "deleting " << skel << endl;
   cout << number_of_spolys << " s-polynomials computed and reduced\n";
   // cleanup
   cout << G.size() << " polynomials before interreduction\n";
@@ -1352,11 +1359,14 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   cout << G.size() << " polynomials after interreduction\n";
   for (auto f : Ftemp) delete f;
   list<Constant_Polynomial *> B;
+  unsigned int num_mons = 0;
   for (Abstract_Polynomial * g : G) {
     g->set_monomial_ordering(curr_ord);
     B.push_back(new Constant_Polynomial(*g));
+    num_mons += g->length();
     delete g;
   }
+  cout << num_mons << " monomials in basis (possibly counting multiple times)\n";
   // first one should be curr_ord; we do not want to delete that!
   while (all_orderings_used.size() != 0) {
     ORDERING_TYPE * bye_bye_ordering = all_orderings_used.front();

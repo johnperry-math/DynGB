@@ -58,7 +58,7 @@ mutex monoda_mutex;
 
 void * Monomial::operator new(size_t size) {
   //monoda_mutex.lock();
-  if (monoda == nullptr) monoda = new Grading_Order_Data_Allocator<Monomial>(size);
+  if (monoda == nullptr) monoda = new Grading_Order_Data_Allocator<Monomial>(size, "monoda");
   Monomial * result = monoda->get_new_block();
   //monoda_mutex.unlock();
   return result;
@@ -73,7 +73,7 @@ void Monomial::operator delete(void *t) {
 void Monomial::initialize_exponents(NVAR_TYPE number_of_vars) {
   n = number_of_vars;
   //moda_mutex.lock();
-  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n);
+  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n, "moda");
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
   for (NVAR_TYPE i = 0; i < n; ++i) exponents[i] = 0;
@@ -168,7 +168,7 @@ Monomial::Monomial(
   emask = 0;
   #endif
   //moda_mutex.lock();
-  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n);
+  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n, "moda");
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
   for (NVAR_TYPE i = 0; i < n; ++i) {
@@ -329,10 +329,11 @@ Monomial & Monomial::operator =(const Monomial &other) {
     emask = other.emask;
     #endif
     if (other.n > n) {
-      delete [] exponents;
-      exponents = new EXP_TYPE [other.n];
+      moda->return_used_block(exponents);
+      //exponents = new EXP_TYPE [other.n];
+      exponents = moda->get_new_block();
+      n = other.n;
     }
-    n = other.n;
     for (NVAR_TYPE i = 0; i < n; ++i)
       exponents[i] = other.exponents[i];
     ordering = other.ordering;

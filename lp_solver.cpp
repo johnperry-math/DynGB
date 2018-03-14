@@ -137,7 +137,7 @@ unsigned invocations = 0;
 */
 inline DEG_TYPE * ray_data_allocation(NVAR_TYPE n) {
   invocations++;
-  if (doda == nullptr) doda = new Grading_Order_Data_Allocator<DEG_TYPE>(n);
+  if (doda == nullptr) doda = new Grading_Order_Data_Allocator<DEG_TYPE>(n, "doda");
   return doda->get_new_block();
 }
 

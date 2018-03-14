@@ -20,10 +20,13 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <string>
 
-using std::cout; using std::endl;
+using std::cout; using std::endl; using std::size_t; using std::string;
 
 #include "system_constants.hpp"
+
+const int BLOCK_COUNT = 2 << 16;
 
 /**
   @defgroup memorygroup Memory Management
@@ -71,14 +74,17 @@ public:
     @return the superblock
   */
   goda_block<TYPE> * allocate_new_block() {
-    goda_block<TYPE> * result
-        = (goda_block<TYPE> *)malloc(10000 * data_size*sizeof(TYPE)*sizeof(long)/sizeof(TYPE));
-    goda_block<TYPE> * tmp = result;
-    for (unsigned i=0; i < 9998; ++i) {
-      tmp->next = &(tmp[data_size]);
-      tmp += data_size;
+    if (elaborate) {
+      cout << name << " allocating " << BLOCK_COUNT << " blocks\n";
+      cout << num_blocks + BLOCK_COUNT << " blocks total\n";
     }
-    tmp->next = nullptr;
+    goda_block<TYPE> * result
+        = (goda_block<TYPE> *)malloc(BLOCK_COUNT * data_size*sizeof(size_t));
+    goda_block<TYPE> * tmp = result;
+    for (unsigned i=0; i < BLOCK_COUNT - 1; ++i) {
+      tmp[i*data_size].next = &(tmp[(i+1)*data_size]);
+    }
+    tmp[(BLOCK_COUNT - 1)*data_size].next = nullptr;
     return result;
   }
   /**
@@ -87,19 +93,26 @@ public:
     @details The Grading_Order_Data_Allocator can and will allocate new blocks
       of @p n objects when it runs out of room.
   */
-  Grading_Order_Data_Allocator(NVAR_TYPE n)
-  : data_size(n)
+  Grading_Order_Data_Allocator(
+      NVAR_TYPE n, const string & block_name = "", bool verbose=false
+  )
+  : data_size(n), name(block_name), elaborate(verbose)
   {
     big_blocks = block = allocate_new_block();
     block->next = nullptr; block += data_size;
   }
   /** @brief releases all memory &mdash; you'd better have freed yours! */
   ~Grading_Order_Data_Allocator() {
+    cout << "at termination, " << name << " has " << num_blocks << " blocks\n";
     while (big_blocks != nullptr) {
       goda_block<TYPE> * next_block = big_blocks->next;
+      cout << name << " freeing " << BLOCK_COUNT << " blocks\n";
+      if (num_blocks < BLOCK_COUNT) num_blocks = 0;
+      else num_blocks -= BLOCK_COUNT;
       free(big_blocks);
       big_blocks = next_block;
     }
+    cout << name << " destructs with " << num_blocks << " blocks\n";
   }
   /**
     @brief allocates and returns a block of memory
@@ -110,6 +123,9 @@ public:
       block = allocate_new_block();
       block->next = big_blocks; big_blocks = block; block += data_size;
     }
+    ++num_blocks;
+    if (elaborate)
+      cout << name << " increase to " << num_blocks << " blocks in use\n";
     TYPE * result = (TYPE *)block;
     block = block->next;
     return result;
@@ -120,8 +136,14 @@ public:
   */
   void return_used_block(TYPE * freed_block) {
     goda_block<TYPE> * new_head = (goda_block<TYPE> *)freed_block;
+    --num_blocks;
+    if (elaborate)
+      cout << name << " decrease to " << num_blocks << " blocks in use\n";
     new_head->next = block;
     block = new_head;
+  }
+  void report() {
+    cout << name << "has allocated " << num_blocks << " blocks\n";
   }
 protected:
   /** @brief how many words to step from one block to the next */
@@ -130,6 +152,12 @@ protected:
   goda_block<TYPE> * block;
   /** @brief pointer to the superblock of all blocks */
   goda_block<TYPE> * big_blocks;
+  /** @brief number of blocks allocated &mdash; mainly for debugging */
+  unsigned int num_blocks = 0;
+  /** @brief name of allocator &mdash; mainly for debugging */
+  const string name = "";
+  /** @brief whether to elaborate during certain activities &mdash; mainly for debugging */
+  bool elaborate = false;
 };
 
 #endif

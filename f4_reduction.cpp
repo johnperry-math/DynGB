@@ -203,7 +203,7 @@ void F4_Reduction_Data::add_monomials(
       M_build.insert(t1, t);
       R_build.insert(r1, nullptr);
       --t1; --r1;
-    }
+    } else delete t;
   }
   auto t2(t1); auto r2(r1);
   Polynomial_Iterator * pi = g->new_iterator();
@@ -218,7 +218,7 @@ void F4_Reduction_Data::add_monomials(
     } else if (**t2 != *t) {
       M_build.insert(t2, t);
       R_build.insert(r2, nullptr);
-    }
+    } else delete t;
     pi->moveRight();
   }
   delete pi;
@@ -229,6 +229,7 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
+  for (auto t : M_build) delete t;
 }
 
 void F4_Reduction_Data::print_row(unsigned i)  {
@@ -541,6 +542,8 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
       ));
       result.back()->set_strategy(strategies[i]);
       strategies[i] = nullptr;
+      for (k = 0; k < A[i].size(); ++k)
+        M_final[k].deinitialize();
       free(M_final);
       free(A_final);
     }
@@ -608,17 +611,20 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
     number_of_spolys += Pnew.size();
     Pnew.clear();
     if (not s.is_zero()) {
+      time_t start_time = time(nullptr);
       s.reduce_by_old(); // cyc8h ~38sec
+      time_t end_time = time(nullptr);
+      total_time += difftime(end_time, start_time);
       s.reduce_by_new(); // cyc8h ~4sec
     }
     if (s.is_zero()) {
       cout << "\tmatrix reduced to zero\n";
       // delete s;
     } else {
-      time_t start_time = time(nullptr);
+      //time_t start_time = time(nullptr);
       vector<Constant_Polynomial *> R = s.finalize();
-      time_t end_time = time(nullptr);
-      total_time += difftime(end_time, start_time);
+      //time_t end_time = time(nullptr);
+      //total_time += difftime(end_time, start_time);
       for (auto r : R) {
         cout << "\tadded " << r->leading_monomial() << endl;
         very_verbose = false;
@@ -634,8 +640,13 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   list<Constant_Polynomial *> B;
-  for (Abstract_Polynomial * g : G)
+  unsigned int num_mons = 0;
+  for (Abstract_Polynomial * g : G) {
     B.push_back(new Constant_Polynomial(*g));
+    num_mons += g->length();
+    delete g;
+  }
+  cout << num_mons << " monomials in basis (possibly counting multiple times)\n";
   time_t end_f4 = time(nullptr);
   double duration = difftime(end_f4, start_f4);
   cout << "computation ended at " << asctime(localtime(&end_f4)) << endl;

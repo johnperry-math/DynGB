@@ -42,7 +42,7 @@ Grading_Order_Data_Allocator<WT_TYPE> * goda = nullptr;
 Grading_Order_Data_Allocator<WGrevlex_Order_Data> * woda = nullptr;
 
 void * WGrevlex_Order_Data::operator new(size_t size) {
-  if (woda == nullptr) woda = new Grading_Order_Data_Allocator<WGrevlex_Order_Data>(size);
+  if (woda == nullptr) woda = new Grading_Order_Data_Allocator<WGrevlex_Order_Data>(size, "woda");
   WGrevlex_Order_Data * result = woda->get_new_block();
   return result;
 }
@@ -232,7 +232,7 @@ Grevlex_Order_Data::Grevlex_Order_Data(const Monomial & t)
   : number_of_gradings(t.num_vars())
 {
   const NVAR_TYPE n = number_of_gradings;
-  if (goda == nullptr) goda = new Grading_Order_Data_Allocator<WT_TYPE>(n);
+  if (goda == nullptr) goda = new Grading_Order_Data_Allocator<WT_TYPE>(n, "goda");
   gradings = goda->get_new_block();
   assign_gradings(t);
 }
@@ -406,7 +406,7 @@ WGrevlex_Order_Data::WGrevlex_Order_Data(Monomial & t)
   : number_of_gradings(t.num_vars())
 {
   const NVAR_TYPE n = number_of_gradings;
-  if (goda == nullptr) goda = new Grading_Order_Data_Allocator<WT_TYPE>(n);
+  if (goda == nullptr) goda = new Grading_Order_Data_Allocator<WT_TYPE>(n, "goda");
   gradings = goda->get_new_block();
   assign_gradings(t);
 }
