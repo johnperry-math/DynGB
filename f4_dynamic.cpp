@@ -124,7 +124,6 @@ F4_Reduction_Data::F4_Reduction_Data(
     }
   }
   // for each monomial, find an appropriate reducer
-  auto mtemp = M_build.begin();
   for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
     auto g = G.begin();
     bool found = mi->second != nullptr;
@@ -193,7 +192,6 @@ void F4_Reduction_Data::initialize_some_rows(
 }
 
 void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P) {
-  //num_cols = M_build.size();
   num_cols = M_builder.size();
   num_rows = P.size();
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
@@ -205,12 +203,10 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   M.clear(); M.resize(M_builder.size());
   R.clear(); R.resize(M_builder.size());
   size_t m = 0;
-  //for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
   for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
     M[m] = mi->first;
     R[m] = mi->second;
-    //M_table.add_monomial(*mi, m);
-    M_table.add_monomial(mi->first, m);
+    M_table.update_location(mi->first, m);
     ++m;
   }
   unsigned row = 0;
@@ -270,17 +266,12 @@ void F4_Reduction_Data::add_monomials(
   if (not new_row) pi->moveRight();
   //monomials_processed += g->length();
   while (not (pi->fellOff())) {
-    Monomial * t = new Monomial(pi->currMonomial());
-    (*t) *= u;
-    auto hint = M_builder.lower_bound(t);
-    if (
-        hint != M_builder.end() and
-        hint->first != nullptr and
-        hint->first->is_like(*t)
-    )
-      delete t;
-    else
-      M_builder.emplace_hint(hint, t, nullptr);
+    if (not M_table.contains_product(pi->currMonomial(), u)) {
+      Monomial * t = new Monomial(pi->currMonomial());
+      (*t) *= u;
+      M_table.add_monomial(t);
+      M_builder.emplace(t, nullptr);
+    }
     pi->moveRight();
   }
   //cout << "processed " << monomials_processed << " monomials\n";
@@ -292,7 +283,6 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
-  for (auto t : M_build) delete t;
   for (auto t : M_builder) delete t.first;
 }
 

@@ -101,11 +101,7 @@ F4_Reduction_Data::F4_Reduction_Data(
   // set up the matrix
   A.clear();
   head.clear();
-  R_build.clear();
-  M_build.clear();
   strategies.clear();
-  auto mi = M_build.begin();
-  auto ri = R_build.begin();
   NVAR_TYPE n = Rx.number_of_variables();
   mord = curr_ord;
   // sugar data for each row of the matrix
@@ -117,42 +113,38 @@ F4_Reduction_Data::F4_Reduction_Data(
       if (p->second() != nullptr)
         strategies.back()->pre_reduction_tasks(p->second_multiplier().log(), *(p->second()));
     }
-    add_monomials(curr_ord, mi, ri, p->first(), p->first_multiplier(), true);
+    add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
-      *ri = const_cast<Abstract_Polynomial *>(p->second());
       /*cout << "for " << **mi << " selected " << p->second()->leading_monomial() << endl;
       cout << '\t' << p->lcm() << endl;
       cout << '\t' << p->first()->leading_monomial() << ", " << p->first_multiplier() << endl;
       cout << '\t' << p->second()->leading_monomial() << ", " << p->second_multiplier() << endl;*/
-      ++ri; ++mi;
-      add_monomials(curr_ord, mi, ri, p->second(), p->second_multiplier());
+      add_monomials(curr_ord, p->second(), p->second_multiplier());
+      M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
   // for each monomial, find an appropriate reducer
-  time_t astart = time(nullptr);
   auto mtemp = M_build.begin();
-  mi = M_build.begin();
-  ri = R_build.begin();
-  while (mi != M_build.end()) {
+  for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
     auto g = G.begin();
-    bool found = ((*ri) != nullptr);
+    bool found = mi->second != nullptr;
     while (not found and g != G.end()) {
-      if ((**mi).divisible_by((*g)->leading_monomial())) {
+      if (mi->first->divisible_by((*g)->leading_monomial())) {
         found = true;
         //cout << "for " << **mi << " selected " << (*g)->leading_monomial() << endl;
-        *ri = *g;
-        Monomial u(**mi);
+        //*ri = *g;
+        mi->second = *g;
+        Monomial u(*(mi->first));
         u /= (*g)->leading_monomial();
-        add_monomials(curr_ord, mi, ri, *g, u);
+        time_t astart = time(nullptr);
+        add_monomials(curr_ord, *g, u);
+        time_t aend = time(nullptr);
+        adding_time += difftime(aend, astart);
         g = G.end();
       }
       ++g;
     }
-    ++mi;
-    ++ri;
   }
-  time_t aend = time(nullptr);
-  adding_time += difftime(aend, astart);
   cout << "adding monomials time " << adding_time << endl;
   // populate
   time_t istart = time(nullptr);
@@ -171,7 +163,7 @@ F4_Reduction_Data::F4_Reduction_Data(
 void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Dynamic *> & P, unsigned row
 ) {
-  const unsigned num_cols = M_build.size();
+  const unsigned num_cols = M_builder.size();
   const Prime_Field & F = P.front()->first()->ground_field();
   const COEF_TYPE F0 = 0;
   for (auto cp : P) {
@@ -181,7 +173,6 @@ void F4_Reduction_Data::initialize_some_rows(
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
     //unsigned i = 0;
-    //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
     unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
@@ -190,7 +181,6 @@ void F4_Reduction_Data::initialize_some_rows(
     nonzero_entries[row] = 1;
     pi->moveRight();
     for (/* */; not pi->fellOff(); ++i) {
-      //while (not M[i]->like_multiple(pi->currMonomial(), t)) ++i;
       i = M_table.lookup_product(pi->currMonomial(), t);
       Arow[i - offset[row]] = pi->currCoeff().value();
       pi->moveRight();
@@ -203,17 +193,24 @@ void F4_Reduction_Data::initialize_some_rows(
 }
 
 void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P) {
-  num_cols = M_build.size();
+  //num_cols = M_build.size();
+  num_cols = M_builder.size();
   num_rows = P.size();
+  cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
-  M.clear();
+  for (auto m : M) delete m;
+  M.clear(); M.resize(M_builder.size());
+  R.clear(); R.resize(M_builder.size());
   size_t m = 0;
-  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
-    M.push_back(*mi);
-    M_table.add_monomial(*mi, m);
+  //for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
+  for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
+    M[m] = mi->first;
+    R[m] = mi->second;
+    //M_table.add_monomial(*mi, m);
+    M_table.add_monomial(mi->first, m);
     ++m;
   }
   unsigned row = 0;
@@ -221,11 +218,6 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   head.resize(P.size());
   l_head.resize(P.size());
   offset.resize(P.size());
-  R.resize(R_build.size());
-  unsigned i = 0;
-  for (Abstract_Polynomial * r : R_build)
-    R[i++] = r;
-  //
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   list<Critical_Pair_Dynamic *> * thread_rows
@@ -257,57 +249,41 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   //
 }
 
+void F4_Reduction_Data::print_builder() {
+  cout << "[ ";
+  for (auto m : M_builder)
+    cout << "( " << *(m.first) << ", " << m.second << " ) ";
+  cout << "]\n";
+}
+
 void F4_Reduction_Data::add_monomials(
     const WGrevlex * curr_ord,
-    list<Monomial *>::iterator & t1,
-    list<Abstract_Polynomial *>::iterator & r1,
     const Abstract_Polynomial *g,
     const Monomial & u,
     bool new_row
 ) {
-  const_cast<Abstract_Polynomial *>(g)->set_monomial_ordering(curr_ord);
+  //static unsigned long monomials_processed = 0;
+  if (g->monomial_ordering() != curr_ord)
+    const_cast<Abstract_Polynomial *>(g)->set_monomial_ordering(curr_ord);
   NVAR_TYPE n = g->leading_monomial().num_vars();
-  if (new_row) {
-    t1 = M_build.begin();
-    r1 = R_build.begin();
-    Monomial * t = new Monomial(g->leading_monomial());
-    (*t) *= u;
-    //cout << "adding " << *t << " from " << g->leading_monomial() << " and " << u << endl;
-    find_position(t1, M_build.end(), r1, *t);
-    if (t1 == M_build.end()) {
-      M_build.push_back(t);
-      R_build.push_back(nullptr);
-      t1 = M_build.begin();
-      r1 = R_build.begin();
-      auto t2(t1);
-      ++t2;
-      while (t2 != M_build.end()) {
-        ++t1; ++r1;
-        ++t2;
-      }
-    } else if (**t1 != *t) {
-      M_build.insert(t1, t);
-      R_build.insert(r1, nullptr);
-      --t1; --r1;
-    } else delete t;
-  }
-  auto t2(t1); auto r2(r1);
   Polynomial_Iterator * pi = g->new_iterator();
-  pi->moveRight();
+  if (not new_row) pi->moveRight();
+  //monomials_processed += g->length();
   while (not (pi->fellOff())) {
     Monomial * t = new Monomial(pi->currMonomial());
     (*t) *= u;
-    // cout << "adding " << *t << " from " << pi->currMonomial() << " and " << u << endl;
-    find_position(t2, M_build.end(), r2, *t);
-    if (t2 == M_build.end()) {
-      M_build.push_back(t);
-      R_build.push_back(nullptr);
-    } else if (**t2 != *t) {
-      M_build.insert(t2, t);
-      R_build.insert(r2, nullptr);
-    } else delete t;
+    auto hint = M_builder.lower_bound(t);
+    if (
+        hint != M_builder.end() and
+        hint->first != nullptr and
+        hint->first->is_like(*t)
+    )
+      delete t;
+    else
+      M_builder.emplace_hint(hint, t, nullptr);
     pi->moveRight();
   }
+  //cout << "processed " << monomials_processed << " monomials\n";
   delete pi;
 }
 
@@ -317,6 +293,7 @@ F4_Reduction_Data::~F4_Reduction_Data() {
       delete strat;
   }
   for (auto t : M_build) delete t;
+  for (auto t : M_builder) delete t.first;
 }
 
 void F4_Reduction_Data::print_row(unsigned i) {

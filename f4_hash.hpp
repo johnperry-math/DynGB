@@ -95,6 +95,67 @@ class F4_Hash {
     }
 
     /**
+      @brief modifies the location of the specified monomial in the lookup table
+      @details Use only in conjunction with monomials allocated with
+        @c add_monomial(const Monomial *).
+      @warning Invoking this on a monomial whose location hasn't changed or
+        been reassigned will lead to errors and possibly termination.
+        Furthermore, there are no guards for whether the monomial actually
+        appears in the table, so if the monomial hasn't been added there will
+        be errors and probably termination.
+      @param t @c Monomial that has already been added to the table
+      @param location column for coefficients of @c t
+    */
+    void update_location(const Monomial * t, size_t location) {
+      auto & list = table[get_index(*t)];
+      //cout << *t << " updating at " << get_index(*t) << endl;
+      auto curr = list.begin();
+      while (not t->is_like(*(curr->first))) ++curr;
+      curr->second = location;
+    }
+
+    /**
+      @brief indicates whether a monomial has been added to the table
+      @return @c true if and only if @p t has been added to the table
+      @param t @c Monomial whose presence we'd like to determine
+    */
+    bool contains(const Monomial * t) {
+      auto & list = table[get_index(*t)];
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->is_like(*t)) ++curr;
+      return curr != list.end();
+    }
+
+    /**
+      @brief indicates whether a product has been added to the table
+      @return @c true if and only if @p t has been added to the table
+      @param t @c Monomial whose presence we'd like to determine
+    */
+    bool contains_product(const Monomial & t, const Monomial & u) {
+      auto & list = table[get_index(t, u)];
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->like_multiple(t, u)) ++curr;
+      return curr != list.end();
+    }
+
+    /**
+      @brief adds a monomial without an index to the lookup table
+      @details Use only when creating the hash table.
+        This does not check for uniqueness; it simply adds monomials!
+        So make sure you are adding a monomial that isn't already there.
+        For this version of the command, you must subsequently call
+        @c update_location() so that the table has proper references.
+      @warning The location of this monomial is <b>invalid</b>.
+        Essentially, this function merely indicates that such an object
+        needs to be tracked, and will eventually be updated for the table.
+      @param t @c Monomial for future lookup
+    */
+    void add_monomial(const Monomial * t) {
+      table[get_index(*t)].emplace_back(t, 0);
+      //cout << *t << " added at " << get_index(*t) << endl;
+    }
+
+    /**
       @brief adds a monomial to the lookup table
       @details Use only when creating the hash table.
         This does not check for uniqueness; it simply adds monomials!
@@ -116,9 +177,9 @@ class F4_Hash {
       @return location of \f$tu\f$ in the array
     */
     size_t lookup_product(const Monomial & t, const Monomial & u) {
-      auto i = get_index(t, u);
-      auto curr = table[i].begin();
-      while (curr != table[i].end() and not curr->first->like_multiple(t, u))
+      auto & list = table[get_index(t, u)];
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->like_multiple(t, u))
         ++curr;
       return curr->second;
     }
@@ -133,9 +194,9 @@ class F4_Hash {
       @return location of \f$tu\f$ in the array
     */
     size_t lookup_product(const Monomial & t, const EXP_TYPE * u) {
-      auto i = get_index(t, u);
-      auto curr = table[i].begin();
-      while (curr != table[i].end() and not curr->first->like_multiple(u, t))
+      auto & list = table[get_index(t, u)];
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->like_multiple(u, t))
         ++curr;
       return curr->second;
     }

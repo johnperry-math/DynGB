@@ -196,6 +196,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   //num_cols = M_build.size();
   num_cols = M_builder.size();
   num_rows = P.size();
+  cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
@@ -261,11 +262,13 @@ void F4_Reduction_Data::add_monomials(
     const Monomial & u,
     bool new_row
 ) {
+  //static unsigned long monomials_processed = 0;
   if (g->monomial_ordering() != curr_ord)
     const_cast<Abstract_Polynomial *>(g)->set_monomial_ordering(curr_ord);
   NVAR_TYPE n = g->leading_monomial().num_vars();
   Polynomial_Iterator * pi = g->new_iterator();
   if (not new_row) pi->moveRight();
+  //monomials_processed += g->length();
   while (not (pi->fellOff())) {
     Monomial * t = new Monomial(pi->currMonomial());
     (*t) *= u;
@@ -280,10 +283,7 @@ void F4_Reduction_Data::add_monomials(
       M_builder.emplace_hint(hint, t, nullptr);
     pi->moveRight();
   }
-  /*cout << "finished adding monomials for " << u << " ( ";
-  g->print(cout);
-  cout << " )\n";
-  print_builder();*/
+  //cout << "processed " << monomials_processed << " monomials\n";
   delete pi;
 }
 

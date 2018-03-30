@@ -337,11 +337,8 @@ protected:
   vector<unsigned> head;
   /** @brief index of the logical head term of this row (absolute index) */
   vector<unsigned> l_head;
-  /** @brief monomials while building */
-  list<Monomial *> M_build;
+  /** @brief storage of monomials and reducers while preprocessing */
   map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
-  /** @brief indices of reducers for the corresponding elements of @c M */
-  list<Abstract_Polynomial *> R_build;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
   vector<Abstract_Polynomial *> R;
   /** @brief reducers actually generated */
