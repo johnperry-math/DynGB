@@ -149,7 +149,7 @@ union goda_block&lt; TYPE &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2016 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00045">45</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00048">48</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 </div><table class="fieldtable">
 <tr><th colspan="3">Class Members</th></tr>
 <tr><td class="fieldtype">
@@ -188,12 +188,12 @@ class Grading_Order_Data_Allocator&lt; TYPE &gt;</h3>
 <p>This is a quick-n-dirty memory pool allocator for <a class="el" href="group__orderinggroup.html#class_grevlex___order___data" title="data for the grevlex monomial ordering ">Grevlex_Order_Data</a> and <a class="el" href="group__orderinggroup.html#class_w_grevlex___order___data" title="data for the weighted grevlex monomial ordering ">WGrevlex_Order_Data</a>. It isn't quite \(O(1)\) but the plan is to fix that eventually (I have to locate my notes from class). </p><dl class="section warning"><dt>Warning</dt><dd>This is initialized to a certain number of variables, which cannot change. If you want to do this for a different number of variables, create another allocator. </dd></dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_dynamic_8cpp-example.html#_a2">test_dynamic.cpp</a>.</dd>
 </dl>
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00067">67</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00070">70</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
-<tr class="memitem:aa9d14580ced0d2e3d9f0a94e8e83aa85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#aa9d14580ced0d2e3d9f0a94e8e83aa85">Grading_Order_Data_Allocator</a> (NVAR_TYPE n)</td></tr>
-<tr class="memdesc:aa9d14580ced0d2e3d9f0a94e8e83aa85"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets allocator up for blocks of \(n\) of type <code>TYPE</code>.  <a href="#aa9d14580ced0d2e3d9f0a94e8e83aa85">More...</a><br /></td></tr>
-<tr class="separator:aa9d14580ced0d2e3d9f0a94e8e83aa85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad093115aea9e8428a9ef8136a008b72b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#ad093115aea9e8428a9ef8136a008b72b">Grading_Order_Data_Allocator</a> (NVAR_TYPE n, const string &amp;block_name=&quot;&quot;, bool verbose=false)</td></tr>
+<tr class="memdesc:ad093115aea9e8428a9ef8136a008b72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets allocator up for blocks of \(n\) of type <code>TYPE</code>.  <a href="#ad093115aea9e8428a9ef8136a008b72b">More...</a><br /></td></tr>
+<tr class="separator:ad093115aea9e8428a9ef8136a008b72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01de71b688612c55185fc1fb7fd531b9"><td class="memItemLeft" align="right" valign="top"><a id="a01de71b688612c55185fc1fb7fd531b9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a01de71b688612c55185fc1fb7fd531b9">~Grading_Order_Data_Allocator</a> ()</td></tr>
 <tr class="memdesc:a01de71b688612c55185fc1fb7fd531b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">releases all memory &mdash; you'd better have freed yours! <br /></td></tr>
@@ -204,6 +204,10 @@ class Grading_Order_Data_Allocator&lt; TYPE &gt;</h3>
 <tr class="memitem:a699e85282a021fd7b06f65b9e773eb30"><td class="memItemLeft" align="right" valign="top">TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a699e85282a021fd7b06f65b9e773eb30">get_new_block</a> ()</td></tr>
 <tr class="memdesc:a699e85282a021fd7b06f65b9e773eb30"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocates and returns a block of memory  <a href="#a699e85282a021fd7b06f65b9e773eb30">More...</a><br /></td></tr>
 <tr class="separator:a699e85282a021fd7b06f65b9e773eb30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2338be626b78d71175fcd32f6f1bcaf1"><td class="memItemLeft" align="right" valign="top"><a id="a2338be626b78d71175fcd32f6f1bcaf1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a2338be626b78d71175fcd32f6f1bcaf1">report</a> ()</td></tr>
+<tr class="memdesc:a2338be626b78d71175fcd32f6f1bcaf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates how many blocks this has allocated <br /></td></tr>
+<tr class="separator:a2338be626b78d71175fcd32f6f1bcaf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a518a8f61da93ea93651f426e12761a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a518a8f61da93ea93651f426e12761a07">return_used_block</a> (TYPE *freed_block)</td></tr>
 <tr class="memdesc:a518a8f61da93ea93651f426e12761a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a block of memory that is no longer needed to the pool  <a href="#a518a8f61da93ea93651f426e12761a07">More...</a><br /></td></tr>
 <tr class="separator:a518a8f61da93ea93651f426e12761a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,10 +224,22 @@ class Grading_Order_Data_Allocator&lt; TYPE &gt;</h3>
 const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a7073b652fe474ccd684c1eebd2129a0b">data_size</a></td></tr>
 <tr class="memdesc:a7073b652fe474ccd684c1eebd2129a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">how many words to step from one block to the next <br /></td></tr>
 <tr class="separator:a7073b652fe474ccd684c1eebd2129a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab98f2bc46fec3c72ca281d1062d755"><td class="memItemLeft" align="right" valign="top"><a id="acab98f2bc46fec3c72ca281d1062d755"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#acab98f2bc46fec3c72ca281d1062d755">elaborate</a> = false</td></tr>
+<tr class="memdesc:acab98f2bc46fec3c72ca281d1062d755"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether to elaborate during certain activities &mdash; mainly for debugging <br /></td></tr>
+<tr class="separator:acab98f2bc46fec3c72ca281d1062d755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62a84f6bb1a339133100a8eb01dfccf2"><td class="memItemLeft" align="right" valign="top"><a id="a62a84f6bb1a339133100a8eb01dfccf2"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a62a84f6bb1a339133100a8eb01dfccf2">name</a> = &quot;&quot;</td></tr>
+<tr class="memdesc:a62a84f6bb1a339133100a8eb01dfccf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of allocator &mdash; mainly for debugging <br /></td></tr>
+<tr class="separator:a62a84f6bb1a339133100a8eb01dfccf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0807060660950818df7e91a37dd6dc4b"><td class="memItemLeft" align="right" valign="top"><a id="a0807060660950818df7e91a37dd6dc4b"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__memorygroup.html#a0807060660950818df7e91a37dd6dc4b">num_blocks</a> = 0</td></tr>
+<tr class="memdesc:a0807060660950818df7e91a37dd6dc4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of blocks allocated &mdash; mainly for debugging <br /></td></tr>
+<tr class="separator:a0807060660950818df7e91a37dd6dc4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
-<a id="aa9d14580ced0d2e3d9f0a94e8e83aa85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9d14580ced0d2e3d9f0a94e8e83aa85">&#9670;&nbsp;</a></span>Grading_Order_Data_Allocator()</h2>
+<a id="ad093115aea9e8428a9ef8136a008b72b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad093115aea9e8428a9ef8136a008b72b">&#9670;&nbsp;</a></span>Grading_Order_Data_Allocator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,8 +253,24 @@ template&lt;typename TYPE&gt; </div>
           <td class="memname"><a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a>&lt; TYPE &gt;::<a class="el" href="group__memorygroup.html#class_grading___order___data___allocator">Grading_Order_Data_Allocator</a> </td>
           <td>(</td>
           <td class="paramtype">NVAR_TYPE&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>block_name</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -251,13 +283,15 @@ template&lt;typename TYPE&gt; </div>
 <p>sets allocator up for blocks of \(n\) of type <code>TYPE</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>number of objects of type <code>TYPE</code> that should be allocated initially</td></tr>
+    <tr><td class="paramname">n</td><td>number of objects of type <code>TYPE</code> that should be allocated initially </td></tr>
+    <tr><td class="paramname">block_name</td><td>an optional name, for debugging purposes </td></tr>
+    <tr><td class="paramname">verbose</td><td>whether to udpate occasionally during use</td></tr>
   </table>
   </dd>
 </dl>
 <p>The <a class="el" href="group__memorygroup.html#class_grading___order___data___allocator" title="special memory pool allocator for Grevlex_Order_Data and WGrevlex_Order_Data ">Grading_Order_Data_Allocator</a> can and will allocate new blocks of <code>n</code> objects when it runs out of room. </p>
 
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00090">90</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00098">98</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +324,7 @@ template&lt;typename TYPE&gt; </div>
 <p>allocates a new superblock of almost 10000 blocks </p>
 <dl class="section return"><dt>Returns</dt><dd>the superblock </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00073">73</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00076">76</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +356,7 @@ template&lt;typename TYPE&gt; </div>
 <p>allocates and returns a block of memory </p>
 <dl class="section return"><dt>Returns</dt><dd>block of memory of the size specified in constructor </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00108">108</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00123">123</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +394,7 @@ template&lt;typename TYPE&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00121">121</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="goda_8hpp_source.html#l00139">139</a> of file <a class="el" href="goda_8hpp_source.html">goda.hpp</a>.</p>
 
 </div>
 </div>

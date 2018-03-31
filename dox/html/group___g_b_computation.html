@@ -1119,7 +1119,7 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 <div class="textblock"><p>hash table class, based on discussions with Christian Eder </p>
 <p>For a homogeneous system it is advisable to recreate this for each matrix. For inhomogeneous systems it may be advantageous to reuse the table as one proceeds through the system. </p>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00027">27</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00029">29</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr class="memitem:a3983b59e08fa7ad90bba989850f9850f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a3983b59e08fa7ad90bba989850f9850f">F4_Hash</a> (NVAR_TYPE num_vars)</td></tr>
@@ -1129,27 +1129,50 @@ const list&lt; <a class="el" href="group___g_b_computation.html#class_critical__
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a25d18c80d34ca2b2113d0a49c92748a7">~F4_Hash</a> ()</td></tr>
 <tr class="memdesc:a25d18c80d34ca2b2113d0a49c92748a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">releases the table and the randomized hash function <br /></td></tr>
 <tr class="separator:a25d18c80d34ca2b2113d0a49c92748a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed2c308a7d79e098e6555d20b1720d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0">add_monomial</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *t)</td></tr>
+<tr class="memdesc:aaed2c308a7d79e098e6555d20b1720d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a monomial without an index to the lookup table  <a href="#aaed2c308a7d79e098e6555d20b1720d0">More...</a><br /></td></tr>
+<tr class="separator:aaed2c308a7d79e098e6555d20b1720d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a18244162325e3d792ea39525b23f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8">add_monomial</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *t, const size_t location)</td></tr>
 <tr class="memdesc:a86a18244162325e3d792ea39525b23f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a monomial to the lookup table  <a href="#a86a18244162325e3d792ea39525b23f8">More...</a><br /></td></tr>
 <tr class="separator:a86a18244162325e3d792ea39525b23f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4191f4fd7b43859efe6b30e4f702cb7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af4191f4fd7b43859efe6b30e4f702cb7">contains</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *t)</td></tr>
+<tr class="memdesc:af4191f4fd7b43859efe6b30e4f702cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether a monomial has been added to the table  <a href="#af4191f4fd7b43859efe6b30e4f702cb7">More...</a><br /></td></tr>
+<tr class="separator:af4191f4fd7b43859efe6b30e4f702cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae8b0444fbe19fff11a0a5d242295156"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aae8b0444fbe19fff11a0a5d242295156">contains_product</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
+<tr class="memdesc:aae8b0444fbe19fff11a0a5d242295156"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates whether a product has been added to the table  <a href="#aae8b0444fbe19fff11a0a5d242295156">More...</a><br /></td></tr>
+<tr class="separator:aae8b0444fbe19fff11a0a5d242295156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b22f6999f276e58087fe668a01f240a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7b22f6999f276e58087fe668a01f240a">get_index</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t)</td></tr>
 <tr class="memdesc:a7b22f6999f276e58087fe668a01f240a"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the index of <code>t</code> in the lookup table  <a href="#a7b22f6999f276e58087fe668a01f240a">More...</a><br /></td></tr>
 <tr class="separator:a7b22f6999f276e58087fe668a01f240a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a12cff698cefa0375ab76ee6c36a0ce6c">get_index</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
 <tr class="memdesc:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the index of \(tu\) in the lookup table  <a href="#a12cff698cefa0375ab76ee6c36a0ce6c">More...</a><br /></td></tr>
 <tr class="separator:a12cff698cefa0375ab76ee6c36a0ce6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7035dafc727cfb078fea49e8bbd011c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa7035dafc727cfb078fea49e8bbd011c">get_index</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const EXP_TYPE *u)</td></tr>
+<tr class="memdesc:aa7035dafc727cfb078fea49e8bbd011c"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines the index of \(tu\) in the lookup table  <a href="#aa7035dafc727cfb078fea49e8bbd011c">More...</a><br /></td></tr>
+<tr class="separator:aa7035dafc727cfb078fea49e8bbd011c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a539f858e09579b9119941795e42cdc4f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a539f858e09579b9119941795e42cdc4f">lookup_product</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u)</td></tr>
-<tr class="memdesc:a539f858e09579b9119941795e42cdc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8" title="adds a monomial to the lookup table ">add_monomial()</a></code> when \(tu\) was the first  <a href="#a539f858e09579b9119941795e42cdc4f">More...</a><br /></td></tr>
+<tr class="memdesc:a539f858e09579b9119941795e42cdc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0" title="adds a monomial without an index to the lookup table ">add_monomial()</a></code> when \(tu\) was the first  <a href="#a539f858e09579b9119941795e42cdc4f">More...</a><br /></td></tr>
 <tr class="separator:a539f858e09579b9119941795e42cdc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eef1cd0bf6fd57e97b6d10d42b3c6d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9eef1cd0bf6fd57e97b6d10d42b3c6d2">lookup_product</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;t, const EXP_TYPE *u)</td></tr>
+<tr class="memdesc:a9eef1cd0bf6fd57e97b6d10d42b3c6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0" title="adds a monomial without an index to the lookup table ">add_monomial()</a></code> when \(tu\) was the first  <a href="#a9eef1cd0bf6fd57e97b6d10d42b3c6d2">More...</a><br /></td></tr>
+<tr class="separator:a9eef1cd0bf6fd57e97b6d10d42b3c6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f1a52f055247e86e6b65446c65a87b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a0f1a52f055247e86e6b65446c65a87b5">update_location</a> (const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *t, size_t location)</td></tr>
+<tr class="memdesc:a0f1a52f055247e86e6b65446c65a87b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">modifies the location of the specified monomial in the lookup table  <a href="#a0f1a52f055247e86e6b65446c65a87b5">More...</a><br /></td></tr>
+<tr class="separator:a0f1a52f055247e86e6b65446c65a87b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><h3>Public Attributes</h3></td></tr>
+<tr class="memitem:aa05b408b16576e49e607249487540930"><td class="memItemLeft" align="right" valign="top"><a id="aa05b408b16576e49e607249487540930"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa05b408b16576e49e607249487540930">max_size</a> = 0</td></tr>
+<tr class="memdesc:aa05b408b16576e49e607249487540930"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum length of a list in the table; currently for info only <br /></td></tr>
+<tr class="separator:aa05b408b16576e49e607249487540930"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
 <tr class="memitem:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="memItemLeft" align="right" valign="top"><a id="ab0d30e19b178ed579bd97fc98c4e3de5"></a>
 NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab0d30e19b178ed579bd97fc98c4e3de5">n</a></td></tr>
 <tr class="memdesc:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of variables in the monomials stored <br /></td></tr>
 <tr class="separator:ab0d30e19b178ed579bd97fc98c4e3de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80d0b9f0d0f2edb34659b27e2520f083"><td class="memItemLeft" align="right" valign="top"><a id="a80d0b9f0d0f2edb34659b27e2520f083"></a>
-list&lt; pair&lt; const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *, size_t &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a80d0b9f0d0f2edb34659b27e2520f083">table</a></td></tr>
-<tr class="memdesc:a80d0b9f0d0f2edb34659b27e2520f083"><td class="mdescLeft">&#160;</td><td class="mdescRight">the actual table <br /></td></tr>
-<tr class="separator:a80d0b9f0d0f2edb34659b27e2520f083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d54fcb4267c7c727d580b0ed90ff0a"><td class="memItemLeft" align="right" valign="top"><a id="a88d54fcb4267c7c727d580b0ed90ff0a"></a>
+vector&lt; pair&lt; const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *, size_t &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a88d54fcb4267c7c727d580b0ed90ff0a">table</a></td></tr>
+<tr class="memdesc:a88d54fcb4267c7c727d580b0ed90ff0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">the actual table <br /></td></tr>
+<tr class="separator:a88d54fcb4267c7c727d580b0ed90ff0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a894a6279c130dd1cdfea12845448e331"><td class="memItemLeft" align="right" valign="top"><a id="a894a6279c130dd1cdfea12845448e331"></a>
 WT_TYPE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a894a6279c130dd1cdfea12845448e331">weights</a></td></tr>
 <tr class="memdesc:a894a6279c130dd1cdfea12845448e331"><td class="mdescLeft">&#160;</td><td class="mdescRight">randomized weighting for each exponent <br /></td></tr>
@@ -1185,7 +1208,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1198,13 +1221,50 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00042">42</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00047">47</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
 <h4 class="groupheader">Member Function Documentation</h4>
+<a id="aaed2c308a7d79e098e6555d20b1720d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaed2c308a7d79e098e6555d20b1720d0">&#9670;&nbsp;</a></span>add_monomial() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Hash::add_monomial </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>adds a monomial without an index to the lookup table </p>
+<p>Use only when creating the hash table. This does not check for uniqueness; it simply adds monomials! So make sure you are adding a monomial that isn't already there. For this version of the command, you must subsequently call <code><a class="el" href="group___g_b_computation.html#a0f1a52f055247e86e6b65446c65a87b5" title="modifies the location of the specified monomial in the lookup table ">update_location()</a></code> so that the table has proper references. </p><dl class="section warning"><dt>Warning</dt><dd>The location of this monomial is <b>invalid</b>. Essentially, this function merely indicates that such an object needs to be tracked, and will eventually be updated for the table. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> for future lookup </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00159">159</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a86a18244162325e3d792ea39525b23f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86a18244162325e3d792ea39525b23f8">&#9670;&nbsp;</a></span>add_monomial()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a86a18244162325e3d792ea39525b23f8">&#9670;&nbsp;</a></span>add_monomial() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1246,12 +1306,97 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00095">95</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00173">173</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af4191f4fd7b43859efe6b30e4f702cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4191f4fd7b43859efe6b30e4f702cb7">&#9670;&nbsp;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool F4_Hash::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>indicates whether a monomial has been added to the table </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if <code>t</code> has been added to the table </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> whose presence we'd like to determine </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00127">127</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aae8b0444fbe19fff11a0a5d242295156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae8b0444fbe19fff11a0a5d242295156">&#9670;&nbsp;</a></span>contains_product()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool F4_Hash::contains_product </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>indicates whether a product has been added to the table </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if and only if \( tu \) has been added to the table </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>monomial whose product we're checking </td></tr>
+    <tr><td class="paramname">u</td><td>monomial whose product we're checking </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00140">140</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a7b22f6999f276e58087fe668a01f240a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b22f6999f276e58087fe668a01f240a">&#9670;&nbsp;</a></span>get_index() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b22f6999f276e58087fe668a01f240a">&#9670;&nbsp;</a></span>get_index() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1283,12 +1428,12 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>which table entry contains the list that contains <code>t</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00067">67</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00073">73</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a12cff698cefa0375ab76ee6c36a0ce6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12cff698cefa0375ab76ee6c36a0ce6c">&#9670;&nbsp;</a></span>get_index() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cff698cefa0375ab76ee6c36a0ce6c">&#9670;&nbsp;</a></span>get_index() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1331,12 +1476,60 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>which table entry contains the list that contains \(tu\) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00080">80</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00086">86</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa7035dafc727cfb078fea49e8bbd011c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7035dafc727cfb078fea49e8bbd011c">&#9670;&nbsp;</a></span>get_index() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t F4_Hash::get_index </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const EXP_TYPE *&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>determines the index of \(tu\) in the lookup table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+    <tr><td class="paramname">u</td><td><code>exponent</code> vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>which table entry contains the list that contains \(tu\) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00096">96</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a539f858e09579b9119941795e42cdc4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a539f858e09579b9119941795e42cdc4f">&#9670;&nbsp;</a></span>lookup_product()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a539f858e09579b9119941795e42cdc4f">&#9670;&nbsp;</a></span>lookup_product() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1369,7 +1562,7 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </table>
 </div><div class="memdoc">
 
-<p>looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#a86a18244162325e3d792ea39525b23f8" title="adds a monomial to the lookup table ">add_monomial()</a></code> when \(tu\) was the first </p>
+<p>looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0" title="adds a monomial without an index to the lookup table ">add_monomial()</a></code> when \(tu\) was the first </p>
 <p>This will not add \(tu\) if it isn't already there, so call it only after the table has been completely set up! </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
@@ -1379,7 +1572,103 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>location of \(tu\) in the array </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00108">108</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00188">188</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9eef1cd0bf6fd57e97b6d10d42b3c6d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eef1cd0bf6fd57e97b6d10d42b3c6d2">&#9670;&nbsp;</a></span>lookup_product() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t F4_Hash::lookup_product </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const EXP_TYPE *&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>looks up the location of \(tu\) in the array; that is, the second argument to <code><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0" title="adds a monomial without an index to the lookup table ">add_monomial()</a></code> when \(tu\) was the first </p>
+<p>This will not add \(tu\) if it isn't already there, so call it only after the table has been completely set up! </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> </td></tr>
+    <tr><td class="paramname">u</td><td><code>exponent</code> vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>location of \(tu\) in the array </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00205">205</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0f1a52f055247e86e6b65446c65a87b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f1a52f055247e86e6b65446c65a87b5">&#9670;&nbsp;</a></span>update_location()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Hash::update_location </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>modifies the location of the specified monomial in the lookup table </p>
+<p>Use only in conjunction with monomials allocated with <code><a class="el" href="group___g_b_computation.html#aaed2c308a7d79e098e6555d20b1720d0" title="adds a monomial without an index to the lookup table ">add_monomial(const Monomial *)</a></code>. </p><dl class="section warning"><dt>Warning</dt><dd>Invoking this on a monomial whose location hasn't changed or been reassigned will lead to errors and possibly termination. Furthermore, there are no guards for whether the monomial actually appears in the table, so if the monomial hasn't been added there will be errors and probably termination. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><code><a class="el" href="group__polygroup.html#class_monomial" title="Implementation of monomials. ">Monomial</a></code> that has already been added to the table </td></tr>
+    <tr><td class="paramname">location</td><td>column for coefficients of <code>t</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__hash_8hpp_source.html#l00115">115</a> of file <a class="el" href="f4__hash_8hpp_source.html">f4_hash.hpp</a>.</p>
 
 </div>
 </div>
@@ -1400,16 +1689,16 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <div class="textblock"><p>Implementation of Faug&egrave;re&rsquo;s F4 algorithm. </p>
 <p>Currently computes a Gr&ouml;bner basis by selecting several s-polynomials of lowest lcm degree. Data is stored in a semi-sparse matrix format, with each row a contiguous array of entries (<code>A</code>). Each row of <code>A</code> begins at the position indicated by the corresponding <code>offset</code>, and its first non-zero entry appears at the position indicated by the corresponding <code>head</code>. So the leading coefficient of the polynomial in row <code>k</code> appears in <code>A[head[k]]</code> and the leading monomial appears in <code>M[offset[k]+head[k]]</code>. Starting from <code>head[k]</code>, row <code>k</code> is actually dense. While this is not sparse, it does succeed in saving more space than one might expect. </p>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8hpp_source.html#l00074">74</a> of file <a class="el" href="f4__dynamic_8hpp_source.html">f4_dynamic.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8hpp_source.html#l00096">96</a> of file <a class="el" href="f4__dynamic_8hpp_source.html">f4_dynamic.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h3>Public Member Functions</h3></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Construction</div></td></tr>
 <tr class="memitem:a41791d20f96fc7310a40a8e4c63aa4ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a41791d20f96fc7310a40a8e4c63aa4ef">F4_Reduction_Data</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;B, Dynamic_Heuristic method)</td></tr>
 <tr class="memdesc:a41791d20f96fc7310a40a8e4c63aa4ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code>  <a href="#a41791d20f96fc7310a40a8e4c63aa4ef">More...</a><br /></td></tr>
 <tr class="separator:a41791d20f96fc7310a40a8e4c63aa4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2096fe45e5eecc1c855acb82787f2719"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a2096fe45e5eecc1c855acb82787f2719">add_monomials</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;ti, list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;ri, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool new_row=false)</td></tr>
-<tr class="memdesc:a2096fe45e5eecc1c855acb82787f2719"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds monomials of \( ug \) to <code>M_build</code>  <a href="#a2096fe45e5eecc1c855acb82787f2719">More...</a><br /></td></tr>
-<tr class="separator:a2096fe45e5eecc1c855acb82787f2719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa73909179732a3e0e4290c69cf992ddf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa73909179732a3e0e4290c69cf992ddf">add_monomials</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *curr_ord, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool new_row=false)</td></tr>
+<tr class="memdesc:aa73909179732a3e0e4290c69cf992ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds monomials of \( ug \) to <code>M_builder</code>  <a href="#aa73909179732a3e0e4290c69cf992ddf">More...</a><br /></td></tr>
+<tr class="separator:aa73909179732a3e0e4290c69cf992ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9fa6a212375b9498ca86a2c18e94ca1e">initialize_many</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;P)</td></tr>
 <tr class="memdesc:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the matrix  <a href="#a9fa6a212375b9498ca86a2c18e94ca1e">More...</a><br /></td></tr>
 <tr class="separator:a9fa6a212375b9498ca86a2c18e94ca1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1422,7 +1711,20 @@ ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <tr class="memitem:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a0fd30b42c2dcf0dd07dfa898f71c8751">initialize_many</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P)</td></tr>
 <tr class="memdesc:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the matrix  <a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">More...</a><br /></td></tr>
 <tr class="separator:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ada9c61c0f75be4a2b3dd5c762c1c9a1b">F4_Reduction_Data</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P, const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;B)</td></tr>
+<tr class="memdesc:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code>  <a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">More...</a><br /></td></tr>
+<tr class="separator:ada9c61c0f75be4a2b3dd5c762c1c9a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad241aa62afb6b6e0b482496c7559f092"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ad241aa62afb6b6e0b482496c7559f092">add_monomials</a> (list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;ti, list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;ri, const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *g, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;u, bool new_row=false)</td></tr>
+<tr class="memdesc:ad241aa62afb6b6e0b482496c7559f092"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds monomials of \( ug \) to <code>M_build</code>  <a href="#ad241aa62afb6b6e0b482496c7559f092">More...</a><br /></td></tr>
+<tr class="separator:ad241aa62afb6b6e0b482496c7559f092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a0fd30b42c2dcf0dd07dfa898f71c8751">initialize_many</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;P)</td></tr>
+<tr class="memdesc:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the matrix  <a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">More...</a><br /></td></tr>
+<tr class="separator:a0fd30b42c2dcf0dd07dfa898f71c8751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Destruction</div></td></tr>
+<tr class="memitem:a6806b4da4f0bc2753ba5a775794f9165"><td class="memItemLeft" align="right" valign="top"><a id="a6806b4da4f0bc2753ba5a775794f9165"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a6806b4da4f0bc2753ba5a775794f9165">~F4_Reduction_Data</a> ()</td></tr>
+<tr class="memdesc:a6806b4da4f0bc2753ba5a775794f9165"><td class="mdescLeft">&#160;</td><td class="mdescRight">releases space for the matrix and deletes any strategies not already set to <code>nullptr</code> <br /></td></tr>
+<tr class="separator:a6806b4da4f0bc2753ba5a775794f9165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6806b4da4f0bc2753ba5a775794f9165"><td class="memItemLeft" align="right" valign="top"><a id="a6806b4da4f0bc2753ba5a775794f9165"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a6806b4da4f0bc2753ba5a775794f9165">~F4_Reduction_Data</a> ()</td></tr>
 <tr class="memdesc:a6806b4da4f0bc2753ba5a775794f9165"><td class="mdescLeft">&#160;</td><td class="mdescRight">releases space for the matrix and deletes any strategies not already set to <code>nullptr</code> <br /></td></tr>
@@ -1468,6 +1770,18 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac56c717e4015d655e40b2c8033fa9d92">number_of_rows</a> ()</td></tr>
 <tr class="memdesc:ac56c717e4015d655e40b2c8033fa9d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic properties <br /></td></tr>
 <tr class="separator:ac56c717e4015d655e40b2c8033fa9d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8c1358071a26e60b2e50f9678dcfb0"><td class="memItemLeft" align="right" valign="top"><a id="aee8c1358071a26e60b2e50f9678dcfb0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aee8c1358071a26e60b2e50f9678dcfb0">is_zero</a> ()</td></tr>
+<tr class="memdesc:aee8c1358071a26e60b2e50f9678dcfb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <code>true</code> iff all the entries are 0 <br /></td></tr>
+<tr class="separator:aee8c1358071a26e60b2e50f9678dcfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memItemLeft" align="right" valign="top"><a id="a1e58764d1bee3437e2bfa74fbb847b1a"></a>
+vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___data">Poly_Sugar_Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a1e58764d1bee3437e2bfa74fbb847b1a">get_strategies</a> ()</td></tr>
+<tr class="memdesc:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the strategies currently in use <br /></td></tr>
+<tr class="separator:a1e58764d1bee3437e2bfa74fbb847b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56c717e4015d655e40b2c8033fa9d92"><td class="memItemLeft" align="right" valign="top"><a id="ac56c717e4015d655e40b2c8033fa9d92"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac56c717e4015d655e40b2c8033fa9d92">number_of_rows</a> ()</td></tr>
+<tr class="memdesc:ac56c717e4015d655e40b2c8033fa9d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic properties <br /></td></tr>
+<tr class="separator:ac56c717e4015d655e40b2c8033fa9d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Conversion</div></td></tr>
 <tr class="memitem:a6f70b5f5779e7aa262d454b9f2bbd2d1"><td class="memItemLeft" align="right" valign="top"><a id="a6f70b5f5779e7aa262d454b9f2bbd2d1"></a>
 vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a6f70b5f5779e7aa262d454b9f2bbd2d1">finalize</a> ()</td></tr>
@@ -1481,6 +1795,10 @@ vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial
 vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acb8721524d3d30e98fe153ed08c21232">finalize</a> ()</td></tr>
 <tr class="memdesc:acb8721524d3d30e98fe153ed08c21232"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a vector of <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
 <tr class="separator:acb8721524d3d30e98fe153ed08c21232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8721524d3d30e98fe153ed08c21232"><td class="memItemLeft" align="right" valign="top"><a id="acb8721524d3d30e98fe153ed08c21232"></a>
+vector&lt; <a class="el" href="group__polygroup.html#class_constant___polynomial">Constant_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#acb8721524d3d30e98fe153ed08c21232">finalize</a> ()</td></tr>
+<tr class="memdesc:acb8721524d3d30e98fe153ed08c21232"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts <code>this</code> to a vector of <a class="el" href="group__polygroup.html#class_constant___polynomial" title="A Constant_Polynomial is a polynomial that should not change. ">Constant_Polynomial</a> and returns the result <br /></td></tr>
+<tr class="separator:acb8721524d3d30e98fe153ed08c21232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Modification</div></td></tr>
 <tr class="memitem:ac006310b3318fa247fa9a415db495d06"><td class="memItemLeft" align="right" valign="top"><a id="ac006310b3318fa247fa9a415db495d06"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac006310b3318fa247fa9a415db495d06">clear_strategy</a> (unsigned i)</td></tr>
@@ -1490,6 +1808,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a727863db45a812f5dccc3f1d3be3a745">set_ordering</a> (const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *ord)</td></tr>
 <tr class="memdesc:a727863db45a812f5dccc3f1d3be3a745"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets monomial ordering to indicated ordering <br /></td></tr>
 <tr class="separator:a727863db45a812f5dccc3f1d3be3a745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac006310b3318fa247fa9a415db495d06"><td class="memItemLeft" align="right" valign="top"><a id="ac006310b3318fa247fa9a415db495d06"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac006310b3318fa247fa9a415db495d06">clear_strategy</a> (unsigned i)</td></tr>
+<tr class="memdesc:ac006310b3318fa247fa9a415db495d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the strategy; do this if you have saved it elsewhere <br /></td></tr>
+<tr class="separator:ac006310b3318fa247fa9a415db495d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac006310b3318fa247fa9a415db495d06"><td class="memItemLeft" align="right" valign="top"><a id="ac006310b3318fa247fa9a415db495d06"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ac006310b3318fa247fa9a415db495d06">clear_strategy</a> (unsigned i)</td></tr>
 <tr class="memdesc:ac006310b3318fa247fa9a415db495d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the strategy; do this if you have saved it elsewhere <br /></td></tr>
@@ -1529,6 +1851,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a395928a83fb46aba60804c3d2b80c84a">reduce_by_new</a> ()</td></tr>
 <tr class="memdesc:a395928a83fb46aba60804c3d2b80c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
 <tr class="separator:a395928a83fb46aba60804c3d2b80c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841c43903004e8a8e355bfcf30dfd36c"><td class="memItemLeft" align="right" valign="top"><a id="a841c43903004e8a8e355bfcf30dfd36c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a841c43903004e8a8e355bfcf30dfd36c">reduce_by_old</a> ()</td></tr>
+<tr class="memdesc:a841c43903004e8a8e355bfcf30dfd36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
+<tr class="separator:a841c43903004e8a8e355bfcf30dfd36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395928a83fb46aba60804c3d2b80c84a"><td class="memItemLeft" align="right" valign="top"><a id="a395928a83fb46aba60804c3d2b80c84a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a395928a83fb46aba60804c3d2b80c84a">reduce_by_new</a> ()</td></tr>
+<tr class="memdesc:a395928a83fb46aba60804c3d2b80c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces polynomials <br /></td></tr>
+<tr class="separator:a395928a83fb46aba60804c3d2b80c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">I/O</div></td></tr>
 <tr class="memitem:af4491ffa78cb0e75051492b83f51744b"><td class="memItemLeft" align="right" valign="top"><a id="af4491ffa78cb0e75051492b83f51744b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af4491ffa78cb0e75051492b83f51744b">list_reducers</a> ()</td></tr>
@@ -1541,6 +1871,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a11e756a43276426735929d09976d7337">print_row</a> (unsigned)</td></tr>
 <tr class="memdesc:a11e756a43276426735929d09976d7337"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints indicated row of the matrix as a polynomial <br /></td></tr>
 <tr class="separator:a11e756a43276426735929d09976d7337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304778da38e44a01184b698b3de45df1"><td class="memItemLeft" align="right" valign="top"><a id="a304778da38e44a01184b698b3de45df1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a304778da38e44a01184b698b3de45df1">print_builder</a> ()</td></tr>
+<tr class="memdesc:a304778da38e44a01184b698b3de45df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the pairs of monomials and reducers that are being built <br /></td></tr>
+<tr class="separator:a304778da38e44a01184b698b3de45df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4491ffa78cb0e75051492b83f51744b"><td class="memItemLeft" align="right" valign="top"><a id="af4491ffa78cb0e75051492b83f51744b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af4491ffa78cb0e75051492b83f51744b">list_reducers</a> ()</td></tr>
+<tr class="memdesc:af4491ffa78cb0e75051492b83f51744b"><td class="mdescLeft">&#160;</td><td class="mdescRight">lists the reducers selected for each column, in order <br /></td></tr>
+<tr class="separator:af4491ffa78cb0e75051492b83f51744b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f3e9b5617084c34f97acd23d6e67a43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9f3e9b5617084c34f97acd23d6e67a43">print_matrix</a> (bool show_data=false)</td></tr>
+<tr class="memdesc:a9f3e9b5617084c34f97acd23d6e67a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the matrix  <a href="#a9f3e9b5617084c34f97acd23d6e67a43">More...</a><br /></td></tr>
+<tr class="separator:a9f3e9b5617084c34f97acd23d6e67a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e756a43276426735929d09976d7337"><td class="memItemLeft" align="right" valign="top"><a id="a11e756a43276426735929d09976d7337"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a11e756a43276426735929d09976d7337">print_row</a> (unsigned)</td></tr>
+<tr class="memdesc:a11e756a43276426735929d09976d7337"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the indicated row of the matrix as an unformatted polynomial <br /></td></tr>
+<tr class="separator:a11e756a43276426735929d09976d7337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4491ffa78cb0e75051492b83f51744b"><td class="memItemLeft" align="right" valign="top"><a id="af4491ffa78cb0e75051492b83f51744b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af4491ffa78cb0e75051492b83f51744b">list_reducers</a> ()</td></tr>
 <tr class="memdesc:af4491ffa78cb0e75051492b83f51744b"><td class="mdescLeft">&#160;</td><td class="mdescRight">lists the reducers selected for each column, in order <br /></td></tr>
@@ -1549,6 +1894,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 <tr class="memdesc:a9f3e9b5617084c34f97acd23d6e67a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the matrix  <a href="#a9f3e9b5617084c34f97acd23d6e67a43">More...</a><br /></td></tr>
 <tr class="separator:a9f3e9b5617084c34f97acd23d6e67a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Member Functions</h3></td></tr>
+<tr class="memitem:af10c8ec51df3bcf3b2be5bbeb4126cd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#af10c8ec51df3bcf3b2be5bbeb4126cd1">add_reductor</a> (vector&lt; COEF_TYPE &gt; &amp;target, COEF_TYPE a, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source, COEF_TYPE mod, unsigned start=1)</td></tr>
+<tr class="memdesc:af10c8ec51df3bcf3b2be5bbeb4126cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position  <a href="#af10c8ec51df3bcf3b2be5bbeb4126cd1">More...</a><br /></td></tr>
+<tr class="separator:af10c8ec51df3bcf3b2be5bbeb4126cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766380b6700443ecfa99aa03ff7df274"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a766380b6700443ecfa99aa03ff7df274">add_reductor</a> (vector&lt; COEF_TYPE &gt; &amp;target, COEF_TYPE a, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source, COEF_TYPE mod)</td></tr>
+<tr class="memdesc:a766380b6700443ecfa99aa03ff7df274"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position  <a href="#a766380b6700443ecfa99aa03ff7df274">More...</a><br /></td></tr>
+<tr class="separator:a766380b6700443ecfa99aa03ff7df274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadda8de768e8a8c504979be7425f85ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aadda8de768e8a8c504979be7425f85ac">build_reducer</a> (vector&lt; COEF_TYPE &gt; &amp;buffer, unsigned i)</td></tr>
+<tr class="memdesc:aadda8de768e8a8c504979be7425f85ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">build the sparse representation of the <b>reduced</b> polynomial chosen to reduce monomial <code>i</code>  <a href="#aadda8de768e8a8c504979be7425f85ac">More...</a><br /></td></tr>
+<tr class="separator:aadda8de768e8a8c504979be7425f85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadda8de768e8a8c504979be7425f85ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aadda8de768e8a8c504979be7425f85ac">build_reducer</a> (vector&lt; COEF_TYPE &gt; &amp;buffer, unsigned i)</td></tr>
+<tr class="memdesc:aadda8de768e8a8c504979be7425f85ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">build the sparse representation of the <b>reduced</b> polynomial chosen to reduce monomial <code>i</code>  <a href="#aadda8de768e8a8c504979be7425f85ac">More...</a><br /></td></tr>
+<tr class="separator:aadda8de768e8a8c504979be7425f85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385d863722c1e2f9e9769ba27b5cb374"><td class="memItemLeft" align="right" valign="top"><a id="a385d863722c1e2f9e9769ba27b5cb374"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a385d863722c1e2f9e9769ba27b5cb374">build_reducer</a> (unsigned, const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;)</td></tr>
+<tr class="memdesc:a385d863722c1e2f9e9769ba27b5cb374"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds a reducer for the specified column <br /></td></tr>
+<tr class="separator:a385d863722c1e2f9e9769ba27b5cb374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c30bf1632513f7f951cffdae9810130"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7c30bf1632513f7f951cffdae9810130">densify_row</a> (vector&lt; COEF_TYPE &gt; &amp;target, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source)</td></tr>
+<tr class="memdesc:a7c30bf1632513f7f951cffdae9810130"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a row from sparse to dense reprsentation  <a href="#a7c30bf1632513f7f951cffdae9810130">More...</a><br /></td></tr>
+<tr class="separator:a7c30bf1632513f7f951cffdae9810130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c30bf1632513f7f951cffdae9810130"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a7c30bf1632513f7f951cffdae9810130">densify_row</a> (vector&lt; COEF_TYPE &gt; &amp;target, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source)</td></tr>
+<tr class="memdesc:a7c30bf1632513f7f951cffdae9810130"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a row from sparse to dense reprsentation  <a href="#a7c30bf1632513f7f951cffdae9810130">More...</a><br /></td></tr>
+<tr class="separator:a7c30bf1632513f7f951cffdae9810130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdcffbc4a0a83211bea0385d851a4fb4"><td class="memItemLeft" align="right" valign="top"><a id="abdcffbc4a0a83211bea0385d851a4fb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abdcffbc4a0a83211bea0385d851a4fb4">initialize_some_rows</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;, unsigned)</td></tr>
+<tr class="memdesc:abdcffbc4a0a83211bea0385d851a4fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates rows of the matrix indexed by the specified pairs, starting at the specified row <br /></td></tr>
+<tr class="separator:abdcffbc4a0a83211bea0385d851a4fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdcffbc4a0a83211bea0385d851a4fb4"><td class="memItemLeft" align="right" valign="top"><a id="abdcffbc4a0a83211bea0385d851a4fb4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abdcffbc4a0a83211bea0385d851a4fb4">initialize_some_rows</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;, unsigned)</td></tr>
 <tr class="memdesc:abdcffbc4a0a83211bea0385d851a4fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates rows of the matrix indexed by the specified pairs, starting at the specified row <br /></td></tr>
@@ -1557,26 +1928,50 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ada3c0b561fefae7da3c28b6f6574cbc0">initialize_some_rows</a> (const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___dynamic">Critical_Pair_Dynamic</a> *&gt; &amp;, unsigned)</td></tr>
 <tr class="memdesc:ada3c0b561fefae7da3c28b6f6574cbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates rows of the matrix indexed by the specified pairs, starting at the specified row <br /></td></tr>
 <tr class="separator:ada3c0b561fefae7da3c28b6f6574cbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a354bbe37c36c47326f4e82adccb6feff"><td class="memItemLeft" align="right" valign="top"><a id="a354bbe37c36c47326f4e82adccb6feff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a354bbe37c36c47326f4e82adccb6feff">reduce_my_new_rows</a> (unsigned, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;, const set&lt; unsigned &gt; &amp;)</td></tr>
-<tr class="memdesc:a354bbe37c36c47326f4e82adccb6feff"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading <br /></td></tr>
-<tr class="separator:a354bbe37c36c47326f4e82adccb6feff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab24c775b8cfd88daf73a1fbde0b998a8">reduce_buffer</a> (vector&lt; COEF_TYPE &gt; &amp;target, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source, COEF_TYPE mod)</td></tr>
+<tr class="memdesc:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduce dense row using the sparse source, modulo the indicated value  <a href="#ab24c775b8cfd88daf73a1fbde0b998a8">More...</a><br /></td></tr>
+<tr class="separator:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ab24c775b8cfd88daf73a1fbde0b998a8">reduce_buffer</a> (vector&lt; COEF_TYPE &gt; &amp;target, const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source, COEF_TYPE mod)</td></tr>
+<tr class="memdesc:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduce dense row using the sparse source, modulo the indicated value  <a href="#ab24c775b8cfd88daf73a1fbde0b998a8">More...</a><br /></td></tr>
+<tr class="separator:ab24c775b8cfd88daf73a1fbde0b998a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76fbaaed7645b0895065bfb13ca7c800"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a76fbaaed7645b0895065bfb13ca7c800">reduce_my_new_rows</a> (vector&lt; COEF_TYPE &gt; &amp;buffer, unsigned i, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;F, const set&lt; unsigned &gt; &amp;rows)</td></tr>
+<tr class="memdesc:a76fbaaed7645b0895065bfb13ca7c800"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading  <a href="#a76fbaaed7645b0895065bfb13ca7c800">More...</a><br /></td></tr>
+<tr class="separator:a76fbaaed7645b0895065bfb13ca7c800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76fbaaed7645b0895065bfb13ca7c800"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a76fbaaed7645b0895065bfb13ca7c800">reduce_my_new_rows</a> (vector&lt; COEF_TYPE &gt; &amp;buffer, unsigned i, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;F, const set&lt; unsigned &gt; &amp;rows)</td></tr>
+<tr class="memdesc:a76fbaaed7645b0895065bfb13ca7c800"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading  <a href="#a76fbaaed7645b0895065bfb13ca7c800">More...</a><br /></td></tr>
+<tr class="separator:a76fbaaed7645b0895065bfb13ca7c800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae75be9f5946c90ea68cbae7276dfd36c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae75be9f5946c90ea68cbae7276dfd36c">reduce_my_new_rows</a> (unsigned i, unsigned lhead_i, const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;F, const set&lt; unsigned &gt; &amp;to_reduce)</td></tr>
 <tr class="memdesc:ae75be9f5946c90ea68cbae7276dfd36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows by the specified row, suitable for multithreading  <a href="#ae75be9f5946c90ea68cbae7276dfd36c">More...</a><br /></td></tr>
 <tr class="separator:ae75be9f5946c90ea68cbae7276dfd36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa631661a253620af23fd3daed2b57c14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa631661a253620af23fd3daed2b57c14">reduce_my_rows</a> (vector&lt; COEF_TYPE &gt; &amp;A_buffer, vector&lt; COEF_TYPE &gt; &amp;R_buffer, const set&lt; unsigned &gt; &amp;rows)</td></tr>
+<tr class="memdesc:aa631661a253620af23fd3daed2b57c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading  <a href="#aa631661a253620af23fd3daed2b57c14">More...</a><br /></td></tr>
+<tr class="separator:aa631661a253620af23fd3daed2b57c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa631661a253620af23fd3daed2b57c14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa631661a253620af23fd3daed2b57c14">reduce_my_rows</a> (vector&lt; COEF_TYPE &gt; &amp;A_buffer, vector&lt; COEF_TYPE &gt; &amp;R_buffer, const set&lt; unsigned &gt; &amp;rows)</td></tr>
+<tr class="memdesc:aa631661a253620af23fd3daed2b57c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading  <a href="#aa631661a253620af23fd3daed2b57c14">More...</a><br /></td></tr>
+<tr class="separator:aa631661a253620af23fd3daed2b57c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6f2417153c7c1dc9a77a3b7f42597"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a5fc6f2417153c7c1dc9a77a3b7f42597">reduce_my_rows</a> (const set&lt; unsigned &gt; &amp;)</td></tr>
 <tr class="memdesc:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading <br /></td></tr>
 <tr class="separator:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6f2417153c7c1dc9a77a3b7f42597"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a5fc6f2417153c7c1dc9a77a3b7f42597">reduce_my_rows</a> (const set&lt; unsigned &gt; &amp;)</td></tr>
-<tr class="memdesc:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces the specified set of rows, suitable for multithreading <br /></td></tr>
-<tr class="separator:a5fc6f2417153c7c1dc9a77a3b7f42597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe5ee5976f0d923576d08d473b5fb0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9fe5ee5976f0d923576d08d473b5fb0c">sparsify_row</a> (vector&lt; COEF_TYPE &gt; &amp;source, vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;target)</td></tr>
+<tr class="memdesc:a9fe5ee5976f0d923576d08d473b5fb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">transform row from dense to sparse format  <a href="#a9fe5ee5976f0d923576d08d473b5fb0c">More...</a><br /></td></tr>
+<tr class="separator:a9fe5ee5976f0d923576d08d473b5fb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5aa71d1578c175bc8d7355ed5f93fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abe5aa71d1578c175bc8d7355ed5f93fa">sparsify_row</a> (const vector&lt; COEF_TYPE &gt; &amp;buffer, vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;source)</td></tr>
+<tr class="memdesc:abe5aa71d1578c175bc8d7355ed5f93fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">transform row from dense to sparse format  <a href="#abe5aa71d1578c175bc8d7355ed5f93fa">More...</a><br /></td></tr>
+<tr class="separator:abe5aa71d1578c175bc8d7355ed5f93fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><h3>Protected Attributes</h3></td></tr>
+<tr class="memitem:aefa417ab77667256a1f21d54f95c264a"><td class="memItemLeft" align="right" valign="top"><a id="aefa417ab77667256a1f21d54f95c264a"></a>
+vector&lt; vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aefa417ab77667256a1f21d54f95c264a">A</a></td></tr>
+<tr class="memdesc:aefa417ab77667256a1f21d54f95c264a"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient data in sparse representation; each vector entry is a subrow of the dense matrix <br /></td></tr>
+<tr class="separator:aefa417ab77667256a1f21d54f95c264a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="memItemLeft" align="right" valign="top"><a id="ae99b64462e7d5f0aef6f196a4bc5c4cd"></a>
 vector&lt; vector&lt; COEF_TYPE &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae99b64462e7d5f0aef6f196a4bc5c4cd">A</a></td></tr>
 <tr class="memdesc:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">coefficient data in sparse representation; each vector entry is a subrow of the dense matrix <br /></td></tr>
 <tr class="separator:ae99b64462e7d5f0aef6f196a4bc5c4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5553e4748985f3adb1a20de2d9edd4"><td class="memItemLeft" align="right" valign="top"><a id="aba5553e4748985f3adb1a20de2d9edd4"></a>
+vector&lt; vector&lt; COEF_TYPE &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aba5553e4748985f3adb1a20de2d9edd4">A_buf</a></td></tr>
+<tr class="memdesc:aba5553e4748985f3adb1a20de2d9edd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffers for rows of A during reduction; one per thread <br /></td></tr>
+<tr class="separator:aba5553e4748985f3adb1a20de2d9edd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0e72696183319ea37b7b88e4772037e"><td class="memItemLeft" align="right" valign="top"><a id="aa0e72696183319ea37b7b88e4772037e"></a>
 set&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aa0e72696183319ea37b7b88e4772037e">dynamic_processed</a></td></tr>
 <tr class="memdesc:aa0e72696183319ea37b7b88e4772037e"><td class="mdescLeft">&#160;</td><td class="mdescRight">rows which have already contributed to the ordering <br /></td></tr>
@@ -1617,6 +2012,10 @@ vector&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a
 list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#aee58b978a10b26bbdf1d518e6eb25fb5">M_build</a></td></tr>
 <tr class="memdesc:aee58b978a10b26bbdf1d518e6eb25fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">monomials while building <br /></td></tr>
 <tr class="separator:aee58b978a10b26bbdf1d518e6eb25fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f8cacf3d9ae0458adfdb7e6184e7b3f"><td class="memItemLeft" align="right" valign="top"><a id="a8f8cacf3d9ae0458adfdb7e6184e7b3f"></a>
+map&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *, <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *, <a class="el" href="struct_mon_cmp.html">MonCmp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a8f8cacf3d9ae0458adfdb7e6184e7b3f">M_builder</a></td></tr>
+<tr class="memdesc:a8f8cacf3d9ae0458adfdb7e6184e7b3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">storage of monomials and reducers while preprocessing <br /></td></tr>
+<tr class="separator:a8f8cacf3d9ae0458adfdb7e6184e7b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0a76700237de2f2e4340f4f1a78c7ff"><td class="memItemLeft" align="right" valign="top"><a id="ae0a76700237de2f2e4340f4f1a78c7ff"></a>
 <a class="el" href="group___g_b_computation.html#class_f4___hash">F4_Hash</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae0a76700237de2f2e4340f4f1a78c7ff">M_table</a></td></tr>
 <tr class="memdesc:ae0a76700237de2f2e4340f4f1a78c7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">hash table of the monomials in <code>M</code> <br /></td></tr>
@@ -1625,10 +2024,10 @@ list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> 
 const <a class="el" href="group__orderinggroup.html#class_monomial___ordering">Monomial_Ordering</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a4f684766174bbefa4d04df3fa894ad1d">mord</a></td></tr>
 <tr class="memdesc:a4f684766174bbefa4d04df3fa894ad1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
 <tr class="separator:a4f684766174bbefa4d04df3fa894ad1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a531a462792fba821e13a63c7376c35cf"><td class="memItemLeft" align="right" valign="top"><a id="a531a462792fba821e13a63c7376c35cf"></a>
-const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a531a462792fba821e13a63c7376c35cf">mord</a></td></tr>
-<tr class="memdesc:a531a462792fba821e13a63c7376c35cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
-<tr class="separator:a531a462792fba821e13a63c7376c35cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b23364eb687aaa5c09882f59be4033c"><td class="memItemLeft" align="right" valign="top"><a id="a9b23364eb687aaa5c09882f59be4033c"></a>
+const <a class="el" href="group__orderinggroup.html#class_w_grevlex">WGrevlex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9b23364eb687aaa5c09882f59be4033c">mord</a></td></tr>
+<tr class="memdesc:a9b23364eb687aaa5c09882f59be4033c"><td class="mdescLeft">&#160;</td><td class="mdescRight">how the monomials are ordered <br /></td></tr>
+<tr class="separator:a9b23364eb687aaa5c09882f59be4033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55db3cd23309e08acfbce3b6d2feec85"><td class="memItemLeft" align="right" valign="top"><a id="a55db3cd23309e08acfbce3b6d2feec85"></a>
 vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a55db3cd23309e08acfbce3b6d2feec85">nonzero_entries</a></td></tr>
 <tr class="memdesc:a55db3cd23309e08acfbce3b6d2feec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nonzero entries of each row of A <br /></td></tr>
@@ -1653,6 +2052,10 @@ vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a c
 vector&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a90488d65365fd6a5512ccda45780acc5">R</a></td></tr>
 <tr class="memdesc:a90488d65365fd6a5512ccda45780acc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalized list of indices of reducers for the corresponding monomials of <code>f</code> <br /></td></tr>
 <tr class="separator:a90488d65365fd6a5512ccda45780acc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae715f7601d5f828b58f59c8ef15748fb"><td class="memItemLeft" align="right" valign="top"><a id="ae715f7601d5f828b58f59c8ef15748fb"></a>
+vector&lt; vector&lt; COEF_TYPE &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#ae715f7601d5f828b58f59c8ef15748fb">R_buf</a></td></tr>
+<tr class="memdesc:ae715f7601d5f828b58f59c8ef15748fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer to build reducers for the matrix <br /></td></tr>
+<tr class="separator:ae715f7601d5f828b58f59c8ef15748fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03bda496da1d09c73151ba42b6db7bc4"><td class="memItemLeft" align="right" valign="top"><a id="a03bda496da1d09c73151ba42b6db7bc4"></a>
 list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a03bda496da1d09c73151ba42b6db7bc4">R_build</a></td></tr>
 <tr class="memdesc:a03bda496da1d09c73151ba42b6db7bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">indices of reducers for the corresponding elements of <code>M</code> <br /></td></tr>
@@ -1661,6 +2064,10 @@ list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">
 vector&lt; vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a341e74dadaec6a56cd944f17be9b9320">R_built</a></td></tr>
 <tr class="memdesc:a341e74dadaec6a56cd944f17be9b9320"><td class="mdescLeft">&#160;</td><td class="mdescRight">reducers actually generated <br /></td></tr>
 <tr class="separator:a341e74dadaec6a56cd944f17be9b9320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfbe5a1e5b64e6512e885077a9b4b6b0"><td class="memItemLeft" align="right" valign="top"><a id="abfbe5a1e5b64e6512e885077a9b4b6b0"></a>
+vector&lt; mutex &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#abfbe5a1e5b64e6512e885077a9b4b6b0">red_lock</a></td></tr>
+<tr class="memdesc:abfbe5a1e5b64e6512e885077a9b4b6b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">locks on the reducers <br /></td></tr>
+<tr class="separator:abfbe5a1e5b64e6512e885077a9b4b6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e8822d7ececb2271ebbef4ec62f986e"><td class="memItemLeft" align="right" valign="top"><a id="a9e8822d7ececb2271ebbef4ec62f986e"></a>
 vector&lt; <a class="el" href="group___c_l_s_solvers.html#class_l_p___solvers_1_1_l_p___solver">LP_Solver</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___g_b_computation.html#a9e8822d7ececb2271ebbef4ec62f986e">row_skel</a></td></tr>
 <tr class="memdesc:a9e8822d7ececb2271ebbef4ec62f986e"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies of the current skeleton, modified according to the preferred monomial of this row <br /></td></tr>
@@ -1676,7 +2083,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </table>
 <h4 class="groupheader">Constructor &amp; Destructor Documentation</h4>
 <a id="a41791d20f96fc7310a40a8e4c63aa4ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41791d20f96fc7310a40a8e4c63aa4ef">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a41791d20f96fc7310a40a8e4c63aa4ef">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1729,7 +2136,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </div>
 </div>
 <a id="ada9c61c0f75be4a2b3dd5c762c1c9a1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1763,13 +2170,50 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00043">43</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00045">45</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ada9c61c0f75be4a2b3dd5c762c1c9a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9c61c0f75be4a2b3dd5c762c1c9a1b">&#9670;&nbsp;</a></span>F4_Reduction_Data() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">F4_Reduction_Data::F4_Reduction_Data </td>
+          <td>(</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt; &amp;&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>encapsulation of one step of the F4 algorithm for the polynomials indicated by <code>P</code> and <code>B</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">P</td><td>list of critical pairs that will create a new basis; matrix will have this many rows </td></tr>
+    <tr><td class="paramname">B</td><td>list of polynomials currently in the basis </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h4 class="groupheader">Member Function Documentation</h4>
 <a id="ad241aa62afb6b6e0b482496c7559f092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad241aa62afb6b6e0b482496c7559f092">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad241aa62afb6b6e0b482496c7559f092">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1825,12 +2269,71 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00185">185</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+</div>
+</div>
+<a id="ad241aa62afb6b6e0b482496c7559f092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad241aa62afb6b6e0b482496c7559f092">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::add_monomials </td>
+          <td>(</td>
+          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;&#160;</td>
+          <td class="paramname"><em>ti</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;&#160;</td>
+          <td class="paramname"><em>ri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>new_row</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds monomials of \( ug \) to <code>M_build</code> </p>
+<p>If <code>g</code> is an s-polynomial generator, set the flag to <code>true</code>, <code>ti</code> to the beginning of <code>M_build</code>, <code>ri</code> to the beginning of <code>R_build</code>, and <code>u</code> to the first multiple in the critical pair. Setting the flag to <code>true</code> signals that <code>ti</code> and <code>ri</code> are not at the correct insertion point, so the function needs to find this point. In this case, <code>ti</code> and <code>ri</code> will change.</p>
+<p>If <code>g</code> is not a generator, then <code>ti</code> and <code>ri</code> should point to appropriate locations for the monomial divisible by the leading term of <code>g</code>. The algorithm advances both a copy of <code>ti</code> and an iterator on <code>g</code> to insert new monomials. In this case, the algorithm modifies neither <code>ti</code> nor <code>ri</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ti</td><td>iterator through <code>M_build</code>; see details for more information </td></tr>
+    <tr><td class="paramname">ri</td><td>iterator through <code>R_build</code>; see details for more information </td></tr>
+    <tr><td class="paramname">g</td><td>polynomial, such as an s-polynomial generator or a reducer </td></tr>
+    <tr><td class="paramname">u</td><td>monomial to multiply to <code>g</code> to add monomials </td></tr>
+    <tr><td class="paramname">new_row</td><td>whether <code>g</code> is adding a new row to the basis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00175">175</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2096fe45e5eecc1c855acb82787f2719"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2096fe45e5eecc1c855acb82787f2719">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[2/2]</span></h2>
+<a id="aa73909179732a3e0e4290c69cf992ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa73909179732a3e0e4290c69cf992ddf">&#9670;&nbsp;</a></span>add_monomials() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1844,18 +2347,6 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_monomial">Monomial</a> *&gt;::iterator &amp;&#160;</td>
-          <td class="paramname"><em>ti</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">list&lt; <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&gt;::iterator &amp;&#160;</td>
-          <td class="paramname"><em>ri</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const <a class="el" href="group__polygroup.html#class_abstract___polynomial">Abstract_Polynomial</a> *&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
@@ -1879,26 +2370,333 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
       </table>
 </div><div class="memdoc">
 
-<p>adds monomials of \( ug \) to <code>M_build</code> </p>
-<p>If <code>g</code> is an s-polynomial generator, set the flag to <code>true</code>, <code>ti</code> to the beginning of <code>M_build</code>, <code>ri</code> to the beginning of <code>R_build</code>, and <code>u</code> to the first multiple in the critical pair. Setting the flag to <code>true</code> signals that <code>ti</code> and <code>ri</code> are not at the correct insertion point, so the function needs to find this point. In this case, <code>ti</code> and <code>ri</code> will change.</p>
-<p>If <code>g</code> is not a generator, then <code>ti</code> and <code>ri</code> should point to appropriate locations for the monomial divisible by the leading term of <code>g</code>. The algorithm advances both a copy of <code>ti</code> and an iterator on <code>g</code> to insert new monomials. In this case, the algorithm modifies neither <code>ti</code> nor <code>ri</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>adds monomials of \( ug \) to <code>M_builder</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">curr_ord</td><td>current monomial ordering </td></tr>
-    <tr><td class="paramname">ti</td><td>iterator through <code>M_build</code>; see details for more information </td></tr>
-    <tr><td class="paramname">ri</td><td>iterator through <code>R_build</code>; see details for more information </td></tr>
     <tr><td class="paramname">g</td><td>polynomial, such as an s-polynomial generator or a reducer </td></tr>
     <tr><td class="paramname">u</td><td>monomial to multiply to <code>g</code> to add monomials </td></tr>
-    <tr><td class="paramname">new_row</td><td>whether <code>g</code> is adding a new row to the basis </td></tr>
+    <tr><td class="paramname">new_row</td><td>if <code>true</code>, adds the leading monomial; otherwise, adds only trailing monomials </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00245">245</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00257">257</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af10c8ec51df3bcf3b2be5bbeb4126cd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10c8ec51df3bcf3b2be5bbeb4126cd1">&#9670;&nbsp;</a></span>add_reductor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::add_reductor </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>start</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position </p>
+<p>The difference between this and reduce_buffer is that in this case you may not want to start from the first position, because you haven't yet added the value $ a $. Thus, you can start with the second term, rather than waste time (however little) starting with the first. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of a polynomial being reduced </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of a reductor </td></tr>
+    <tr><td class="paramname">mod</td><td>modulus for all operations </td></tr>
+    <tr><td class="paramname">start</td><td>position in the source (default is 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a766380b6700443ecfa99aa03ff7df274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766380b6700443ecfa99aa03ff7df274">&#9670;&nbsp;</a></span>add_reductor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::add_reductor </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>mod</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position </p>
+<p>The difference between this and reduce_buffer is that in this case you may not want to start from the first position, because you haven't yet added the value $ a $. Thus, you can start with the second term, rather than waste time (however little) starting with the first. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of a polynomial being reduced </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of a reductor </td></tr>
+    <tr><td class="paramname">mod</td><td>modulus for all operations </td></tr>
+    <tr><td class="paramname">a</td><td>scalar multiple of source </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00321">321</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aadda8de768e8a8c504979be7425f85ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadda8de768e8a8c504979be7425f85ac">&#9670;&nbsp;</a></span>build_reducer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::build_reducer </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>build the sparse representation of the <b>reduced</b> polynomial chosen to reduce monomial <code>i</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>where to store the dense representation while building the reductor </td></tr>
+    <tr><td class="paramname">i</td><td>index in <code>M</code> of the monomial to be reduced </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aadda8de768e8a8c504979be7425f85ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadda8de768e8a8c504979be7425f85ac">&#9670;&nbsp;</a></span>build_reducer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::build_reducer </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>build the sparse representation of the <b>reduced</b> polynomial chosen to reduce monomial <code>i</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>where to store the dense representation while building the reductor </td></tr>
+    <tr><td class="paramname">i</td><td>index in <code>M</code> of the monomial to be reduced </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00332">332</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7c30bf1632513f7f951cffdae9810130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c30bf1632513f7f951cffdae9810130">&#9670;&nbsp;</a></span>densify_row() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::densify_row </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert a row from sparse to dense reprsentation </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of row </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of row </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7c30bf1632513f7f951cffdae9810130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c30bf1632513f7f951cffdae9810130">&#9670;&nbsp;</a></span>densify_row() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::densify_row </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert a row from sparse to dense reprsentation </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of row </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of row </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00290">290</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a0fd30b42c2dcf0dd07dfa898f71c8751"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1921,12 +2719,38 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00130">130</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+</div>
+</div>
+<a id="a0fd30b42c2dcf0dd07dfa898f71c8751"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fd30b42c2dcf0dd07dfa898f71c8751">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::initialize_many </td>
+          <td>(</td>
+          <td class="paramtype">const list&lt; <a class="el" href="group___g_b_computation.html#class_critical___pair___basic">Critical_Pair_Basic</a> *&gt; &amp;&#160;</td>
+          <td class="paramname"><em>P</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>creates the matrix </p>
+<p>called internally by constructor, which has already performed some setup; inadvisable to use elsewhere </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">P</td><td>list of critical pairs that will generate the matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00123">123</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a9fa6a212375b9498ca86a2c18e94ca1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fa6a212375b9498ca86a2c18e94ca1e">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fa6a212375b9498ca86a2c18e94ca1e">&#9670;&nbsp;</a></span>initialize_many() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1949,12 +2773,12 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00189">189</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00194">194</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a9f3e9b5617084c34f97acd23d6e67a43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f3e9b5617084c34f97acd23d6e67a43">&#9670;&nbsp;</a></span>print_matrix() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3e9b5617084c34f97acd23d6e67a43">&#9670;&nbsp;</a></span>print_matrix() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1980,7 +2804,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </div>
 </div>
 <a id="a9f3e9b5617084c34f97acd23d6e67a43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f3e9b5617084c34f97acd23d6e67a43">&#9670;&nbsp;</a></span>print_matrix() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3e9b5617084c34f97acd23d6e67a43">&#9670;&nbsp;</a></span>print_matrix() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2003,7 +2827,33 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00315">315</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+</div>
+</div>
+<a id="a9f3e9b5617084c34f97acd23d6e67a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3e9b5617084c34f97acd23d6e67a43">&#9670;&nbsp;</a></span>print_matrix() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::print_matrix </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>show_data</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints the matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">show_data</td><td>whether to show the monomials that correspond to each column </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00304">304</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2051,12 +2901,238 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <p>This step falls between <code><a class="el" href="group___g_b_computation.html#a841c43903004e8a8e355bfcf30dfd36c" title="reduces polynomials ">reduce_by_old()</a></code> and <code><a class="el" href="group___g_b_computation.html#a6f70b5f5779e7aa262d454b9f2bbd2d1" title="converts this to a vector of Constant_Polynomial and returns the result ">finalize()</a></code>. It attempts to perform a more global analysis of the matrix than select_dynamic_single. After reduction of rows by the existing basis, this step analyzes the matrix for a new ordering, proceeding row-by-row. </p><dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="group__orderinggroup.html#class_w_grevlex" title="the grevlex ordering for a specified number of variables ">WGrevlex</a> ordering that is considered optimal for the matrix and consistent with past choices </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00754">754</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00850">850</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab24c775b8cfd88daf73a1fbde0b998a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab24c775b8cfd88daf73a1fbde0b998a8">&#9670;&nbsp;</a></span>reduce_buffer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_buffer </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>mod</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduce dense row using the sparse source, modulo the indicated value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of a polynomial being reduced </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of a reductor </td></tr>
+    <tr><td class="paramname">mod</td><td>modulus for all operations </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab24c775b8cfd88daf73a1fbde0b998a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab24c775b8cfd88daf73a1fbde0b998a8">&#9670;&nbsp;</a></span>reduce_buffer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_buffer </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">COEF_TYPE&#160;</td>
+          <td class="paramname"><em>mod</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduce dense row using the sparse source, modulo the indicated value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>dense representation of a polynomial being reduced </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of a reductor </td></tr>
+    <tr><td class="paramname">mod</td><td>modulus for all operations </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00300">300</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a76fbaaed7645b0895065bfb13ca7c800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76fbaaed7645b0895065bfb13ca7c800">&#9670;&nbsp;</a></span>reduce_my_new_rows() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_my_new_rows </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const set&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces the specified set of rows by the specified row, suitable for multithreading </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>storage for the dense representation of a row </td></tr>
+    <tr><td class="paramname">i</td><td>which row to use as reductor </td></tr>
+    <tr><td class="paramname">F</td><td>the ground field, needed not just for the modulus but for inverses </td></tr>
+    <tr><td class="paramname">rows</td><td>which rows this thread will reduce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a76fbaaed7645b0895065bfb13ca7c800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76fbaaed7645b0895065bfb13ca7c800">&#9670;&nbsp;</a></span>reduce_my_new_rows() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_my_new_rows </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___fields_group.html#class_prime___field">Prime_Field</a> &amp;&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const set&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces the specified set of rows by the specified row, suitable for multithreading </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>storage for the dense representation of a row </td></tr>
+    <tr><td class="paramname">i</td><td>which row to use as reductor </td></tr>
+    <tr><td class="paramname">F</td><td>the ground field, needed not just for the modulus but for inverses </td></tr>
+    <tr><td class="paramname">rows</td><td>which rows this thread will reduce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00445">445</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
 <a id="ae75be9f5946c90ea68cbae7276dfd36c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae75be9f5946c90ea68cbae7276dfd36c">&#9670;&nbsp;</a></span>reduce_my_new_rows()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae75be9f5946c90ea68cbae7276dfd36c">&#9670;&nbsp;</a></span>reduce_my_new_rows() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2112,7 +3188,113 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00442">442</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00529">529</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa631661a253620af23fd3daed2b57c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa631661a253620af23fd3daed2b57c14">&#9670;&nbsp;</a></span>reduce_my_rows() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_my_rows </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>A_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>R_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const set&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces the specified set of rows, suitable for multithreading </p>
+<p>Under the current implementation, we need two buffers for the rows of a matrix. We intend to change that eventually to 1. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A_buffer</td><td>buffer to store the dense representation of a row </td></tr>
+    <tr><td class="paramname">R_buffer</td><td>buffer to store the dense representation of a row </td></tr>
+    <tr><td class="paramname">rows</td><td>which rows this thread will reduce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa631661a253620af23fd3daed2b57c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa631661a253620af23fd3daed2b57c14">&#9670;&nbsp;</a></span>reduce_my_rows() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::reduce_my_rows </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>A_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>R_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const set&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces the specified set of rows, suitable for multithreading </p>
+<p>Under the current implementation, we need two buffers for the rows of a matrix. We intend to change that eventually to 1. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A_buffer</td><td>buffer to store the dense representation of a row </td></tr>
+    <tr><td class="paramname">R_buffer</td><td>buffer to store the dense representation of a row </td></tr>
+    <tr><td class="paramname">rows</td><td>which rows this thread will reduce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00371">371</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
@@ -2136,7 +3318,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <dl class="section return"><dt>Returns</dt><dd>whether the preferred, compatible monomial would change the current ordering </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00690">690</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00788">788</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2197,7 +3379,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the recommended monomial ordering; this may be the same as <code>curr_ord</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00846">846</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00942">942</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2265,7 +3447,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the row with the recommended new ordering </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00978">978</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l01074">1074</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2293,7 +3475,99 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00608">608</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00704">704</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9fe5ee5976f0d923576d08d473b5fb0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe5ee5976f0d923576d08d473b5fb0c">&#9670;&nbsp;</a></span>sparsify_row() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::sparsify_row </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>transform row from dense to sparse format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>dense representation of row </td></tr>
+    <tr><td class="paramname">target</td><td>sparse representation of row </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe5aa71d1578c175bc8d7355ed5f93fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe5aa71d1578c175bc8d7355ed5f93fa">&#9670;&nbsp;</a></span>sparsify_row() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void F4_Reduction_Data::sparsify_row </td>
+          <td>(</td>
+          <td class="paramtype">const vector&lt; COEF_TYPE &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; pair&lt; unsigned, COEF_TYPE &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>transform row from dense to sparse format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>dense representation of row </td></tr>
+    <tr><td class="paramname">source</td><td>sparse representation of row </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="f4__reduction_8cpp_source.html#l00312">312</a> of file <a class="el" href="f4__reduction_8cpp_source.html">f4_reduction.cpp</a>.</p>
 
 </div>
 </div>
@@ -2323,7 +3597,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <dl class="section return"><dt>Returns</dt><dd><code>false</code> if and only if <code>newSkel</code> cannot be modified to compatibility with <code>newSkel</code> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function is not currently in use and has not been tested. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00634">634</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l00730">730</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>
@@ -2436,7 +3710,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <li><code>BIG_BETTI_HILBERT_DEG</code> tries to obtain a set of incremental Betti with the largest values, comparing from the top and stopping when not equal</li>
 <li><code>GRAD_BETTI_HILBERT_DEG</code> tries to obtain a set of incremental Betti numbers with the largest values, comparing from the bottom and stopping when not equal </li>
 </ol>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a1">test_4by4.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#a9">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#a9">user_interface.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a1">test_4by4.cpp</a>, <a class="el" href="test_dynamic_8cpp-example.html#a8">test_dynamic.cpp</a>, and <a class="el" href="user_interface_8cpp-example.html#a9">user_interface.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="dynamic__engine_8hpp_source.html#l00083">83</a> of file <a class="el" href="dynamic__engine_8hpp_source.html">dynamic_engine.hpp</a>.</p>
 
@@ -2496,7 +3770,7 @@ vector&lt; <a class="el" href="group__strategygroup.html#class_poly___sugar___da
 <li>GEOBUCKETS polynomials are created and manipulated in geobucket format <a class="el" href="citelist.html#CITEREF_YanGeobuckets">[10]</a></li>
 <li>DOUBLE_BUF polynomials are created and manipulated in a novel, doubled-buffered format </li>
 </ul>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a0">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#a0">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#a0">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#a0">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#a0">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#a0">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#a0">test_cab_es9.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#a9">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a18">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#a0">test_4by4.cpp</a>, <a class="el" href="test_cab_es1_8cpp-example.html#a0">test_cab_es1.cpp</a>, <a class="el" href="test_cab_es2_8cpp-example.html#a0">test_cab_es2.cpp</a>, <a class="el" href="test_cab_es4_8cpp-example.html#a0">test_cab_es4.cpp</a>, <a class="el" href="test_cab_es5_8cpp-example.html#a0">test_cab_es5.cpp</a>, <a class="el" href="test_cab_es6_8cpp-example.html#a0">test_cab_es6.cpp</a>, <a class="el" href="test_cab_es9_8cpp-example.html#a0">test_cab_es9.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#a9">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#a17">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="critical__pair_8hpp_source.html#l00055">55</a> of file <a class="el" href="critical__pair_8hpp_source.html">critical_pair.hpp</a>.</p>
 
@@ -2917,7 +4191,7 @@ If desired, the algorithm can analyze the inputs to find a good global ordering.
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a Gr&ouml;bner basis of the ideal generated by \( F \) with respect to the ordering already assigned to its polynomials </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l01102">1102</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="f4__dynamic_8cpp_source.html#l01201">1201</a> of file <a class="el" href="f4__dynamic_8cpp_source.html">f4_dynamic.cpp</a>.</p>
 
 </div>
 </div>

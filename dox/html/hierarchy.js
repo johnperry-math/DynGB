@@ -32,6 +32,7 @@ var hierarchy =
       [ "LP_Solvers::Skeleton", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_skeleton", null ]
     ] ],
     [ "LP_Solvers::Ray", "group___c_l_s_solvers.html#class_l_p___solvers_1_1_ray", null ],
+    [ "MonCmp", "struct_mon_cmp.html", null ],
     [ "Monomial", "group__polygroup.html#class_monomial", null ],
     [ "Monomial_Ideal", "group__polygroup.html#class_monomial___ideal", null ],
     [ "Monomial_Node", "group__polygroup.html#class_monomial___node", null ],

@@ -90,6 +90,8 @@ public:
   /**
     @brief sets allocator up for blocks of @f$n@f$ of type @c TYPE.
     @param n number of objects of type @c TYPE that should be allocated initially
+    @param block_name an optional name, for debugging purposes
+    @param verbose whether to udpate occasionally during use
     @details The Grading_Order_Data_Allocator can and will allocate new blocks
       of @p n objects when it runs out of room.
   */
@@ -126,7 +128,7 @@ public:
     ++num_blocks;
     if (elaborate)
       cout << name << " increase to " << num_blocks << " blocks in use\n";
-    TYPE * result = (TYPE *)block;
+    TYPE * result = reinterpret_cast<TYPE *>(block);
     block = block->next;
     return result;
   }
@@ -142,6 +144,9 @@ public:
     new_head->next = block;
     block = new_head;
   }
+  /**
+    @brief indicates how many blocks this has allocated
+  */
   void report() {
     cout << name << "has allocated " << num_blocks << " blocks\n";
   }

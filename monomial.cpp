@@ -115,6 +115,32 @@ Monomial::Monomial(
   #endif
 }
 
+Monomial::Monomial(const Monomial & t, const Monomial & u, bool product) {
+  common_initialization(t.ordering);
+  n = t.n;
+  if (product) mask = t.mask | u.mask;
+  else mask = t.mask;
+  #if EPACK
+  emask = t.emask + u.emask;
+  #endif
+  exponents = moda->get_new_block();
+  NVAR_TYPE i;
+  if (product) {
+    for (i = 0; i + 1 < n; i += 2) {
+      exponents[i] = t.exponents[i] + u.exponents[i];
+      exponents[i + 1] = t.exponents[i + 1] + u.exponents[i + 1];
+    }
+    if (n % 2) exponents[i + 1] = t.exponents[i + 1] + u.exponents[i + 1];
+  } else {
+    for (i = 0; i + 1 < n; i += 2) {
+      exponents[i] = t.exponents[i] - u.exponents[i];
+      exponents[i + 1] = t.exponents[i + 1] - u.exponents[i + 1];
+    }
+    if (n % 2) exponents[i + 1] = t.exponents[i + 1] - u.exponents[i + 1];
+  }
+  ordering->set_data(*this); 
+}
+
 Monomial::Monomial(const Monomial &other) {
   common_initialization(other.ordering);
   n = other.n;

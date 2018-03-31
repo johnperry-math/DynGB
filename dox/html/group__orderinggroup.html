@@ -160,7 +160,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>John Perry </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2015</dd></dl>
 <p>The weighted grevlex ordering first compares weighted sums of all exponents, then the sums of all but the last exponent, then the sums of all but the last two exponents, and so forth, until either the sums differ or it runs out of variables. Whether the weights are applied to more than one sum can be decided at construction. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a10">test_dynamic.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="test_4by4_8cpp-example.html#_a11">test_4by4.cpp</a>, <a class="el" href="test_cyclicn_8cpp-example.html#_a12">test_cyclicn.cpp</a>, and <a class="el" href="test_dynamic_8cpp-example.html#_a9">test_dynamic.cpp</a>.</dd>
 </dl>
 <p class="definition">Definition at line <a class="el" href="particular__orderings_8hpp_source.html#l00465">465</a> of file <a class="el" href="particular__orderings_8hpp_source.html">particular_orderings.hpp</a>.</p>
 </div><div class="dynheader">
@@ -614,6 +614,9 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Grevlex_Order_Data::Grevlex_Order_Data </td>
@@ -623,6 +626,11 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>creates an array of partial weights of <code>t</code> </p>
@@ -961,6 +969,9 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Lex_Ordering::Lex_Ordering </td>
@@ -970,6 +981,11 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>creates a lex ordering specific to \(n\) variables </p>
@@ -1722,7 +1738,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not override unless you know what you&rsquo;re doing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00492">492</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00519">519</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -1761,7 +1777,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__orderinggroup.html#aed41fe82e1ca5cd287a93d287fee7c20">first_larger()</a> </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not override unless you know what you&rsquo;re doing </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00498">498</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00525">525</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -1944,7 +1960,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <p>Reimplemented in <a class="el" href="group__orderinggroup.html#a65f1e27ee52413c91ffcb87632dcb27c">CachedWGrevlex_Ordering</a>, <a class="el" href="group__orderinggroup.html#a18ba60cd0a76da002303a11d362142d9">WGrevlex</a>, <a class="el" href="group__orderinggroup.html#a83abd3e7505fe2096b01b8146bfdd83f">Grevlex_Ordering</a>, and <a class="el" href="group__orderinggroup.html#a14c344858da03d16c8019afdae3da5dc">Generic_Grevlex</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00488">488</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monomial_8cpp_source.html#l00515">515</a> of file <a class="el" href="monomial_8cpp_source.html">monomial.cpp</a>.</p>
 
 </div>
 </div>
@@ -2335,6 +2351,9 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">WGrevlex_Order_Data::WGrevlex_Order_Data </td>
@@ -2344,6 +2363,11 @@ const NVAR_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>creates an array of partial weights of <code>t</code> </p>

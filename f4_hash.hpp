@@ -9,6 +9,8 @@ using std::uniform_int_distribution;
 
 #include <list>
 using std::list;
+#include <vector>
+using std::vector;
 
 #include <utility>
 using std::pair;
@@ -31,16 +33,20 @@ class F4_Hash {
     NVAR_TYPE n; /**< @brief number of variables in the monomials stored */
     WT_TYPE * weights; /**< @brief randomized weighting for each exponent */
     static const size_t MAXIMUM = 1 << 18; /**< @brief number of entries in table */
-    list<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
+    //list<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
+    vector<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
 
   public:
 
+    /** @brief maximum length of a list in the table; currently for info only */
+    size_t max_size = 0;
     /**
       @brief allocates the table and sets up randomized hash function
       @param num_vars number of variables in the monomials this table will check
     */
-    F4_Hash(NVAR_TYPE num_vars) {
-      table = new list<pair<const Monomial *, size_t> > [MAXIMUM];
+    explicit F4_Hash(NVAR_TYPE num_vars) {
+      //table = new list<pair<const Monomial *, size_t> > [MAXIMUM];
+      table = new vector<pair<const Monomial *, size_t> > [MAXIMUM];
       n = num_vars;
       weights = new WT_TYPE[n];
       default_random_engine generator(
@@ -78,7 +84,7 @@ class F4_Hash {
       @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
-      get_index(t, u.log());
+      return get_index(t, u.log());
     }
 
     /**
@@ -90,7 +96,7 @@ class F4_Hash {
     size_t get_index(const Monomial & t, const EXP_TYPE * u) {
       DEG_TYPE index = 0;
       for (NVAR_TYPE i = 0; i < n; ++i)
-        index += ((t[i] + u[i]) * weights[i]) % MAXIMUM;
+        index += ((t[i] + u[i]) * weights[i]);
       return index % MAXIMUM;
     }
 
@@ -108,7 +114,6 @@ class F4_Hash {
     */
     void update_location(const Monomial * t, size_t location) {
       auto & list = table[get_index(*t)];
-      //cout << *t << " updating at " << get_index(*t) << endl;
       auto curr = list.begin();
       while (not t->is_like(*(curr->first))) ++curr;
       curr->second = location;
@@ -128,8 +133,9 @@ class F4_Hash {
 
     /**
       @brief indicates whether a product has been added to the table
-      @return @c true if and only if @p t has been added to the table
-      @param t @c Monomial whose presence we'd like to determine
+      @return @c true if and only if \f$ tu \f$ has been added to the table
+      @param t monomial whose product we're checking
+      @param u monomial whose product we're checking
     */
     bool contains_product(const Monomial & t, const Monomial & u) {
       auto & list = table[get_index(t, u)];
@@ -151,8 +157,9 @@ class F4_Hash {
       @param t @c Monomial for future lookup
     */
     void add_monomial(const Monomial * t) {
-      table[get_index(*t)].emplace_back(t, 0);
-      //cout << *t << " added at " << get_index(*t) << endl;
+      auto & list = table[get_index(*t)];
+      list.emplace_back(t, 0);
+      if (list.size() > max_size) max_size = list.size();
     }
 
     /**
@@ -164,7 +171,9 @@ class F4_Hash {
       @param location column for coefficients of @p t
     */
     void add_monomial(const Monomial * t, const size_t location) {
-      table[get_index(*t)].emplace_back(t, location);
+      auto & list = table[get_index(*t)];
+      list.emplace_back(t, location);
+      if (list.size() > max_size) max_size = list.size();
     }
 
     /**

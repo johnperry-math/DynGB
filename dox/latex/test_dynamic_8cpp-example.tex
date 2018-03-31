@@ -43,8 +43,6 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
 \textcolor{keyword}{extern} \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\_Ordering} * generic\_grevlex\_ptr;
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<WT\_TYPE>} * 
       \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
-\textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<DEG\_TYPE>} * 
-      \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda};
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<EXP\_TYPE>} * 
       \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
 \textcolor{keyword}{extern} \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\_Order\_Data\_Allocator<Monomial>} * 
@@ -124,7 +122,7 @@ This illustrates how to compute a Gr\"{o}bner basis of the Cyclic-\/ $n$ system 
   \}
   \textcolor{keywordflow}{if} (mord != generic\_grevlex\_ptr) \textcolor{keyword}{delete} mord;
   \textcolor{keywordflow}{if} (goda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gadf1bccf09eada41d10a5d4ceda7ca479}{goda};
-  \textcolor{keywordflow}{if} (doda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda};
+  \textcolor{keywordflow}{if} (\hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda} != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga0dc763860167cb9a6e5c84bfda9a456e}{doda};
   \textcolor{keywordflow}{if} (moda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_gaf2c367d23e09c5dad7e0273995a3304c}{moda};
   \textcolor{keywordflow}{if} (monoda != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga76b5ae808895658b417e3f3a13c60e51}{monoda};
   \textcolor{keywordflow}{if} (monododa != \textcolor{keyword}{nullptr}) \textcolor{keyword}{delete} \hyperlink{group__memorygroup_ga2b5eeb775f6c601e624b487f3245983a}{monododa};

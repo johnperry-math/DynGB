@@ -105,7 +105,7 @@ public:
     @brief creates an array of partial weights of @c t
     @param t a Monomial whose parial weights @c this caches
   */
-  Grevlex_Order_Data(const Monomial & t);
+  explicit Grevlex_Order_Data(const Monomial & t);
   /** @brief copy constructor */
   Grevlex_Order_Data(const Grevlex_Order_Data &);
   /** @brief clone &ldquo;constructor&rdquo; */
@@ -157,7 +157,7 @@ public:
   /**
     @brief creates a grevlex ordering specific to the specified number of variables
   */
-  Grevlex_Ordering(NVAR_TYPE number_of_variables);
+  explicit Grevlex_Ordering(NVAR_TYPE number_of_variables);
   ///@}
   /** @name Comparison */
   ///@{
@@ -344,7 +344,7 @@ public:
     @brief creates a lex ordering specific to @f$n@f$ variables
     @param number_of_variables number of variables this ordering should check
   */
-  Lex_Ordering(NVAR_TYPE number_of_variables);
+  explicit Lex_Ordering(NVAR_TYPE number_of_variables);
   ///@}
   /** @name Comparison */
   ///@{
@@ -407,7 +407,7 @@ public:
     @warning Assign the correct ordering to @c t first!
     @param t a Monomial whose weights @c this will cache
   */
-  WGrevlex_Order_Data(Monomial & t);
+  explicit WGrevlex_Order_Data(Monomial & t);
   /** @brief copy constructor */
   WGrevlex_Order_Data(const WGrevlex_Order_Data &);
   /** @brief clone constructor */

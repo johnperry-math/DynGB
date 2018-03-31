@@ -1,6 +1,7 @@
 var searchData=
 [
   ['matrix_5fordering',['Matrix_Ordering',['../group__orderinggroup.html#class_matrix___ordering',1,'']]],
+  ['moncmp',['MonCmp',['../struct_mon_cmp.html',1,'']]],
   ['monomial',['Monomial',['../group__polygroup.html#class_monomial',1,'']]],
   ['monomial_5fideal',['Monomial_Ideal',['../group__polygroup.html#class_monomial___ideal',1,'']]],
   ['monomial_5fideal_5fvariables_5fexception',['Monomial_Ideal_Variables_Exception',['../group__polygroup.html#class_monomial___ideal___variables___exception',1,'']]],

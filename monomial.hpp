@@ -93,6 +93,13 @@ public:
       NVAR_TYPE number_of_vars,
       const Monomial_Ordering * order = generic_grevlex_ptr
   );
+  /**
+    @brief "Product" constructor: constructs a product or quotient
+    @param product @c true if and only if we want a product
+    @param t @c Monomial to multiply
+    @param u @c Monomial to multiply
+  */
+  Monomial(const Monomial & t, const Monomial & u, bool product = true);
   /** @brief Copy constructor, allocates new space for exponents. */
   Monomial(const Monomial &other);
   /**

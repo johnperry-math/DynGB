@@ -237,11 +237,11 @@ protected:
   );
   /**
     @brief transform row from dense to sparse format
-    @param source dense representation of row
-    @param target sparse representation of row
+    @param buffer dense representation of row
+    @param source sparse representation of row
   */
   void sparsify_row(
-      const vector<COEF_TYPE> & source, vector<pair<unsigned, COEF_TYPE> > & target
+      const vector<COEF_TYPE> & buffer, vector<pair<unsigned, COEF_TYPE> > & source
   );
   /**
     @brief reduce dense row using the sparse source, modulo the indicated value,
@@ -253,6 +253,7 @@ protected:
     @param target dense representation of a polynomial being reduced
     @param source sparse representation of a reductor
     @param mod modulus for all operations
+    @param a scalar multiple of source
   */
   void add_reductor(
       vector<COEF_TYPE> & target, COEF_TYPE a,

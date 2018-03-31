@@ -652,7 +652,7 @@ hash table class, based on discussions with Christian Eder
 
 For a homogeneous system it is advisable to recreate this for each matrix. For inhomogeneous systems it may be advantageous to reuse the table as one proceeds through the system. 
 
-Definition at line 27 of file f4\+\_\+hash.\+hpp.
+Definition at line 29 of file f4\+\_\+hash.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -662,22 +662,40 @@ Definition at line 27 of file f4\+\_\+hash.\+hpp.
 \mbox{\Hypertarget{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}\label{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}} 
 \hyperlink{group___g_b_computation_a25d18c80d34ca2b2113d0a49c92748a7}{$\sim$\+F4\+\_\+\+Hash} ()
 \begin{DoxyCompactList}\small\item\em releases the table and the randomized hash function \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t)
+\begin{DoxyCompactList}\small\item\em adds a monomial without an index to the lookup table \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t, const size\+\_\+t location)
 \begin{DoxyCompactList}\small\item\em adds a monomial to the lookup table \end{DoxyCompactList}\item 
+bool \hyperlink{group___g_b_computation_af4191f4fd7b43859efe6b30e4f702cb7}{contains} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t)
+\begin{DoxyCompactList}\small\item\em indicates whether a monomial has been added to the table \end{DoxyCompactList}\item 
+bool \hyperlink{group___g_b_computation_aae8b0444fbe19fff11a0a5d242295156}{contains\+\_\+product} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
+\begin{DoxyCompactList}\small\item\em indicates whether a product has been added to the table \end{DoxyCompactList}\item 
 size\+\_\+t \hyperlink{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t)
 \begin{DoxyCompactList}\small\item\em determines the index of {\ttfamily t} in the lookup table \end{DoxyCompactList}\item 
 size\+\_\+t \hyperlink{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
 \begin{DoxyCompactList}\small\item\em determines the index of $tu$ in the lookup table \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group___g_b_computation_aa7035dafc727cfb078fea49e8bbd011c}{get\+\_\+index} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$u)
+\begin{DoxyCompactList}\small\item\em determines the index of $tu$ in the lookup table \end{DoxyCompactList}\item 
 size\+\_\+t \hyperlink{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}{lookup\+\_\+product} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u)
-\begin{DoxyCompactList}\small\item\em looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial()}} when $tu$ was the first \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group___g_b_computation_a9eef1cd0bf6fd57e97b6d10d42b3c6d2}{lookup\+\_\+product} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$u)
+\begin{DoxyCompactList}\small\item\em looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial()}} when $tu$ was the first \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a0f1a52f055247e86e6b65446c65a87b5}{update\+\_\+location} (const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$t, size\+\_\+t location)
+\begin{DoxyCompactList}\small\item\em modifies the location of the specified monomial in the lookup table \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{group___g_b_computation_aa05b408b16576e49e607249487540930}\label{group___g_b_computation_aa05b408b16576e49e607249487540930}} 
+size\+\_\+t \hyperlink{group___g_b_computation_aa05b408b16576e49e607249487540930}{max\+\_\+size} = 0
+\begin{DoxyCompactList}\small\item\em maximum length of a list in the table; currently for info only \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}\label{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}} 
 N\+V\+A\+R\+\_\+\+T\+Y\+PE \hyperlink{group___g_b_computation_ab0d30e19b178ed579bd97fc98c4e3de5}{n}
 \begin{DoxyCompactList}\small\item\em number of variables in the monomials stored \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}\label{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}} 
-list$<$ pair$<$ const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$, size\+\_\+t $>$ $>$ $\ast$ \hyperlink{group___g_b_computation_a80d0b9f0d0f2edb34659b27e2520f083}{table}
+\mbox{\Hypertarget{group___g_b_computation_a88d54fcb4267c7c727d580b0ed90ff0a}\label{group___g_b_computation_a88d54fcb4267c7c727d580b0ed90ff0a}} 
+vector$<$ pair$<$ const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$, size\+\_\+t $>$ $>$ $\ast$ \hyperlink{group___g_b_computation_a88d54fcb4267c7c727d580b0ed90ff0a}{table}
 \begin{DoxyCompactList}\small\item\em the actual table \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}\label{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}} 
 W\+T\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group___g_b_computation_a894a6279c130dd1cdfea12845448e331}{weights}
@@ -701,7 +719,7 @@ ostream \& \hyperlink{group___g_b_computation_a979748da85dd3012fb925b0ff6b9b71c}
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
 \subparagraph{\texorpdfstring{F4\+\_\+\+Hash()}{F4\_Hash()}}
-{\footnotesize\ttfamily F4\+\_\+\+Hash\+::\+F4\+\_\+\+Hash (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+vars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily F4\+\_\+\+Hash\+::\+F4\+\_\+\+Hash (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{num\+\_\+vars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
 
 
 
@@ -714,15 +732,37 @@ allocates the table and sets up randomized hash function
 \end{DoxyParams}
 
 
-Definition at line 42 of file f4\+\_\+hash.\+hpp.
+Definition at line 47 of file f4\+\_\+hash.\+hpp.
 
 
 
 \paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}\label{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!add\+\_\+monomial@{add\+\_\+monomial}}
+\index{add\+\_\+monomial@{add\+\_\+monomial}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{add\+\_\+monomial()}{add\_monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Hash\+::add\+\_\+monomial (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+adds a monomial without an index to the lookup table 
+
+Use only when creating the hash table. This does not check for uniqueness; it simply adds monomials! So make sure you are adding a monomial that isn\textquotesingle{}t already there. For this version of the command, you must subsequently call {\ttfamily \hyperlink{group___g_b_computation_a0f1a52f055247e86e6b65446c65a87b5}{update\+\_\+location()}} so that the table has proper references. \begin{DoxyWarning}{Warning}
+The location of this monomial is {\bfseries invalid}. Essentially, this function merely indicates that such an object needs to be tracked, and will eventually be updated for the table. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} for future lookup \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 159 of file f4\+\_\+hash.\+hpp.
+
 \mbox{\Hypertarget{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}\label{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}} 
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!add\+\_\+monomial@{add\+\_\+monomial}}
 \index{add\+\_\+monomial@{add\+\_\+monomial}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
-\subparagraph{\texorpdfstring{add\+\_\+monomial()}{add\_monomial()}}
+\subparagraph{\texorpdfstring{add\+\_\+monomial()}{add\_monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Hash\+::add\+\_\+monomial (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t,  }\item[{const size\+\_\+t}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -738,12 +778,58 @@ Use only when creating the hash table. This does not check for uniqueness; it si
 \end{DoxyParams}
 
 
-Definition at line 95 of file f4\+\_\+hash.\+hpp.
+Definition at line 173 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_af4191f4fd7b43859efe6b30e4f702cb7}\label{group___g_b_computation_af4191f4fd7b43859efe6b30e4f702cb7}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!contains@{contains}}
+\index{contains@{contains}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool F4\+\_\+\+Hash\+::contains (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+indicates whether a monomial has been added to the table 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if {\ttfamily t} has been added to the table 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} whose presence we\textquotesingle{}d like to determine \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 127 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_aae8b0444fbe19fff11a0a5d242295156}\label{group___g_b_computation_aae8b0444fbe19fff11a0a5d242295156}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!contains\+\_\+product@{contains\+\_\+product}}
+\index{contains\+\_\+product@{contains\+\_\+product}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{contains\+\_\+product()}{contains\_product()}}
+{\footnotesize\ttfamily bool F4\+\_\+\+Hash\+::contains\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+indicates whether a product has been added to the table 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if and only if $ tu $ has been added to the table 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & monomial whose product we\textquotesingle{}re checking \\
+\hline
+{\em u} & monomial whose product we\textquotesingle{}re checking \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 140 of file f4\+\_\+hash.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}\label{group___g_b_computation_a7b22f6999f276e58087fe668a01f240a}} 
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
 \index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
-\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -760,12 +846,12 @@ which table entry contains the list that contains {\ttfamily t}
 \end{DoxyReturn}
 
 
-Definition at line 67 of file f4\+\_\+hash.\+hpp.
+Definition at line 73 of file f4\+\_\+hash.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}\label{group___g_b_computation_a12cff698cefa0375ab76ee6c36a0ce6c}} 
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
 \index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
-\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -784,17 +870,41 @@ which table entry contains the list that contains $tu$
 \end{DoxyReturn}
 
 
-Definition at line 80 of file f4\+\_\+hash.\+hpp.
+Definition at line 86 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_aa7035dafc727cfb078fea49e8bbd011c}\label{group___g_b_computation_aa7035dafc727cfb078fea49e8bbd011c}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!get\+\_\+index@{get\+\_\+index}}
+\index{get\+\_\+index@{get\+\_\+index}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{get\+\_\+index()}{get\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::get\+\_\+index (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+determines the index of $tu$ in the lookup table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily exponent} vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+which table entry contains the list that contains $tu$ 
+\end{DoxyReturn}
+
+
+Definition at line 96 of file f4\+\_\+hash.\+hpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}\label{group___g_b_computation_a539f858e09579b9119941795e42cdc4f}} 
 \index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!lookup\+\_\+product@{lookup\+\_\+product}}
 \index{lookup\+\_\+product@{lookup\+\_\+product}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
-\subparagraph{\texorpdfstring{lookup\+\_\+product()}{lookup\_product()}}
+\subparagraph{\texorpdfstring{lookup\+\_\+product()}{lookup\_product()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::lookup\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_a86a18244162325e3d792ea39525b23f8}{add\+\_\+monomial()}} when $tu$ was the first 
+looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial()}} when $tu$ was the first 
 
 This will not add $tu$ if it isn\textquotesingle{}t already there, so call it only after the table has been completely set up! 
 \begin{DoxyParams}{Parameters}
@@ -808,7 +918,55 @@ location of $tu$ in the array
 \end{DoxyReturn}
 
 
-Definition at line 108 of file f4\+\_\+hash.\+hpp.
+Definition at line 188 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a9eef1cd0bf6fd57e97b6d10d42b3c6d2}\label{group___g_b_computation_a9eef1cd0bf6fd57e97b6d10d42b3c6d2}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!lookup\+\_\+product@{lookup\+\_\+product}}
+\index{lookup\+\_\+product@{lookup\+\_\+product}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{lookup\+\_\+product()}{lookup\_product()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t F4\+\_\+\+Hash\+::lookup\+\_\+product (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+looks up the location of $tu$ in the array; that is, the second argument to {\ttfamily \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial()}} when $tu$ was the first 
+
+This will not add $tu$ if it isn\textquotesingle{}t already there, so call it only after the table has been completely set up! 
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} \\
+\hline
+{\em u} & {\ttfamily exponent} vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+location of $tu$ in the array 
+\end{DoxyReturn}
+
+
+Definition at line 205 of file f4\+\_\+hash.\+hpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a0f1a52f055247e86e6b65446c65a87b5}\label{group___g_b_computation_a0f1a52f055247e86e6b65446c65a87b5}} 
+\index{F4\+\_\+\+Hash@{F4\+\_\+\+Hash}!update\+\_\+location@{update\+\_\+location}}
+\index{update\+\_\+location@{update\+\_\+location}!F4\+\_\+\+Hash@{F4\+\_\+\+Hash}}
+\subparagraph{\texorpdfstring{update\+\_\+location()}{update\_location()}}
+{\footnotesize\ttfamily void F4\+\_\+\+Hash\+::update\+\_\+location (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$}]{t,  }\item[{size\+\_\+t}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+modifies the location of the specified monomial in the lookup table 
+
+Use only in conjunction with monomials allocated with {\ttfamily \hyperlink{group___g_b_computation_aaed2c308a7d79e098e6555d20b1720d0}{add\+\_\+monomial(const Monomial $\ast$)}}. \begin{DoxyWarning}{Warning}
+Invoking this on a monomial whose location hasn\textquotesingle{}t changed or been reassigned will lead to errors and possibly termination. Furthermore, there are no guards for whether the monomial actually appears in the table, so if the monomial hasn\textquotesingle{}t been added there will be errors and probably termination. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} that has already been added to the table \\
+\hline
+{\em location} & column for coefficients of {\ttfamily t} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 115 of file f4\+\_\+hash.\+hpp.
 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}\label{class_f4___reduction___data}
 \Hypertarget{group___g_b_computation_class_f4___reduction___data}
@@ -817,7 +975,7 @@ Implementation of Faug\`{e}re's F4 algorithm.
 
 Currently computes a Gr\"{o}bner basis by selecting several s-\/polynomials of lowest lcm degree. Data is stored in a semi-\/sparse matrix format, with each row a contiguous array of entries ({\ttfamily A}). Each row of {\ttfamily A} begins at the position indicated by the corresponding {\ttfamily offset}, and its first non-\/zero entry appears at the position indicated by the corresponding {\ttfamily head}. So the leading coefficient of the polynomial in row {\ttfamily k} appears in {\ttfamily A\mbox{[}head\mbox{[}k\mbox{]}\mbox{]}} and the leading monomial appears in {\ttfamily M\mbox{[}offset\mbox{[}k\mbox{]}+head\mbox{[}k\mbox{]}\mbox{]}}. Starting from {\ttfamily head\mbox{[}k\mbox{]}}, row {\ttfamily k} is actually dense. While this is not sparse, it does succeed in saving more space than one might expect. 
 
-Definition at line 74 of file f4\+\_\+dynamic.\+hpp.
+Definition at line 96 of file f4\+\_\+dynamic.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{Indent}\textbf{ Construction}\par
@@ -825,9 +983,15 @@ Definition at line 74 of file f4\+\_\+dynamic.\+hpp.
 \item 
 \hyperlink{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}{F4\+\_\+\+Reduction\+\_\+\+Data} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&B, Dynamic\+\_\+\+Heuristic method)
 \begin{DoxyCompactList}\small\item\em encapsulation of one step of the F4 algorithm for the polynomials indicated by {\ttfamily P} and {\ttfamily B} \end{DoxyCompactList}\item 
-void \hyperlink{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}{add\+\_\+monomials} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&ti, list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&ri, const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool new\+\_\+row=false)
-\begin{DoxyCompactList}\small\item\em adds monomials of $ ug $ to {\ttfamily M\+\_\+build} \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aa73909179732a3e0e4290c69cf992ddf}{add\+\_\+monomials} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$curr\+\_\+ord, const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool new\+\_\+row=false)
+\begin{DoxyCompactList}\small\item\em adds monomials of $ ug $ to {\ttfamily M\+\_\+builder} \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_a9fa6a212375b9498ca86a2c18e94ca1e}{initialize\+\_\+many} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&P)
+\begin{DoxyCompactList}\small\item\em creates the matrix \end{DoxyCompactList}\item 
+\hyperlink{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}{F4\+\_\+\+Reduction\+\_\+\+Data} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&P, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&B)
+\begin{DoxyCompactList}\small\item\em encapsulation of one step of the F4 algorithm for the polynomials indicated by {\ttfamily P} and {\ttfamily B} \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_ad241aa62afb6b6e0b482496c7559f092}{add\+\_\+monomials} (list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&ti, list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&ri, const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$g, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool new\+\_\+row=false)
+\begin{DoxyCompactList}\small\item\em adds monomials of $ ug $ to {\ttfamily M\+\_\+build} \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}{initialize\+\_\+many} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&P)
 \begin{DoxyCompactList}\small\item\em creates the matrix \end{DoxyCompactList}\item 
 \hyperlink{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}{F4\+\_\+\+Reduction\+\_\+\+Data} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&P, const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&B)
 \begin{DoxyCompactList}\small\item\em encapsulation of one step of the F4 algorithm for the polynomials indicated by {\ttfamily P} and {\ttfamily B} \end{DoxyCompactList}\item 
@@ -839,6 +1003,9 @@ void \hyperlink{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}{initi
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}\label{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}} 
+\hyperlink{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}{$\sim$\+F4\+\_\+\+Reduction\+\_\+\+Data} ()
+\begin{DoxyCompactList}\small\item\em releases space for the matrix and deletes any strategies not already set to {\ttfamily nullptr} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}\label{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}} 
 \hyperlink{group___g_b_computation_a6806b4da4f0bc2753ba5a775794f9165}{$\sim$\+F4\+\_\+\+Reduction\+\_\+\+Data} ()
 \begin{DoxyCompactList}\small\item\em releases space for the matrix and deletes any strategies not already set to {\ttfamily nullptr} \end{DoxyCompactList}\item 
@@ -875,6 +1042,15 @@ vector$<$ \hyperlink{group__strategygroup_class_poly___sugar___data}{Poly\+\_\+\
 \begin{DoxyCompactList}\small\item\em returns the strategies currently in use \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}\label{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}} 
 unsigned \hyperlink{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}{number\+\_\+of\+\_\+rows} ()
+\begin{DoxyCompactList}\small\item\em basic properties \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}\label{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}} 
+bool \hyperlink{group___g_b_computation_aee8c1358071a26e60b2e50f9678dcfb0}{is\+\_\+zero} ()
+\begin{DoxyCompactList}\small\item\em returns {\ttfamily true} iff all the entries are 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}\label{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}} 
+vector$<$ \hyperlink{group__strategygroup_class_poly___sugar___data}{Poly\+\_\+\+Sugar\+\_\+\+Data} $\ast$ $>$ \hyperlink{group___g_b_computation_a1e58764d1bee3437e2bfa74fbb847b1a}{get\+\_\+strategies} ()
+\begin{DoxyCompactList}\small\item\em returns the strategies currently in use \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}\label{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}} 
+unsigned \hyperlink{group___g_b_computation_ac56c717e4015d655e40b2c8033fa9d92}{number\+\_\+of\+\_\+rows} ()
 \begin{DoxyCompactList}\small\item\em basic properties \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Conversion}\par
@@ -888,6 +1064,9 @@ vector$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\
 \begin{DoxyCompactList}\small\item\em converts indicated row to a \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial}, returns result \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}\label{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}} 
 vector$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}{finalize} ()
+\begin{DoxyCompactList}\small\item\em converts {\ttfamily this} to a vector of \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} and returns the result \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}\label{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}} 
+vector$<$ \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_acb8721524d3d30e98fe153ed08c21232}{finalize} ()
 \begin{DoxyCompactList}\small\item\em converts {\ttfamily this} to a vector of \hyperlink{group__polygroup_class_constant___polynomial}{Constant\+\_\+\+Polynomial} and returns the result \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Modification}\par
@@ -899,6 +1078,9 @@ void \hyperlink{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}{clear
 \mbox{\Hypertarget{group___g_b_computation_a727863db45a812f5dccc3f1d3be3a745}\label{group___g_b_computation_a727863db45a812f5dccc3f1d3be3a745}} 
 void \hyperlink{group___g_b_computation_a727863db45a812f5dccc3f1d3be3a745}{set\+\_\+ordering} (const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ord)
 \begin{DoxyCompactList}\small\item\em sets monomial ordering to indicated ordering \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}\label{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}} 
+void \hyperlink{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}{clear\+\_\+strategy} (unsigned i)
+\begin{DoxyCompactList}\small\item\em clears the strategy; do this if you have saved it elsewhere \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}\label{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}} 
 void \hyperlink{group___g_b_computation_ac006310b3318fa247fa9a415db495d06}{clear\+\_\+strategy} (unsigned i)
 \begin{DoxyCompactList}\small\item\em clears the strategy; do this if you have saved it elsewhere \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -929,6 +1111,12 @@ void \hyperlink{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}{reduc
 \begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}\label{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}} 
 void \hyperlink{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}{reduce\+\_\+by\+\_\+new} ()
+\begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}\label{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}} 
+void \hyperlink{group___g_b_computation_a841c43903004e8a8e355bfcf30dfd36c}{reduce\+\_\+by\+\_\+old} ()
+\begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}\label{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}} 
+void \hyperlink{group___g_b_computation_a395928a83fb46aba60804c3d2b80c84a}{reduce\+\_\+by\+\_\+new} ()
 \begin{DoxyCompactList}\small\item\em reduces polynomials \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ I/O}\par
@@ -942,6 +1130,17 @@ void \hyperlink{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}{print
 \mbox{\Hypertarget{group___g_b_computation_a11e756a43276426735929d09976d7337}\label{group___g_b_computation_a11e756a43276426735929d09976d7337}} 
 void \hyperlink{group___g_b_computation_a11e756a43276426735929d09976d7337}{print\+\_\+row} (unsigned)
 \begin{DoxyCompactList}\small\item\em prints indicated row of the matrix as a polynomial \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a304778da38e44a01184b698b3de45df1}\label{group___g_b_computation_a304778da38e44a01184b698b3de45df1}} 
+void \hyperlink{group___g_b_computation_a304778da38e44a01184b698b3de45df1}{print\+\_\+builder} ()
+\begin{DoxyCompactList}\small\item\em prints the pairs of monomials and reducers that are being built \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}\label{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}} 
+void \hyperlink{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}{list\+\_\+reducers} ()
+\begin{DoxyCompactList}\small\item\em lists the reducers selected for each column, in order \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}{print\+\_\+matrix} (bool show\+\_\+data=false)
+\begin{DoxyCompactList}\small\item\em prints the matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a11e756a43276426735929d09976d7337}\label{group___g_b_computation_a11e756a43276426735929d09976d7337}} 
+void \hyperlink{group___g_b_computation_a11e756a43276426735929d09976d7337}{print\+\_\+row} (unsigned)
+\begin{DoxyCompactList}\small\item\em prints the indicated row of the matrix as an unformatted polynomial \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}\label{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}} 
 void \hyperlink{group___g_b_computation_af4491ffa78cb0e75051492b83f51744b}{list\+\_\+reducers} ()
 \begin{DoxyCompactList}\small\item\em lists the reducers selected for each column, in order \end{DoxyCompactList}\item 
@@ -951,29 +1150,63 @@ void \hyperlink{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}{print
 \subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{group___g_b_computation_af10c8ec51df3bcf3b2be5bbeb4126cd1}{add\+\_\+reductor} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, C\+O\+E\+F\+\_\+\+T\+Y\+PE a, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source, C\+O\+E\+F\+\_\+\+T\+Y\+PE mod, unsigned start=1)
+\begin{DoxyCompactList}\small\item\em reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a766380b6700443ecfa99aa03ff7df274}{add\+\_\+reductor} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, C\+O\+E\+F\+\_\+\+T\+Y\+PE a, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source, C\+O\+E\+F\+\_\+\+T\+Y\+PE mod)
+\begin{DoxyCompactList}\small\item\em reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}{build\+\_\+reducer} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&buffer, unsigned i)
+\begin{DoxyCompactList}\small\item\em build the sparse representation of the {\bfseries reduced} polynomial chosen to reduce monomial {\ttfamily i} \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}{build\+\_\+reducer} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&buffer, unsigned i)
+\begin{DoxyCompactList}\small\item\em build the sparse representation of the {\bfseries reduced} polynomial chosen to reduce monomial {\ttfamily i} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a385d863722c1e2f9e9769ba27b5cb374}\label{group___g_b_computation_a385d863722c1e2f9e9769ba27b5cb374}} 
+void \hyperlink{group___g_b_computation_a385d863722c1e2f9e9769ba27b5cb374}{build\+\_\+reducer} (unsigned, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&)
+\begin{DoxyCompactList}\small\item\em builds a reducer for the specified column \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}{densify\+\_\+row} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source)
+\begin{DoxyCompactList}\small\item\em convert a row from sparse to dense reprsentation \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}{densify\+\_\+row} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source)
+\begin{DoxyCompactList}\small\item\em convert a row from sparse to dense reprsentation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}\label{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}} 
+void \hyperlink{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}{initialize\+\_\+some\+\_\+rows} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&, unsigned)
+\begin{DoxyCompactList}\small\item\em creates rows of the matrix indexed by the specified pairs, starting at the specified row \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}\label{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}} 
 void \hyperlink{group___g_b_computation_abdcffbc4a0a83211bea0385d851a4fb4}{initialize\+\_\+some\+\_\+rows} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&, unsigned)
 \begin{DoxyCompactList}\small\item\em creates rows of the matrix indexed by the specified pairs, starting at the specified row \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ada3c0b561fefae7da3c28b6f6574cbc0}\label{group___g_b_computation_ada3c0b561fefae7da3c28b6f6574cbc0}} 
 void \hyperlink{group___g_b_computation_ada3c0b561fefae7da3c28b6f6574cbc0}{initialize\+\_\+some\+\_\+rows} (const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&, unsigned)
 \begin{DoxyCompactList}\small\item\em creates rows of the matrix indexed by the specified pairs, starting at the specified row \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a354bbe37c36c47326f4e82adccb6feff}\label{group___g_b_computation_a354bbe37c36c47326f4e82adccb6feff}} 
-void \hyperlink{group___g_b_computation_a354bbe37c36c47326f4e82adccb6feff}{reduce\+\_\+my\+\_\+new\+\_\+rows} (unsigned, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&, const set$<$ unsigned $>$ \&)
+void \hyperlink{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}{reduce\+\_\+buffer} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source, C\+O\+E\+F\+\_\+\+T\+Y\+PE mod)
+\begin{DoxyCompactList}\small\item\em reduce dense row using the sparse source, modulo the indicated value \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}{reduce\+\_\+buffer} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&target, const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source, C\+O\+E\+F\+\_\+\+T\+Y\+PE mod)
+\begin{DoxyCompactList}\small\item\em reduce dense row using the sparse source, modulo the indicated value \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}{reduce\+\_\+my\+\_\+new\+\_\+rows} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&buffer, unsigned i, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&F, const set$<$ unsigned $>$ \&rows)
+\begin{DoxyCompactList}\small\item\em reduces the specified set of rows by the specified row, suitable for multithreading \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}{reduce\+\_\+my\+\_\+new\+\_\+rows} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&buffer, unsigned i, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&F, const set$<$ unsigned $>$ \&rows)
 \begin{DoxyCompactList}\small\item\em reduces the specified set of rows by the specified row, suitable for multithreading \end{DoxyCompactList}\item 
 void \hyperlink{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}{reduce\+\_\+my\+\_\+new\+\_\+rows} (unsigned i, unsigned lhead\+\_\+i, const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&F, const set$<$ unsigned $>$ \&to\+\_\+reduce)
 \begin{DoxyCompactList}\small\item\em reduces the specified set of rows by the specified row, suitable for multithreading \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}\label{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}} 
-void \hyperlink{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}{reduce\+\_\+my\+\_\+rows} (const set$<$ unsigned $>$ \&)
+void \hyperlink{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}{reduce\+\_\+my\+\_\+rows} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&A\+\_\+buffer, vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&R\+\_\+buffer, const set$<$ unsigned $>$ \&rows)
+\begin{DoxyCompactList}\small\item\em reduces the specified set of rows, suitable for multithreading \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}{reduce\+\_\+my\+\_\+rows} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&A\+\_\+buffer, vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&R\+\_\+buffer, const set$<$ unsigned $>$ \&rows)
 \begin{DoxyCompactList}\small\item\em reduces the specified set of rows, suitable for multithreading \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}\label{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}} 
 void \hyperlink{group___g_b_computation_a5fc6f2417153c7c1dc9a77a3b7f42597}{reduce\+\_\+my\+\_\+rows} (const set$<$ unsigned $>$ \&)
-\begin{DoxyCompactList}\small\item\em reduces the specified set of rows, suitable for multithreading \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em reduces the specified set of rows, suitable for multithreading \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_a9fe5ee5976f0d923576d08d473b5fb0c}{sparsify\+\_\+row} (vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&source, vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&target)
+\begin{DoxyCompactList}\small\item\em transform row from dense to sparse format \end{DoxyCompactList}\item 
+void \hyperlink{group___g_b_computation_abe5aa71d1578c175bc8d7355ed5f93fa}{sparsify\+\_\+row} (const vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&buffer, vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&source)
+\begin{DoxyCompactList}\small\item\em transform row from dense to sparse format \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{group___g_b_computation_aefa417ab77667256a1f21d54f95c264a}\label{group___g_b_computation_aefa417ab77667256a1f21d54f95c264a}} 
+vector$<$ vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ $>$ \hyperlink{group___g_b_computation_aefa417ab77667256a1f21d54f95c264a}{A}
+\begin{DoxyCompactList}\small\item\em coefficient data in sparse representation; each vector entry is a subrow of the dense matrix \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}\label{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}} 
 vector$<$ vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \hyperlink{group___g_b_computation_ae99b64462e7d5f0aef6f196a4bc5c4cd}{A}
 \begin{DoxyCompactList}\small\item\em coefficient data in sparse representation; each vector entry is a subrow of the dense matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_aba5553e4748985f3adb1a20de2d9edd4}\label{group___g_b_computation_aba5553e4748985f3adb1a20de2d9edd4}} 
+vector$<$ vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \hyperlink{group___g_b_computation_aba5553e4748985f3adb1a20de2d9edd4}{A\+\_\+buf}
+\begin{DoxyCompactList}\small\item\em buffers for rows of A during reduction; one per thread \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}\label{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}} 
 set$<$ unsigned $>$ \hyperlink{group___g_b_computation_aa0e72696183319ea37b7b88e4772037e}{dynamic\+\_\+processed}
 \begin{DoxyCompactList}\small\item\em rows which have already contributed to the ordering \end{DoxyCompactList}\item 
@@ -1004,14 +1237,17 @@ vector$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ $>$ \hype
 \mbox{\Hypertarget{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}\label{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}} 
 list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$ $>$ \hyperlink{group___g_b_computation_aee58b978a10b26bbdf1d518e6eb25fb5}{M\+\_\+build}
 \begin{DoxyCompactList}\small\item\em monomials while building \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_a8f8cacf3d9ae0458adfdb7e6184e7b3f}\label{group___g_b_computation_a8f8cacf3d9ae0458adfdb7e6184e7b3f}} 
+map$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$, \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$, \hyperlink{struct_mon_cmp}{Mon\+Cmp} $>$ \hyperlink{group___g_b_computation_a8f8cacf3d9ae0458adfdb7e6184e7b3f}{M\+\_\+builder}
+\begin{DoxyCompactList}\small\item\em storage of monomials and reducers while preprocessing \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}\label{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}} 
 \hyperlink{group___g_b_computation_class_f4___hash}{F4\+\_\+\+Hash} \hyperlink{group___g_b_computation_ae0a76700237de2f2e4340f4f1a78c7ff}{M\+\_\+table}
 \begin{DoxyCompactList}\small\item\em hash table of the monomials in {\ttfamily M} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}\label{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}} 
 const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$ \hyperlink{group___g_b_computation_a4f684766174bbefa4d04df3fa894ad1d}{mord}
 \begin{DoxyCompactList}\small\item\em how the monomials are ordered \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group___g_b_computation_a531a462792fba821e13a63c7376c35cf}\label{group___g_b_computation_a531a462792fba821e13a63c7376c35cf}} 
-const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ \hyperlink{group___g_b_computation_a531a462792fba821e13a63c7376c35cf}{mord}
+\mbox{\Hypertarget{group___g_b_computation_a9b23364eb687aaa5c09882f59be4033c}\label{group___g_b_computation_a9b23364eb687aaa5c09882f59be4033c}} 
+const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$ \hyperlink{group___g_b_computation_a9b23364eb687aaa5c09882f59be4033c}{mord}
 \begin{DoxyCompactList}\small\item\em how the monomials are ordered \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a55db3cd23309e08acfbce3b6d2feec85}\label{group___g_b_computation_a55db3cd23309e08acfbce3b6d2feec85}} 
 vector$<$ unsigned $>$ \hyperlink{group___g_b_computation_a55db3cd23309e08acfbce3b6d2feec85}{nonzero\+\_\+entries}
@@ -1031,12 +1267,18 @@ vector$<$ unsigned $>$ \hyperlink{group___g_b_computation_a5686aed4d209fd6e2596b
 \mbox{\Hypertarget{group___g_b_computation_a90488d65365fd6a5512ccda45780acc5}\label{group___g_b_computation_a90488d65365fd6a5512ccda45780acc5}} 
 vector$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_a90488d65365fd6a5512ccda45780acc5}{R}
 \begin{DoxyCompactList}\small\item\em finalized list of indices of reducers for the corresponding monomials of {\ttfamily f} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_ae715f7601d5f828b58f59c8ef15748fb}\label{group___g_b_computation_ae715f7601d5f828b58f59c8ef15748fb}} 
+vector$<$ vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \hyperlink{group___g_b_computation_ae715f7601d5f828b58f59c8ef15748fb}{R\+\_\+buf}
+\begin{DoxyCompactList}\small\item\em buffer to build reducers for the matrix \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a03bda496da1d09c73151ba42b6db7bc4}\label{group___g_b_computation_a03bda496da1d09c73151ba42b6db7bc4}} 
 list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$ $>$ \hyperlink{group___g_b_computation_a03bda496da1d09c73151ba42b6db7bc4}{R\+\_\+build}
 \begin{DoxyCompactList}\small\item\em indices of reducers for the corresponding elements of {\ttfamily M} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}\label{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}} 
 vector$<$ vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ $>$ \hyperlink{group___g_b_computation_a341e74dadaec6a56cd944f17be9b9320}{R\+\_\+built}
 \begin{DoxyCompactList}\small\item\em reducers actually generated \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___g_b_computation_abfbe5a1e5b64e6512e885077a9b4b6b0}\label{group___g_b_computation_abfbe5a1e5b64e6512e885077a9b4b6b0}} 
+vector$<$ mutex $>$ \hyperlink{group___g_b_computation_abfbe5a1e5b64e6512e885077a9b4b6b0}{red\+\_\+lock}
+\begin{DoxyCompactList}\small\item\em locks on the reducers \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}\label{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}} 
 vector$<$ \hyperlink{group___c_l_s_solvers_class_l_p___solvers_1_1_l_p___solver}{L\+P\+\_\+\+Solver} $\ast$ $>$ \hyperlink{group___g_b_computation_a9e8822d7ececb2271ebbef4ec62f986e}{row\+\_\+skel}
 \begin{DoxyCompactList}\small\item\em copies of the current skeleton, modified according to the preferred monomial of this row \end{DoxyCompactList}\item 
@@ -1052,7 +1294,7 @@ vector$<$ \hyperlink{group__strategygroup_class_poly___sugar___data}{Poly\+\_\+\
 \mbox{\Hypertarget{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}\label{group___g_b_computation_a41791d20f96fc7310a40a8e4c63aa4ef}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily F4\+\_\+\+Reduction\+\_\+\+Data\+::\+F4\+\_\+\+Reduction\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&}]{B,  }\item[{Dynamic\+\_\+\+Heuristic}]{method }\end{DoxyParamCaption})}
 
 
@@ -1077,7 +1319,7 @@ Definition at line 64 of file f4\+\_\+dynamic.\+cpp.
 \mbox{\Hypertarget{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}\label{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily F4\+\_\+\+Reduction\+\_\+\+Data\+::\+F4\+\_\+\+Reduction\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&}]{P,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&}]{B }\end{DoxyParamCaption})}
 
 
@@ -1093,15 +1335,57 @@ encapsulation of one step of the F4 algorithm for the polynomials indicated by {
 \end{DoxyParams}
 
 
-Definition at line 43 of file f4\+\_\+reduction.\+cpp.
+Definition at line 45 of file f4\+\_\+reduction.\+cpp.
 
+\mbox{\Hypertarget{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}\label{group___g_b_computation_ada9c61c0f75be4a2b3dd5c762c1c9a1b}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{F4\+\_\+\+Reduction\+\_\+\+Data()}{F4\_Reduction\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily F4\+\_\+\+Reduction\+\_\+\+Data\+::\+F4\+\_\+\+Reduction\+\_\+\+Data (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&}]{P,  }\item[{const list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$ \&}]{B }\end{DoxyParamCaption})}
+
+
+
+encapsulation of one step of the F4 algorithm for the polynomials indicated by {\ttfamily P} and {\ttfamily B} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em P} & list of critical pairs that will create a new basis; matrix will have this many rows \\
+\hline
+{\em B} & list of polynomials currently in the basis \\
+\hline
+\end{DoxyParams}
 
 
 \paragraph{Member Function Documentation}
 \mbox{\Hypertarget{group___g_b_computation_ad241aa62afb6b6e0b482496c7559f092}\label{group___g_b_computation_ad241aa62afb6b6e0b482496c7559f092}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+monomials@{add\+\_\+monomials}}
 \index{add\+\_\+monomials@{add\+\_\+monomials}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{add\+\_\+monomials()}{add\_monomials()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{add\+\_\+monomials()}{add\_monomials()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+monomials (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&}]{ti,  }\item[{list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&}]{ri,  }\item[{const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$}]{g,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{bool}]{new\+\_\+row = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+adds monomials of $ ug $ to {\ttfamily M\+\_\+build} 
+
+If {\ttfamily g} is an s-\/polynomial generator, set the flag to {\ttfamily true}, {\ttfamily ti} to the beginning of {\ttfamily M\+\_\+build}, {\ttfamily ri} to the beginning of {\ttfamily R\+\_\+build}, and {\ttfamily u} to the first multiple in the critical pair. Setting the flag to {\ttfamily true} signals that {\ttfamily ti} and {\ttfamily ri} are not at the correct insertion point, so the function needs to find this point. In this case, {\ttfamily ti} and {\ttfamily ri} will change.
+
+If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} should point to appropriate locations for the monomial divisible by the leading term of {\ttfamily g}. The algorithm advances both a copy of {\ttfamily ti} and an iterator on {\ttfamily g} to insert new monomials. In this case, the algorithm modifies neither {\ttfamily ti} nor {\ttfamily ri}. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & iterator through {\ttfamily M\+\_\+build}; see details for more information \\
+\hline
+{\em ri} & iterator through {\ttfamily R\+\_\+build}; see details for more information \\
+\hline
+{\em g} & polynomial, such as an s-\/polynomial generator or a reducer \\
+\hline
+{\em u} & monomial to multiply to {\ttfamily g} to add monomials \\
+\hline
+{\em new\+\_\+row} & whether {\ttfamily g} is adding a new row to the basis \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_ad241aa62afb6b6e0b482496c7559f092}\label{group___g_b_computation_ad241aa62afb6b6e0b482496c7559f092}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+monomials@{add\+\_\+monomials}}
+\index{add\+\_\+monomials@{add\+\_\+monomials}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{add\+\_\+monomials()}{add\_monomials()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+monomials (\begin{DoxyParamCaption}\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&}]{ti,  }\item[{list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&}]{ri,  }\item[{const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$}]{g,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{bool}]{new\+\_\+row = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
@@ -1125,43 +1409,174 @@ If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} shou
 \end{DoxyParams}
 
 
-Definition at line 185 of file f4\+\_\+reduction.\+cpp.
+Definition at line 175 of file f4\+\_\+reduction.\+cpp.
 
-\mbox{\Hypertarget{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}\label{group___g_b_computation_a2096fe45e5eecc1c855acb82787f2719}} 
+\mbox{\Hypertarget{group___g_b_computation_aa73909179732a3e0e4290c69cf992ddf}\label{group___g_b_computation_aa73909179732a3e0e4290c69cf992ddf}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+monomials@{add\+\_\+monomials}}
 \index{add\+\_\+monomials@{add\+\_\+monomials}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{add\+\_\+monomials()}{add\_monomials()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+monomials (\begin{DoxyParamCaption}\item[{const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{list$<$ \hyperlink{group__polygroup_class_monomial}{Monomial} $\ast$$>$\+::iterator \&}]{ti,  }\item[{list$<$ \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$$>$\+::iterator \&}]{ri,  }\item[{const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$}]{g,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{bool}]{new\+\_\+row = {\ttfamily false} }\end{DoxyParamCaption})}
+\subparagraph{\texorpdfstring{add\+\_\+monomials()}{add\_monomials()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+monomials (\begin{DoxyParamCaption}\item[{const \hyperlink{group__orderinggroup_class_w_grevlex}{W\+Grevlex} $\ast$}]{curr\+\_\+ord,  }\item[{const \hyperlink{group__polygroup_class_abstract___polynomial}{Abstract\+\_\+\+Polynomial} $\ast$}]{g,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{bool}]{new\+\_\+row = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
-adds monomials of $ ug $ to {\ttfamily M\+\_\+build} 
+adds monomials of $ ug $ to {\ttfamily M\+\_\+builder} 
 
-If {\ttfamily g} is an s-\/polynomial generator, set the flag to {\ttfamily true}, {\ttfamily ti} to the beginning of {\ttfamily M\+\_\+build}, {\ttfamily ri} to the beginning of {\ttfamily R\+\_\+build}, and {\ttfamily u} to the first multiple in the critical pair. Setting the flag to {\ttfamily true} signals that {\ttfamily ti} and {\ttfamily ri} are not at the correct insertion point, so the function needs to find this point. In this case, {\ttfamily ti} and {\ttfamily ri} will change.
 
-If {\ttfamily g} is not a generator, then {\ttfamily ti} and {\ttfamily ri} should point to appropriate locations for the monomial divisible by the leading term of {\ttfamily g}. The algorithm advances both a copy of {\ttfamily ti} and an iterator on {\ttfamily g} to insert new monomials. In this case, the algorithm modifies neither {\ttfamily ti} nor {\ttfamily ri}. 
 \begin{DoxyParams}{Parameters}
 {\em curr\+\_\+ord} & current monomial ordering \\
-\hline
-{\em ti} & iterator through {\ttfamily M\+\_\+build}; see details for more information \\
-\hline
-{\em ri} & iterator through {\ttfamily R\+\_\+build}; see details for more information \\
 \hline
 {\em g} & polynomial, such as an s-\/polynomial generator or a reducer \\
 \hline
 {\em u} & monomial to multiply to {\ttfamily g} to add monomials \\
 \hline
-{\em new\+\_\+row} & whether {\ttfamily g} is adding a new row to the basis \\
+{\em new\+\_\+row} & if {\ttfamily true}, adds the leading monomial; otherwise, adds only trailing monomials \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line 245 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 257 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_af10c8ec51df3bcf3b2be5bbeb4126cd1}\label{group___g_b_computation_af10c8ec51df3bcf3b2be5bbeb4126cd1}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+reductor@{add\+\_\+reductor}}
+\index{add\+\_\+reductor@{add\+\_\+reductor}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{add\+\_\+reductor()}{add\_reductor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+reductor (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{a,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{mod,  }\item[{unsigned}]{start = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position 
+
+The difference between this and reduce\+\_\+buffer is that in this case you may not want to start from the first position, because you haven\textquotesingle{}t yet added the value \$ a \$. Thus, you can start with the second term, rather than waste time (however little) starting with the first. 
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of a polynomial being reduced \\
+\hline
+{\em source} & sparse representation of a reductor \\
+\hline
+{\em mod} & modulus for all operations \\
+\hline
+{\em start} & position in the source (default is 1) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_a766380b6700443ecfa99aa03ff7df274}\label{group___g_b_computation_a766380b6700443ecfa99aa03ff7df274}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!add\+\_\+reductor@{add\+\_\+reductor}}
+\index{add\+\_\+reductor@{add\+\_\+reductor}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{add\+\_\+reductor()}{add\_reductor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::add\+\_\+reductor (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{a,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{mod }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduce dense row using the sparse source, modulo the indicated value, starting at the indicated position 
+
+The difference between this and reduce\+\_\+buffer is that in this case you may not want to start from the first position, because you haven\textquotesingle{}t yet added the value \$ a \$. Thus, you can start with the second term, rather than waste time (however little) starting with the first. 
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of a polynomial being reduced \\
+\hline
+{\em source} & sparse representation of a reductor \\
+\hline
+{\em mod} & modulus for all operations \\
+\hline
+{\em a} & scalar multiple of source \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 321 of file f4\+\_\+reduction.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}\label{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!build\+\_\+reducer@{build\+\_\+reducer}}
+\index{build\+\_\+reducer@{build\+\_\+reducer}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{build\+\_\+reducer()}{build\_reducer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::build\+\_\+reducer (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{buffer,  }\item[{unsigned}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+build the sparse representation of the {\bfseries reduced} polynomial chosen to reduce monomial {\ttfamily i} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & where to store the dense representation while building the reductor \\
+\hline
+{\em i} & index in {\ttfamily M} of the monomial to be reduced \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}\label{group___g_b_computation_aadda8de768e8a8c504979be7425f85ac}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!build\+\_\+reducer@{build\+\_\+reducer}}
+\index{build\+\_\+reducer@{build\+\_\+reducer}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{build\+\_\+reducer()}{build\_reducer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::build\+\_\+reducer (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{buffer,  }\item[{unsigned}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+build the sparse representation of the {\bfseries reduced} polynomial chosen to reduce monomial {\ttfamily i} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & where to store the dense representation while building the reductor \\
+\hline
+{\em i} & index in {\ttfamily M} of the monomial to be reduced \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 332 of file f4\+\_\+reduction.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}\label{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!densify\+\_\+row@{densify\+\_\+row}}
+\index{densify\+\_\+row@{densify\+\_\+row}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{densify\+\_\+row()}{densify\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::densify\+\_\+row (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+convert a row from sparse to dense reprsentation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of row \\
+\hline
+{\em source} & sparse representation of row \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}\label{group___g_b_computation_a7c30bf1632513f7f951cffdae9810130}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!densify\+\_\+row@{densify\+\_\+row}}
+\index{densify\+\_\+row@{densify\+\_\+row}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{densify\+\_\+row()}{densify\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::densify\+\_\+row (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+convert a row from sparse to dense reprsentation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of row \\
+\hline
+{\em source} & sparse representation of row \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 290 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}\label{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
 \index{initialize\+\_\+many@{initialize\+\_\+many}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{initialize\+\_\+many()}{initialize\_many()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{initialize\+\_\+many()}{initialize\_many()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::initialize\+\_\+many (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&}]{P }\end{DoxyParamCaption})}
+
+
+
+creates the matrix 
+
+called internally by constructor, which has already performed some setup; inadvisable to use elsewhere 
+\begin{DoxyParams}{Parameters}
+{\em P} & list of critical pairs that will generate the matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}\label{group___g_b_computation_a0fd30b42c2dcf0dd07dfa898f71c8751}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
+\index{initialize\+\_\+many@{initialize\+\_\+many}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{initialize\+\_\+many()}{initialize\_many()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::initialize\+\_\+many (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___basic}{Critical\+\_\+\+Pair\+\_\+\+Basic} $\ast$$>$ \&}]{P }\end{DoxyParamCaption})}
 
 
@@ -1175,12 +1590,12 @@ called internally by constructor, which has already performed some setup; inadvi
 \end{DoxyParams}
 
 
-Definition at line 130 of file f4\+\_\+reduction.\+cpp.
+Definition at line 123 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a9fa6a212375b9498ca86a2c18e94ca1e}\label{group___g_b_computation_a9fa6a212375b9498ca86a2c18e94ca1e}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!initialize\+\_\+many@{initialize\+\_\+many}}
 \index{initialize\+\_\+many@{initialize\+\_\+many}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{initialize\+\_\+many()}{initialize\_many()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{initialize\+\_\+many()}{initialize\_many()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::initialize\+\_\+many (\begin{DoxyParamCaption}\item[{const list$<$ \hyperlink{group___g_b_computation_class_critical___pair___dynamic}{Critical\+\_\+\+Pair\+\_\+\+Dynamic} $\ast$$>$ \&}]{P }\end{DoxyParamCaption})}
 
 
@@ -1194,12 +1609,12 @@ called internally by constructor, which has already performed some setup; inadvi
 \end{DoxyParams}
 
 
-Definition at line 189 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 194 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}\label{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!print\+\_\+matrix@{print\+\_\+matrix}}
 \index{print\+\_\+matrix@{print\+\_\+matrix}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{print\+\_\+matrix()}{print\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{print\+\_\+matrix()}{print\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::print\+\_\+matrix (\begin{DoxyParamCaption}\item[{bool}]{show\+\_\+data = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
@@ -1214,7 +1629,22 @@ prints the matrix
 \mbox{\Hypertarget{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}\label{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!print\+\_\+matrix@{print\+\_\+matrix}}
 \index{print\+\_\+matrix@{print\+\_\+matrix}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{print\+\_\+matrix()}{print\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{print\+\_\+matrix()}{print\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::print\+\_\+matrix (\begin{DoxyParamCaption}\item[{bool}]{show\+\_\+data = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+prints the matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em show\+\_\+data} & whether to show the monomials that correspond to each column \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}\label{group___g_b_computation_a9f3e9b5617084c34f97acd23d6e67a43}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!print\+\_\+matrix@{print\+\_\+matrix}}
+\index{print\+\_\+matrix@{print\+\_\+matrix}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{print\+\_\+matrix()}{print\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::print\+\_\+matrix (\begin{DoxyParamCaption}\item[{bool}]{show\+\_\+data = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
@@ -1228,7 +1658,7 @@ prints the matrix
 \end{DoxyParams}
 
 
-Definition at line 315 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 304 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}\label{group___g_b_computation_a8c98bfecfd48902809a64411729cabe6}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+and\+\_\+select\+\_\+order@{reduce\+\_\+and\+\_\+select\+\_\+order}}
@@ -1257,12 +1687,100 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 754 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 850 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}\label{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+buffer@{reduce\+\_\+buffer}}
+\index{reduce\+\_\+buffer@{reduce\+\_\+buffer}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+buffer()}{reduce\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+buffer (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{mod }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduce dense row using the sparse source, modulo the indicated value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of a polynomial being reduced \\
+\hline
+{\em source} & sparse representation of a reductor \\
+\hline
+{\em mod} & modulus for all operations \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}\label{group___g_b_computation_ab24c775b8cfd88daf73a1fbde0b998a8}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+buffer@{reduce\+\_\+buffer}}
+\index{reduce\+\_\+buffer@{reduce\+\_\+buffer}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+buffer()}{reduce\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+buffer (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{target,  }\item[{const vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source,  }\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{mod }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduce dense row using the sparse source, modulo the indicated value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & dense representation of a polynomial being reduced \\
+\hline
+{\em source} & sparse representation of a reductor \\
+\hline
+{\em mod} & modulus for all operations \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 300 of file f4\+\_\+reduction.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}\label{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
+\index{reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+new\+\_\+rows()}{reduce\_my\_new\_rows()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+my\+\_\+new\+\_\+rows (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{buffer,  }\item[{unsigned}]{i,  }\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&}]{F,  }\item[{const set$<$ unsigned $>$ \&}]{rows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduces the specified set of rows by the specified row, suitable for multithreading 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & storage for the dense representation of a row \\
+\hline
+{\em i} & which row to use as reductor \\
+\hline
+{\em F} & the ground field, needed not just for the modulus but for inverses \\
+\hline
+{\em rows} & which rows this thread will reduce \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}\label{group___g_b_computation_a76fbaaed7645b0895065bfb13ca7c800}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
+\index{reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+new\+\_\+rows()}{reduce\_my\_new\_rows()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+my\+\_\+new\+\_\+rows (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{buffer,  }\item[{unsigned}]{i,  }\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&}]{F,  }\item[{const set$<$ unsigned $>$ \&}]{rows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduces the specified set of rows by the specified row, suitable for multithreading 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & storage for the dense representation of a row \\
+\hline
+{\em i} & which row to use as reductor \\
+\hline
+{\em F} & the ground field, needed not just for the modulus but for inverses \\
+\hline
+{\em rows} & which rows this thread will reduce \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 445 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}\label{group___g_b_computation_ae75be9f5946c90ea68cbae7276dfd36c}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}}
 \index{reduce\+\_\+my\+\_\+new\+\_\+rows@{reduce\+\_\+my\+\_\+new\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
-\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+new\+\_\+rows()}{reduce\_my\_new\_rows()}}
+\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+new\+\_\+rows()}{reduce\_my\_new\_rows()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+my\+\_\+new\+\_\+rows (\begin{DoxyParamCaption}\item[{unsigned}]{i,  }\item[{unsigned}]{lhead\+\_\+i,  }\item[{const \hyperlink{group___fields_group_class_prime___field}{Prime\+\_\+\+Field} \&}]{F,  }\item[{const set$<$ unsigned $>$ \&}]{to\+\_\+reduce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
@@ -1282,7 +1800,49 @@ reduces the specified set of rows by the specified row, suitable for multithread
 \end{DoxyParams}
 
 
-Definition at line 442 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 529 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}\label{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+rows@{reduce\+\_\+my\+\_\+rows}}
+\index{reduce\+\_\+my\+\_\+rows@{reduce\+\_\+my\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+rows()}{reduce\_my\_rows()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+my\+\_\+rows (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{A\+\_\+buffer,  }\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{R\+\_\+buffer,  }\item[{const set$<$ unsigned $>$ \&}]{rows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduces the specified set of rows, suitable for multithreading 
+
+Under the current implementation, we need two buffers for the rows of a matrix. We intend to change that eventually to 1. 
+\begin{DoxyParams}{Parameters}
+{\em A\+\_\+buffer} & buffer to store the dense representation of a row \\
+\hline
+{\em R\+\_\+buffer} & buffer to store the dense representation of a row \\
+\hline
+{\em rows} & which rows this thread will reduce \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}\label{group___g_b_computation_aa631661a253620af23fd3daed2b57c14}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!reduce\+\_\+my\+\_\+rows@{reduce\+\_\+my\+\_\+rows}}
+\index{reduce\+\_\+my\+\_\+rows@{reduce\+\_\+my\+\_\+rows}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{reduce\+\_\+my\+\_\+rows()}{reduce\_my\_rows()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::reduce\+\_\+my\+\_\+rows (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{A\+\_\+buffer,  }\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{R\+\_\+buffer,  }\item[{const set$<$ unsigned $>$ \&}]{rows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+reduces the specified set of rows, suitable for multithreading 
+
+Under the current implementation, we need two buffers for the rows of a matrix. We intend to change that eventually to 1. 
+\begin{DoxyParams}{Parameters}
+{\em A\+\_\+buffer} & buffer to store the dense representation of a row \\
+\hline
+{\em R\+\_\+buffer} & buffer to store the dense representation of a row \\
+\hline
+{\em rows} & which rows this thread will reduce \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 371 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}\label{group___g_b_computation_a2e84fe04a903a93a5344aa3c959ce0a3}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!row\+\_\+would\+\_\+change\+\_\+ordering@{row\+\_\+would\+\_\+change\+\_\+ordering}}
@@ -1302,7 +1862,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 690 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 788 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}\label{group___g_b_computation_abcd2fc91687bbbafbf856488d21620d8}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic@{select\+\_\+dynamic}}
@@ -1332,7 +1892,7 @@ the recommended monomial ordering; this may be the same as {\ttfamily curr\+\_\+
 \end{DoxyReturn}
 
 
-Definition at line 846 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 942 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_af50b3f58764474df16c466034515b63e}\label{group___g_b_computation_af50b3f58764474df16c466034515b63e}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!select\+\_\+dynamic\+\_\+single@{select\+\_\+dynamic\+\_\+single}}
@@ -1364,7 +1924,7 @@ the row with the recommended new ordering
 \end{DoxyReturn}
 
 
-Definition at line 978 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 1074 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}\label{group___g_b_computation_aa550a298a15a8baac59ced268331dc68}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!simplify\+\_\+identical\+\_\+rows@{simplify\+\_\+identical\+\_\+rows}}
@@ -1383,7 +1943,45 @@ eliminates duplicates of rows\+: later rows that are identical to earlier rows w
 \end{DoxyParams}
 
 
-Definition at line 608 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 704 of file f4\+\_\+dynamic.\+cpp.
+
+\mbox{\Hypertarget{group___g_b_computation_a9fe5ee5976f0d923576d08d473b5fb0c}\label{group___g_b_computation_a9fe5ee5976f0d923576d08d473b5fb0c}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!sparsify\+\_\+row@{sparsify\+\_\+row}}
+\index{sparsify\+\_\+row@{sparsify\+\_\+row}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{sparsify\+\_\+row()}{sparsify\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::sparsify\+\_\+row (\begin{DoxyParamCaption}\item[{vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{source,  }\item[{vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+transform row from dense to sparse format 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & dense representation of row \\
+\hline
+{\em target} & sparse representation of row \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group___g_b_computation_abe5aa71d1578c175bc8d7355ed5f93fa}\label{group___g_b_computation_abe5aa71d1578c175bc8d7355ed5f93fa}} 
+\index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!sparsify\+\_\+row@{sparsify\+\_\+row}}
+\index{sparsify\+\_\+row@{sparsify\+\_\+row}!F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}}
+\subparagraph{\texorpdfstring{sparsify\+\_\+row()}{sparsify\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void F4\+\_\+\+Reduction\+\_\+\+Data\+::sparsify\+\_\+row (\begin{DoxyParamCaption}\item[{const vector$<$ C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ \&}]{buffer,  }\item[{vector$<$ pair$<$ unsigned, C\+O\+E\+F\+\_\+\+T\+Y\+PE $>$ $>$ \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+transform row from dense to sparse format 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & dense representation of row \\
+\hline
+{\em source} & sparse representation of row \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 312 of file f4\+\_\+reduction.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}\label{group___g_b_computation_ad9808f644164e01195a2bcca7c3ca787}} 
 \index{F4\+\_\+\+Reduction\+\_\+\+Data@{F4\+\_\+\+Reduction\+\_\+\+Data}!verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows@{verify\+\_\+and\+\_\+modify\+\_\+processed\+\_\+rows}}
@@ -1408,7 +2006,7 @@ This function is not currently in use and has not been tested.
 \end{DoxyWarning}
 
 
-Definition at line 634 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 730 of file f4\+\_\+dynamic.\+cpp.
 
 \index{smaller\+\_\+lm@{smaller\+\_\+lm}}\label{structsmaller__lm}
 \Hypertarget{group___g_b_computation_structsmaller__lm}
@@ -1740,7 +2338,7 @@ a Gr\"{o}bner basis of the ideal generated by $ F $ with respect to the ordering
 \end{DoxyReturn}
 
 
-Definition at line 1102 of file f4\+\_\+dynamic.\+cpp.
+Definition at line 1201 of file f4\+\_\+dynamic.\+cpp.
 
 \mbox{\Hypertarget{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}\label{group___g_b_computation_ga5a0f37dcb4ac73e553793fd627941c48}} 
 \index{Gr\"{o}bner basis computation@{Gr\"{o}bner basis computation}!find\+\_\+reducer@{find\+\_\+reducer}}

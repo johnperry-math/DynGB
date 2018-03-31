@@ -163,7 +163,7 @@ void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Dynamic *> & P, unsigned row
 ) {
   const unsigned num_cols = M_builder.size();
-  const Prime_Field & F = P.front()->first()->ground_field();
+  //const Prime_Field & F = P.front()->first()->ground_field();
   const COEF_TYPE F0 = 0;
   for (auto cp : P) {
     auto p = cp->first();
@@ -209,7 +209,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
     M_table.update_location(mi->first, m);
     ++m;
   }
-  unsigned row = 0;
+  //unsigned row = 0;
   A.resize(P.size());
   head.resize(P.size());
   l_head.resize(P.size());
@@ -252,6 +252,8 @@ void F4_Reduction_Data::print_builder() {
   cout << "]\n";
 }
 
+double emplace_time;
+
 void F4_Reduction_Data::add_monomials(
     const WGrevlex * curr_ord,
     const Abstract_Polynomial *g,
@@ -259,15 +261,17 @@ void F4_Reduction_Data::add_monomials(
     bool new_row
 ) {
   //static unsigned long monomials_processed = 0;
-  if (g->monomial_ordering() != curr_ord)
-    const_cast<Abstract_Polynomial *>(g)->set_monomial_ordering(curr_ord);
-  NVAR_TYPE n = g->leading_monomial().num_vars();
   Polynomial_Iterator * pi = g->new_iterator();
   if (not new_row) pi->moveRight();
   //monomials_processed += g->length();
   while (not (pi->fellOff())) {
-    if (not M_table.contains_product(pi->currMonomial(), u)) {
+    time_t start = time(nullptr);
+    bool already_there = M_table.contains_product(pi->currMonomial(), u);
+    time_t end = time(nullptr);
+    emplace_time += difftime(end, start);
+    if (not already_there) {
       Monomial * t = new Monomial(pi->currMonomial());
+      t->set_monomial_ordering(curr_ord);
       (*t) *= u;
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
@@ -284,6 +288,8 @@ F4_Reduction_Data::~F4_Reduction_Data() {
       delete strat;
   }
   for (auto t : M_builder) delete t.first;
+  cout << "there were at most " << M_table.max_size << " monomials in any list of hash table\n";
+  cout << "we spend " << emplace_time << " seconds emplacing\n";
 }
 
 void F4_Reduction_Data::print_row(unsigned i) {
@@ -430,9 +436,10 @@ void F4_Reduction_Data::reduce_my_rows(
               unsigned l = j - offset[k];
               bool was_zero = Ak[l] == 0;
               Ak[l] += a*ri.second; Ak[l] %= mod;
-              if (was_zero)
+              if (was_zero) {
                 ++new_nonzero_entries;
-              else if (Ak[l] == 0)
+                if (head[k] > l) head[k] = l;
+              } else if (Ak[l] == 0)
                 --new_nonzero_entries;
               // advance
             }
@@ -515,7 +522,6 @@ void F4_Reduction_Data::reduce_by_old() {
   }
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c].join();
-  //reduce_my_rows(thread_rows[0], buffer[0], indices[0]);
   delete [] workers;
   delete [] thread_rows;
 }
@@ -611,9 +617,12 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
       strategies[i] = nullptr;
     } else {
       vector<COEF_TYPE> & Ai = A[i];
-      Monomial * M_final = (Monomial *)malloc(sizeof(Monomial)*nonzero_entries[i]);
-      Prime_Field_Element * A_final
-          = (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element)*nonzero_entries[i]);
+      Monomial * M_final = static_cast<Monomial *>(
+          malloc(sizeof(Monomial)*nonzero_entries[i])
+      );
+      Prime_Field_Element * A_final = static_cast<Prime_Field_Element *>(
+          malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
+      );
       COEF_TYPE scale = F.inverse(Ai[head[i]]);
       unsigned k = 0;
       for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
@@ -621,7 +630,7 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
           A_final[k].assign(Ai[j]*scale % mod, &F);
           M_final[k].common_initialization();
           M_final[k].initialize_exponents(n);
-          M_final[k].set_monomial_ordering(mord);
+          //M_final[k].set_monomial_ordering(mord);
           M_final[k] = *M[offset[i] + j];
           ++k;
         }
@@ -649,9 +658,12 @@ Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
   UCOEF_TYPE mod = F.modulus();
   NVAR_TYPE n = M[0]->num_vars();
   vector<COEF_TYPE> & Ai = A[i];
-  Monomial * M_final = (Monomial *)malloc(sizeof(Monomial)*nonzero_entries[i]);
-  Prime_Field_Element * A_final
-      = (Prime_Field_Element *)malloc(sizeof(Prime_Field_Element)*nonzero_entries[i]);
+  Monomial * M_final = static_cast<Monomial *>(
+      malloc(sizeof(Monomial)*nonzero_entries[i])
+  );
+  Prime_Field_Element * A_final = static_cast<Prime_Field_Element *>(
+      malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
+  );
   COEF_TYPE scale = F.inverse(Ai[l_head[i]]);
   unsigned k = 0;
   for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
@@ -752,6 +764,8 @@ bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
           }
           else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
             newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
+          else
+            newskel = nullptr; // this should never happen, of course
           consistent = newskel->solve(new_constraint);
           //cout << "Have ray " << w << endl;
           // if we're consistent, we need to recompute the ordering
@@ -808,8 +822,6 @@ bool F4_Reduction_Data::row_would_change_ordering(unsigned i) {
           row_skel[i] = newSkeleton;
         else if (src_PPL != nullptr)
           row_skel[i] = newSkeleton;
-        break;
-        currSkel = row_skel[i];
       }
     } else {
       // this monomial is not, in fact, compatible
@@ -840,7 +852,7 @@ WGrevlex * F4_Reduction_Data::reduce_and_select_order(
   LP_Solver * skel
 ) {
   WGrevlex * result = nullptr;
-  bool ordering_changed = false;
+  //bool ordering_changed = false;
   // set up the logical heads, the ideals, ...
   I.resize(number_of_rows());
   row_skel.resize(number_of_rows(), nullptr);
@@ -890,7 +902,7 @@ WGrevlex * F4_Reduction_Data::reduce_and_select_order(
     dynamic_processed.insert(winning_row);
     dynamic_unprocessed.erase(winning_row);
     if (row_changes_ordering[winning_row]) {
-      ordering_changed = true;
+      //ordering_changed = true;
       // update skeleton
       skel->copy(row_skel[winning_row]);
       // update ordering

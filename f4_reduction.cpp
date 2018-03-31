@@ -100,8 +100,6 @@ F4_Reduction_Data::F4_Reduction_Data(
 void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Basic *> & P, unsigned row
 ) {
-  const unsigned num_cols = M_build.size();
-  const COEF_TYPE F0 = 0;
   for (auto cp : P) {
     auto p = cp->first();
     const Monomial & t = cp->first_multiplier();
@@ -335,7 +333,6 @@ void F4_Reduction_Data::build_reducer(vector<COEF_TYPE> & buffer, unsigned mi) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
   UCOEF_TYPE mod = F.modulus();
-  auto & r = R_built[mi]; // only call build_reducer when empty, so no check
   const auto g = R[mi];
   Polynomial_Iterator * gi = g->new_iterator();
   EXP_TYPE v[n];
@@ -383,7 +380,6 @@ void F4_Reduction_Data::reduce_my_rows(
   for (unsigned i : my_rows) {
     auto & Ai = A[i];
     fill(A_buffer.begin(), A_buffer.end(), 0);
-    unsigned j = 0;
     // loop through terms of Ai
     for (auto term : Ai) {
       auto mi = term.first; // monomial index
@@ -406,7 +402,6 @@ void F4_Reduction_Data::reduce_my_rows(
           v[k] = t[k] - u[k];
         strategies[i]->pre_reduction_tasks(v, *R[mi]);
       }
-      ++j;
     }
     sparsify_row(A_buffer, Ai);
   }
@@ -510,7 +505,6 @@ vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
   cout << "spent " << copy_time << " seconds copying\n";
   vector<Constant_Polynomial *> result;
   const Prime_Field & F = Rx.ground_field();
-  UCOEF_TYPE mod = F.modulus();
   NVAR_TYPE n = M[0]->num_vars();
   for (unsigned i = 0; i < num_rows; ++i) {
     if (A[i].size() == 0) {

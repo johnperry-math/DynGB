@@ -341,8 +341,8 @@ bool less_by_wdegree_then_hilbert(PP_With_Ideal &a, PP_With_Ideal &b)
     result = false;
   else {
     // now check the coefficients of the Hilbert polynomial
-    Dense_Univariate_Rational_Polynomial HPdiff
-        = a.get_hilbert_polynomial() - b.get_hilbert_polynomial();
+    Dense_Univariate_Rational_Polynomial HPdiff(*a.get_hilbert_polynomial());
+    HPdiff -= *b.get_hilbert_polynomial();
     if (not HPdiff.is_zero())
       result = (HPdiff.numerator(HPdiff.degree()) >= 0);
     else // use Hilbert series

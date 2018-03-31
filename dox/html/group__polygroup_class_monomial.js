@@ -1,6 +1,7 @@
 var group__polygroup_class_monomial =
 [
     [ "Monomial", "group__polygroup.html#a3c710f9d6f7c7e0addc2779a037042dd", null ],
+    [ "Monomial", "group__polygroup.html#aeccfe12ba582763df3cf7e83cffcd71f", null ],
     [ "Monomial", "group__polygroup.html#ad6968b542cf22f8bc24053fb48782dcc", null ],
     [ "Monomial", "group__polygroup.html#a8b9c7bc9d5b286adb11ccc39471b00c4", null ],
     [ "Monomial", "group__polygroup.html#a85d91b1a13592c849394c26c5ad294d8", null ],
@@ -22,7 +23,7 @@ var group__polygroup_class_monomial =
     [ "larger_than_multiple", "group__polygroup.html#a1cac303db5d3cc66247137172cf84145", null ],
     [ "lcm", "group__polygroup.html#a168381ee5e477d90f59dec9f26b24cc6", null ],
     [ "like_multiple", "group__polygroup.html#adec4a37e9e36f821ae69ca00eb087961", null ],
-    [ "like_multiple", "group__polygroup.html#ab2989052f946017870269c19b2108b55", null ],
+    [ "like_multiple", "group__polygroup.html#a1b3b3fe2d07b206d5c6cb5f7298754a2", null ],
     [ "log", "group__polygroup.html#a6b5a0acb65334373ed437045f9835a61", null ],
     [ "monomial_ordering", "group__polygroup.html#abd2698ed3860ba7132c01685d8efe03c", null ],
     [ "monomial_ordering_data", "group__polygroup.html#ac8f4e8a87c0c7170780525beea5acfb3", null ],

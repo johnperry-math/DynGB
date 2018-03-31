@@ -26,6 +26,7 @@ var annotated_dup =
     [ "Lex_Ordering", "group__orderinggroup.html#class_lex___ordering", "group__orderinggroup_class_lex___ordering" ],
     [ "LLPolynomial_Iterator", "group___iterator_group.html#class_l_l_polynomial___iterator", "group___iterator_group_class_l_l_polynomial___iterator" ],
     [ "Matrix_Ordering", "group__orderinggroup.html#class_matrix___ordering", "group__orderinggroup_class_matrix___ordering" ],
+    [ "MonCmp", "struct_mon_cmp.html", "struct_mon_cmp" ],
     [ "Monomial", "group__polygroup.html#class_monomial", "group__polygroup_class_monomial" ],
     [ "Monomial_Ideal", "group__polygroup.html#class_monomial___ideal", "group__polygroup_class_monomial___ideal" ],
     [ "Monomial_Ideal_Variables_Exception", "group__polygroup.html#class_monomial___ideal___variables___exception", null ],

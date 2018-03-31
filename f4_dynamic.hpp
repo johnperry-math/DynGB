@@ -56,7 +56,18 @@ using Dynamic_Engine::Dynamic_Heuristic;
 */
 list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F);
 
+/**
+  @brief used to compare monomials for STL containers such as @c map
+*/
 struct MonCmp {
+  /**
+    @brief returns @c true iff the monomial pointed to by @p t is smaller than
+      the monomial pointed to by @p u
+    @param t monomial we're comparing
+    @param u monomial we're comparing
+    @return @c true iff the monomial pointed to by @p t is smaller than
+      the monomial pointed to by @p u
+  */
   bool operator()(
         const Monomial * t,
         const Monomial * u

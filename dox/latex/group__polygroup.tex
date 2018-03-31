@@ -874,15 +874,6 @@ John Perry
 2016 
 \end{DoxyDate}
 \begin{DoxyWarning}{Warning}
-You must have {\ttfamily deg} smaller than {\ttfamily size}, as {\ttfamily deg} indexes the monomial of largest degree, which can be at most {\ttfamily size~-\/~1}.
-\end{DoxyWarning}
-\begin{DoxyAuthor}{Author}
-John Perry 
-\end{DoxyAuthor}
-\begin{DoxyDate}{Date}
-2016 
-\end{DoxyDate}
-\begin{DoxyWarning}{Warning}
 You must have {\ttfamily deg} smaller than {\ttfamily size}, as {\ttfamily deg} indexes the monomial of largest degree, which can be at most {\ttfamily size~-\/~1}. 
 \end{DoxyWarning}
 
@@ -901,22 +892,10 @@ Definition at line 37 of file dense\+\_\+univariate\+\_\+rational\+\_\+poly.\+hp
 \begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a355c74bb36083fa2407a28ac066ca081}\label{group__polygroup_a355c74bb36083fa2407a28ac066ca081}} 
 \hyperlink{group__polygroup_a355c74bb36083fa2407a28ac066ca081}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} (D\+E\+G\+\_\+\+T\+Y\+PE, int64\+\_\+t $\ast$, uint64\+\_\+t $\ast$)
-\begin{DoxyCompactList}\small\item\em construct from given data, with the expected number of terms \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a373bccc0cf3c06160702a484edb5ca10}\label{group__polygroup_a373bccc0cf3c06160702a484edb5ca10}} 
-\hyperlink{group__polygroup_a373bccc0cf3c06160702a484edb5ca10}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} (D\+E\+G\+\_\+\+T\+Y\+PE)
-\begin{DoxyCompactList}\small\item\em construct with the number of expected terms \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a809d897a0cc6a226c42b80617c2aeab5}\label{group__polygroup_a809d897a0cc6a226c42b80617c2aeab5}} 
-\hyperlink{group__polygroup_a809d897a0cc6a226c42b80617c2aeab5}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&)
-\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a355c74bb36083fa2407a28ac066ca081}\label{group__polygroup_a355c74bb36083fa2407a28ac066ca081}} 
-\hyperlink{group__polygroup_a355c74bb36083fa2407a28ac066ca081}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} (D\+E\+G\+\_\+\+T\+Y\+PE, int64\+\_\+t $\ast$, uint64\+\_\+t $\ast$)
 \begin{DoxyCompactList}\small\item\em construct from given data, with the expected number of terms \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Destruction}\par
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{group__polygroup_aeade1e7c67dd64b79340aff7555e0354}\label{group__polygroup_aeade1e7c67dd64b79340aff7555e0354}} 
-{\bfseries $\sim$\+Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} ()
 \item 
 \mbox{\Hypertarget{group__polygroup_aeade1e7c67dd64b79340aff7555e0354}\label{group__polygroup_aeade1e7c67dd64b79340aff7555e0354}} 
 {\bfseries $\sim$\+Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} ()
@@ -957,44 +936,11 @@ void \hyperlink{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}{subtract} (c
 \begin{DoxyCompactList}\small\item\em subtracts {\ttfamily other} from {\ttfamily this} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}\label{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}} 
 void \hyperlink{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}{operator-\/=} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&other)
-\begin{DoxyCompactList}\small\item\em alias for \hyperlink{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}{subtract()} \end{DoxyCompactList}\item 
-void \hyperlink{group__polygroup_a57f7bbe1cd7ae1c2ca66d12f988a9c6d}{expand\+\_\+poly} (D\+E\+G\+\_\+\+T\+Y\+PE)
-\begin{DoxyCompactList}\small\item\em expand to allow for higher-\/degree monomials \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a382347b9ae8adcc72c7787b0a737fbbf}\label{group__polygroup_a382347b9ae8adcc72c7787b0a737fbbf}} 
-void \hyperlink{group__polygroup_a382347b9ae8adcc72c7787b0a737fbbf}{set\+\_\+coefficient} (D\+E\+G\+\_\+\+T\+Y\+PE k, C\+O\+E\+F\+\_\+\+T\+Y\+PE a, U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE b)
-\begin{DoxyCompactList}\small\item\em set the coefficient of $x^k$ to $\frac{a}{b}$ \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_accb38470c561da8878937486c9c3c4e7}\label{group__polygroup_accb38470c561da8878937486c9c3c4e7}} 
-void \hyperlink{group__polygroup_accb38470c561da8878937486c9c3c4e7}{scale\+\_\+by} (C\+O\+E\+F\+\_\+\+T\+Y\+PE a)
-\begin{DoxyCompactList}\small\item\em multiplies every monomial by a constant integer \end{DoxyCompactList}\item 
-void \hyperlink{group__polygroup_a75113519785d8fba7d957b630bd26a54}{scale\+\_\+by} (C\+O\+E\+F\+\_\+\+T\+Y\+PE a, U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE b)
-\begin{DoxyCompactList}\small\item\em multiplies every monomial by a constant rational \end{DoxyCompactList}\item 
-void \hyperlink{group__polygroup_ab21b7f1a23165a93293db98129fdd48c}{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree} (D\+E\+G\+\_\+\+T\+Y\+PE)
-\begin{DoxyCompactList}\small\item\em a hopefully efficient multiplication algorithm \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_af73d51542118ec7fbe36757b2590220e}\label{group__polygroup_af73d51542118ec7fbe36757b2590220e}} 
-void \hyperlink{group__polygroup_af73d51542118ec7fbe36757b2590220e}{multiply\+\_\+by} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&)
-\begin{DoxyCompactList}\small\item\em highly inefficient polynomial multiplication ( $O(mn)$) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a4086e22f45503e348985f120b3c0a79c}\label{group__polygroup_a4086e22f45503e348985f120b3c0a79c}} 
-void \hyperlink{group__polygroup_a4086e22f45503e348985f120b3c0a79c}{negate} ()
-\begin{DoxyCompactList}\small\item\em negates the numerators \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a8cf0a014475645d777b7f3168d632a93}\label{group__polygroup_a8cf0a014475645d777b7f3168d632a93}} 
-void \hyperlink{group__polygroup_a8cf0a014475645d777b7f3168d632a93}{add} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&)
-\begin{DoxyCompactList}\small\item\em adds {\ttfamily other} to {\ttfamily this} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a61d2068402442a595dde1fcc4dc40f52}\label{group__polygroup_a61d2068402442a595dde1fcc4dc40f52}} 
-void \hyperlink{group__polygroup_a61d2068402442a595dde1fcc4dc40f52}{operator+=} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&other)
-\begin{DoxyCompactList}\small\item\em alias for \hyperlink{group__polygroup_a8cf0a014475645d777b7f3168d632a93}{add()} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}\label{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}} 
-void \hyperlink{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}{subtract} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&)
-\begin{DoxyCompactList}\small\item\em subtracts {\ttfamily other} from {\ttfamily this} \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}\label{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}} 
-void \hyperlink{group__polygroup_a7bb6d8ed216e5575773013a19052e79c}{operator-\/=} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&other)
 \begin{DoxyCompactList}\small\item\em alias for \hyperlink{group__polygroup_aab4902fd7521146ea739f9f3f8c0c8b6}{subtract()} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Computation}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}\label{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}} 
-\hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \hyperlink{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}{operator-\/} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&) const
-\begin{DoxyCompactList}\small\item\em returns the difference between {\ttfamily this} and the other \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}\label{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}} 
 \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \hyperlink{group__polygroup_a91d98d134a32b9089b6af40fc35c809f}{operator-\/} (const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&) const
 \begin{DoxyCompactList}\small\item\em returns the difference between {\ttfamily this} and the other \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -1013,25 +959,7 @@ M\+P\+Z\+C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_ab44929e18d51379
 \begin{DoxyCompactList}\small\item\em returns the $k$th denominator \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}\label{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}} 
 D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}{degree} () const
-\begin{DoxyCompactList}\small\item\em returns the polynomial's degree \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a6959dd2fd63384953e774e63c1e2a344}\label{group__polygroup_a6959dd2fd63384953e774e63c1e2a344}} 
-bool \hyperlink{group__polygroup_a6959dd2fd63384953e774e63c1e2a344}{is\+\_\+zero} () const
-\begin{DoxyCompactList}\small\item\em indicates whether the polynomial is zero \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a660686fcb8d2f6c874eea7ccb9ad127b}\label{group__polygroup_a660686fcb8d2f6c874eea7ccb9ad127b}} 
-C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_a660686fcb8d2f6c874eea7ccb9ad127b}{numerator} (D\+E\+G\+\_\+\+T\+Y\+PE k) const
-\begin{DoxyCompactList}\small\item\em returns the $k$th numerator \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a409c8de55599ce76d63a48d37a4dc41e}\label{group__polygroup_a409c8de55599ce76d63a48d37a4dc41e}} 
-U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_a409c8de55599ce76d63a48d37a4dc41e}{denominator} (D\+E\+G\+\_\+\+T\+Y\+PE k) const
-\begin{DoxyCompactList}\small\item\em returns the $k$th denominator \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}\label{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}} 
-D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_a12c3fe334fa0eefdc2533bad00df262d}{degree} () const
-\begin{DoxyCompactList}\small\item\em returns the polynomial's degree \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a72a983199fc30d9de996476e16fad6a9}\label{group__polygroup_a72a983199fc30d9de996476e16fad6a9}} 
-const C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__polygroup_a72a983199fc30d9de996476e16fad6a9}{numerator\+\_\+array} ()
-\begin{DoxyCompactList}\small\item\em all the numerators \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a0337d2949c3c6826fd991d73f8593f5f}\label{group__polygroup_a0337d2949c3c6826fd991d73f8593f5f}} 
-const U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__polygroup_a0337d2949c3c6826fd991d73f8593f5f}{denominator\+\_\+array} ()
-\begin{DoxyCompactList}\small\item\em all the denominators \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em returns the polynomial's degree \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -1042,12 +970,6 @@ M\+P\+Q\+C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__polygroup_a6137f99c
 \mbox{\Hypertarget{group__polygroup_a1c6da3f7245cd50ec18c5877202fd8f6}\label{group__polygroup_a1c6da3f7245cd50ec18c5877202fd8f6}} 
 D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_a1c6da3f7245cd50ec18c5877202fd8f6}{deg}
 \begin{DoxyCompactList}\small\item\em degree of the polynomial (largest nonzero exponent) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_a52dd896ab7091806cd99431c473ba6d0}\label{group__polygroup_a52dd896ab7091806cd99431c473ba6d0}} 
-U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__polygroup_a52dd896ab7091806cd99431c473ba6d0}{denominators}
-\begin{DoxyCompactList}\small\item\em list of denominators; index 0 is the constant's \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_ab3f8f2b676e0795601dc037c4d12e078}\label{group__polygroup_ab3f8f2b676e0795601dc037c4d12e078}} 
-C\+O\+E\+F\+\_\+\+T\+Y\+PE $\ast$ \hyperlink{group__polygroup_ab3f8f2b676e0795601dc037c4d12e078}{numerators}
-\begin{DoxyCompactList}\small\item\em list of numerators; index 0 is the constant's \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_ac1150612197de4b6cb20463fd0c33134}\label{group__polygroup_ac1150612197de4b6cb20463fd0c33134}} 
 D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_ac1150612197de4b6cb20463fd0c33134}{size}
 \begin{DoxyCompactList}\small\item\em number of slots for coefficients \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -1057,9 +979,6 @@ D\+E\+G\+\_\+\+T\+Y\+PE \hyperlink{group__polygroup_ac1150612197de4b6cb20463fd0c
 \item 
 \mbox{\Hypertarget{group__polygroup_ac7750eb75a7943bbc34c104cd36333ff}\label{group__polygroup_ac7750eb75a7943bbc34c104cd36333ff}} 
 ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&p)
-\item 
-\mbox{\Hypertarget{group__polygroup_a070aa3f629127672cb47c9eec3ec102b}\label{group__polygroup_a070aa3f629127672cb47c9eec3ec102b}} 
-ostream \& {\bfseries operator$<$$<$} (ostream \&os, \hyperlink{group__polygroup_class_dense___univariate___rational___polynomial}{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial} \&p)
 \end{DoxyCompactItemize}
 \end{Indent}
 
@@ -1068,17 +987,7 @@ ostream \& {\bfseries operator$<$$<$} (ostream \&os, \hyperlink{group__polygroup
 \mbox{\Hypertarget{group__polygroup_a57f7bbe1cd7ae1c2ca66d12f988a9c6d}\label{group__polygroup_a57f7bbe1cd7ae1c2ca66d12f988a9c6d}} 
 \index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!expand\+\_\+poly@{expand\+\_\+poly}}
 \index{expand\+\_\+poly@{expand\+\_\+poly}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{expand\+\_\+poly()}{expand\_poly()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::expand\+\_\+poly (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{ }\end{DoxyParamCaption})}
-
-
-
-expand to allow for higher-\/degree monomials 
-
-You should do this at the beginning of any computation that could expand the size of the polynomial. \mbox{\Hypertarget{group__polygroup_a57f7bbe1cd7ae1c2ca66d12f988a9c6d}\label{group__polygroup_a57f7bbe1cd7ae1c2ca66d12f988a9c6d}} 
-\index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!expand\+\_\+poly@{expand\+\_\+poly}}
-\index{expand\+\_\+poly@{expand\+\_\+poly}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{expand\+\_\+poly()}{expand\_poly()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{expand\+\_\+poly()}{expand\_poly()}}
 {\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::expand\+\_\+poly (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{n }\end{DoxyParamCaption})}
 
 
@@ -1092,17 +1001,7 @@ Definition at line 67 of file dense\+\_\+univariate\+\_\+rational\+\_\+poly.\+cp
 \mbox{\Hypertarget{group__polygroup_ab21b7f1a23165a93293db98129fdd48c}\label{group__polygroup_ab21b7f1a23165a93293db98129fdd48c}} 
 \index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}}
 \index{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree()}{multiply\_by\_monomial\_of\_degree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{ }\end{DoxyParamCaption})}
-
-
-
-a hopefully efficient multiplication algorithm 
-
-Moves exponents from higher degrees to even higher degrees, freeing up space for smaller exponents. \mbox{\Hypertarget{group__polygroup_ab21b7f1a23165a93293db98129fdd48c}\label{group__polygroup_ab21b7f1a23165a93293db98129fdd48c}} 
-\index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}}
-\index{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree@{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree()}{multiply\_by\_monomial\_of\_degree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree()}{multiply\_by\_monomial\_of\_degree()}}
 {\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::multiply\+\_\+by\+\_\+monomial\+\_\+of\+\_\+degree (\begin{DoxyParamCaption}\item[{D\+E\+G\+\_\+\+T\+Y\+PE}]{k }\end{DoxyParamCaption})}
 
 
@@ -1116,24 +1015,7 @@ Definition at line 102 of file dense\+\_\+univariate\+\_\+rational\+\_\+poly.\+c
 \mbox{\Hypertarget{group__polygroup_a75113519785d8fba7d957b630bd26a54}\label{group__polygroup_a75113519785d8fba7d957b630bd26a54}} 
 \index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!scale\+\_\+by@{scale\+\_\+by}}
 \index{scale\+\_\+by@{scale\+\_\+by}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{scale\+\_\+by()}{scale\_by()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::scale\+\_\+by (\begin{DoxyParamCaption}\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{a,  }\item[{U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{b }\end{DoxyParamCaption})}
-
-
-
-multiplies every monomial by a constant rational 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a} & rational's numerator \\
-\hline
-{\em b} & rational's denominator \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{group__polygroup_a75113519785d8fba7d957b630bd26a54}\label{group__polygroup_a75113519785d8fba7d957b630bd26a54}} 
-\index{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}!scale\+\_\+by@{scale\+\_\+by}}
-\index{scale\+\_\+by@{scale\+\_\+by}!Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial@{Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial}}
-\subparagraph{\texorpdfstring{scale\+\_\+by()}{scale\_by()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{scale\+\_\+by()}{scale\_by()}}
 {\footnotesize\ttfamily void Dense\+\_\+\+Univariate\+\_\+\+Rational\+\_\+\+Polynomial\+::scale\+\_\+by (\begin{DoxyParamCaption}\item[{C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{a,  }\item[{U\+C\+O\+E\+F\+\_\+\+T\+Y\+PE}]{b }\end{DoxyParamCaption})}
 
 
@@ -1486,6 +1368,8 @@ void \hyperlink{group__polygroup_a6f28aa6d15979b018003908937155052}{set\+\_\+exp
 \mbox{\Hypertarget{group__polygroup_a3c710f9d6f7c7e0addc2779a037042dd}\label{group__polygroup_a3c710f9d6f7c7e0addc2779a037042dd}} 
 \hyperlink{group__polygroup_a3c710f9d6f7c7e0addc2779a037042dd}{Monomial} (N\+V\+A\+R\+\_\+\+T\+Y\+PE number\+\_\+of\+\_\+vars, const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$order=generic\+\_\+grevlex\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em The first constructor is equivalent to instantiating 1. \end{DoxyCompactList}\item 
+\hyperlink{group__polygroup_aeccfe12ba582763df3cf7e83cffcd71f}{Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&t, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, bool product=true)
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Product\char`\"{} constructor\+: constructs a product or quotient \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_ad6968b542cf22f8bc24053fb48782dcc}\label{group__polygroup_ad6968b542cf22f8bc24053fb48782dcc}} 
 \hyperlink{group__polygroup_ad6968b542cf22f8bc24053fb48782dcc}{Monomial} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&other)
 \begin{DoxyCompactList}\small\item\em Copy constructor, allocates new space for exponents. \end{DoxyCompactList}\item 
@@ -1566,8 +1450,8 @@ bool \hyperlink{group__polygroup_ac68d2650242d00ab6c26c3f01f31414a}{is\+\_\+like
 \mbox{\Hypertarget{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}\label{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}} 
 bool \hyperlink{group__polygroup_adec4a37e9e36f821ae69ca00eb087961}{like\+\_\+multiple} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&u, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&v) const
 \begin{DoxyCompactList}\small\item\em is {\ttfamily this} like $uv$? \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{group__polygroup_ab2989052f946017870269c19b2108b55}\label{group__polygroup_ab2989052f946017870269c19b2108b55}} 
-bool \hyperlink{group__polygroup_ab2989052f946017870269c19b2108b55}{like\+\_\+multiple} (E\+X\+P\+\_\+\+T\+Y\+PE $\ast$e, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&v) const
+\mbox{\Hypertarget{group__polygroup_a1b3b3fe2d07b206d5c6cb5f7298754a2}\label{group__polygroup_a1b3b3fe2d07b206d5c6cb5f7298754a2}} 
+bool \hyperlink{group__polygroup_a1b3b3fe2d07b206d5c6cb5f7298754a2}{like\+\_\+multiple} (const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$e, const \hyperlink{group__polygroup_class_monomial}{Monomial} \&v) const
 \begin{DoxyCompactList}\small\item\em is {\ttfamily this} like $uv$? (where $u$ is a monomial whose exponents are those of {\ttfamily e} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__polygroup_ab50a4f90c210bcaf6e21fc16028a121a}\label{group__polygroup_ab50a4f90c210bcaf6e21fc16028a121a}} 
 bool \hyperlink{group__polygroup_ab50a4f90c210bcaf6e21fc16028a121a}{larger\+\_\+than} (const \hyperlink{group__polygroup_class_monomial}{Monomial} \&) const
@@ -1664,10 +1548,33 @@ ostream \& \hyperlink{group__polygroup_a76dc21e1d0624ecd913ce3e2f83c0f13}{operat
 
 
 \paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__polygroup_aeccfe12ba582763df3cf7e83cffcd71f}\label{group__polygroup_aeccfe12ba582763df3cf7e83cffcd71f}} 
+\index{Monomial@{Monomial}!Monomial@{Monomial}}
+\index{Monomial@{Monomial}!Monomial@{Monomial}}
+\subparagraph{\texorpdfstring{Monomial()}{Monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Monomial\+::\+Monomial (\begin{DoxyParamCaption}\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{t,  }\item[{const \hyperlink{group__polygroup_class_monomial}{Monomial} \&}]{u,  }\item[{bool}]{product = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+\char`\"{}\+Product\char`\"{} constructor\+: constructs a product or quotient 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product} & {\ttfamily true} if and only if we want a product \\
+\hline
+{\em t} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} to multiply \\
+\hline
+{\em u} & {\ttfamily \hyperlink{group__polygroup_class_monomial}{Monomial}} to multiply \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 118 of file monomial.\+cpp.
+
 \mbox{\Hypertarget{group__polygroup_a8b9c7bc9d5b286adb11ccc39471b00c4}\label{group__polygroup_a8b9c7bc9d5b286adb11ccc39471b00c4}} 
 \index{Monomial@{Monomial}!Monomial@{Monomial}}
 \index{Monomial@{Monomial}!Monomial@{Monomial}}
-\subparagraph{\texorpdfstring{Monomial()}{Monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subparagraph{\texorpdfstring{Monomial()}{Monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily Monomial\+::\+Monomial (\begin{DoxyParamCaption}\item[{initializer\+\_\+list$<$ E\+X\+P\+\_\+\+T\+Y\+PE $>$}]{powers,  }\item[{const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order = {\ttfamily generic\+\_\+grevlex\+\_\+ptr} }\end{DoxyParamCaption})}
 
 
@@ -1683,12 +1590,12 @@ Constructor from initializer list.
 \end{DoxyParams}
 The list should contains the powers of the exponents, in order. 
 
-Definition at line 134 of file monomial.\+cpp.
+Definition at line 160 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a85d91b1a13592c849394c26c5ad294d8}\label{group__polygroup_a85d91b1a13592c849394c26c5ad294d8}} 
 \index{Monomial@{Monomial}!Monomial@{Monomial}}
 \index{Monomial@{Monomial}!Monomial@{Monomial}}
-\subparagraph{\texorpdfstring{Monomial()}{Monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subparagraph{\texorpdfstring{Monomial()}{Monomial()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily Monomial\+::\+Monomial (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{size,  }\item[{const E\+X\+P\+\_\+\+T\+Y\+PE $\ast$}]{powers,  }\item[{const \hyperlink{group__orderinggroup_class_monomial___ordering}{Monomial\+\_\+\+Ordering} $\ast$}]{order = {\ttfamily generic\+\_\+grevlex\+\_\+ptr} }\end{DoxyParamCaption})}
 
 
@@ -1706,7 +1613,7 @@ Constructor from array of exponents.
 \end{DoxyParams}
 Copies exponents so you can reuse yours. 
 
-Definition at line 161 of file monomial.\+cpp.
+Definition at line 187 of file monomial.\+cpp.
 
 
 
@@ -1734,7 +1641,7 @@ Does not check if {\ttfamily this} is divisible by other. See \hyperlink{group__
 \end{DoxyReturn}
 
 
-Definition at line 372 of file monomial.\+cpp.
+Definition at line 399 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_afe6df62857d9f58634d5f6c668f12d35}\label{group__polygroup_afe6df62857d9f58634d5f6c668f12d35}} 
 \index{Monomial@{Monomial}!total\+\_\+degree@{total\+\_\+degree}}
@@ -1756,7 +1663,7 @@ total standard degree of this \hyperlink{group__polygroup_class_monomial}{Monomi
 \end{DoxyReturn}
 
 
-Definition at line 208 of file monomial.\+cpp.
+Definition at line 234 of file monomial.\+cpp.
 
 \mbox{\Hypertarget{group__polygroup_a5b19863967dc9801997d2d1058f312a3}\label{group__polygroup_a5b19863967dc9801997d2d1058f312a3}} 
 \index{Monomial@{Monomial}!weighted\+\_\+degree@{weighted\+\_\+degree}}
@@ -1776,7 +1683,7 @@ weighted sum of first {\ttfamily m} exponents, using given {\ttfamily weights}
 \end{DoxyParams}
 If {\ttfamily weights} is {\ttfamily nullptr} then returns total\+\_\+degree(m). If {\ttfamily m} is zero (default), computes for all indeterminates. 
 
-Definition at line 217 of file monomial.\+cpp.
+Definition at line 243 of file monomial.\+cpp.
 
 \index{Monomial\+\_\+\+Ideal@{Monomial\+\_\+\+Ideal}}\label{class_monomial___ideal}
 \Hypertarget{group__polygroup_class_monomial___ideal}

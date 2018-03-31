@@ -51,7 +51,7 @@ John Perry
 \end{DoxyDate}
 
 
-Definition at line 45 of file goda.\+hpp.
+Definition at line 48 of file goda.\+hpp.
 
 \begin{DoxyFields}{Class Members}
 \mbox{\Hypertarget{group__memorygroup_ad5bea3a00bf688f2db31ad5db90e3deb}\label{group__memorygroup_ad5bea3a00bf688f2db31ad5db90e3deb}} 
@@ -89,12 +89,12 @@ This is initialized to a certain number of variables, which cannot change. If yo
 \hyperlink{test_dynamic_8cpp-example}{test\+\_\+dynamic.\+cpp}.\end{Desc}
 
 
-Definition at line 67 of file goda.\+hpp.
+Definition at line 70 of file goda.\+hpp.
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{group__memorygroup_aa9d14580ced0d2e3d9f0a94e8e83aa85}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n)
+\hyperlink{group__memorygroup_ad093115aea9e8428a9ef8136a008b72b}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} (N\+V\+A\+R\+\_\+\+T\+Y\+PE n, const string \&block\+\_\+name=\char`\"{}\char`\"{}, bool verbose=false)
 \begin{DoxyCompactList}\small\item\em sets allocator up for blocks of $n$ of type {\ttfamily T\+Y\+PE}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__memorygroup_a01de71b688612c55185fc1fb7fd531b9}\label{group__memorygroup_a01de71b688612c55185fc1fb7fd531b9}} 
 \hyperlink{group__memorygroup_a01de71b688612c55185fc1fb7fd531b9}{$\sim$\+Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} ()
@@ -103,6 +103,9 @@ Definition at line 67 of file goda.\+hpp.
 \begin{DoxyCompactList}\small\item\em allocates a new superblock of almost 10000 blocks \end{DoxyCompactList}\item 
 T\+Y\+PE $\ast$ \hyperlink{group__memorygroup_a699e85282a021fd7b06f65b9e773eb30}{get\+\_\+new\+\_\+block} ()
 \begin{DoxyCompactList}\small\item\em allocates and returns a block of memory \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__memorygroup_a2338be626b78d71175fcd32f6f1bcaf1}\label{group__memorygroup_a2338be626b78d71175fcd32f6f1bcaf1}} 
+void \hyperlink{group__memorygroup_a2338be626b78d71175fcd32f6f1bcaf1}{report} ()
+\begin{DoxyCompactList}\small\item\em indicates how many blocks this has allocated \end{DoxyCompactList}\item 
 void \hyperlink{group__memorygroup_a518a8f61da93ea93651f426e12761a07}{return\+\_\+used\+\_\+block} (T\+Y\+PE $\ast$freed\+\_\+block)
 \begin{DoxyCompactList}\small\item\em returns a block of memory that is no longer needed to the pool \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
@@ -116,16 +119,25 @@ void \hyperlink{group__memorygroup_a518a8f61da93ea93651f426e12761a07}{return\+\_
 \begin{DoxyCompactList}\small\item\em pointer to the next free block \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__memorygroup_a7073b652fe474ccd684c1eebd2129a0b}\label{group__memorygroup_a7073b652fe474ccd684c1eebd2129a0b}} 
 const unsigned \hyperlink{group__memorygroup_a7073b652fe474ccd684c1eebd2129a0b}{data\+\_\+size}
-\begin{DoxyCompactList}\small\item\em how many words to step from one block to the next \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em how many words to step from one block to the next \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__memorygroup_acab98f2bc46fec3c72ca281d1062d755}\label{group__memorygroup_acab98f2bc46fec3c72ca281d1062d755}} 
+bool \hyperlink{group__memorygroup_acab98f2bc46fec3c72ca281d1062d755}{elaborate} = false
+\begin{DoxyCompactList}\small\item\em whether to elaborate during certain activities --- mainly for debugging \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__memorygroup_a62a84f6bb1a339133100a8eb01dfccf2}\label{group__memorygroup_a62a84f6bb1a339133100a8eb01dfccf2}} 
+const string \hyperlink{group__memorygroup_a62a84f6bb1a339133100a8eb01dfccf2}{name} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em name of allocator --- mainly for debugging \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__memorygroup_a0807060660950818df7e91a37dd6dc4b}\label{group__memorygroup_a0807060660950818df7e91a37dd6dc4b}} 
+unsigned int \hyperlink{group__memorygroup_a0807060660950818df7e91a37dd6dc4b}{num\+\_\+blocks} = 0
+\begin{DoxyCompactList}\small\item\em number of blocks allocated --- mainly for debugging \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \paragraph{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{group__memorygroup_aa9d14580ced0d2e3d9f0a94e8e83aa85}\label{group__memorygroup_aa9d14580ced0d2e3d9f0a94e8e83aa85}} 
+\mbox{\Hypertarget{group__memorygroup_ad093115aea9e8428a9ef8136a008b72b}\label{group__memorygroup_ad093115aea9e8428a9ef8136a008b72b}} 
 \index{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}!Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}}
 \index{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}!Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}}
 \subparagraph{\texorpdfstring{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator()}{Grading\_Order\_Data\_Allocator()}}
 {\footnotesize\ttfamily template$<$typename T\+Y\+PE$>$ \\
-\hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}$<$ T\+Y\+PE $>$\+::\hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}$<$ T\+Y\+PE $>$\+::\hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} (\begin{DoxyParamCaption}\item[{N\+V\+A\+R\+\_\+\+T\+Y\+PE}]{n,  }\item[{const string \&}]{block\+\_\+name = {\ttfamily \char`\"{}\char`\"{}},  }\item[{bool}]{verbose = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,12 +145,16 @@ sets allocator up for blocks of $n$ of type {\ttfamily T\+Y\+PE}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em n} & number of objects of type {\ttfamily T\+Y\+PE} that should be allocated initially\\
+{\em n} & number of objects of type {\ttfamily T\+Y\+PE} that should be allocated initially \\
+\hline
+{\em block\+\_\+name} & an optional name, for debugging purposes \\
+\hline
+{\em verbose} & whether to udpate occasionally during use\\
 \hline
 \end{DoxyParams}
 The \hyperlink{group__memorygroup_class_grading___order___data___allocator}{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator} can and will allocate new blocks of {\ttfamily n} objects when it runs out of room. 
 
-Definition at line 90 of file goda.\+hpp.
+Definition at line 98 of file goda.\+hpp.
 
 
 
@@ -159,7 +175,7 @@ the superblock
 \end{DoxyReturn}
 
 
-Definition at line 73 of file goda.\+hpp.
+Definition at line 76 of file goda.\+hpp.
 
 \mbox{\Hypertarget{group__memorygroup_a699e85282a021fd7b06f65b9e773eb30}\label{group__memorygroup_a699e85282a021fd7b06f65b9e773eb30}} 
 \index{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}!get\+\_\+new\+\_\+block@{get\+\_\+new\+\_\+block}}
@@ -177,7 +193,7 @@ block of memory of the size specified in constructor
 \end{DoxyReturn}
 
 
-Definition at line 108 of file goda.\+hpp.
+Definition at line 123 of file goda.\+hpp.
 
 \mbox{\Hypertarget{group__memorygroup_a518a8f61da93ea93651f426e12761a07}\label{group__memorygroup_a518a8f61da93ea93651f426e12761a07}} 
 \index{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator@{Grading\+\_\+\+Order\+\_\+\+Data\+\_\+\+Allocator}!return\+\_\+used\+\_\+block@{return\+\_\+used\+\_\+block}}
@@ -197,7 +213,7 @@ returns a block of memory that is no longer needed to the pool
 \end{DoxyParams}
 
 
-Definition at line 121 of file goda.\+hpp.
+Definition at line 139 of file goda.\+hpp.
 
 
 
