@@ -51,7 +51,11 @@ F4_Reduction_Data::F4_Reduction_Data(
 {
   num_cols = 0;
   A.clear();
+  R_build.clear();
+  M_build.clear();
   strategies.clear();
+  auto mi = M_build.begin();
+  auto ri = R_build.begin();
   mord = P.front()->first()->monomial_ordering();
   for (auto p : P) {
     strategies.push_back(new Poly_Sugar_Data(p->first()));
@@ -60,27 +64,32 @@ F4_Reduction_Data::F4_Reduction_Data(
       if (p->second() != nullptr)
         strategies.back()->pre_reduction_tasks(p->second_multiplier().log(), *(p->second()));
     }
-    add_monomials(p->first(), p->first_multiplier(), true);
+    add_monomials(mi, ri, p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
-      add_monomials(p->second(), p->second_multiplier());
-      M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
+      *ri = const_cast<Abstract_Polynomial *>(p->second());
+      ++ri; ++mi;
+      add_monomials(mi, ri, p->second(), p->second_multiplier());
     }
   }
   // for each monomial, find an appropriate reducer
-  for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
+  mi = M_build.begin();
+  ri = R_build.begin();
+  while (mi != M_build.end()) {
     auto g = G.begin();
-    bool found = mi->second != nullptr;
+    bool found = ((*ri) != nullptr);
     while (not found and g != G.end()) {
-      if (mi->first->divisible_by((*g)->leading_monomial())) {
+      if ((**mi).divisible_by((*g)->leading_monomial())) {
         found = true;
-        mi->second = *g;
-        Monomial u(*(mi->first));
+        *ri = *g;
+        Monomial u(**mi);
         u /= (*g)->leading_monomial();
-        add_monomials(*g, u);
+        add_monomials(mi, ri, *g, u);
         g = G.end();
       }
       ++g;
     }
+    ++mi;
+    ++ri;
   }
   initialize_many(P);
   unsigned els = 0;
@@ -112,24 +121,26 @@ void F4_Reduction_Data::initialize_some_rows(
 }
 
 void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
-  num_cols = M_builder.size();
+  num_cols = M_build.size();
   num_rows = P.size();
   strategies.resize(num_rows);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
-  for (auto m : M) delete m;
-  M.clear(); M.resize(M_builder.size());
-  R.clear(); R.resize(M_builder.size());
+  M.clear();
   size_t m = 0;
-  for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
-    M[m] = mi->first;
-    R[m] = mi->second;
-    M_table.update_location(mi->first, m);
+  for (auto mi = M_build.begin(); mi != M_build.end(); ++mi) {
+    M.push_back(*mi);
+    M_table.add_monomial(*mi, m);
     ++m;
   }
   for (unsigned i = 0; i < strategies.size(); ++i)
     strategies[i] = nullptr;
   A.resize(P.size());
+  R.resize(R_build.size());
+  unsigned i = 0;
+  for (Abstract_Polynomial * r : R_build)
+    R[i++] = r;
+  //
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   list<Critical_Pair_Basic *> * thread_rows
@@ -161,29 +172,51 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Basic *> & P) {
   //
 }
 
-void F4_Reduction_Data::print_builder() {
-  cout << "[ ";
-  for (auto m : M_builder)
-    cout << "( " << *(m.first) << ", " << m.second << " )";
-  cout << "]\n";
-}
-
 void F4_Reduction_Data::add_monomials(
+    list<Monomial *>::iterator & t1,
+    list<Abstract_Polynomial *>::iterator & r1,
     const Abstract_Polynomial *g,
     const Monomial & u,
     bool new_row
 ) {
   NVAR_TYPE n = g->leading_monomial().num_vars();
+  if (new_row) {
+    t1 = M_build.begin();
+    r1 = R_build.begin();
+    Monomial * t = new Monomial(g->leading_monomial());
+    (*t) *= u;
+    find_position(t1, M_build.end(), r1, *t);
+    if (t1 == M_build.end()) {
+      M_build.push_back(t);
+      R_build.push_back(nullptr);
+      t1 = M_build.begin();
+      r1 = R_build.begin();
+      auto t2(t1);
+      ++t2;
+      while (t2 != M_build.end()) {
+        ++t1; ++r1;
+        ++t2;
+      }
+    } else if (**t1 != *t) {
+      M_build.insert(t1, t);
+      R_build.insert(r1, nullptr);
+      --t1; --r1;
+    } else delete t;
+  }
+  auto t2(t1); auto r2(r1);
   Polynomial_Iterator * pi = g->new_iterator();
-  if (not new_row) pi->moveRight();
+  pi->moveRight();
   while (not (pi->fellOff())) {
-    bool already_there = M_table.contains_product(pi->currMonomial(), u);
-    if (not already_there) {
-      Monomial * t = new Monomial(pi->currMonomial());
-      (*t) *= u;
-      M_table.add_monomial(t);
-      M_builder.emplace(t, nullptr);
-    }
+    Monomial * t = new Monomial(pi->currMonomial());
+    (*t) *= u;
+    find_position(t2, M_build.end(), r2, *t);
+    if (t2 == M_build.end()) {
+      M_build.push_back(t);
+      R_build.push_back(nullptr);
+    } else if (**t2 != *t) {
+      M_build.insert(t2, t);
+      R_build.insert(r2, nullptr);
+    } else delete t;
     pi->moveRight();
   }
   delete pi;
@@ -194,7 +227,7 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
-  for (auto t : M_builder) delete t.first;
+  for (auto t : M_build) delete t;
 }
 
 void F4_Reduction_Data::print_row(unsigned i)  {
@@ -310,7 +343,7 @@ void F4_Reduction_Data::build_reducer(vector<COEF_TYPE> & buffer, unsigned mi) {
   // build needed subreducers first
   // we do this recursively, building only from right-to-left, to save space
   while (gi->canMoveRight()) gi->moveRight(); // don't try to reduce by self
-  while (gi->currMonomial() != u) {
+  while (gi->currMonomial() != g->leading_monomial()) {
     auto j = M_table.lookup_product(gi->currMonomial(), v);
     red_lock[j].lock();
     if (R[j] != nullptr and R_built[j].size() == 0)

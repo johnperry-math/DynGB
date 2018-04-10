@@ -31,8 +31,6 @@
 using std::set;
 #include <list>
 using std::list;
-#include <map>
-using std::map;
 #include <vector>
 using std::vector;
 #include <cstdlib>
@@ -51,23 +49,6 @@ using std::mutex;
     with respect to the ordering already assigned to its polynomials
 */
 list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F);
-
-/**
-  @brief used to compare monomials for STL containers such as @c map
-*/
-struct MonCmp {
-  /**
-    @brief returns @c true iff the monomial pointed to by @p t is smaller than
-      the monomial pointed to by @p u
-    @param t monomial we're comparing
-    @param u monomial we're comparing
-    @return @c true iff the monomial pointed to by @p t is smaller than
-      the monomial pointed to by @p u
-  */
-  bool operator() (const Monomial * t, const Monomial * u) const {
-    return *t < *u;
-  }
-};
 
 /**
   @brief Implementation of Faug&egrave;re&rsquo;s F4 algorithm.
@@ -102,13 +83,29 @@ public:
       const list<Abstract_Polynomial *> & B
   );
   /**
-    @brief adds monomials of @f$ ug @f$ to @c M_builder
+    @brief adds monomials of @f$ ug @f$ to @c M_build
+    @details
+      If @c g is an s-polynomial generator, set the flag to @c true,
+      @c ti to the beginning of @c M_build, @c ri to the beginning of @c R_build,
+      and @c u to the first multiple in the critical pair.
+      Setting the flag to @c true signals that @c ti and @c ri are not at the
+      correct insertion point, so the function needs to find this point.
+      In this case, @c ti and @c ri will change.
+
+      If @c g is not a generator, then @c ti and @c ri should point
+      to appropriate locations for the monomial divisible by
+      the leading term of @c g. The algorithm advances both a copy of @c ti
+      and an iterator on @c g to insert new monomials.
+      In this case, the algorithm modifies neither @c ti nor @c ri.
+    @param ti iterator through @c M_build; see details for more information
+    @param ri iterator through @c R_build; see details for more information
     @param g polynomial, such as an s-polynomial generator or a reducer
     @param u monomial to multiply to @p g to add monomials
-    @param new_row if @c true, adds the leading monomial; otherwise, adds only
-        trailing monomials
+    @param new_row whether @p g is adding a new row to the basis
   */
   void add_monomials(
+      list<Monomial *>::iterator & ti,
+      list<Abstract_Polynomial *>::iterator & ri,
       const Abstract_Polynomial *g,
       const Monomial & u,
       bool new_row = false
@@ -175,10 +172,6 @@ public:
     @brief prints the indicated row of the matrix as an unformatted polynomial
   **/
   void print_row(unsigned);
-  /**
-    @brief prints the pairs of monomials and reducers that are being built
-  **/
-  void print_builder();
   ///@}
 protected:
   /*void check_consistency() {
@@ -291,8 +284,10 @@ protected:
   vector<vector<pair<unsigned, COEF_TYPE> > > A;
   /** @brief buffers for rows of A during reduction; one per thread */
   vector<vector<COEF_TYPE> > A_buf;
-  /** @brief storage of monomials and reducers while preprocessing */
-  map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
+  /** @brief monomials while building */
+  list<Monomial *> M_build;
+  /** @brief indices of reducers for the corresponding elements of @c M */
+  list<Abstract_Polynomial *> R_build;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
   vector<Abstract_Polynomial *> R;
   /** @brief reducers actually generated */
