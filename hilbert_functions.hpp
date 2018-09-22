@@ -81,22 +81,36 @@ Dense_Univariate_Integer_Polynomial * solve_one_base_case(
   @ingroup commalg
   @brief test for the &ldquo;splitting case&rdquo; @cite Bigatti97
   @param T list of generators of monomial ideal
-  @return index of an entry of @c T that is coprime to the rest
-  @details If result is <c>T.end()</c>, this is not a splitting case.
+  @param U empty list of iterators on T; will be modified
+  @param V empty list of iterators on T; will be modified
+  @return @c true if and only if @p T can be split into two lists
+    of relatively prime monomials
+  @details If the result is @c true, the monomials indexed by iterators in @p U
+    should be relatively prime to the monomials indexed by iterators in @c V.
+  @warning If the result is @c false, disregard the entries of @c U and @c V.
 */
-list<Monomial>::const_iterator is_splitting_case(const list<Monomial> & T);
+bool is_splitting_case(
+    const list<Monomial> & T,
+    list< list<Monomial>::const_iterator > & U,
+    list< list<Monomial>::const_iterator > & V
+);
 
 /**
   @ingroup commalg
   @brief applies Bigatti&rsquo;s algorithm for the 1-base case
   @param T list of generators of monomial ideal
-  @param ti index of a term in @c T which is coprime to the rest
+  @param U list of iterators indexing elements of @p T
+  @param V list of iterators indexing elements of @p U
   @param grading use for a graded polynomial ring
   @return the Hilbert numerator for the splitting case @cite Bigatti97
   @details If you do not want to use a grading, set it to @c nullptr.
+  @warning The entries of @p U @p V need to be relatively prime
+    to the entries of @p V; otherwise the result is wrong.
 */
 Dense_Univariate_Integer_Polynomial * solve_splitting_case(
-    const list<Monomial> & T, list<Monomial>::const_iterator ti,
+    const list<Monomial> & T,
+    const list< list<Monomial>::const_iterator > & U,
+    const list< list<Monomial>::const_iterator > & V,
     const WT_TYPE * grading
 );
 

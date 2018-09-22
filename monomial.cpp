@@ -25,20 +25,6 @@ using std::mutex;
 
 #include "monomial.hpp"
 
-#if EPACK
-  #define MASKALL 0b1111111111111111111111111111111111111111111111111111111111111111
-  const uint64_t MASK [] = {
-    0b0000000000000000000000000000000000000000000000000000000011111111,
-    0b0000000000000000000000000000000000000000000000001111111100000000,
-    0b0000000000000000000000000000000000000000111111110000000000000000,
-    0b0000000000000000000000000000000011111111000000000000000000000000,
-    0b0000000000000000000000001111111100000000000000000000000000000000,
-    0b0000000000000000111111110000000000000000000000000000000000000000,
-    0b0000000011111111000000000000000000000000000000000000000000000000,
-    0b1111111100000000000000000000000000000000000000000000000000000000
-  };
-#endif
-
 /**
   @brief memory manager for monomial exponents
   @ingroup memorygroup
@@ -72,12 +58,11 @@ void Monomial::operator delete(void *t) {
 
 void Monomial::initialize_exponents(NVAR_TYPE number_of_vars) {
   n = number_of_vars;
+  make_last_invalid();
   //moda_mutex.lock();
-  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n, "moda");
+  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(2*n, "moda");
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
-  for (NVAR_TYPE i = 0; i < n; ++i) exponents[i] = 0;
-  mask = 0;
 }
 
 void Monomial::deinitialize() {
@@ -87,19 +72,97 @@ void Monomial::deinitialize() {
   if (ordering_data != nullptr) delete ordering_data;
 }
 
-void Monomial::set_exponent(NVAR_TYPE i, DEG_TYPE e) {
-  exponents[i] = e;
-  if (e == 0) {
-    mask &= ~ (1 << i);
-    #if EPACK
-    if (i < NPACK) emask &= ~MASK[i];
-    #endif
+Exponent_Location Monomial::find_exponent(NVAR_TYPE i) const {
+  Exponent_Location result;
+  if (not valid_exponents()) {
+    // no exponents have been initialized, so it is not already set
+    result.loc = 0;
+    result.already_set = false;
+  } else {
+    result.loc = last;
+    result.already_set = false;
+    NVAR_TYPE k = 0;
+    while (k < last) {
+      if (exponents[k] < i) k += 2;
+      else {
+        result.loc = k;
+        result.already_set = (exponents[k] == i);
+        break;
+      }
+    }
   }
-  else {
-    mask |= (1 << i);
-    #if EPACK
-    if (i < NPACK) emask |= (MASK[i] & (((uint64_t )((PACKSIZE )e)) << (i*NPACK)));
-    #endif
+  /*  NVAR_TYPE start = 0, stop = (valid_exponents()) ? last : start;
+    NVAR_TYPE k = (start + stop) / 2;
+    if (k % 2 == 1) k -= 1;
+    bool searching = start != stop;
+    while (searching) {
+      if (exponents[k] == i) {
+        start = stop = k;
+        searching = false;
+      } else if (exponents[k] < i) {
+        start = k;
+        k += (stop - k) / 2;
+        if (k % 2 == 1) k -= 1;
+        searching = k != start;
+      } else {
+        stop = k;
+        k /= 2;
+        if (k % 2 == 1) k -= 1;
+        searching = k != start;
+      }
+    }
+    if (k == last or exponents[k] == i) {
+      result.loc = k;
+      result.already_set = k != last;
+    } else {
+      result.loc = k + 2;
+      result.already_set = false;
+    }
+  }*/
+  return result;
+}
+
+void Monomial::shift_exponents_right(NVAR_TYPE i) {
+  for (NVAR_TYPE k = last; k > i; k -= 2) {
+    exponents[k] = exponents[k - 2];
+    exponents[k + 1] = exponents[k - 1];
+  }
+  last += 2;
+}
+
+void Monomial::compress() {
+  NVAR_TYPE d = 0; // distance to move each entry
+  NVAR_TYPE i = 0;
+  for (/* already initialized */; i < last; /* */) {
+    if (d != 0) {
+      exponents[i] = exponents[i + d];
+      exponents[i + 1] = exponents[i + d + 1];
+    }
+    if (exponents[i + 1] != 0)
+      i += 2;
+    else {
+      d += 2;
+      last -= 2;
+    }
+  }
+  if (i == 0) make_last_invalid();
+  else last = i;
+}
+
+void Monomial::set_exponent(NVAR_TYPE i, DEG_TYPE e) {
+  if (not valid_exponents()) {
+    last = 2;
+    exponents[0] = i;
+    exponents[1] = e;
+  } else {
+    auto pos = find_exponent(i);
+    if (pos.already_set) { exponents[pos.loc] = e; }
+    else {
+      auto k = pos.loc;
+      shift_exponents_right(k);
+      exponents[k] = i;
+      exponents[k + 1] = e;
+    }
   }
 }
 
@@ -109,49 +172,92 @@ Monomial::Monomial(
   common_initialization(order);
   initialize_exponents(number_of_vars);
   ordering->set_data(*this);
-  mask = 0;
-  #if EPACK
-  emask = 0;
-  #endif
+}
+
+void Monomial::make_product_or_quotient(
+    const Monomial & t, const Monomial & u, bool product
+) {
+  n = t.n;
+  last = 0;
+  exponents = moda->get_new_block();
+  auto te = t.exponents, ue = u.exponents;
+  NVAR_TYPE i = 0, j = 0;
+  if (product) {
+    for (/* already initialized */; i < t.last and j < u.last; last += 2) {
+      if (t.exponents[i] == u.exponents[j]) {
+        exponents[last] = t.exponents[i];
+        exponents[last + 1] = t.exponents[i + 1] + u.exponents[j + 1];
+        i += 2;
+        j += 2;
+      } else if (t.exponents[i] < u.exponents[j]) {
+        exponents[last] = t.exponents[i];
+        exponents[last + 1] = t.exponents[i + 1];
+        i += 2;
+      }
+      else {
+        exponents[last] = u.exponents[j];
+        exponents[last + 1] = u.exponents[j + 1];
+        j += 2;
+      }
+    }
+    for (/* */; i < t.last; last += 2) {
+      exponents[last] = t.exponents[i];
+      exponents[last + 1] = t.exponents[i + 1];
+      i += 2;
+    }
+    for (/* */; j < u.last; last += 2) {
+      exponents[last] = u.exponents[j];
+      exponents[last + 1] = u.exponents[j + 1];
+      j += 2;
+    }
+  } else {
+    for (/* already initialized */; i < t.last and j < u.last; last += 2) {
+      if (t.exponents[i] == u.exponents[j]) {
+        exponents[last] = t.exponents[i];
+        exponents[last + 1] = t.exponents[i + 1] - u.exponents[j + 1];
+        i += 2;
+        j += 2;
+      } else if (t.exponents[i] < u.exponents[j]) {
+        exponents[last] = t.exponents[i];
+        exponents[last + 1] = t.exponents[i + 1];
+        i += 2;
+      }
+      else {
+        /* this should never happen! */
+        exponents[last] = u.exponents[j];
+        exponents[last + 1] = -u.exponents[j + 1];
+        j += 2;
+      }
+    }
+    for (/* */; i < t.last; last += 2) {
+      exponents[last] = t.exponents[i];
+      exponents[last + 1] = t.exponents[i + 1];
+      i += 2;
+    }
+    for (/* */; j < u.last; last += 2) {
+      /* this loop should never happen! */
+      exponents[last] = u.exponents[j];
+      exponents[last + 1] = -u.exponents[j + 1];
+      j += 2;
+    }
+    compress();
+  }
+  ordering->set_data(*this); 
 }
 
 Monomial::Monomial(const Monomial & t, const Monomial & u, bool product) {
   common_initialization(t.ordering);
-  n = t.n;
-  if (product) mask = t.mask | u.mask;
-  else mask = t.mask;
-  #if EPACK
-  emask = t.emask + u.emask;
-  #endif
-  exponents = moda->get_new_block();
-  NVAR_TYPE i;
-  if (product) {
-    for (i = 0; i + 1 < n; i += 2) {
-      exponents[i] = t.exponents[i] + u.exponents[i];
-      exponents[i + 1] = t.exponents[i + 1] + u.exponents[i + 1];
-    }
-    if (n % 2) exponents[i + 1] = t.exponents[i + 1] + u.exponents[i + 1];
-  } else {
-    for (i = 0; i + 1 < n; i += 2) {
-      exponents[i] = t.exponents[i] - u.exponents[i];
-      exponents[i + 1] = t.exponents[i + 1] - u.exponents[i + 1];
-    }
-    if (n % 2) exponents[i + 1] = t.exponents[i + 1] - u.exponents[i + 1];
-  }
-  ordering->set_data(*this); 
+  make_product_or_quotient(t, u, product);
 }
 
 Monomial::Monomial(const Monomial &other) {
   common_initialization(other.ordering);
   n = other.n;
-  mask = other.mask;
-  #if EPACK
-  emask = other.emask;
-  #endif
+  last = other.last;
   //moda_mutex.lock();
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
-  memcpy(exponents, other.exponents, n*sizeof(EXP_TYPE));
+  memcpy(exponents, other.exponents, last*sizeof(EXP_TYPE));
   ordering_data = (other.ordering_data == nullptr) ? nullptr
       : ordering_data = other.monomial_ordering_data()->clone();
   ord_degree = other.ord_degree;
@@ -161,23 +267,18 @@ Monomial::Monomial(
     initializer_list<EXP_TYPE> powers, const Monomial_Ordering * order
 ) {
   common_initialization(order);
-  mask = 0;
-  #if EPACK
-  emask = 0;
-  #endif
   initialize_exponents(powers.size());
   NVAR_TYPE i = 0;
+  last = 0;
   for (
        auto pi = powers.begin();
        pi != powers.end();
        ++pi
   ) {
-    exponents[i] = *pi;
     if (*pi != 0) {
-      mask |= (1 << i);
-      #if EPACK
-      if (i < NPACK) emask |= (MASK[i] & (((uint64_t )((PACKSIZE )exponents[i])) << (i*NPACK)));
-      #endif
+      exponents[last] = i;
+      exponents[last + 1] = *pi;
+      last += 2;
     }
     ++i;
   }
@@ -189,21 +290,16 @@ Monomial::Monomial(
 ) {
   common_initialization(order);
   n = size;
-  mask = 0;
-  #if EPACK
-  emask = 0;
-  #endif
+  last = 0;
   //moda_mutex.lock();
-  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(n, "moda");
+  if (moda == nullptr) moda = new Grading_Order_Data_Allocator<EXP_TYPE>(2*n, "moda");
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
   for (NVAR_TYPE i = 0; i < n; ++i) {
-    exponents[i] = powers[i];
-    if (exponents[i] != 0) {
-      mask |= (1 << i);
-      #if EPACK
-      if (i < NPACK) emask |= (MASK[i] & (((uint64_t )((PACKSIZE )exponents[i])) << (i*NPACK)));
-      #endif
+    if (powers[i] != 0) {
+      exponents[last] = i;
+      exponents[last + 1] = powers[i];
+      last += 2;
     }
   }
   ordering->set_data(*this);
@@ -218,37 +314,33 @@ Monomial::~Monomial() {
 }
 
 bool Monomial::is_one() const {
-  bool result = true;
-  for (NVAR_TYPE i = 0; result and i < n; ++i)
-    result = result and exponents[i] == 0;
-  return result;
+  return not valid_exponents();
 }
 
 DEG_TYPE Monomial::degree(NVAR_TYPE i) const {
-  //if (i < n) return exponents[i]; else return 0;
-  return exponents[i];
+  auto pos = find_exponent(i);
+  return (pos.already_set) ? exponents[pos.loc + 1] : 0;
 }
 
 DEG_TYPE Monomial::operator[](NVAR_TYPE i) const { return degree(i); }
 
 DEG_TYPE Monomial::total_degree(NVAR_TYPE m) const {
   DEG_TYPE result = 0;
-  m = ( m == 0 or m > n ) ? n : m;
-  if (exponents != nullptr)
-    for (NVAR_TYPE i = 0; i < m; ++i)
-      result += exponents[i];
+  if (m == 0) m = n;
+  for (NVAR_TYPE i = 0; i < last and exponents[i] < m; i += 2)
+    result += exponents[i + 1];
   return result;
 };
 
 DEG_TYPE Monomial::weighted_degree(const WT_TYPE *weights, NVAR_TYPE m)
 const {
   DEG_TYPE result = 0;
-  m = ( m == 0 or m > n ) ? n : m;
+  if (m == 0) m = n;
   if (weights == nullptr)
     result = total_degree();
-  else if (exponents != nullptr)
-    for (NVAR_TYPE i = 0; i < m; ++i)
-      result += weights[i]*exponents[i];
+  else
+    for (NVAR_TYPE i = 0; i < last and exponents[i] < m; i += 2)
+      result += weights[exponents[i]]*exponents[i + 1];
   return result;
 }
 
@@ -266,17 +358,10 @@ void Monomial::set_ordering_data(Monomial_Order_Data * mordat) {
 }
 
 bool Monomial::operator ==(const Monomial &other) const {
-  bool result = (n == other.n) and (mask == other.mask)
-      #if EPACK
-      and (emask == other.emask)
-      #endif
-  ;
-  #if !EPACK
-  for (NVAR_TYPE i = 0; result and i < n; ++i)
-  #else
-  for (NVAR_TYPE i = NPACK; result and i < n; ++i)
-  #endif
-    result = result and exponents[i] == other.exponents[i];
+  bool result = (n == other.n) and (last == other.last);
+  for (NVAR_TYPE i = 0; result and i < last; i += 2)
+    result = exponents[i] == other.exponents[i]
+        and exponents[i+1] == other.exponents[i+1];
   return result;
 }
 
@@ -285,31 +370,63 @@ bool Monomial::operator !=(const Monomial &other) const {
 }
 
 bool Monomial::is_coprime(const Monomial &other) const {
-  return (mask & other.mask) == 0;
+  bool result = true;
+  NVAR_TYPE i = 0, j = 0;
+  auto oe = other.exponents;
+  for (/* already initialized */; result and i < last and j < other.last; /* */) {
+    auto a = exponents[i], b = oe[j];
+    result = a != b;
+    if (result) {
+      if (a < b) i += 2;
+      else if (a > b) j += 2;
+    }
+  }
+  return result;
 }
 
 bool Monomial::is_like(const Monomial &other) const { return *this == other; }
 
 bool Monomial::like_multiple(const EXP_TYPE * e, const Monomial & v) const {
-  bool result = (n == v.n);
+  bool result = (n == v.n) and (last == v.last);
   auto ve = v.exponents;
-  for (NVAR_TYPE i = 0; result and i < n; ++i)
-    result = exponents[i] == e[i] + ve[i];
+  for (NVAR_TYPE i = 0; result and i < last; i += 2)
+    result = exponents[i] == ve[i]
+        and exponents[i+1] == ve[i+1] + e[exponents[i]];
   return result;
 }
 
 bool Monomial::like_multiple(const Monomial &u, const Monomial &v) const {
-  bool result = (n == u.n and n == v.n) and (mask == (u.mask | v.mask))
-      #if EPACK
-      and (emask == (u.emask + v.emask))
-      #endif
-      ;
-  #if !EPACK
-  for (NVAR_TYPE i = 0; result and i < n; ++i)
-  #else
-  for (NVAR_TYPE i = NPACK; result and i < n; ++i)
-  #endif
-    result = result and exponents[i] == u.exponents[i] + v.exponents[i];
+  bool result = (n == u.n and n == v.n);
+  auto ue = u.exponents, ve = v.exponents;
+  NVAR_TYPE i = 0, j = 0, k = 0;
+  for (
+        /* already initialized */;
+        result and i < last and j < u.last and k < v.last;
+        /* */
+  ) {
+    if (exponents[i] == ue[j]) {
+      if (exponents[i] != ve[k]) {
+        result = exponents[i+1] == ue[j+1];
+        i += 2; j += 2;
+      } else {
+        result = exponents[i+1] + ue[j+1] + ve[k+1];
+        i += 2; j += 2; k += 2;
+      }
+    } else if (exponents[i] == ve[k]) {
+      result = exponents[i+1] == ve[k+1];
+      i += 2; k += 2;
+    } else
+      result = false;
+  }
+  for (/* */; result and i < last and j < u.last; /* */) {
+    result = (exponents[i] == ue[j]) and (exponents[i+1] == ue[j+1]);
+    i += 2; j += 2;
+  }
+  for (/* */; result and i < last and k < v.last; /* */) {
+    result = (exponents[i] == ve[k]) and (exponents[i+1] == ve[k+1]);
+    i += 2; k += 2;
+  }
+  result = result and (i == last) and (j == u.last) and (k == v.last);
   return result;
 }
 
@@ -329,17 +446,21 @@ bool Monomial::larger_than_multiple(
 }
 
 bool Monomial::divisible_by(const Monomial &other) const {
-  bool result = (n == other.n) and (((~ mask) & other.mask) == 0);
-  #if !EPACK
-  for (NVAR_TYPE i = 0; result and i < n; ++i)
-    result = result and exponents[i] >= other.exponents[i];
-  #else
-  for (NVAR_TYPE i = 0; result and i < NPACK; ++i)
-    result = result
-  and ((emask & MASK[i]) >= (other.emask & MASK[i]));
-  for (NVAR_TYPE i = NPACK; result and i < n; ++i)
-    result = result and exponents[i] >= other.exponents[i];
-  #endif
+  bool result = (n == other.n);
+  NVAR_TYPE i = 0, j = 0;
+  auto oe = other.exponents;
+  for (/* already initialized */; result and i < last and j < other.last; /* */)
+  {
+    if (exponents[i] == oe[j]) {
+      result = exponents[i+1] >= oe[j+1];
+      i += 2;
+      j += 2;
+    } else if (exponents[i] < oe[j])
+      i += 2;
+    else
+      result = false;
+  }
+  result = result and j == other.last;
   return result;
 }
 
@@ -350,18 +471,18 @@ bool Monomial::operator |(const Monomial &other) const {
 Monomial & Monomial::operator =(const Monomial &other) {
   if (this != &other)
   {
-    mask = other.mask;
-    #if EPACK
-    emask = other.emask;
-    #endif
+    last = other.last;
     if (other.n > n) {
       moda->return_used_block(exponents);
       //exponents = new EXP_TYPE [other.n];
       exponents = moda->get_new_block();
       n = other.n;
     }
-    for (NVAR_TYPE i = 0; i < n; ++i)
-      exponents[i] = other.exponents[i];
+    auto oe = other.exponents;
+    for (NVAR_TYPE i = 0; i < last; i += 2) {
+      exponents[i] = oe[i];
+      exponents[i+1] = oe[i+1];
+    }
     ordering = other.ordering;
     if (ordering_data != nullptr) {
       delete ordering_data;
@@ -373,102 +494,220 @@ Monomial & Monomial::operator =(const Monomial &other) {
 }
 
 Monomial & Monomial::operator *=(const Monomial &other) {
-  mask |= other.mask;
-  #if EPACK
-  emask += other.emask;
-  #endif
-  NVAR_TYPE i;
-  for (i = 0; i + 1 < n; i += 2) {
-    exponents[i] += other.exponents[i];
-    exponents[i + 1] += other.exponents[i + 1];
+  static EXP_TYPE * buffer = nullptr;
+  if (buffer == nullptr) buffer = moda->get_new_block();
+  NVAR_TYPE i = 0, j = 0, k = 0;
+  auto oe = other.exponents;
+  for (/* already initialized */; i < last and j < other.last; /* */) {
+    if (exponents[i] == oe[j]) {
+      buffer[k] = exponents[i];
+      buffer[k+1] = exponents[i+1] + oe[j+1];
+      i += 2;
+      j += 2;
+      k += 2;
+    } else if (exponents[i] < oe[j]) {
+      buffer[k] = exponents[i];
+      buffer[k+1] = exponents[i+1];
+      i += 2;
+      k += 2;
+    } else {
+      buffer[k] = oe[j];
+      buffer[k+1] = oe[j+1];
+      j += 2;
+      k += 2;
+    }
   }
-  if (n % 2) exponents[i] += other.exponents[i];
+  for (/* */; i < last; /* */) {
+    buffer[k] = exponents[i];
+    buffer[k+1] = exponents[i+1];
+    i += 2;
+    k += 2;
+  }
+  for (/* */; j < other.last; /* */) {
+    buffer[k] = oe[j];
+    buffer[k+1] = oe[j+1];
+    j += 2;
+    k += 2;
+  }
+  auto tmp = exponents;
+  exponents = buffer;
+  buffer = tmp;
+  last = k;
   ordering->set_data(*this);
   return *this;
 }
 
 Monomial Monomial::operator *(const Monomial & other) const {
   Monomial u(n);
-  for (NVAR_TYPE i = 0; i < n; ++i)
-    u.set_exponent(i, exponents[i] + other.exponents[i]);
-  u.mask = mask | other.mask;
+  NVAR_TYPE i = 0, j = 0, k = 0;
+  auto oe = other.exponents, ue = u.exponents;
+  for (/* already initialized */; i < last and j < other.last; /* */) {
+    if (exponents[i] == oe[j]) {
+      ue[k] = exponents[i];
+      ue[k+1] = exponents[i+1] + oe[j+1];
+      i += 2;
+      j += 2;
+      k += 2;
+    } else if (exponents[i] < oe[j]) {
+      ue[k] = exponents[i];
+      ue[k+1] = exponents[i+1];
+      i += 2;
+      k += 2;
+    } else {
+      ue[k] = oe[j];
+      ue[k+1] = oe[j+1];
+      j += 2;
+      k += 2;
+    }
+  }
+  for (/* */; i < last; i += 2) {
+    ue[k] = exponents[i];
+    ue[k+1] = exponents[i+1];
+    i += 2;
+    k += 2;
+  }
+  for (/* */; j < other.last; j += 2) {
+    ue[k] = oe[j];
+    ue[k+1] = oe[j+1];
+    j += 2;
+    k += 2;
+  }
+  u.last = k;
   ordering->set_data(u);
+  return u;
+}
+
+Monomial Monomial::operator *(const Indeterminate & other) const {
+  Monomial u(n);
+  auto i = other.index_in_ring();
+  auto ue = u.exponents;
+  NVAR_TYPE k = 0;
+  for (/* already initialized */; k < last and exponents[k] < i; k += 2) {
+    ue[k] = exponents[k];
+    ue[k+1] = exponents[k+1];
+  }
+  if (k < last and exponents[k] == i)
+    ++ue[k+1];
+  else {
+    ue[k] = i;
+    ue[k+1] = 1;
+  }
+  k += 2;
+  for (/* */; k - 2 < last; k += 2) {
+    ue[k] = exponents[k - 2];
+    ue[k + 1] = exponents[k - 1];
+  }
+  u.last = k;
+  u.ordering->set_data(u);
   return u;
 }
 
 bool Monomial::operator /=(const Monomial &other) {
   bool result = (n == other.n);
-  #if EPACK
-  emask -= other.emask;
-  #endif
-  if (result)
-    for (NVAR_TYPE i = 0; i < n; ++i) {
-      exponents[i] -= other.exponents[i];
-      if (exponents[i] == 0) mask &= ~(1 << i);
+  if (result) {
+    NVAR_TYPE i = 0, j = 0;
+    auto oe = other.exponents;
+    for (/* already initialized */; j < other.last; /* */) {
+      if (exponents[i] == oe[j]) {
+        exponents[i+1] -= oe[j+1];
+        i += 2;
+        j += 2;
+      } else // should only have exponents[i] < oe[j] here
+        i += 2;
     }
+  }
+  compress();
   ordering->set_data(*this);
   return result;
 }
 
 Monomial Monomial::lcm(const Monomial & u) const {
    Monomial result(n, monomial_ordering());
-   result.mask = mask | u.mask;
-   #if EPACK
-   result.emask = emask;
-   #endif
    result.set_monomial_ordering(monomial_ordering());
-   for (NVAR_TYPE i = 0; i < n; ++i)
-     if (exponents[i] >= u.exponents[i]) result.exponents[i] = exponents[i];
-     else {
-       result.exponents[i] = u.exponents[i];
-       #if EPACK
-       if (i < NPACK) {
-         result.emask &= ~MASK[i];
-         result.emask |= ((((uint64_t )((PACKSIZE )u.exponents[i])) << (i*NPACK)) & MASK[i]);
-       }
-       #endif
+   NVAR_TYPE i = 0, j = 0, k = 0;
+   auto ue = u.exponents, re = result.exponents;
+   for (/* already initialized */; i < last and j < u.last; /* */)
+     if (exponents[i] == ue[j]) {
+       re[k] = exponents[i];
+       re[k+1] = (exponents[i+1] > ue[j+1]) ? exponents[i+1] : ue[j+1];
+       i += 2;
+       j += 2;
+       k += 2;
+     } else if (exponents[i] < ue[j]) {
+       re[k] = exponents[i];
+       re[k+1] = exponents[i+1];
+       i += 2;
+       k += 2;
+     } else {
+       re[k] = ue[j];
+       re[k+1] = ue[j+1];
+       j += 2;
+       k += 2;
      }
+   for (/* */; i < last; i += 2) {
+     re[k] = exponents[i];
+     re[k+1] = exponents[i+1];
+     k += 2;
+   }
+   for (/* */; j < u.last; j += 2) {
+     re[k] = ue[j];
+     re[k+1] = ue[j+1];
+     k += 2;
+   }
+   result.last = k;
    ordering->set_data(result);
    return result;
 }
 
 Monomial Monomial::gcd(const Monomial & u) const {
-  Monomial result(n, monomial_ordering());
-  result.mask = mask & u.mask;
-  #if EPACK
-  result.emask = emask;
-  #endif
-  for (NVAR_TYPE i = 0; i < n; ++i)
-    if (exponents[i] <= u.exponents[i]) { result.exponents[i] = exponents[i]; }
-    else {
-      result.exponents[i] = u.exponents[i];
-      #if EPACK
-      if (i < NPACK) {
-        result.emask &= ~MASK[i];
-        result.emask |= ((((uint64_t )((PACKSIZE )u.exponents[i])) << (i*NPACK)) & MASK[i]);
-      }
-      #endif
-    }
-  ordering->set_data(result);
-  return result;
+   Monomial result(n, monomial_ordering());
+   result.set_monomial_ordering(monomial_ordering());
+   NVAR_TYPE i = 0, j = 0, k = 0;
+   auto ue = u.exponents, re = result.exponents;
+   for (/* already initialized */; i < last and j < u.last; /* */)
+   if (exponents[i] == ue[j]) {
+     re[k] = exponents[i];
+     re[k+1] = (exponents[i+1] < ue[j+1]) ? exponents[i+1] : ue[j+1];
+     i += 2;
+     j += 2;
+     k += 2;
+   } else if (exponents[i] < ue[j])
+     i += 2;
+   else
+     j += 2;
+   result.last = k;
+   ordering->set_data(result);
+   return result;
 }
 
 Monomial Monomial::colon(const Monomial & u) const {
   Monomial result(n, monomial_ordering());
-  result.mask = 0;
-  #if EPACK
-  result.emask = 0;
-  #endif
-  for (NVAR_TYPE i = 0; i < n; ++i)
-    if (exponents[i] <= u.exponents[i])
-      result.exponents[i] = 0;
-    else {
-      result.exponents[i] = exponents[i] - u.exponents[i];
-      result.mask += (1 << i);
-      #if EPACK
-      if (i < NPACK) result.emask |= (((uint64_t )((PACKSIZE )exponents[i])) << (i*NPACK)) & MASK[i];
-      #endif
+  result.set_monomial_ordering(monomial_ordering());
+  NVAR_TYPE i = 0, j = 0, k = 0;
+  auto ue = u.exponents, re = result.exponents;
+  for (/* already initialized */; i < last and j < u.last; /* */)
+    if (exponents[i] == ue[j]) {
+      if (exponents[i+1] > ue[j+1]) {
+        re[k] = exponents[i];
+        re[k+1] = exponents[i+1] - ue[j+1];
+        k += 2;
+      }
+      i += 2;
+      j += 2;
+    } else if (exponents[i] > ue[j]) {
+      j += 2;
+    } else {
+      re[k] = exponents[i];
+      re[k+1] = exponents[i+1];
+      i += 2;
+      k += 2;
     }
+  for (/* */; i < last; i += 2) {
+    re[k] = exponents[i];
+    re[k+1] = exponents[i+1];
+    k += 2;
+  }
+  result.last = k;
   ordering->set_data(result);
   return result;
 }
@@ -482,32 +721,27 @@ bool Monomial::larger_than(const Monomial & u) const {
   return ordering->first_larger(*this, u);
 }
 
-#define SHOW_MASK false
-#define SHOW_EPACK false
 void Monomial::print(bool add_newline, ostream & os, const string * names) const
 {
   if (is_one()) cout << "1 ";
-  else
-    for (NVAR_TYPE i = 0; i < n; ++i)
-      if (exponents[i] != 0)
+  else {
+    bool first_printed = false;
+    for (NVAR_TYPE i = 0; i < last; i += 2)
+      if (exponents[i+1] != 0)
       {
-        if (names == nullptr)
-          os << "x" << i;
+        if (first_printed)
+          cout << "* ";
         else
-          os << names[i];
-        if (exponents[i] != 1)
-          os << "^" << exponents[i];
+          first_printed = true;
+        if (names == nullptr)
+          os << 'x' << exponents[i];
+        else
+          os << names[exponents[i]];
+        if (exponents[i+1] != 1)
+          os << '^' << exponents[i+1];
         os << ' ';
       }
-  #if SHOW_MASK
-  os << '(' << mask << ')';
-  #endif
-  #if SHOW_EPACK
-  os << '(';
-  for (NVAR_TYPE i = 0; i < NPACK; ++i)
-    os << std::bitset<NPACK>(((emask & MASK[i]) >> (i*NPACK))) << ' ';
-  os << ')';
-  #endif
+  }
   if (add_newline)
     os << endl;
 }

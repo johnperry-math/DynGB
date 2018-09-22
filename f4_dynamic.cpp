@@ -265,14 +265,12 @@ void F4_Reduction_Data::add_monomials(
   if (not new_row) pi->moveRight();
   //monomials_processed += g->length();
   while (not (pi->fellOff())) {
-    time_t start = time(nullptr);
     bool already_there = M_table.contains_product(pi->currMonomial(), u);
-    time_t end = time(nullptr);
-    emplace_time += difftime(end, start);
     if (not already_there) {
       Monomial * t = new Monomial(pi->currMonomial());
       t->set_monomial_ordering(curr_ord);
       (*t) *= u;
+      cout << "adding " << pi->currMonomial() << " * " << u << " = " << *t << endl;
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
@@ -410,8 +408,7 @@ void F4_Reduction_Data::reduce_my_rows(
               // determine multiplier
               const Monomial & t = *M[mi];
               const Monomial & v = gi->currMonomial();
-              for (NVAR_TYPE l = 0; l < n; ++l)
-                u.set_exponent(l, t[l] - v[l]);
+              u.make_product_or_quotient(t, v, false);
               red_mutex.lock();
               vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
               if (r.size() == 0) { // need to create reducer

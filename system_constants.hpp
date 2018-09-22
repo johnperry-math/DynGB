@@ -33,6 +33,7 @@
 // for monomials
 #define EXP_TYPE uint32_t
 #define NVAR_TYPE uint64_t
+#define MASK_SIZE 256
 
 // size of a degree
 #define DEG_TYPE uint64_t

@@ -25,6 +25,7 @@
 #include "monomial.hpp"
 #include "polynomial_ring.hpp"
 
+class Monomial;
 class Polynomial_Ring;
 
 /**
@@ -81,10 +82,10 @@ public:
   ///@{
 
   /** @brief the Polynomial_Ring @c this lives in */
-  Polynomial_Ring & base_ring() { return *R; }
+  Polynomial_Ring & base_ring() const { return *R; }
 
   /** @brief which variable in base_ring() @c this is*/
-  NVAR_TYPE index_in_ring() { return i; }
+  NVAR_TYPE index_in_ring() const { return i; }
 
   ///@}
 
@@ -97,12 +98,8 @@ public:
   /** @brief returns the product of @c this and @p y */
   Monomial operator *(Indeterminate y);
 
-  /** @brief returns the product of @c this and @p t */
-  Monomial operator *(Monomial t) {
-    Monomial u(t);
-    u.set_exponent(i, u.degree(i) + 1);
-    return u;
-  }
+  /** @brief returns the product of @c this and @p y */
+  Monomial operator *(Monomial t);
 
   ///@}
 

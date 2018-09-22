@@ -22,8 +22,8 @@ using std::cout; using std::endl;
 #include "hilbert_functions.hpp"
 
 int main() {
-  Monomial x0 = { 1, 0, 0, 0, 0, 0 };
-  WT_TYPE wt6 [6] = { 3, 2, 1, 1, 1, 1 };
+  Monomial x0 { 1, 0, 0, 0, 0, 0 };
+  WT_TYPE wt6 [6] { 3, 2, 1, 1, 1, 1 };
   list <Monomial> T0 = { x0 };
   cout << "Hilbert numerator of { " << x0 << "}\n";
   Dense_Univariate_Integer_Polynomial * hn = hilbert_numerator_bigatti(T0);
@@ -46,15 +46,15 @@ int main() {
   cout << "Hilbert polynomial of { " << x0 << "}\n";
   Dense_Univariate_Rational_Polynomial * hp = hilbert_polynomial(6, 0, T0, hn);
   cout << *hp << endl;
-  delete hn; delete hng; delete hngr;
+  delete hn; delete hnr; delete hng; delete hngr;
   delete hp;
   cout << endl; cout << endl;
   //
-  Monomial t = { 5, 0 };
-  Monomial u = { 3, 1 };
-  Monomial v = { 1, 4 };
-  WT_TYPE wt2 [2] = { 5, 3 };
-  list<Monomial> T = { t, u, v };
+  Monomial t { 5, 0 };
+  Monomial u { 3, 1 };
+  Monomial v { 1, 4 };
+  WT_TYPE wt2 [2] { 5, 3 };
+  list<Monomial> T { t, u, v };
   cout << "Hilbert numerator of { " << t << ", " << u << ", " << v << "}\n";
   hn = hilbert_numerator_bigatti(T);
   cout << *hn << endl;
@@ -72,18 +72,18 @@ int main() {
   cout << "Hilbert polynomial of { " << t << ", " << u << ", " << v << "}\n";
   hp = hilbert_polynomial(2, 0, T, hn);
   cout << *hp << endl;
-  delete hn; delete hng; delete hngr;
+  delete hn; delete hnr; delete hng; delete hngr;
   delete hp;
   cout << endl; cout << endl;
   //
-  Monomial t1 = { 0, 2, 0, 0, 0 };
-  Monomial t2 = { 0, 1, 1, 0, 0 };
-  Monomial t3 = { 0, 0, 2, 0, 0 };
-  Monomial t4 = { 0, 1, 0, 1, 0 };
-  Monomial t5 = { 0, 0, 1, 1, 0 };
-  Monomial t6 = { 0, 0, 0, 2, 0 };
-  WT_TYPE wt5 [5] = { 1, 2, 3, 4, 5 };
-  list<Monomial> T1 = { t1, t2, t3, t4, t5, t6 };
+  Monomial t1 { 0, 2, 0, 0, 0 };
+  Monomial t2 { 0, 1, 1, 0, 0 };
+  Monomial t3 { 0, 0, 2, 0, 0 };
+  Monomial t4 { 0, 1, 0, 1, 0 };
+  Monomial t5 { 0, 0, 1, 1, 0 };
+  Monomial t6 { 0, 0, 0, 2, 0 };
+  WT_TYPE wt5 [5] { 1, 2, 3, 4, 5 };
+  list<Monomial> T1 { t1, t2, t3, t4, t5, t6 };
   cout << "Hilbert numerator of { " << t1 << ',' << t2 << ',' << t3 << ','
        << t4 << ',' << t5 << ',' << t6 << "}\n";
   hn = hilbert_numerator_bigatti(T1);
@@ -107,9 +107,56 @@ int main() {
   hngr = hilbert_second_numerator(5, hng, wt5);
   cout << *hngr << endl;
   cout << "Hilbert polynomial:\n";
-  hp = hilbert_polynomial(5, 0, T, hn);
+  hp = hilbert_polynomial(5, 0, T1, hn);
   cout << *hp << endl;
-  delete hn; delete hng; delete hngr;
+  delete hn; delete hnr; delete hng; delete hngr;
   delete hp;
   cout << endl;
+  //
+  Monomial u1 = { 1, 2, 3, 0, 0 };
+  Monomial u2 = { 0, 1, 2, 3, 0 };
+  Monomial u3 = { 0, 0, 1, 2, 3 };
+  Monomial u4 = { 3, 0, 0, 1, 2 };
+  Monomial u5 = { 2, 3, 0, 0, 1 };
+  Monomial u6 = { 3, 2, 1, 0, 0 };
+  Monomial u7 = { 0, 3, 2, 1, 0 };
+  Monomial u8 = { 0, 0, 3, 2, 1 };
+  Monomial u9 = { 1, 0, 0, 3, 2 };
+  Monomial u10 = { 2, 1, 0, 0, 3 };
+  Monomial u11 = { 2, 2, 2, 0, 0 };
+  Monomial u12 = { 0, 2, 2, 2, 0 };
+  Monomial u13 = { 0, 0, 2, 2, 2 };
+  list<Monomial> U1 = { u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13 };
+  cout << "Hilbert numerator of { " << u1 << ',' << u2 << ',' << u3 << ','
+       << u4 << ',' << u5 << ',' << u6 << ',' << u7 << ',' << u8 << ','
+       << u9 << ',' << u10 << ',' << u11 << ',' << u12 << ',' << u13 << "}\n";
+  hn = hilbert_numerator_bigatti(U1);
+  cout << *hn << endl;
+  cout << "Hilbert reduced numerator of { " << u1 << ',' << u2 << ',' << u3 << ','
+       << u4 << ',' << u5 << ',' << u6 << ',' << u7 << ',' << u8 << ','
+       << u9 << ',' << u10 << ',' << u11 << ',' << u12 << ',' << u13 << "}\n";
+  hnr = hilbert_second_numerator(5, hn);
+  cout << *hnr << endl;
+  cout << "Graded Hilbert numerator of { " << u1 << ',' << u2 << ',' << u3 << ','
+       << u4 << ',' << u5 << ',' << u6 << ',' << u7 << ',' << u8 << ','
+       << u9 << ',' << u10 << ',' << u11 << ',' << u12 << ',' << u13 << "}\n";
+  cout << "\t(with grading (";
+  for (unsigned i = 0; i < 5; ++i) cout << wt5[i] << ',';
+  cout << ") )\n";
+  hng = hilbert_numerator_bigatti(U1, wt5);
+  cout << *hng << endl;
+  cout << "Graded Hilbert reduced numerator of { " << u1 << ',' << u2 << ',' << u3 << ','
+       << u4 << ',' << u5 << ',' << u6 << ',' << u7 << ',' << u8 << ','
+       << u9 << ',' << u10 << ',' << u11 << ',' << u12 << ',' << u13 << "}\n";
+  cout << "\t(with grading (";
+  for (unsigned i = 0; i < 5; ++i) cout << wt5[i] << ',';
+  cout << ") )\n";
+  hngr = hilbert_second_numerator(5, hng, wt5);
+  cout << *hngr << endl;
+  cout << "Hilbert polynomial:\n";
+  hp = hilbert_polynomial(5, 0, U1, hn);
+  cout << *hp << endl;
+  delete hn; delete hnr; delete hng; delete hngr;
+  delete hp;
+  cout << endl;  
 }

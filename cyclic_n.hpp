@@ -73,14 +73,17 @@ list<Abstract_Polynomial *> cyclic_n(
     M[i].set_monomial_ordering(mord);
   }
   // ith polynomial for i = 1, ... n-1
+  bool initialized = false;
   for (NVAR_TYPE i = 0; i < n - 1; ++i) {
     // jth monomial...
     for (NVAR_TYPE j = 0; j < n; ++j)
     {
       A[j] = F.unity();
       // clear exponents first...
-      for (NVAR_TYPE k = 0; k < max_n; ++k)
+      /*for (NVAR_TYPE k = 0; k < max_n; ++k)
         M[j].set_exponent(k,0);
+      M[j].compress();*/
+      if (initialized) M[j] /= M[j];
       // set relevant exponents to 1
       for (NVAR_TYPE k = j; k < i + j + 1; ++k)
       {
@@ -88,21 +91,19 @@ list<Abstract_Polynomial *> cyclic_n(
         M[j].set_exponent(l, 1);
       }
     }
+    initialized = true;
     Constant_Polynomial * f = new Constant_Polynomial(n, *R, M, A);
     f->sort_by_order();
     result.push_back(f);
   }
   // last polynomial has a different structure so we can't run it in the loop
-  for (NVAR_TYPE i = 0; i < max_n; ++i) {
-    if (!homog or i < max_n - 1) {
+  M[0] /= M[0];
+  M[1] /= M[1];
+  for (NVAR_TYPE i = 0; i < max_n; ++i)
+    if (!homog or i < max_n - 1)
       M[0].set_exponent(i, 1);
-      M[1].set_exponent(i, 0);
-    }
-    else {
-      M[0].set_exponent(i, 0);
+    else
       M[1].set_exponent(i, n);
-    }
-  }
   M[0].set_monomial_ordering(mord);
   M[0].set_monomial_ordering(mord);
   A[0] = F.unity();

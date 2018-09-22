@@ -19,6 +19,8 @@
 \*****************************************************************************/
 
 #include <string>
+#include <bitset>
+using std::bitset;
 #include <cstdlib>
 #include <iostream>
 #include <initializer_list>
@@ -26,7 +28,10 @@
 #include "system_constants.hpp"
 
 #include "goda.hpp"
+#include "indeterminate.hpp"
 #include "monomial_ordering.hpp"
+
+class Indeterminate;
 
 extern Monomial_Ordering * generic_grevlex_ptr;
 
@@ -39,6 +44,14 @@ using std::string;
 #define EPACK false /** whether to pack exponents */
 #define PACKSIZE uint8_t /** size of packed exponent -- do not change unless you are willing to change MASKALL in <c>.cpp</c> file (and maybe more) */
 #define NPACK sizeof(unsigned long long)/sizeof(PACKSIZE)    /** number of exponents to pack */
+
+/** @brief used to locate a variable's exponent in the Monomial data structure */
+struct Exponent_Location_Struct {
+  NVAR_TYPE loc = 0;
+  bool already_set;
+};
+
+typedef struct Exponent_Location_Struct Exponent_Location;
 
 /**
   @class Monomial
@@ -92,6 +105,15 @@ public:
   Monomial(
       NVAR_TYPE number_of_vars,
       const Monomial_Ordering * order = generic_grevlex_ptr
+  );
+  /**
+    @brief "product" constructor when monomial's expoennts already initialized
+    @param product @c true if and only if we want a product
+    @param t @c Monomial to multiply
+    @param u @c Monomial to multiply
+  */
+  void make_product_or_quotient(
+      const Monomial & t, const Monomial & u, bool product = true
   );
   /**
     @brief "Product" constructor: constructs a product or quotient
@@ -162,8 +184,40 @@ public:
         If @c m is zero (default), computes for all indeterminates.
   */
   DEG_TYPE weighted_degree(const WT_TYPE *weights, NVAR_TYPE m=0) const;
-  /** @brief Direct access to the exponents, for whatever reason. */
-  const EXP_TYPE * log() const { return exponents; }
+  /**
+    @brief access to the exponents, for whatever reason.
+    @return an exponent vector @c e where <c>e[i]</c> is
+      the degree of the monomial in the <c>i</c>th variable
+    @details This is a new array.
+      Clients should delete it once they are done using it.
+  */
+  EXP_TYPE * log() const {
+    EXP_TYPE * result = new EXP_TYPE[n] { 0 };
+    for (NVAR_TYPE i = 0; i < last; i += 2)
+      result[exponents[i]] = exponents[i + 1];
+    return result;
+  }
+  /**
+    @brief access to the exponents, packed;
+      use in conjunction with @c packed_size() and delete result when finished
+    @return array of exponents in the form @f$(i_1,e_1,\ldots,i_k,e_k)@f$
+      such that @f$ x_{i_j}^e_{i_j} @f$ divides @c this
+  */
+  EXP_TYPE * packed_log() const {
+    EXP_TYPE * result = new EXP_TYPE[2*n];
+    for (NVAR_TYPE i = 0; i < last; ++i)
+      result[i] = exponents[i];
+    return result;
+  }
+  /** @brief indicates the size of the result of @c packed_log() */
+  NVAR_TYPE packed_size() const { return last; }
+  /** @brief exponent mask */
+  const bitset<MASK_SIZE> mask() const {
+    bitset<MASK_SIZE> result;
+    for (NVAR_TYPE i = 0; i < last; i += 2)
+      result[exponents[i]] = 1;
+    return result;
+  }
   ///@}
   /**
     @name Comparison
@@ -247,12 +301,16 @@ public:
     Computes something, and may modify <c>this</c>.
   */
   ///@{
+  /** @brief remove zero exponents */
+  void compress();
   /** @brief assignment */
   Monomial & operator =(const Monomial &other);
   /** @brief Multiply <c>this</c> by <c>other</c>. */
   Monomial & operator *=(const Monomial &other);
   /** @brief Return result of <c>this</c> by <c>other</c>. */
   Monomial operator *(const Monomial &other) const;
+  /** @brief Return result of <c>this</c> by <c>other</c>. */
+  Monomial operator *(const Indeterminate &other) const;
   /**
     @brief divide @c this by @p other
     @param other Monomial to divide @c this by
@@ -295,10 +353,20 @@ public:
   void operator delete(void *);
   ///@}
 protected:
+  /** @brief locate the indicated exponent */
+  Exponent_Location find_exponent(NVAR_TYPE) const;
+  /** @brief make the last variable invalid */
+  void make_last_invalid() { last = 0; }
+  /** @brief check if exponents are valid */
+  bool valid_exponents() const { return last > 0; }
+  /** @brief make space for a new exponent, starting at given position */
+  void shift_exponents_right(NVAR_TYPE);
   /** @brief number of variables */
   NVAR_TYPE n;
   /** @brief has size n */
   EXP_TYPE * exponents;
+  /** @brief last valid exponent */
+  NVAR_TYPE last = 0;
   /**
     @brief degree associated with monomial ordering (used for faster comparisons)
   */
@@ -307,12 +375,6 @@ protected:
   const Monomial_Ordering * ordering;
   /** @brief optional data for a monomial ordering */
   Monomial_Order_Data * ordering_data;
-  /** @brief divisibility mask (up to 64 variables)  */
-  uint64_t mask;
-  #if EPACK
-  /** @brief equality mask, a packing of exponents */
-  uint64_t emask;
-  #endif
 };
 
 #endif

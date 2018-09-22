@@ -71,9 +71,7 @@ class F4_Hash {
       @return which table entry contains the list that contains @p t
     */
     size_t get_index(const Monomial & t) {
-      DEG_TYPE index = 0;
-      for (NVAR_TYPE i = 0; i < n; ++i)
-        index += (t[i] * weights[i]) % MAXIMUM;
+      DEG_TYPE index = t.weighted_degree(weights);
       return index % MAXIMUM;
     }
 
@@ -84,7 +82,8 @@ class F4_Hash {
       @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
-      return get_index(t, u.log());
+      DEG_TYPE index = t.weighted_degree(weights) + u.weighted_degree(weights);
+      return index % MAXIMUM;
     }
 
     /**

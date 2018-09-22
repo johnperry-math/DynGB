@@ -39,6 +39,10 @@ ostream & operator << (ostream & os, const Monomial_Ideal & I) {
   return os;
 }
 
+bool first_smaller(const Monomial & t, const Monomial & u) {
+  return t < u;
+}
+
 list<Monomial> colon_ideal_without_ideals(
     const list<Monomial> & U, const Monomial & t
 ) {
@@ -46,26 +50,37 @@ list<Monomial> colon_ideal_without_ideals(
   for (const Monomial & u : U) {
     Monomial tnew = u.colon(t);
     // first prune from V monomials that tnew divides
-    bool redundant = false;
+    /*bool redundant = false;
     for (
           list<Monomial>::const_iterator vi = V.begin();
           vi != V.end();
-          ++vi
-    ) {
-      if ((not redundant) and tnew.divisible_by(*vi))
-        redundant = true; 
-      while (
-              vi != V.end() and (not tnew.is_like(*vi))
-                  and vi->divisible_by(tnew)
+          /* */
+    /*) {
+      if (tnew.divisible_by(*vi)) redundant = true;
+      if (not redundant and vi->divisible_by(tnew)
       ) {
-        list<Monomial>::const_iterator wi = vi; ++wi;
+        list<Monomial>::const_iterator wi { vi }; ++wi;
         V.erase(vi);
         vi = wi;
-      }
+      } else
+        ++vi;
     }
     // check that tnew not divisible by anything in V
-    if (not redundant)
+    if (not redundant)*/
       V.push_back(tnew);
+  }
+  V.sort(first_smaller);
+  for (auto vi = V.begin(); vi != V.end(); ++vi) {
+    auto ui { vi };
+    for (++ui; ui != V.end(); /* */) {
+      if (ui->divisible_by(*vi)) {
+        auto wi { ui };
+        ++wi;
+        V.erase(ui);
+        ui = wi;
+      } else
+        ++ui;
+    }
   }
   return V;
 }

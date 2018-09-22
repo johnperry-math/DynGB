@@ -24,8 +24,10 @@
 #include <cstring>
 #include <iostream>
 #include <algorithm>
+#include <bitset>
 
 using std::set; using std::list; using std::vector;
+using std::bitset;
 
 #include "system_constants.hpp"
 
@@ -45,7 +47,8 @@ bool is_zero_base_case(const list<Monomial> & T) {
   const Monomial & t = T.front();
   NVAR_TYPE n = t.num_vars();
   bool * d = new bool [n] {false};
-  for (const Monomial & t : T) {
+  for (auto ti = T.cbegin(); result and ti != T.cend(); ++ti) {
+    const auto & t = *ti;
     bool found = false;
     for (NVAR_TYPE k = 0; result and k < n; ++k) {
       if (t.degree(k) != 0) {
@@ -79,8 +82,12 @@ Dense_Univariate_Integer_Polynomial * solve_zero_base_case(
     const list<Monomial> & T,
     const WT_TYPE * grading
 ) {
+  if (T.size() == 1 and T.begin()->total_degree() == 0) {
+    return new Dense_Univariate_Integer_Polynomial(1);
+  }
   DEG_TYPE n = T.front().weighted_degree(grading) + 1;
   DEG_TYPE d = n;
+  // determine the size of the result
   list<Monomial>::const_iterator ti = T.begin();
   for (++ti; ti != T.end(); ++ti)
   {
@@ -88,12 +95,13 @@ Dense_Univariate_Integer_Polynomial * solve_zero_base_case(
     if (ti->weighted_degree(grading) + 1 > d)
       d = ti->weighted_degree(grading) + 1;
   }
-  Dense_Univariate_Integer_Polynomial * result
-      = new Dense_Univariate_Integer_Polynomial(n);
+  Dense_Univariate_Integer_Polynomial * result =
+      new Dense_Univariate_Integer_Polynomial(n);
   result->set_coefficient(0, 1);
-  Dense_Univariate_Integer_Polynomial * intermediate
-      = new Dense_Univariate_Integer_Polynomial(d);
+  Dense_Univariate_Integer_Polynomial * intermediate =
+      new Dense_Univariate_Integer_Polynomial(d);
   intermediate->set_coefficient(0, 1);
+  unsigned e = 0;
   for (ti = T.begin(); ti != T.end(); ++ti) {
     intermediate->set_coefficient(ti->weighted_degree(grading), -1);
     result->multiply_by(*intermediate);
@@ -105,18 +113,22 @@ Dense_Univariate_Integer_Polynomial * solve_zero_base_case(
 
 list<Monomial>::const_iterator is_one_base_case(const list<Monomial> & T) {
   list<Monomial>::const_iterator result = T.end();
-  for (
-    list<Monomial>::const_iterator ti = T.begin();
-    (result != T.end()) and ti != T.end();
-    ++ti
-   ) {
-    list<Monomial> U;
-    for (const Monomial & u : T)
-      if (not u.is_like(*ti))
-        U.push_back(u);
-    if (is_zero_base_case(U))
+  EXP_TYPE n = T.begin()->num_vars();
+  unsigned non_simple_powers = 0;
+  for (auto ti = T.begin(); non_simple_powers < 2 and ti != T.end(); ++ti) {
+    auto & t = *ti;
+    unsigned variables_used = 0;
+    for (EXP_TYPE i = 0; variables_used < 2 and i < n; ++i)
+      if (t.degree(i) != 0) {
+        ++variables_used;
+        if (variables_used == 2)
+          ++non_simple_powers;
+      }
+    if (variables_used > 1)
+      // this happens only when there are more than two non-simple powers
       result = ti;
   }
+  if (non_simple_powers > 1) result = T.end();
   return result;
 }
 
@@ -127,7 +139,7 @@ Dense_Univariate_Integer_Polynomial * solve_one_base_case(
   // copy T and remove the monomial that isn't a simple power
   list<Monomial> U(T);
   Monomial p = *ui;
-  U.erase(ui);
+  U.remove(*ui);
   Dense_Univariate_Integer_Polynomial * result = solve_zero_base_case(U, grading);
   DEG_TYPE d = 0;
   DEG_TYPE max_d = 0;
@@ -164,9 +176,11 @@ Dense_Univariate_Integer_Polynomial * solve_one_base_case(
       fac->set_coefficient(u.degree(k) - p.degree(k), 0);
     } else {
       WT_TYPE d = grading[k];
-      fac->set_coefficient(d*(u.degree(k) - p.degree(k)), -1);
+      WT_TYPE e = d*(u.degree(k) - p.degree(k));
+      fac->expand_poly(e);
+      fac->set_coefficient(e, -1);
       prod->multiply_by(*fac);
-      fac->set_coefficient(d*(u.degree(k) - p.degree(k)), 0);
+      fac->set_coefficient(e, 0);
     }
   }
   delete fac;
@@ -177,7 +191,46 @@ Dense_Univariate_Integer_Polynomial * solve_one_base_case(
   return result;
 }
 
-list<Monomial>::const_iterator is_splitting_case(const list<Monomial> & T) {
+bool is_splitting_case(
+    const list<Monomial> & T,
+    list<std::list<Monomial>::const_iterator> & U,
+    list<std::list<Monomial>::const_iterator> & V
+) {
+  bitset<MASK_SIZE> U_mask, V_mask;
+  auto ti = T.begin();
+  U.push_back(ti);
+  U_mask |= ti->mask();
+  for (++ti; ti != T.end(); ++ti) {
+    auto & t = *ti;
+    auto t_mask = t.mask();
+    if ((t_mask & U_mask) == 0) {
+      V.push_back(ti);
+      V_mask |= t_mask;
+    } else {
+      U.push_back(ti);
+      U_mask |= t_mask;
+      if ((V_mask & t_mask) != 0) {
+        bitset<MASK_SIZE> new_V_mask;
+        for (auto vii = V.begin(); vii != V.end(); /* */) {
+          auto v_mask = (*vii)->mask();
+          if ((U_mask & v_mask) == 0) {
+            new_V_mask |= v_mask;
+            ++vii;
+          } else {
+            U.push_back(*vii);
+            V.erase(vii);
+            U_mask |= v_mask;
+            vii = V.begin();
+          }
+        }
+        V_mask = new_V_mask;
+      }
+    }
+  }
+  return V.size() != 0;
+}
+
+/*list<Monomial>::const_iterator is_splitting_case(const list<Monomial> & T) {
   list<Monomial>::const_iterator result = T.end(); // guilty until proven innocent
   for (
     list<Monomial>::const_iterator ti = T.begin();
@@ -198,9 +251,25 @@ list<Monomial>::const_iterator is_splitting_case(const list<Monomial> & T) {
       result = ti;
   }
   return result;
-}
+}*/
 
 Dense_Univariate_Integer_Polynomial * solve_splitting_case(
+    const list<Monomial> & T,
+    const list< list<Monomial>::const_iterator > & U,
+    const list< list<Monomial>::const_iterator > & V,
+    const WT_TYPE * grading
+) {
+  list<Monomial> U_mons, V_mons;
+  for (auto & ui : U) U_mons.push_back(*ui);
+  for (auto & vi : V) V_mons.push_back(*vi);
+  auto first  = hilbert_numerator_bigatti(U_mons, grading);
+  auto second = hilbert_numerator_bigatti(V_mons, grading);
+  first->multiply_by(*second);
+  delete second;
+  return first;
+}
+
+/*Dense_Univariate_Integer_Polynomial * solve_splitting_case(
   const list<Monomial> & T, list<Monomial>::const_iterator ui,
   const WT_TYPE * grading
 ) {
@@ -215,40 +284,50 @@ Dense_Univariate_Integer_Polynomial * solve_splitting_case(
   result->multiply_by(*other);
   delete other;
   return result;
-}
+}*/
 
 Monomial choose_hilbert_pivot(const list<Monomial> & T) {
   NVAR_TYPE n = T.front().num_vars();
   unsigned * xcount = new unsigned [n] {0};
-  for (const Monomial & t : T)
-    for (NVAR_TYPE k = 0; k < n; ++k)
-      if (t.degree(k) != 0)
+  vector< vector<EXP_TYPE> > tds(n, vector<EXP_TYPE> (T.size(), 0));
+  vector< unsigned > lasts(n, 0);
+  NVAR_TYPE i = T.size();
+  EXP_TYPE max = 0;
+  for (const Monomial & t : T) {
+    for (NVAR_TYPE k = 0; k < n; ++k) {
+      auto td = t.degree(k);
+      if (td != 0) {
+        tds[k][lasts[k]] = td;
         ++xcount[k];
-  int i = 0;
-  for (NVAR_TYPE k = 1; k < n; ++k)
-    if (xcount[k] > xcount[i])
-      i = k;
+        ++lasts[k];
+        if (xcount[k] > max) {
+          i = k;
+          max = xcount[k];
+        }
+      }
+    }
+  }
   delete [] xcount;
-  unsigned * td = new unsigned [T.size()];
-  unsigned j = 0;
-  for (const Monomial & t : T)
-    if (t.degree(i) != 0)
-      td[j++] = t.degree(i);
-  unsigned m = j;
-  std::sort(td, td + m);
-  j = (m == 2) ? 0 : m / 2;
+  auto & td = tds[i];
+  auto m = lasts[i];
+  td.resize(m);
+  std::sort(td.begin(), td.end());
+  auto j = (m == 2) ? 0 : m / 2;
   Monomial result(n);
   result.set_exponent(i, td[j]);
-  delete [] td;
   return result;
 }
 
 Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     const list<Monomial> & T, const WT_TYPE * grading
 ) {
+  static unsigned iterations = 0, level = 0;
+  iterations++;
+  level++;
+  auto this_level = level;
   bool verbose = false;
   if (verbose) {
-    cout << "T = { ";
+    cout << "level " << this_level << " T = { ";
     for (const Monomial & t : T) cout << t << " ,";
     cout << "}\n";
     if (grading != nullptr) {
@@ -260,17 +339,27 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
   }
   Dense_Univariate_Integer_Polynomial * result;
   list<Monomial>::const_iterator ti;
-  if (T.size() == 1)
+  list<std::list<Monomial>::const_iterator> U_split, V_split;
+  if (T.size() == 1) {
+    if (verbose) cout << "level " << this_level << " one monomial\n";
     result = solve_one_monomial_case(T, grading);
-  else if (is_zero_base_case(T))
+  } else if (is_zero_base_case(T)) {
+    if (verbose) cout << "level " << this_level << " 0-base\n";
     result = solve_zero_base_case(T, grading);
-  else if ((ti = is_one_base_case(T)) != T.end())
+  } else if ((ti = is_one_base_case(T)) != T.end()) {
+    if (verbose) cout << "level " << this_level << " 1-base\n";
     result = solve_one_base_case(T, ti, grading);
-  else if ((ti = is_splitting_case(T)) != T.end())
-    result = solve_splitting_case(T, ti, grading);
-  else {
+  } else if ((is_splitting_case(T, U_split, V_split))) {
+    if (verbose) {
+      cout << "level " << this_level << " splitting\n";
+      for (auto t : T) { cout << t << ", "; } cout << endl << "into:\n";
+      for (auto ui : U_split) { cout << *ui << ", "; } cout << endl;
+      for (auto vi : V_split) { cout << *vi << ", "; } cout << endl;
+    }
+    result = solve_splitting_case(T, U_split, V_split, grading);
+  } else {
     Monomial p = choose_hilbert_pivot(T);
-    if (verbose) cout << "pivot = " << p << endl;
+    if (verbose) cout << "level " << this_level << " pivot = " << p << endl;
     // find pivot precisely
     unsigned pi = 0;
     while (p.degree(pi) == 0) { ++pi; }
@@ -282,24 +371,26 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     V = colon_ideal_without_ideals(T, p);
     U.push_back(p);
     if (verbose) {
-      cout << "U = { ";
+      cout << "U(" << this_level << ") = { ";
       for (const Monomial & u : U) cout << u << " ,";
       cout << "}\n";
     }
     if (verbose) {
-      cout << "V = { ";
+      cout << "V(" << this_level << ") = { ";
       for (const Monomial & v : V) cout << v << " ,";
       cout << "}\n";
     }
     result = hilbert_numerator_bigatti(V, grading);
-    if (verbose) cout << "result from V: " << *result << endl;
+    if (verbose) cout << "result from V(" << this_level << "): " << *result << endl;
     result->multiply_by_monomial_of_degree(p.weighted_degree(grading));
     Dense_Univariate_Integer_Polynomial * other
         = hilbert_numerator_bigatti(U, grading);
-    if (verbose) cout << "result from U: " << *other << endl;
+    if (verbose) cout << "result from U(" << this_level << "): " << *other << endl;
     *result += *other;
     delete other;
   }
+  if (verbose) cout << "result from level " << this_level << *result << endl;
+  verbose = false;
   return result;
 }
 
@@ -311,15 +402,15 @@ Dense_Univariate_Integer_Polynomial * hilbert_second_numerator(
   Dense_Univariate_Integer_Polynomial * hn
     = new Dense_Univariate_Integer_Polynomial(*first);
   if (grading == nullptr) {
-    unsigned r = 0;
+    MPZCOEF_TYPE r = 0;
     NVAR_TYPE i = 0;
     // perform synthetic division on the Hilbert numerator
     for (/* */; r == 0 and i < n; ++i) {
-      COEF_TYPE a = hn->coeff(hn->degree());
+      MPZCOEF_TYPE a = hn->coeff(hn->degree());
       Dense_Univariate_Integer_Polynomial * tmp
         = new Dense_Univariate_Integer_Polynomial(*hn);
       for (DEG_TYPE j = hn->degree(); j != 0; --j) {
-        COEF_TYPE b = hn->coeff(j - 1);
+        MPZCOEF_TYPE b = hn->coeff(j - 1);
         a += b;
         hn->set_coefficient(j - 1, a);
       }
@@ -350,7 +441,7 @@ Dense_Univariate_Integer_Polynomial * hilbert_second_numerator(
       Dense_Univariate_Integer_Polynomial * q
         = new Dense_Univariate_Integer_Polynomial(hn->degree());
       for (DEG_TYPE j = hn->degree(); j > curr_grad - 1; --j) {
-        COEF_TYPE a = hn->coeff(j);
+        MPZCOEF_TYPE a = hn->coeff(j);
         q->set_coefficient(j - curr_grad, a);
         hn->set_coefficient(j, 0);
         hn->set_coefficient(j - curr_grad, hn->coeff(j - curr_grad) + a);

@@ -60,11 +60,11 @@ public:
   */
   void expand_poly(DEG_TYPE);
   /** @brief set the coefficient of @f$x^k@f$ to @f$\frac{a}{b}@f$ */
-  void set_coefficient(DEG_TYPE k, COEF_TYPE a);
+  void set_coefficient(DEG_TYPE k, MPZCOEF_TYPE a);
   /**
     @brief multiplies every monomial by a constant
   */
-  void scale_by(COEF_TYPE a);
+  void scale_by(MPZCOEF_TYPE a);
   /**
     @brief a hopefully efficient multiplication algorithm
     @details Moves exponents from higher degrees to even higher degrees,
@@ -104,9 +104,9 @@ public:
   /** @name Basic properties */
   ///@{
   /** @brief the @f$k@f$th coefficient */
-  COEF_TYPE coeff(DEG_TYPE k) const { return coeffs[k]; }
+  MPZCOEF_TYPE coeff(DEG_TYPE k) const { return coeffs[k]; }
   /** @brief synonym for @c coeff(k) */
-  COEF_TYPE operator[](DEG_TYPE k) const { return coeffs[k]; }
+  MPZCOEF_TYPE operator[](DEG_TYPE k) const { return coeffs[k]; }
   /** @brief the polynomial&rsquo;s degree (exponent of largest nonzero term) */
   DEG_TYPE degree() const { return deg; }
   /** @brief returns @c True if and only if every valid coefficient is zero */
@@ -117,7 +117,7 @@ public:
     return result;
   }
   /** @brief all the coefficients */
-  const COEF_TYPE * coefficient_array() { return coeffs; }
+  const MPZCOEF_TYPE * coefficient_array() { return coeffs; }
   ///@}
   /** @name I/O */
   ///@{
@@ -130,6 +130,7 @@ public:
         if (p.coeffs[i] != 1 and p.coeffs[i] != -1) {
           if (p.coeffs[i] > 0) { os << p.coeffs[i]; }
           else { os << -p.coeffs[i]; }
+          os << '*';
         }
         if (i != 1) { os << "t^" << i; }
         else { os << "t"; }
@@ -146,7 +147,7 @@ public:
   ///@}
 protected:
   /** @brief list of numerators; index 0 is the constant&rsquo;s */
-  COEF_TYPE * coeffs;
+  MPZCOEF_TYPE * coeffs;
   /** @brief degree of the polynomial (largest nonzero exponent) */
   DEG_TYPE deg;
   /** @brief number of slots for coefficients */

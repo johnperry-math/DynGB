@@ -54,12 +54,16 @@ F4_Reduction_Data::F4_Reduction_Data(
   strategies.clear();
   mord = P.front()->first()->monomial_ordering();
   for (auto p : P) {
-    strategies.push_back(new Poly_Sugar_Data(p->first()));
+    /*strategies.push_back(new Poly_Sugar_Data(p->first()));
+    cout << "new strategy " << strategies.back() << endl;
     if (strategies.back() != nullptr) {
       strategies.back()->at_generation_tasks(p->first_multiplier());
-      if (p->second() != nullptr)
-        strategies.back()->pre_reduction_tasks(p->second_multiplier().log(), *(p->second()));
-    }
+      if (p->second() != nullptr) {
+        auto plog = p->second_multiplier().log();
+        strategies.back()->pre_reduction_tasks(plog, *(p->second()));
+        delete [] plog;
+      }
+    }*/
     add_monomials(p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
       add_monomials(p->second(), p->second_multiplier());
@@ -106,6 +110,7 @@ void F4_Reduction_Data::initialize_some_rows(
     }
     delete pi;
     strategies[row] = new Poly_Sugar_Data(cp->first());
+    if (cp->second() == nullptr) delete cp->first();
     delete cp;
     ++row;
   }
@@ -302,11 +307,9 @@ void F4_Reduction_Data::build_reducer(vector<COEF_TYPE> & buffer, unsigned mi) {
   UCOEF_TYPE mod = F.modulus();
   const auto g = R[mi];
   Polynomial_Iterator * gi = g->new_iterator();
-  EXP_TYPE v[n];
   const Monomial & t = *M[mi];
   const Monomial & u = g->leading_monomial();
-  for (NVAR_TYPE k = 0; k < n; ++k)
-    v[k] = t[k] - u[k];
+  Monomial v(t, u, false);
   // build needed subreducers first
   // we do this recursively, building only from right-to-left, to save space
   while (gi->canMoveRight()) gi->moveRight(); // don't try to reduce by self

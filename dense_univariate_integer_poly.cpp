@@ -25,7 +25,7 @@ using std::cout; using std::endl;
 Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(
   DEG_TYPE n
 ) {
-  coeffs = new COEF_TYPE [n];
+  coeffs = new MPZCOEF_TYPE [n];
   for (DEG_TYPE i = 0; i < n; ++i)
     coeffs[i] = 0;
   size = n;
@@ -37,7 +37,7 @@ Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(
 ) {
   size = p.size;
   deg = p.deg;
-  coeffs = new COEF_TYPE[size];
+  coeffs = new MPZCOEF_TYPE[size];
   for (DEG_TYPE i = 0; i <= deg; ++i)
     coeffs[i] = p.coeffs[i];
 }
@@ -47,14 +47,14 @@ Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(
 ) {
   size = n + 1;
   deg = n;
-  coeffs = new COEF_TYPE[size] { 0 };
+  coeffs = new MPZCOEF_TYPE[size] { 0 };
   for (DEG_TYPE i = 0; i <= deg; ++i)
     coeffs[i] = C[i];
 }
 
 void Dense_Univariate_Integer_Polynomial::expand_poly(DEG_TYPE n) {
   if (n + 1 > size) {
-    COEF_TYPE * new_nums = new COEF_TYPE [n + 1];
+    MPZCOEF_TYPE * new_nums = new MPZCOEF_TYPE [n + 1];
     for (DEG_TYPE i = 0; i < deg + 1; ++i)
       new_nums[i] = coeffs[i];
     delete [] coeffs;
@@ -66,7 +66,7 @@ void Dense_Univariate_Integer_Polynomial::expand_poly(DEG_TYPE n) {
 }
 
 void Dense_Univariate_Integer_Polynomial::set_coefficient(
-  DEG_TYPE k, COEF_TYPE a
+  DEG_TYPE k, MPZCOEF_TYPE a
 ) {
   coeffs[k] = a;
   if (k > deg and a != 0) { deg = k; }
@@ -75,7 +75,7 @@ void Dense_Univariate_Integer_Polynomial::set_coefficient(
   }
 }
 
-void Dense_Univariate_Integer_Polynomial::scale_by(COEF_TYPE a) {
+void Dense_Univariate_Integer_Polynomial::scale_by(MPZCOEF_TYPE a) {
   for (DEG_TYPE i = 0; i <= deg; ++i)
     if (coeffs[i] != 0)
       set_coefficient(i, coeffs[i] * a);
@@ -101,8 +101,8 @@ void Dense_Univariate_Integer_Polynomial::multiply_by(
   DEG_TYPE n = deg + q.deg + 1; // add 1 in case deg == q.deg == 0
   DEG_TYPE nq = q.deg;
   n = (n > size) ? n : size;
-  COEF_TYPE * new_nums = new COEF_TYPE [n] { 0 };
-  COEF_TYPE * b = q.coeffs;
+  MPZCOEF_TYPE * new_nums = new MPZCOEF_TYPE [n] { 0 };
+  MPZCOEF_TYPE * b = q.coeffs;
   /*for (DEG_TYPE i = 0; i < n; ++i)
     new_nums[i] = 0;*/
   for (DEG_TYPE i = 0; i < deg + 1; ++i)

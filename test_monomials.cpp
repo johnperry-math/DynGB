@@ -28,14 +28,23 @@ using std::cout; using std::endl;
 int main()
 {
   DEG_TYPE a [] = {1, 0, 5, 2, 0};
-  Monomial t = { 1, 0, 3, 2, 0 };
+  Monomial s { 1, 0, 5, 2, 0 };
+  Monomial t { 1, 0, 3, 2, 0 };
+  cout << "s = " << s << endl;
   cout << "t = " << t << endl;
 
   Monomial u { 3, 1, 0, 0, 2 };
   cout << "u = " << u << endl << endl;
 
+  cout << "\nMasks:\n";
+  cout << s.mask().to_string() << endl << t.mask() << endl << u.mask() << endl << endl;
+
+  cout << "Does s divide t? " << t.divisible_by(s) << endl;
+  cout << "Does t divide s? " << s.divisible_by(t) << endl;
   cout << "Does t divide u? " << u.divisible_by(t) << endl;
   cout << "Does u divide t? " << t.divisible_by(u) << endl;
+  cout << "t:u = " << t.colon(u) << endl;
+  cout << "u:t = " << u.colon(t) << endl;
   cout << "lcm(t,u) = " << t.lcm(u) << endl;
   cout << "lcm(u,t) = " << u.lcm(t) << endl;
   cout << "gcd(t,u) = " << t.gcd(u) << endl;

@@ -53,15 +53,7 @@ void WGrevlex_Order_Data::operator delete(void *t) {
 
 void Generic_Grevlex::set_data(Monomial & t) const {
   t.set_ordering_data(nullptr);
-  NVAR_TYPE n = t.num_vars();
-  const EXP_TYPE * a = t.log();
-  DEG_TYPE d = 0;
-  NVAR_TYPE k;
-  // small speedup by going in twos
-  for (k = 0; k < n; ++k) {
-    d += a[k];
-  }
-  t.set_ordering_degree(d);
+  t.set_ordering_degree(t.total_degree());
 }
 
 bool Generic_Grevlex::first_larger(
@@ -70,17 +62,22 @@ bool Generic_Grevlex::first_larger(
   DEG_TYPE dtk = t.ordering_degree();
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
+  auto a = t.packed_log();
+  auto b = u.packed_log();
+  auto i = t.packed_size();
+  auto j = u.packed_size();
   if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1];
-      duk -= b[n - k - 1];
+    for (/* */; searching and i > 0 and j > 0; /* */) {
+      i -= 2; j -= 2;
+      if (a[i] >= b[j])
+        dtk -= a[i+1];
+      if (b[j] >= a[i])
+        duk -= b[j+1];
       searching = dtk == duk;
     }
   }
+  delete [] a;
+  delete [] b;
   return dtk > duk;
 }
 
@@ -90,17 +87,22 @@ bool Generic_Grevlex::first_smaller(
   DEG_TYPE dtk = t.ordering_degree();
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
+  auto a = t.packed_log();
+  auto b = u.packed_log();
+  auto i = t.packed_size();
+  auto j = u.packed_size();
   if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1];
-      duk -= b[n - k - 1];
+    for (/* */; searching and i > 0 and j > 0; /* */) {
+      i -= 2; j -= 2;
+      if (a[i] >= b[j])
+        dtk -= a[i+1];
+      if (b[j] >= a[i])
+        duk -= b[j+1];
       searching = dtk == duk;
     }
   }
+  delete [] a;
+  delete [] b;
   return dtk < duk;
 }
 
@@ -110,21 +112,49 @@ bool Generic_Grevlex::first_larger_than_multiple(
   DEG_TYPE dtk = t.ordering_degree();
   DEG_TYPE duk = u.ordering_degree();
   DEG_TYPE dvk = v.ordering_degree();
-  bool searching = dtk == duk + dvk;
-  if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    const EXP_TYPE * c = v.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1];
-      duk -= b[n - k - 1];
-      dvk -= c[n - k - 1];
-      searching = dtk == duk + dvk;
-    }
-  }
-  return dtk > duk + dvk;
+  bool searching = dtk == duk + dtk;
+  if (t.is_one()) {
+    if (u.is_one()) {
+      if (v.is_one()) {
+        auto a = t.packed_log();
+        auto b = u.packed_log();
+        auto c = v.packed_log();
+        auto i = t.packed_size();
+        auto j = u.packed_size();
+        auto k = v.packed_size();
+        bool searching = dtk == duk + dvk;
+        if (searching) {
+          i -= 2; j -= 2; k -= 2;
+          for (/* */; searching and i > 0 and j > 0 and k > 0; /* */) {
+            auto max_degree = (a[i] > b[j]) ? a[i] : b[j];
+            max_degree = (max_degree > c[k]) ? max_degree : c[k];
+            if (max_degree == a[i]) {
+              dtk -= a[i+1];
+              i -= 2;
+            }
+            if (max_degree == b[j]) {
+              duk -= b[j+1];
+              j -= 2;
+            }
+            if (max_degree == c[k]) {
+              dvk -= c[k+1];
+              k -= 2;
+            }
+          }
+          searching = dtk == duk + dvk;
+        }
+        delete [] a;
+        delete [] b;
+        delete [] c;
+        return dtk > duk + dvk;
+      } else
+        return first_larger(t, u);
+    } else if (v.is_one())
+      return first_larger(t, v);
+    else
+      return t.is_one();
+  } else
+    return not (u.is_one() or v.is_one());
 }
 
 Generic_Grevlex generic_grevlex;
@@ -144,17 +174,7 @@ WGrevlex::WGrevlex(Ray r, bool thorough) :
 
 void WGrevlex::set_data(Monomial & t) const {
   t.set_ordering_data(nullptr);
-  const EXP_TYPE * a = t.log();
-  DEG_TYPE d = 0;
-  NVAR_TYPE k;
-  // small speedup by setting two at a time
-  for (k = 0; k + 1 < n; k += 2) {
-    d += a[k] * weights[k];
-    d += a[k + 1] * weights[k + 1];
-  }
-  // using n % 2 seems smarter than k < n
-  if (n % 2) d += a[k] * weights[k];
-  t.set_ordering_degree(d);
+  t.set_ordering_degree(t.weighted_degree(weights));
 }
 
 bool WGrevlex::first_larger(
@@ -165,12 +185,9 @@ bool WGrevlex::first_larger(
   bool searching = dtk == duk;
   if (searching) {
     NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1] * weights[n - k - 1];
-      duk -= b[n - k - 1] * weights[n - k - 1];
+    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
+      dtk -= t[n - k] * weights[n - k];
+      duk -= u[n - k] * weights[n - k];
       searching = dtk == duk;
     }
   }
@@ -185,12 +202,9 @@ bool WGrevlex::first_smaller(
   bool searching = dtk == duk;
   if (searching) {
     NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1] * weights[n - k - 1];
-      duk -= b[n - k - 1] * weights[n - k - 1];
+    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
+      dtk -= t[n - k];
+      duk -= u[n - k];
       searching = dtk == duk;
     }
   }
@@ -206,15 +220,11 @@ bool WGrevlex::first_larger_than_multiple(
   bool searching = dtk == duk + dvk;
   if (searching) {
     NVAR_TYPE n = t.num_vars();
-    const EXP_TYPE * a = t.log();
-    const EXP_TYPE * b = u.log();
-    const EXP_TYPE * c = v.log();
-    NVAR_TYPE k = 0;
-    for (/* */; searching and k < n; ++k) {
-      dtk -= a[n - k - 1] * weights[n - k - 1];
-      duk -= b[n - k - 1] * weights[n - k - 1];
-      dvk -= c[n - k - 1] * weights[n - k - 1];
-      searching = dtk == duk + dvk;
+    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
+      dtk -= t[n - k];
+      duk -= u[n - k];
+      dvk -= v[n - k];
+      searching = dtk == duk;
     }
   }
   return dtk > duk + dvk;
@@ -340,12 +350,10 @@ Lex_Ordering::Lex_Ordering(NVAR_TYPE number_of_variables) : n(number_of_variable
 bool Lex_Ordering::first_larger(const Monomial & t, const Monomial & u) const {
   bool still_tied = true;
   bool result = false;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
   for (NVAR_TYPE k = 0; still_tied and k < n; ++k) {
-    if (a[k] < b[k])
+    if (t[k] < u[k])
       still_tied = false;
-    else if (a[k] > b[k]) {
+    else if (t[k] > u[k]) {
       result = true;
       still_tied = false;
     }
@@ -356,12 +364,10 @@ bool Lex_Ordering::first_larger(const Monomial & t, const Monomial & u) const {
 bool Lex_Ordering::first_smaller(const Monomial & t, const Monomial & u) const {
   bool still_tied = true;
   bool result = false;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
   for (NVAR_TYPE k = 0; still_tied and k < n; ++k) {
-    if (a[k] > b[k])
+    if (t[k] > u[k])
       still_tied = false;
-    else if (a[k] < b[k]) {
+    else if (t[k] < u[k]) {
       result = true;
       still_tied = false;
     }
@@ -374,13 +380,10 @@ bool Lex_Ordering::first_larger_than_multiple(
 ) const {
   bool still_tied = true;
   bool result = false;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
-  const EXP_TYPE * c = v.log();
   for (NVAR_TYPE k = 0; still_tied and k < n; ++k) {
-    if (a[k] < b[k] + c[k])
+    if (t[k] < u[k] + v[k])
       still_tied = false;
-    else if (a[k] > b[k] + c[k]) {
+    else if (t[k] > u[k] + v[k]) {
       result = true;
       still_tied = false;
     }
@@ -394,10 +397,8 @@ void WGrevlex_Order_Data::assign_gradings(Monomial &t) {
     = (
         static_cast<const CachedWGrevlex_Ordering *>(t.monomial_ordering())
       )->order_weights();
-  const EXP_TYPE * a = t.log();
   for (NVAR_TYPE l = 0; l < number_of_gradings; ++l) {
-    value += w[l] * a[l];
-    gradings[number_of_gradings-l-1] = value;
+    gradings[number_of_gradings-l-1] = t.weighted_degree(w, l + 1);
   }
   t.set_ordering_degree(gradings[0]);
 }
@@ -528,12 +529,11 @@ DEG_TYPE CachedWGrevlex_Ordering::compute_ith_weight(
     const Monomial & t, NVAR_TYPE i
 ) const {
   DEG_TYPE result = 0;
-  const EXP_TYPE * a = t.log();
   for (NVAR_TYPE k = 0; k < n - i; ++k)
     if (fully_apply)
-      result += weights[k]*a[k];
+      result += weights[k]*t[k];
     else
-      result += a[k];
+      result += t[k];
   return result;
 }
 
@@ -636,14 +636,12 @@ bool Matrix_Ordering::first_larger(const Monomial & t, const Monomial & u) const
 {
   bool result = false;
   bool searching = true;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
   for (NVAR_TYPE i = 0; searching and i < m; ++i) {
     DEG_TYPE wt = 0;
     DEG_TYPE wu = 0;
     for (NVAR_TYPE j = 0; j < n; ++j) {
-      wt += W[i][j] * a[j];
-      wu += W[i][j] * b[j];
+      wt += W[i][j] * t[j];
+      wu += W[i][j] * u[j];
     }
     if (wt < wu)
       searching = false;
@@ -659,14 +657,12 @@ bool Matrix_Ordering::first_smaller(const Monomial & t, const Monomial & u) cons
 {
   bool result = false;
   bool searching = true;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
   for (NVAR_TYPE i = 0; searching and i < m; ++i) {
     DEG_TYPE wt = 0;
     DEG_TYPE wu = 0;
     for (NVAR_TYPE j = 0; j < n; ++j) {
-      wt += W[i][j] * a[j];
-      wu += W[i][j] * b[j];
+      wt += W[i][j] * t[j];
+      wu += W[i][j] * u[j];
     }
     if (wt > wu)
       searching = false;
@@ -683,17 +679,14 @@ bool Matrix_Ordering::first_larger_than_multiple(
 ) const {
   bool result = false;
   bool searching = true;
-  const EXP_TYPE * a = t.log();
-  const EXP_TYPE * b = u.log();
-  const EXP_TYPE * c = v.log();
   for (NVAR_TYPE i = 0; searching and i < m; ++i) {
     DEG_TYPE wt = 0;
     DEG_TYPE wu = 0;
     DEG_TYPE wv = 0;
     for (NVAR_TYPE j = 0; j < n; ++j) {
-      wt += W[i][j] * a[j];
-      wu += W[i][j] * b[j];
-      wv += W[i][j] * c[j];
+      wt += W[i][j] * t[j];
+      wu += W[i][j] * u[j];
+      wv += W[i][j] * v[j];
     }
     if (wt < wu + wv)
       searching = false;

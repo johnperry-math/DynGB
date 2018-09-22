@@ -1,3 +1,9 @@
+# DOXYGEN SUPPORT
+include $(top_srcdir)/aminclude.am
+
+# ensure the distribution of the doxygen configuration file
+EXTRA_DIST = doxygen.cfg
+
 #bin_PROGRAMS = test_cyclicn_mpi
 bin_PROGRAMS = test_monomials test_hilbert_functions test_incremental_betti test_glpk_solver test_gmp test_cyclicn test_dynamic test_initial_analysis user_interface test_4by4 test_cab_es1 test_cab_es2 test_cab_es4 test_cab_es5 test_cab_es6 test_cab_es9 test_f4 test_f4_dynamic test_hash
 

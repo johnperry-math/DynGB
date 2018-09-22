@@ -23,18 +23,24 @@ Indeterminate & Indeterminate::operator=(const Indeterminate & other) {
 }
 
 Monomial Indeterminate::operator ^(EXP_TYPE a) {
-  EXP_TYPE * A = new EXP_TYPE[R->number_of_variables()] { 0 };
-  A[i] = a;
-  Monomial t(R->number_of_variables(), A);
-  delete [] A;
+  Monomial t(R->number_of_variables());
+  t.set_exponent(i, a);
   return t;
 }
 
 Monomial Indeterminate::operator *(Indeterminate y) {
   Monomial u(R->number_of_variables());
-  u.set_exponent(i,1);
-  u.set_exponent(y.i, 1);
+  if (i == y.i)
+    u.set_exponent(i, 2);
+  else {
+    u.set_exponent(i,1);
+    u.set_exponent(y.i, 1);
+  }
   return u;
+}
+
+Monomial Indeterminate::operator *(Monomial t) {
+  return t * (*this);
 }
 
 ostream & operator << (ostream & os, Indeterminate & x) {
