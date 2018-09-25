@@ -18,20 +18,6 @@
 * along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *
 \*****************************************************************************/
 
-#include <set>
-using std::set;
-#include <list>
-using std::list;
-#include <vector>
-using std::vector;
-#include <cstdlib>
-#include <utility>
-using std::pair;
-#include <functional>
-using std::function;
-#include <mutex>
-using std::mutex;
-
 #include "system_constants.hpp"
 
 #include "fields.hpp"
@@ -41,11 +27,21 @@ using std::mutex;
 #include "critical_pair.hpp"
 #include "f4_hash.hpp"
 
-#include "lp_solver.hpp"
-using LP_Solvers::LP_Solver;
-#include "dynamic_engine.hpp"
-using Dynamic_Engine::PP_With_Ideal;
-using Dynamic_Engine::Dynamic_Heuristic;
+#include <set>
+using std::set;
+#include <list>
+using std::list;
+#include <map>
+using std::map;
+#include <vector>
+using std::vector;
+#include <cstdlib>
+#include <utility>
+using std::pair;
+#include <thread>
+using std::thread;
+#include <mutex>
+using std::mutex;
 
 /**
   @ingroup GBComputation
@@ -68,10 +64,7 @@ struct MonCmp {
     @return @c true iff the monomial pointed to by @p t is smaller than
       the monomial pointed to by @p u
   */
-  bool operator()(
-        const Monomial * t,
-        const Monomial * u
-  ) const {
+  bool operator() (const Monomial * t, const Monomial * u) const {
     return *t < *u;
   }
 };
@@ -100,28 +93,22 @@ public:
   /**
     @brief encapsulation of one step of the F4 algorithm for the polynomials
         indicated by @p P and @p B
-    @param curr_ord current monomial ordering
     @param P list of critical pairs that will create a new basis; matrix will
         have this many rows
     @param B list of polynomials currently in the basis
-    @param method heuristic the system should use in choosing leading monomials
   */
   F4_Reduction_Data(
-      const WGrevlex * curr_ord,
-      const list<Critical_Pair_Dynamic *> & P,
-      const list<Abstract_Polynomial *> & B,
-      Dynamic_Heuristic method
+      const list<Critical_Pair_Basic *> & P,
+      const list<Abstract_Polynomial *> & B
   );
   /**
     @brief adds monomials of @f$ ug @f$ to @c M_builder
-    @param curr_ord current monomial ordering
     @param g polynomial, such as an s-polynomial generator or a reducer
     @param u monomial to multiply to @p g to add monomials
     @param new_row if @c true, adds the leading monomial; otherwise, adds only
         trailing monomials
   */
   void add_monomials(
-      const WGrevlex * curr_ord,
       const Abstract_Polynomial *g,
       const Monomial & u,
       bool new_row = false
@@ -132,7 +119,7 @@ public:
         setup; inadvisable to use elsewhere
     @param P list of critical pairs that will generate the matrix
   */
-  void initialize_many(const list<Critical_Pair_Dynamic *> & P);
+  void initialize_many(const list<Critical_Pair_Basic *> & P);
   ///@}
   /** @name Destruction */
   ///@{
@@ -148,18 +135,12 @@ public:
     @brief returns @c true iff all the entries are 0
   */
   bool is_zero();
-  /** @brief returns the number of nonzero entries on the indicated row */
-  unsigned number_of_nonzero_entries(unsigned i) { return nonzero_entries[i]; }
   /**
     @brief returns the strategies currently in use
   */
   vector<Poly_Sugar_Data *> get_strategies() { return strategies; }
   /** @brief basic properties */
-  unsigned number_of_rows() const { return A.size(); }
-  /** @brief set of monomials in row @p i that are not zero */
-  void monomials_in_row(unsigned i, set<Monomial> &) const;
-  /** @brief current ordering of monomials */
-  const WGrevlex * current_ordering() const { return mord; }
+  unsigned number_of_rows() { return A.size(); }
   ///@}
   /** @name Conversion */
   ///@{
@@ -168,112 +149,18 @@ public:
       and returns the result
   */
   vector<Constant_Polynomial *> finalize();
-  /**
-    @brief converts indicated row to a Constant_Polynomial, returns result
-  */
-  Constant_Polynomial * finalize(unsigned);
   ///@}
   /** @name Modification */
   ///@{
   /** @brief clears the strategy; do this if you have saved it elsewhere */
   void clear_strategy(unsigned i) { strategies[i] = nullptr; }
-  /** @brief sets monomial ordering to indicated ordering */
-  void set_ordering(const WGrevlex * ord) {
-    mord = ord;
-    for (auto & m : M) m->set_monomial_ordering(mord);
-  }
   ///@}
   /** @name Computation */
   ///@{
   /** @brief reduces polynomials */
   void reduce_by_old();
   /** @brief reduces polynomials */
-  void reduce_by_new(unsigned i, unsigned lhead_i, const set<unsigned> &);
-  /**
-    @brief selects leading monomials for the remaining nonzero rows
-    @details This functions basically fills the role that select_monomial()
-      fills in the dynamic Buchberger algorithm.
-    @param T list of current leading monomials
-    @param G list of current basis polynomials
-    @param P list of current critical pairs
-    @param curr_ord current monomial ordering
-    @param skel the current LP_Solver that defines the term ordering
-    @return the recommended monomial ordering;
-      this may be the same as @p curr_ord
-  */
-  WGrevlex * select_dynamic(
-      list<Monomial> & T,
-      const list<Abstract_Polynomial *> G,
-      const list<Critical_Pair_Dynamic *> & P,
-      WGrevlex * curr_ord,
-      LP_Solver * & skel
-  );
-  /**
-    @brief selects leading monomials for one remaining nonzero rows
-    @details This functions basically fills the role that select_monomial()
-      fills in the dynamic Buchberger algorithm.
-      Unlike the other select_dynamic(), however,
-      it chooses only one row at a time.
-    @param unprocessed set of unprocessed rows;
-      the result will from from this set
-    @param T list of current leading monomials
-    @param G list of current basis polynomials
-    @param P list of current critical pairs
-    @param curr_ord current monomial ordering
-    @param skel the current LP_Solver that defines the term ordering
-    @return the row with the recommended new ordering
-  */
-  unsigned select_dynamic_single(
-      set<unsigned> & unprocessed,
-      list<Monomial> & T,
-      const list<Abstract_Polynomial *> G,
-      const list<Critical_Pair_Dynamic *> & P,
-      WGrevlex * curr_ord,
-      LP_Solver * & skel
-  );
-  /**
-    @brief selects an ordering that would be best for the indicated row,
-      verifying that the ordering is compatible not only with the basis
-      heretofore, but also with previously processed rows of the matrix
-    @return whether the preferred, compatible monomial
-      would change the current ordering
-    @warning This function is not currently in use and has not been tested.
-  */
-  bool row_would_change_ordering(unsigned);
-  /**
-    @brief see details
-    @param T list of current monomials
-    @param P list of current critical pairs
-    @param skel skeleton corresponding to current monomial ordering
-    @details This step falls between @c reduce_by_old() and @c finalize().
-      It attempts to perform a more global analysis of the matrix
-      than select_dynamic_single.
-      After reduction of rows by the existing basis,
-      this step analyzes the matrix for a new ordering, proceeding row-by-row.
-    @return a WGrevlex ordering that is considered optimal for the matrix and
-      consistent with past choices
-    @warning This function is not currently in use and has not been tested.
-  */
-  WGrevlex * reduce_and_select_order(
-    const list<Monomial> & T, const list<Critical_Pair_Dynamic *> & P,
-    LP_Solver * skel
-  );
-  /**
-    @brief verify the processed rows against @p skel and modify @p skel
-      if necessary to preserve previous choices
-    @param skel pending new @c LP_Solver (best have a copy of the old one
-      if this turns out bad)
-    @return @c false if and only if @p newSkel cannot be modified
-      to compatibility with @p newSkel
-    @warning This function is not currently in use and has not been tested.
-  */
-  bool verify_and_modify_processed_rows(LP_Solver * skel);
-  /**
-    @brief eliminates duplicates of rows:
-      later rows that are identical to earlier rows will be eliminated
-    @param in_use rows that are currently still in use by the matrix
-  */
-  void simplify_identical_rows(set<unsigned> & in_use);
+  void reduce_by_new();
   ///@}
   /** @name I/O */
   ///@{
@@ -285,12 +172,12 @@ public:
   */
   void print_matrix(bool show_data=false);
   /**
-    @brief prints indicated row of the matrix as a polynomial
-  */
+    @brief prints the indicated row of the matrix as an unformatted polynomial
+  **/
   void print_row(unsigned);
   /**
     @brief prints the pairs of monomials and reducers that are being built
-  */
+  **/
   void print_builder();
   ///@}
 protected:
@@ -307,26 +194,86 @@ protected:
     @brief creates rows of the matrix indexed by the specified pairs,
       starting at the specified row
   */
-  void initialize_some_rows(const list<Critical_Pair_Dynamic *> &, unsigned);
-  /** @brief builds a reducer for the specified column */
-  void build_reducer(unsigned, const Monomial &);
-  /** @brief reduces the specified set of rows, suitable for multithreading */
-  void reduce_my_rows(const vector<int> &);
+  void initialize_some_rows(const list<Critical_Pair_Basic *> &, unsigned);
+  /**
+    @brief reduces the specified set of rows, suitable for multithreading
+    @details Under the current implementation, we need two buffers for the rows
+        of a matrix. We intend to change that eventually to 1.
+    @param A_buffer buffer to store the dense representation of a row
+    @param R_buffer buffer to store the dense representation of a row
+    @param rows which rows this thread will reduce
+  */
+  void reduce_my_rows(
+      vector<COEF_TYPE> & A_buffer,
+      vector<COEF_TYPE> & R_buffer,
+      const set<unsigned> & rows
+  );
   /**
     @brief reduces the specified set of rows by the specified row,
       suitable for multithreading
-    @param i row of the row to use when reducing
-    @param lhead_i the location of the (new) leading monomial of @p i;
-      this may differ from <c>head[i]</c>!
-    @param F the underlying field
-    @param to_reduce which rows of the matrix this thread will reduce
+    @param buffer storage for the dense representation of a row
+    @param i which row to use as reductor
+    @param F the ground field, needed not just for the modulus but for inverses
+    @param rows which rows this thread will reduce
   */
   void reduce_my_new_rows(
+      vector<COEF_TYPE> & buffer,
       unsigned i,
-      unsigned lhead_i,
       const Prime_Field & F,
-      const set<unsigned> & to_reduce
+      const set<unsigned> & rows
   );
+  /**
+    @brief convert a row from sparse to dense reprsentation
+    @param target dense representation of row
+    @param source sparse representation of row
+  */
+  void densify_row(
+      vector<COEF_TYPE> & target,
+      const vector<pair<unsigned, COEF_TYPE> > & source
+  );
+  /**
+    @brief reduce dense row using the sparse source, modulo the indicated value
+    @param target dense representation of a polynomial being reduced
+    @param source sparse representation of a reductor
+    @param mod modulus for all operations
+  */
+  void reduce_buffer(
+      vector<COEF_TYPE> & target,
+      const vector<pair<unsigned, COEF_TYPE> > & source,
+      COEF_TYPE mod
+  );
+  /**
+    @brief transform row from dense to sparse format
+    @param buffer dense representation of row
+    @param source sparse representation of row
+  */
+  void sparsify_row(
+      const vector<COEF_TYPE> & buffer, vector<pair<unsigned, COEF_TYPE> > & source
+  );
+  /**
+    @brief reduce dense row using the sparse source, modulo the indicated value,
+    starting at the indicated position
+    @details The difference between this and reduce_buffer is that in this case
+    you may not want to start from the first position, because you haven't
+    yet added the value \$ a \$. Thus, you can start with the second term,
+    rather than waste time (however little) starting with the first.
+    @param target dense representation of a polynomial being reduced
+    @param source sparse representation of a reductor
+    @param mod modulus for all operations
+    @param a scalar multiple of source
+  */
+  void add_reductor(
+      vector<COEF_TYPE> & target, COEF_TYPE a,
+      const vector<pair<unsigned, COEF_TYPE> > & source, COEF_TYPE mod
+  );
+  /**
+    @brief build the sparse representation of the @b reduced polynomial chosen
+        to reduce monomial @p i
+    @param buffer where to store the dense representation while building the
+        reductor
+    @param i index in @c M of the monomial to be reduced
+  */
+  void build_reducer(vector<COEF_TYPE> & buffer, unsigned i);
   /** @brief number of columns in the polynomial */
   unsigned num_cols;
   /** @brief number of rows in the matrix */
@@ -341,52 +288,27 @@ protected:
     @brief coefficient data in sparse representation; each vector entry is a
       subrow of the dense matrix
   */
-  vector<vector<COEF_TYPE> > A;
-  /** @brief index of the starting point of this row in the dense matrix*/
-  vector<unsigned> offset;
-  /**
-    @brief index of the first non-zero entry of this row in the dense matrix
-      (counted from offset)
-  */
-  vector<unsigned> head;
-  /** @brief index of the logical head term of this row (absolute index) */
-  vector<unsigned> l_head;
+  vector<vector<pair<unsigned, COEF_TYPE> > > A;
+  /** @brief buffers for rows of A during reduction; one per thread */
+  vector<vector<COEF_TYPE> > A_buf;
   /** @brief storage of monomials and reducers while preprocessing */
   map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
   vector<Abstract_Polynomial *> R;
   /** @brief reducers actually generated */
   vector<vector<pair<unsigned, COEF_TYPE> > > R_built;
+  /** @brief buffer to build reducers for the matrix */
+  vector<vector<COEF_TYPE> > R_buf;
   /** @brief count of threads that have actually read a generated actually built */
   vector<unsigned> num_readers;
   /** @brief current basis of ideal */
   const list<Abstract_Polynomial *> & G;
   /** @brief how the monomials are ordered */
-  const WGrevlex * mord;
-  /** @brief number of nonzero entries of each row of A */
-  vector<unsigned> nonzero_entries;
+  const Monomial_Ordering * mord;
   /** @brief polynomial ring */
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */
   vector<Poly_Sugar_Data *> strategies;
-  /** @brief rows which have already contributed to the ordering */
-  set<unsigned> dynamic_processed;
-  /** @brief rows which still have to be considered for the ordering */
-  set<unsigned> dynamic_unprocessed;
-  /**
-    @brief each entry contains a set of monomials that could be a leading
-      monomial of the corresponding row of the matrix
-  */
-  vector<list<PP_With_Ideal> > I;
-  /**
-    @brief copies of the current skeleton, modified according to the preferred
-      monomial of this row
-  */
-  vector<LP_Solver *> row_skel;
-  /** @brief heuristic the system should use in choosing leading monomials */
-  Dynamic_Heuristic heur;
-  /** @brief function corresponding to @c heur */
-  function <bool(PP_With_Ideal &, PP_With_Ideal &)> heuristic_judges_smaller;
 };
 
 #endif

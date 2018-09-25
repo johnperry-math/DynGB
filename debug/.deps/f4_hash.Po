@@ -141,7 +141,9 @@ f4_hash.o: ../f4_hash.cpp /usr/include/stdc-predef.h ../f4_hash.hpp \
  /usr/include/c++/8/bits/locale_facets.tcc \
  /usr/include/c++/8/bits/basic_ios.tcc \
  /usr/include/c++/8/bits/ostream.tcc /usr/include/c++/8/istream \
- /usr/include/c++/8/bits/istream.tcc ../goda.hpp ../indeterminate.hpp \
+ /usr/include/c++/8/bits/istream.tcc ../goda.hpp \
+ /usr/include/c++/8/atomic /usr/include/c++/8/bits/atomic_base.h \
+ /usr/include/c++/8/bits/atomic_lockfree_defines.h ../indeterminate.hpp \
  ../polynomial_ring.hpp ../fields.hpp ../monomial_ordering.hpp
 
 /usr/include/stdc-predef.h:
@@ -595,6 +597,12 @@ f4_hash.o: ../f4_hash.cpp /usr/include/stdc-predef.h ../f4_hash.hpp \
 /usr/include/c++/8/bits/istream.tcc:
 
 ../goda.hpp:
+
+/usr/include/c++/8/atomic:
+
+/usr/include/c++/8/bits/atomic_base.h:
+
+/usr/include/c++/8/bits/atomic_lockfree_defines.h:
 
 ../indeterminate.hpp:
 

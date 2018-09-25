@@ -141,7 +141,9 @@ f4_dynamic.o: ../f4_dynamic.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/8/bits/basic_ios.tcc \
  /usr/include/c++/8/bits/ostream.tcc /usr/include/c++/8/istream \
  /usr/include/c++/8/bits/istream.tcc ../monomial.hpp \
- /usr/include/c++/8/bitset ../goda.hpp ../indeterminate.hpp \
+ /usr/include/c++/8/bitset ../goda.hpp /usr/include/c++/8/atomic \
+ /usr/include/c++/8/bits/atomic_base.h \
+ /usr/include/c++/8/bits/atomic_lockfree_defines.h ../indeterminate.hpp \
  ../polynomial_ring.hpp ../monomial_ordering.hpp ../polynomial.hpp \
  ../strategies.hpp ../critical_pair.hpp ../polynomial_geobucket.hpp \
  ../polynomial_array.hpp ../polynomial_linked_list.hpp \
@@ -184,8 +186,6 @@ f4_dynamic.o: ../f4_dynamic.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/8/bits/shared_ptr.h \
  /usr/include/c++/8/bits/shared_ptr_base.h \
  /usr/include/c++/8/bits/shared_ptr_atomic.h \
- /usr/include/c++/8/bits/atomic_base.h \
- /usr/include/c++/8/bits/atomic_lockfree_defines.h \
  /usr/include/c++/8/backward/auto_ptr.h /usr/include/c++/8/deque \
  /usr/include/c++/8/bits/stl_deque.h /usr/include/c++/8/bits/deque.tcc \
  /usr/include/c++/8/iterator /usr/include/c++/8/bits/stream_iterator.h \
@@ -640,6 +640,12 @@ f4_dynamic.o: ../f4_dynamic.cpp /usr/include/stdc-predef.h \
 
 ../goda.hpp:
 
+/usr/include/c++/8/atomic:
+
+/usr/include/c++/8/bits/atomic_base.h:
+
+/usr/include/c++/8/bits/atomic_lockfree_defines.h:
+
 ../indeterminate.hpp:
 
 ../polynomial_ring.hpp:
@@ -795,10 +801,6 @@ f4_dynamic.o: ../f4_dynamic.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/8/bits/shared_ptr_base.h:
 
 /usr/include/c++/8/bits/shared_ptr_atomic.h:
-
-/usr/include/c++/8/bits/atomic_base.h:
-
-/usr/include/c++/8/bits/atomic_lockfree_defines.h:
 
 /usr/include/c++/8/backward/auto_ptr.h:
 

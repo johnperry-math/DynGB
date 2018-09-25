@@ -62,11 +62,11 @@ bool Generic_Grevlex::first_larger(
   DEG_TYPE dtk = t.ordering_degree();
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
-  auto a = t.packed_log();
-  auto b = u.packed_log();
-  auto i = t.packed_size();
-  auto j = u.packed_size();
   if (searching) {
+    auto a = t.packed_log();
+    auto b = u.packed_log();
+    auto i = t.packed_size();
+    auto j = u.packed_size();
     for (/* */; searching and i > 0 and j > 0; /* */) {
       i -= 2; j -= 2;
       if (a[i] >= b[j])
@@ -76,8 +76,6 @@ bool Generic_Grevlex::first_larger(
       searching = dtk == duk;
     }
   }
-  delete [] a;
-  delete [] b;
   return dtk > duk;
 }
 
@@ -101,8 +99,6 @@ bool Generic_Grevlex::first_smaller(
       searching = dtk == duk;
     }
   }
-  delete [] a;
-  delete [] b;
   return dtk < duk;
 }
 
@@ -112,49 +108,45 @@ bool Generic_Grevlex::first_larger_than_multiple(
   DEG_TYPE dtk = t.ordering_degree();
   DEG_TYPE duk = u.ordering_degree();
   DEG_TYPE dvk = v.ordering_degree();
-  bool searching = dtk == duk + dtk;
-  if (t.is_one()) {
-    if (u.is_one()) {
-      if (v.is_one()) {
-        auto a = t.packed_log();
-        auto b = u.packed_log();
-        auto c = v.packed_log();
-        auto i = t.packed_size();
-        auto j = u.packed_size();
-        auto k = v.packed_size();
-        bool searching = dtk == duk + dvk;
-        if (searching) {
+  bool searching = dtk == duk + dvk;
+  if (searching) {
+    if (t.is_one()) {
+      if (u.is_one()) {
+        if (v.is_one()) {
+          auto a = t.packed_log();
+          auto b = u.packed_log();
+          auto c = v.packed_log();
+          auto i = t.packed_size();
+          auto j = u.packed_size();
+          auto k = v.packed_size();
           i -= 2; j -= 2; k -= 2;
           for (/* */; searching and i > 0 and j > 0 and k > 0; /* */) {
-            auto max_degree = (a[i] > b[j]) ? a[i] : b[j];
-            max_degree = (max_degree > c[k]) ? max_degree : c[k];
-            if (max_degree == a[i]) {
+            auto max_index = (a[i] > b[j]) ? a[i] : b[j];
+            max_index = (max_index > c[k]) ? max_index : c[k];
+            if (max_index == a[i]) {
               dtk -= a[i+1];
               i -= 2;
             }
-            if (max_degree == b[j]) {
+            if (max_index == b[j]) {
               duk -= b[j+1];
               j -= 2;
             }
-            if (max_degree == c[k]) {
+            if (max_index == c[k]) {
               dvk -= c[k+1];
               k -= 2;
             }
+            searching = dtk == duk + dvk;
           }
-          searching = dtk == duk + dvk;
-        }
-        delete [] a;
-        delete [] b;
-        delete [] c;
-        return dtk > duk + dvk;
-      } else
-        return first_larger(t, u);
-    } else if (v.is_one())
-      return first_larger(t, v);
-    else
-      return t.is_one();
-  } else
-    return not (u.is_one() or v.is_one());
+        } else
+          return first_larger(t, u);
+      } else if (v.is_one())
+        return first_larger(t, v);
+      else
+        return not t.is_one();
+    } else
+      return not (u.is_one() or v.is_one());
+  }
+  return dtk > duk + dvk;
 }
 
 Generic_Grevlex generic_grevlex;
@@ -184,10 +176,16 @@ bool WGrevlex::first_larger(
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
   if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
-      dtk -= t[n - k] * weights[n - k];
-      duk -= u[n - k] * weights[n - k];
+    auto a = t.packed_log();
+    auto b = u.packed_log();
+    auto i = t.packed_size();
+    auto j = u.packed_size();
+    for (/* */; searching and i > 0 and j > 0; /* */) {
+      i -= 2; j -= 2;
+      if (a[i] >= b[j])
+        dtk -= a[i+1] * weights[a[i]];
+      if (b[j] >= a[i])
+        duk -= b[j+1] * weights[b[j]];
       searching = dtk == duk;
     }
   }
@@ -201,10 +199,16 @@ bool WGrevlex::first_smaller(
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
   if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
-      dtk -= t[n - k];
-      duk -= u[n - k];
+    auto a = t.packed_log();
+    auto b = u.packed_log();
+    auto i = t.packed_size();
+    auto j = u.packed_size();
+    for (/* */; searching and i > 0 and j > 0; /* */) {
+      i -= 2; j -= 2;
+      if (a[i] >= b[j])
+        dtk -= a[i+1] * weights[a[i]];
+      if (b[j] >= a[i])
+        duk -= b[j+1] * weights[b[j]];
       searching = dtk == duk;
     }
   }
@@ -219,13 +223,41 @@ bool WGrevlex::first_larger_than_multiple(
   DEG_TYPE dvk = v.ordering_degree();
   bool searching = dtk == duk + dvk;
   if (searching) {
-    NVAR_TYPE n = t.num_vars();
-    for (NVAR_TYPE k = 1; searching and k < n; ++k) {
-      dtk -= t[n - k];
-      duk -= u[n - k];
-      dvk -= v[n - k];
-      searching = dtk == duk;
-    }
+    if (t.is_one()) {
+      if (u.is_one()) {
+        if (v.is_one()) {
+          auto a = t.packed_log();
+          auto b = u.packed_log();
+          auto c = v.packed_log();
+          auto i = t.packed_size();
+          auto j = u.packed_size();
+          auto k = v.packed_size();
+          i -= 2; j -= 2; k -= 2;
+          for (/* */; searching and i > 0 and j > 0 and k > 0; /* */) {
+            auto max_index = (a[i] > b[j]) ? a[i] : b[j];
+            max_index = (max_index > c[k]) ? max_index : c[k];
+            if (max_index == a[i]) {
+              dtk -= a[i+1] * weights[a[i]];
+              i -= 2;
+            }
+            if (max_index == b[j]) {
+              duk -= b[j+1] * weights[b[j]];
+              j -= 2;
+            }
+            if (max_index == c[k]) {
+              dvk -= c[k+1] * weights[c[k]];
+              k -= 2;
+            }
+            searching = dtk == duk + dvk;
+          }
+        } else
+          return first_larger(t, u);
+      } else if (v.is_one())
+        return first_larger(t, v);
+      else
+        return not t.is_one();
+    } else
+      return not (u.is_one() or v.is_one());
   }
   return dtk > duk + dvk;
 }

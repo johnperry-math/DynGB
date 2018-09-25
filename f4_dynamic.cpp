@@ -1344,7 +1344,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         r->set_monomial_ordering(curr_ord);
         T.push_back(r->leading_monomial());
         cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
-        cout << "SANITY CHECK: ordering changed? " << ordering_changed << endl;
+        cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
         //for (auto t : T) cout << t << " "; cout << endl;
         very_verbose = false;
         if (very_verbose) { cout << "\tadded "; r->println(); }

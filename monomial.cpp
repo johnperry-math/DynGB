@@ -179,7 +179,6 @@ void Monomial::make_product_or_quotient(
 ) {
   n = t.n;
   last = 0;
-  exponents = moda->get_new_block();
   auto te = t.exponents, ue = u.exponents;
   NVAR_TYPE i = 0, j = 0;
   if (product) {
@@ -247,6 +246,7 @@ void Monomial::make_product_or_quotient(
 
 Monomial::Monomial(const Monomial & t, const Monomial & u, bool product) {
   common_initialization(t.ordering);
+  exponents = moda->get_new_block();
   make_product_or_quotient(t, u, product);
 }
 
@@ -682,7 +682,6 @@ Monomial Monomial::gcd(const Monomial & u) const {
 
 Monomial Monomial::colon(const Monomial & u) const {
   Monomial result(n, monomial_ordering());
-  result.set_monomial_ordering(monomial_ordering());
   NVAR_TYPE i = 0, j = 0, k = 0;
   auto ue = u.exponents, re = result.exponents;
   for (/* already initialized */; i < last and j < u.last; /* */)

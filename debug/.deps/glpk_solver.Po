@@ -135,7 +135,9 @@ glpk_solver.o: ../glpk_solver.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/8/bits/basic_ios.tcc \
  /usr/include/c++/8/bits/ostream.tcc /usr/include/c++/8/istream \
  /usr/include/c++/8/bits/istream.tcc ../monomial.hpp \
- /usr/include/c++/8/bitset ../goda.hpp ../indeterminate.hpp \
+ /usr/include/c++/8/bitset ../goda.hpp /usr/include/c++/8/atomic \
+ /usr/include/c++/8/bits/atomic_base.h \
+ /usr/include/c++/8/bits/atomic_lockfree_defines.h ../indeterminate.hpp \
  ../polynomial_ring.hpp ../fields.hpp ../monomial_ordering.hpp
 
 /usr/include/stdc-predef.h:
@@ -573,6 +575,12 @@ glpk_solver.o: ../glpk_solver.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/8/bitset:
 
 ../goda.hpp:
+
+/usr/include/c++/8/atomic:
+
+/usr/include/c++/8/bits/atomic_base.h:
+
+/usr/include/c++/8/bits/atomic_lockfree_defines.h:
 
 ../indeterminate.hpp:
 

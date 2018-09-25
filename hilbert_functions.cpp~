@@ -169,6 +169,7 @@ Dense_Univariate_Integer_Polynomial * solve_one_base_case(
     for (/* */; k < u.num_vars() and u.degree(k) == 0; ++k) {
       /* do nothing */
     }
+    //cout << "one base case: " << *ui << " and " << p << endl;
     if (grading == nullptr) {
       fac->set_coefficient(u.degree(k) - p.degree(k), -1);
       prod->multiply_by(*fac);
@@ -312,7 +313,7 @@ Monomial choose_hilbert_pivot(const list<Monomial> & T) {
   td.resize(m);
   std::sort(td.begin(), td.end());
   auto j = (m == 2) ? 0 : m / 2;
-  Monomial result(n, T.begin()->monomial_ordering());
+  Monomial result(n);
   result.set_exponent(i, td[j]);
   return result;
 }
@@ -321,13 +322,13 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     const list<Monomial> & T, const WT_TYPE * grading
 ) {
   static unsigned iterations = 0, level = 0;
-  ++iterations;
-  ++level;
+  iterations++;
+  level++;
   auto this_level = level;
   bool verbose = false;
   if (verbose) {
     cout << "level " << this_level << " T = { ";
-    for (const Monomial & t : T) cout << '(' << t << " ," << t.monomial_ordering() << ") ";
+    for (const Monomial & t : T) cout << t << " ,";
     cout << "}\n";
     if (grading != nullptr) {
       cout << "w = { ";

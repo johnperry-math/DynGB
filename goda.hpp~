@@ -21,10 +21,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <atomic>
 
 using std::cout; using std::endl; using std::size_t; using std::string;
-using std::atomic_flag;
 
 #include "system_constants.hpp"
 
@@ -102,7 +100,6 @@ public:
   )
   : data_size(n), name(block_name), elaborate(verbose)
   {
-    in_use.clear();
     big_blocks = block = allocate_new_block();
     block->next = nullptr; block += data_size;
   }
@@ -124,7 +121,6 @@ public:
     @return block of memory of the size specified in constructor
   */
   TYPE * get_new_block() {
-    while (in_use.test_and_set()) { /* */ }
     if (block == nullptr) {
       block = allocate_new_block();
       block->next = big_blocks; big_blocks = block; block += data_size;
@@ -134,7 +130,6 @@ public:
       cout << name << " increase to " << num_blocks << " blocks in use\n";
     TYPE * result = reinterpret_cast<TYPE *>(block);
     block = block->next;
-    in_use.clear();
     return result;
   }
   /**
@@ -142,14 +137,12 @@ public:
     @param freed_block block to return to the pool
   */
   void return_used_block(TYPE * freed_block) {
-    while (in_use.test_and_set()) { /* */ }
     goda_block<TYPE> * new_head = (goda_block<TYPE> *)freed_block;
     --num_blocks;
     if (elaborate)
       cout << name << " decrease to " << num_blocks << " blocks in use\n";
     new_head->next = block;
     block = new_head;
-    in_use.clear();
   }
   /**
     @brief indicates how many blocks this has allocated
@@ -170,7 +163,6 @@ protected:
   const string name = "";
   /** @brief whether to elaborate during certain activities &mdash; mainly for debugging */
   bool elaborate = false;
-  atomic_flag in_use = ATOMIC_FLAG_INIT;
 };
 
 #endif

@@ -198,16 +198,14 @@ public:
     return result;
   }
   /**
-    @brief access to the exponents, packed;
-      use in conjunction with @c packed_size() and delete result when finished
+    @brief access to the exponents, packed; use in conjunction with @c packed_size()
     @return array of exponents in the form @f$(i_1,e_1,\ldots,i_k,e_k)@f$
       such that @f$ x_{i_j}^e_{i_j} @f$ divides @c this
+    @warning In the current implementation, this provides direct access to the
+      underlying data structure. <b>Do not modify or delete.</b>
   */
-  EXP_TYPE * packed_log() const {
-    EXP_TYPE * result = new EXP_TYPE[2*n];
-    for (NVAR_TYPE i = 0; i < last; ++i)
-      result[i] = exponents[i];
-    return result;
+  const EXP_TYPE * packed_log() const {
+    return exponents;
   }
   /** @brief indicates the size of the result of @c packed_log() */
   NVAR_TYPE packed_size() const { return last; }

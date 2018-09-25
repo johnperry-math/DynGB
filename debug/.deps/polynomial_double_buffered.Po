@@ -128,8 +128,11 @@ polynomial_double_buffered.o: ../polynomial_double_buffered.cpp \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
  /usr/include/bits/uio_lim.h ../monomial.hpp /usr/include/c++/8/bitset \
- ../goda.hpp ../indeterminate.hpp ../polynomial_ring.hpp \
- ../monomial_ordering.hpp ../strategies.hpp ../polynomial_linked_list.hpp
+ ../goda.hpp /usr/include/c++/8/atomic \
+ /usr/include/c++/8/bits/atomic_base.h \
+ /usr/include/c++/8/bits/atomic_lockfree_defines.h ../indeterminate.hpp \
+ ../polynomial_ring.hpp ../monomial_ordering.hpp ../strategies.hpp \
+ ../polynomial_linked_list.hpp
 
 /usr/include/stdc-predef.h:
 
@@ -536,6 +539,12 @@ polynomial_double_buffered.o: ../polynomial_double_buffered.cpp \
 /usr/include/c++/8/bitset:
 
 ../goda.hpp:
+
+/usr/include/c++/8/atomic:
+
+/usr/include/c++/8/bits/atomic_base.h:
+
+/usr/include/c++/8/bits/atomic_lockfree_defines.h:
 
 ../indeterminate.hpp:
 
