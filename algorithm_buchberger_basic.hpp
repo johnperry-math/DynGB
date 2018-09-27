@@ -157,11 +157,14 @@ struct smaller_lm {
     reduces to zero
   @ingroup GBComputation
   @param G list of generators of an ideal
-  @param strategy how to select critical pairs 
+  @param strategy how to select critical pairs
+  @param max_degree check only pairs of this degree or less;
+    a value of 0 means to check every degree
 */
 void check_correctness(
   list<Constant_Polynomial *>G,
-  StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY
+  StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY,
+  EXP_TYPE max_degree = 0
 );
 
 /**

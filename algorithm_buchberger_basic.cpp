@@ -66,21 +66,30 @@ list<Abstract_Polynomial *> reduce_basis(list<Abstract_Polynomial *>G) {
   return result;
 }
 
-void check_correctness(list<Constant_Polynomial *>G, StrategyFlags strategy) {
+void check_correctness(
+    list<Constant_Polynomial *>G, StrategyFlags strategy, EXP_TYPE max_degree
+) {
   cout << "quick check for correctness\n";
+  if (max_degree == 0) {
+    for (auto f : G) {
+      max_degree = (max_degree < f->standard_degree()) ? f->standard_degree() : max_degree;
+    }
+  }
   for (auto fi = G.begin(); fi != G.end(); ++fi)
     for (auto gi = next(fi); gi != G.end(); ++gi)
     {
-      Critical_Pair_Basic * p = new Critical_Pair_Basic(*fi, *gi, strategy);
-      Mutable_Polynomial * s = p->s_polynomial(
-          SPolyCreationFlags::LINKED_LST, strategy
-      );
-      reduce_over_basis<list<Constant_Polynomial *>>(&s, G);
-      if (not s->is_zero())
-        cout << "\tfailure with " << p->first()->leading_monomial() << ','
-             << p->second()->leading_monomial() << ':' << s->leading_monomial()
-             << endl;
-      delete s;
+      if ((*fi)->leading_monomial().lcm((*gi)->leading_monomial()).total_degree() <= max_degree) {
+        Critical_Pair_Basic * p = new Critical_Pair_Basic(*fi, *gi, strategy);
+        Mutable_Polynomial * s = p->s_polynomial(
+            SPolyCreationFlags::LINKED_LST, strategy
+        );
+        reduce_over_basis<list<Constant_Polynomial *>>(&s, G);
+        if (not s->is_zero())
+          cout << "\tfailure with " << p->first()->leading_monomial() << ','
+               << p->second()->leading_monomial() << ':' << s->leading_monomial()
+               << endl;
+        delete s;
+      }
     }
 }
 

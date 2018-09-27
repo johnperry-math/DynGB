@@ -223,9 +223,9 @@ bool WGrevlex::first_larger_than_multiple(
   DEG_TYPE dvk = v.ordering_degree();
   bool searching = dtk == duk + dvk;
   if (searching) {
-    if (t.is_one()) {
-      if (u.is_one()) {
-        if (v.is_one()) {
+    if (not t.is_one()) {
+      if (not u.is_one()) {
+        if (not v.is_one()) {
           auto a = t.packed_log();
           auto b = u.packed_log();
           auto c = v.packed_log();

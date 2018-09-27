@@ -270,7 +270,7 @@ void F4_Reduction_Data::add_monomials(
       Monomial * t = new Monomial(pi->currMonomial());
       t->set_monomial_ordering(curr_ord);
       (*t) *= u;
-      cout << "adding " << pi->currMonomial() << " * " << u << " = " << *t << endl;
+      //cout << "adding " << pi->currMonomial() << " * " << u << " = " << *t << endl;
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
@@ -1344,7 +1344,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         r->set_monomial_ordering(curr_ord);
         T.push_back(r->leading_monomial());
         cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
-        cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
+        //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
         //for (auto t : T) cout << t << " "; cout << endl;
         very_verbose = false;
         if (very_verbose) { cout << "\tadded "; r->println(); }
@@ -1357,6 +1357,14 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         cout << "continuing\n";
       }
     }
+    /*list<Constant_Polynomial *> B;
+    cout << "basis of degree " << mindeg << endl;
+    for (auto g : G) {
+      static_cast<Constant_Polynomial *>(g)->set_monomial_ordering(curr_ord);
+      B.push_back(static_cast<Constant_Polynomial *>(g));
+      cout << '\t' << *g << endl;
+    }
+    check_correctness(B, StrategyFlags::SUGAR_STRATEGY, mindeg);*/
   }
   delete skel;
   //cout << "deleting " << skel << endl;
