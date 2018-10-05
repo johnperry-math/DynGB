@@ -590,7 +590,7 @@ void F4_Reduction_Data::reduce_by_new(
   for (unsigned j = 0; j < num_threads; ++j)
     thread_rows[j].clear();
   unsigned k = 0;
-  for (unsigned j : unprocessed) {
+  for (unsigned j = 0; j < num_rows; ++j) {
     if (j != i and nonzero_entries[j] != 0
         and Ai0 > offset[j]
         and (A[j][Ai0 - offset[j]] != 0)
@@ -1114,7 +1114,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
         list<Monomial> T {U};
         if (dynamic_cast<Skeleton *>(skel) != nullptr) {
           new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
-          cout << "allocated skeleton " << new_lp << endl;
+          //cout << "allocated skeleton " << new_lp << endl;
         }
         else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
           new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
@@ -1129,13 +1129,6 @@ unsigned F4_Reduction_Data::select_dynamic_single(
         );
         // first save the index of the leading monomial (need for reduction)
         Monomial row_lm { U.back() };
-        /*if (not new_ordering) {
-          // it's possible we don't have a new ordering
-          // because the preferred choices fail
-          // in this case, we take whatever the current ordering prefers
-          // (I'm not sure why this is necessary -- need to look into it more)
-          row_lm = *M[head[i] + offset[i]];
-        }*/
         U.pop_back();
         // if tempideal beats newideal, reassign newideal
         Ray r(ray_sum(new_lp->get_rays()));
@@ -1144,7 +1137,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           ordering_changed = new_ordering;
           winning_row = i;
           winning_skel = new_lp;
-          cout << "saving skeleton " << new_lp << endl;
+          //cout << "saving skeleton " << new_lp << endl;
           winning_lm = row_lm;
           newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
           newideal->set_hilbert_numerator(hn);
@@ -1195,6 +1188,8 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   time_t end_time = time(nullptr);
   new_reduction_time += difftime(end_time, start_time);
   cout << "spent " << new_reduction_time << " seconds in reducing by new polys\n";
+  U.push_back(*M[l_head[winning_row] + offset[winning_row]]);
+  cout << "selected " << *M[l_head[winning_row] + offset[winning_row]] << endl;
   unprocessed.erase(winning_row);
   for (unsigned i = 0; i < number_of_rows(); ++i)
     if (unprocessed.count(i) > 0)
@@ -1318,6 +1313,8 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
       for (unsigned i = 0; i < s.number_of_rows(); ++i)
         if (s.number_of_nonzero_entries(i) != 0)
           unprocessed.insert(i);
+      set<unsigned> all_completed_rows;
+      bool ordering_changed = false;
       while (unprocessed.size() != 0) {
         time_t start_time = time(nullptr);
         LP_Solver * old_skel = skel;
@@ -1326,24 +1323,28 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
         );
         time_t end_time = time(nullptr);
         dynamic_time += difftime(end_time, start_time);
-        Constant_Polynomial * r = s.finalize(completed_row);
-        bool ordering_changed = skel != old_skel;
+        all_completed_rows.insert(completed_row);
+        ordering_changed |= skel != old_skel;
         if (ordering_changed) {
           Ray w(ray_sum(skel->get_rays()));
           w.simplify_ray();
           WGrevlex * new_ord = new WGrevlex(w);
           cout << "new ordering: " << *new_ord << endl;
-          for (auto p : P)
-            p->change_ordering(new_ord);
-          for (auto & t : T)
-            t.set_monomial_ordering(new_ord);
           all_orderings_used.push_front(curr_ord);
           curr_ord = new_ord;
           s.set_ordering(curr_ord);
+          for (auto p : P)
+            p->change_ordering(curr_ord);
+          for (auto & t : T)
+            t.set_monomial_ordering(curr_ord);
         }
-        r->set_monomial_ordering(curr_ord);
-        T.push_back(r->leading_monomial());
+      }
+      for (auto completed_row : all_completed_rows) {
+        Constant_Polynomial * r = s.finalize(completed_row);
+        if (ordering_changed)
+          r->set_monomial_ordering(curr_ord);
         cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
+        //r->printlncout();
         //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
         //for (auto t : T) cout << t << " "; cout << endl;
         very_verbose = false;
@@ -1362,9 +1363,12 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
     for (auto g : G) {
       static_cast<Constant_Polynomial *>(g)->set_monomial_ordering(curr_ord);
       B.push_back(static_cast<Constant_Polynomial *>(g));
-      cout << '\t' << *g << endl;
+      //cout << '\t' << *g << ',' << endl;
     }
     check_correctness(B, StrategyFlags::SUGAR_STRATEGY, mindeg);*/
+    //cout << "completed degree " << mindeg << " with " << T.size() << " polynomials:\n";
+    //for (auto & t : T) { cout << t << ", "; }
+    //cout << endl;
   }
   delete skel;
   //cout << "deleting " << skel << endl;

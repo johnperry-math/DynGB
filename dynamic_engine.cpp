@@ -747,6 +747,7 @@ void select_monomial(
   {
     PP_With_Ideal newIdeal(t, CurrentLPPs, w, crit_pairs, *current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
+    //cout << "pushed back " << t << endl;
   }
   //cout << "heuristic: " << method << endl;
   switch(method)
@@ -806,7 +807,9 @@ void select_monomial(
       else if (src_PPL != nullptr)
         newSkeleton = new PPL_Solver(*src_PPL);
       vector<Constraint> newvecs;
-      //cout << "testing " << I.get_pp() << endl;
+      /*cout << "testing " << I.get_pp() << endl;
+      cout << '\t' << *I.get_hilbert_polynomial() << endl;
+      cout << '\t' << *I.get_hilbert_numerator() << endl;*/
       constraints_for_new_pp(I, PPunion, newvecs);
       if (newSkeleton->solve(newvecs))
       {

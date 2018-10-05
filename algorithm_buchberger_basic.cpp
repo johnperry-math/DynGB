@@ -75,6 +75,7 @@ void check_correctness(
       max_degree = (max_degree < f->standard_degree()) ? f->standard_degree() : max_degree;
     }
   }
+  bool verbose = true;
   for (auto fi = G.begin(); fi != G.end(); ++fi)
     for (auto gi = next(fi); gi != G.end(); ++gi)
     {
@@ -84,10 +85,12 @@ void check_correctness(
             SPolyCreationFlags::LINKED_LST, strategy
         );
         reduce_over_basis<list<Constant_Polynomial *>>(&s, G);
-        if (not s->is_zero())
+        if (not s->is_zero()) {
           cout << "\tfailure with " << p->first()->leading_monomial() << ','
                << p->second()->leading_monomial() << ':' << s->leading_monomial()
                << endl;
+          if (verbose) cout << '\t' << *s << endl << endl;
+        }
         delete s;
       }
     }

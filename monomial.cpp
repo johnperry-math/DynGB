@@ -409,7 +409,7 @@ bool Monomial::like_multiple(const Monomial &u, const Monomial &v) const {
         result = exponents[i+1] == ue[j+1];
         i += 2; j += 2;
       } else {
-        result = exponents[i+1] + ue[j+1] + ve[k+1];
+        result = exponents[i+1] == ue[j+1] + ve[k+1];
         i += 2; j += 2; k += 2;
       }
     } else if (exponents[i] == ve[k]) {

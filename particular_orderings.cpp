@@ -176,18 +176,30 @@ bool WGrevlex::first_larger(
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
   if (searching) {
-    auto a = t.packed_log();
-    auto b = u.packed_log();
-    auto i = t.packed_size();
-    auto j = u.packed_size();
-    for (/* */; searching and i > 0 and j > 0; /* */) {
-      i -= 2; j -= 2;
-      if (a[i] >= b[j])
-        dtk -= a[i+1] * weights[a[i]];
-      if (b[j] >= a[i])
-        duk -= b[j+1] * weights[b[j]];
-      searching = dtk == duk;
-    }
+    if (not t.is_one()) {
+      if (not u.is_one()) {
+        NVAR_TYPE n = 2*t.num_vars();
+        auto a = t.packed_log();
+        auto b = u.packed_log();
+        auto i = t.packed_size();
+        auto j = u.packed_size();
+        i -= 2; j -= 2;
+        for (/* */; searching and i < n and j < n; /* */) {
+          auto max_index = (a[i] > b[j]) ? a[i] : b[j];
+          if (max_index == a[i]) {
+            dtk -= a[i+1] * weights[a[i]];
+            i -= 2;
+          }
+          if (max_index == b[j]) {
+            duk -= b[j+1] * weights[b[j]];
+            j -= 2;
+          }
+          searching = dtk == duk;
+        }
+      } else
+        return true;
+    } else
+      return false;
   }
   return dtk > duk;
 }
@@ -199,18 +211,30 @@ bool WGrevlex::first_smaller(
   DEG_TYPE duk = u.ordering_degree();
   bool searching = dtk == duk;
   if (searching) {
-    auto a = t.packed_log();
-    auto b = u.packed_log();
-    auto i = t.packed_size();
-    auto j = u.packed_size();
-    for (/* */; searching and i > 0 and j > 0; /* */) {
-      i -= 2; j -= 2;
-      if (a[i] >= b[j])
-        dtk -= a[i+1] * weights[a[i]];
-      if (b[j] >= a[i])
-        duk -= b[j+1] * weights[b[j]];
-      searching = dtk == duk;
-    }
+    if (not t.is_one()) {
+      if (not u.is_one()) {
+        NVAR_TYPE n = 2*t.num_vars();
+        auto a = t.packed_log();
+        auto b = u.packed_log();
+        auto i = t.packed_size();
+        auto j = u.packed_size();
+        i -= 2; j -= 2;
+        for (/* */; searching and i < n and j < n; /* */) {
+          auto max_index = (a[i] > b[j]) ? a[i] : b[j];
+          if (max_index == a[i]) {
+            dtk -= a[i+1] * weights[a[i]];
+            i -= 2;
+          }
+          if (max_index == b[j]) {
+            duk -= b[j+1] * weights[b[j]];
+            j -= 2;
+          }
+          searching = dtk == duk;
+        }
+      } else
+        return true;
+    } else
+      return false;
   }
   return dtk < duk;
 }
@@ -226,6 +250,7 @@ bool WGrevlex::first_larger_than_multiple(
     if (not t.is_one()) {
       if (not u.is_one()) {
         if (not v.is_one()) {
+          NVAR_TYPE n = 2*t.num_vars();
           auto a = t.packed_log();
           auto b = u.packed_log();
           auto c = v.packed_log();
@@ -233,7 +258,9 @@ bool WGrevlex::first_larger_than_multiple(
           auto j = u.packed_size();
           auto k = v.packed_size();
           i -= 2; j -= 2; k -= 2;
-          for (/* */; searching and i > 0 and j > 0 and k > 0; /* */) {
+          // the strange terminating condition accounts for overflow
+          // when an unsigned number becomes "negative"
+          for (/* */; searching and i < n and j < n and k < n; /* */) {
             auto max_index = (a[i] > b[j]) ? a[i] : b[j];
             max_index = (max_index > c[k]) ? max_index : c[k];
             if (max_index == a[i]) {
@@ -250,9 +277,33 @@ bool WGrevlex::first_larger_than_multiple(
             }
             searching = dtk == duk + dvk;
           }
+          for (/* */; searching and i < n and j < n; /* */) {
+            auto max_index = (a[i] > b[j]) ? a[i] : b[j];
+            if (max_index == a[i]) {
+              dtk -= a[i+1] * weights[a[i]];
+              i -= 2;
+            }
+            if (max_index == b[j]) {
+              duk -= b[j+1] * weights[b[j]];
+              j -= 2;
+            }
+            searching = dtk == duk + dvk;
+          }
+          for (/* */; searching and i < n and k < n; /* */) {
+            auto max_index = (a[i] > c[k]) ? a[i] : c[k];
+            if (max_index == a[i]) {
+              dtk -= a[i+1] * weights[a[i]];
+              i -= 2;
+            }
+            if (max_index == c[k]) {
+              dvk -= c[k+1] * weights[c[k]];
+              k -= 2;
+            }
+            searching = dtk == duk + dvk;
+          }
         } else
           return first_larger(t, u);
-      } else if (v.is_one())
+      } else if (not v.is_one())
         return first_larger(t, v);
       else
         return not t.is_one();

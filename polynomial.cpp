@@ -50,7 +50,7 @@ ostream & operator << (ostream & os, const Abstract_Polynomial & p) {
     Polynomial_Iterator * pi = p.new_iterator();
     while (!pi->fellOff()) {
       if (pi->currMonomial().is_one() or not pi->currCoeff().is_one())
-        os << pi->currCoeff() << ' ';
+        os << pi->currCoeff() << " * ";
       //os << pi->currMonomial();
       if (not pi->currMonomial().is_one())
         pi->currMonomial().print(false, os, p.base_ring().name_list());
