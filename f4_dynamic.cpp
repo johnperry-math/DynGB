@@ -202,6 +202,8 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   for (auto m : M) delete m;
   M.clear(); M.resize(M_builder.size());
   R.clear(); R.resize(M_builder.size());
+  vector<mutex> new_red_mutex(M_builder.size());
+  red_mutex.swap(new_red_mutex);
   size_t m = 0;
   for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
     M[m] = mi->first;
@@ -336,7 +338,7 @@ bool F4_Reduction_Data::is_zero() {
 }
 
 double reduction_time = 0;
-mutex red_mutex;
+//mutex red_mutex;
 
 void F4_Reduction_Data::build_reducer(unsigned mi, const Monomial & u) {
   NVAR_TYPE n = Rx.number_of_variables();
@@ -384,9 +386,7 @@ void F4_Reduction_Data::reduce_my_rows(
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
-  red_mutex.lock();
   Monomial u(n);
-  red_mutex.unlock();
   UCOEF_TYPE mod = F.modulus();
   unsigned new_nonzero_entries;
   #define UNREDUCED_REDUCERS true
@@ -409,7 +409,7 @@ void F4_Reduction_Data::reduce_my_rows(
               const Monomial & t = *M[mi];
               const Monomial & v = gi->currMonomial();
               u.make_product_or_quotient(t, v, false);
-              red_mutex.lock();
+              red_mutex[mi].lock();
               vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
               if (r.size() == 0) { // need to create reducer
                 size_t j = mi;
@@ -422,7 +422,7 @@ void F4_Reduction_Data::reduce_my_rows(
                 }
               }
               delete gi;
-              red_mutex.unlock();
+              red_mutex[mi].unlock();
               // prepare for reduction
               new_nonzero_entries = nonzero_entries[k];
               auto sk = strategies[k];
@@ -533,9 +533,9 @@ void F4_Reduction_Data::reduce_by_old() {
 void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
-    const Prime_Field & F,
     const set<unsigned> & to_reduce
 ) {
+  const Prime_Field & F = Rx.ground_field();
   auto mod = F.modulus();
   const auto & Ai = A[i];
   for (auto j : to_reduce) {
@@ -602,7 +602,7 @@ void F4_Reduction_Data::reduce_by_new(
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_new_rows, this,
-        i, lhead_i, std::cref(F), std::cref(thread_rows[c])
+        i, lhead_i, std::cref(thread_rows[c])
     );
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c].join();
@@ -706,22 +706,28 @@ void F4_Reduction_Data::monomials_in_row(unsigned i, set<Monomial> & result) con
 }
 
 void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
+  const Prime_Field & F = Rx.ground_field();
+  UCOEF_TYPE mod = F.modulus();
   set<unsigned> removed;
   // identify redundants
   for (auto i : in_use) {
-    unsigned i0 = offset[i] + head[i];
-    for (unsigned j = i + 1; j < number_of_rows(); ++j) {
-      if (offset[j] + head[j] == i0 and nonzero_entries[j] == nonzero_entries[i]) {
-        bool still_equal = true;
-        for (unsigned k = i0; still_equal and k < M.size(); ++k) {
-          unsigned ik = k - offset[i];
-          unsigned jk = k - offset[j];
-          still_equal = A[i][ik] == A[j][jk];
-        }
-        if (still_equal) {
-          nonzero_entries[j] = 0;
-          head[j] = M.size();
-          removed.insert(j);
+    if (nonzero_entries[i] != 0) {
+      unsigned i0 = offset[i] + head[i];
+      for (unsigned j = i + 1; j < number_of_rows(); ++j) {
+        if (offset[j] + head[j] == i0 and nonzero_entries[j] == nonzero_entries[i]) {
+          bool still_equal = true;
+          auto & Ai = A[i], & Aj = A[j];
+          auto a = Aj[i0 - offset[j]] * F.inverse(Ai[i0 - offset[i]]) % mod;
+          for (unsigned k = i0; still_equal and k < M.size(); ++k) {
+            unsigned ik = k - offset[i];
+            unsigned jk = k - offset[j];
+            still_equal = (a*Ai[ik] % mod ) == Aj[jk];
+          }
+          if (still_equal) {
+            nonzero_entries[j] = 0;
+            head[j] = M.size();
+            removed.insert(j);
+          }
         }
       }
     }
@@ -1332,13 +1338,18 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
           cout << "new ordering: " << *new_ord << endl;
           all_orderings_used.push_front(curr_ord);
           curr_ord = new_ord;
-          s.set_ordering(curr_ord);
+          /*s.set_ordering(curr_ord);
           for (auto p : P)
             p->change_ordering(curr_ord);
           for (auto & t : T)
-            t.set_monomial_ordering(curr_ord);
+            t.set_monomial_ordering(curr_ord);*/
         }
       }
+      s.set_ordering(curr_ord);
+      for (auto p : P)
+        p->change_ordering(curr_ord);
+      for (auto & t : T)
+        t.set_monomial_ordering(curr_ord);
       for (auto completed_row : all_completed_rows) {
         Constant_Polynomial * r = s.finalize(completed_row);
         if (ordering_changed)

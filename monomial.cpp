@@ -91,34 +91,6 @@ Exponent_Location Monomial::find_exponent(NVAR_TYPE i) const {
       }
     }
   }
-  /*  NVAR_TYPE start = 0, stop = (valid_exponents()) ? last : start;
-    NVAR_TYPE k = (start + stop) / 2;
-    if (k % 2 == 1) k -= 1;
-    bool searching = start != stop;
-    while (searching) {
-      if (exponents[k] == i) {
-        start = stop = k;
-        searching = false;
-      } else if (exponents[k] < i) {
-        start = k;
-        k += (stop - k) / 2;
-        if (k % 2 == 1) k -= 1;
-        searching = k != start;
-      } else {
-        stop = k;
-        k /= 2;
-        if (k % 2 == 1) k -= 1;
-        searching = k != start;
-      }
-    }
-    if (k == last or exponents[k] == i) {
-      result.loc = k;
-      result.already_set = k != last;
-    } else {
-      result.loc = k + 2;
-      result.already_set = false;
-    }
-  }*/
   return result;
 }
 

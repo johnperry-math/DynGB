@@ -24,6 +24,7 @@ using std::cout; using std::endl;
 #include "fields.hpp"
 #include "polynomial_ring.hpp"
 #include "indeterminate.hpp"
+#include "particular_orderings.hpp"
 
 int main()
 {
@@ -64,6 +65,20 @@ int main()
   Monomial smaller { 0, 1, 0, 1, 1, 0 };
   cout << smaller << " < " << larger << " ? " << (smaller < larger) << endl;
   cout << larger << " < " << smaller << " ? " << (larger < smaller) << endl;
+
+  WT_TYPE w1[] { 26, 18, 24, 30, 31, 1, 33, 34, 1 };
+  WT_TYPE w2[] { 157, 102, 142, 173, 182, 1, 190, 191, 1 };
+  WGrevlex o1( 7, w1 );
+  WGrevlex o2( 7, w2 );
+  Monomial t1 { 2, 2, 0, 1, 0, 0, 1 }, t2 { 3, 1, 1, 1, 0, 0, 0 };
+  t1.set_monomial_ordering(&o1); t2.set_monomial_ordering(&o1);
+  cout << "Under ordering " << o1 << ": " << endl;
+  cout << t1 << " < " << t2 << " ? " << ( t1 < t2 ) << endl;
+  cout << t2 << " < " << t1 << " ? " << ( t2 < t1 ) << endl;
+  t1.set_monomial_ordering(&o2); t2.set_monomial_ordering(&o2);
+  cout << "Under ordering " << o2 << ": " << endl;
+  cout << t1 << " < " << t2 << " ? " << ( t1 < t2 ) << endl;
+  cout << t2 << " < " << t1 << " ? " << ( t2 < t1 ) << endl;
 
   Prime_Field F(43);
   string var_names [] = { "x", "y" };

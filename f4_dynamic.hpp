@@ -318,13 +318,11 @@ protected:
     @param i row of the row to use when reducing
     @param lhead_i the location of the (new) leading monomial of @p i;
       this may differ from <c>head[i]</c>!
-    @param F the underlying field
     @param to_reduce which rows of the matrix this thread will reduce
   */
   void reduce_my_new_rows(
       unsigned i,
       unsigned lhead_i,
-      const Prime_Field & F,
       const set<unsigned> & to_reduce
   );
   /** @brief number of columns in the polynomial */
@@ -355,6 +353,8 @@ protected:
   map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
   vector<Abstract_Polynomial *> R;
+  /** @brief mutexes for building rows of @c R */
+  vector<mutex> red_mutex;
   /** @brief reducers actually generated */
   vector<vector<pair<unsigned, COEF_TYPE> > > R_built;
   /** @brief count of threads that have actually read a generated actually built */

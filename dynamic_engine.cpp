@@ -249,8 +249,11 @@ bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
       result = true;
     else if (a.get_pp().total_degree() > b.get_pp().total_degree())
       result = false;
-    else
+    else {
+      //cout << "breaking a Hilbert & degree tie by ordering: " << a.get_pp() << " < " << b.get_pp() << "? ";
       result = (a.get_pp() < b.get_pp());
+      //cout << result << endl;
+    }
   }
   return result;
 };

@@ -135,7 +135,7 @@ class PP_With_Ideal {
       @param h unreduced Hilbert numerator of @p F (does not verify correctness)
     */
     PP_With_Ideal(
-        Monomial u, const list<Monomial> & F, Ray & w,
+        const Monomial & u, const list<Monomial> & F, Ray & w,
         const list<Critical_Pair_Dynamic *> & P,
         const Dense_Univariate_Integer_Polynomial * h = nullptr
     ) : t(u), ordering(w), num_new_pairs(-1), min_deg(-1), max_deg(-1),
