@@ -436,16 +436,30 @@ void F4_Reduction_Data::reduce_my_rows(
                 unsigned l = j - offset[k];
                 auto & Akl = Ak[l];
                 bool was_zero = Akl == 0;
-                Akl += a*ri.second; Akl %= mod;
+                //begin modifications 16 Oct
+                Akl += a*ri.second; // Akl %= mod;
                 if (was_zero) {
                   ++new_nonzero_entries;
                   if (hk > l) hk = l;
-                } else if (Akl == 0)
-                  --new_nonzero_entries;
+                  was_zero = false;
+                }
+                if (Akl & OVERFLOW_MASK != 0) {
+                  Akl %= mod;
+                  if (not was_zero and Akl == 0)
+                    --new_nonzero_entries;
+                }
                 // advance
               }
-              while (hk < Ak.size() and Ak[hk] == 0) ++hk;
+              while (hk < Ak.size() and Ak[hk] == 0) {
+                ++hk;
+                if (hk < Ak.size() and Ak[hk] != 0) {
+                  Ak[hk] %= mod;
+                  if (Ak[hk] == 0) --new_nonzero_entries;
+                }
+              }
+              // end modifications 16 Oct (but see below)
               nonzero_entries[k] = new_nonzero_entries;
+              if (nonzero_entries[k] == 0) hk = M.size();
               //if (k == 0) { cout << '\t'; print_row(k); }
             }
           }
@@ -504,6 +518,36 @@ void F4_Reduction_Data::reduce_my_rows(
       }
     }
   }
+  // begin modifications 16 Oct
+  //mutex debugging;
+  for (auto i: my_rows) {
+    auto & Ai = A[i];
+    /*debugging.lock();
+    cout << "first check of " << i << ": " << head[i] << ", "
+         << nonzero_entries[i] << endl;
+    check_consistency(i);
+    debugging.unlock();*/
+    auto & hi = head[i];
+    for (auto k = hi; k < Ai.size() and nonzero_entries[i] != 0; ++k) {
+      if (Ai[k] != 0) {
+        Ai[k] %= mod;
+        if (Ai[k] == 0) {
+          --nonzero_entries[i];
+          if (nonzero_entries[i] == 0)
+            hi = M.size();
+          else if (k == hi) {
+            while (hi < Ai.size() and Ai[hi] == 0) ++hi;
+          }
+        }
+      }
+    }
+    /*debugging.lock();
+    cout << "second check of " << i << ": " << head[i] << ", "
+         << nonzero_entries[i] << endl;
+    check_consistency(i);
+    debugging.unlock();*/
+  }
+  // end modifications 16 Oct
 }
 
 void F4_Reduction_Data::reduce_by_old() {
@@ -517,7 +561,7 @@ void F4_Reduction_Data::reduce_by_old() {
   // loop through num_rows
   for (unsigned k = 0; k < num_rows; ++k)
     thread_rows[k % num_threads].push_back(k);
-  for (unsigned k = 0; k < num_threads; ++k) thread_rows[k].push_back(-1);
+  //for (unsigned k = 0; k < num_threads; ++k) thread_rows[k].push_back(-1);
   thread * workers = new thread[num_threads];
   for (unsigned c = 0; c < num_threads; ++c) {
     workers[c] = thread(

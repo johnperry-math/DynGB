@@ -26,9 +26,12 @@
 // for coefficients
 
 #define COEF_TYPE int64_t
-#define UCOEF_TYPE uint64_t
+#define UCOEF_TYPE uint64_t // see OVERFLOW_MASK below
 #define MPQCOEF_TYPE mpq_class
 #define MPZCOEF_TYPE mpz_class
+
+// to catch overflow; this should be the same size as UCOEF_TYPE
+const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE )1) << 63;
 
 // for monomials
 #define EXP_TYPE uint32_t

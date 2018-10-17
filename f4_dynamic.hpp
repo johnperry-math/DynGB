@@ -294,15 +294,13 @@ public:
   void print_builder();
   ///@}
 protected:
-  /*void check_consistency() {
-    for (unsigned i = 0; i < num_rows; ++i) {
-      const auto & Ai = A[i];
-      unsigned n = 0;
-      for (auto a : Ai)
-        if (a != 0) ++n;
-      if (n != nonzero_entries[i]) cout << "row " << i << " inconsistent\n";
-    }
-  }*/
+  void check_consistency(unsigned i) {
+    const auto & Ai = A[i];
+    unsigned n = 0;
+    for (auto a : Ai)
+      if (a != 0) ++n;
+    if (n != nonzero_entries[i]) cout << "row " << i << " inconsistent\n";
+  }
   /**
     @brief creates rows of the matrix indexed by the specified pairs,
       starting at the specified row
