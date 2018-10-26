@@ -126,7 +126,7 @@ bool PPL_Solver::solve(const Constraint & c) {
     if (c[i] != 0)
       ineq += Linear_Expression(c[i]*(*X[i]));
   }
-  PPL_Constraint pc(ineq >= 0);
+  PPL_Constraint pc(ineq >= 1);
   lp->refine_with_constraint(pc);
   setup_rays();
   return (rays.size() > 0);
@@ -140,12 +140,34 @@ bool PPL_Solver::solve(const vector<Constraint> &C) {
       if (c[i] != 0)
         ineq += Linear_Expression(c[i]*(*X[i]));
     }
-    PPL_Constraint pc(ineq >= 0);
+    PPL_Constraint pc(ineq >= 1);
     cs.insert(pc);
   }
   lp->refine_with_constraints(cs);
   setup_rays();
   return (rays.size() > 0);
+}
+
+ostream & operator << (ostream & ostr, const PPL_Solver &skel)
+{
+  // header, start constraints
+  ostr << "Skeleton defined by constraints" << endl;
+  for (auto & c : skel.lp->constraints()) {
+    c.ascii_dump(ostr);
+  }
+  ostr << "has " << skel.rays.size() << " rays" << endl;
+  for (auto & r : skel.rays) {
+    ostr << '\t' << r << endl;
+  }
+  ostr << "connected in edges" << endl;
+  for (auto & g : skel.lp->generators()) {
+    if (g.is_line()) {
+      g.ascii_dump(ostr);
+    }
+  }
+  // footer
+  ostr << "End of skeleton" << endl;
+  return ostr;
 }
 
 }

@@ -170,6 +170,7 @@ protected:
   const string name = "";
   /** @brief whether to elaborate during certain activities &mdash; mainly for debugging */
   bool elaborate = false;
+  /** @brief used for a spinlock for thread safety */
   atomic_flag in_use = ATOMIC_FLAG_INIT;
 };
 

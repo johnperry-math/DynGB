@@ -582,14 +582,14 @@ bool verify_and_modify_if_necessary(
 )
 {
   bool consistent = true; // innocent until proven guilty
-  Ray w = ray_sum(skel->get_rays()); // our tentative ordering
-  // cout << "Have ray " << w << endl;
+  Ray w { ray_sum(skel->get_rays()) }; // our tentative ordering
+  cout << "Have ray " << w << endl;
   NVAR_TYPE n = w.get_dimension();
   RAYENT_TYPE *entries = new RAYENT_TYPE [n]; // used for entries for new rays
   CONSTR_TYPE *coefficients = new CONSTR_TYPE [n]; // used for coefficients for new constraints
   // loop through all polynomials; verify leading power product is unchanged
   for (
-       auto piter = currentPolys.begin(); piter != currentPolys.end(); ++piter
+       auto piter = currentPolys.begin(); consistent and piter != currentPolys.end(); ++piter
        // next line commented out for GLPK_Solver (approx skel causes issues...)
        //Abstract_Polynomial * pp : currentPolys
       )
@@ -600,7 +600,6 @@ bool verify_and_modify_if_necessary(
     for (NVAR_TYPE i = 0; i < n; ++i) entries[i] = t[i];
     Ray a(n, entries);
     // loop through the polynomial's remaining monomials
-    //for (poly titer = (*piter)->next; consistent and titer != nullptr; titer = titer->next)
     Polynomial_Iterator * ti;
     for (
           ti = pp->new_iterator();
@@ -619,6 +618,7 @@ bool verify_and_modify_if_necessary(
         //cout << a*w << ',' << b*w << endl;
         if (a*w <= b*w)
         {
+          //cout << "ray fails to preserve " << t << " > " << ti->currMonomial() << " ; adding constraint and trying to recover\n";
           if (coefficients == nullptr) // ensure we have space
             coefficients = new CONSTR_TYPE[n];
           for (NVAR_TYPE i = 0; i < n; ++i)
@@ -627,25 +627,27 @@ bool verify_and_modify_if_necessary(
           LP_Solver * newskel = nullptr;
           if (dynamic_cast<Skeleton *>(skel) != nullptr)
             newskel = new Skeleton(*static_cast<Skeleton *>(skel));
-          else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr) {
+          else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
             newskel = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
-            //piter = currentPolys.begin(); break;
-          }
           else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
             newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
           consistent = newskel->solve(new_constraint);
-          w = ray_sum(newskel->get_rays());
+          auto w_tmp { ray_sum(newskel->get_rays()) };
           //cout << "Have ray " << w << endl;
           // if we're consistent, we need to recompute the ordering
           //cout << "\t\t" << a*w << ',' << b*w << endl;
-          if (consistent and a*w > b*w)
+          if (consistent and a*w_tmp > b*w_tmp)
           {
-            //*skel = *newskel;
             skel->copy(newskel);
             piter = currentPolys.begin();
+            w = w_tmp;
+            cout << " recovered with << " << w_tmp << endl;
             break;
           } // if consistent
-          else consistent = false;
+          else {
+            consistent = false;
+            cout << t << " fails again with ordering " << w_tmp << endl;
+          }
           delete newskel;
         } // if LPP changed
       } // if PP != LPP
@@ -679,6 +681,7 @@ void constraints_for_new_pp(
     // insert only different PPs (since I->t should also be in that set)
     if (t != I.get_pp())
     {
+      //cout << "adding constraint " << I.get_pp() << " > " << t << endl;
       b = t.log();
       for (NVAR_TYPE i = 0; i < n; ++i) c[i] = a[i] - b[i];
       result.push_back(Constraint(n,c));
@@ -810,13 +813,13 @@ void select_monomial(
       else if (src_PPL != nullptr)
         newSkeleton = new PPL_Solver(*src_PPL);
       vector<Constraint> newvecs;
-      /*cout << "testing " << I.get_pp() << endl;
-      cout << '\t' << *I.get_hilbert_polynomial() << endl;
+      //cout << "testing " << I.get_pp() << endl;
+      /*cout << '\t' << *I.get_hilbert_polynomial() << endl;
       cout << '\t' << *I.get_hilbert_numerator() << endl;*/
       constraints_for_new_pp(I, PPunion, newvecs);
       if (newSkeleton->solve(newvecs))
       {
-        //cout << "consistent\n";
+        //cout << I.get_pp() << " is consistent\n";
         if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
         {
           if (src_skel != nullptr)
@@ -832,7 +835,7 @@ void select_monomial(
       }
       else
       {
-        //cout << "inconsistent\n";
+        //cout << I.get_pp() << "is inconsistent\n";
         // cout << newSkeleton;
         // this monomial is not, in fact, compatible
         compatible_pps.erase(I.get_pp());

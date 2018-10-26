@@ -94,6 +94,10 @@ public:
     return not inconsistent;
   }
   ///@}
+  /** @name I/O */
+  ///@{
+  friend ostream & operator<<(ostream & os, const GLPK_Solver & s);
+  ///@}
 protected:
   /**
     @brief overrides @c rays from @c LP_Solver ; necessary because for GLPK
@@ -119,6 +123,14 @@ private:
   int n; /**< number of variables */
   mutable bool dirty; /**< whether the rays are valid (here, @c false means valid) */
 };
+
+/**
+  @brief prints out the constraints, then the rays, then the edges of @p s.
+  @param os output stream to print to
+  @param s skeleton to print
+  @return the output stream
+*/
+ostream & operator<<(ostream & os, const GLPK_Solver & s);
 
 }
 

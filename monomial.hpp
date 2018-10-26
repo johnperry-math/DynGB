@@ -47,7 +47,16 @@ using std::string;
 
 /** @brief used to locate a variable's exponent in the Monomial data structure */
 struct Exponent_Location_Struct {
+  /**
+    @brief location of the desired exponent, if already set
+    (check against @c already_set !)'
+    @warning If @c already_set is @c false, this data is @b invalid !
+  */
   NVAR_TYPE loc = 0;
+  /**
+    @brief @c true if and only if the degree of this exponent has been set
+    @warning Ignore the value of @c loc if @c already_set is @c false!
+  */
   bool already_set;
 };
 
@@ -351,11 +360,19 @@ public:
   void operator delete(void *);
   ///@}
 protected:
-  /** @brief locate the indicated exponent */
+  /**
+    @brief locate the indicated exponent
+    @return information on the exponent's location; @see Exponent_Location_Struct
+  */
   Exponent_Location find_exponent(NVAR_TYPE) const;
   /** @brief make the last variable invalid */
   void make_last_invalid() { last = 0; }
-  /** @brief check if exponents are valid */
+  /**
+    @brief check if exponents are valid
+    @return @c true if and only if this monomial has valid data
+    @details Currently this is a test to see if the polynomial has any exponents
+    defined at all. It will in fact give the opposite result of @c is_one().
+  */
   bool valid_exponents() const { return last > 0; }
   /** @brief make space for a new exponent, starting at given position */
   void shift_exponents_right(NVAR_TYPE);

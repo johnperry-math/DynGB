@@ -19,6 +19,9 @@
 \*****************************************************************************/
 
 #include "lp_solver.hpp"
+#include "glpk_solver.hpp"
+#include "ppl_solver.hpp"
+#include "skeleton.hpp"
 
 namespace LP_Solvers {
 
@@ -386,6 +389,19 @@ bool operator<(const Ray &first_ray, const Ray &second_ray)
 }
 
 const set<Ray> & LP_Solver::get_rays() const { return rays; }
+
+ostream & operator<<(ostream & os, const LP_Solver & s) {
+  const Skeleton * Skel_src;
+  const GLPK_Solver * GLPK_src;
+  const PPL_Solver * PPL_src;
+  if ((Skel_src = dynamic_cast<const Skeleton *>(&s)) != nullptr)
+    os << *Skel_src;
+  else if ((GLPK_src = dynamic_cast<const GLPK_Solver *>(&s)) != nullptr)
+    os << *GLPK_src;
+  else if ((PPL_src = dynamic_cast<const PPL_Solver *>(&s)) != nullptr)
+    os << *PPL_src;
+  return os;
+}
 
 }
 

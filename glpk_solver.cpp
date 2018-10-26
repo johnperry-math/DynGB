@@ -204,6 +204,29 @@ const set<Ray> & GLPK_Solver::get_rays() const {
   return rays;
 }
 
+ostream & operator << (ostream & ostr, const GLPK_Solver &skel)
+{
+  // header, start constraints
+  int num_rows = glp_get_num_rows(skel.lp);
+  int num_cols = glp_get_num_cols(skel.lp);
+  int row_buffer[num_cols];
+  double val_buffer[num_cols];
+  ostr << "Skeleton defined by " << num_rows << " constraints" << endl;
+  for (int i = 0; i < num_rows; ++i) {
+    int len = glp_get_mat_row(skel.lp, i, row_buffer, val_buffer);
+    for (int j = 0; j < len; ++j)
+      ostr << val_buffer[j] << " * " << row_buffer[j] << " + ";
+    ostr << endl;
+  }
+  ostr << "has " << skel.get_rays().size() << " rays" << endl;
+  for (auto & r : skel.get_rays()) {
+    ostr << '\t' << r << endl;
+  }
+  // footer
+  ostr << "End of skeleton" << endl;
+  return ostr;
+}
+
 }
 
 #endif

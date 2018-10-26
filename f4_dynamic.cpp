@@ -27,6 +27,8 @@ double copy_time = 0;
 using std::thread;
 #include <mutex>
 using std::mutex;
+#include <bitset>
+using std::bitset;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -74,6 +76,7 @@ F4_Reduction_Data::F4_Reduction_Data(
   static double adding_time = 0;
   static double initializing_time = 0;
   time_t ostart = time(nullptr);
+  auto mod = Rx.ground_field().modulus();
   num_cols = 0;
   // set up the heuristic
   switch(heur) {
@@ -1256,7 +1259,9 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   list<Monomial> T;
   Dense_Univariate_Integer_Polynomial * hn = nullptr;
   NVAR_TYPE n = F.front()->number_of_variables();
-  LP_Solver * skel = new Skeleton(n);
+  //LP_Solver * skel = new Skeleton(n);
+  LP_Solver * skel = new PPL_Solver(n);
+  //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
   Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
@@ -1380,6 +1385,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
           w.simplify_ray();
           WGrevlex * new_ord = new WGrevlex(w);
           cout << "new ordering: " << *new_ord << endl;
+          //cout << "skeleton:\n" << *skel << endl;
           all_orderings_used.push_front(curr_ord);
           curr_ord = new_ord;
           /*s.set_ordering(curr_ord);

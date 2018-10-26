@@ -669,9 +669,21 @@ public:
     return not inconsistent;
   }
   ///@}
+  /** @name I/O */
+  ///@{
+  friend ostream & operator<<(ostream & os, const LP_Solver & s);
+  ///@}
 protected:
   mutable set<Ray> rays; /**< the skeleton (may be approximate, depending on solver) */
 };
+
+/**
+  @brief prints out the constraints, then the rays, then the edges of @p s.
+  @param os output stream to print to
+  @param s skeleton to print
+  @return the output stream
+*/
+ostream & operator<<(ostream & os, const LP_Solver & s);
 
 }
 

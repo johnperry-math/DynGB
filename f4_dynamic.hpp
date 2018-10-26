@@ -294,6 +294,12 @@ public:
   void print_builder();
   ///@}
 protected:
+  /**
+    @brief one or more checks for integrity of data of a row in the matrix
+    @param i which row of the matrix to check
+    @details At the present time this checks only if the number of nonzero
+      entries is correctly recorded.
+  */
   void check_consistency(unsigned i) {
     const auto & Ai = A[i];
     unsigned n = 0;

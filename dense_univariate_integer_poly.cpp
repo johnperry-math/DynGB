@@ -48,8 +48,11 @@ Dense_Univariate_Integer_Polynomial::Dense_Univariate_Integer_Polynomial(
   size = n + 1;
   deg = n;
   coeffs = new MPZCOEF_TYPE[size] { 0 };
-  for (DEG_TYPE i = 0; i <= deg; ++i)
-    coeffs[i] = C[i];
+  for (DEG_TYPE i = 0; i <= deg; ++i) {
+    coeffs[i] = (long )(C[i] >> 32);
+    coeffs[i] << 32;
+    coeffs[i] = coeffs[i] + (long )(C[i] % (((long long)1) << 32));
+  }
 }
 
 void Dense_Univariate_Integer_Polynomial::expand_poly(DEG_TYPE n) {

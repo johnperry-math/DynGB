@@ -64,6 +64,10 @@ public:
   /** @brief clear the current set of rays and extracts the ones contained in lp */
   virtual void setup_rays();
   ///@}
+  /** @name I/O */
+  ///@{
+  friend ostream & operator<<(ostream & os, const PPL_Solver & s);
+  ///@}
 protected:
   PPL::NNC_Polyhedron * lp; /**< @brief PPL problem interface */
   NVAR_TYPE n; /**< @brief number of variables */
@@ -72,6 +76,14 @@ protected:
   PPL::Variable ** X; /**< @brief array of variables */
   RAYENT_TYPE * ray_data; /**< @brief used to retrieve rays */
 };
+
+/**
+  @brief prints out the constraints, then the rays, then the edges of @p s.
+  @param os output stream to print to
+  @param s skeleton to print
+  @return the output stream
+*/
+ostream & operator<<(ostream & os, const PPL_Solver & s);
 
 }
 
