@@ -71,10 +71,6 @@ bool no_triplet(const T *p, const list<T *>C) {
   return result;
 }
 
-template bool no_triplet<Critical_Pair_Basic>(
-    const Critical_Pair_Basic *, const list<Critical_Pair_Basic *>
-);
-
 /**
   @brief Checks if the lcm of @p t and @p u is like the lcm stored in @p p.
   @param t a monomial
@@ -129,10 +125,6 @@ void report_critical_pairs(const list<T *>P, bool verbose = false) {
     for (T * p : P)
       cout << '\t' << *p << endl;
 }
-
-template void report_critical_pairs<Critical_Pair_Basic>(
-    const list<Critical_Pair_Basic *>, bool
-);
 
 /**
   @brief used to sort polynomials by leading monomial
@@ -235,9 +227,5 @@ void sort_pairs_by_strategy(list<T *> & P) {
   P.erase(minkey_i);
   P.push_front(minkey);
 }
-
-template void sort_pairs_by_strategy<Critical_Pair_Basic>(
-    list<Critical_Pair_Basic *> &
-);
 
 #endif

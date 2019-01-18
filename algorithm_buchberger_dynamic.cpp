@@ -29,6 +29,20 @@ using Dynamic_Engine::compatible_pp; using Dynamic_Engine::hilbert_cmp;
 #include "particular_orderings.hpp"
 #include "reduction_support.hpp"
 
+// instantiation of templated functions
+
+template void sort_pairs_by_strategy<Critical_Pair_Dynamic>(
+    list<Critical_Pair_Dynamic *> &
+);
+
+template void report_critical_pairs<Critical_Pair_Dynamic>(
+    const list<Critical_Pair_Dynamic *>, bool
+);
+
+template bool no_triplet<Critical_Pair_Dynamic>(
+    const Critical_Pair_Dynamic *, const list<Critical_Pair_Dynamic *>
+);
+
 void reduce_over_basis_dynamic(
     Mutable_Polynomial **sp,
     const list<Abstract_Polynomial *>G

@@ -21,7 +21,7 @@ double copy_time = 0;
 \*****************************************************************************/
 
 #include "f4_dynamic.hpp"
-#include "algorithm_buchberger_dynamic.hpp"
+#include "algorithm_buchberger_basic.hpp"
 
 #include <thread>
 using std::thread;
@@ -50,6 +50,24 @@ using Dynamic_Engine::less_by_betti;
 using Dynamic_Engine::less_by_grad_betti;
 using Dynamic_Engine::compatible_pp;
 using Dynamic_Engine::verify_and_modify_if_necessary;
+
+extern list<Abstract_Polynomial *> reduce_basis(list<Abstract_Polynomial *>G);
+extern void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy);
+extern void gm_update_dynamic(
+    list<Critical_Pair_Dynamic *> & P,
+    list<Abstract_Polynomial *> & G,
+    Abstract_Polynomial * r,
+    StrategyFlags strategy,
+    ORDERING_TYPE * ordering
+);
+
+extern template void report_critical_pairs<Critical_Pair_Dynamic>(
+    const list<Critical_Pair_Dynamic *>, bool
+);
+
+extern template void sort_pairs_by_strategy<Critical_Pair_Basic>(
+    list<Critical_Pair_Basic *> &
+);
 
 void find_position(
   list<Monomial *>::iterator & ti,

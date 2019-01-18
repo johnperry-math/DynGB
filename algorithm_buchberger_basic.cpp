@@ -22,6 +22,18 @@
 
 #include "reduction_support.hpp"
 
+template bool no_triplet<Critical_Pair_Basic>(
+    const Critical_Pair_Basic *, const list<Critical_Pair_Basic *>
+);
+
+template void report_critical_pairs<Critical_Pair_Basic>(
+    const list<Critical_Pair_Basic *>, bool
+);
+
+template void sort_pairs_by_strategy<Critical_Pair_Basic>(
+    list<Critical_Pair_Basic *> &
+);
+
 bool lcm_alike(const Monomial & t, const Monomial & u,
                const Critical_Pair_Basic * p)
 {

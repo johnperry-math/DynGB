@@ -53,4 +53,7 @@ const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE )1) << 63;
 // entries in a weighted monomial ordering -- needs to be the same as RAY_TYPE
 #define WT_TYPE RAYENT_TYPE
 
+// ordering for dynamic computation
+#define ORDERING_TYPE WGrevlex
+
 #endif

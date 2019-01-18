@@ -43,11 +43,6 @@ using std::set;
 
 #include "dynamic_engine.hpp"
 using Dynamic_Engine::Dynamic_Heuristic;
-#include "algorithm_buchberger_basic.hpp"
-
-// caching the weights seems to run about 15% slower, oddly enough
-//#define ORDERING_TYPE CachedWGrevlex_Ordering
-#define ORDERING_TYPE WGrevlex
 
 /**
   @defgroup GBComputation Gr&ouml;bner basis computation
@@ -135,20 +130,6 @@ list<Constant_Polynomial *> buchberger_dynamic(
     Dynamic_Heuristic heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG,
     DynamicSolver solver = SKELETON_SOLVER,
     bool analyze_inputs = false
-);
-
-// instantiation of templated functions
-
-template bool no_triplet<Critical_Pair_Dynamic>(
-    const Critical_Pair_Dynamic *, const list<Critical_Pair_Dynamic *>
-);
-
-template void report_critical_pairs<Critical_Pair_Dynamic>(
-    const list<Critical_Pair_Dynamic *>, bool
-);
-
-template void sort_pairs_by_strategy<Critical_Pair_Dynamic>(
-    list<Critical_Pair_Dynamic *> &
 );
 
 /**
