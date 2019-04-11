@@ -547,14 +547,14 @@ void compatible_pp(
   for (const Monomial & b : allPPs)
     if (not b.is_like(currentLPP) and skel->makes_consistent_constraint(b, currentLPP))
       initial_candidates.push_back(b);
-  for (const Monomial & t : initial_candidates)
-    result.insert(t);
+  //for (const Monomial & t : initial_candidates)
+  //  result.insert(t);
   // (new) alternate refinement: compare remaining monomials against each other,
   // using skeleton to ensure consistency
   // this approach should be more efficient than the one below, yet equivalent to it
   for (const Monomial & t : initial_candidates)
   {
-    // cout << "testing for consistency: "; pWrite(*t);
+    cout << "testing for consistency: " << t << endl;
     bool good_constraints = true;
     /*for (set<Monomial>::const_iterator u = initial_candidates.begin();
          good_constraints and u != initial_candidates.end();
@@ -562,16 +562,20 @@ void compatible_pp(
       if (not t.is_like(*u))
         if (not skel->makes_consistent_constraint(t,*u))
           good_constraints = false;*/
-    for (const Monomial & u : initial_candidates)
+    for (const Monomial & u : initial_candidates) {
+      cout << "\tagainst " << u << endl;
       if (not t.is_like(u))
         if (not skel->makes_consistent_constraint(t, u)) {
           good_constraints = false;
+          cout << "\tinconsistent\n";
           break;
         }
+    }
     if (good_constraints)
     {
-      boundary_mons.push_back(t);
-      // cout << "\tconsistent!\n";
+      //boundary_mons.push_back(t);
+      result.insert(t);
+      cout << "\tconsistent!\n";
     }
   }
 }
