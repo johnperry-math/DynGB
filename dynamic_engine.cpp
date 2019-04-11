@@ -547,8 +547,8 @@ void compatible_pp(
   for (const Monomial & b : allPPs)
     if (not b.is_like(currentLPP) and skel->makes_consistent_constraint(b, currentLPP))
       initial_candidates.push_back(b);
-  for (const Monomial & t : initial_candidates)
-    result.insert(t);
+  //for (const Monomial & t : initial_candidates)
+  //  result.insert(t);
   // (new) alternate refinement: compare remaining monomials against each other,
   // using skeleton to ensure consistency
   // this approach should be more efficient than the one below, yet equivalent to it
@@ -570,7 +570,8 @@ void compatible_pp(
         }
     if (good_constraints)
     {
-      boundary_mons.push_back(t);
+      //boundary_mons.push_back(t);
+      result.insert(t);
       // cout << "\tconsistent!\n";
     }
   }
