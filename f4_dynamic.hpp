@@ -157,7 +157,7 @@ public:
   /** @brief basic properties */
   unsigned number_of_rows() const { return A.size(); }
   /** @brief set of monomials in row @p i that are not zero */
-  void monomials_in_row(unsigned i, set<Monomial> &) const;
+  void monomials_in_row(unsigned i, set<int> &) const;
   /** @brief current ordering of monomials */
   const WGrevlex * current_ordering() const { return mord; }
   ///@}
@@ -190,23 +190,71 @@ public:
   /** @brief reduces polynomials */
   void reduce_by_new(unsigned i, unsigned lhead_i, const set<unsigned> &);
   /**
-    @brief selects leading monomials for the remaining nonzero rows
-    @details This functions basically fills the role that select_monomial()
-      fills in the dynamic Buchberger algorithm.
-    @param T list of current leading monomials
-    @param G list of current basis polynomials
-    @param P list of current critical pairs
-    @param curr_ord current monomial ordering
-    @param skel the current LP_Solver that defines the term ordering
-    @return the recommended monomial ordering;
-      this may be the same as @p curr_ord
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief Compute the compatible leading monomials of a polynomial.
+    @details This differs from the more general case in that monomials are
+      indexed by @c M, rather than making copies of monomials.
+      In addition, we keep a cache of the monomials for each row,
+      so that we don't have to recompute the compatible monomials on each pass.
+    @param currentLPP the current leading power product of the polynomial
+    @param allPPs set of all power products of the polynomial
+    @param result set of power products of the polynomial compatible with `bndrys`
+    @param skel existing skeleton that defines currently-compatible orderings
+    @param boundary_mons boundary monomials (no apparent purpose at the moment)
   */
-  WGrevlex * select_dynamic(
-      list<Monomial> & T,
-      const list<Abstract_Polynomial *> G,
-      const list<Critical_Pair_Dynamic *> & P,
-      WGrevlex * curr_ord,
-      LP_Solver * & skel
+  void compatible_pp(
+    const int currentLPP_index,            // the current LPP
+    const set<int> & allPPs,   // the monomials to consider; some removed
+    set<int> &result,          // returned as PPs for Hilbert function
+                                    // ("easy" (& efficient?) to extract exps
+    list<int> &boundary_mons,   // boundary monomials
+    const LP_Solver *skel                 // used for alternate refinement
+  );
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief Create constraints for a candidate LPP.
+    @param pp_I pair of PP with the ideal it would have.
+    @param monomials_for_comparison indices of monomials used to generate constraints with LPP
+    @param result the new constraints
+  */
+  void constraints_for_new_pp(
+    const PP_With_Ideal &I,
+    const set<int> &monomials_for_comparison,
+    vector<Constraint> &result
+  );
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief Selects a leading power product for a polynomial.
+    @details Applies a particular Dynamic_Heuristic
+    (default is `ORD_HILBERT_THEN_DEG`)
+    and ensures compatibility with previous choices of LPP for other monomials.
+    @param allPP_indices indices of the support of a polynomial in need of a new choice of LPP
+    @param currentLPP current leading monomial of this polynomial
+    @param CurrentLPPs the current choices of LPPs for `CurrentPolys`
+    @param CurrentPolys the current basis of the ideal
+    @param critpairs the current list of critical pairs
+    @param currSkel the current skeleton, corresponding to the choices `CurrentLPPs`
+    @param ordering_changed whether the monomial selected changes the ordering
+    @param method the method to apply; see `Dynamic_Heuristic`
+    @param current_hilbert_numerator Hilbert numerator for CurrentLPPs (changes to
+        match new monomial, hence the double reference)
+  */
+  void select_monomial(
+      const set<int> & allPP_indices,
+      const int currentLPP,
+      list<Monomial> & CurrentLPPs,       // changes
+      Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
+      const list<Abstract_Polynomial *> & CurrentPolys,
+      const list<Critical_Pair_Dynamic *> & crit_pairs,
+      LP_Solver * currSkel,                        // possibly changes
+      bool & ordering_changed,
+      Dynamic_Heuristic method
   );
   /**
     @brief selects leading monomials for one remaining nonzero rows
