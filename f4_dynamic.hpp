@@ -392,6 +392,14 @@ protected:
       subrow of the dense matrix
   */
   vector<vector<COEF_TYPE> > A;
+  /**
+    @brief cache of monomials which could possibly be leading monomials
+  */
+  vector<set<int> > row_plm_cache;
+  /**
+    @brief record of which rows were "dirtied" by a previous reduction
+  */
+  vector<bool> row_is_dirty;
   /** @brief index of the starting point of this row in the dense matrix*/
   vector<unsigned> offset;
   /**

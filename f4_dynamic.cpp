@@ -194,6 +194,8 @@ void F4_Reduction_Data::initialize_some_rows(
     auto pi = p->new_iterator();
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
+    row_plm_cache.clear();
+    row_is_dirty[row] = true;
     //unsigned i = 0;
     unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
@@ -220,6 +222,8 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
+  row_plm_cache.resize(num_rows);
+  row_is_dirty.resize(num_rows);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   for (auto m : M) delete m;
@@ -1284,8 +1288,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       set<int> all_pps, potential_pps;
       list<int> boundary_pps;
       monomials_in_row(i, all_pps);
-      //compatible_pp(*M[offset[i] + head[i]], all_pps, potential_pps, boundary_pps, skel);
-      compatible_pp(offset[i] + head[i], all_pps, potential_pps, boundary_pps, skel);
+      if (row_is_dirty[i])
+        compatible_pp(offset[i] + head[i], all_pps, potential_pps, boundary_pps, skel);
+      else
+        potential_pps = row_plm_cache[i];
       cout << "compatible monomials for row " << i << ": ";
       for (auto t : potential_pps) cout << *M[t] << ", "; cout << endl;
       if (potential_pps.size() == 1) {
