@@ -209,6 +209,18 @@ class F4_Hash {
       return curr->second;
     }
 
+    /**
+      @brief indicates which location is associated with @p t
+      @param t @c Monomial
+      @return location of @p t in the array
+    */
+    unsigned operator[](const Monomial & t) {
+      auto & list = table[get_index(t)];
+      auto curr = list.begin();
+      while (not curr->first->is_like(t)) ++curr;
+      return curr->second;
+    }
+
     friend ostream & operator << (ostream &, const F4_Hash &);
 
 };

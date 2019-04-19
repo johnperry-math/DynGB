@@ -76,7 +76,9 @@ public:
     @param g a polynomial
   */
   virtual void pre_reduction_tasks(const Monomial & u, const Abstract_Polynomial & g) override {
-    pre_reduction_tasks(u.log(), g);
+    auto uexp = u.log();
+    pre_reduction_tasks(uexp, g);
+    delete [] uexp;
   }
   /** @name Basic properties */
   ///@{

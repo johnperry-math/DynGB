@@ -540,7 +540,9 @@ void compatible_pp(
   const set<Ray> &bndrys = skel->get_rays();
   // get the exponent vector of the current LPP, insert it
   NVAR_TYPE n = currentLPP.num_vars();
-  Ray aray(n, currentLPP.log());
+  auto alog = currentLPP.log();
+  Ray aray(n, alog);
+  delete [] alog;
   list<Monomial> initial_candidates;
   initial_candidates.push_back(currentLPP);
   // compare other monomials with LPP
