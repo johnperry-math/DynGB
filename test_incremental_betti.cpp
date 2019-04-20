@@ -121,9 +121,9 @@ void incremental_test() {
   Monomial x24x32  { 0, 0, 4, 2 };
 
   WT_TYPE wts[4] = { 6, 4, 3, 2 };
-  list<Monomial> T { w, x2 };
+  vector<Monomial> T { w, x2 };
   cout << w << ", " << x2 << ", " << x1x32 << ": ";
-  set<pair<const Monomial *, const Monomial *> > P;
+  set<pair<int, int> > P;
   for (auto p : incremental_betti(T, x1x32, P))
     cout << p.first << ',' << p.second << "; ";
   cout << endl;
@@ -179,14 +179,14 @@ void incremental_test() {
   cout << endl;*/
 
   P.clear();
-  P.emplace(&x2, &x1x32);   // 1,2
-  P.emplace(&x2, &x1x22x3); // 1,3
-  P.emplace(&x2, &x1x24);   // 1,5
-  P.emplace(&x1x32, &x1x22x3); // 2,3
-  P.emplace(&x1x32, &x22x33);  // 2,4
-  P.emplace(&x1x32, &x1x24);   // 2,5
-  P.emplace(&x1x22x3, &x1x24); // 3,5
-  list<Monomial> V { w, x2, x1x32, x1x22x3, x22x33, x1x24 };
+  P.emplace(1, 2); // 1,2
+  P.emplace(1, 3); // 1,3
+  P.emplace(1, 5); // 1,5
+  P.emplace(2, 3); // 2,3
+  P.emplace(2, 4); // 2,4
+  P.emplace(2, 5); // 2,5
+  P.emplace(3, 5); // 3,5
+  vector<Monomial> V { w, x2, x1x32, x1x22x3, x22x33, x1x24 };
   cout << w << ", " << x2 << ", " << x1x32 << ", " << x1x22x3 << ", " << x22x33 << ", " << x1x24 << ", " << x24x32 << " : ";
   for (auto p : incremental_betti(V, x24x32, P))
     cout << p.first << ',' << p.second << "; ";

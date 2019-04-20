@@ -118,9 +118,9 @@ inline map<DEG_TYPE, unsigned long> full_betti(
     degree @f$ d @f$.
 */
 map<DEG_TYPE, unsigned long> incremental_betti(
-  const list<Monomial> & T,
+  const vector<Monomial> & T,
   const Monomial & u,
-  set< pair<const Monomial *, const Monomial *> > & R,
+  set< pair<int, int> > & R,
   const WT_TYPE * grading = nullptr
 );
 

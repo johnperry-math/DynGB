@@ -95,12 +95,12 @@ public:
       NVAR_TYPE nvars, const list<Monomial> & G,
       const Dense_Univariate_Integer_Polynomial * h_old = nullptr,
       const WT_TYPE * h_grading = nullptr
-  ) {
+  ) : gens(G) {
     n = nvars;
     for (const Monomial & g : G) {
       if (g.num_vars() != n)
         throw new Monomial_Ideal_Variables_Exception();
-      gens.push_back(g);
+      gens_vector.push_back(g);
     }
     hPol = nullptr;
     if (h_grading == nullptr) {
@@ -123,13 +123,10 @@ public:
         NVAR_TYPE nvars, const vector<Monomial> & G,
         const Dense_Univariate_Integer_Polynomial * h_old = nullptr,
         const WT_TYPE * h_grading = nullptr
-  ) {
+  ) : gens_vector(G) {
     n = nvars;
-    for (const Monomial & g : G) {
-      if (g.num_vars() != n)
-        throw new Monomial_Ideal_Variables_Exception();
+    for (auto & g : G)
       gens.push_back(g);
-    }
     hPol = nullptr;
     if (h_grading == nullptr) {
       hNum = (h_old == nullptr) ? nullptr
@@ -144,7 +141,7 @@ public:
   }
   /** @brief copy constructor */
   explicit Monomial_Ideal(const Monomial_Ideal & I) 
-  : n(I.n), gens(I.gens)
+  : n(I.n), gens(I.gens), gens_vector(I.gens_vector)
   {
     hNum = (I.hNum == nullptr) ? nullptr
         : new Dense_Univariate_Integer_Polynomial(*(I.hNum));
@@ -183,6 +180,8 @@ public:
   unsigned size() const { return gens.size(); }
   /** @brief returns the list of generators */
   const list<Monomial> & generators() const { return gens; }
+  /** @brief returns the vector of generators */
+  const vector<Monomial> & generators_vector() const { return gens_vector; }
   /**
     @brief returns the dimension of the ideal
   */
@@ -388,6 +387,8 @@ protected:
   NVAR_TYPE n;
   /** @brief the ideal's generators */
   list<Monomial> gens;
+  /** @brief the ideal's generators, as a vector */
+  vector<Monomial> gens_vector;
   /** @brief the ideal's incremental Betti numbers */
   map<DEG_TYPE, unsigned long> ibmap;
   /** @brief the ideal's Hilbert numerator, standard grading */

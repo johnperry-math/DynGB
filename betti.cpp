@@ -78,9 +78,9 @@ struct Comparer {
 };
 
 map<DEG_TYPE, unsigned long> incremental_betti(
-  const list<Monomial> & T,
+  const vector<Monomial> & T,
   const Monomial & u,
-  set< pair<const Monomial *, const Monomial *> > & R,
+  set< pair<int, int> > & R,
   const WT_TYPE * grading
 ) {
   map<DEG_TYPE, unsigned long> result;
@@ -88,16 +88,16 @@ map<DEG_TYPE, unsigned long> incremental_betti(
   auto ri = R.begin();
   while (ri != R.end()) {
     auto & r = *ri;
-    auto rlcm{r.first->lcm(*r.second)};
-    if (rlcm == rlcm.lcm(u) and rlcm != r.first->lcm(u) and rlcm != r.second->lcm(u)) {
+    auto rlcm{T[r.first].lcm(r.second)};
+    if (rlcm.like_lcm(rlcm, u) and rlcm.like_lcm(T[r.first], u) and rlcm.like_lcm(T[r.second], u)) {
       auto tmp {ri};
       ++ri;
       R.erase(tmp);
     } else ++ri;
   }
   // cancel new pairs subject to proper divisibility of lcms
-  set<tuple<const Monomial *, const Monomial *, const Monomial> > A;
-  for (auto & t : T) { A.emplace(&t, &u, t.lcm(u)); }
+  set<tuple<int, int, const Monomial> > A;
+  for (int i = 0; i < T.size(); ++i) { A.emplace(i, T.size(), T[i].lcm(u)); }
   auto ai = A.begin();
   while (ai != A.end()) {
     if (any_of(
@@ -117,7 +117,7 @@ map<DEG_TYPE, unsigned long> incremental_betti(
     auto bi { ai2 };
     while (bi != A.end()) {
       if (get<2>(*ai) == get<2>(*bi)) {
-        if (get<0>(*bi)->is_coprime(*get<1>(*bi))) {
+        if (T[get<0>(*bi)].is_coprime(u)) {
           A.erase(ai);
           ai = bi;
           ++bi;
@@ -130,15 +130,17 @@ map<DEG_TYPE, unsigned long> incremental_betti(
         }
       } else ++bi;
     }
-    if (get<0>(*ai)->is_coprime(*get<1>(*ai)))
+    if (T[get<0>(*ai)].is_coprime(u))
       A.erase(ai);
     else
-      R.emplace(get<0>(*ai), get<1>(*ai));
+      R.emplace(get<0>(*ai), T.size());
     ai = ai2;
   }
   for (auto & r : R) {
     //cout << *r.first << ", " << *r.second << "; ";
-    DEG_TYPE d = lcm_degree(*(r.first), *(r.second), grading);
+    DEG_TYPE d = (r.second == T.size()) ?
+        lcm_degree(T[r.first], u, grading) :
+        lcm_degree(T[r.first], T[r.second], grading);
     if (result.find(d) != result.end())
       ++result[d];
     else
