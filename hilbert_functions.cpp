@@ -229,29 +229,6 @@ bool is_splitting_case(
   return V.size() != 0;
 }
 
-/*list<Monomial>::const_iterator is_splitting_case(const list<Monomial> & T) {
-  list<Monomial>::const_iterator result = T.end(); // guilty until proven innocent
-  for (
-    list<Monomial>::const_iterator ti = T.begin();
-    result == T.end() and ti != T.end();
-    ++ti
-  ) {
-    // check whether other monomials are relatively prime to t
-    bool relprime = true;
-    for (
-      list<Monomial>::const_iterator ui = T.begin();
-      relprime and ui != T.end();
-      ++ui
-    ) {
-      if (ti != ui)
-        relprime = ti->is_coprime(*ui);
-    }
-    if (relprime)
-      result = ti;
-  }
-  return result;
-}*/
-
 Dense_Univariate_Integer_Polynomial * solve_splitting_case(
     const list<Monomial> & T,
     const list< list<Monomial>::const_iterator > & U,
@@ -267,23 +244,6 @@ Dense_Univariate_Integer_Polynomial * solve_splitting_case(
   delete second;
   return first;
 }
-
-/*Dense_Univariate_Integer_Polynomial * solve_splitting_case(
-  const list<Monomial> & T, list<Monomial>::const_iterator ui,
-  const WT_TYPE * grading
-) {
-  list<Monomial> U, V;
-  for (list<Monomial>::const_iterator ti = T.begin(); ti != T.end(); ++ti)
-    if (ti != ui)
-      U.push_back(*ti);
-    else
-      V.push_back(*ti);
-  Dense_Univariate_Integer_Polynomial * result = hilbert_numerator_bigatti(U, grading);
-  Dense_Univariate_Integer_Polynomial * other = solve_one_monomial_case(V, grading);
-  result->multiply_by(*other);
-  delete other;
-  return result;
-}*/
 
 Monomial choose_hilbert_pivot(const list<Monomial> & T) {
   NVAR_TYPE n = T.front().num_vars();
