@@ -440,6 +440,74 @@ bool Monomial::operator |(const Monomial &other) const {
   return other.divisible_by(*this);
 }
 
+bool Monomial::divides_lcm(const Monomial &t, const Monomial &u) const {
+  bool result = (n == t.n) and (n == u.n);
+  NVAR_TYPE i = 0, j = 0, k = 0;
+  auto te = t.exponents, ue = u.exponents;
+  for (/* already initialized */; result and i < last and j < t.last and k < u.last; /* */) {
+    NVAR_TYPE index;
+    EXP_TYPE value;
+    int which;
+    // first figure out next power
+    if (te[j] == ue[k]) {
+      index = te[j];
+      value = (te[j+1] < ue[k+1]) ? ue[k+1] : te[j+1];
+      which = 0;
+    } else if (te[j] < ue[k]) {
+      index = te[j];
+      value = te[j+1];
+      which = 1;
+    } else {
+      index = ue[k];
+      value = ue[k+1];
+      which = 2;
+    }
+    if (exponents[i] == index) {
+      result = exponents[i+1] <= value;
+      i += 2;
+      switch (which) {
+      case 0: j += 2; k += 2; break;
+      case 1: j += 2; break;
+      case 2: k += 2; break;
+      }
+    } else if (exponents[i] < index)
+      result = false;
+    else {
+      switch (which) {
+      case 0: j += 2; k += 2; break;
+      case 1: j += 2; break;
+      case 2: k += 2; break;
+      }
+    }
+  }
+  if (i < last and exponents[i] < t.last) {
+    for (/* */; result and i < last and j < t.last; /* */) {
+      if (exponents[i] < te[j])
+        result = false;
+      else if (exponents[i] > te[j])
+        j += 2;
+      else {
+        result = exponents[i+1] <= te[j+1];
+        i += 2; j += 2;
+      }
+    }
+  }
+  if (i < last and exponents[i] < u.last) {
+    for (/* */; result and i < last and k < u.last; /* */) {
+      if (exponents[i] < ue[k])
+        result = false;
+      else if (exponents[i] > ue[k])
+        k += 2;
+      else {
+        result = exponents[i+1] <= ue[k+1];
+        i += 2; k += 2;
+      }
+    }
+  }
+  result = result and i == last;
+  return result;
+}
+
 Monomial & Monomial::operator =(const Monomial &other) {
   if (this != &other)
   {

@@ -29,6 +29,8 @@ using std::thread;
 using std::mutex;
 #include <bitset>
 using std::bitset;
+#include <string>
+using std::to_string;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -50,7 +52,6 @@ using Dynamic_Engine::less_by_betti;
 using Dynamic_Engine::less_by_grad_betti;
 using Dynamic_Engine::less_by_degree_then_grad_hilbert;
 using Dynamic_Engine::less_by_random;
-//using Dynamic_Engine::compatible_pp;
 using Dynamic_Engine::verify_and_modify_if_necessary;
 
 extern list<Abstract_Polynomial *> reduce_basis(list<Abstract_Polynomial *>G);
@@ -184,6 +185,8 @@ F4_Reduction_Data::F4_Reduction_Data(
   cout << "overall time in setup " << overall_time << endl;
 }
 
+mutex print_lock;
+
 void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Dynamic *> & P, unsigned row
 ) {
@@ -191,11 +194,15 @@ void F4_Reduction_Data::initialize_some_rows(
   const COEF_TYPE F0 = 0;
   for (auto cp : P) {
     auto p = cp->first();
+    //print_lock.lock();
+    //cout << "initializing row " << row << " for " << cp->lcm() << " with poly " << *p << " and poly ";
+    //if (cp->second() == nullptr) cout << "0\n"; else cout << *cp->second() << endl;
+    //print_lock.unlock();
     const Monomial & t = cp->first_multiplier();
     auto pi = p->new_iterator();
     vector<COEF_TYPE> & Arow = A[row];
     nonzero_entries[row] = 0;
-    row_plm_cache[row].clear();
+    //row_plm_cache[row].clear();
     unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
@@ -221,8 +228,8 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
-  row_plm_cache.resize(num_rows);
-  row_is_dirty.resize(num_rows, true);
+  //row_plm_cache.resize(num_rows);
+  //row_is_dirty.resize(num_rows, true);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   for (auto m : M) delete m;
@@ -314,10 +321,14 @@ F4_Reduction_Data::~F4_Reduction_Data() {
   cout << "we spend " << emplace_time << " seconds emplacing\n";
 }
 
-void F4_Reduction_Data::print_row(unsigned i) {
+void F4_Reduction_Data::print_row(unsigned i, bool as_poly) {
   for (unsigned j = offset[i] + head[i]; j < M.size(); ++j) {
-    if (A[i][j - offset[i]] != 0) {
-      cout << " + " << A[i][j - offset[i]] << " " << *M[j];
+    if (as_poly) {
+      if (A[i][j - offset[i]] != 0) {
+        cout << " + " << A[i][j - offset[i]] << " " << *M[j];
+      }
+    } else {
+      cout << A[i][j - offset[i]] << ", ";
     }
   }
   cout << endl;
@@ -462,13 +473,13 @@ void F4_Reduction_Data::reduce_my_rows(
                   ++new_nonzero_entries;
                   if (hk > l) hk = l;
                   was_zero = false;
-                  if (row_plm_cache[k].count(l + offset[k]) != 0) row_is_dirty[k] = true;
+                  //if (row_plm_cache[k].count(l + offset[k]) != 0) row_is_dirty[k] = true;
                 }
                 if (Akl & OVERFLOW_MASK != 0) {
                   Akl %= mod;
                   if (not was_zero and Akl == 0) {
                     --new_nonzero_entries;
-                    if (row_plm_cache[k].count(l + offset[k]) != 0) row_is_dirty[k] = true;
+                    //if (row_plm_cache[k].count(l + offset[k]) != 0) row_is_dirty[k] = true;
                   }
                 }
                 // advance
@@ -479,7 +490,7 @@ void F4_Reduction_Data::reduce_my_rows(
                   Ak[hk] %= mod;
                   if (Ak[hk] == 0) {
                     --new_nonzero_entries;
-                    if (row_plm_cache[k].count(hk + offset[k]) != 0) row_is_dirty[k] = true;
+                    //if (row_plm_cache[k].count(hk + offset[k]) != 0) row_is_dirty[k] = true;
                   }
                 }
               }
@@ -550,7 +561,7 @@ void F4_Reduction_Data::reduce_my_rows(
         Ai[k] %= mod;
         if (Ai[k] == 0) {
           --nonzero_entries[i];
-          if (row_plm_cache[i].count(k) > 0) row_is_dirty[i] = true;
+          //if (row_plm_cache[i].count(k) > 0) row_is_dirty[i] = true;
           if (nonzero_entries[i] == 0)
             hi = M.size();
           else if (k == hi) {
@@ -563,6 +574,9 @@ void F4_Reduction_Data::reduce_my_rows(
 }
 
 void F4_Reduction_Data::reduce_by_old() {
+  /*cout << "before reduction\n";
+  for (unsigned k = 0; k < num_rows; ++k)
+    check_consistency(k);*/
   if (red_lock.size() < num_cols) {
     vector<mutex> new_list(3*num_cols / 2);
     red_lock.swap(new_list);
@@ -583,6 +597,9 @@ void F4_Reduction_Data::reduce_by_old() {
     workers[c].join();
   delete [] workers;
   delete [] thread_rows;
+  /*cout << "after reduction\n";
+  for (unsigned k = 0; k < num_rows; ++k)
+    check_consistency(k);*/
 }
 
 void F4_Reduction_Data::reduce_my_new_rows(
@@ -601,30 +618,34 @@ void F4_Reduction_Data::reduce_my_new_rows(
     if (offset[j] + head[j] > offset[i] + head[i]) {
       // first make sure row is large enough; if not, resize & copy correctly
       unsigned old_size = A[j].size();
-      if (old_size < M.size() - (offset[i] + head[i]) + 1) {
-        A[j].resize(M.size());
+      auto M_size = M.size();
+      if (old_size < M_size - (offset[i] + head[i])) {
+        auto new_size = M_size - (offset[i] + head[i]);
+        A[j].resize(new_size);
         unsigned k = 1;
         for (/* */; k <= old_size; ++k)
-          A[j][M.size() - k] = A[j][old_size - k];
-        for (/* */; k <= M.size(); ++k)
-          A[j][M.size() - k] = 0;
-        offset[j] = 0; cj = offset[i] + head[i];
+          A[j][new_size - k] = A[j][old_size - k];
+        for (/* */; k <= new_size; ++k)
+          A[j][new_size - k] = 0;
+        offset[j] = offset[j] + old_size - new_size;
+        cj = 0;
       }
       head[j] = cj;
     }
     auto a = Aj[lhead_i - offset[j]];
     unsigned ops = 0;
     a *= mod - F.inverse(Ai[lhead_i - offset[i]]);
-    while (cj < Aj.size() and ops < nonzero_entries[i]) {
+    auto Aj_size = Aj.size();
+    while (cj < Aj_size and ops < nonzero_entries[i]) {
       if (Ai[ci] != 0) {
         bool was_zero = (Aj[cj] == 0);
         Aj[cj] += a*Ai[ci]; Aj[cj] %= mod;
         if (was_zero) {
           ++nonzero_entries[j];
-          if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
+          //if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
         } else if (Aj[cj] == 0) {
           --nonzero_entries[j];
-          if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
+          //if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
         }
         ++ops;
       }
@@ -650,7 +671,7 @@ void F4_Reduction_Data::reduce_by_new(
   unsigned k = 0;
   for (unsigned j = 0; j < num_rows; ++j) {
     if (j != i and nonzero_entries[j] != 0
-        and Ai0 > offset[j]
+        and Ai0 >= offset[j]
         and (A[j][Ai0 - offset[j]] != 0)
     ) {
       thread_rows[k].insert(j);
@@ -725,7 +746,7 @@ Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
   Prime_Field_Element * A_final = static_cast<Prime_Field_Element *>(
       malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
   );
-  COEF_TYPE scale = F.inverse(Ai[l_head[i]]);
+  COEF_TYPE scale = F.inverse(Ai[l_head[i] - offset[i]]);
   unsigned k = 0;
   for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
     if (Ai[j] != 0) {
@@ -755,11 +776,15 @@ void F4_Reduction_Data::monomials_in_row(unsigned i, set<int> & result) const {
   unsigned processed = 0;
   unsigned k = head[i];
   auto Ai = A[i];
+  //cout << "head: " << k << "; offset: " << offset[i] << "; maximum: " << M.size() << "; nonzero: " << nonzero_entries[i] << endl;
+  //cout << "inserted ";
   while (processed < nonzero_entries[i]) {
     while (Ai[k] == 0) ++k;
     result.insert(k + offset[i]);
+    //cout << k + offset[i] << ", ";
     ++k; ++processed;
   }
+  //cout << endl;
 }
 
 void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
@@ -930,7 +955,7 @@ WGrevlex * F4_Reduction_Data::reduce_and_select_order(
       row_skel[i] = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
     else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
       row_skel[i] = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
-    l_head[i] = head[i];
+    l_head[i] = head[i] + offset[i];
     if (nonzero_entries[i] != 0) {
       set<int> all_pps, potential_pps;
       list<int> boundary_pps;
@@ -1012,6 +1037,8 @@ void F4_Reduction_Data::compatible_pp(
   const LP_Solver *skel                 // used for alternate refinement
 )
 {
+  //static time_t all_time = 0;
+  //time_t start = time(nullptr);
   // known boundary vectors
   const set<Ray> &bndrys = skel->get_rays();
   // get the exponent vector of the current LPP, insert it
@@ -1047,6 +1074,9 @@ void F4_Reduction_Data::compatible_pp(
       // cout << "\tconsistent!\n";
     }
   }
+  //time_t stop = time(nullptr);
+  //all_time += difftime(stop, start);
+  //cout << "overall time in compatible_pp " << all_time << endl;
 }
 
 void F4_Reduction_Data::constraints_for_new_pp(
@@ -1055,6 +1085,8 @@ void F4_Reduction_Data::constraints_for_new_pp(
   vector<Constraint> &result
 )
 {
+  //static time_t all_time = 0;
+  //time_t start = time(nullptr);
   // setup
   NVAR_TYPE n = I.get_ideal().number_of_variables();
   const EXP_TYPE * a, * b;
@@ -1076,6 +1108,9 @@ void F4_Reduction_Data::constraints_for_new_pp(
   }
   delete [] c;
   delete [] a;
+  //time_t stop = time(nullptr);
+  //all_time += difftime(stop, start);
+  //cout << "time spent constructing constraints: " << all_time << endl;
 }
 
 void F4_Reduction_Data::select_monomial(
@@ -1090,6 +1125,8 @@ void F4_Reduction_Data::select_monomial(
     Dynamic_Heuristic method
 )
 {
+  static time_t total_time = 0;
+  time_t start = time(nullptr);
   //cout << "entering selmon\n";
   //cout << "skeleton before: " << currSkel << endl;
   Skeleton * src_skel    = dynamic_cast<Skeleton *>    (currSkel);
@@ -1099,7 +1136,6 @@ void F4_Reduction_Data::select_monomial(
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
   for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
-  //cout << "comparing against: "; p_Write(currentLPP, Rx);
   list<int> boundaryPPs;
   set<int> compatible_pps;
   // loop through all exponent vectors
@@ -1115,6 +1151,8 @@ void F4_Reduction_Data::select_monomial(
     //cout << "pushed back " << t << endl;
   }
   //cout << "heuristic: " << method << endl;
+  static time_t presolve_time = 0;
+  time_t presolve_start = time(nullptr);
   switch(method)
   {
     case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
@@ -1153,6 +1191,9 @@ void F4_Reduction_Data::select_monomial(
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
   PP_With_Ideal * winner = & possibleIdealsBasic.front();
+  time_t presolve_stop = time(nullptr);
+  presolve_time += difftime(presolve_stop, presolve_start);
+  cout << "time spent in presolve: " << presolve_time << endl;
   if (possibleIdealsBasic.size() != 1)
   {
     // test each combination of LPPs for consistency
@@ -1207,7 +1248,7 @@ void F4_Reduction_Data::select_monomial(
     currSkel->solve(newvecs);
     verify_and_modify_if_necessary(currSkel, CurrentPolys);
   }
-    
+   
   // set marked lpp, new Hilbert numerator
   CurrentLPPs.push_back(winner->get_pp());
   if (*current_hilbert_numerator != nullptr) delete *current_hilbert_numerator;
@@ -1229,6 +1270,9 @@ void F4_Reduction_Data::select_monomial(
   cout << "skeleton after:\n";
   cout << currSkel; */
   //cout << "returning from selmon\n";
+  time_t stop = time(nullptr);
+  total_time += difftime(stop, start);
+  cout << "time spend in selecting monomials: " << total_time << endl;
 }
 
 unsigned F4_Reduction_Data::select_dynamic_single(
@@ -1255,16 +1299,16 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       set<int> all_pps, potential_pps;
       list<int> boundary_pps;
       monomials_in_row(i, all_pps);
-      if (row_is_dirty[i]) {
+      //if (row_is_dirty[i]) {
         compatible_pp(offset[i] + head[i], all_pps, potential_pps, boundary_pps, skel);
-        row_plm_cache[i].clear();
-        row_plm_cache[i] = potential_pps;
-        row_is_dirty[i] = false;
-        cout << "row " << i << " was dirty\n";
-      } else {
-        potential_pps = row_plm_cache[i];
-        cout << "row " << i << " was not dirty\n";
-      }
+        //row_plm_cache[i].clear();
+        //row_plm_cache[i] = potential_pps;
+        //row_is_dirty[i] = false;
+        //cout << "row " << i << " was dirty\n";
+      //} else {
+        //potential_pps = row_plm_cache[i];
+        //cout << "row " << i << " was not dirty\n";
+      //}
       cout << "compatible monomials for row " << i << ": ";
       for (auto t : potential_pps) cout << *M[t] << ", "; cout << endl;
       if (potential_pps.size() == 1) {
@@ -1338,15 +1382,15 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   vector<COEF_TYPE> & Ai = A[winning_row];
   bool searching = true;
   j = M_table[winning_lm];
-  l_head[winning_row] = j - offset[winning_row];
+  l_head[winning_row] = j;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
   reduce_by_new(winning_row, j, unprocessed);
   time_t end_time = time(nullptr);
   new_reduction_time += difftime(end_time, start_time);
   cout << "spent " << new_reduction_time << " seconds in reducing by new polys\n";
-  U.push_back(*M[l_head[winning_row] + offset[winning_row]]);
-  cout << "selected " << *M[l_head[winning_row] + offset[winning_row]] << endl;
+  U.push_back(*M[l_head[winning_row]]);
+  cout << "selected " << *M[l_head[winning_row]] << " from row " << winning_row << endl;
   unprocessed.erase(winning_row);
   for (unsigned i = 0; i < number_of_rows(); ++i)
     if (unprocessed.count(i) > 0)
@@ -1368,6 +1412,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
   Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+  //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;
   double reduce_old_time = 0;

@@ -302,6 +302,8 @@ public:
   bool divisible_by(const Monomial &other) const;
   /** @brief operator for divisibility */
   bool operator |(const Monomial &other) const;
+  /** @brief divides the lcm of the other two */
+  bool divides_lcm(const Monomial &, const Monomial &) const;
   ///@}
   /**
     @name Computation

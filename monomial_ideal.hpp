@@ -202,14 +202,14 @@ public:
         // nothing to do
       }
       else {
-        ibmap = incremental_betti(gens, grading);
+        ibmap = full_betti(gens, grading);
         current_grading = nullptr;
       }
     } else {
       if (current_grading == grading and ibmap.size() > 0) {
         // nothing to do
       } else{
-        ibmap = incremental_betti(gens, grading);
+        ibmap = full_betti(gens, grading);
         current_grading = grading;
       }
     }

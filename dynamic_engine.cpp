@@ -443,19 +443,19 @@ bool less_by_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
     if (Bbi == Bb.end())
       result = less_by_hilbert_then_degree(a, b);
     else
-      result = false;
-  } else {
-    if (Bbi == Bb.end()) {
       result = true;
-    } else {
+  } else {
+    if (Bbi == Bb.end())
+      result = false;
+    else {
       if (Bai->first < Bbi->first)
-        result = false;
-      else if (Bai->first > Bbi->first)
         result = true;
-      else if (Bai->second < Bbi->second)
+      else if (Bai->first > Bbi->first)
         result = false;
+      else if (Bai->second < Bbi->second)
+        result = true;
       else
-        result = a.get_pp() < b.get_pp();
+        result = false;;
     }
   }
   return result;

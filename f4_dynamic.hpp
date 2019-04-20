@@ -333,9 +333,10 @@ public:
   */
   void print_matrix(bool show_data=false);
   /**
-    @brief prints indicated row of the matrix as a polynomial
+    @brief prints indicated row of the matrix
+    @details If the second argument is true, the row is printed as a polynomial.
   */
-  void print_row(unsigned);
+  void print_row(unsigned, bool=false);
   /**
     @brief prints the pairs of monomials and reducers that are being built
   */
@@ -353,7 +354,9 @@ protected:
     unsigned n = 0;
     for (auto a : Ai)
       if (a != 0) ++n;
-    if (n != nonzero_entries[i]) cout << "row " << i << " inconsistent\n";
+    if (n != nonzero_entries[i]) {
+      cout << "row " << i << " inconsistent: should have " << nonzero_entries[i] << " but has " << n << "\n";
+    }
   }
   /**
     @brief creates rows of the matrix indexed by the specified pairs,
@@ -392,14 +395,6 @@ protected:
       subrow of the dense matrix
   */
   vector<vector<COEF_TYPE> > A;
-  /**
-    @brief cache of monomials which could possibly be leading monomials
-  */
-  vector<set<int> > row_plm_cache;
-  /**
-    @brief record of which rows were "dirtied" by a previous reduction
-  */
-  vector<bool> row_is_dirty;
   /** @brief index of the starting point of this row in the dense matrix*/
   vector<unsigned> offset;
   /**
