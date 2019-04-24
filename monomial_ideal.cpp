@@ -43,6 +43,10 @@ bool first_smaller(const Monomial & t, const Monomial & u) {
   return t < u;
 }
 
+bool standard_degree(const Monomial & t, const Monomial & u) {
+  return t.total_degree() < u.total_degree();
+}
+
 list<Monomial> colon_ideal_without_ideals(
     const list<Monomial> & U, const Monomial & t
 ) {
@@ -69,7 +73,7 @@ list<Monomial> colon_ideal_without_ideals(
     if (not redundant)*/
       V.push_back(tnew);
   }
-  V.sort(first_smaller);
+  V.sort(standard_degree);
   for (auto vi = V.begin(); vi != V.end(); ++vi) {
     auto ui { vi };
     for (++ui; ui != V.end(); /* */) {

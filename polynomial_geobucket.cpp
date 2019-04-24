@@ -450,7 +450,7 @@ ostream & operator << (ostream & os, const Polynomial_Geobucket & p) {
     if (p.buckets[i] != nullptr and (not p.buckets[i]->is_zero())) {
       if (i > 0)
         os << " + ";
-      os << '(' << *(p.buckets[i]) << ')';
+      os << "((" << i << ')' << *(p.buckets[i]) << ')';
     }
   return os;
 }

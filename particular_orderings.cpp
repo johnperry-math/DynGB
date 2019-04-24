@@ -110,33 +110,33 @@ bool Generic_Grevlex::first_larger_than_multiple(
   DEG_TYPE dvk = v.ordering_degree();
   bool searching = dtk == duk + dvk;
   if (searching) {
-    if (t.is_one()) {
-      if (u.is_one()) {
-        if (v.is_one()) {
+    if (not t.is_one()) {
+      if (not u.is_one()) {
+        if (not v.is_one()) {
           auto a = t.packed_log();
           auto b = u.packed_log();
           auto c = v.packed_log();
-          auto i = t.packed_size();
-          auto j = u.packed_size();
-          auto k = v.packed_size();
+          auto i = t.packed_size(); auto i0 = i;
+          auto j = u.packed_size(); auto j0 = j;
+          auto k = v.packed_size(); auto k0 = k;
           i -= 2; j -= 2; k -= 2;
-          for (/* */; searching and i > 0 and j > 0 and k > 0; /* */) {
+          do {
             auto max_index = (a[i] > b[j]) ? a[i] : b[j];
             max_index = (max_index > c[k]) ? max_index : c[k];
-            if (max_index == a[i]) {
+            if (i < i0 and max_index == a[i]) {
               dtk -= a[i+1];
               i -= 2;
             }
-            if (max_index == b[j]) {
+            if (j < j0 and max_index == b[j]) {
               duk -= b[j+1];
               j -= 2;
             }
-            if (max_index == c[k]) {
+            if (k < k0 and max_index == c[k]) {
               dvk -= c[k+1];
               k -= 2;
             }
             searching = dtk == duk + dvk;
-          }
+          } while (searching and (i < i0 or j < j0 or k < k0));
         } else
           return first_larger(t, u);
       } else if (v.is_one())

@@ -392,7 +392,7 @@ void Polynomial_Linked_List::add_polynomial_multiple(
     const Abstract_Polynomial &q,
     bool subtract
 ) {
-  // cout << "\tadding " << a << " * " << t << " * (" << q << ')' << endl;
+  //cout << "\tadding " << a << " * " << t << " * (" << q << ')' << endl;
   // need an iterator
   Polynomial_Iterator * oi = q.new_iterator();
   // first add monomials until this or q is exhausted
