@@ -1190,6 +1190,9 @@ void F4_Reduction_Data::select_monomial(
       break;
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
+  cout << "sorted as ";
+  for (auto each : possibleIdealsBasic) { cout << each.get_pp(); }
+  cout << endl;
   PP_With_Ideal * winner = & possibleIdealsBasic.front();
   time_t presolve_stop = time(nullptr);
   presolve_time += difftime(presolve_stop, presolve_start);
@@ -1411,8 +1414,8 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   LP_Solver * skel = new PPL_Solver(n);
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
-  Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-  //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
+  //Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+  Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;
   double reduce_old_time = 0;

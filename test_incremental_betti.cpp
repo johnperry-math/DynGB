@@ -25,6 +25,9 @@ using std::pair;
 \*****************************************************************************/
 
 void full_test() {
+
+  cout << "FULL BETTI\n";
+
   Monomial w       { 1, 0, 0, 0 };
 
   Monomial x2      { 0, 2, 0, 0 };
@@ -42,6 +45,7 @@ void full_test() {
   Monomial x24x32  { 0, 0, 4, 2 };
 
   WT_TYPE wts[4] = { 6, 4, 3, 2 };
+
   list<Monomial> T { w, x2 };
   cout << w << ", " << x2 << ", " << x1x32 << ": ";
   for (auto p : full_betti(T, x1x32))
@@ -101,9 +105,13 @@ void full_test() {
     cout << p.first << ',' << p.second << "; ";
   cout << endl;
   cout << "Should be (4,1), (5,2), (6,3), (7,3)\n";
+
 }
 
 void incremental_test() {
+
+  cout << "INCREMENTAL BETTI\n";
+
   Monomial w       { 1, 0, 0, 0 };
 
   Monomial x2      { 0, 2, 0, 0 };
@@ -191,7 +199,8 @@ void incremental_test() {
   for (auto p : incremental_betti(V, x24x32, P))
     cout << p.first << ',' << p.second << "; ";
   cout << endl;
-  cout << "Should be (4,1), (5,2), (6,3), (7,3)\n"; 
+  cout << "Should be (4,1), (5,2), (6,3), (7,3)\n";
+
 }
 
 int main() {

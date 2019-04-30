@@ -137,7 +137,6 @@ map<DEG_TYPE, unsigned long> incremental_betti(
     ai = ai2;
   }
   for (auto & r : R) {
-    //cout << *r.first << ", " << *r.second << "; ";
     DEG_TYPE d = (r.second == T.size()) ?
         lcm_degree(T[r.first], u, grading) :
         lcm_degree(T[r.first], T[r.second], grading);

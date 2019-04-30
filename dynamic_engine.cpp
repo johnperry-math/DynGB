@@ -86,7 +86,6 @@ int hilbert_cmp(
 }
 
 bool less_by_hilbert (PP_With_Ideal &a, PP_With_Ideal &b) {
-  //cout << "Less by Hilbert then Lex\n";
   bool result;
   // first check the coefficients of the Hilbert polynomial
   int hilcheck = hilbert_cmp(
@@ -434,6 +433,11 @@ bool less_by_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
   const map<DEG_TYPE, unsigned long> & Bb = b.get_inc_betti();
   auto Bai = Ba.begin();
   auto Bbi = Bb.begin();
+  /*cout << "comparing " << a.get_pp() << " [ "; 
+  for (auto each : Ba) { cout << each.first << " : " << each.second << " , "; }
+  cout << " ] against " << b.get_pp() << " [ ";
+  for (auto each : Bb) { cout << each.first << " : " << each.second << " , "; }
+  cout << "]\n";*/
   for (/* */ ;
        Bai != Ba.end() and Bbi != Bb.end()
           and (Bai->first == Bbi->first and Bai->second == Bbi->second);
@@ -441,7 +445,8 @@ bool less_by_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
   ) { }
   if (Bai == Ba.end()) {
     if (Bbi == Bb.end())
-      result = less_by_hilbert_then_degree(a, b);
+      //result = less_by_hilbert_then_degree(a, b);
+      result = (a.get_pp() < b.get_pp());
     else
       result = true;
   } else {
@@ -458,6 +463,7 @@ bool less_by_betti (PP_With_Ideal & a, PP_With_Ideal & b) {
         result = false;;
     }
   }
+  //cout << "first smaller? " << result << endl;
   return result;
 }
 
