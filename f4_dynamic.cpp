@@ -1190,9 +1190,9 @@ void F4_Reduction_Data::select_monomial(
       break;
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
-  cout << "sorted as ";
+  /*cout << "sorted as ";
   for (auto each : possibleIdealsBasic) { cout << each.get_pp(); }
-  cout << endl;
+  cout << endl;*/
   PP_With_Ideal * winner = & possibleIdealsBasic.front();
   time_t presolve_stop = time(nullptr);
   presolve_time += difftime(presolve_stop, presolve_start);
