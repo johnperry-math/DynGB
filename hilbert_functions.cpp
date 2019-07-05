@@ -306,7 +306,7 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     if (verbose) cout << "level " << this_level << " 0-base\n";
     result = solve_zero_base_case(T, grading);
   } else if ((ti = is_one_base_case(T)) != T.end()) {
-    if (verbose) cout << "level " << this_level << " 1-base\n";
+    if (verbose) cout << "level " << this_level << " 1-base " << *ti << endl;
     result = solve_one_base_case(T, ti, grading);
   } else if ((is_splitting_case(T, U_split, V_split))) {
     if (verbose) {

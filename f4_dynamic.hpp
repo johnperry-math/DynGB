@@ -160,6 +160,11 @@ public:
   void monomials_in_row(unsigned i, set<int> &) const;
   /** @brief current ordering of monomials */
   const WGrevlex * current_ordering() const { return mord; }
+  /** @brief runs @c check_consistency() on all rows */
+  void consistent() {
+    for (unsigned i = 0; i < num_rows; ++i)
+      check_consistency(i);
+  }
   ///@}
   /** @name Conversion */
   ///@{
@@ -209,7 +214,6 @@ public:
     const set<int> & allPPs,   // the monomials to consider; some removed
     set<int> &result,          // returned as PPs for Hilbert function
                                     // ("easy" (& efficient?) to extract exps
-    list<int> &boundary_mons,   // boundary monomials
     const LP_Solver *skel                 // used for alternate refinement
   );
   /**
@@ -246,9 +250,10 @@ public:
         match new monomial, hence the double reference)
   */
   void select_monomial(
+      int my_row,
       const set<int> & allPP_indices,
       const int currentLPP,
-      list<Monomial> & CurrentLPPs,       // changes
+      const list<Monomial> & CurrentLPPs,
       Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
       const list<Abstract_Polynomial *> & CurrentPolys,
       const list<Critical_Pair_Dynamic *> & crit_pairs,
@@ -278,33 +283,6 @@ public:
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
       LP_Solver * & skel
-  );
-  /**
-    @brief selects an ordering that would be best for the indicated row,
-      verifying that the ordering is compatible not only with the basis
-      heretofore, but also with previously processed rows of the matrix
-    @return whether the preferred, compatible monomial
-      would change the current ordering
-    @warning This function is not currently in use and has not been tested.
-  */
-  bool row_would_change_ordering(unsigned);
-  /**
-    @brief see details
-    @param T list of current monomials
-    @param P list of current critical pairs
-    @param skel skeleton corresponding to current monomial ordering
-    @details This step falls between @c reduce_by_old() and @c finalize().
-      It attempts to perform a more global analysis of the matrix
-      than select_dynamic_single.
-      After reduction of rows by the existing basis,
-      this step analyzes the matrix for a new ordering, proceeding row-by-row.
-    @return a WGrevlex ordering that is considered optimal for the matrix and
-      consistent with past choices
-    @warning This function is not currently in use and has not been tested.
-  */
-  WGrevlex * reduce_and_select_order(
-    const list<Monomial> & T, const list<Critical_Pair_Dynamic *> & P,
-    LP_Solver * skel
   );
   /**
     @brief verify the processed rows against @p skel and modify @p skel
@@ -352,11 +330,15 @@ protected:
   void check_consistency(unsigned i) {
     const auto & Ai = A[i];
     unsigned n = 0;
-    for (auto a : Ai)
-      if (a != 0) ++n;
-    if (n != nonzero_entries[i]) {
-      cout << "row " << i << " inconsistent: should have " << nonzero_entries[i] << " but has " << n << "\n";
+    unsigned j;
+    for (j = head[i]; j < num_cols - offset[i]; ++j) {
+      auto a = Ai[j];
+      if (a != 0)
+        ++n;
     }
+    if (n != nonzero_entries[i])
+      cout << "row " << i << " inconsistent: should have " << nonzero_entries[i]
+           << " but has " << n << "\n";
   }
   /**
     @brief creates rows of the matrix indexed by the specified pairs,
@@ -404,6 +386,12 @@ protected:
   vector<unsigned> head;
   /** @brief index of the logical head term of this row (absolute index) */
   vector<unsigned> l_head;
+  /** @brief index of the preferred head term of this row (absolute index) */
+  vector<unsigned> pref_head;
+  /** @brief compatible pp's for each row */
+  vector< set<int> > compatible_pps;
+  /** @brief potential ideals for the given row */
+  vector< list<PP_With_Ideal> > potential_ideals;
   /** @brief storage of monomials and reducers while preprocessing */
   map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
