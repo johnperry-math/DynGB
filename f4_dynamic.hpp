@@ -210,8 +210,8 @@ public:
     @param boundary_mons boundary monomials (no apparent purpose at the moment)
   */
   void compatible_pp(
+    int my_row,
     const int currentLPP_index,            // the current LPP
-    const set<int> & allPPs,   // the monomials to consider; some removed
     set<int> &result,          // returned as PPs for Hilbert function
                                     // ("easy" (& efficient?) to extract exps
     const LP_Solver *skel                 // used for alternate refinement
@@ -234,32 +234,55 @@ public:
     @ingroup GBComputation
     @author John Perry
     @date 2019
-    @brief Selects a leading power product for a polynomial.
-    @details Applies a particular Dynamic_Heuristic
-    (default is `ORD_HILBERT_THEN_DEG`)
-    and ensures compatibility with previous choices of LPP for other monomials.
-    @param allPP_indices indices of the support of a polynomial in need of a new choice of LPP
+    @brief identifies potential leading monomials and sorts them by preference
+    @param my_row which row of the matrix we are working on
     @param currentLPP current leading monomial of this polynomial
-    @param CurrentLPPs the current choices of LPPs for `CurrentPolys`
-    @param CurrentPolys the current basis of the ideal
-    @param critpairs the current list of critical pairs
+    @param allPP_indices indices of the support of a polynomial in need of a new choice of LPP
     @param currSkel the current skeleton, corresponding to the choices `CurrentLPPs`
-    @param ordering_changed whether the monomial selected changes the ordering
-    @param method the method to apply; see `Dynamic_Heuristic`
-    @param current_hilbert_numerator Hilbert numerator for CurrentLPPs (changes to
-        match new monomial, hence the double reference)
   */
-  void select_monomial(
+  void create_and_sort_ideals(
       int my_row,
-      const set<int> & allPP_indices,
-      const int currentLPP,
       const list<Monomial> & CurrentLPPs,
-      Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
+      Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
       const list<Abstract_Polynomial *> & CurrentPolys,
       const list<Critical_Pair_Dynamic *> & crit_pairs,
-      LP_Solver * currSkel,                        // possibly changes
-      bool & ordering_changed,
+      const LP_Solver * currSkel,
+      const Ray & w,
       Dynamic_Heuristic method
+  );
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief refines the ordering, if possible
+    @param my_row the row of the matrix that we are refining
+    @param currSkel the current skeleton, corresponding to the choices `CurrentLPPs`
+    @param CurrentPolys list of current polynomials in the basis (needed to verify consistency)
+  */
+  LP_Solver * refine(
+      unsigned my_row,
+      LP_Solver * currSkel,
+      const list<Abstract_Polynomial *> & CurrentPolys
+  );
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief cleans up various records after we compute a new ordering
+    @param my_row the row of the matrix that we are refining
+    @param w the old ordering
+    @param current_hilbert_numerator the basis' current Hilbert numerator
+    @param currSkel the current skeleton
+    @param winner the @c PP_With_Ideal with information relating to the selected monomial
+    @param ordering_changed whether the ordering has changed (written, not read)
+  */
+  void reassign(
+      unsigned my_row,
+      const Ray & w,
+      Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
+      LP_Solver * currSkel,
+      const PP_With_Ideal & winner,
+      bool & ordering_changed
   );
   /**
     @brief selects leading monomials for one remaining nonzero rows

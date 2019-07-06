@@ -879,8 +879,8 @@ bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
 }
 
 void F4_Reduction_Data::compatible_pp(
+  int my_row,
   const int currentLPP_index,            // the current LPP
-  const set<int> & allPPs,   // the monomials to consider; some removed
   set<int> &result,          // returned as PPs for Hilbert function
                                   // ("easy" (& efficient?) to extract exps
   const LP_Solver *skel                 // used for alternate refinement
@@ -899,6 +899,8 @@ void F4_Reduction_Data::compatible_pp(
   initial_candidates.push_back(currentLPP_index);
 
   // compare other monomials with LPP
+  set<int> allPPs;
+  monomials_in_row(my_row, allPPs);
   for (const int b : allPPs) {
     const Monomial & u(*M[b]);
     if (not u.is_like(currentLPP) and skel->makes_consistent_constraint(u, currentLPP))
@@ -960,40 +962,142 @@ void F4_Reduction_Data::constraints_for_new_pp(
   //cout << "time spent constructing constraints: " << all_time << endl;
 }
 
-void F4_Reduction_Data::select_monomial(
-    int my_row,
-    const set<int> & allPP_indices,
-    const int currentLPP,
-    const list<Monomial> & CurrentLPPs,       // changes
-    Dense_Univariate_Integer_Polynomial ** current_hilbert_numerator,
-    const list<Abstract_Polynomial *> & CurrentPolys,
-    const list<Critical_Pair_Dynamic *> & crit_pairs,
-    LP_Solver * currSkel,                        // possibly changes
-    bool & ordering_changed,
-    Dynamic_Heuristic method
-)
-{
-  static time_t total_time = 0;
-  time_t start = time(nullptr);
-  //cout << "entering selmon\n";
-  //cout << "skeleton before: " << currSkel << endl;
+LP_Solver * F4_Reduction_Data::refine(
+    unsigned my_row,
+    LP_Solver * currSkel,
+    const list<Abstract_Polynomial *> & CurrentPolys
+) {
+
+  static time_t presolve_time = 0;
+  time_t refine_start = time(nullptr);
+
+  static time_t verify_time = 0;
+
+  bool success = false;
+
+  LP_Solver * result = currSkel;
+
   Skeleton * src_skel    = dynamic_cast<Skeleton *>    (currSkel);
   GLPK_Solver * src_GLPK = dynamic_cast<GLPK_Solver *> (currSkel);
   PPL_Solver * src_PPL   = dynamic_cast<PPL_Solver *>  (currSkel);
-  Ray w = ray_sum(currSkel->get_rays());
+
+  list<PP_With_Ideal> & possibleIdealsBasic = potential_ideals[my_row];
+
+  PP_With_Ideal * winner = & possibleIdealsBasic.front();
+  if (possibleIdealsBasic.size() != 1)
+  {
+    // test each combination of LPPs for consistency
+    // one of them must work (current LPP, if nothing else) 
+    set<int> PPunion;
+    for (const int t : compatible_pps[my_row]) PPunion.insert(t);
+    // for (PP_With_Ideal & I : possibleIdealsBasic) {
+    while (not success) {
+      PP_With_Ideal & I = possibleIdealsBasic.front();
+      //cout << currSkel << endl;
+      LP_Solver * newSkeleton;
+      if (src_skel != nullptr)
+        newSkeleton = new Skeleton(*src_skel);
+      else if (src_GLPK != nullptr)
+        newSkeleton = new GLPK_Solver(*src_GLPK);
+      else if (src_PPL != nullptr)
+        newSkeleton = new PPL_Solver(*src_PPL);
+      vector<Constraint> newvecs;
+      //cout << "testing " << I.get_pp() << endl;
+      /*cout << '\t' << *I.get_hilbert_polynomial() << endl;
+      cout << '\t' << *I.get_hilbert_numerator() << endl;*/
+      constraints_for_new_pp(I, PPunion, newvecs);
+      if (newSkeleton->solve(newvecs))
+      {
+        //cout << I.get_pp() << " is consistent\n";
+        time_t start_verify = time(nullptr);
+        success = verify_and_modify_if_necessary(newSkeleton, CurrentPolys);
+        time_t stop_verify = time(nullptr);
+        verify_time += difftime(stop_verify, start_verify);
+        if (not success)
+          possibleIdealsBasic.pop_front();
+        else {
+          winner = & I;
+          result = newSkeleton;
+          break;
+        }
+      }
+      else
+      {
+        //cout << I.get_pp() << "is inconsistent\n";
+        // cout << newSkeleton;
+        // this monomial is not, in fact, compatible
+        compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
+        possibleIdealsBasic.pop_front();
+        delete newSkeleton;
+      }
+    }
+  }
+  time_t refine_stop = time(nullptr);
+  presolve_time += difftime(refine_stop, refine_start);
+  cout << "time spent in presolve: " << presolve_time << endl;
+
+  return result;
+
+}
+
+void F4_Reduction_Data::reassign(
+    unsigned my_row,
+    const Ray & w,
+    Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
+    LP_Solver * currSkel,
+    const PP_With_Ideal & winner,
+    bool & ordering_changed
+) {
+
+  ordering_changed = false;
+  pref_head[my_row] = M_table[winner.get_pp()];
+  if (current_hilbert_numerator != nullptr) delete current_hilbert_numerator;
+  current_hilbert_numerator
+      = new Dense_Univariate_Integer_Polynomial(*(winner.get_hilbert_numerator()));
+  Ray new_weight = ray_sum(currSkel->get_rays());
+  new_weight.simplify_ray();
+  for (
+        int i = 0;
+        not ordering_changed and i < (int )(new_weight.get_dimension());
+        ++i
+  ) {
+    // w is the old ordering
+    ordering_changed = ordering_changed or (new_weight[i] != w[i]);
+  }
+  cout << "ordering changed? " << ordering_changed << endl;
+
+}
+
+void F4_Reduction_Data::create_and_sort_ideals(
+    int my_row,
+    const list<Monomial> & CurrentLPPs,
+    Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
+    const list<Abstract_Polynomial *> & CurrentPolys,
+    const list<Critical_Pair_Dynamic *> & crit_pairs,
+    const LP_Solver * currSkel,
+    const Ray & w,
+    Dynamic_Heuristic method
+) {
+
+  static time_t create_time = 0;
+  time_t start = time(nullptr);
+
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
   for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
-  set<int> compatible_pps;
+  set<int> & row_compatibles = compatible_pps[my_row];
+  row_compatibles.clear();
   // loop through all exponent vectors
-  cout << allPP_indices.size() << " possible monomials\n";
-  compatible_pp(currentLPP, allPP_indices, compatible_pps, currSkel);
-  cout << compatible_pps.size() << " compatible monomials\n";
+  //cout << allPP_indices.size() << " possible monomials\n";
+  //compatible_pp(my_row, currentLPP, row_compatibles, currSkel);
+  compatible_pp(my_row, head[my_row] + offset[my_row], row_compatibles, currSkel);
+  // cout << "row " << my_row << " has " << row_compatibles.size() << " compatible monomials\n";
   // list possible future ideals, sort by Hilbert Function
-  list<PP_With_Ideal> possibleIdealsBasic;
-  for (const int ti : compatible_pps)
+  list<PP_With_Ideal> & possibleIdealsBasic = potential_ideals[my_row];
+  possibleIdealsBasic.clear();
+  for (const int ti : row_compatibles)
   {
-    PP_With_Ideal newIdeal(*M[ti], CurrentLPPs, w, crit_pairs, *current_hilbert_numerator);
+    PP_With_Ideal newIdeal(*M[ti], CurrentLPPs, w, crit_pairs, current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
     //cout << "pushed back " << t << endl;
   }
@@ -1037,92 +1141,11 @@ void F4_Reduction_Data::select_monomial(
       break;
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
-  /*cout << "sorted as ";
-  for (auto each : possibleIdealsBasic) { cout << each.get_pp(); }
-  cout << endl;*/
-  PP_With_Ideal * winner = & possibleIdealsBasic.front();
-  time_t presolve_stop = time(nullptr);
-  presolve_time += difftime(presolve_stop, presolve_start);
-  cout << "time spent in presolve: " << presolve_time << endl;
-  if (possibleIdealsBasic.size() != 1)
-  {
-    // test each combination of LPPs for consistency
-    // one of them must work (current LPP, if nothing else -- see previous case) 
-    set<int> PPunion;
-    for (const int t : compatible_pps) PPunion.insert(t);
-    for (PP_With_Ideal & I : possibleIdealsBasic) {
-      //cout << currSkel << endl;
-      LP_Solver * newSkeleton;
-      if (src_skel != nullptr)
-        newSkeleton = new Skeleton(*src_skel);
-      else if (src_GLPK != nullptr)
-        newSkeleton = new GLPK_Solver(*src_GLPK);
-      else if (src_PPL != nullptr)
-        newSkeleton = new PPL_Solver(*src_PPL);
-      vector<Constraint> newvecs;
-      //cout << "testing " << I.get_pp() << endl;
-      /*cout << '\t' << *I.get_hilbert_polynomial() << endl;
-      cout << '\t' << *I.get_hilbert_numerator() << endl;*/
-      constraints_for_new_pp(I, PPunion, newvecs);
-      if (newSkeleton->solve(newvecs))
-      {
-        //cout << I.get_pp() << " is consistent\n";
-        if (verify_and_modify_if_necessary(newSkeleton, CurrentPolys))
-        {
-          if (src_skel != nullptr)
-            src_skel -> copy(newSkeleton);
-          else if (src_GLPK != nullptr)
-            src_GLPK -> copy(newSkeleton);
-          else if (src_PPL != nullptr)
-            src_PPL -> copy(newSkeleton);
-          winner = & I;
-          delete newSkeleton;
-          break;
-        }
-      }
-      else
-      {
-        //cout << I.get_pp() << "is inconsistent\n";
-        // cout << newSkeleton;
-        // this monomial is not, in fact, compatible
-        compatible_pps.erase(M_table.get_index(I.get_pp()));
-      }
-      delete newSkeleton;
-    }
-  }
-  else if (possibleIdealsBasic.size() == 1 and compatible_pps.size() != 1)
-  {
-    vector<Constraint> newvecs;
-    constraints_for_new_pp(*(possibleIdealsBasic.begin()), compatible_pps, newvecs);
-    currSkel->solve(newvecs);
-    verify_and_modify_if_necessary(currSkel, CurrentPolys);
-  }
-   
-  // set marked lpp, new Hilbert numerator
-  //CurrentLPPs.push_back(winner->get_pp());
-  pref_head[my_row] = M_table[winner->get_pp()];
-  if (*current_hilbert_numerator != nullptr) delete *current_hilbert_numerator;
-  *current_hilbert_numerator
-      = new Dense_Univariate_Integer_Polynomial(*(winner->get_hilbert_numerator()));
-  Ray new_weight = ray_sum(currSkel->get_rays());
-  //cout << "Have ray " << w << endl;
-  new_weight.simplify_ray();
-  for (
-        int i = 0;
-        not ordering_changed and i < (int )(new_weight.get_dimension());
-        ++i
-  ) {
-    // w is the old ordering
-    ordering_changed = ordering_changed or (new_weight[i] != w[i]);
-  }
-  cout << "ordering changed? " << ordering_changed << endl;
-  /*cout << endl;
-  cout << "skeleton after:\n";
-  cout << currSkel; */
-  //cout << "returning from selmon\n";
+
   time_t stop = time(nullptr);
-  total_time += difftime(stop, start);
-  cout << "time spend in selecting monomials: " << total_time << endl;
+  create_time += difftime(stop, start);
+  cout << "time spent in creating and sorting ideals: " << create_time << endl;
+
 }
 
 unsigned F4_Reduction_Data::select_dynamic_single(
@@ -1135,95 +1158,60 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 ) {
   bool ordering_changed = false;
   PP_With_Ideal * newideal = nullptr;
-  LP_Solver * winning_skel = nullptr;
+  LP_Solver * winning_skel = skel;
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   simplify_identical_rows(unprocessed);
-  unsigned winning_row = *(unprocessed.begin());
-  Monomial winning_lm { *M[offset[winning_row] + head[winning_row]] };
-  set<unsigned> remove;
-  for (unsigned i : unprocessed) {
-    if (nonzero_entries[i] == 0)
-      remove.insert(i);
-    else {
-      set<int> all_pps, potential_pps;
-      list<int> boundary_pps;
-      monomials_in_row(i, all_pps);
-      compatible_pp(offset[i] + head[i], all_pps, potential_pps, skel);
-      cout << "compatible monomials for row " << i << ": ";
-      for (auto t : potential_pps) cout << *M[t] << ", "; cout << endl;
-      if (potential_pps.size() == 1) {
-        // we process rows with only one potential pp first
-        // this helps avoid wrong paths
+
+  unsigned winning_row = num_rows;
+
+  Ray w = ray_sum(skel->get_rays());
+  Dense_Univariate_Integer_Polynomial * current_hilbert_numerator = nullptr;
+
+  for (unsigned i: unprocessed) {
+    if (nonzero_entries[i] > 0) {
+      create_and_sort_ideals(
+          i, U,
+          current_hilbert_numerator, G, P,
+          skel, w,
+          heur
+      );
+      if (potential_ideals[i].size() == 1) {
         winning_row = i;
-        winning_lm = *M[*potential_pps.begin()];
+        //winning_skel = refine(i, skel, G);
         break;
+      }
+      if (winning_row == num_rows) {
+        winning_row = i;
+        winning_skel = refine(i, skel, G);
       } else {
-        LP_Solver * new_lp;
-        list<Monomial> T {U};
-        if (dynamic_cast<Skeleton *>(skel) != nullptr) {
-          new_lp = new Skeleton(*dynamic_cast<Skeleton *>(skel));
-          //cout << "allocated skeleton " << new_lp << endl;
-        }
-        else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr)
-          new_lp = new GLPK_Solver(*dynamic_cast<GLPK_Solver *>(skel));
-        else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
-          new_lp = new PPL_Solver(*dynamic_cast<PPL_Solver *>(skel));
-        // see if we can obtain a better ordering from this polynomial
-        bool new_ordering = false;
-        Dense_Univariate_Integer_Polynomial * hn = nullptr;
-        select_monomial(
-            i, potential_pps, *potential_pps.begin(), U, & hn, G, P, new_lp,
-            new_ordering, heur
-        );
-        // first save the index of the leading monomial (need for reduction)
-        Monomial row_lm { *M[pref_head[i]] };
-        //Monomial row_lm { U.back() };
-        //U.pop_back();
-        // if tempideal beats newideal, reassign newideal
-        Ray r(ray_sum(new_lp->get_rays()));
-        r.simplify_ray();
-        if (newideal == nullptr) { // always true in this case
-          ordering_changed = new_ordering;
-          winning_row = i;
-          winning_skel = new_lp;
-          //cout << "saving skeleton " << new_lp << endl;
-          winning_lm = row_lm;
-          newideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
-          newideal->set_hilbert_numerator(hn);
-        } else {
-          PP_With_Ideal * tempideal = new PP_With_Ideal(row_lm, T, r, P, nullptr);
-          tempideal->set_hilbert_numerator(hn);
-          if (not heuristic_judges_smaller(*tempideal, *newideal)) {
-            delete new_lp;
-            //cout << "deleting new skeleton " << new_lp << endl;
-            delete tempideal;
-          } else { // winner has changed; reduce matrix by it
-            ordering_changed = ordering_changed or new_ordering;
-            delete newideal;
+        if (heuristic_judges_smaller(
+              potential_ideals[i].front(), potential_ideals[winning_row].front()
+        )) {
+          winning_skel = refine(i, skel, G);
+          if (heuristic_judges_smaller(
+                potential_ideals[i].front(), potential_ideals[winning_row].front()
+          )) {
             winning_row = i;
-            winning_lm = row_lm;
-            newideal = tempideal;
-            delete winning_skel;
-            //cout << "deleting old skeleton " << winning_skel << endl;
-            winning_skel = new_lp;
-          } // change_winner?
-        } // newideal == nullptr?
-      } // row has more than one potential pp
-    } // row has nonzero entries
-  } // loop through rows
-  if (not ordering_changed and winning_skel == nullptr)
-    delete winning_skel;
-  else {
-    //cout << "deleting " << skel << endl;
+          }
+        }
+      }
+    }
+  }
+  if (winning_skel != skel) {
     delete skel;
     skel = winning_skel;
+    reassign(
+        winning_row,
+        w, current_hilbert_numerator, skel,
+        potential_ideals[winning_row].front(), ordering_changed
+    );
   }
+
   // find current lm and use for reduction
-  unsigned j = offset[winning_row] + head[winning_row];
   vector<COEF_TYPE> & Ai = A[winning_row];
-  bool searching = true;
-  j = M_table[winning_lm];
+  //unsigned j = M_table[winning_lm];
+  unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
   l_head[winning_row] = j;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
@@ -1339,16 +1327,19 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
       bool ordering_changed = false;
       while (unprocessed.size() != 0) {
         time_t start_time = time(nullptr);
-        LP_Solver * old_skel = skel;
+        //LP_Solver * old_skel = skel;
         unsigned completed_row = s.select_dynamic_single(
             unprocessed, T, G, P, curr_ord, skel
         );
         time_t end_time = time(nullptr);
         dynamic_time += difftime(end_time, start_time);
         all_completed_rows.insert(completed_row);
-        ordering_changed |= skel != old_skel;
+        Ray w(ray_sum(skel->get_rays()));
+        //ordering_changed |= skel != old_skel;
+        ordering_changed = false;
+        for (unsigned i = 0; (not ordering_changed) and (i < w.get_dimension()); ++i)
+          ordering_changed = w[i] == curr_ord->order_weights()[i];
         if (ordering_changed) {
-          Ray w(ray_sum(skel->get_rays()));
           w.simplify_ray();
           WGrevlex * new_ord = new WGrevlex(w);
           cout << "new ordering: " << *new_ord << endl;
