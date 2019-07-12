@@ -156,8 +156,8 @@ public:
   vector<Poly_Sugar_Data *> get_strategies() { return strategies; }
   /** @brief basic properties */
   unsigned number_of_rows() const { return A.size(); }
-  /** @brief set of monomials in row @p i that are not zero */
-  void monomials_in_row(unsigned i, set<int> &) const;
+  /** @brief set of monomials in row @p i that are not zero (absolute index) */
+  void monomials_in_row(unsigned i, list<int> &) const;
   /** @brief current ordering of monomials */
   const WGrevlex * current_ordering() const { return mord; }
   /** @brief runs @c check_consistency() on all rows */
@@ -198,28 +198,6 @@ public:
     @ingroup GBComputation
     @author John Perry
     @date 2019
-    @brief Compute the compatible leading monomials of a polynomial.
-    @details This differs from the more general case in that monomials are
-      indexed by @c M, rather than making copies of monomials.
-      In addition, we keep a cache of the monomials for each row,
-      so that we don't have to recompute the compatible monomials on each pass.
-    @param currentLPP the current leading power product of the polynomial
-    @param allPPs set of all power products of the polynomial
-    @param result set of power products of the polynomial compatible with `bndrys`
-    @param skel existing skeleton that defines currently-compatible orderings
-    @param boundary_mons boundary monomials (no apparent purpose at the moment)
-  */
-  void compatible_pp(
-    int my_row,
-    const int currentLPP_index,            // the current LPP
-    set<int> &result,          // returned as PPs for Hilbert function
-                                    // ("easy" (& efficient?) to extract exps
-    const LP_Solver *skel                 // used for alternate refinement
-  );
-  /**
-    @ingroup GBComputation
-    @author John Perry
-    @date 2019
     @brief Create constraints for a candidate LPP.
     @param pp_I pair of PP with the ideal it would have.
     @param monomials_for_comparison indices of monomials used to generate constraints with LPP
@@ -238,7 +216,6 @@ public:
     @param my_row which row of the matrix we are working on
     @param currentLPP current leading monomial of this polynomial
     @param allPP_indices indices of the support of a polynomial in need of a new choice of LPP
-    @param currSkel the current skeleton, corresponding to the choices `CurrentLPPs`
   */
   void create_and_sort_ideals(
       int my_row,
@@ -246,7 +223,6 @@ public:
       Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
       const list<Abstract_Polynomial *> & CurrentPolys,
       const list<Critical_Pair_Dynamic *> & crit_pairs,
-      const LP_Solver * currSkel,
       const Ray & w,
       Dynamic_Heuristic method
   );
@@ -411,8 +387,10 @@ protected:
   vector<unsigned> l_head;
   /** @brief index of the preferred head term of this row (absolute index) */
   vector<unsigned> pref_head;
-  /** @brief compatible pp's for each row */
-  vector< set<int> > compatible_pps;
+  /** @brief number of nonzero entries of each row of A */
+  vector<unsigned> nonzero_entries;
+  /** @brief compatible pp's for each row (absolute index) */
+  vector< list<int> > compatible_pps;
   /** @brief potential ideals for the given row */
   vector< list<PP_With_Ideal> > potential_ideals;
   /** @brief storage of monomials and reducers while preprocessing */
@@ -429,8 +407,6 @@ protected:
   const list<Abstract_Polynomial *> & G;
   /** @brief how the monomials are ordered */
   const WGrevlex * mord;
-  /** @brief number of nonzero entries of each row of A */
-  vector<unsigned> nonzero_entries;
   /** @brief polynomial ring */
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */
@@ -444,15 +420,18 @@ protected:
       monomial of the corresponding row of the matrix
   */
   vector<list<PP_With_Ideal> > I;
-  /**
-    @brief copies of the current skeleton, modified according to the preferred
-      monomial of this row
-  */
-  vector<LP_Solver *> row_skel;
   /** @brief heuristic the system should use in choosing leading monomials */
   Dynamic_Heuristic heur;
   /** @brief function corresponding to @c heur */
   function <bool(PP_With_Ideal &, PP_With_Ideal &)> heuristic_judges_smaller;
+  friend void compatible_pp(
+    int my_row,
+    F4_Reduction_Data & F4,
+    const LP_Solver * skel,
+    bool & stop,
+    vector<bool> & completed
+  );
+
 };
 
 #endif

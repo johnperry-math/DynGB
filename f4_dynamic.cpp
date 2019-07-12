@@ -23,6 +23,9 @@ double copy_time = 0;
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
+#include <future>
+using std::future; using std::async;
+
 #include <thread>
 using std::thread;
 #include <mutex>
@@ -230,8 +233,6 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
-  //row_plm_cache.resize(num_rows);
-  //row_is_dirty.resize(num_rows, true);
   R_built.resize(num_cols);
   num_readers.assign(num_cols, 0);
   for (auto m : M) delete m;
@@ -432,74 +433,72 @@ void F4_Reduction_Data::reduce_my_rows(
       // is this monomial reducible?
       if (R[mi] != nullptr) {
         for (int k : my_rows) {
-          if (k != -1) {
-            vector<COEF_TYPE> & Ak = A[k];
-            auto off_k = offset[k];
-            // do we need to reduce this poly?
-            if (off_k <= mi and Ak[mi - off_k] != 0) {
-              unsigned i = mi - off_k;
-              // get reducer for this monomial
-              const Abstract_Polynomial * g = R[mi];
-              Polynomial_Iterator * gi = g->new_iterator();
-              //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
-              // determine multiplier
-              const Monomial & t = *M[mi];
-              const Monomial & v = gi->currMonomial();
-              u.make_product_or_quotient(t, v, false);
-              red_mutex[mi].lock();
-              vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
-              if (r.size() == 0) { // need to create reducer
-                size_t j = mi;
-                // loop through g's terms
-                while (not gi->fellOff()) {
-                  const Monomial & t = gi->currMonomial();
-                  j = M_table.lookup_product(u, t);
-                  r.emplace_back(j, gi->currCoeff().value());
-                  gi->moveRight();
-                }
-              }
-              delete gi;
-              red_mutex[mi].unlock();
-              // prepare for reduction
-              new_nonzero_entries = nonzero_entries[k];
-              auto sk = strategies[k];
-              sk->pre_reduction_tasks(u, *g);
-              // determine reduction coefficient
-              COEF_TYPE a(mod - ((Ak[i]*F.inverse(r[0].second)) % mod));
+          vector<COEF_TYPE> & Ak = A[k];
+          auto off_k = offset[k];
+          // do we need to reduce this poly?
+          if (off_k <= mi and Ak[mi - off_k] != 0) {
+            unsigned i = mi - off_k;
+            // get reducer for this monomial
+            const Abstract_Polynomial * g = R[mi];
+            Polynomial_Iterator * gi = g->new_iterator();
+            //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
+            // determine multiplier
+            const Monomial & t = *M[mi];
+            const Monomial & v = gi->currMonomial();
+            u.make_product_or_quotient(t, v, false);
+            red_mutex[mi].lock();
+            vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
+            if (r.size() == 0) { // need to create reducer
+              size_t j = mi;
               // loop through g's terms
-              unsigned & hk = head[k];
-              for (auto ri : r) {
-                unsigned j = ri.first;
-                unsigned l = j - offset[k];
-                auto & Akl = Ak[l];
-                bool was_zero = Akl == 0;
-                Akl += a*ri.second;
-                if (was_zero) {
-                  ++new_nonzero_entries;
-                  if (hk > l) hk = l;
-                  was_zero = false;
-                }
-                if (Akl & OVERFLOW_MASK != 0) {
-                  Akl %= mod;
-                  if (not was_zero and Akl == 0) {
-                    --new_nonzero_entries;
-                  }
-                }
-                // advance
+              while (not gi->fellOff()) {
+                const Monomial & t = gi->currMonomial();
+                j = M_table.lookup_product(u, t);
+                r.emplace_back(j, gi->currCoeff().value());
+                gi->moveRight();
               }
-              while (hk < Ak.size() and Ak[hk] == 0) {
-                ++hk;
-                if (hk < Ak.size() and Ak[hk] != 0) {
-                  Ak[hk] %= mod;
-                  if (Ak[hk] == 0) {
-                    --new_nonzero_entries;
-                  }
-                }
-              }
-              nonzero_entries[k] = new_nonzero_entries;
-              if (nonzero_entries[k] == 0) hk = M.size();
-              //if (k == 0) { cout << '\t'; print_row(k); }
             }
+            delete gi;
+            red_mutex[mi].unlock();
+            // prepare for reduction
+            new_nonzero_entries = nonzero_entries[k];
+            auto sk = strategies[k];
+            sk->pre_reduction_tasks(u, *g);
+            // determine reduction coefficient
+            COEF_TYPE a(mod - ((Ak[i]*F.inverse(r[0].second)) % mod));
+            // loop through g's terms
+            unsigned & hk = head[k];
+            for (auto ri : r) {
+              unsigned j = ri.first;
+              unsigned l = j - offset[k];
+              auto & Akl = Ak[l];
+              bool was_zero = Akl == 0;
+              Akl += a*ri.second;
+              if (was_zero) {
+                ++new_nonzero_entries;
+                if (hk > l) hk = l;
+                was_zero = false;
+              }
+              if (Akl & OVERFLOW_MASK != 0) {
+                Akl %= mod;
+                if (not was_zero and Akl == 0) {
+                  --new_nonzero_entries;
+                }
+              }
+              // advance
+            }
+            while (hk < Ak.size() and Ak[hk] == 0) {
+              ++hk;
+              if (hk < Ak.size() and Ak[hk] != 0) {
+                Ak[hk] %= mod;
+                if (Ak[hk] == 0) {
+                  --new_nonzero_entries;
+                }
+              }
+            }
+            nonzero_entries[k] = new_nonzero_entries;
+            if (nonzero_entries[k] == 0) hk = M.size();
+            //if (k == 0) { cout << '\t'; print_row(k); }
           }
         }
       }
@@ -509,7 +508,6 @@ void F4_Reduction_Data::reduce_my_rows(
       // is this monomial reducible?
       if (R[mi] != nullptr) {
         for (int k : my_rows) {
-          if (k != -1) {
             vector<COEF_TYPE> & Ak = A[k];
             auto off_k = offset[k];
             // do we need to reduce this poly?
@@ -550,7 +548,6 @@ void F4_Reduction_Data::reduce_my_rows(
               nonzero_entries[k] = new_nonzero_entries;
               //if (k == 0) { cout << '\t'; print_row(k); }
             }
-          }
         }
       }
     }
@@ -563,7 +560,6 @@ void F4_Reduction_Data::reduce_my_rows(
         Ai[k] %= mod;
         if (Ai[k] == 0) {
           --nonzero_entries[i];
-          //if (row_plm_cache[i].count(k) > 0) row_is_dirty[i] = true;
           if (nonzero_entries[i] == 0)
             hi = M.size();
           else if (k == hi) {
@@ -644,10 +640,8 @@ void F4_Reduction_Data::reduce_my_new_rows(
         Aj[cj] += a*Ai[ci]; Aj[cj] %= mod;
         if (was_zero) {
           ++nonzero_entries[j];
-          //if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
         } else if (Aj[cj] == 0) {
           --nonzero_entries[j];
-          //if (row_plm_cache[j].count(cj + offset[j]) != 0) row_is_dirty[j] = true;
         }
         ++ops;
       }
@@ -774,7 +768,7 @@ Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
   return result;
 }
 
-void F4_Reduction_Data::monomials_in_row(unsigned i, set<int> & result) const {
+void F4_Reduction_Data::monomials_in_row(unsigned i, list<int> & result) const {
   unsigned processed = 0;
   unsigned k = head[i];
   auto Ai = A[i];
@@ -782,7 +776,7 @@ void F4_Reduction_Data::monomials_in_row(unsigned i, set<int> & result) const {
   //cout << "inserted ";
   while (processed < nonzero_entries[i]) {
     while (Ai[k] == 0) ++k;
-    result.insert(k + offset[i]);
+    result.push_back(k + offset[i]);
     //cout << k + offset[i] << ", ";
     ++k; ++processed;
   }
@@ -878,19 +872,37 @@ bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
   return consistent;
 }
 
-void F4_Reduction_Data::compatible_pp(
+/**
+  @ingroup GBComputation
+  @author John Perry
+  @date 2019
+  @brief Compute the compatible leading monomials of a polynomial.
+  @details This differs from the more general case in that monomials are
+    indexed by @c M, rather than making copies of monomials.
+    In addition, we keep a cache of the monomials for each row,
+    so that we don't have to recompute the compatible monomials on each pass.
+  @param currentLPP the current leading power product of the polynomial
+  @param allPPs set of all power products of the polynomial
+  @param result set of power products of the polynomial compatible with `bndrys`
+  @param skel existing skeleton that defines currently-compatible orderings
+  @param boundary_mons boundary monomials (no apparent purpose at the moment)
+*/
+void compatible_pp(
   int my_row,
-  const int currentLPP_index,            // the current LPP
-  set<int> &result,          // returned as PPs for Hilbert function
-                                  // ("easy" (& efficient?) to extract exps
-  const LP_Solver *skel                 // used for alternate refinement
+  F4_Reduction_Data & F4,
+  const LP_Solver * skel,
+  bool & stop,
+  vector<bool> & completed
 )
 {
+
   // known boundary vectors
   const set<Ray> &bndrys = skel->get_rays();
 
+  int currentLPP_index = F4.head[my_row] + F4.offset[my_row];
+
   // get the exponent vector of the current LPP, insert it
-  const Monomial & currentLPP(*M[currentLPP_index]);
+  const Monomial & currentLPP(*F4.M[currentLPP_index]);
   NVAR_TYPE n = currentLPP.num_vars();
   auto tmp = currentLPP.log();
   Ray aray(n, tmp);
@@ -899,31 +911,48 @@ void F4_Reduction_Data::compatible_pp(
   initial_candidates.push_back(currentLPP_index);
 
   // compare other monomials with LPP
-  set<int> allPPs;
-  monomials_in_row(my_row, allPPs);
-  for (const int b : allPPs) {
-    const Monomial & u(*M[b]);
-    if (not u.is_like(currentLPP) and skel->makes_consistent_constraint(u, currentLPP))
-      initial_candidates.push_back(b);
-  }
-  for (int b : initial_candidates)
-  {
-    const Monomial & u(*M[b]);
-    // cout << "testing for consistency: "; pWrite(*t);
-    bool good_constraints = true;
-    for (int c : initial_candidates) {
-      const Monomial & v(*M[c]);
-      if (not u.is_like(v))
-        if (not skel->makes_consistent_constraint(u, v)) {
-          good_constraints = false;
-          break;
+  list<int> allPPs;
+
+  if (not stop) {
+
+    F4.monomials_in_row(my_row, allPPs);
+    for (const int b : allPPs) {
+      if (stop) break;
+      const Monomial & u(*F4.M[b]);
+      if (currentLPP_index != b and skel->makes_consistent_constraint(u, currentLPP))
+        initial_candidates.push_back(b);
+    }
+
+    if (not stop) {
+  
+      list<int> & result = F4.compatible_pps[my_row];
+      for (int b : initial_candidates)
+      {
+        if (stop) break;
+        const Monomial & u(*F4.M[b]);
+        bool good_constraints = true;
+        for (int c : initial_candidates) {
+          if (b != c) {
+          const Monomial & v(*F4.M[c]);
+            if (not skel->makes_consistent_constraint(u, v)) {
+              good_constraints = false;
+              break;
+            }
+          }
         }
+        if (good_constraints)
+        {
+          result.push_back(b);
+          // cout << "\tadded " << u << endl;
+        }
+    
+      }
+
+      if (not stop) completed[my_row] = true;
+      if (result.size() == 1) stop = true;
+
     }
-    if (good_constraints)
-    {
-      result.insert(b);
-      // cout << "\tconsistent!\n";
-    }
+
   }
 
 }
@@ -1026,7 +1055,7 @@ LP_Solver * F4_Reduction_Data::refine(
         //cout << I.get_pp() << "is inconsistent\n";
         // cout << newSkeleton;
         // this monomial is not, in fact, compatible
-        compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
+        //compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
         possibleIdealsBasic.pop_front();
         delete newSkeleton;
       }
@@ -1074,7 +1103,6 @@ void F4_Reduction_Data::create_and_sort_ideals(
     Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
     const list<Abstract_Polynomial *> & CurrentPolys,
     const list<Critical_Pair_Dynamic *> & crit_pairs,
-    const LP_Solver * currSkel,
     const Ray & w,
     Dynamic_Heuristic method
 ) {
@@ -1085,15 +1113,9 @@ void F4_Reduction_Data::create_and_sort_ideals(
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
   for (NVAR_TYPE i = 0; i < w.get_dimension(); ++i) { ord.push_back(w[i]); }
-  set<int> & row_compatibles = compatible_pps[my_row];
-  row_compatibles.clear();
-  // loop through all exponent vectors
-  //cout << allPP_indices.size() << " possible monomials\n";
-  //compatible_pp(my_row, currentLPP, row_compatibles, currSkel);
-  compatible_pp(my_row, head[my_row] + offset[my_row], row_compatibles, currSkel);
-  // cout << "row " << my_row << " has " << row_compatibles.size() << " compatible monomials\n";
   // list possible future ideals, sort by Hilbert Function
   list<PP_With_Ideal> & possibleIdealsBasic = potential_ideals[my_row];
+  list<int> & row_compatibles = compatible_pps[my_row];
   possibleIdealsBasic.clear();
   for (const int ti : row_compatibles)
   {
@@ -1168,19 +1190,71 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   Ray w = ray_sum(skel->get_rays());
   Dense_Univariate_Integer_Polynomial * current_hilbert_numerator = nullptr;
 
+  set<unsigned> processed;
+  bool found_single = false;
+
+  static time_t compat_time = 0;
+  time_t start_compat = time(nullptr);
+
+  list< future<void> > waiters;
+  vector<bool> completed(num_rows, false);
+
   for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0) {
+      // loop through all exponent vectors
+      compatible_pps[i].clear();
+      //compatible_pp(i, *this, skel, found_single, completed);
+      waiters.push_back( std::move(
+          async(
+              compatible_pp, i, std::ref(*this), skel,
+              std::ref(found_single), std::ref(completed)
+          )
+      ) );
+    }
+  }
+
+  time_t stop_compat = time(nullptr);
+  compat_time += difftime(stop_compat, start_compat);
+  cout << "time spent in compatible_pp: " << compat_time << endl;
+
+  for (auto & fut : waiters) {
+    fut.get();
+  }
+
+  for (unsigned i: unprocessed) {
+    if (nonzero_entries[i] > 0 and completed[i]) {
+      list<int> & row_compatibles = compatible_pps[i];
+      //cout << row_compatibles.size() << " compatible at " << i << endl;
+      //waiters[i].get();
+        processed.insert(i);
+    }
+  }
+
+  for (unsigned i: processed) {
+
+    if (nonzero_entries[i] > 0 and completed[i]) {
+
+      list<int> & row_compatibles = compatible_pps[i];
+      // loop through all exponent vectors
+      /*row_compatibles.clear();
+      compatible_pp(i, head[i] + offset[i], row_compatibles, skel);
+      cout << row_compatibles.size() << " compatible at " << i << endl;
+      if (row_compatibles.size() == 1) {
+        winning_row = i;
+      }*/
+
       create_and_sort_ideals(
           i, U,
           current_hilbert_numerator, G, P,
-          skel, w,
+          w,
           heur
       );
+
       if (potential_ideals[i].size() == 1) {
         winning_row = i;
-        //winning_skel = refine(i, skel, G);
         break;
       }
+
       if (winning_row == num_rows) {
         winning_row = i;
         winning_skel = refine(i, skel, G);
@@ -1196,8 +1270,13 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           }
         }
       }
+      /*cout << skel->get_rays().size() << " rays in skeleton\n";
+      for (auto r : skel->get_rays()) cout << '\t' << r << endl;*/
+
     }
+
   }
+
   if (winning_skel != skel) {
     delete skel;
     skel = winning_skel;

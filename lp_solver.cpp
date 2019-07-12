@@ -194,7 +194,7 @@ Ray::Ray(const Ray &old_ray)
 Ray::~Ray()
 {
   //delete [] coords;
-  doda->return_used_block(coords);
+  if (coords != nullptr) doda->return_used_block(coords);
 }
 
 void Ray::simplify_ray()
