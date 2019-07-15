@@ -641,21 +641,23 @@ bool verify_and_modify_if_necessary(
           else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
             newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
           consistent = newskel->solve(new_constraint);
-          auto w_tmp { ray_sum(newskel->get_rays()) };
           //cout << "Have ray " << w << endl;
           // if we're consistent, we need to recompute the ordering
           //cout << "\t\t" << a*w << ',' << b*w << endl;
-          if (consistent and a*w_tmp > b*w_tmp)
+          if (consistent)
           {
-            skel->copy(newskel);
-            piter = currentPolys.begin();
-            w = w_tmp;
-            cout << " recovered with << " << w_tmp << endl;
-            break;
+            auto w_tmp { ray_sum(newskel->get_rays()) };
+            if (a*w_tmp > b*w_tmp) {
+              skel->copy(newskel);
+              piter = currentPolys.begin();
+              w = w_tmp;
+              cout << " recovered with << " << w_tmp << endl;
+              break;
+            }
           } // if consistent
           else {
             consistent = false;
-            cout << t << " fails again with ordering " << w_tmp << endl;
+            cout << t << " fails again" << endl;
           }
           delete newskel;
         } // if LPP changed

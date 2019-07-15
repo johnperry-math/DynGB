@@ -244,6 +244,14 @@ public:
     @ingroup GBComputation
     @author John Perry
     @date 2019
+    @brief determines the weights of each monomial, according to the given skeleton
+    @param skel current skeleton
+  */
+  void recache_weights(LP_Solver * skel);
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
     @brief cleans up various records after we compute a new ordering
     @param my_row the row of the matrix that we are refining
     @param w the old ordering
@@ -252,6 +260,14 @@ public:
     @param winner the @c PP_With_Ideal with information relating to the selected monomial
     @param ordering_changed whether the ordering has changed (written, not read)
   */
+  /**
+    @ingroup GBComputation
+    @author John Perry
+    @date 2019
+    @brief prints the weights cached for each monomial, according to most recent
+      skeleton used
+  */
+  void print_cached_weights();
   void reassign(
       unsigned my_row,
       const Ray & w,
@@ -391,6 +407,8 @@ protected:
   vector<unsigned> nonzero_entries;
   /** @brief compatible pp's for each row (absolute index) */
   vector< list<int> > compatible_pps;
+  /** @brief cache of monomial weights under current ordering */
+  vector< vector<unsigned> > pp_weights;
   /** @brief potential ideals for the given row */
   vector< list<PP_With_Ideal> > potential_ideals;
   /** @brief storage of monomials and reducers while preprocessing */

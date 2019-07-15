@@ -252,6 +252,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   l_head.resize(P.size());
   offset.resize(P.size());
   pref_head.resize(P.size());
+  pp_weights.resize(M.size());
   compatible_pps.resize(P.size());
   potential_ideals.resize(P.size());
   unsigned cores = std::thread::hardware_concurrency();
@@ -881,11 +882,11 @@ bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
     indexed by @c M, rather than making copies of monomials.
     In addition, we keep a cache of the monomials for each row,
     so that we don't have to recompute the compatible monomials on each pass.
-  @param currentLPP the current leading power product of the polynomial
-  @param allPPs set of all power products of the polynomial
-  @param result set of power products of the polynomial compatible with `bndrys`
+  @param my_row row to process
+  @param F4 matrix structure
   @param skel existing skeleton that defines currently-compatible orderings
-  @param boundary_mons boundary monomials (no apparent purpose at the moment)
+  @param stop signal bit whether to stop processing early (indeterminism may result)
+  @param completed (out only) whether we complete our given rows
 */
 void compatible_pp(
   int my_row,
@@ -896,17 +897,11 @@ void compatible_pp(
 )
 {
 
-  // known boundary vectors
-  const set<Ray> &bndrys = skel->get_rays();
-
   int currentLPP_index = F4.head[my_row] + F4.offset[my_row];
 
   // get the exponent vector of the current LPP, insert it
   const Monomial & currentLPP(*F4.M[currentLPP_index]);
   NVAR_TYPE n = currentLPP.num_vars();
-  auto tmp = currentLPP.log();
-  Ray aray(n, tmp);
-  delete [] tmp;
   list<int> initial_candidates;
   initial_candidates.push_back(currentLPP_index);
 
@@ -919,9 +914,18 @@ void compatible_pp(
     for (const int b : allPPs) {
       if (stop) break;
       const Monomial & u(*F4.M[b]);
-      if (currentLPP_index != b and skel->makes_consistent_constraint(u, currentLPP))
-        initial_candidates.push_back(b);
+      //if (currentLPP_index != b and skel->makes_consistent_constraint(u, currentLPP))
+      if (currentLPP_index != b)
+        for (unsigned i = 0; i < F4.pp_weights[b].size(); ++i)
+          if (F4.pp_weights[b][i] > F4.pp_weights[currentLPP_index][i]) {
+            initial_candidates.push_back(b);
+            break;
+          }
     }
+
+    /*cout << initial_candidates.size() << " initial candidates: ";
+    for (auto b : initial_candidates) cout << *F4.M[b] << ", ";
+    cout << endl;*/
 
     if (not stop) {
   
@@ -933,17 +937,25 @@ void compatible_pp(
         bool good_constraints = true;
         for (int c : initial_candidates) {
           if (b != c) {
-          const Monomial & v(*F4.M[c]);
-            if (not skel->makes_consistent_constraint(u, v)) {
+            bool found_one = false;
+            const Monomial & v(*F4.M[c]);
+            //if (not skel->makes_consistent_constraint(u, v))
+            for (unsigned i = 0; i < F4.pp_weights[b].size(); ++i)
+              if (F4.pp_weights[b][i] > F4.pp_weights[c][i]) {
+              found_one = true;
+              break;
+            }
+            if (not found_one) {
               good_constraints = false;
               break;
             }
+            //good_constraints = false;
           }
         }
         if (good_constraints)
         {
           result.push_back(b);
-          // cout << "\tadded " << u << endl;
+          //cout << "\tadded " << u << endl;
         }
     
       }
@@ -1095,6 +1107,9 @@ void F4_Reduction_Data::reassign(
   }
   cout << "ordering changed? " << ordering_changed << endl;
 
+  // signal that weight cache is invalid (avoid recomputation unless necessary)
+  if (ordering_changed) pp_weights[0][0] = 0;
+
 }
 
 void F4_Reduction_Data::create_and_sort_ideals(
@@ -1170,6 +1185,49 @@ void F4_Reduction_Data::create_and_sort_ideals(
 
 }
 
+void F4_Reduction_Data::print_cached_weights() {
+  for (auto & cache : pp_weights) {
+    cout << "( ";
+    for (auto w : cache)
+      cout << w << ", ";
+    cout << ") ";
+  }
+  cout << endl;
+}
+
+void F4_Reduction_Data::recache_weights(LP_Solver * skel) {
+
+  time_t recache_time = 0;
+  time_t start_recache = time(nullptr);
+
+  auto ray_set = skel->get_rays();
+  vector<Ray> rays;
+  for (auto & r : ray_set) rays.emplace_back(r);
+
+  if (rays.size() != pp_weights[0].size()) {
+    for (auto & cache : pp_weights) {
+      cache.resize(rays.size());
+    }
+  }
+
+  auto n = Rx.number_of_variables();
+
+  for (unsigned i = 0; i < pp_weights.size(); ++i) {
+    auto & cache = pp_weights[i];
+    auto & t = *M[i];
+    for (unsigned j = 0; j < rays.size(); ++j) {
+      cache[j] = 0;
+      for (unsigned k = 0; k < n; ++k)
+        cache[j] += rays[j][k] * t[k];
+    }
+  }
+
+  time_t stop_recache = time(nullptr);
+  recache_time += difftime(stop_recache, start_recache);
+  cout << "recaching time: " << recache_time << endl;
+ 
+}
+
 unsigned F4_Reduction_Data::select_dynamic_single(
     set<unsigned> & unprocessed,
     list<Monomial> & U,
@@ -1199,9 +1257,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   list< future<void> > waiters;
   vector<bool> completed(num_rows, false);
 
+  if (pp_weights[0].size() == 0 or pp_weights[0][0] == 0) recache_weights(skel);
+
   for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0) {
-      // loop through all exponent vectors
       compatible_pps[i].clear();
       //compatible_pp(i, *this, skel, found_single, completed);
       waiters.push_back( std::move(
@@ -1213,20 +1272,19 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     }
   }
 
-  time_t stop_compat = time(nullptr);
-  compat_time += difftime(stop_compat, start_compat);
-  cout << "time spent in compatible_pp: " << compat_time << endl;
-
   for (auto & fut : waiters) {
     fut.get();
   }
+
+  time_t stop_compat = time(nullptr);
+  compat_time += difftime(stop_compat, start_compat);
+  cout << "time spent in compatible_pp: " << compat_time << endl;
 
   for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0 and completed[i]) {
       list<int> & row_compatibles = compatible_pps[i];
       //cout << row_compatibles.size() << " compatible at " << i << endl;
-      //waiters[i].get();
-        processed.insert(i);
+      processed.insert(i);
     }
   }
 
@@ -1235,13 +1293,6 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     if (nonzero_entries[i] > 0 and completed[i]) {
 
       list<int> & row_compatibles = compatible_pps[i];
-      // loop through all exponent vectors
-      /*row_compatibles.clear();
-      compatible_pp(i, head[i] + offset[i], row_compatibles, skel);
-      cout << row_compatibles.size() << " compatible at " << i << endl;
-      if (row_compatibles.size() == 1) {
-        winning_row = i;
-      }*/
 
       create_and_sort_ideals(
           i, U,
@@ -1270,8 +1321,6 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           }
         }
       }
-      /*cout << skel->get_rays().size() << " rays in skeleton\n";
-      for (auto r : skel->get_rays()) cout << '\t' << r << endl;*/
 
     }
 
