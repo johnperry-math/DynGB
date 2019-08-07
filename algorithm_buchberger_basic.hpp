@@ -154,7 +154,7 @@ struct smaller_lm {
     a value of 0 means to check every degree
 */
 void check_correctness(
-  list<Constant_Polynomial *>G,
+  list<Abstract_Polynomial *>G,
   StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY,
   EXP_TYPE max_degree = 0
 );

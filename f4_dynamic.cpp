@@ -439,17 +439,17 @@ void F4_Reduction_Data::reduce_my_rows(
           // do we need to reduce this poly?
           if (off_k <= mi and Ak[mi - off_k] != 0) {
             unsigned i = mi - off_k;
+            red_mutex[mi].lock();
             // get reducer for this monomial
             const Abstract_Polynomial * g = R[mi];
-            Polynomial_Iterator * gi = g->new_iterator();
-            //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
-            // determine multiplier
-            const Monomial & t = *M[mi];
-            const Monomial & v = gi->currMonomial();
-            u.make_product_or_quotient(t, v, false);
-            red_mutex[mi].lock();
             vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
             if (r.size() == 0) { // need to create reducer
+              Polynomial_Iterator * gi = g->new_iterator();
+              //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
+              // determine multiplier
+              const Monomial & t = *M[mi];
+              const Monomial & v = gi->currMonomial();
+              u.make_product_or_quotient(t, v, false);
               size_t j = mi;
               // loop through g's terms
               while (not gi->fellOff()) {
@@ -458,8 +458,8 @@ void F4_Reduction_Data::reduce_my_rows(
                 r.emplace_back(j, gi->currCoeff().value());
                 gi->moveRight();
               }
+              delete gi;
             }
-            delete gi;
             red_mutex[mi].unlock();
             // prepare for reduction
             new_nonzero_entries = nonzero_entries[k];
@@ -499,6 +499,7 @@ void F4_Reduction_Data::reduce_my_rows(
             }
             nonzero_entries[k] = new_nonzero_entries;
             if (nonzero_entries[k] == 0) hk = M.size();
+            l_head[k] = hk + offset[k];
             //if (k == 0) { cout << '\t'; print_row(k); }
           }
         }
@@ -650,6 +651,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
     }
     unsigned & hj = head[j];
     while (hj < Aj.size() and Aj[hj] == 0) ++hj;
+    l_head[j] = hj + offset[j];
     // if (j == 0) { cout << "reduced row " << j << " by new: "; print_row(j); }
   }
 }
@@ -684,51 +686,6 @@ void F4_Reduction_Data::reduce_by_new(
     workers[c].join();
   delete [] workers;
   delete [] thread_rows;
-}
-
-vector<Constant_Polynomial *> F4_Reduction_Data::finalize() {
-  vector<Constant_Polynomial *> result;
-  const Prime_Field & F = Rx.ground_field();
-  UCOEF_TYPE mod = F.modulus();
-  NVAR_TYPE n = M[0]->num_vars();
-  for (unsigned i = 0; i < num_rows; ++i) {
-    if (nonzero_entries[i] == 0) {
-      delete strategies[i];
-      strategies[i] = nullptr;
-    } else {
-      vector<COEF_TYPE> & Ai = A[i];
-      Monomial * M_final = static_cast<Monomial *>(
-          malloc(sizeof(Monomial)*nonzero_entries[i])
-      );
-      Prime_Field_Element * A_final = static_cast<Prime_Field_Element *>(
-          malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
-      );
-      COEF_TYPE scale = F.inverse(Ai[head[i]]);
-      unsigned k = 0;
-      for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
-        if (Ai[j] != 0) {
-          A_final[k].assign(Ai[j]*scale % mod, &F);
-          M_final[k].common_initialization();
-          M_final[k].initialize_exponents(n);
-          M_final[k] = *M[offset[i] + j];
-          ++k;
-        }
-      }
-      result.push_back(new Constant_Polynomial(
-          nonzero_entries[i],
-          Rx,
-          M_final, A_final,
-          mord
-      ));
-      result.back()->set_strategy(strategies[i]);
-      strategies[i] = nullptr;
-      for (k = 0; k < nonzero_entries[i]; ++k)
-        M_final[k].deinitialize();
-      free(M_final);
-      free(A_final);
-    }
-  }
-  return result;
 }
 
 Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
@@ -1361,7 +1318,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
-list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
+list<Constant_Polynomial *> f4_control(
+    const list<Abstract_Polynomial *> &F,
+    const bool static_algorithm
+) {
   list<Monomial> T;
   Dense_Univariate_Integer_Polynomial * hn = nullptr;
   NVAR_TYPE n = F.front()->number_of_variables();
@@ -1453,51 +1413,76 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
           unprocessed.insert(i);
       set<unsigned> all_completed_rows;
       bool ordering_changed = false;
-      while (unprocessed.size() != 0) {
-        time_t start_time = time(nullptr);
-        //LP_Solver * old_skel = skel;
-        unsigned completed_row = s.select_dynamic_single(
-            unprocessed, T, G, P, curr_ord, skel
-        );
-        time_t end_time = time(nullptr);
-        dynamic_time += difftime(end_time, start_time);
-        all_completed_rows.insert(completed_row);
-        Ray w(ray_sum(skel->get_rays()));
-        //ordering_changed |= skel != old_skel;
-        ordering_changed = false;
-        for (unsigned i = 0; (not ordering_changed) and (i < w.get_dimension()); ++i)
-          ordering_changed = w[i] == curr_ord->order_weights()[i];
-        if (ordering_changed) {
-          w.simplify_ray();
-          WGrevlex * new_ord = new WGrevlex(w);
-          cout << "new ordering: " << *new_ord << endl;
-          //cout << "skeleton:\n" << *skel << endl;
-          all_orderings_used.push_front(curr_ord);
-          curr_ord = new_ord;
+      if (static_algorithm) {
+        while (unprocessed.size() != 0) {
+          unsigned winning_row = *unprocessed.begin();
+          if (s.number_of_nonzero_entries(winning_row) != 0) {
+            unsigned winning_lm = s.head_monomial_index(winning_row);
+            for (auto i: unprocessed) {
+              auto nz = s.number_of_nonzero_entries(i);
+              if ( (nz != 0)
+                   and ( (s.head_monomial_index(i) > winning_lm)
+                         or (s.head_monomial_index(i) == winning_lm
+                             and nz < s.number_of_nonzero_entries(winning_row)) )
+              ) {
+                winning_row = i;
+                winning_lm = s.head_monomial_index(i);
+              }
+            }
+            s.reduce_by_new(winning_row, winning_lm, unprocessed);
+            all_completed_rows.insert(winning_row);
+          }
+          unprocessed.erase(winning_row);
         }
+      } else {
+        while (unprocessed.size() != 0) {
+          time_t start_time = time(nullptr);
+          //LP_Solver * old_skel = skel;
+          unsigned completed_row = s.select_dynamic_single(
+              unprocessed, T, G, P, curr_ord, skel
+          );
+          time_t end_time = time(nullptr);
+          dynamic_time += difftime(end_time, start_time);
+          all_completed_rows.insert(completed_row);
+          Ray w(ray_sum(skel->get_rays()));
+          //ordering_changed |= skel != old_skel;
+          ordering_changed = false;
+          for (unsigned i = 0; (not ordering_changed) and (i < w.get_dimension()); ++i)
+            ordering_changed = w[i] == curr_ord->order_weights()[i];
+          if (ordering_changed) {
+            w.simplify_ray();
+            WGrevlex * new_ord = new WGrevlex(w);
+            cout << "new ordering: " << *new_ord << endl;
+            //cout << "skeleton:\n" << *skel << endl;
+            all_orderings_used.push_front(curr_ord);
+            curr_ord = new_ord;
+          }
+        }
+        s.set_ordering(curr_ord);
+        for (auto p : P)
+          p->change_ordering(curr_ord);
+        for (auto & t : T)
+          t.set_monomial_ordering(curr_ord);
       }
-      s.set_ordering(curr_ord);
-      for (auto p : P)
-        p->change_ordering(curr_ord);
-      for (auto & t : T)
-        t.set_monomial_ordering(curr_ord);
       for (auto completed_row : all_completed_rows) {
-        Constant_Polynomial * r = s.finalize(completed_row);
-        if (ordering_changed)
-          r->set_monomial_ordering(curr_ord);
-        cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
-        //r->printlncout();
-        //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
-        //for (auto t : T) cout << t << " "; cout << endl;
-        very_verbose = false;
-        if (very_verbose) { cout << "\tadded "; r->println(); }
-        start_time = time(nullptr);
-        gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
-        end_time = time(nullptr);
-        gm_time += difftime(end_time, start_time);
-        //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
-        //for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
-        cout << "continuing\n";
+        if (s.number_of_nonzero_entries(completed_row) != 0) {
+          Constant_Polynomial * r = s.finalize(completed_row);
+          if (ordering_changed)
+            r->set_monomial_ordering(curr_ord);
+          cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
+          //r->printlncout();
+          //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
+          //for (auto t : T) cout << t << " "; cout << endl;
+          very_verbose = false;
+          if (very_verbose) { cout << "\tadded "; r->println(); }
+          start_time = time(nullptr);
+          gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+          end_time = time(nullptr);
+          gm_time += difftime(end_time, start_time);
+          //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
+          //for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
+          cout << "continuing\n";
+        }
       }
     }
     /*list<Constant_Polynomial *> B;
@@ -1516,7 +1501,7 @@ list<Constant_Polynomial *> f4_control(const list<Abstract_Polynomial *> &F) {
   cout << number_of_spolys << " s-polynomials computed and reduced\n";
   // cleanup
   cout << G.size() << " polynomials before interreduction\n";
-  //check_correctness(G, strategy);
+  //check_correctness(G);
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   for (auto f : Ftemp) delete f;
