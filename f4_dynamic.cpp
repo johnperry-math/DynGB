@@ -34,6 +34,8 @@ using std::mutex;
 using std::bitset;
 #include <string>
 using std::to_string;
+#include <algorithm>
+using std::fill;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -74,18 +76,6 @@ extern template void report_critical_pairs<Critical_Pair_Dynamic>(
 extern template void sort_pairs_by_strategy<Critical_Pair_Basic>(
     list<Critical_Pair_Basic *> &
 );
-
-void find_position(
-  list<Monomial *>::iterator & ti,
-  list<Monomial *>::iterator stop,
-  list<Abstract_Polynomial *>::iterator & pi,
-  const Monomial & u
-) {
-  while (ti != stop and **ti > u) {
-    ++ti;
-    ++pi;
-  }
-}
 
 F4_Reduction_Data::F4_Reduction_Data(
     const WGrevlex * curr_ord,
@@ -231,6 +221,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   num_cols = M_builder.size();
   num_rows = P.size();
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
+  dirty.resize(num_rows, true);
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
@@ -376,8 +367,6 @@ bool F4_Reduction_Data::is_zero() {
     is_zero_so_far = is_zero_so_far and (nonzero_entries[i] == 0);
   return is_zero_so_far;
 }
-
-double reduction_time = 0;
 
 void F4_Reduction_Data::build_reducer(unsigned mi, const Monomial & u) {
   NVAR_TYPE n = Rx.number_of_variables();
@@ -659,6 +648,11 @@ void F4_Reduction_Data::reduce_my_new_rows(
 void F4_Reduction_Data::reduce_by_new(
     unsigned i, unsigned lhead_i, const set<unsigned> & unprocessed
 ) {
+  cout << "pre reduction:\n";
+  //for (auto && b: dirty) b = false;
+  fill(dirty.begin(), dirty.end(), false);
+  for (auto b: dirty) cout << b << ' '; cout << endl;
+  //print_matrix(false);
   auto & F = Rx.ground_field();
   unsigned cores = std::thread::hardware_concurrency() * 2;
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
@@ -673,6 +667,7 @@ void F4_Reduction_Data::reduce_by_new(
         and Ai0 >= offset[j]
         and (A[j][Ai0 - offset[j]] != 0)
     ) {
+      dirty[j] = true;
       thread_rows[k].insert(j);
       ++k; k %= num_threads;
     }
@@ -686,6 +681,9 @@ void F4_Reduction_Data::reduce_by_new(
     workers[c].join();
   delete [] workers;
   delete [] thread_rows;
+  cout << "post reduction:\n";
+  for (auto b: dirty) cout << b << ' '; cout << endl;
+  //print_matrix(false);
 }
 
 Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
@@ -771,63 +769,6 @@ void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
   cout << "identified " << removed.size() << " redundant rows\n";
   // now remove
   for (auto i : removed) in_use.erase(i);
-}
-
-bool F4_Reduction_Data::verify_and_modify_processed_rows(LP_Solver * skel) {
-  bool consistent = true; // innocent until proven guilty
-  Ray w = ray_sum(skel->get_rays()); // our tentative ordering
-  NVAR_TYPE n = w.get_dimension();
-  CONSTR_TYPE *coefficients = new CONSTR_TYPE [n]; // used for coefficients for new constraints
-  // cout << "Have ray " << w << endl;
-  // loop through all polynomials; verify leading power product is unchanged
-  for (auto i : dynamic_processed) {
-    // create a ray for the current LPP's exponents
-    const Monomial & t = *M[l_head[i]];
-    DEG_TYPE td = t.weighted_degree(w.weights());
-    // loop through the polynomial's remaining monomials
-    unsigned k = head[i];
-    unsigned mons_considered = 1; // accounting for l_head[i]
-    while (mons_considered < nonzero_entries[i]) {
-      // don't compare with LPP; that would be Bad (TM)
-      if (k + offset[i] != l_head[i])
-      {
-        ++mons_considered;
-        Monomial & u = *M[k + offset[i]];
-        // compare weights between a and b; if this fails,
-        // recompute the skeleton with a new constraint
-        if (td <= u.weighted_degree(w.weights())) {
-          if (coefficients == nullptr) // ensure we have space
-            coefficients = new CONSTR_TYPE[n];
-          for (NVAR_TYPE i = 0; i < n; ++i)
-            coefficients[i] = t[i] - u[i];
-          Constraint new_constraint(n, coefficients);
-          LP_Solver * newskel;
-          if (dynamic_cast<Skeleton *>(skel) != nullptr)
-            newskel = new Skeleton(*static_cast<Skeleton *>(skel));
-          else if (dynamic_cast<GLPK_Solver *>(skel) != nullptr) {
-            newskel = new GLPK_Solver(*static_cast<GLPK_Solver *>(skel));
-          }
-          else if (dynamic_cast<PPL_Solver *>(skel) != nullptr)
-            newskel = new PPL_Solver(*static_cast<PPL_Solver *>(skel));
-          else
-            newskel = nullptr; // this should never happen, of course
-          consistent = newskel->solve(new_constraint);
-          //cout << "Have ray " << w << endl;
-          // if we're consistent, we need to recompute the ordering
-          if (consistent) { // if consistent
-            w = ray_sum(newskel->get_rays());
-            //cout << "Have ray " << w << endl;
-            *skel = *newskel;
-          } else delete newskel;
-        } // if LPP changed
-      } // if PP != LPP
-      ++k;
-    } // loop through PPs
-  } // loop through processed
-  // cleanup
-  delete [] coefficients;
-  // finally done
-  return consistent;
 }
 
 /**
@@ -935,6 +876,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
   //static time_t all_time = 0;
   //time_t start = time(nullptr);
   // setup
+  cout << "adding constraints for " << I.get_pp() << endl;
   NVAR_TYPE n = I.get_ideal().number_of_variables();
   const EXP_TYPE * a, * b;
   CONSTR_TYPE *c = new CONSTR_TYPE[n];  // space for coefficients of constraint
@@ -1196,6 +1138,8 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   bool ordering_changed = false;
   PP_With_Ideal * newideal = nullptr;
   LP_Solver * winning_skel = skel;
+  cout << "rays:\n";
+  for (auto & r : skel->get_rays()) cout << '\t' << r << endl;
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   simplify_identical_rows(unprocessed);
@@ -1218,6 +1162,8 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0) {
+      if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
+      else {
       compatible_pps[i].clear();
       //compatible_pp(i, *this, skel, found_single, completed);
       waiters.push_back( std::move(
@@ -1227,6 +1173,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
           )
       ) );
     }
+  }
   }
 
   for (auto & fut : waiters) {
@@ -1239,12 +1186,16 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0 and completed[i]) {
-      list<int> & row_compatibles = compatible_pps[i];
+      //list<int> & row_compatibles = compatible_pps[i];
       //cout << row_compatibles.size() << " compatible at " << i << endl;
       processed.insert(i);
     }
   }
 
+  cout << "analyzed " << processed.size() << " rows: ";
+  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << ", "; cout << endl;
+
+  // first check for rows w/only 1 compatible monomial
   for (unsigned i: processed) {
 
     if (nonzero_entries[i] > 0 and completed[i]) {

@@ -302,16 +302,6 @@ public:
       LP_Solver * & skel
   );
   /**
-    @brief verify the processed rows against @p skel and modify @p skel
-      if necessary to preserve previous choices
-    @param skel pending new @c LP_Solver (best have a copy of the old one
-      if this turns out bad)
-    @return @c false if and only if @p newSkel cannot be modified
-      to compatibility with @p newSkel
-    @warning This function is not currently in use and has not been tested.
-  */
-  bool verify_and_modify_processed_rows(LP_Solver * skel);
-  /**
     @brief eliminates duplicates of rows:
       later rows that are identical to earlier rows will be eliminated
     @param in_use rows that are currently still in use by the matrix
@@ -394,6 +384,8 @@ protected:
       subrow of the dense matrix
   */
   vector<vector<COEF_TYPE> > A;
+  /** @brief whether the row was modified during reduction */
+  vector<bool> dirty;
   /** @brief index of the starting point of this row in the dense matrix*/
   vector<unsigned> offset;
   /**
