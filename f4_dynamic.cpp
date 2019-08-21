@@ -812,13 +812,17 @@ void compatible_pp(
     for (const int b : allPPs) {
       if (stop) break;
       const Monomial & u(*F4.M[b]);
+      auto & F4b = F4.pp_weights[b];
+      auto m = F4b.size();
       //if (currentLPP_index != b and skel->makes_consistent_constraint(u, currentLPP))
-      if (currentLPP_index != b)
-        for (unsigned i = 0; i < F4.pp_weights[b].size(); ++i)
-          if (F4.pp_weights[b][i] > F4.pp_weights[currentLPP_index][i]) {
+      if (currentLPP_index != b) {
+        auto & F4c = F4.pp_weights[currentLPP_index];
+        for (unsigned i = 0; i < m; ++i)
+          if (F4b[i] > F4c[i]) {
             initial_candidates.push_back(b);
             break;
           }
+      }
     }
 
     /*cout << initial_candidates.size() << " initial candidates: ";
@@ -831,15 +835,18 @@ void compatible_pp(
       for (int b : initial_candidates)
       {
         if (stop) break;
+        auto & F4b = F4.pp_weights[b];
+        auto m = F4b.size();
         const Monomial & u(*F4.M[b]);
         bool good_constraints = true;
         for (int c : initial_candidates) {
           if (b != c) {
+            auto & F4c = F4.pp_weights[c];
             bool found_one = false;
-            const Monomial & v(*F4.M[c]);
+            //const Monomial & v(*F4.M[c]);
             //if (not skel->makes_consistent_constraint(u, v))
-            for (unsigned i = 0; i < F4.pp_weights[b].size(); ++i)
-              if (F4.pp_weights[b][i] > F4.pp_weights[c][i]) {
+            for (unsigned i = 0; i < m; ++i)
+              if (F4b[i] > F4c[i]) {
               found_one = true;
               break;
             }
@@ -888,7 +895,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
     // insert only different PPs (since I->t should also be in that set)
     if (t != I.get_pp())
     {
-      //cout << "adding constraint " << I.get_pp() << " > " << t << endl;
+      //cout << "\tadding constraint " << I.get_pp() << " > " << t << endl;
       b = t.log();
       for (NVAR_TYPE i = 0; i < n; ++i) c[i] = a[i] - b[i];
       delete [] b;
@@ -1021,7 +1028,7 @@ void F4_Reduction_Data::create_and_sort_ideals(
     Dynamic_Heuristic method
 ) {
 
-  static time_t create_time = 0;
+  static time_t create_time = 0, create_sort_time = 0;
   time_t start = time(nullptr);
 
   //cout << "Have ray " << w << endl;
@@ -1037,9 +1044,12 @@ void F4_Reduction_Data::create_and_sort_ideals(
     possibleIdealsBasic.push_back(newIdeal);
     //cout << "pushed back " << t << endl;
   }
+  time_t stop = time(nullptr);
+  create_time += difftime(stop, start);
+  cout << "time spent in creating ideals: " << create_time << endl;
   //cout << "heuristic: " << method << endl;
-  static time_t presolve_time = 0;
-  time_t presolve_start = time(nullptr);
+  //static time_t presolve_time = 0;
+  //time_t presolve_start = time(nullptr);
   switch(method)
   {
     case Dynamic_Heuristic::ORD_HILBERT_THEN_LEX:
@@ -1078,9 +1088,10 @@ void F4_Reduction_Data::create_and_sort_ideals(
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
 
-  time_t stop = time(nullptr);
-  create_time += difftime(stop, start);
-  cout << "time spent in creating and sorting ideals: " << create_time << endl;
+  stop = time(nullptr);
+  create_sort_time += difftime(stop, start);
+  cout << "time spent in creating and sorting ideals: " << create_sort_time
+       << endl;
 
 }
 
@@ -1185,15 +1196,22 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   cout << "time spent in compatible_pp: " << compat_time << endl;
 
   for (unsigned i: unprocessed) {
-    if (nonzero_entries[i] > 0 and completed[i]) {
+    auto size = compatible_pps[i].size();
+    if (size > 0 and completed[i]) {
       //list<int> & row_compatibles = compatible_pps[i];
       //cout << row_compatibles.size() << " compatible at " << i << endl;
-      processed.insert(i);
+      if (size > 1)
+        processed.insert(i);
+      else {
+        processed.clear();
+        processed.insert(i);
+        break;
+      }
     }
   }
 
   cout << "analyzed " << processed.size() << " rows: ";
-  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << ", "; cout << endl;
+  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl;
 
   // first check for rows w/only 1 compatible monomial
   for (unsigned i: processed) {
@@ -1202,6 +1220,9 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
       list<int> & row_compatibles = compatible_pps[i];
 
+      // we cannot skip this next step: program crashes if we do
+      // probably cause: data may change because of refinement,
+      // even if polynomial is not dirty
       create_and_sort_ideals(
           i, U,
           current_hilbert_numerator, G, P,
