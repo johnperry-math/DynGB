@@ -222,7 +222,7 @@ public:
   void create_and_sort_ideals(
       int my_row,
       const list<Monomial> & CurrentLPPs,
-      Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
+      const Dense_Univariate_Integer_Polynomial * current_hilbert_numerator,
       const list<Abstract_Polynomial *> & CurrentPolys,
       const list<Critical_Pair_Dynamic *> & crit_pairs,
       const Ray & w,

@@ -970,7 +970,7 @@ LP_Solver * F4_Reduction_Data::refine(
       }
       else
       {
-        //cout << I.get_pp() << "is inconsistent\n";
+        cout << I.get_pp() << "is inconsistent\n";
         // cout << newSkeleton;
         // this monomial is not, in fact, compatible
         //compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
@@ -1018,18 +1018,78 @@ void F4_Reduction_Data::reassign(
 
 }
 
+void subset_analysis(
+    F4_Reduction_Data & s,
+    const set<unsigned> & rows,
+    const list<Monomial> & T,
+    const list<Abstract_Polynomial *> & G,
+    const Dense_Univariate_Integer_Polynomial * h,
+    const list <Critical_Pair_Dynamic *> & P,
+    const Ray & w,
+    Dynamic_Heuristic method
+) {
+  for (auto i : rows) {
+    s.create_and_sort_ideals(i, T, h, G, P, w, method);
+    cout << "sorted " << i << endl;
+  }
+}
+
+void initial_ideal_analysis(
+    F4_Reduction_Data & s,
+    const set<unsigned> & rows,
+    const list<Monomial> & T,
+    const list<Abstract_Polynomial *> & G,
+    const Dense_Univariate_Integer_Polynomial * h,
+    const list <Critical_Pair_Dynamic *> & P,
+    const Ray & w,
+    Dynamic_Heuristic method
+) {
+
+  if (rows.size() < 5) {
+    subset_analysis(s, rows, T, G, h, P, w, method);
+  } else {
+    unsigned cores = std::thread::hardware_concurrency();
+    unsigned threads = cores < rows.size() ? cores : rows.size();
+    set<unsigned> subsets[threads];
+    auto row = rows.begin();
+    auto n = rows.size();
+    for (int i = 0; i < threads - 1; ++i) {
+      for (int j = 0; j < n / threads; ++j) {
+        subsets[i].insert(*row); ++row;
+      }
+    }
+    while (row != rows.end()) {
+      subsets[threads - 1].insert(*row); ++row;
+    }
+    vector< future<void> > tasks;
+    for (unsigned i = 0; i < threads; ++i) {
+      tasks.emplace_back(
+        async(
+            subset_analysis,
+            std::ref(s), std::cref(subsets[i]), std::cref(T), std::cref(G),
+            std::ref(h), std::cref(P), std::cref(w), method
+        )
+      );
+      cout << "launched set " << i << endl;
+    }
+    for (unsigned i = 0; i < threads; ++i)
+      tasks[i].get();
+  }
+
+}
+
 void F4_Reduction_Data::create_and_sort_ideals(
     int my_row,
     const list<Monomial> & CurrentLPPs,
-    Dense_Univariate_Integer_Polynomial * & current_hilbert_numerator,
+    const Dense_Univariate_Integer_Polynomial * current_hilbert_numerator,
     const list<Abstract_Polynomial *> & CurrentPolys,
     const list<Critical_Pair_Dynamic *> & crit_pairs,
     const Ray & w,
     Dynamic_Heuristic method
 ) {
 
-  static time_t create_time = 0, create_sort_time = 0;
-  time_t start = time(nullptr);
+  //static time_t create_time = 0, create_sort_time = 0;
+  //time_t start = time(nullptr);
 
   //cout << "Have ray " << w << endl;
   vector<WT_TYPE> ord(w.get_dimension());
@@ -1044,9 +1104,9 @@ void F4_Reduction_Data::create_and_sort_ideals(
     possibleIdealsBasic.push_back(newIdeal);
     //cout << "pushed back " << t << endl;
   }
-  time_t stop = time(nullptr);
+  /*time_t stop = time(nullptr);
   create_time += difftime(stop, start);
-  cout << "time spent in creating ideals: " << create_time << endl;
+  cout << "time spent in creating ideals: " << create_time << endl;*/
   //cout << "heuristic: " << method << endl;
   //static time_t presolve_time = 0;
   //time_t presolve_start = time(nullptr);
@@ -1088,10 +1148,10 @@ void F4_Reduction_Data::create_and_sort_ideals(
     default: possibleIdealsBasic.sort(less_by_hilbert);
   }
 
-  stop = time(nullptr);
+  /*stop = time(nullptr);
   create_sort_time += difftime(stop, start);
   cout << "time spent in creating and sorting ideals: " << create_sort_time
-       << endl;
+       << endl;*/
 
 }
 
@@ -1213,6 +1273,17 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   cout << "analyzed " << processed.size() << " rows: ";
   for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl;
 
+  static time_t sort_time = 0;
+  time_t start_sort = time(nullptr);
+
+  initial_ideal_analysis(
+      *this, processed, U, G, current_hilbert_numerator, P, w, heur
+  );
+
+  time_t stop_sort = time(nullptr);
+  sort_time += difftime(stop_sort, start_sort);
+  cout << "time spent creating and sorting ideals: " << sort_time << endl;
+
   // first check for rows w/only 1 compatible monomial
   for (unsigned i: processed) {
 
@@ -1223,17 +1294,12 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       // we cannot skip this next step: program crashes if we do
       // probably cause: data may change because of refinement,
       // even if polynomial is not dirty
-      create_and_sort_ideals(
+      /*create_and_sort_ideals(
           i, U,
           current_hilbert_numerator, G, P,
           w,
           heur
-      );
-
-      if (potential_ideals[i].size() == 1) {
-        winning_row = i;
-        break;
-      }
+      );*/
 
       if (winning_row == num_rows) {
         winning_row = i;
