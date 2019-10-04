@@ -201,7 +201,7 @@ void F4_Reduction_Data::initialize_some_rows(
     unsigned i = M_table.lookup_product(pi->currMonomial(), t);
     Arow.resize(num_cols - i, F0);
     Arow[0] = pi->currCoeff().value();
-    offset[row] = i;
+    l_head[row] = offset[row] = i;
     head[row] = 0;
     nonzero_entries[row] = 1;
     pi->moveRight();

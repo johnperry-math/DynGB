@@ -73,7 +73,7 @@ void user_interface() {
   string * names = new string[n];
   Prime_Field F(p);
   Polynomial_Ring * P;
-  if (specify_names == 'y') {
+  if (specify_names == 'n') {
     P = new Polynomial_Ring(n, F);
     cout << "indeterminate names are: ";
     for (NVAR_TYPE i = 0; i < n; ++i) {
@@ -81,6 +81,7 @@ void user_interface() {
       names[i] = P->name(i);
     }
   } else {
+    cout << "what are the indeterminates' names? ";
     for (NVAR_TYPE i = 0; i < n; ++i)
       cin >> names[i];
     P = new Polynomial_Ring(n, F, names);
@@ -104,13 +105,13 @@ void user_interface() {
       EXP_TYPE exp[n];
       for (NVAR_TYPE i = 0; i < n; ++i) exp[i] = 0;
       while (inpoly[i] == ' ') ++i;
+      bool positive = true;
       while (reading_term and i < inpoly.size()) {
         unsigned j = i;
         if (
             inpoly[i] == '+' or inpoly[i] == '-' or
             (inpoly[i] >= '0' and inpoly[i] <= '9')
         ) {
-          bool positive = true;
           if (inpoly[i] == '-') positive = false;
           if (inpoly[i] == '+' or inpoly[i] == '-') ++i;
           while (inpoly[i] == ' ') ++i;
@@ -118,7 +119,6 @@ void user_interface() {
             j = i;
             while (inpoly[j] >= '0' and inpoly[j] <= '9') ++j;
             a *= stol(inpoly.substr(i, j - i));
-            if (not positive) a *= -1;
             i = j;
           }
         }
@@ -154,11 +154,13 @@ void user_interface() {
           }
         }
         while (inpoly[i] == ' ') ++i;
-        if (inpoly[i] == '+' or inpoly[i] == '-') reading_term = false;
+        if (inpoly[i] == '+' or inpoly[i] == '-')
+          reading_term = false;
       }
       ++nt;
       Monomial t(n, exp);
       M.push_back(t);
+      if (not positive) a *= -1;
       A.emplace_back(a, &F);
     }
     Abstract_Polynomial * p = new Constant_Polynomial(*P, M, A);

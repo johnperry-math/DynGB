@@ -1,4 +1,4 @@
-buchberger
+f4
 32003
 6
 y
@@ -11,6 +11,3 @@ t u v x y z
 -11 v^3 + x y + 2 z t
 -11 u v + 3 v^2 + 99 x
 d
-skel
-h
-y

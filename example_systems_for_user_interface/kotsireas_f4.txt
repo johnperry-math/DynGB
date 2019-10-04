@@ -1,4 +1,4 @@
-buchberger
+f4
 32003
 6
 y
@@ -10,7 +10,4 @@ b^2 - 2 b d + d^2 - 2 b - 2 d + f + 1
 B^2 b^3 - 1
 D^2 d^3 - 1
 F^2 f^3 - 1
-d
-skel
-h
-y
+s
