@@ -909,7 +909,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
   //cout << "time spent constructing constraints: " << all_time << endl;
 }
 
-LP_Solver * F4_Reduction_Data::refine(
+pair< bool, LP_Solver * > F4_Reduction_Data::refine(
     unsigned my_row,
     LP_Solver * currSkel,
     const list<Abstract_Polynomial *> & CurrentPolys
@@ -920,7 +920,7 @@ LP_Solver * F4_Reduction_Data::refine(
 
   static time_t verify_time = 0;
 
-  bool success = false;
+  bool success = true;
 
   LP_Solver * result = currSkel;
 
@@ -930,60 +930,55 @@ LP_Solver * F4_Reduction_Data::refine(
 
   list<PP_With_Ideal> & possibleIdealsBasic = potential_ideals[my_row];
 
-  PP_With_Ideal * winner = & possibleIdealsBasic.front();
   if (possibleIdealsBasic.size() != 1)
   {
     // test each combination of LPPs for consistency
     // one of them must work (current LPP, if nothing else) 
     set<int> PPunion;
     for (const int t : compatible_pps[my_row]) PPunion.insert(t);
-    // for (PP_With_Ideal & I : possibleIdealsBasic) {
-    while (not success) {
-      PP_With_Ideal & I = possibleIdealsBasic.front();
-      //cout << currSkel << endl;
-      LP_Solver * newSkeleton;
-      if (src_skel != nullptr)
-        newSkeleton = new Skeleton(*src_skel);
-      else if (src_GLPK != nullptr)
-        newSkeleton = new GLPK_Solver(*src_GLPK);
-      else if (src_PPL != nullptr)
-        newSkeleton = new PPL_Solver(*src_PPL);
-      vector<Constraint> newvecs;
-      //cout << "testing " << I.get_pp() << endl;
-      /*cout << '\t' << *I.get_hilbert_polynomial() << endl;
-      cout << '\t' << *I.get_hilbert_numerator() << endl;*/
-      constraints_for_new_pp(I, PPunion, newvecs);
-      if (newSkeleton->solve(newvecs))
-      {
-        //cout << I.get_pp() << " is consistent\n";
-        time_t start_verify = time(nullptr);
-        success = verify_and_modify_if_necessary(newSkeleton, CurrentPolys);
-        time_t stop_verify = time(nullptr);
-        verify_time += difftime(stop_verify, start_verify);
-        if (not success)
-          possibleIdealsBasic.pop_front();
-        else {
-          winner = & I;
-          result = newSkeleton;
-          break;
-        }
-      }
-      else
-      {
-        cout << I.get_pp() << "is inconsistent\n";
-        // cout << newSkeleton;
-        // this monomial is not, in fact, compatible
-        //compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
+    PP_With_Ideal & I = possibleIdealsBasic.front();
+    //cout << currSkel << endl;
+    LP_Solver * newSkeleton;
+    if (src_skel != nullptr)
+      newSkeleton = new Skeleton(*src_skel);
+    else if (src_GLPK != nullptr)
+      newSkeleton = new GLPK_Solver(*src_GLPK);
+    else if (src_PPL != nullptr)
+      newSkeleton = new PPL_Solver(*src_PPL);
+    vector<Constraint> newvecs;
+    //cout << "testing " << I.get_pp() << endl;
+    /*cout << '\t' << *I.get_hilbert_polynomial() << endl;
+    cout << '\t' << *I.get_hilbert_numerator() << endl;*/
+    constraints_for_new_pp(I, PPunion, newvecs);
+    if (newSkeleton->solve(newvecs))
+    {
+      //cout << I.get_pp() << " is consistent\n";
+      time_t start_verify = time(nullptr);
+      success = verify_and_modify_if_necessary(newSkeleton, CurrentPolys);
+      time_t stop_verify = time(nullptr);
+      verify_time += difftime(stop_verify, start_verify);
+      if (not success) {
         possibleIdealsBasic.pop_front();
         delete newSkeleton;
+      } else {
+        result = newSkeleton;
       }
+    }
+    else
+    {
+      cout << I.get_pp() << "is inconsistent\n";
+      // cout << newSkeleton;
+      // this monomial is not, in fact, compatible
+      //compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
+      possibleIdealsBasic.pop_front();
+      delete newSkeleton;
     }
   }
   time_t refine_stop = time(nullptr);
   presolve_time += difftime(refine_stop, refine_start);
   cout << "time spent in presolve: " << presolve_time << endl;
 
-  return result;
+  return pair< bool, LP_Solver * >(success, result);
 
 }
 
@@ -1284,40 +1279,31 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   sort_time += difftime(stop_sort, start_sort);
   cout << "time spent creating and sorting ideals: " << sort_time << endl;
 
-  // first check for rows w/only 1 compatible monomial
-  for (unsigned i: processed) {
+  // initialize result
+  winning_row = number_of_rows();
+  winning_skel = skel;
 
-    if (nonzero_entries[i] > 0 and completed[i]) {
+  // check each row
+  for (unsigned i: processed) {
 
       list<int> & row_compatibles = compatible_pps[i];
 
-      // we cannot skip this next step: program crashes if we do
-      // probably cause: data may change because of refinement,
-      // even if polynomial is not dirty
-      /*create_and_sort_ideals(
-          i, U,
-          current_hilbert_numerator, G, P,
-          w,
-          heur
-      );*/
-
-      if (winning_row == num_rows) {
-        winning_row = i;
-        winning_skel = refine(i, skel, G);
+      if (row_compatibles.size() == 1) {
+        winning_row = i; winning_skel = skel;
+        break;
       } else {
-        if (heuristic_judges_smaller(
+        while (winning_row == number_of_rows() or
+            heuristic_judges_smaller(
               potential_ideals[i].front(), potential_ideals[winning_row].front()
         )) {
-          winning_skel = refine(i, skel, G);
-          if (heuristic_judges_smaller(
-                potential_ideals[i].front(), potential_ideals[winning_row].front()
-          )) {
+          auto refinement_result = refine(i, skel, G);
+          if (refinement_result.first) {
             winning_row = i;
+            winning_skel = refinement_result.second;
+            break;
           }
         }
       }
-
-    }
 
   }
 

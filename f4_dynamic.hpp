@@ -237,7 +237,7 @@ public:
     @param currSkel the current skeleton, corresponding to the choices `CurrentLPPs`
     @param CurrentPolys list of current polynomials in the basis (needed to verify consistency)
   */
-  LP_Solver * refine(
+  pair< bool, LP_Solver * > refine(
       unsigned my_row,
       LP_Solver * currSkel,
       const list<Abstract_Polynomial *> & CurrentPolys

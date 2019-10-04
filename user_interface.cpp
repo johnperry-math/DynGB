@@ -29,7 +29,9 @@ using std::cin; using std::cout; using std::endl;
 #include "dynamic_engine.hpp"
 #include "polynomial_array.hpp"
 
+#include "algorithm_buchberger_basic.hpp"
 #include "algorithm_buchberger_dynamic.hpp"
+#include "f4_dynamic.hpp"
 
 /**
   @ingroup utils
@@ -56,6 +58,9 @@ using std::cin; using std::cout; using std::endl;
     being.
 */
 void user_interface() {
+  string algorithm;
+  cout << "algorithm: (buchberger, f4)";
+  cin >> algorithm;
   UCOEF_TYPE p;
   cout << "prime number for base field: ";
   cin >> p;
@@ -68,7 +73,7 @@ void user_interface() {
   string * names = new string[n];
   Prime_Field F(p);
   Polynomial_Ring * P;
-  if (not specify_names) {
+  if (specify_names == 'y') {
     P = new Polynomial_Ring(n, F);
     cout << "indeterminate names are: ";
     for (NVAR_TYPE i = 0; i < n; ++i) {
@@ -172,62 +177,69 @@ void user_interface() {
   list<Constant_Polynomial *> B;
   bool dynamic = not (computation.compare("d") and computation.compare("dynamic"));
   if (not dynamic) {
-    B = buchberger(I);
+    if (algorithm.compare("buchberger") == 0)
+      B = buchberger(I);
+    else
+      B = f4_control(I); // defaults to static
   } else {
-    DynamicSolver solver;
-    string solver_choice;
-    while (
-        solver_choice.compare("skel") and solver_choice.compare("glpk")
-        and solver_choice.compare("ppl") and solver_choice.compare("skeleton")
-    ) {
-      cout << "which solver? ([skel]eton, glpk, ppl) ";
-      getline(cin, solver_choice);
+    if (algorithm.compare("f4") == 0)
+      B = f4_control(I, false); // dynamic
+    else {
+      DynamicSolver solver;
+      string solver_choice;
+      while (
+          solver_choice.compare("skel") and solver_choice.compare("glpk")
+          and solver_choice.compare("ppl") and solver_choice.compare("skeleton")
+      ) {
+        cout << "which solver? ([skel]eton, glpk, ppl) ";
+        getline(cin, solver_choice);
+      }
+      if (not solver_choice.compare("skel") or not solver_choice.compare("skeleton"))
+        solver = SKELETON_SOLVER;
+      else if (not solver_choice.compare("glpk"))
+        solver = GLPK_SOLVER;
+      else if (not solver_choice.compare("ppl"))
+        solver = PPL_SOLVER;
+      string heur_choice;
+      Dynamic_Heuristic heuristic;
+      while (
+        heur_choice.compare("h") and heur_choice.compare("gh")
+        and heur_choice.compare("b") and heur_choice.compare("bb")
+        and heur_choice.compare("gb") and heur_choice.compare("c")
+        and heur_choice.compare("d") and heur_choice.compare("r")
+      ) {
+        cout << "available heuristics are\n";
+        cout << "\t h = hilbert with standard grading\n";
+        cout << "\tgh = hilbert with order-based grading\n";
+        cout << "\t b = betti with standard grading\n";
+        cout << "\tbb = \"big\" betti with standard grading\n";
+        cout << "\tgb = betti with order-based grading\n";
+        cout << "\t c = minimal number of critical pairs\n";
+        cout << "\t d = minimal degree, ties broken by hilbert\n";
+        cout << "\t r = random choice\n";
+        cout << "which heuristic would you like? ";
+        getline(cin, heur_choice);
+      }
+      if      (not heur_choice.compare( "h")) heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+      else if (not heur_choice.compare("gh")) heuristic = Dynamic_Heuristic::GRAD_HILB_THEN_DEG;
+      else if (not heur_choice.compare( "b")) heuristic = Dynamic_Heuristic::BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare("bb")) heuristic = Dynamic_Heuristic::BIG_BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare("gb")) heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare( "c")) heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
+      else if (not heur_choice.compare( "d")) heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
+      else if (not heur_choice.compare( "r")) heuristic = Dynamic_Heuristic::EVIL_RANDOM;
+      string whether_analysis;
+      bool analyze_first = false;
+      while (whether_analysis.compare("y") and whether_analysis.compare("n")) {
+        cout << "perform global analysis at the outset? (y or n) ";
+        cin >> whether_analysis;
+      }
+      if (not whether_analysis.compare("y")) analyze_first = true;
+      B = buchberger_dynamic(
+          I, SPolyCreationFlags::GEOBUCKETS, StrategyFlags::SUGAR_STRATEGY,
+          nullptr, heuristic, solver, analyze_first
+      );
     }
-    if (not solver_choice.compare("skel") or not solver_choice.compare("skeleton"))
-      solver = SKELETON_SOLVER;
-    else if (not solver_choice.compare("glpk"))
-      solver = GLPK_SOLVER;
-    else if (not solver_choice.compare("ppl"))
-      solver = PPL_SOLVER;
-    string heur_choice;
-    Dynamic_Heuristic heuristic;
-    while (
-      heur_choice.compare("h") and heur_choice.compare("gh")
-      and heur_choice.compare("b") and heur_choice.compare("bb")
-      and heur_choice.compare("gb") and heur_choice.compare("c")
-      and heur_choice.compare("d") and heur_choice.compare("r")
-    ) {
-      cout << "available heuristics are\n";
-      cout << "\t h = hilbert with standard grading\n";
-      cout << "\tgh = hilbert with order-based grading\n";
-      cout << "\t b = betti with standard grading\n";
-      cout << "\tbb = \"big\" betti with standard grading\n";
-      cout << "\tgb = betti with order-based grading\n";
-      cout << "\t c = minimal number of critical pairs\n";
-      cout << "\t d = minimal degree, ties broken by hilbert\n";
-      cout << "\t r = random choice\n";
-      cout << "which heuristic would you like? ";
-      getline(cin, heur_choice);
-    }
-    if      (not heur_choice.compare( "h")) heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-    else if (not heur_choice.compare("gh")) heuristic = Dynamic_Heuristic::GRAD_HILB_THEN_DEG;
-    else if (not heur_choice.compare( "b")) heuristic = Dynamic_Heuristic::BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare("bb")) heuristic = Dynamic_Heuristic::BIG_BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare("gb")) heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
-    else if (not heur_choice.compare( "c")) heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
-    else if (not heur_choice.compare( "d")) heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
-    else if (not heur_choice.compare( "r")) heuristic = Dynamic_Heuristic::EVIL_RANDOM;
-    string whether_analysis;
-    bool analyze_first = false;
-    while (whether_analysis.compare("y") and whether_analysis.compare("n")) {
-      cout << "perform global analysis at the outset? (y or n) ";
-      cin >> whether_analysis;
-    }
-    if (not whether_analysis.compare("y")) analyze_first = true;
-    B = buchberger_dynamic(
-        I, SPolyCreationFlags::GEOBUCKETS, StrategyFlags::SUGAR_STRATEGY,
-        nullptr, heuristic, solver, analyze_first
-    );
   }
   //check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
   cout << "have basis with " << B.size() << " elements:\n";
