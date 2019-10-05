@@ -970,6 +970,7 @@ pair< bool, LP_Solver * > F4_Reduction_Data::refine(
       // cout << newSkeleton;
       // this monomial is not, in fact, compatible
       //compatible_pps[my_row].erase(M_table.get_index(I.get_pp()));
+      success = false;
       possibleIdealsBasic.pop_front();
       delete newSkeleton;
     }
