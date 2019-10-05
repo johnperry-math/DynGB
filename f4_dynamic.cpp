@@ -648,10 +648,9 @@ void F4_Reduction_Data::reduce_my_new_rows(
 void F4_Reduction_Data::reduce_by_new(
     unsigned i, unsigned lhead_i, const set<unsigned> & unprocessed
 ) {
-  cout << "pre reduction:\n";
-  //for (auto && b: dirty) b = false;
+  //cout << "pre reduction:\n";
   fill(dirty.begin(), dirty.end(), false);
-  for (auto b: dirty) cout << b << ' '; cout << endl;
+  //for (auto b: dirty) cout << b << ' '; cout << endl;
   //print_matrix(false);
   auto & F = Rx.ground_field();
   unsigned cores = std::thread::hardware_concurrency() * 2;
@@ -681,8 +680,8 @@ void F4_Reduction_Data::reduce_by_new(
     workers[c].join();
   delete [] workers;
   delete [] thread_rows;
-  cout << "post reduction:\n";
-  for (auto b: dirty) cout << b << ' '; cout << endl;
+  //cout << "post reduction:\n";
+  //for (auto b: dirty) cout << b << ' '; cout << endl;
   //print_matrix(false);
 }
 
@@ -1205,8 +1204,8 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   bool ordering_changed = false;
   PP_With_Ideal * newideal = nullptr;
   LP_Solver * winning_skel = skel;
-  cout << "rays:\n";
-  for (auto & r : skel->get_rays()) cout << '\t' << r << endl;
+  //cout << "rays:\n";
+  //for (auto & r : skel->get_rays()) cout << '\t' << r << endl;
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   simplify_identical_rows(unprocessed);
@@ -1470,11 +1469,11 @@ list<Constant_Polynomial *> f4_control(
           dynamic_time += difftime(end_time, start_time);
           all_completed_rows.insert(completed_row);
           Ray w(ray_sum(skel->get_rays()));
-          //ordering_changed |= skel != old_skel;
-          ordering_changed = false;
-          for (unsigned i = 0; (not ordering_changed) and (i < w.get_dimension()); ++i)
-            ordering_changed = w[i] == curr_ord->order_weights()[i];
-          if (ordering_changed) {
+          bool ordering_changed_now = false;
+          for (unsigned i = 0; (not ordering_changed_now) and (i < w.get_dimension()); ++i)
+            ordering_changed_now = w[i] != curr_ord->order_weights()[i];
+          if (ordering_changed_now) {
+            ordering_changed = true;
             w.simplify_ray();
             WGrevlex * new_ord = new WGrevlex(w);
             cout << "new ordering: " << *new_ord << endl;
@@ -1483,17 +1482,17 @@ list<Constant_Polynomial *> f4_control(
             curr_ord = new_ord;
           }
         }
-        s.set_ordering(curr_ord);
-        for (auto p : P)
-          p->change_ordering(curr_ord);
-        for (auto & t : T)
-          t.set_monomial_ordering(curr_ord);
       }
       for (auto completed_row : all_completed_rows) {
         if (s.number_of_nonzero_entries(completed_row) != 0) {
           Constant_Polynomial * r = s.finalize(completed_row);
-          if (ordering_changed)
+          if (ordering_changed) {
             r->set_monomial_ordering(curr_ord);
+            for (auto p : P)
+              p->change_ordering(curr_ord);
+            for (auto & t : T)
+              t.set_monomial_ordering(curr_ord);
+          }
           cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
           //r->printlncout();
           //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;

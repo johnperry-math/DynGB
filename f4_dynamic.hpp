@@ -184,11 +184,6 @@ public:
   ///@{
   /** @brief clears the strategy; do this if you have saved it elsewhere */
   void clear_strategy(unsigned i) { strategies[i] = nullptr; }
-  /** @brief sets monomial ordering to indicated ordering */
-  void set_ordering(const WGrevlex * ord) {
-    mord = ord;
-    for (auto & m : M) m->set_monomial_ordering(mord);
-  }
   ///@}
   /** @name Computation */
   ///@{
