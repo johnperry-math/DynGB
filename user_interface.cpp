@@ -184,9 +184,12 @@ void user_interface() {
     else
       B = f4_control(I); // defaults to static
   } else {
-    if (algorithm.compare("f4") == 0)
-      B = f4_control(I, false); // dynamic
-    else {
+    if (algorithm.compare("f4") == 0) {
+      unsigned max_refinements = 0;
+      cout << "maximum number of refinements per matrix? (0 for none) ";
+      cin >> max_refinements;
+      B = f4_control(I, false, max_refinements); // dynamic
+    } else {
       DynamicSolver solver;
       string solver_choice;
       while (

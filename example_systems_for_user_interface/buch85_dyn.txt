@@ -22,6 +22,6 @@ cf^2 + sf^2 - 1
 ct^2 + st^2 - 1
 cp^2 + sp^2 - 1
 d
-skel
-c
+ppl
+h
 n

@@ -11,3 +11,4 @@ x y + y z + 2 z t + 2 t u + 2 u v - u
 t^2 + 2 x v + 2 y v + 2 z v - y
 2 x + 2 y + 2 z + 2 t + 2 u + v - 1
 d
+0

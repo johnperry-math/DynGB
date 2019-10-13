@@ -1344,7 +1344,8 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
 list<Constant_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
-    const bool static_algorithm
+    const bool static_algorithm,
+    const unsigned max_refinements
 ) {
   list<Monomial> T;
   Dense_Univariate_Integer_Polynomial * hn = nullptr;
@@ -1369,12 +1370,16 @@ list<Constant_Polynomial *> f4_control(
   WGrevlex * curr_ord = new ORDERING_TYPE(n, wts);
   list<ORDERING_TYPE *> all_orderings_used; // so we can free them at the end
   list<Abstract_Polynomial *> Ftemp;
+  DEG_TYPE operating_degree = 1000000;
   for (Abstract_Polynomial * fo : F)
   {
     Constant_Polynomial * f = new Constant_Polynomial(*fo);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
-    P.push_back(new Critical_Pair_Dynamic(f, StrategyFlags::SUGAR_STRATEGY, curr_ord));
+    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+    if (p->lcm().total_degree() < operating_degree)
+      operating_degree = p->lcm().total_degree();
+    P.push_back(p);
     Ftemp.push_back(f);
   }
   // main loop
@@ -1385,35 +1390,21 @@ list<Constant_Polynomial *> f4_control(
     sort_pairs_by_strategy(P);
     report_critical_pairs(P);
     Critical_Pair_Dynamic * p = P.front();
-    report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
-    cout << "\tdegree: " << p->lcm().total_degree(0) << endl;
-    P.pop_front();
-    Pnew.push_back(p);
-    DEG_TYPE mindeg = p->lcm().total_degree();
-    for (auto pi = P.begin(); pi != P.end(); /* */) { 
-      p = *pi;
-      if (p->lcm().total_degree() < mindeg) {
-        for (auto qi = Pnew.begin(); qi != Pnew.end(); ++qi)
-          P.push_front(*qi);
-        Pnew.clear();
-        mindeg = p->lcm().total_degree();
-        report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
-        cout << "\tdegree: " << p->lcm().total_degree(0) << endl;
-        Pnew.push_back(p);
-        auto qi = pi;
-        ++qi;
-        P.erase(pi);
-        pi = qi;
+    cout << "\tdegree: " << operating_degree << endl;
+    while (Pnew.empty() and not P.empty()) {
+      for (auto pi = P.begin(); pi != P.end(); /* */) { 
+        p = *pi;
+        if (p->lcm().total_degree() <= operating_degree) {
+          report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
+          Pnew.push_back(p);
+          auto qi = pi;
+          ++qi;
+          P.erase(pi);
+          pi = qi;
+        } else
+          ++pi;
       }
-      else if (p->lcm().total_degree() == mindeg) {
-        report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
-        Pnew.push_back(p);
-        auto qi = pi;
-        ++qi;
-        P.erase(pi);
-        pi = qi;
-      } else
-        ++pi;
+      ++operating_degree;
     }
     // make s-poly
     time_t start_time = time(nullptr);
@@ -1437,29 +1428,12 @@ list<Constant_Polynomial *> f4_control(
           unprocessed.insert(i);
       set<unsigned> all_completed_rows;
       bool ordering_changed = false;
-      if (static_algorithm) {
-        while (unprocessed.size() != 0) {
-          unsigned winning_row = *unprocessed.begin();
-          if (s.number_of_nonzero_entries(winning_row) != 0) {
-            unsigned winning_lm = s.head_monomial_index(winning_row);
-            for (auto i: unprocessed) {
-              auto nz = s.number_of_nonzero_entries(i);
-              if ( (nz != 0)
-                   and ( (s.head_monomial_index(i) > winning_lm)
-                         or (s.head_monomial_index(i) == winning_lm
-                             and nz < s.number_of_nonzero_entries(winning_row)) )
-              ) {
-                winning_row = i;
-                winning_lm = s.head_monomial_index(i);
-              }
-            }
-            s.reduce_by_new(winning_row, winning_lm, unprocessed);
-            all_completed_rows.insert(winning_row);
-          }
-          unprocessed.erase(winning_row);
-        }
-      } else {
-        while (unprocessed.size() != 0) {
+      if (not static_algorithm) {
+        const unsigned max_comparisons
+            = (max_refinements != 0) ? max_refinements : s.number_of_rows();
+        int comparisons = 0;
+        while (unprocessed.size() != 0 and comparisons < max_comparisons) {
+          ++comparisons;
           time_t start_time = time(nullptr);
           //LP_Solver * old_skel = skel;
           unsigned completed_row = s.select_dynamic_single(
@@ -1482,6 +1456,27 @@ list<Constant_Polynomial *> f4_control(
             curr_ord = new_ord;
           }
         }
+      }
+      // process remaining pairs statically
+      while (unprocessed.size() != 0) {
+        unsigned winning_row = *unprocessed.begin();
+        if (s.number_of_nonzero_entries(winning_row) != 0) {
+          unsigned winning_lm = s.head_monomial_index(winning_row);
+          for (auto i: unprocessed) {
+            auto nz = s.number_of_nonzero_entries(i);
+            if ( (nz != 0)
+                 and ( (s.head_monomial_index(i) > winning_lm)
+                       or (s.head_monomial_index(i) == winning_lm
+                           and nz < s.number_of_nonzero_entries(winning_row)) )
+            ) {
+              winning_row = i;
+              winning_lm = s.head_monomial_index(i);
+            }
+          }
+          s.reduce_by_new(winning_row, winning_lm, unprocessed);
+          all_completed_rows.insert(winning_row);
+        }
+        unprocessed.erase(winning_row);
       }
       for (auto completed_row : all_completed_rows) {
         if (s.number_of_nonzero_entries(completed_row) != 0) {
