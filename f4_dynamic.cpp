@@ -1431,9 +1431,9 @@ list<Constant_Polynomial *> f4_control(
       if (not static_algorithm) {
         const unsigned max_comparisons
             = (max_refinements != 0) ? max_refinements : s.number_of_rows();
+        cout << max_comparisons << " comparisons allowed\n";
         int comparisons = 0;
         while (unprocessed.size() != 0 and comparisons < max_comparisons) {
-          ++comparisons;
           time_t start_time = time(nullptr);
           //LP_Solver * old_skel = skel;
           unsigned completed_row = s.select_dynamic_single(
@@ -1441,6 +1441,8 @@ list<Constant_Polynomial *> f4_control(
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);
+          if (s.number_of_compatibles(completed_row) > 1) ++comparisons;
+          cout << comparisons << " refinements\n";
           all_completed_rows.insert(completed_row);
           Ray w(ray_sum(skel->get_rays()));
           bool ordering_changed_now = false;
@@ -1456,6 +1458,7 @@ list<Constant_Polynomial *> f4_control(
             curr_ord = new_ord;
           }
         }
+        if (comparisons == max_comparisons) cout << "refinements halted early\n";
       }
       // process remaining pairs statically
       while (unprocessed.size() != 0) {

@@ -175,6 +175,12 @@ public:
     for (unsigned i = 0; i < num_rows; ++i)
       check_consistency(i);
   }
+  /**
+    @brief returns the number of compatible monomials detected in the given row
+  */
+  unsigned number_of_compatibles(unsigned row) {
+    return compatible_pps[row].size();
+  }
   ///@}
   /** @name Conversion */
   ///@{
