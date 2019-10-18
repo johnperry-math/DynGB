@@ -469,7 +469,7 @@ void F4_Reduction_Data::reduce_my_rows(
                 if (hk > l) hk = l;
                 was_zero = false;
               }
-              if (Akl & OVERFLOW_MASK != 0) {
+              if (Akl & (OVERFLOW_MASK != 0)) {
                 Akl %= mod;
                 if (not was_zero and Akl == 0) {
                   --new_nonzero_entries;
@@ -1203,14 +1203,11 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 ) {
   bool ordering_changed = false;
   PP_With_Ideal * newideal = nullptr;
-  LP_Solver * winning_skel = skel;
   //cout << "rays:\n";
   //for (auto & r : skel->get_rays()) cout << '\t' << r << endl;
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   simplify_identical_rows(unprocessed);
-
-  unsigned winning_row = num_rows;
 
   Ray w = ray_sum(skel->get_rays());
   Dense_Univariate_Integer_Polynomial * current_hilbert_numerator = nullptr;
@@ -1226,7 +1223,32 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   if (pp_weights[0].size() == 0 or pp_weights[0][0] == 0) recache_weights(skel);
 
-  for (unsigned i: unprocessed) {
+  while (nonzero_entries[*unprocessed.begin()] == 0)
+    unprocessed.erase(unprocessed.begin());
+  unsigned first_row = *unprocessed.begin();
+  compatible_pp(first_row, *this, skel, found_single, completed);
+
+  unsigned winning_row = num_rows;
+  LP_Solver * winning_skel = skel;
+
+  create_and_sort_ideals(
+      first_row, U, current_hilbert_numerator, G, P, w, heur
+  );
+  if (compatible_pps[first_row].size() == 1) {
+    winning_row = first_row;
+  } else {
+    // next loop terminates b/c at least one term is truly compatible
+    while (winning_row == num_rows) {
+      auto refinement_result = refine(first_row, skel, G);
+      if (refinement_result.first) {
+        winning_row = first_row;
+        winning_skel = refinement_result.second;
+        break;
+      }
+    }
+  }
+
+  /*for (unsigned i: unprocessed) {
     if (nonzero_entries[i] > 0) {
       if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
       else {
@@ -1266,9 +1288,9 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   }
 
   cout << "analyzed " << processed.size() << " rows: ";
-  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl;
+  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl; */
 
-  static time_t sort_time = 0;
+  /*static time_t sort_time = 0;
   time_t start_sort = time(nullptr);
 
   initial_ideal_analysis(
@@ -1277,10 +1299,10 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   time_t stop_sort = time(nullptr);
   sort_time += difftime(stop_sort, start_sort);
-  cout << "time spent creating and sorting ideals: " << sort_time << endl;
+  cout << "time spent creating and sorting ideals: " << sort_time << endl; */
 
   // initialize result
-  winning_row = number_of_rows();
+  /*winning_row = number_of_rows();
   winning_skel = skel;
 
   // check each row
@@ -1305,7 +1327,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
         }
       }
 
-  }
+  }*/
 
   if (winning_skel != skel) {
     delete skel;

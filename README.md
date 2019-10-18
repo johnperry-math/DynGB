@@ -16,6 +16,15 @@ The `autoreconf`, `automake`, and `autoconf` commands may not be necessary,
 depending on how agreeable your system finds the last one I pushed from.
 (I'm afraid I haven't quite figured out autotools.)
 
+If you are on macOS (as I sometimes am) and have installed PPL, GLPK, etc. via ports
+or brew or some other such system, you will need to specify the include and link
+directories using something along these lines:
+
+   ../configure LDFLAGS='-L/opt/local/lib' CPPFLAGS='-I/opt/local/include'
+
+If you want compiler flags such as `-Ofast` etc., go ahead and specify them with
+`CPPFLAGS` while you're at it.
+
 Depending on what I'm working on at the moment, some older stuff may not actually work.
 I do try to keep things in order.
 
