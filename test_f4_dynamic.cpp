@@ -46,7 +46,7 @@ void give_help();
 
 int main(int argc, char *argv[]) {
   bool homog, traditional = false;
-  int modulus, numvars, refinements;
+  int modulus, numvars, refinements = 0;
   Analysis style = Analysis::row_sequential;
   if (
       not meaningful_arguments(
