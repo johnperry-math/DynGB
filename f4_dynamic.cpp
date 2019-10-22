@@ -1199,7 +1199,8 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     const list<Abstract_Polynomial *> G,
     const list<Critical_Pair_Dynamic *> & P,
     WGrevlex * curr_ord,
-    LP_Solver * & skel
+    LP_Solver * & skel,
+    const Analysis & style
 ) {
   bool ordering_changed = false;
   PP_With_Ideal * newideal = nullptr;
@@ -1208,6 +1209,9 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   Dense_Univariate_Integer_Polynomial *hn = nullptr;
   // select most advantageous unprocessed poly, reduce others
   simplify_identical_rows(unprocessed);
+
+  unsigned winning_row = num_rows;
+  LP_Solver * winning_skel = skel;
 
   Ray w = ray_sum(skel->get_rays());
   Dense_Univariate_Integer_Polynomial * current_hilbert_numerator = nullptr;
@@ -1225,109 +1229,117 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   while (nonzero_entries[*unprocessed.begin()] == 0)
     unprocessed.erase(unprocessed.begin());
-  unsigned first_row = *unprocessed.begin();
-  compatible_pp(first_row, *this, skel, found_single, completed);
 
-  unsigned winning_row = num_rows;
-  LP_Solver * winning_skel = skel;
+  if (style == Analysis::row_sequential) {
 
-  create_and_sort_ideals(
-      first_row, U, current_hilbert_numerator, G, P, w, heur
-  );
-  if (compatible_pps[first_row].size() == 1) {
-    winning_row = first_row;
-  } else {
-    // next loop terminates b/c at least one term is truly compatible
-    while (winning_row == num_rows) {
-      auto refinement_result = refine(first_row, skel, G);
-      if (refinement_result.first) {
-        winning_row = first_row;
-        winning_skel = refinement_result.second;
-        break;
-      }
-    }
-  }
+    cout << "sequential analysis\n";
 
-  /*for (unsigned i: unprocessed) {
-    if (nonzero_entries[i] > 0) {
-      if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
-      else {
-      compatible_pps[i].clear();
-      //compatible_pp(i, *this, skel, found_single, completed);
-      waiters.push_back( std::move(
-          async(
-              compatible_pp, i, std::ref(*this), skel,
-              std::ref(found_single), std::ref(completed)
-          )
-      ) );
-    }
-  }
-  }
-
-  for (auto & fut : waiters) {
-    fut.get();
-  }
-
-  time_t stop_compat = time(nullptr);
-  compat_time += difftime(stop_compat, start_compat);
-  cout << "time spent in compatible_pp: " << compat_time << endl;
-
-  for (unsigned i: unprocessed) {
-    auto size = compatible_pps[i].size();
-    if (size > 0 and completed[i]) {
-      //list<int> & row_compatibles = compatible_pps[i];
-      //cout << row_compatibles.size() << " compatible at " << i << endl;
-      if (size > 1)
-        processed.insert(i);
-      else {
-        processed.clear();
-        processed.insert(i);
-        break;
-      }
-    }
-  }
-
-  cout << "analyzed " << processed.size() << " rows: ";
-  for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl; */
-
-  /*static time_t sort_time = 0;
-  time_t start_sort = time(nullptr);
-
-  initial_ideal_analysis(
-      *this, processed, U, G, current_hilbert_numerator, P, w, heur
-  );
-
-  time_t stop_sort = time(nullptr);
-  sort_time += difftime(stop_sort, start_sort);
-  cout << "time spent creating and sorting ideals: " << sort_time << endl; */
-
-  // initialize result
-  /*winning_row = number_of_rows();
-  winning_skel = skel;
-
-  // check each row
-  for (unsigned i: processed) {
-
-      list<int> & row_compatibles = compatible_pps[i];
-
-      if (row_compatibles.size() == 1) {
-        winning_row = i; winning_skel = skel;
-        break;
-      } else {
-        while (winning_row == number_of_rows() or
-            heuristic_judges_smaller(
-              potential_ideals[i].front(), potential_ideals[winning_row].front()
-        )) {
-          auto refinement_result = refine(i, skel, G);
-          if (refinement_result.first) {
-            winning_row = i;
-            winning_skel = refinement_result.second;
-            break;
-          }
+    unsigned first_row = *unprocessed.begin();
+    compatible_pp(first_row, *this, skel, found_single, completed);
+  
+    create_and_sort_ideals(
+        first_row, U, current_hilbert_numerator, G, P, w, heur
+    );
+    if (compatible_pps[first_row].size() == 1) {
+      winning_row = first_row;
+    } else {
+      // next loop terminates b/c at least one term is truly compatible
+      while (winning_row == num_rows) {
+        auto refinement_result = refine(first_row, skel, G);
+        if (refinement_result.first) {
+          winning_row = first_row;
+          winning_skel = refinement_result.second;
+          break;
         }
       }
+    }
 
-  }*/
+  } else {
+
+    cout << "whole analysis\n";
+
+    for (unsigned i: unprocessed) {
+      if (nonzero_entries[i] > 0) {
+        if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
+        else {
+        compatible_pps[i].clear();
+        //compatible_pp(i, *this, skel, found_single, completed);
+        waiters.push_back( std::move(
+            async(
+                compatible_pp, i, std::ref(*this), skel,
+                std::ref(found_single), std::ref(completed)
+            )
+        ) );
+      }
+    }
+    }
+  
+    for (auto & fut : waiters) {
+      fut.get();
+    }
+  
+    time_t stop_compat = time(nullptr);
+    compat_time += difftime(stop_compat, start_compat);
+    cout << "time spent in compatible_pp: " << compat_time << endl;
+  
+    for (unsigned i: unprocessed) {
+      auto size = compatible_pps[i].size();
+      if (size > 0 and completed[i]) {
+        //list<int> & row_compatibles = compatible_pps[i];
+        //cout << row_compatibles.size() << " compatible at " << i << endl;
+        if (size > 1)
+          processed.insert(i);
+        else {
+          processed.clear();
+          processed.insert(i);
+          break;
+        }
+      }
+    }
+  
+    cout << "analyzed " << processed.size() << " rows: ";
+    for (auto i : processed) cout << i << " (" << compatible_pps[i].size() << "), "; cout << endl;
+  
+    static time_t sort_time = 0;
+    time_t start_sort = time(nullptr);
+  
+    initial_ideal_analysis(
+        *this, processed, U, G, current_hilbert_numerator, P, w, heur
+    );
+  
+    time_t stop_sort = time(nullptr);
+    sort_time += difftime(stop_sort, start_sort);
+    cout << "time spent creating and sorting ideals: " << sort_time << endl;
+  
+    // initialize result
+    winning_row = number_of_rows();
+    winning_skel = skel;
+  
+    // check each row
+    for (unsigned i: processed) {
+  
+        list<int> & row_compatibles = compatible_pps[i];
+  
+        if (row_compatibles.size() == 1) {
+          winning_row = i; winning_skel = skel;
+          break;
+        } else {
+          while (winning_row == number_of_rows() or
+              heuristic_judges_smaller(
+                potential_ideals[i].front(), potential_ideals[winning_row].front()
+          )) {
+            auto refinement_result = refine(i, skel, G);
+            if (refinement_result.first) {
+              winning_row = i;
+              winning_skel = refinement_result.second;
+              break;
+            }
+          }
+        }
+  
+    }
+
+  }
 
   if (winning_skel != skel) {
     delete skel;
@@ -1367,7 +1379,8 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 list<Constant_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     const bool static_algorithm,
-    const unsigned max_refinements
+    const unsigned max_refinements,
+    const Analysis style
 ) {
   list<Monomial> T;
   Dense_Univariate_Integer_Polynomial * hn = nullptr;
@@ -1459,7 +1472,7 @@ list<Constant_Polynomial *> f4_control(
           time_t start_time = time(nullptr);
           //LP_Solver * old_skel = skel;
           unsigned completed_row = s.select_dynamic_single(
-              unprocessed, T, G, P, curr_ord, skel
+              unprocessed, T, G, P, curr_ord, skel, style
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);

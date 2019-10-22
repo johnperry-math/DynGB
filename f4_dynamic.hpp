@@ -48,6 +48,14 @@ using Dynamic_Engine::PP_With_Ideal;
 using Dynamic_Engine::Dynamic_Heuristic;
 
 /**
+  @brief enumeration of styles of row analysis for selecting a new ordering
+*/
+enum class Analysis {
+  row_sequential, /**< analyze only one row (topmost unprocessed) */
+  whole_matrix    /**< analyze every row of the matrix */
+};
+
+/**
   @ingroup GBComputation
   @brief equivalent to @c buchberger(), but for Faug&egrave;re&rsquo;s F4 algorithm
   @param F generators of a polynomial ideal
@@ -61,7 +69,8 @@ using Dynamic_Engine::Dynamic_Heuristic;
 list<Constant_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     const bool static_algorithm = true,
-    const unsigned max_refinements = 0
+    const unsigned max_refinements = 0,
+    const Analysis style = Analysis::row_sequential
 );
 
 /**
@@ -295,6 +304,7 @@ public:
     @param P list of current critical pairs
     @param curr_ord current monomial ordering
     @param skel the current LP_Solver that defines the term ordering
+    @param row_option which approach to take to selecting a row
     @return the row with the recommended new ordering
   */
   unsigned select_dynamic_single(
@@ -303,7 +313,8 @@ public:
       const list<Abstract_Polynomial *> G,
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
-      LP_Solver * & skel
+      LP_Solver * & skel,
+      const Analysis & style = Analysis::row_sequential
   );
   /**
     @brief eliminates duplicates of rows:

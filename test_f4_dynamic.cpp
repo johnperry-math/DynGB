@@ -40,14 +40,19 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 extern Grading_Order_Data_Allocator<Monomial_Node> * monododa;
 
 // Forward declarations
-bool meaningful_arguments(int, char **, bool &, bool &, int &, int &);
+bool meaningful_arguments(int, char **, bool &, bool &, int &, int &, int &, Analysis &);
 
 void give_help();
 
 int main(int argc, char *argv[]) {
   bool homog, traditional = false;
-  int modulus, numvars;
-  if (not meaningful_arguments(argc, argv, traditional, homog, modulus, numvars)) {
+  int modulus, numvars, refinements;
+  Analysis style = Analysis::row_sequential;
+  if (
+      not meaningful_arguments(
+          argc, argv, traditional, homog, modulus, numvars, refinements, style
+      )
+  ) {
     give_help();
   } else {
     int true_numvars = (homog) ? numvars + 1 : numvars;
@@ -59,7 +64,7 @@ int main(int argc, char *argv[]) {
     for (Abstract_Polynomial * f : F)
       cout << '\t' << *f << endl;
     // compute basis
-    list<Constant_Polynomial *> G = f4_control(F, traditional);
+    list<Constant_Polynomial *> G = f4_control(F, traditional, refinements, style);
     // display basis
     cout << G.size() << " polynomials in basis:\n";
     /*for (list<Constant_Polynomial *>::const_iterator g = G.begin(); g != G.end(); ++g)
@@ -94,7 +99,9 @@ enum order_flags { GENERIC_GREVLEX = 0, GREVLEX, LEX, WGREVLEX };
 
 bool meaningful_arguments(
     int argc, char *argv[],
-    bool & traditional, bool & homogeneous, int & modulus, int & numvars
+    bool & traditional, bool & homogeneous,
+    int & modulus, int & numvars, int & refinements,
+    Analysis & style
 ) {
   modulus = 43;
   homogeneous = false;
@@ -108,7 +115,19 @@ bool meaningful_arguments(
         homogeneous = true;
       else if (!strcmp(argv[i],"static"))
         traditional = true;
-      else {
+      else if (!strcmp(argv[i], "analyze")) {
+        if (i + 1 < argc) {
+          if (!strcmp(argv[i+1], "row")) {
+            style = Analysis::row_sequential;
+          } else if (!strcmp(argv[i+1], "matrix")) {
+            style = Analysis::whole_matrix;
+          } else {
+            cout << "invalid analysis: choose 'row' or 'matrix'";
+            good_args = false;
+          }
+          i += 1;
+        } else good_args = false;
+      } else {
         int j = 0;
         for (/* */; argv[i][j] != '=' and argv[i][j] != '\0'; ++j) { /* */ }
         if (argv[i][j] != '=') {
@@ -132,6 +151,13 @@ bool meaningful_arguments(
             if (modulus < 2) {
               good_args = false;
               cout << "Invalid modulus; must be at least 2.\n";
+            }
+          }
+          else if (!strcmp(argv[i],"r") or !strcmp(argv[i],"refinements")) {
+            refinements = atoi(&(argv[i][j+1]));
+            if (refinements < 0) {
+              good_args = false;
+              cout << "Invalid number of refinements; must be at least 0.\n";
             }
           }
           else {
