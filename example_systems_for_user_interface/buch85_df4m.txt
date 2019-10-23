@@ -1,0 +1,26 @@
+f4
+32003
+20
+y
+l1 l2 px py pz phi theta psi del1 del2 s1 c1 s2 c2 sf cf st ct sp cp
+17
+c1 c2 + 32002 cf ct cp + sf sp
+s1 c2 + 32002 sf ct cp + 32002 cf sp
+s2 + st cp
+c1 s2 + cf ct sp + 32002 sf cp
+s1 s2 + 32002 sf ct sp +  cf cp
+c2 + 32002 st sp
+s1 + 32002 cf st
+c1 + sf st
+ct
+l2 c1 c2 + 32002 px
+l2 s1 c2 + 32002 py
+l2 s2 + l1 + 32002 pz
+c1^2 + s1^2 - 1
+c2^2 + s2^2 - 1
+cf^2 + sf^2 - 1
+ct^2 + st^2 - 1
+cp^2 + sp^2 - 1
+d
+matrix
+0

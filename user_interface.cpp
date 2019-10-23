@@ -185,10 +185,20 @@ void user_interface() {
       B = f4_control(I); // defaults to static
   } else {
     if (algorithm.compare("f4") == 0) {
+      string analysis;
+      while (analysis.compare("row") != 0 and analysis.compare("matrix") != 0) {
+        cout << "'row' or 'matrix' analysis? ";
+        cin >> analysis;
+      }
+      Analysis style = (analysis.compare("row") == 0) ?
+            Analysis::row_sequential
+          : Analysis::whole_matrix;
       unsigned max_refinements = 0;
-      cout << "maximum number of refinements per matrix? (0 for none) ";
-      cin >> max_refinements;
-      B = f4_control(I, false, max_refinements); // dynamic
+      if (style == Analysis::whole_matrix) {
+        cout << "maximum number of refinements per matrix? (0 for none) ";
+        cin >> max_refinements;
+      }
+      B = f4_control(I, false, max_refinements, style); // dynamic
     } else {
       DynamicSolver solver;
       string solver_choice;
