@@ -24,6 +24,8 @@
 using std::list;
 #include <vector>
 using std::vector;
+#include<utility>
+using std::pair;
 
 #include "polynomial.hpp"
 
@@ -132,6 +134,26 @@ public:
       const vector<Monomial *> mons,
       const COEF_TYPE *coeffs,
       unsigned start
+  );
+  /**
+    @param R parent ring
+    @param condensed a condensed version of the polynomial, where
+        the first item refers to the index in @c monomials, and
+        the second item contains the coefficient
+    @param monomials data referenced by @c condensed
+    @param mord monomial ordering used to first sort the polynomial;
+        @c nullptr gives @c generic_grevlex_ptr
+    @details 
+    We do not check that the monomials have the same number of variables,
+    nor that the coefficients come from the same field,
+    nor that the coefficients are nonzero,
+    nor do we sort the monomials. The client needs to do this!
+  */
+  Constant_Polynomial(
+    Polynomial_Ring & R,
+    const vector< pair< unsigned, COEF_TYPE > > condensed,
+    const vector<Monomial * > monomials,
+    const Monomial_Ordering * mord
   );
   /**
     @param R parent ring

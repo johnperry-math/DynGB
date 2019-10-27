@@ -107,6 +107,26 @@ Constant_Polynomial::Constant_Polynomial(
 }
 
 Constant_Polynomial::Constant_Polynomial(
+  Polynomial_Ring & R,
+  const vector< pair< unsigned, COEF_TYPE > > condensed,
+  const vector<Monomial * > monomials,
+  const Monomial_Ordering * mord
+) : Abstract_Polynomial(R, mord) {
+  m = condensed.size();
+  M = static_cast<Monomial *>(calloc(m, sizeof(Monomial)));
+  A = static_cast<Prime_Field_Element *>(calloc(m, sizeof(Prime_Field_Element)));
+  auto n = R.number_of_variables();
+  auto & F = R.ground_field();
+  for (unsigned i = 0; i < m; ++i) {
+    M[i].common_initialization(mord);
+    M[i].initialize_exponents(n);
+    M[i] = *(monomials[condensed[i].first]);
+    A[i] = Prime_Field_Element(condensed[i].second, &F);
+  }
+  head = 0;
+}
+
+Constant_Polynomial::Constant_Polynomial(
     Polynomial_Ring & R,
     const list<Monomial> & mons,
     const list<Prime_Field_Element> & coeffs,
