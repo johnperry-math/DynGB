@@ -73,6 +73,10 @@ list<Constant_Polynomial *> f4_control(
     const Analysis style = Analysis::row_sequential
 );
 
+extern unsigned location_of_monomial_index(
+    vector< pair< unsigned, COEF_TYPE > > & row, unsigned i
+);
+
 /**
   @brief used to compare monomials for STL containers such as @c map
 */
@@ -179,14 +183,16 @@ public:
     return compatible_pps[row].size();
   }
   /** @brief find the index of the monomial of greatest weight in this row */
-  unsigned head_monomial_index(unsigned i) {
+  unsigned head_monomial_index(unsigned i, bool static_algorithm = false) {
     const auto & Ai = A[i];
     unsigned result = Ai[0].first;
-    auto & t = *M[result];
-    for (unsigned k = 1; k < Ai.size(); ++k) {
-      if (mord->first_smaller(t, *M[Ai[k].first])) {
-        result = Ai[k].first;
-        t = *M[result];
+    if (not static_algorithm) { 
+      auto & t = *M[result];
+      for (unsigned k = 1; k < Ai.size(); ++k) {
+        if (mord->first_smaller(t, *M[Ai[k].first])) {
+          result = Ai[k].first;
+          t = *M[result];
+        }
       }
     }
     return result;
@@ -321,6 +327,15 @@ public:
     @param in_use rows that are currently still in use by the matrix
   */
   void simplify_identical_rows(set<unsigned> & in_use);
+  /** @brief make row monic at indicated index */
+  void normalize(unsigned i, unsigned lhead_i) {
+    auto & Ai = A[i];
+    auto mod = Rx.ground_field().modulus();
+    COEF_TYPE a = Rx.ground_field().inverse(Ai[location_of_monomial_index(Ai, lhead_i)].second);
+    for (auto k = 0; k < Ai.size(); ++k) {
+      Ai[k].second *= a; Ai[k].second %= mod;
+    }
+  }
   ///@}
   /** @name I/O */
   ///@{
@@ -357,7 +372,7 @@ protected:
   */
   void reduce_my_rows(
       const vector<int> &rows,
-      vector <COEF_TYPE> &buffer, vector <unsigned> & next
+      vector <COEF_TYPE> &buffer, vector <unsigned> & prev, vector <unsigned> & next
   );
   /**
     @brief reduces the specified set of rows by the specified row,
@@ -372,7 +387,7 @@ protected:
       unsigned i,
       unsigned lhead_i,
       vector< COEF_TYPE > & buffer,
-      vector< unsigned > & next,
+      vector< unsigned > & prev, vector< unsigned > & next,
       const set<unsigned> & to_reduce,
       unsigned mod
   );

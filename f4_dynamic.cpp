@@ -375,77 +375,115 @@ void F4_Reduction_Data::build_reducer(unsigned mi) {
 void expand(
     vector< pair< unsigned, COEF_TYPE > > & row,
     vector< COEF_TYPE > & B,
+    vector< unsigned > & prev,
     vector< unsigned > & next
 ) {
-  unsigned i = 0, n = row.size() - 1;
+  auto k = row[0].first;
+  B[k] = row[0].second;
+  prev[k] = B.size();
+  next[k] = row[1].first;
+  unsigned i = 1, n = row.size() - 1;
   while (i < n) {
-    auto k = row[i].first;
+    k = row[i].first;
     B[k] = row[i].second;
     next[k] = row[i+1].first;
+    prev[k] = row[i-1].first;
     ++i;
   }
   B[row[i].first] = row[i].second;
+  prev[row[i].first] = k;
   next[row[i].first] = B.size();
 }
 
+// always reduces the monomial at start
 unsigned reduce_monomial(
     vector<COEF_TYPE> & B,
     const vector< pair< unsigned, COEF_TYPE> > & r,
     COEF_TYPE a,
     COEF_TYPE mod,
-    unsigned & head, vector<unsigned> & next,
+    unsigned start, unsigned & head,
+    vector<unsigned> & prev, vector<unsigned> & next,
     unsigned & nonzero_entries
 ) {
   auto num_cols = B.size();
   // cancel as much as possible from the beginning
-  unsigned i = head, j = 0;
+  unsigned i = start, j = 0;
   while (i < num_cols and i == r[j].first and B[i] == (r[j].second * a % mod)) {
     --nonzero_entries;
     i = next[i];
     ++j;
   }
-  head = i;
+  unsigned old_head = head, old_start = start;
+  // repair links
+  if (head == start) {
+    head = i;
+    if (i < num_cols) prev[i] = num_cols;
+  } else if (i < num_cols) {
+    prev[i] = prev[start];
+    if (prev[start] < num_cols) next[prev[start]] = i;
+  }
+  start = i;
+  // only want to worry about the head once
+  // if B[i] can be reduced, previous loop means it won't reduce to 0
+  // hence we check how to adjust the head: merely reduce it? or reassign it?
   if (j < r.size()) {
-    if (i == r[j].first) {
-      B[i] -= a*r[j].second; B[i] %= mod;
-      if (B[i] < 0) B[i] += mod;
+    auto k = r[j].first;
+    if (i == k) {
+      B[k] -= a*r[j].second; B[k] %= mod;
+      if (B[k] < 0) B[k] += mod;
       ++j;
-    } else if (i > r[j].first) {
+    } else if (i > k) { // need to adjust head
       ++nonzero_entries;
-      head = r[j].first;
-      B[head] = - a*r[j].second; B[head] %= mod;
-      if (B[head] < 0) B[head] += mod;
-      ++j;
-      next[head] = i;
-      i = head;
-    }
-    // add until we run out of monomials in reductee
-    while (j < r.size()) {
-      auto k = r[j].first;
-      auto & next_i = next[i];
-      if (next_i < k) {
-        i = next_i;
-      } else if (next_i == k) {
-        B[next_i] -= a*r[j].second;
-        B[next_i] %= mod;
-        if (B[next_i] < 0) B[next_i] += mod;
-        else if (B[next_i] == 0) {
-          --nonzero_entries;
-          next_i = next[next_i];
-        }
-        ++j;
-      } else {
-        ++nonzero_entries;
-        B[k] = (- r[j].second * a) % mod;
-        B[k] += mod;
-        next[k] = next_i;
-        next_i = k;
-        i = k;
-        ++j;
+      start = k;
+      next[k] = i;
+      if (i < num_cols) {
+        auto & prev_i = prev[i];
+        if (prev_i < num_cols) next[prev_i] = k;
+        prev[k] = prev_i; prev_i = k;
       }
+      if (head == i) {
+        prev[k] = num_cols;
+        head = k;
+      }
+      B[k] = - a*r[j].second; B[k] %= mod;
+      if (B[k] < 0) B[k] += mod;
+      i = k;
+      ++j;
     }
   }
-  return head;
+  // add until we run out of monomials in reductee
+  while (j < r.size()) {
+    auto k = r[j].first;
+    auto & next_i = next[i];
+    if (next_i < k) {
+      i = next_i;
+    } else if (next_i == k) {
+      B[next_i] -= a*r[j].second;
+      B[next_i] %= mod;
+      if (B[next_i] < 0) B[next_i] += mod;
+      if (B[next_i] != 0)
+        i = next_i;
+      else {
+        --nonzero_entries;
+        if (next_i < num_cols) {
+          if (next[next_i] < num_cols) prev[next[next_i]] = i;
+          next_i = next[next_i];
+        }
+      }
+      ++j;
+    } else {
+      ++nonzero_entries;
+      B[k] = (- r[j].second * a) % mod;
+      B[k] += mod;
+      next[k] = next_i;
+      prev[k] = i;
+      if (next_i < num_cols) prev[next_i] = k;
+      next_i = k;
+      i = k;
+      ++j;
+    }
+  }
+  return start;
 }
 
 void condense(
@@ -466,17 +504,18 @@ void condense(
 
 void F4_Reduction_Data::reduce_my_rows(
     const vector<int> & my_rows, vector<COEF_TYPE> & B,
-    vector<unsigned> & next
+    vector<unsigned> & prev, vector<unsigned> & next
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
   auto mod = F.modulus();
   Monomial u(n);
   B.resize(num_cols);
+  prev.resize(num_cols);
   next.resize(num_cols);
   // expand, reduce, condense each row
   for (unsigned i : my_rows) {
-    expand(A[i], B, next);
+    expand(A[i], B, prev, next);
     unsigned head = A[i][0].first;
     for (unsigned j = head; j < num_cols; /* */) {
       const Abstract_Polynomial * g = R[j];
@@ -490,7 +529,9 @@ void F4_Reduction_Data::reduce_my_rows(
         red_mutex[j].unlock();
         auto si = strategies[i];
         si->pre_reduction_tasks(u, *g);
-        j = reduce_monomial(B, r, a, mod, head, next, nonzero_entries[i]);
+        j = reduce_monomial(
+            B, r, a, mod, j, head, prev, next, nonzero_entries[i]
+        );
       }
     }
     condense(A[i], head, B, next, nonzero_entries[i]);
@@ -508,7 +549,7 @@ void F4_Reduction_Data::reduce_by_old() {
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   vector<COEF_TYPE> buffer[num_threads];
-  vector<unsigned> next[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   vector<int> * thread_rows = new vector<int>[num_threads];
   // loop through num_rows
   for (unsigned k = 0; k < num_rows; ++k)
@@ -517,7 +558,7 @@ void F4_Reduction_Data::reduce_by_old() {
   for (unsigned c = 0; c < num_threads; ++c) {
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_rows, this, std::cref(thread_rows[c]),
-        std::ref(buffer[c]), std::ref(next[c])
+        std::ref(buffer[c]), std::ref(prev[c]), std::ref(next[c])
     );
   }
   for (unsigned c = 0; c < num_threads; ++c)
@@ -553,20 +594,21 @@ void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
     vector< COEF_TYPE > & B,
-    vector< unsigned > & next,
+    vector< unsigned > & prev, vector< unsigned > & next,
     const set<unsigned> & to_reduce,
     unsigned mod
 ) {
   auto & Ai = A[i];
   B.resize(num_cols);
+  prev.resize(num_cols);
   next.resize(num_cols);
   for (auto j : to_reduce) {
     auto & Aj = A[j];
-    expand(Aj, B, next);
+    expand(Aj, B, prev, next);
     unsigned k = location_of_monomial_index(Aj, lhead_i);
     COEF_TYPE a = Aj[k].second;
     unsigned head = Aj[0].first;
-    reduce_monomial(B, Ai, a, mod, head, next, nonzero_entries[j]);
+    reduce_monomial(B, Ai, a, mod, lhead_i, head, prev, next, nonzero_entries[j]);
     condense(Aj, head, B, next, nonzero_entries[j]);
   }
 }
@@ -584,7 +626,7 @@ void F4_Reduction_Data::reduce_by_new(
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
   vector<COEF_TYPE> B[num_threads];
-  vector<unsigned> next[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   thread * workers = new thread[num_threads];
   for (unsigned j = 0; j < num_threads; ++j)
     thread_rows[j].clear();
@@ -605,7 +647,7 @@ void F4_Reduction_Data::reduce_by_new(
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_new_rows, this,
         i, lhead_i,
-        std::ref(B[c]), std::ref(next[c]),
+        std::ref(B[c]), std::ref(prev[c]), std::ref(next[c]),
         std::cref(thread_rows[c]), mod
     );
   for (unsigned c = 0; c < num_threads; ++c)
@@ -1405,18 +1447,19 @@ list<Constant_Polynomial *> f4_control(
       while (unprocessed.size() != 0) {
         unsigned winning_row = *unprocessed.begin();
         if (s.number_of_nonzero_entries(winning_row) != 0) {
-          unsigned winning_lm = s.head_monomial_index(winning_row);
+          unsigned winning_lm = s.head_monomial_index(winning_row, static_algorithm);
           for (auto i: unprocessed) {
             auto nz = s.number_of_nonzero_entries(i);
             if ( (nz != 0)
-                 and ( (s.head_monomial_index(i) > winning_lm)
-                       or (s.head_monomial_index(i) == winning_lm
+                 and ( (s.head_monomial_index(i, static_algorithm) > winning_lm)
+                       or (s.head_monomial_index(i, static_algorithm) == winning_lm
                            and nz < s.number_of_nonzero_entries(winning_row)) )
             ) {
               winning_row = i;
-              winning_lm = s.head_monomial_index(i);
+              winning_lm = s.head_monomial_index(i, static_algorithm);
             }
           }
+          s.normalize(winning_row, winning_lm);
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
           all_completed_rows.insert(winning_row);
         }
