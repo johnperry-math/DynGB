@@ -608,7 +608,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
     unsigned k = location_of_monomial_index(Aj, lhead_i);
     COEF_TYPE a = Aj[k].second;
     unsigned head = Aj[0].first;
-    reduce_monomial(B, Ai, a, mod, lhead_i, head, prev, next, nonzero_entries[j]);
+    reduce_monomial(B, Ai, a, mod, head, head, prev, next, nonzero_entries[j]);
     condense(Aj, head, B, next, nonzero_entries[j]);
   }
 }
