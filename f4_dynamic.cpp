@@ -76,13 +76,14 @@ extern template void sort_pairs_by_strategy<Critical_Pair_Basic>(
 );
 
 F4_Reduction_Data::F4_Reduction_Data(
-    const WGrevlex * curr_ord,
+    WGrevlex * curr_ord,
     const list<Critical_Pair_Dynamic *> & P,
     const list<Abstract_Polynomial *> & B,
     Dynamic_Heuristic method
 ) :
     G(B), Rx(P.front()->first()->base_ring()), heur(method),
-    M_table(P.front()->first()->base_ring().number_of_variables())
+    M_table(P.front()->first()->base_ring().number_of_variables()),
+    mord(curr_ord)
 {
   static double overall_time = 0;
   static double adding_time = 0;
@@ -659,12 +660,14 @@ void F4_Reduction_Data::reduce_by_new(
   //print_matrix(false);
 }
 
-Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
-  Constant_Polynomial * result;
+Polynomial_Hashed * F4_Reduction_Data::finalize(
+    unsigned i, vector< Monomial * > & final_monomials, F4_Hash & final_hash
+) {
+  Polynomial_Hashed * result;
   const Prime_Field & F = Rx.ground_field();
   UCOEF_TYPE mod = F.modulus();
   NVAR_TYPE n = M[0]->num_vars();
-  result = new Constant_Polynomial(Rx, A[i], M, mord);
+  result = new Polynomial_Hashed(Rx, final_monomials, final_hash, A[i], M, mord);
   result->set_strategy(strategies[i]);
   strategies[i] = nullptr;
   return result;
@@ -1324,7 +1327,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
-list<Constant_Polynomial *> f4_control(
+list<Polynomial_Hashed *> f4_control(
     const list<Abstract_Polynomial *> &F,
     const bool static_algorithm,
     const unsigned max_refinements,
@@ -1338,6 +1341,8 @@ list<Constant_Polynomial *> f4_control(
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
   Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+  vector< Monomial * > finalized_monomials;
+  F4_Hash finalized_hash(n);
   //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;
@@ -1356,7 +1361,7 @@ list<Constant_Polynomial *> f4_control(
   DEG_TYPE operating_degree = 1000000;
   for (Abstract_Polynomial * fo : F)
   {
-    Constant_Polynomial * f = new Constant_Polynomial(*fo);
+    Polynomial_Hashed * f = new Polynomial_Hashed(*fo, finalized_monomials, finalized_hash, curr_ord);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
     auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::SUGAR_STRATEGY, curr_ord);
@@ -1467,7 +1472,7 @@ list<Constant_Polynomial *> f4_control(
       }
       for (auto completed_row : all_completed_rows) {
         if (s.number_of_nonzero_entries(completed_row) != 0) {
-          Constant_Polynomial * r = s.finalize(completed_row);
+          Polynomial_Hashed * r = s.finalize(completed_row, finalized_monomials, finalized_hash);
           if (ordering_changed) {
             r->set_monomial_ordering(curr_ord);
             for (auto p : P)
@@ -1491,11 +1496,11 @@ list<Constant_Polynomial *> f4_control(
         }
       }
     }
-    /*list<Constant_Polynomial *> B;
+    /*list<Polynomial_Hashed *> B;
     cout << "basis of degree " << mindeg << endl;
     for (auto g : G) {
-      static_cast<Constant_Polynomial *>(g)->set_monomial_ordering(curr_ord);
-      B.push_back(static_cast<Constant_Polynomial *>(g));
+      static_cast<Polynomial_Hashed *>(g)->set_monomial_ordering(curr_ord);
+      B.push_back(static_cast<Polynomial_Hashed *>(g));
       //cout << '\t' << *g << ',' << endl;
     }
     check_correctness(B, StrategyFlags::SUGAR_STRATEGY, mindeg);*/
@@ -1511,11 +1516,13 @@ list<Constant_Polynomial *> f4_control(
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   for (auto f : Ftemp) delete f;
-  list<Constant_Polynomial *> B;
+  list<Polynomial_Hashed *> B;
   unsigned int num_mons = 0;
   for (Abstract_Polynomial * g : G) {
     g->set_monomial_ordering(curr_ord);
-    B.push_back(new Constant_Polynomial(*g));
+    B.push_back(
+        new Polynomial_Hashed(*g, finalized_monomials, finalized_hash, curr_ord)
+    );
     num_mons += g->length();
     delete g;
   }

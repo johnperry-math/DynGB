@@ -18,6 +18,7 @@ using std::pair;
 #include "system_constants.hpp"
 
 #include "monomial.hpp"
+#include "polynomial_hashed.hpp"
 
 /**
   @ingroup GBComputation

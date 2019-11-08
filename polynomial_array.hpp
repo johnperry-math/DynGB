@@ -243,7 +243,7 @@ public:
   /** @name Iteration */
   ///@{
   /** @brief an iterator that poses no risk of modifying the polynomial */
-  virtual Constant_Polynomial_Iterator * new_iterator() const override;
+  virtual Polynomial_Iterator * new_iterator() const override;
   /** @brief iterator to the first element */
   virtual Polynomial_Iterator * begin() const override;
   /** @brief iterator to the last element */

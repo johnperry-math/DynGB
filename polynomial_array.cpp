@@ -282,7 +282,7 @@ Constant_Polynomial * Constant_Polynomial::scalar_multiple(
   return result;
 }
 
-Constant_Polynomial_Iterator *
+Polynomial_Iterator *
 Constant_Polynomial::new_iterator() const
 { return new Constant_Polynomial_Iterator(this); }
 

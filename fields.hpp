@@ -84,7 +84,7 @@ public:
   */
   ///@{
   /** @brief Returns the field's modulus. */
-  inline unsigned modulus() const { return m; }
+  COEF_TYPE modulus() const { return m; }
   /**
     @brief Returns the inverse of @f$a@f$, modulo @f$m@f$.
     @param a the element of this field whose inverse we desire
@@ -115,7 +115,7 @@ public:
   ///@}
 protected:
   /** @brief characteristic/modulus of the field */
-  UCOEF_TYPE m;
+  COEF_TYPE m;
   /**
     @brief for @f$i\neq0@f$, @f$Fi_i@f$ is multiplicative inverse
       of @f$i@f$, mod @f$m@f$
@@ -182,7 +182,7 @@ public:
   /** @brief The value of the element. This always satisfies @f$0\leq a\leq m@f$. */
   COEF_TYPE value() const;
   /** @brief The field's modulus. */
-  unsigned modulus() const;
+  COEF_TYPE modulus() const;
   /** @brief The field this element lies in. */
   const Prime_Field * field() const;
   /** @brief <c>true</c> iff <c>this</c> and <c>b</c> have the same modulus. */
@@ -283,7 +283,7 @@ protected:
     @brief the number&rsquo; modulus, stored here to avoid the expense of
       accessing it in @f$F@f$.
   */
-  unsigned m;
+  COEF_TYPE m;
 };
 
 #endif

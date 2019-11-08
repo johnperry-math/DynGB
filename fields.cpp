@@ -71,7 +71,7 @@ Prime_Field_Element::Prime_Field_Element(
 
 COEF_TYPE Prime_Field_Element::value() const { return a; }
 
-unsigned Prime_Field_Element::modulus() const { return m; }
+COEF_TYPE Prime_Field_Element::modulus() const { return m; }
 
 const Prime_Field * Prime_Field_Element::field() const { return F; }
 
