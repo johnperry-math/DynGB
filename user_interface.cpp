@@ -31,7 +31,9 @@ using std::cin; using std::cout; using std::endl;
 
 #include "algorithm_buchberger_basic.hpp"
 #include "algorithm_buchberger_dynamic.hpp"
+#include "f4_hash.hpp"
 #include "f4_dynamic.hpp"
+#include "polynomial_hashed.hpp"
 
 /**
   @ingroup utils
@@ -176,13 +178,14 @@ void user_interface() {
     cout << "static (s) or dynamic (d) computation? ";
     getline(cin, computation);
   }
-  list<Constant_Polynomial *> B;
+  list<Abstract_Polynomial *> B;
+  F4_Hash hash_table(n);
   bool dynamic = not (computation.compare("d") and computation.compare("dynamic"));
   if (not dynamic) {
     if (algorithm.compare("buchberger") == 0)
       B = buchberger(I);
     else
-      B = f4_control(I); // defaults to static
+      B = f4_control(I, hash_table); // defaults to static
   } else {
     if (algorithm.compare("f4") == 0) {
       string analysis;
@@ -198,7 +201,7 @@ void user_interface() {
         cout << "maximum number of refinements per matrix? (0 for none) ";
         cin >> max_refinements;
       }
-      B = f4_control(I, false, max_refinements, style); // dynamic
+      B = f4_control(I, hash_table, false, max_refinements, style); // dynamic
     } else {
       DynamicSolver solver;
       string solver_choice;

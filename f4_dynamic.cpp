@@ -1327,7 +1327,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
-list<Polynomial_Hashed *> f4_control(
+list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     F4_Hash & finalized_hash,
     const bool static_algorithm,
@@ -1516,7 +1516,7 @@ list<Polynomial_Hashed *> f4_control(
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   for (auto f : Ftemp) delete f;
-  list<Polynomial_Hashed *> B;
+  list<Abstract_Polynomial *> B;
   unsigned int num_mons = 0;
   for (Abstract_Polynomial * g : G) {
     g->set_monomial_ordering(curr_ord);

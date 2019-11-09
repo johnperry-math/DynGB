@@ -290,7 +290,7 @@ void initial_analysis(
   if (win_hp != nullptr) delete win_hp;
 }
 
-list<Constant_Polynomial *> buchberger_dynamic(
+list<Abstract_Polynomial *> buchberger_dynamic(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags method,
     StrategyFlags strategy,
@@ -433,7 +433,7 @@ list<Constant_Polynomial *> buchberger_dynamic(
   cout << G.size() << " polynomials after interreduction\n";
   //set<Constant_Polynomial *, smaller_lm> B;
   // sort all polynomials to new ordering
-  list<Constant_Polynomial *> B;
+  list<Abstract_Polynomial *> B;
   unsigned long num_mons = 0;
   unsigned long max_mons = 0;
   for (Abstract_Polynomial * g : G)

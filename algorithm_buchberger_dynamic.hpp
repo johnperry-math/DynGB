@@ -122,7 +122,7 @@ void initial_analysis(
     waste of time input polynomials where many polynomials can be reduced by
     others, so the default is @c false.
 */
-list<Constant_Polynomial *> buchberger_dynamic(
+list<Abstract_Polynomial *> buchberger_dynamic(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS,
     StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY,

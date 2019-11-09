@@ -189,7 +189,7 @@ void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy);
       of weights here
   @return list of polynomials in a Gr&ouml;bner basis of @c F
 */
-list<Constant_Polynomial *> buchberger(
+list<Abstract_Polynomial *> buchberger(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags rep = SPolyCreationFlags::GEOBUCKETS,
     StrategyFlags strategy = StrategyFlags::SUGAR_STRATEGY,

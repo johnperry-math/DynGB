@@ -203,7 +203,7 @@ void report_front_pair(Critical_Pair_Basic *p, StrategyFlags strategy) {
   }
 }
 
-list<Constant_Polynomial *> buchberger(
+list<Abstract_Polynomial *> buchberger(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags method,
     StrategyFlags strategy,
@@ -258,9 +258,7 @@ list<Constant_Polynomial *> buchberger(
       s->set_strategy(nullptr);
       delete s;
       cout << "\tadded " << r->leading_monomial() << endl;
-      very_verbose = true;
       if (very_verbose) { cout << "\tadded "; r->println(); }
-      very_verbose = false;
       gm_update(P, G, r, strategy);
     }
   }
@@ -271,7 +269,7 @@ list<Constant_Polynomial *> buchberger(
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   //set<Constant_Polynomial *, smaller_lm> B;
-  list<Constant_Polynomial *> B;
+  list<Abstract_Polynomial *> B;
   unsigned long num_mons = 0;
   unsigned long max_mons = 0;
   for (Abstract_Polynomial * g : G) {
