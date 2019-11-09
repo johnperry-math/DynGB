@@ -1329,6 +1329,7 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
+    vector< Monomial * > finalized_monomials,
     F4_Hash & finalized_hash,
     const bool static_algorithm,
     const unsigned max_refinements,
@@ -1342,7 +1343,6 @@ list<Abstract_Polynomial *> f4_control(
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
   Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-  vector< Monomial * > finalized_monomials;
   //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;

@@ -180,12 +180,13 @@ void user_interface() {
   }
   list<Abstract_Polynomial *> B;
   F4_Hash hash_table(n);
+  vector< Monomial * > monomials;
   bool dynamic = not (computation.compare("d") and computation.compare("dynamic"));
   if (not dynamic) {
     if (algorithm.compare("buchberger") == 0)
       B = buchberger(I);
     else
-      B = f4_control(I, hash_table); // defaults to static
+      B = f4_control(I, monomials, hash_table); // defaults to static
   } else {
     if (algorithm.compare("f4") == 0) {
       string analysis;
@@ -201,7 +202,7 @@ void user_interface() {
         cout << "maximum number of refinements per matrix? (0 for none) ";
         cin >> max_refinements;
       }
-      B = f4_control(I, hash_table, false, max_refinements, style); // dynamic
+      B = f4_control(I, monomials, hash_table, false, max_refinements, style); // dynamic
     } else {
       DynamicSolver solver;
       string solver_choice;

@@ -59,6 +59,7 @@ enum class Analysis {
   @ingroup GBComputation
   @brief equivalent to @c buchberger(), but for Faug&egrave;re&rsquo;s F4 algorithm
   @param F generators of a polynomial ideal
+  @param finalized_monomials monomials computed for the basis
   @param hash_table an @c F4_Hash to store monomials computed for the basis
   @param static_algorithm whether the algorithm should run traditionally or
       using dynamic techniques
@@ -69,6 +70,7 @@ enum class Analysis {
 */
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
+    vector<Monomial *> finalized_monomials,
     F4_Hash & hash_table,
     const bool static_algorithm = true,
     const unsigned max_refinements = 0,

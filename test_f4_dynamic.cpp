@@ -65,8 +65,9 @@ int main(int argc, char *argv[]) {
     for (Abstract_Polynomial * f : F)
       cout << '\t' << *f << endl;
     // compute basis
-    F4_Hash monomials(true_numvars);
-    list<Abstract_Polynomial *> G = f4_control(F, monomials, traditional, refinements, style);
+    vector< Monomial * > monomials;
+    F4_Hash hash_table(true_numvars);
+    list<Abstract_Polynomial *> G = f4_control(F, monomials, hash_table, traditional, refinements, style);
     // display basis
     cout << G.size() << " polynomials in basis:\n";
     /*for (list<Constant_Polynomial *>::const_iterator g = G.begin(); g != G.end(); ++g)
