@@ -1329,7 +1329,7 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
-    vector< Monomial * > finalized_monomials,
+    vector< Monomial * > & finalized_monomials,
     F4_Hash & finalized_hash,
     const bool static_algorithm,
     const unsigned max_refinements,

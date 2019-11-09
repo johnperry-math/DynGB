@@ -70,7 +70,7 @@ enum class Analysis {
 */
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
-    vector<Monomial *> finalized_monomials,
+    vector<Monomial *> & finalized_monomials,
     F4_Hash & hash_table,
     const bool static_algorithm = true,
     const unsigned max_refinements = 0,
