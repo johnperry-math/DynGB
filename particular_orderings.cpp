@@ -140,9 +140,9 @@ bool Generic_Grevlex::first_larger_than_multiple(
         } else
           return first_larger(t, u);
       } else if (v.is_one())
-        return first_larger(t, v);
-      else
         return not t.is_one();
+      else
+        return first_larger(t, v);
     } else
       return not (u.is_one() or v.is_one());
   }

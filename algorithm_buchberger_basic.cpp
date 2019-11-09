@@ -258,7 +258,9 @@ list<Constant_Polynomial *> buchberger(
       s->set_strategy(nullptr);
       delete s;
       cout << "\tadded " << r->leading_monomial() << endl;
+      very_verbose = true;
       if (very_verbose) { cout << "\tadded "; r->println(); }
+      very_verbose = false;
       gm_update(P, G, r, strategy);
     }
   }

@@ -53,25 +53,7 @@ list<Monomial> colon_ideal_without_ideals(
   list<Monomial> V;
   for (const Monomial & u : U) {
     Monomial tnew = u.colon(t);
-    // first prune from V monomials that tnew divides
-    /*bool redundant = false;
-    for (
-          list<Monomial>::const_iterator vi = V.begin();
-          vi != V.end();
-          /* */
-    /*) {
-      if (tnew.divisible_by(*vi)) redundant = true;
-      if (not redundant and vi->divisible_by(tnew)
-      ) {
-        list<Monomial>::const_iterator wi { vi }; ++wi;
-        V.erase(vi);
-        vi = wi;
-      } else
-        ++vi;
-    }
-    // check that tnew not divisible by anything in V
-    if (not redundant)*/
-      V.push_back(tnew);
+    V.push_back(tnew);
   }
   V.sort(standard_degree);
   for (auto vi = V.begin(); vi != V.end(); ++vi) {
