@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
       cout << '\t' << *f << endl;
     // compute basis
     F4_Hash monomials(true_numvars);
-    list<Polynomial_Hashed *> G = f4_control(F, monomials, traditional, refinements, style);
+    list<Abstract_Polynomial *> G = f4_control(F, monomials, traditional, refinements, style);
     // display basis
     cout << G.size() << " polynomials in basis:\n";
     /*for (list<Constant_Polynomial *>::const_iterator g = G.begin(); g != G.end(); ++g)
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     Polynomial_Ring * R = & (G.front()->base_ring());
     auto mord = G.front()->monomial_ordering();
     cout << G.size() << " leading monomials:\n";
-    for (Polynomial_Hashed * g : G) {
+    for (Abstract_Polynomial * g : G) {
       cout << g->leading_monomial() << ", ";
       delete g->strategy();
       delete g;
