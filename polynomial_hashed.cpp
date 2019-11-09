@@ -83,6 +83,7 @@ Polynomial_Hashed::Polynomial_Hashed(
     terms.emplace_back( location, pi->currCoeff() );
     pi->moveRight();
   }
+  delete pi;
 }
 
 Polynomial_Hashed::~Polynomial_Hashed() {}

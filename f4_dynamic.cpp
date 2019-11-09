@@ -1321,6 +1321,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       if (nonzero_entries[i] == 0)
         unprocessed.erase(i);
   delete newideal;
+  delete current_hilbert_numerator;
   return winning_row;
 }
 
