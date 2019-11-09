@@ -31,6 +31,7 @@ using std::cout; using std::endl;
 #include "monomial_ordering.hpp"
 #include "particular_orderings.hpp"
 #include "polynomial_linked_list.hpp"
+#include "f4_hash.hpp"
 #include "f4_dynamic.hpp"
 
 extern Monomial_Ordering * generic_grevlex_ptr;
@@ -64,7 +65,8 @@ int main(int argc, char *argv[]) {
     for (Abstract_Polynomial * f : F)
       cout << '\t' << *f << endl;
     // compute basis
-    list<Polynomial_Hashed *> G = f4_control(F, traditional, refinements, style);
+    F4_Hash monomials(true_numvars);
+    list<Polynomial_Hashed *> G = f4_control(F, monomials, traditional, refinements, style);
     // display basis
     cout << G.size() << " polynomials in basis:\n";
     /*for (list<Constant_Polynomial *>::const_iterator g = G.begin(); g != G.end(); ++g)

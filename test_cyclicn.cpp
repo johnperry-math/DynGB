@@ -105,7 +105,7 @@ bool meaningful_arguments(int argc, char *argv[], bool & homogeneous,
                          )
 {
   modulus = 43;
-  method = SPolyCreationFlags::LINKED_LST;
+  method = SPolyCreationFlags::GEOBUCKETS;
   homogeneous = false;
   WT_TYPE * weights = nullptr;
   unsigned int order_flag = 0;
