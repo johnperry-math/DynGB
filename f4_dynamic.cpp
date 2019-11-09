@@ -35,7 +35,7 @@ using std::to_string;
 #include <algorithm>
 using std::fill;
 #include <cstdlib>
-using std::rand;
+using std::srand; using std::rand;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -240,6 +240,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
     = new list<Critical_Pair_Dynamic *>[num_threads];
   // loop through num_rows
   unsigned k = 0, rows_added = 0;
+  srand(time(NULL));
   for (auto pi : P) {
     /*thread_rows[k].push_back(pi);
     ++rows_added;
