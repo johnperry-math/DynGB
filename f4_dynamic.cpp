@@ -34,6 +34,8 @@ using std::bitset;
 using std::to_string;
 #include <algorithm>
 using std::fill;
+#include <cstdlib>
+using std::rand;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -237,10 +239,12 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   list<Critical_Pair_Dynamic *> * thread_rows
     = new list<Critical_Pair_Dynamic *>[num_threads];
   // loop through num_rows
-  unsigned k = 0;
+  unsigned k = 0, rows_added = 0;
   for (auto pi : P) {
-    thread_rows[k % num_threads].push_back(pi);
-    ++k;
+    /*thread_rows[k].push_back(pi);
+    ++rows_added;
+    if (rows_added > P.size() / num_threads + 1) { ++k; rows_added = 0; }*/
+    thread_rows[rand() % num_threads].push_back(pi);
   }
   unsigned start_work[num_threads];
   unsigned start_row = 0;
