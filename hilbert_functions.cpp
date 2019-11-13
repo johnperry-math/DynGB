@@ -502,7 +502,7 @@ Dense_Univariate_Rational_Polynomial * hilbert_polynomial(
     for (DEG_TYPE i = 0; i <= d; ++i) {
       //q = polynomial_binomial(d1 - d + i, d1);
       Dense_Univariate_Rational_Polynomial * q = polynomial_binomial(d1 - i, d1);
-      cout << "( computed q: " << *q << " ) " << endl;
+      //cout << "( computed q: " << *q << " ) " << endl;
       //q->scale_by(hn2->coeff(d - i));
       q->scale_by(hn2->coeff(i));
       hp->add(*q);
