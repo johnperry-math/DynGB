@@ -242,10 +242,10 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   unsigned k = 0, rows_added = 0;
   srand(time(NULL));
   for (auto pi : P) {
-    /*thread_rows[k].push_back(pi);
+    thread_rows[k].push_back(pi);
     ++rows_added;
-    if (rows_added > P.size() / num_threads + 1) { ++k; rows_added = 0; }*/
-    thread_rows[rand() % num_threads].push_back(pi);
+    if (rows_added > P.size() / num_threads + 1) { ++k; rows_added = 0; }
+    //thread_rows[rand() % num_threads].push_back(pi);
   }
   unsigned start_work[num_threads];
   unsigned start_row = 0;
@@ -541,6 +541,7 @@ void F4_Reduction_Data::reduce_my_rows(
       }
     }
     condense(A[i], head, B, next, nonzero_entries[i]);
+    print_lock.lock(); cout << "row " << i << " completed\n"; print_lock.unlock();
   }
 }
 
@@ -851,6 +852,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
       for (NVAR_TYPE i = 0; i < n; ++i) c[i] = a[i] - b[i];
       delete [] b;
       result.push_back(Constraint(n,c));
+      //cout << "New constraint: " << result.back() << endl;
     }
   }
   delete [] c;
@@ -1373,7 +1375,7 @@ list<Abstract_Polynomial *> f4_control(
     Polynomial_Hashed * f = new Polynomial_Hashed(*fo, finalized_monomials, finalized_hash, curr_ord);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
-    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::NORMAL_STRATEGY, curr_ord);
     if (p->lcm().total_degree() < operating_degree)
       operating_degree = p->lcm().total_degree();
     P.push_back(p);
@@ -1392,7 +1394,7 @@ list<Abstract_Polynomial *> f4_control(
       for (auto pi = P.begin(); pi != P.end(); /* */) { 
         p = *pi;
         if (p->lcm().total_degree() <= operating_degree) {
-          report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
+          report_front_pair(p, StrategyFlags::NORMAL_STRATEGY);
           Pnew.push_back(p);
           auto qi = pi;
           ++qi;

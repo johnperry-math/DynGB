@@ -235,6 +235,7 @@ bool less_by_num_crit_pairs (PP_With_Ideal &a, PP_With_Ideal &b)
 bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
 {
   //cout << "Less by Hilbert then Deg\n";
+  //cout << a.get_pp() << " < " << b.get_pp() << "? ";
   bool result;
   // first check the coefficients of the Hilbert polynomial
   int hilcheck = hilbert_cmp(
@@ -254,6 +255,7 @@ bool less_by_hilbert_then_degree(PP_With_Ideal &a, PP_With_Ideal &b)
       //cout << result << endl;
     }
   }
+  //cout << result << endl;
   return result;
 };
 
