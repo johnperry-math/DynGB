@@ -30,7 +30,6 @@ using std::cout; using std::endl;
 #include "monomial_ordering.hpp"
 #include "particular_orderings.hpp"
 #include "algorithm_buchberger_basic.hpp"
-#include "f4_reduction.hpp"
 #include "algorithm_buchberger_explorer_serial.hpp"
 
 extern Monomial_Ordering * generic_grevlex_ptr;
@@ -68,10 +67,8 @@ int main(int argc, char *argv[]) {
       cout << '\t' << *f << endl;
     // compute basis
     //set<Constant_Polynomial *, smaller_lm> G = buchberger(F, method);
-    list<Constant_Polynomial *> G;
-    if (f4)
-      G = f4_control(F);
-    else if (xplor)
+    list<Abstract_Polynomial *> G;
+    if (xplor)
       G = buchberger_explorer(F, method, strategy, grading);
     else
       G = buchberger(F, method, strategy, grading);
@@ -81,7 +78,7 @@ int main(int argc, char *argv[]) {
       cout << '\t' << *(*g) << endl;*/
     Polynomial_Ring * R = & (G.front()->base_ring());
     cout << G.size() << " leading monomials:\n";
-    for (Constant_Polynomial * g : G) {
+    for (Abstract_Polynomial * g : G) {
       cout << g->leading_monomial() << ", ";
       bool verbose = false;
       if (verbose) cout << '\t' << *g << endl;

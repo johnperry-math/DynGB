@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
       default: cout << "Unknown solver\n"; break;
     }
     // compute basis
-    list<Constant_Polynomial *> G = buchberger_dynamic(
+    list<Abstract_Polynomial *> G = buchberger_dynamic(
         F, method, strategy, grading, (Dynamic_Heuristic )heuristic, solver
     );
     // display basis
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
         G.front()->monomial_ordering()
     );
     cout << G.size() << " leading monomials:\n";
-    for (Constant_Polynomial * g : G) {
+    for (Abstract_Polynomial * g : G) {
       cout << g->leading_monomial() << ", ";
       //cout << *g << endl;
       delete g;

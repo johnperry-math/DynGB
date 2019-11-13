@@ -79,7 +79,7 @@ bool newer_HF_smaller(Monomial & t, unsigned i, Monomial & u, unsigned j,
 
 typedef Critical_Pair_Basic * Critical_Pair_Basic_Ptr;
 
-list<Constant_Polynomial *> buchberger_explorer(
+list<Abstract_Polynomial *> buchberger_explorer(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags method,
     StrategyFlags strategy,
@@ -215,7 +215,7 @@ list<Constant_Polynomial *> buchberger_explorer(
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   //set<Constant_Polynomial *, smaller_lm> B;
-  list<Constant_Polynomial *> B;
+  list<Abstract_Polynomial *> B;
   for (Abstract_Polynomial * g : G) {
     B.push_back(new Constant_Polynomial(*g));
     //if (F.find(g) == F.end()) delete g;

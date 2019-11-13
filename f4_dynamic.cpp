@@ -1049,7 +1049,10 @@ void F4_Reduction_Data::create_and_sort_ideals(
   {
     PP_With_Ideal newIdeal(*M[ti], CurrentLPPs, w, crit_pairs, current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
-    //cout << "pushed back " << t << endl;
+    /*cout << "pushed back " << *M[ti]
+         << " with hilbert poly " << *newIdeal.get_hilbert_polynomial()
+         << " and hilbert num " << *newIdeal.get_hilbert_numerator()
+         << endl;*/
   }
   /*time_t stop = time(nullptr);
   create_time += difftime(stop, start);

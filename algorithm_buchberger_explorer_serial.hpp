@@ -53,7 +53,7 @@ using std::cout; using std::endl;
     functions, accepting the one with the smallest Hilbert function, and
     returning the others to the list of pairs.
 */
-list<Constant_Polynomial *> buchberger_explorer(
+list<Abstract_Polynomial *> buchberger_explorer(
     const list<Abstract_Polynomial *> &F,
     SPolyCreationFlags method = SPolyCreationFlags::GEOBUCKETS,
     StrategyFlags strategy = StrategyFlags::NORMAL_STRATEGY,
