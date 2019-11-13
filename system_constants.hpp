@@ -48,7 +48,7 @@ const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE )1) << 31;
 #define CONSTR_TYPE int32_t
 
 // size of dot product
-#define DOTPROD_TYPE int32_t
+#define DOTPROD_TYPE int64_t
 
 // entries in a weighted monomial ordering -- needs to be the same as RAY_TYPE
 #define WT_TYPE RAYENT_TYPE
