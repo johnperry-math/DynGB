@@ -118,7 +118,6 @@ F4_Reduction_Data::F4_Reduction_Data(
   }
   // set up the matrix
   A.clear();
-  head.clear();
   strategies.clear();
   NVAR_TYPE n = Rx.number_of_variables();
   for (auto p : P) {
@@ -134,10 +133,6 @@ F4_Reduction_Data::F4_Reduction_Data(
     }
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
-      /*cout << "for " << **mi << " selected " << p->second()->leading_monomial() << endl;
-      cout << '\t' << p->lcm() << endl;
-      cout << '\t' << p->first()->leading_monomial() << ", " << p->first_multiplier() << endl;
-      cout << '\t' << p->second()->leading_monomial() << ", " << p->second_multiplier() << endl;*/
       add_monomials(curr_ord, p->second(), p->second_multiplier());
       M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
@@ -165,7 +160,6 @@ F4_Reduction_Data::F4_Reduction_Data(
     //if (not found) cout << " no reducer found\n";
   }
   cout << "adding monomials time " << adding_time << endl;
-  // populate
   time_t istart = time(nullptr);
   initialize_many(P);
   time_t iend = time(nullptr);
@@ -181,6 +175,10 @@ F4_Reduction_Data::F4_Reduction_Data(
 
 mutex print_lock;
 
+bool sort_by_first(pair<unsigned, COEF_TYPE> a, pair<unsigned, COEF_TYPE> b) {
+  return a.first < b.first;
+}
+
 void F4_Reduction_Data::initialize_some_rows(
     const list<Critical_Pair_Dynamic *> & P, unsigned row
 ) {
@@ -188,28 +186,23 @@ void F4_Reduction_Data::initialize_some_rows(
   const COEF_TYPE F0 = 0;
   for (auto cp : P) {
     auto p = cp->first();
+    nonzero_entries[row] = p->length();
     //print_lock.lock();
     //cout << "initializing row " << row << " for " << cp->lcm() << " with poly " << *p << " and poly ";
     //if (cp->second() == nullptr) cout << "0\n"; else cout << *cp->second() << endl;
     //print_lock.unlock();
     const Monomial & t = cp->first_multiplier();
+    unsigned j = 0;
+    auto & Arow = A[row];
+    Arow.resize(p->length());
     auto pi = p->new_iterator();
-    vector<COEF_TYPE> & Arow = A[row];
-    nonzero_entries[row] = 0;
-    //row_plm_cache[row].clear();
-    unsigned i = M_table.lookup_product(pi->currMonomial(), t);
-    Arow.resize(num_cols - i, F0);
-    Arow[0] = pi->currCoeff().value();
-    l_head[row] = offset[row] = i;
-    head[row] = 0;
-    nonzero_entries[row] = 1;
-    pi->moveRight();
-    for (/* */; not pi->fellOff(); ++i) {
-      i = M_table.lookup_product(pi->currMonomial(), t);
-      Arow[i - offset[row]] = pi->currCoeff().value();
-      pi->moveRight();
-      ++nonzero_entries[row];
+    for (/* */; not pi->fellOff(); pi->moveRight()) {
+      auto i = M_table.lookup_product(pi->currMonomial(), t);
+      Arow[j].first = i;
+      Arow[j].second = pi->currCoeff().value();
+      ++j;
     }
+    sort(Arow.begin(), Arow.end(), sort_by_first);
     delete pi;
     delete cp;
     ++row;
@@ -224,7 +217,6 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
-  num_readers.assign(num_cols, 0);
   for (auto m : M) delete m;
   M.clear(); M.resize(M_builder.size());
   R.clear(); R.resize(M_builder.size());
@@ -238,9 +230,6 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
     ++m;
   }
   A.resize(P.size());
-  head.resize(P.size());
-  l_head.resize(P.size());
-  offset.resize(P.size());
   pref_head.resize(P.size());
   pp_weights.resize(M.size());
   compatible_pps.resize(P.size());
@@ -250,10 +239,13 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   list<Critical_Pair_Dynamic *> * thread_rows
     = new list<Critical_Pair_Dynamic *>[num_threads];
   // loop through num_rows
-  unsigned k = 0;
+  unsigned k = 0, rows_added = 0;
+  srand(time(NULL));
   for (auto pi : P) {
-    thread_rows[k % num_threads].push_back(pi);
-    ++k;
+    thread_rows[k].push_back(pi);
+    ++rows_added;
+    if (rows_added > P.size() / num_threads + 1) { ++k; rows_added = 0; }
+    //thread_rows[rand() % num_threads].push_back(pi);
   }
   unsigned start_work[num_threads];
   unsigned start_row = 0;
@@ -319,13 +311,12 @@ F4_Reduction_Data::~F4_Reduction_Data() {
 }
 
 void F4_Reduction_Data::print_row(unsigned i, bool as_poly) {
-  for (unsigned j = offset[i] + head[i]; j < M.size(); ++j) {
+  auto & Ai = A[i];
+  for (unsigned j = 0; j < Ai.size(); ++j) {
     if (as_poly) {
-      if (A[i][j - offset[i]] != 0) {
-        cout << " + " << A[i][j - offset[i]] << " " << *M[j];
-      }
+      cout << " + " << Ai[j].second << " " << *M[Ai[j].first];
     } else {
-      cout << A[i][j - offset[i]] << ", ";
+      cout << Ai[j].second << " (" << Ai[j].first << "), ";
     }
   }
   cout << endl;
@@ -339,11 +330,13 @@ void F4_Reduction_Data::print_matrix(bool show_data) {
   }
   for (unsigned i = 0; i < num_rows; ++i) { // print entries
     cout << "A[" << i << "]: ( ";
-    unsigned j;
-    for (j = 0; j < offset[i] + head[i]; ++j)
-      cout << "0, ";
-    for (/* */; j < offset[i] + A[i].size(); ++j)
-      cout << A[i][j - offset[i]] << ", ";
+    unsigned j = 0;
+    auto & Ai = A[i];
+    for (unsigned l = 0; l < Ai.size(); ++l) {
+      for (/* */; j < Ai[l].first; ++j) cout << "0, ";
+      cout << Ai[l].second << ", ";
+      ++j;
+    }
     for (/* */; j < num_cols; ++j)
       cout << "0, ";
     cout << ")\n";
@@ -368,195 +361,156 @@ bool F4_Reduction_Data::is_zero() {
 }
 
 void F4_Reduction_Data::build_reducer(unsigned mi) {
-  NVAR_TYPE n = Rx.number_of_variables();
-  const Prime_Field & F = Rx.ground_field();
-  UCOEF_TYPE mod = F.modulus();
   const auto g = R[mi];
   Polynomial_Iterator * gi = g->new_iterator();
   auto & r = R_built[mi];
+  r.resize(g->length());
   Monomial u(*M[mi], g->leading_monomial(), false);
-  vector<COEF_TYPE> r_buf(num_cols - mi, 0);
+  unsigned k = 0;
   while (not gi->fellOff()) {
     const Monomial & t = gi->currMonomial();
-    auto j = M_table.lookup_product(u, t);
-    r_buf[j - mi] = gi->currCoeff().value();
+    r[k].first = M_table.lookup_product(u, t);;
+    r[k].second = gi->currCoeff().value();
+    ++k;
     gi->moveRight();
   }
-  // interreduce the buffer before finalizing the reducer
-  for (unsigned ri = r_buf.size() - 1; ri > 0; --ri) { // don't try to reduce by self
-    red_lock[mi + ri].lock();
-    if (r_buf[ri] != 0 and R[mi + ri] != nullptr) {
-      auto & s = R_built[mi + ri]; // reducer for this column
-      if (s.size() == 0) {
-        Monomial v(n);
-        const Monomial & t = *M[mi + ri];
-        build_reducer(mi + ri);
-      }
-      COEF_TYPE a(r_buf[ri]);
-      for (auto si : s) {
-        r_buf[si.first - mi] += mod - (a * si.second % mod);
-        r_buf[si.first - mi] %= mod;
-      }
-    }
-    red_lock[mi + ri].unlock();
-  }
-  // finalize the reducer
-  for (unsigned ri = 0; ri < r_buf.size(); ++ri)
-    if (r_buf[ri] != 0)
-      r.emplace_back(ri + mi, r_buf[ri]);
   delete gi;
+  sort(r.begin(), r.end(), sort_by_first);
+}
+
+void expand(
+    vector< pair< unsigned, COEF_TYPE > > & row,
+    vector< COEF_TYPE > & B,
+    vector< unsigned > & prev,
+    vector< unsigned > & next
+) {
+  auto k = row[0].first;
+  B[k] = row[0].second;
+  prev[k] = B.size();
+  next[k] = row[1].first;
+  unsigned i = 1, n = row.size() - 1;
+  while (i < n) {
+    k = row[i].first;
+    B[k] = row[i].second;
+    next[k] = row[i+1].first;
+    prev[k] = row[i-1].first;
+    ++i;
+  }
+  B[row[i].first] = row[i].second;
+  prev[row[i].first] = k;
+  next[row[i].first] = B.size();
+}
+
+// always reduces the monomial at start
+unsigned reduce_monomial(
+    vector<COEF_TYPE> & B,
+    const vector< pair< unsigned, COEF_TYPE> > & r,
+    COEF_TYPE a,
+    COEF_TYPE mod,
+    unsigned start, unsigned & head,
+    vector<unsigned> & prev, vector<unsigned> & next,
+    unsigned & nonzero_entries
+) {
+  auto num_cols = B.size();
+  unsigned i = head, j = 0;
+  start = next[start];
+  while (i < r[j].first) i = next[i];
+  unsigned prev_i = num_cols;
+  // add until we run out of monomials in reductee
+  while (j < r.size()) {
+    auto k = r[j].first;
+    if (i < k) {
+      prev_i = i; 
+      i = next[i];
+    } else if (i == k) {
+      B[i] -= a*r[j].second; B[i] %= mod;
+      if (B[i] < 0) B[i] += mod;
+      else if (B[i] == 0) {
+        if (i == start) start = next[start];
+        --nonzero_entries;
+        if (i == head) head = next[i];
+        if (next[i] < num_cols) prev[next[i]] = prev[i];
+        if (prev[i] < num_cols) next[prev[i]] = next[i];
+      }
+      prev_i = i; 
+      i = next[i]; ++j;
+    } else {
+      ++nonzero_entries;
+      B[k] = (- r[j].second * a) % mod + mod;
+      if (head > k) { // inserting new head
+        prev[k] = num_cols;
+        next[k] = head;
+        prev[head] = k;
+        i = head;
+        head = k;
+      } else { // head < k < i
+        if (i < num_cols) {
+          prev[k] = prev[i];
+          if (prev[i] < num_cols) next[prev[i]] = k;
+          prev[i] = k;
+        } else {
+          prev[k] = prev_i;
+          next[prev_i] = k;
+          prev_i = k;
+        }
+        next[k] = i;
+      }
+      ++j;
+    }
+  }
+  return start;
+}
+
+void condense(
+    vector< pair< unsigned, COEF_TYPE > > & row,
+    unsigned head,
+    const vector< COEF_TYPE > & B, const vector< unsigned > & next,
+    unsigned nonzero_entries
+) {
+  if (row.size() != nonzero_entries) row.resize(nonzero_entries);
+  unsigned i = 0;
+  unsigned n = B.size();
+  for (unsigned k = head; k < n; k = next[k]) {
+    row[i].first = k;
+    row[i].second = B[k];
+    ++i;
+  }
 }
 
 void F4_Reduction_Data::reduce_my_rows(
-  const vector<int> & my_rows
+    const vector<int> & my_rows, vector<COEF_TYPE> & B,
+    vector<unsigned> & prev, vector<unsigned> & next
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
+  auto mod = F.modulus();
   Monomial u(n);
-  UCOEF_TYPE mod = F.modulus();
-  unsigned new_nonzero_entries;
-  #define UNREDUCED_REDUCERS true
-  if (UNREDUCED_REDUCERS) {
-    for (unsigned mi = 0; mi < num_cols; ++mi) {
-      // is this monomial reducible?
-      if (R[mi] != nullptr) {
-        for (int k : my_rows) {
-          vector<COEF_TYPE> & Ak = A[k];
-          auto off_k = offset[k];
-          // do we need to reduce this poly?
-          if (off_k <= mi and Ak[mi - off_k] != 0) {
-            unsigned i = mi - off_k;
-            red_mutex[mi].lock();
-            // get reducer for this monomial
-            const Abstract_Polynomial * g = R[mi];
-            vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
-            if (r.size() == 0) { // need to create reducer
-              Polynomial_Iterator * gi = g->new_iterator();
-              //if (k == 0) cout << "reducing " << *M[mi] << " by " << *g << endl;
-              // determine multiplier
-              const Monomial & t = *M[mi];
-              const Monomial & v = gi->currMonomial();
-              u.make_product_or_quotient(t, v, false);
-              size_t j = mi;
-              // loop through g's terms
-              while (not gi->fellOff()) {
-                const Monomial & t = gi->currMonomial();
-                j = M_table.lookup_product(u, t);
-                r.emplace_back(j, gi->currCoeff().value());
-                gi->moveRight();
-              }
-              delete gi;
-            }
-            red_mutex[mi].unlock();
-            // prepare for reduction
-            new_nonzero_entries = nonzero_entries[k];
-            auto sk = strategies[k];
-            sk->pre_reduction_tasks(u, *g);
-            // determine reduction coefficient
-            COEF_TYPE a(mod - ((Ak[i]*F.inverse(r[0].second)) % mod));
-            // loop through g's terms
-            unsigned & hk = head[k];
-            for (auto ri : r) {
-              unsigned j = ri.first;
-              unsigned l = j - offset[k];
-              auto & Akl = Ak[l];
-              bool was_zero = Akl == 0;
-              Akl += a*ri.second;
-              if (was_zero) {
-                ++new_nonzero_entries;
-                if (hk > l) hk = l;
-                was_zero = false;
-              }
-              if (Akl & (OVERFLOW_MASK != 0)) {
-                Akl %= mod;
-                if (not was_zero and Akl == 0) {
-                  --new_nonzero_entries;
-                }
-              }
-              // advance
-            }
-            while (hk < Ak.size() and Ak[hk] == 0) {
-              ++hk;
-              if (hk < Ak.size() and Ak[hk] != 0) {
-                Ak[hk] %= mod;
-                if (Ak[hk] == 0) {
-                  --new_nonzero_entries;
-                }
-              }
-            }
-            nonzero_entries[k] = new_nonzero_entries;
-            if (nonzero_entries[k] == 0) hk = M.size();
-            l_head[k] = hk + offset[k];
-            //if (k == 0) { cout << '\t'; print_row(k); }
-          }
-        }
+  B.resize(num_cols);
+  prev.resize(num_cols);
+  next.resize(num_cols);
+  // expand, reduce, condense each row
+  for (unsigned i : my_rows) {
+    expand(A[i], B, prev, next);
+    unsigned head = A[i][0].first;
+    for (unsigned j = head; j < num_cols; /* */) {
+      const Abstract_Polynomial * g = R[j];
+      if (g == nullptr)
+        j = next[j];
+      else {
+        auto a = B[j];
+        red_mutex[j].lock();
+        auto & r = R_built[j];
+        if (r.size() == 0) build_reducer(j);
+        red_mutex[j].unlock();
+        auto si = strategies[i];
+        si->pre_reduction_tasks(u, *g);
+        j = reduce_monomial(
+            B, r, a, mod, j, head, prev, next, nonzero_entries[i]
+        );
       }
     }
-  } else {
-    for (unsigned mi = num_cols - 1; mi < num_cols; --mi) {
-      // is this monomial reducible?
-      if (R[mi] != nullptr) {
-        for (int k : my_rows) {
-            vector<COEF_TYPE> & Ak = A[k];
-            auto off_k = offset[k];
-            // do we need to reduce this poly?
-            if (off_k <= mi and Ak[mi - off_k] != 0) {
-              unsigned i = mi - off_k;
-              // get reducer for this monomial
-              const Abstract_Polynomial * g = R[mi];
-              // determine multiplier
-              Monomial & t = *M[mi];
-              for (NVAR_TYPE l = 0; l < n; ++l)
-                u.set_exponent(l, t[l] - (g->leading_monomial())[l]);
-              red_lock[mi].lock();
-              vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
-              if (r.size() == 0) { // need to create reducer
-                build_reducer(mi);
-              }
-              red_lock[mi].unlock();
-              // prepare for reduction
-              new_nonzero_entries = nonzero_entries[k];
-              auto sk = strategies[k];
-              sk->pre_reduction_tasks(u, *g);
-              // determine reduction coefficient
-              COEF_TYPE a(mod - ((Ak[i]*F.inverse(r[0].second)) % mod));
-              // loop through g's terms
-              for (auto ri : r) {
-                unsigned j = ri.first;
-                unsigned l = j - offset[k];
-                bool was_zero = Ak[l] == 0;
-                Ak[l] += a*ri.second; Ak[l] %= mod;
-                if (was_zero)
-                  ++new_nonzero_entries;
-                else if (Ak[l] == 0)
-                  --new_nonzero_entries;
-                // advance
-              }
-              unsigned & hk = head[k];
-              while (hk < Ak.size() and Ak[hk] == 0) ++hk;
-              nonzero_entries[k] = new_nonzero_entries;
-              //if (k == 0) { cout << '\t'; print_row(k); }
-            }
-        }
-      }
-    }
-  }
-  for (auto i: my_rows) {
-    auto & Ai = A[i];
-    auto & hi = head[i];
-    for (auto k = hi; k < Ai.size() and nonzero_entries[i] != 0; ++k) {
-      if (Ai[k] != 0) {
-        Ai[k] %= mod;
-        if (Ai[k] == 0) {
-          --nonzero_entries[i];
-          if (nonzero_entries[i] == 0)
-            hi = M.size();
-          else if (k == hi) {
-            while (hi < Ai.size() and Ai[hi] == 0) ++hi;
-          }
-        }
-      }
-    }
+    condense(A[i], head, B, next, nonzero_entries[i]);
+    print_lock.lock(); cout << "row " << i << " completed\n"; print_lock.unlock();
   }
 }
 
@@ -568,8 +522,10 @@ void F4_Reduction_Data::reduce_by_old() {
     vector<mutex> new_list(3*num_cols / 2);
     red_lock.swap(new_list);
   }
-  unsigned cores = std::thread::hardware_concurrency() * 3 / 2;
+  unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
+  vector<COEF_TYPE> buffer[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   vector<int> * thread_rows = new vector<int>[num_threads];
   // loop through num_rows
   for (unsigned k = 0; k < num_rows; ++k)
@@ -577,7 +533,8 @@ void F4_Reduction_Data::reduce_by_old() {
   thread * workers = new thread[num_threads];
   for (unsigned c = 0; c < num_threads; ++c) {
     workers[c] = thread(
-        &F4_Reduction_Data::reduce_my_rows, this, std::cref(thread_rows[c])
+        &F4_Reduction_Data::reduce_my_rows, this, std::cref(thread_rows[c]),
+        std::ref(buffer[c]), std::ref(prev[c]), std::ref(next[c])
     );
   }
   for (unsigned c = 0; c < num_threads; ++c)
@@ -589,57 +546,53 @@ void F4_Reduction_Data::reduce_by_old() {
     check_consistency(k);*/
 }
 
+unsigned location_of_monomial_index(
+    vector< pair< unsigned, COEF_TYPE > > & row, unsigned i
+) {
+  if (i < row[0].first or i > row[row.size() - 1].first) return row.size(); 
+  unsigned j = 0, k = row.size() / 2, l = row.size();
+  while (row[k].first != i and j != k and k != l) {
+    auto tmp = k;
+    if (row[k].first < i) {
+      k = (k + l) / 2;
+      j = tmp;
+    } else {
+      k = (j + k) / 2;
+      l = tmp;
+    }
+  }
+  if (row[k].first == i) return k;
+  if (row[l].first == i) return l;
+  return row.size();
+}
+
 void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
-    const set<unsigned> & to_reduce
+    vector< COEF_TYPE > & B,
+    vector< unsigned > & prev, vector< unsigned > & next,
+    const set<unsigned> & to_reduce,
+    unsigned mod
 ) {
-  const Prime_Field & F = Rx.ground_field();
-  auto mod = F.modulus();
-  const auto & Ai = A[i];
+  auto & Ai = A[i];
+  B.resize(num_cols);
+  prev.resize(num_cols);
+  next.resize(num_cols);
   for (auto j : to_reduce) {
-    auto ci = head[i];
     auto & Aj = A[j];
-    auto cj = head[i] + offset[i] - offset[j]; // pos in A[j] of A[i]'s head
-    // adjust head
-    if (offset[j] + head[j] > offset[i] + head[i]) {
-      // first make sure row is large enough; if not, resize & copy correctly
-      unsigned old_size = A[j].size();
-      auto M_size = M.size();
-      if (old_size < M_size - (offset[i] + head[i])) {
-        auto new_size = M_size - (offset[i] + head[i]);
-        A[j].resize(new_size);
-        unsigned k = 1;
-        for (/* */; k <= old_size; ++k)
-          A[j][new_size - k] = A[j][old_size - k];
-        for (/* */; k <= new_size; ++k)
-          A[j][new_size - k] = 0;
-        offset[j] = offset[j] + old_size - new_size;
-        cj = 0;
-      }
-      head[j] = cj;
+    expand(Aj, B, prev, next);
+    unsigned k = location_of_monomial_index(Aj, lhead_i);
+    COEF_TYPE a = Aj[k].second;
+    unsigned head = Aj[0].first;
+    auto start = Ai[0].first;
+    if (B[start] == 0) {
+      auto new_start = head;
+      while (next[new_start] < start) new_start = next[new_start];
+      start = new_start;
     }
-    auto a = Aj[lhead_i - offset[j]];
-    unsigned ops = 0;
-    a *= mod - F.inverse(Ai[lhead_i - offset[i]]);
-    auto Aj_size = Aj.size();
-    while (cj < Aj_size and ops < nonzero_entries[i]) {
-      if (Ai[ci] != 0) {
-        bool was_zero = (Aj[cj] == 0);
-        Aj[cj] += a*Ai[ci]; Aj[cj] %= mod;
-        if (was_zero) {
-          ++nonzero_entries[j];
-        } else if (Aj[cj] == 0) {
-          --nonzero_entries[j];
-        }
-        ++ops;
-      }
-      ++cj; ++ci;
-    }
-    unsigned & hj = head[j];
-    while (hj < Aj.size() and Aj[hj] == 0) ++hj;
-    l_head[j] = hj + offset[j];
-    // if (j == 0) { cout << "reduced row " << j << " by new: "; print_row(j); }
+    print_lock.lock(); cout << "reducing " << j << " at " << lhead_i << endl; print_lock.unlock();
+    reduce_monomial(B, Ai, a, mod, start, head, prev, next, nonzero_entries[j]);
+    condense(Aj, head, B, next, nonzero_entries[j]);
   }
 }
 
@@ -651,28 +604,34 @@ void F4_Reduction_Data::reduce_by_new(
   //for (auto b: dirty) cout << b << ' '; cout << endl;
   //print_matrix(false);
   auto & F = Rx.ground_field();
-  unsigned cores = std::thread::hardware_concurrency() * 2;
+  auto mod = F.modulus();
+  unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
+  vector<COEF_TYPE> B[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   thread * workers = new thread[num_threads];
-  COEF_TYPE Ai0 = lhead_i; // abs pos of A[i]'s head
   for (unsigned j = 0; j < num_threads; ++j)
     thread_rows[j].clear();
   unsigned k = 0;
+  unsigned num_to_reduce = 0;
   for (unsigned j = 0; j < num_rows; ++j) {
     if (j != i and nonzero_entries[j] != 0
-        and Ai0 >= offset[j]
-        and (A[j][Ai0 - offset[j]] != 0)
+        and location_of_monomial_index(A[j], lhead_i) != A[j].size()
     ) {
       dirty[j] = true;
       thread_rows[k].insert(j);
       ++k; k %= num_threads;
+      ++num_to_reduce;
     }
   }
+  cout << "row " << i << " reduces " << num_to_reduce << " rows\n";
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_new_rows, this,
-        i, lhead_i, std::cref(thread_rows[c])
+        i, lhead_i,
+        std::ref(B[c]), std::ref(prev[c]), std::ref(next[c]),
+        std::cref(thread_rows[c]), mod
     );
   for (unsigned c = 0; c < num_threads; ++c)
     workers[c].join();
@@ -683,57 +642,24 @@ void F4_Reduction_Data::reduce_by_new(
   //print_matrix(false);
 }
 
-Constant_Polynomial * F4_Reduction_Data::finalize(unsigned i) {
-  Constant_Polynomial * result;
+Polynomial_Hashed * F4_Reduction_Data::finalize(
+    unsigned i, vector< Monomial * > & final_monomials, F4_Hash & final_hash
+) {
+  Polynomial_Hashed * result;
   const Prime_Field & F = Rx.ground_field();
   UCOEF_TYPE mod = F.modulus();
   NVAR_TYPE n = M[0]->num_vars();
-  vector<COEF_TYPE> & Ai = A[i];
-  Monomial * M_final = static_cast<Monomial *>(
-      malloc(sizeof(Monomial)*nonzero_entries[i])
-  );
-  Prime_Field_Element * A_final = static_cast<Prime_Field_Element *>(
-      malloc(sizeof(Prime_Field_Element)*nonzero_entries[i])
-  );
-  COEF_TYPE scale = F.inverse(Ai[l_head[i] - offset[i]]);
-  unsigned k = 0;
-  for (unsigned j = head[i]; k < nonzero_entries[i]; ++j) {
-    if (Ai[j] != 0) {
-      A_final[k].assign(Ai[j]*scale % mod, &F);
-      M_final[k].common_initialization();
-      M_final[k].initialize_exponents(n);
-      M_final[k].set_monomial_ordering(mord);
-      M_final[k] = *M[offset[i] + j];
-      ++k;
-    }
-  }
-  result = new Constant_Polynomial(
-      nonzero_entries[i],
-      Rx,
-      M_final, A_final,
-      mord
-  );
+  result = new Polynomial_Hashed(Rx, final_monomials, final_hash, A[i], M, mord);
   result->set_strategy(strategies[i]);
   strategies[i] = nullptr;
-  for (k = 0; k < nonzero_entries[i]; ++k) M_final[k].deinitialize();
-  free(M_final);
-  free(A_final);
   return result;
 }
 
 void F4_Reduction_Data::monomials_in_row(unsigned i, list<int> & result) const {
   unsigned processed = 0;
-  unsigned k = head[i];
-  auto Ai = A[i];
-  //cout << "head: " << k << "; offset: " << offset[i] << "; maximum: " << M.size() << "; nonzero: " << nonzero_entries[i] << endl;
-  //cout << "inserted ";
-  while (processed < nonzero_entries[i]) {
-    while (Ai[k] == 0) ++k;
-    result.push_back(k + offset[i]);
-    //cout << k + offset[i] << ", ";
-    ++k; ++processed;
-  }
-  //cout << endl;
+  auto & Ai = A[i];
+  for (unsigned k = 0; k < Ai.size(); ++k)
+    result.push_back(Ai[k].first);
 }
 
 void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
@@ -742,21 +668,26 @@ void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
   set<unsigned> removed;
   // identify redundants
   for (auto i : in_use) {
+    auto & Ai = A[i];
     if (nonzero_entries[i] != 0) {
-      unsigned i0 = offset[i] + head[i];
       for (unsigned j = i + 1; j < number_of_rows(); ++j) {
-        if (offset[j] + head[j] == i0 and nonzero_entries[j] == nonzero_entries[i]) {
-          bool still_equal = true;
-          auto & Ai = A[i], & Aj = A[j];
-          auto a = Aj[i0 - offset[j]] * F.inverse(Ai[i0 - offset[i]]) % mod;
-          for (unsigned k = i0; still_equal and k < M.size(); ++k) {
-            unsigned ik = k - offset[i];
-            unsigned jk = k - offset[j];
-            still_equal = (a*Ai[ik] % mod ) == Aj[jk];
+        auto & Aj = A[j];
+        if (
+            nonzero_entries[j] == nonzero_entries[i]
+            and Ai[0].first == Aj[0].first
+        ) {
+          auto a = Aj[0].second * F.inverse(Ai[0].second) % mod;
+          unsigned k = 1;
+          for (
+               /* already initialized */ ;
+               k < Ai.size() and Ai[k].first == Aj[k].first
+               and ((a*Ai[k].second % mod) == Aj[k].second) ;
+               ++k
+          ) {
+            /* already handled */
           }
-          if (still_equal) {
+          if (k == Ai.size()) {
             nonzero_entries[j] = 0;
-            head[j] = M.size();
             removed.insert(j);
           }
         }
@@ -792,7 +723,7 @@ void compatible_pp(
 )
 {
 
-  int currentLPP_index = F4.head[my_row] + F4.offset[my_row];
+  int currentLPP_index = F4.A[my_row][0].first;
 
   // get the exponent vector of the current LPP, insert it
   const Monomial & currentLPP(*F4.M[currentLPP_index]);
@@ -897,6 +828,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
       for (NVAR_TYPE i = 0; i < n; ++i) c[i] = a[i] - b[i];
       delete [] b;
       result.push_back(Constraint(n,c));
+      //cout << "New constraint: " << result.back() << endl;
     }
   }
   delete [] c;
@@ -1095,7 +1027,10 @@ void F4_Reduction_Data::create_and_sort_ideals(
   {
     PP_With_Ideal newIdeal(*M[ti], CurrentLPPs, w, crit_pairs, current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
-    //cout << "pushed back " << t << endl;
+    /*cout << "pushed back " << *M[ti]
+         << " with hilbert poly " << *newIdeal.get_hilbert_polynomial()
+         << " and hilbert num " << *newIdeal.get_hilbert_numerator()
+         << endl;*/
   }
   /*time_t stop = time(nullptr);
   create_time += difftime(stop, start);
@@ -1260,22 +1195,22 @@ unsigned F4_Reduction_Data::select_dynamic_single(
       if (nonzero_entries[i] > 0) {
         if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
         else {
-        compatible_pps[i].clear();
-        //compatible_pp(i, *this, skel, found_single, completed);
-        waiters.push_back( std::move(
-            async(
-                compatible_pp, i, std::ref(*this), skel,
-                std::ref(found_single), std::ref(completed)
-            )
-        ) );
+          compatible_pps[i].clear();
+          //compatible_pp(i, *this, skel, found_single, completed);
+          waiters.push_back( std::move(
+              async(
+                  compatible_pp, i, std::ref(*this), skel,
+                  std::ref(found_single), std::ref(completed)
+              )
+          ) );
+        }
       }
-    }
     }
   
     for (auto & fut : waiters) {
       fut.get();
     }
-  
+
     time_t stop_compat = time(nullptr);
     compat_time += difftime(stop_compat, start_compat);
     cout << "time spent in compatible_pp: " << compat_time << endl;
@@ -1349,25 +1284,30 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     );
   }
 
-  // find current lm and use for reduction
-  vector<COEF_TYPE> & Ai = A[winning_row];
-  //unsigned j = M_table[winning_lm];
   unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
-  l_head[winning_row] = j;
+  pref_head[winning_row] = j;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
+  auto & Ai = A[winning_row];
+  auto & F = Rx.ground_field();
+  COEF_TYPE a = F.inverse(Ai[location_of_monomial_index(Ai, j)].second);
+  auto mod = F.modulus();
+  for (auto & term : Ai) {
+    term.second *= a; term.second %= mod;
+  }
   reduce_by_new(winning_row, j, unprocessed);
   time_t end_time = time(nullptr);
   new_reduction_time += difftime(end_time, start_time);
   cout << "spent " << new_reduction_time << " seconds in reducing by new polys\n";
-  U.push_back(*M[l_head[winning_row]]);
-  cout << "selected " << *M[l_head[winning_row]] << " from row " << winning_row << endl;
+  U.push_back(*M[j]);
+  cout << "selected " << *M[j] << " from row " << winning_row << endl;
   unprocessed.erase(winning_row);
   for (unsigned i = 0; i < number_of_rows(); ++i)
     if (unprocessed.count(i) > 0)
       if (nonzero_entries[i] == 0)
         unprocessed.erase(i);
   delete newideal;
+  delete current_hilbert_numerator;
   return winning_row;
 }
 
@@ -1376,6 +1316,8 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
+    vector< Monomial * > & finalized_monomials,
+    F4_Hash & finalized_hash,
     const bool static_algorithm,
     const unsigned max_refinements,
     const Analysis style
@@ -1406,7 +1348,7 @@ list<Abstract_Polynomial *> f4_control(
   DEG_TYPE operating_degree = 1000000;
   for (Abstract_Polynomial * fo : F)
   {
-    Constant_Polynomial * f = new Constant_Polynomial(*fo);
+    Polynomial_Hashed * f = new Polynomial_Hashed(*fo, finalized_monomials, finalized_hash, curr_ord);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
     auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::NORMAL_STRATEGY, curr_ord);
@@ -1509,6 +1451,7 @@ list<Abstract_Polynomial *> f4_control(
               winning_lm = s.head_monomial_index(i, static_algorithm);
             }
           }
+          s.normalize(winning_row, winning_lm);
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
           all_completed_rows.insert(winning_row);
         }
@@ -1516,15 +1459,18 @@ list<Abstract_Polynomial *> f4_control(
       }
       for (auto completed_row : all_completed_rows) {
         if (s.number_of_nonzero_entries(completed_row) != 0) {
-          Constant_Polynomial * r = s.finalize(completed_row);
+          Polynomial_Hashed * r = s.finalize(completed_row, finalized_monomials, finalized_hash);
           if (ordering_changed) {
             r->set_monomial_ordering(curr_ord);
+            if (r->leading_coefficient().value() != 1) {
+              cout << "ERROR HERE\n";
+            }
             for (auto p : P)
               p->change_ordering(curr_ord);
             for (auto & t : T)
               t.set_monomial_ordering(curr_ord);
           }
-          cout << "\tadded " << r->leading_monomial() << " from row " << completed_row << endl;
+          cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << completed_row << endl;
           //r->printlncout();
           //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
           //for (auto t : T) cout << t << " "; cout << endl;
@@ -1540,11 +1486,11 @@ list<Abstract_Polynomial *> f4_control(
         }
       }
     }
-    /*list<Constant_Polynomial *> B;
+    /*list<Polynomial_Hashed *> B;
     cout << "basis of degree " << mindeg << endl;
     for (auto g : G) {
-      static_cast<Constant_Polynomial *>(g)->set_monomial_ordering(curr_ord);
-      B.push_back(static_cast<Constant_Polynomial *>(g));
+      static_cast<Polynomial_Hashed *>(g)->set_monomial_ordering(curr_ord);
+      B.push_back(static_cast<Polynomial_Hashed *>(g));
       //cout << '\t' << *g << ',' << endl;
     }
     check_correctness(B, StrategyFlags::SUGAR_STRATEGY, mindeg);*/
@@ -1564,7 +1510,9 @@ list<Abstract_Polynomial *> f4_control(
   unsigned int num_mons = 0;
   for (Abstract_Polynomial * g : G) {
     g->set_monomial_ordering(curr_ord);
-    B.push_back(new Constant_Polynomial(*g));
+    B.push_back(
+        new Polynomial_Hashed(*g, finalized_monomials, finalized_hash, curr_ord)
+    );
     num_mons += g->length();
     delete g;
   }

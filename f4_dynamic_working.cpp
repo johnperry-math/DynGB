@@ -1,8 +1,6 @@
 #ifndef __F4_REDUCTION_CPP__
 #define __F4_REDUCTION_CPP__
 
-double copy_time = 0;
-
 /*****************************************************************************\
 * This file is part of DynGB.                                                 *
 *                                                                             *
@@ -36,6 +34,8 @@ using std::bitset;
 using std::to_string;
 #include <algorithm>
 using std::fill;
+#include <cstdlib>
+using std::srand; using std::rand;
 
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
@@ -78,13 +78,14 @@ extern template void sort_pairs_by_strategy<Critical_Pair_Basic>(
 );
 
 F4_Reduction_Data::F4_Reduction_Data(
-    const WGrevlex * curr_ord,
+    WGrevlex * curr_ord,
     const list<Critical_Pair_Dynamic *> & P,
     const list<Abstract_Polynomial *> & B,
     Dynamic_Heuristic method
 ) :
     G(B), Rx(P.front()->first()->base_ring()), heur(method),
-    M_table(P.front()->first()->base_ring().number_of_variables())
+    M_table(P.front()->first()->base_ring().number_of_variables()),
+    mord(curr_ord)
 {
   static double overall_time = 0;
   static double adding_time = 0;
@@ -120,8 +121,6 @@ F4_Reduction_Data::F4_Reduction_Data(
   head.clear();
   strategies.clear();
   NVAR_TYPE n = Rx.number_of_variables();
-  mord = curr_ord;
-  // sugar data for each row of the matrix
   for (auto p : P) {
     Poly_Sugar_Data * new_sugar = new Poly_Sugar_Data(p->first());
     strategies.push_back(new_sugar);
@@ -368,13 +367,14 @@ bool F4_Reduction_Data::is_zero() {
   return is_zero_so_far;
 }
 
-void F4_Reduction_Data::build_reducer(unsigned mi, const Monomial & u) {
+void F4_Reduction_Data::build_reducer(unsigned mi) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
   UCOEF_TYPE mod = F.modulus();
   const auto g = R[mi];
   Polynomial_Iterator * gi = g->new_iterator();
   auto & r = R_built[mi];
+  Monomial u(*M[mi], g->leading_monomial(), false);
   vector<COEF_TYPE> r_buf(num_cols - mi, 0);
   while (not gi->fellOff()) {
     const Monomial & t = gi->currMonomial();
@@ -1376,7 +1376,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
-list<Constant_Polynomial *> f4_control(
+list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     const bool static_algorithm,
     const unsigned max_refinements,
@@ -1411,7 +1411,7 @@ list<Constant_Polynomial *> f4_control(
     Constant_Polynomial * f = new Constant_Polynomial(*fo);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
-    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::NORMAL_STRATEGY, curr_ord);
     if (p->lcm().total_degree() < operating_degree)
       operating_degree = p->lcm().total_degree();
     P.push_back(p);
@@ -1430,7 +1430,7 @@ list<Constant_Polynomial *> f4_control(
       for (auto pi = P.begin(); pi != P.end(); /* */) { 
         p = *pi;
         if (p->lcm().total_degree() <= operating_degree) {
-          report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
+          report_front_pair(p, StrategyFlags::NORMAL_STRATEGY);
           Pnew.push_back(p);
           auto qi = pi;
           ++qi;
@@ -1499,16 +1499,16 @@ list<Constant_Polynomial *> f4_control(
       while (unprocessed.size() != 0) {
         unsigned winning_row = *unprocessed.begin();
         if (s.number_of_nonzero_entries(winning_row) != 0) {
-          unsigned winning_lm = s.head_monomial_index(winning_row);
+          unsigned winning_lm = s.head_monomial_index(winning_row, static_algorithm);
           for (auto i: unprocessed) {
             auto nz = s.number_of_nonzero_entries(i);
             if ( (nz != 0)
-                 and ( (s.head_monomial_index(i) > winning_lm)
-                       or (s.head_monomial_index(i) == winning_lm
+                 and ( (s.head_monomial_index(i, static_algorithm) > winning_lm)
+                       or (s.head_monomial_index(i, static_algorithm) == winning_lm
                            and nz < s.number_of_nonzero_entries(winning_row)) )
             ) {
               winning_row = i;
-              winning_lm = s.head_monomial_index(i);
+              winning_lm = s.head_monomial_index(i, static_algorithm);
             }
           }
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
@@ -1562,7 +1562,7 @@ list<Constant_Polynomial *> f4_control(
   G = reduce_basis(G);
   cout << G.size() << " polynomials after interreduction\n";
   for (auto f : Ftemp) delete f;
-  list<Constant_Polynomial *> B;
+  list<Abstract_Polynomial *> B;
   unsigned int num_mons = 0;
   for (Abstract_Polynomial * g : G) {
     g->set_monomial_ordering(curr_ord);
