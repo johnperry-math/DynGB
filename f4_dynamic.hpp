@@ -59,6 +59,8 @@ enum class Analysis {
   @ingroup GBComputation
   @brief equivalent to @c buchberger(), but for Faug&egrave;re&rsquo;s F4 algorithm
   @param F generators of a polynomial ideal
+  @param finalized_monomials monomials computed for the basis
+  @param hash_table an @c F4_Hash to store monomials computed for the basis
   @param static_algorithm whether the algorithm should run traditionally or
       using dynamic techniques
   @param max_refinements maximum number of refinements per matrix;
@@ -68,6 +70,8 @@ enum class Analysis {
 */
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
+    vector<Monomial *> & finalized_monomials,
+    F4_Hash & hash_table,
     const bool static_algorithm = true,
     const unsigned max_refinements = 0,
     const Analysis style = Analysis::row_sequential
@@ -158,8 +162,7 @@ public:
   /** @name Destruction */
   ///@{
   /**
-    @brief releases space for the matrix and deletes any strategies not already
-    set to @c nullptr
+    @brief releases space for the matrix
   */
   ~F4_Reduction_Data();
   ///@}
@@ -169,45 +172,45 @@ public:
     @brief returns @c true iff all the entries are 0
   */
   bool is_zero();
-  /** @brief head monomial of the given row */
-  unsigned head_monomial_index(unsigned i, bool static_algorithm=false) {
-    return l_head[i];
-  }
   /** @brief returns the number of nonzero entries on the indicated row */
   unsigned number_of_nonzero_entries(unsigned i) { return nonzero_entries[i]; }
-  /**
-    @brief returns the strategies currently in use
-  */
-  vector<Poly_Sugar_Data *> get_strategies() { return strategies; }
   /** @brief basic properties */
   unsigned number_of_rows() const { return A.size(); }
   /** @brief set of monomials in row @p i that are not zero (absolute index) */
   void monomials_in_row(unsigned i, list<int> &) const;
   /** @brief current ordering of monomials */
   const WGrevlex * current_ordering() const { return mord; }
-  /** @brief runs @c check_consistency() on all rows */
-  void consistent() {
-    for (unsigned i = 0; i < num_rows; ++i)
-      check_consistency(i);
-  }
   /**
     @brief returns the number of compatible monomials detected in the given row
   */
   unsigned number_of_compatibles(unsigned row) {
     return compatible_pps[row].size();
   }
+  /** @brief find the index of the monomial of greatest weight in this row */
+  unsigned head_monomial_index(unsigned i, bool static_algorithm = false) {
+    const auto & Ai = A[i];
+    unsigned result = Ai[0].first;
+    if (not static_algorithm) { 
+      auto & t = *M[result];
+      for (unsigned k = 1; k < Ai.size(); ++k) {
+        if (mord->first_smaller(t, *M[Ai[k].first])) {
+          result = Ai[k].first;
+          t = *M[result];
+        }
+      }
+    }
+    return result;
+  }
   ///@}
   /** @name Conversion */
   ///@{
   /**
-    @brief converts indicated row to a Constant_Polynomial, returns result
+    @brief converts indicated row to a Polynomial_Hashed, returns result
   */
-  Constant_Polynomial * finalize(unsigned);
+  Polynomial_Hashed * finalize(unsigned, vector< Monomial * > &, F4_Hash &);
   ///@}
   /** @name Modification */
   ///@{
-  /** @brief clears the strategy; do this if you have saved it elsewhere */
-  void clear_strategy(unsigned i) { strategies[i] = nullptr; }
   ///@}
   /** @name Computation */
   ///@{
@@ -316,7 +319,7 @@ public:
   unsigned select_dynamic_single(
       set<unsigned> & unprocessed,
       list<Monomial> & T,
-      const list<Abstract_Polynomial *> G,
+      const list<Abstract_Polynomial *> & G,
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
       LP_Solver * & skel,
@@ -328,6 +331,15 @@ public:
     @param in_use rows that are currently still in use by the matrix
   */
   void simplify_identical_rows(set<unsigned> & in_use);
+  /** @brief make row monic at indicated index */
+  void normalize(unsigned i, unsigned lhead_i) {
+    auto & Ai = A[i];
+    auto mod = Rx.ground_field().modulus();
+    COEF_TYPE a = Rx.ground_field().inverse(Ai[location_of_monomial_index(Ai, lhead_i)].second);
+    for (auto k = 0; k < Ai.size(); ++k) {
+      Ai[k].second *= a; Ai[k].second %= mod;
+    }
+  }
   ///@}
   /** @name I/O */
   ///@{
@@ -350,45 +362,38 @@ public:
   ///@}
 protected:
   /**
-    @brief one or more checks for integrity of data of a row in the matrix
-    @param i which row of the matrix to check
-    @details At the present time this checks only if the number of nonzero
-      entries is correctly recorded.
-  */
-  void check_consistency(unsigned i) {
-    const auto & Ai = A[i];
-    unsigned n = 0;
-    unsigned j;
-    for (j = head[i]; j < num_cols - offset[i]; ++j) {
-      auto a = Ai[j];
-      if (a != 0)
-        ++n;
-    }
-    if (n != nonzero_entries[i])
-      cout << "row " << i << " inconsistent: should have " << nonzero_entries[i]
-           << " but has " << n << "\n";
-  }
-  /**
     @brief creates rows of the matrix indexed by the specified pairs,
       starting at the specified row
   */
   void initialize_some_rows(const list<Critical_Pair_Dynamic *> &, unsigned);
   /** @brief builds a reducer for the specified column */
   void build_reducer(unsigned);
-  /** @brief reduces the specified set of rows, suitable for multithreading */
-  void reduce_my_rows(const vector<int> &);
+  /**
+    @brief reduces the specified set of rows, suitable for multithreading
+    @param rows the rows to reduce
+    @param buffer space to expand each row in @p rows and then reduce
+    @param next @c expand needs this to track monomial locations
+  */
+  void reduce_my_rows(
+      const vector<int> &rows,
+      vector <COEF_TYPE> &buffer, vector <unsigned> & prev, vector <unsigned> & next
+  );
   /**
     @brief reduces the specified set of rows by the specified row,
       suitable for multithreading
     @param i row of the row to use when reducing
-    @param lhead_i the location of the (new) leading monomial of @p i;
-      this may differ from <c>head[i]</c>!
+    @param lhead_i the location of the (new) leading monomial of @p i
+    @param buffer space to expand each row for reduction
+    @param next @c expand needs this to track monomial locations
     @param to_reduce which rows of the matrix this thread will reduce
   */
   void reduce_my_new_rows(
       unsigned i,
       unsigned lhead_i,
-      const set<unsigned> & to_reduce
+      vector< COEF_TYPE > & buffer,
+      vector< unsigned > & prev, vector< unsigned > & next,
+      const set<unsigned> & to_reduce,
+      unsigned mod
   );
   /** @brief number of columns in the polynomial */
   unsigned num_cols;
@@ -401,24 +406,15 @@ protected:
   /** @brief locks on the reducers */
   vector<mutex> red_lock;
   /**
-    @brief coefficient data in sparse representation; each vector entry is a
-      subrow of the dense matrix
+    @brief coefficient data in sparse representation; each vector entry 
+        indicates position and coefficient
   */
-  vector<vector<COEF_TYPE> > A;
+  vector< vector < pair < unsigned, COEF_TYPE > > > A;
   /** @brief whether the row was modified during reduction */
   vector<bool> dirty;
-  /** @brief index of the starting point of this row in the dense matrix*/
-  vector<unsigned> offset;
-  /**
-    @brief index of the first non-zero entry of this row in the dense matrix
-      (counted from offset)
-  */
-  vector<unsigned> head;
-  /** @brief index of the logical head term of this row (absolute index) */
-  vector<unsigned> l_head;
   /** @brief index of the preferred head term of this row (absolute index) */
   vector<unsigned> pref_head;
-  /** @brief number of nonzero entries of each row of A */
+  /** @brief number of nonzero entries of each expanded row of A */
   vector<unsigned> nonzero_entries;
   /** @brief compatible pp's for each row (absolute index) */
   vector< list<int> > compatible_pps;
@@ -434,8 +430,6 @@ protected:
   vector<mutex> red_mutex;
   /** @brief reducers actually generated */
   vector<vector<pair<unsigned, COEF_TYPE> > > R_built;
-  /** @brief count of threads that have actually read a generated actually built */
-  vector<unsigned> num_readers;
   /** @brief current basis of ideal */
   const list<Abstract_Polynomial *> & G;
   /** @brief how the monomials are ordered */
@@ -444,10 +438,6 @@ protected:
   Polynomial_Ring & Rx;
   /** @brief strategy data for each polynomial */
   vector<Poly_Sugar_Data *> strategies;
-  /** @brief rows which have already contributed to the ordering */
-  set<unsigned> dynamic_processed;
-  /** @brief rows which still have to be considered for the ordering */
-  set<unsigned> dynamic_unprocessed;
   /**
     @brief each entry contains a set of monomials that could be a leading
       monomial of the corresponding row of the matrix

@@ -390,9 +390,7 @@ void F4_Reduction_Data::build_reducer(unsigned mi) {
       if (s.size() == 0) {
         Monomial v(n);
         const Monomial & t = *M[mi + ri];
-        for (NVAR_TYPE k = 0; k < n; ++k)
-          v.set_exponent(k, t[k] - (R[mi + ri]->leading_monomial())[k]);
-        build_reducer(mi + ri, v);
+        build_reducer(mi + ri);
       }
       COEF_TYPE a(r_buf[ri]);
       for (auto si : s) {
@@ -513,7 +511,7 @@ void F4_Reduction_Data::reduce_my_rows(
               red_lock[mi].lock();
               vector<pair<unsigned, COEF_TYPE> > & r = R_built[mi];
               if (r.size() == 0) { // need to create reducer
-                build_reducer(mi, u);
+                build_reducer(mi);
               }
               red_lock[mi].unlock();
               // prepare for reduction
@@ -1533,7 +1531,7 @@ list<Abstract_Polynomial *> f4_control(
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
-          gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+          gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
           end_time = time(nullptr);
           gm_time += difftime(end_time, start_time);
           //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;

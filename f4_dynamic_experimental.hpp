@@ -319,7 +319,7 @@ public:
   unsigned select_dynamic_single(
       set<unsigned> & unprocessed,
       list<Monomial> & T,
-      const list<Abstract_Polynomial *> G,
+      const list<Abstract_Polynomial *> & G,
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
       LP_Solver * & skel,

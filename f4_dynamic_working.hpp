@@ -170,7 +170,9 @@ public:
   */
   bool is_zero();
   /** @brief head monomial of the given row */
-  unsigned head_monomial_index(unsigned i, bool static=false) { return l_head[i]; }
+  unsigned head_monomial_index(unsigned i, bool static_algorithm=false) {
+    return l_head[i];
+  }
   /** @brief returns the number of nonzero entries on the indicated row */
   unsigned number_of_nonzero_entries(unsigned i) { return nonzero_entries[i]; }
   /**

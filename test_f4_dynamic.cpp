@@ -67,8 +67,8 @@ int main(int argc, char *argv[]) {
     // compute basis
     vector< Monomial * > monomials;
     F4_Hash hash_table(true_numvars);
-    //list<Abstract_Polynomial *> G { f4_control(F, monomials, hash_table, traditional, refinements, style) } ;
-    list<Abstract_Polynomial *> G { f4_control(F, traditional, refinements, style) } ;
+    list<Abstract_Polynomial *> G { f4_control(F, monomials, hash_table, traditional, refinements, style) } ;
+    //list<Abstract_Polynomial *> G { f4_control(F, traditional, refinements, style) } ;
     // display basis
     cout << G.size() << " polynomials in basis:\n";
     /*for (list<Constant_Polynomial *>::const_iterator g = G.begin(); g != G.end(); ++g)

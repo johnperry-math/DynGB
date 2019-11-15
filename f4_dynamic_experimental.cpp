@@ -425,17 +425,20 @@ unsigned reduce_monomial(
     } else if (i == k) {
       B[i] -= a*r[j].second; B[i] %= mod;
       if (B[i] < 0) B[i] += mod;
-      else if (B[i] == 0) {
+      if (B[i] != 0)
+        prev_i = i;
+      else {
         if (i == start) start = next[start];
         --nonzero_entries;
         if (i == head) head = next[i];
         if (next[i] < num_cols) prev[next[i]] = prev[i];
         if (prev[i] < num_cols) next[prev[i]] = next[i];
+        prev_i = prev[i];
       }
-      prev_i = i; 
       i = next[i]; ++j;
     } else {
       ++nonzero_entries;
+      if (k < start) start = k;
       B[k] = (- r[j].second * a) % mod + mod;
       if (head > k) { // inserting new head
         prev[k] = num_cols;
@@ -590,7 +593,6 @@ void F4_Reduction_Data::reduce_my_new_rows(
       while (next[new_start] < start) new_start = next[new_start];
       start = new_start;
     }
-    print_lock.lock(); cout << "reducing " << j << " at " << lhead_i << endl; print_lock.unlock();
     reduce_monomial(B, Ai, a, mod, start, head, prev, next, nonzero_entries[j]);
     condense(Aj, head, B, next, nonzero_entries[j]);
   }
@@ -1129,7 +1131,7 @@ void F4_Reduction_Data::recache_weights(LP_Solver * skel) {
 unsigned F4_Reduction_Data::select_dynamic_single(
     set<unsigned> & unprocessed,
     list<Monomial> & U,
-    const list<Abstract_Polynomial *> G,
+    const list<Abstract_Polynomial *> & G,
     const list<Critical_Pair_Dynamic *> & P,
     WGrevlex * curr_ord,
     LP_Solver * & skel,
@@ -1264,6 +1266,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
             auto refinement_result = refine(i, skel, G);
             if (refinement_result.first) {
               winning_row = i;
+              if (winning_skel != skel) delete winning_skel;
               winning_skel = refinement_result.second;
               break;
             }
@@ -1477,7 +1480,7 @@ list<Abstract_Polynomial *> f4_control(
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
-          gm_update_dynamic(P, G, r, StrategyFlags::SUGAR_STRATEGY, curr_ord);
+          gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
           end_time = time(nullptr);
           gm_time += difftime(end_time, start_time);
           //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
