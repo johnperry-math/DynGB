@@ -1289,6 +1289,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
   pref_head[winning_row] = j;
+  cout << "selected " << *M[j] << " from row " << winning_row << endl;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
   auto & Ai = A[winning_row];
@@ -1303,7 +1304,6 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   new_reduction_time += difftime(end_time, start_time);
   cout << "spent " << new_reduction_time << " seconds in reducing by new polys\n";
   U.push_back(*M[j]);
-  cout << "selected " << *M[j] << " from row " << winning_row << endl;
   unprocessed.erase(winning_row);
   for (unsigned i = 0; i < number_of_rows(); ++i)
     if (unprocessed.count(i) > 0)
@@ -1419,6 +1419,7 @@ list<Abstract_Polynomial *> f4_control(
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);
+          Polynomial_Hashed * r = s.finalize(completed_row, finalized_monomials, finalized_hash);
           if (s.number_of_compatibles(completed_row) > 1) ++comparisons;
           cout << comparisons << " refinements\n";
           all_completed_rows.insert(completed_row);
@@ -1435,6 +1436,19 @@ list<Abstract_Polynomial *> f4_control(
             all_orderings_used.push_front(curr_ord);
             curr_ord = new_ord;
           }
+          if (ordering_changed) {
+            r->set_monomial_ordering(curr_ord);
+            if (r->leading_coefficient().value() != 1) {
+              cout << "ERROR HERE\n";
+            }
+          }
+          cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << completed_row << endl;
+          very_verbose = false;
+          if (very_verbose) { cout << "\tadded "; r->println(); }
+          start_time = time(nullptr);
+          gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
+          end_time = time(nullptr);
+          gm_time += difftime(end_time, start_time);
         }
         if (comparisons == max_comparisons) cout << "refinements halted early\n";
       }
@@ -1457,32 +1471,34 @@ list<Abstract_Polynomial *> f4_control(
           s.normalize(winning_row, winning_lm);
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
           all_completed_rows.insert(winning_row);
-        }
-        unprocessed.erase(winning_row);
-      }
-      for (auto completed_row : all_completed_rows) {
-        if (s.number_of_nonzero_entries(completed_row) != 0) {
-          Polynomial_Hashed * r = s.finalize(completed_row, finalized_monomials, finalized_hash);
+          Polynomial_Hashed * r = s.finalize(winning_row, finalized_monomials, finalized_hash);
           if (ordering_changed) {
             r->set_monomial_ordering(curr_ord);
             if (r->leading_coefficient().value() != 1) {
               cout << "ERROR HERE\n";
             }
-            for (auto p : P)
-              p->change_ordering(curr_ord);
-            for (auto & t : T)
-              t.set_monomial_ordering(curr_ord);
           }
-          cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << completed_row << endl;
-          //r->printlncout();
-          //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
-          //for (auto t : T) cout << t << " "; cout << endl;
+          cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << winning_row << endl;
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
           gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
           end_time = time(nullptr);
           gm_time += difftime(end_time, start_time);
+        }
+        unprocessed.erase(winning_row);
+      }
+      for (auto completed_row : all_completed_rows) {
+        if (s.number_of_nonzero_entries(completed_row) != 0) {
+          if (ordering_changed) {
+            for (auto p : P)
+              p->change_ordering(curr_ord);
+            for (auto & t : T)
+              t.set_monomial_ordering(curr_ord);
+          }
+          //r->printlncout();
+          //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
+          //for (auto t : T) cout << t << " "; cout << endl;
           //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
           //for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
           cout << "continuing\n";
