@@ -396,9 +396,13 @@ void expand(
     prev[k] = row[i-1].first;
     ++i;
   }
-  B[row[i].first] = row[i].second;
-  prev[row[i].first] = k;
-  next[row[i].first] = B.size();
+  if (i < row.size()) { 
+    B[row[i].first] = row[i].second;
+    prev[row[i].first] = k;
+    next[row[i].first] = B.size();
+  } else { // happens only if B.size() == 1
+    next[k] = B.size();
+  }
 }
 
 // always reduces the monomial at start
@@ -1325,6 +1329,10 @@ list<Abstract_Polynomial *> f4_control(
     const unsigned max_refinements,
     const Analysis style
 ) {
+  // butcher85 goes terribly awry if we use the normal strategy
+  // so set this to sugar strategy until we add an option to choose strategy
+  // with inputs
+  StrategyFlags this_strategy = StrategyFlags::SUGAR_STRATEGY;
   list<Monomial> T;
   Dense_Univariate_Integer_Polynomial * hn = nullptr;
   NVAR_TYPE n = F.front()->number_of_variables();
@@ -1354,7 +1362,7 @@ list<Abstract_Polynomial *> f4_control(
     Polynomial_Hashed * f = new Polynomial_Hashed(*fo, finalized_monomials, finalized_hash, curr_ord);
     f->set_strategy(new Poly_Sugar_Data(f));
     f->strategy()->at_generation_tasks();
-    auto * p = new Critical_Pair_Dynamic(f, StrategyFlags::NORMAL_STRATEGY, curr_ord);
+    auto * p = new Critical_Pair_Dynamic(f, this_strategy, curr_ord);
     if (p->lcm().total_degree() < operating_degree)
       operating_degree = p->lcm().total_degree();
     P.push_back(p);
@@ -1368,12 +1376,13 @@ list<Abstract_Polynomial *> f4_control(
     sort_pairs_by_strategy(P);
     report_critical_pairs(P);
     Critical_Pair_Dynamic * p = P.front();
+    operating_degree = p->lcm().total_degree();
     cout << "\tdegree: " << operating_degree << endl;
     while (Pnew.empty() and not P.empty()) {
-      for (auto pi = P.begin(); pi != P.end(); /* */) { 
+      for (auto pi = P.begin(); pi != P.end(); /* */) {
         p = *pi;
         if (p->lcm().total_degree() <= operating_degree) {
-          report_front_pair(p, StrategyFlags::NORMAL_STRATEGY);
+          report_front_pair(p, this_strategy);
           Pnew.push_back(p);
           auto qi = pi;
           ++qi;
@@ -1383,6 +1392,32 @@ list<Abstract_Polynomial *> f4_control(
           ++pi;
       }
       ++operating_degree;
+      /*list< Critical_Pair_Dynamic * > Prestore;
+      for (auto pi = P.begin(); pi != P.end(); ) { 
+        p = *pi;
+        if (p->lcm().total_degree() < operating_degree) {
+          operating_degree = p->lcm().total_degree();
+          cout << "\tno, degree: " << operating_degree << endl;
+          report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
+          for (auto q : Pnew) { Prestore.push_back(q); }
+          Pnew.clear();
+          auto qi = pi; ++qi;
+          P.erase(pi);
+          Pnew.push_back(p);
+          pi = qi;
+        } else if (p->lcm().total_degree() == operating_degree) {
+          report_front_pair(p, StrategyFlags::SUGAR_STRATEGY);
+          Pnew.push_back(p);
+          auto qi = pi;
+          ++qi;
+          P.erase(pi);
+          pi = qi;
+        } else
+          ++pi;
+      }
+      for (auto q : Prestore) {
+        P.push_back(q);
+      }*/
     }
     // make s-poly
     time_t start_time = time(nullptr);
@@ -1446,7 +1481,7 @@ list<Abstract_Polynomial *> f4_control(
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
-          gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
+          gm_update_dynamic(P, G, r, this_strategy, curr_ord);
           end_time = time(nullptr);
           gm_time += difftime(end_time, start_time);
         }
@@ -1482,7 +1517,7 @@ list<Abstract_Polynomial *> f4_control(
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
-          gm_update_dynamic(P, G, r, StrategyFlags::NORMAL_STRATEGY, curr_ord);
+          gm_update_dynamic(P, G, r, this_strategy, curr_ord);
           end_time = time(nullptr);
           gm_time += difftime(end_time, start_time);
         }

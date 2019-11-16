@@ -351,6 +351,8 @@ list<Abstract_Polynomial *> buchberger_dynamic(
     curr_ord = new ORDERING_TYPE(n, weights);
     all_orderings_used.push_front(curr_ord);
     g->set_monomial_ordering(curr_ord);
+    bool very_verbose = false;
+    if (very_verbose) { cout << "\tadded "; g->println(); }
   }
   /*cout << "Concluded with " << g->leading_monomial() << endl;
         for (auto r: solver->get_rays()) cout << '\t' << r << endl;
@@ -415,6 +417,11 @@ list<Abstract_Polynomial *> buchberger_dynamic(
         all_orderings_used.push_front(curr_ord);
         r->set_monomial_ordering(curr_ord);
         cout << "ended with leading monomial " << r->leading_monomial() << endl;
+        very_verbose = false;
+        if (very_verbose) {
+          Prime_Field_Element c(r->leading_coefficient().inverse(), r->leading_coefficient().field());
+          cout << "\tadded "; r->scalar_multiple(c)->println();
+        }
         //cout << "changing " << P.size() << " pairs:\n\t";
         for (Critical_Pair_Dynamic * p : P) {
           //cout << p->lcm() << " ";
