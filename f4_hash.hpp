@@ -34,8 +34,7 @@ class F4_Hash {
     NVAR_TYPE n; /**< @brief number of variables in the monomials stored */
     WT_TYPE * weights; /**< @brief randomized weighting for each exponent */
     static const size_t MAXIMUM = 1 << 18; /**< @brief number of entries in table */
-    //list<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
-    vector<pair<const Monomial *, size_t> > * table; /**< @brief the actual table */
+    vector< vector<pair<const Monomial *, size_t> > > table; /**< @brief the actual table */
 
   public:
 
@@ -45,9 +44,7 @@ class F4_Hash {
       @brief allocates the table and sets up randomized hash function
       @param num_vars number of variables in the monomials this table will check
     */
-    explicit F4_Hash(NVAR_TYPE num_vars) {
-      //table = new list<pair<const Monomial *, size_t> > [MAXIMUM];
-      table = new vector<pair<const Monomial *, size_t> > [MAXIMUM];
+    explicit F4_Hash(NVAR_TYPE num_vars) : table(MAXIMUM) {
       n = num_vars;
       weights = new WT_TYPE[n];
       default_random_engine generator(
@@ -63,7 +60,6 @@ class F4_Hash {
     */
     ~F4_Hash() {
       delete [] weights;
-      delete [] table;
     }
 
     /**
@@ -220,6 +216,15 @@ class F4_Hash {
       auto curr = list.begin();
       while (not curr->first->is_like(t)) ++curr;
       return curr->second;
+    }
+
+    /** @brief list the monomials stored at this monomial's index */
+    void vomit(const Monomial & t) {
+      auto & list = table[get_index(t)];
+      cout << "bucket " << get_index(t) << endl;
+      for (auto storage : list) {
+        cout << "\t( " << *storage.first << " , " << storage.second << " )\n";
+      }
     }
 
     friend ostream & operator << (ostream &, const F4_Hash &);

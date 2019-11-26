@@ -21,6 +21,11 @@
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
+using std::cerr;
+
+#include <fstream>
+using std::ofstream;
+
 #include <future>
 using std::future; using std::async;
 
@@ -131,9 +136,14 @@ F4_Reduction_Data::F4_Reduction_Data(
         delete [] p2log;
       }
     }
+//auto pdeg = p->first()->leading_monomial().total_degree() + p->first_multiplier().total_degree();
+//if (pdeg >= 9 and pdeg <= 10) { cout << "start spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cout); cout << " )\n"; }
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
+//if (pdeg >= 9 and pdeg <= 10) { cout << "stop spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cout); cout << " )\n"; }
     if (p->second() != nullptr) {
+//if (pdeg >= 9 and pdeg <= 10) { cout << "start spoly 1 " << p->second_multiplier() << " * ( "; p->second()->print(cout); cout << " )\n"; }
       add_monomials(curr_ord, p->second(), p->second_multiplier());
+//if (pdeg >= 9 and pdeg <= 10) { cout << "stop spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cout); cout << " )\n"; }
       M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
@@ -150,7 +160,10 @@ F4_Reduction_Data::F4_Reduction_Data(
         Monomial u(*(mi->first));
         u /= (*g)->leading_monomial();
         time_t astart = time(nullptr);
+//auto gdeg = (*g)->leading_monomial().total_degree() + u.total_degree();
+//if (gdeg >= 9 and gdeg <= 10) { cout << "start reducer " << u << " * ( "; (*g)->print(cout); cout << " )\n"; }
         add_monomials(curr_ord, *g, u);
+//if (gdeg >= 9 and gdeg <= 10) { cout << "stop reducer " << u << " * ( "; (*g)->print(cout); cout << " )\n"; }
         time_t aend = time(nullptr);
         adding_time += difftime(aend, astart);
         g = G.end();
@@ -284,13 +297,14 @@ void F4_Reduction_Data::add_monomials(
 ) {
   Polynomial_Iterator * pi = g->new_iterator();
   if (not new_row) pi->moveRight();
+//auto deg = u.total_degree() + g->leading_monomial().total_degree();
   while (not (pi->fellOff())) {
     bool already_there = M_table.contains_product(pi->currMonomial(), u);
     if (not already_there) {
       Monomial * t = new Monomial(pi->currMonomial());
       t->set_monomial_ordering(curr_ord);
       (*t) *= u;
-      //cout << "adding " << pi->currMonomial() << " * " << u << " = " << *t << endl;
+//if (deg != t->total_degree()) cout << "\tadded " << u << " * " << pi->currMonomial() << " = " << *t << " from " << g->leading_monomial() << " ERROR\n";
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
@@ -419,7 +433,7 @@ unsigned reduce_monomial(
   unsigned i = head, j = 0;
   start = next[start];
   while (i < r[j].first) i = next[i];
-  unsigned prev_i = num_cols;
+  unsigned prev_i = prev[i];
   // add until we run out of monomials in reductee
   while (j < r.size()) {
     auto k = r[j].first;
@@ -458,8 +472,8 @@ unsigned reduce_monomial(
         } else {
           prev[k] = prev_i;
           next[prev_i] = k;
-          prev_i = k;
         }
+        prev_i = k;
         next[k] = i;
       }
       ++j;
@@ -1321,6 +1335,19 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
+void hash_integrity_check(
+  F4_Hash & hash,
+  vector< Monomial * > & mons
+) {
+  cout << "integrity check\n";
+  for (auto mp : mons) {
+    if (not hash.contains(mp)) {
+      cout << "hash lost " << *mp << " from " << hash.get_index(*mp) << endl;
+      hash.vomit(*mp);
+    }
+  }
+}
+
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     vector< Monomial * > & finalized_monomials,
@@ -1329,6 +1356,7 @@ list<Abstract_Polynomial *> f4_control(
     const unsigned max_refinements,
     const Analysis style
 ) {
+  //ofstream log_file("debugging report", std::ofstream::out);
   // butcher85 goes terribly awry if we use the normal strategy
   // so set this to sugar strategy until we add an option to choose strategy
   // with inputs
@@ -1488,6 +1516,7 @@ list<Abstract_Polynomial *> f4_control(
         if (comparisons == max_comparisons) cout << "refinements halted early\n";
       }
       // process remaining pairs statically
+      list< unsigned > unfinalized;
       while (unprocessed.size() != 0) {
         unsigned winning_row = *unprocessed.begin();
         if (s.number_of_nonzero_entries(winning_row) != 0) {
@@ -1503,41 +1532,39 @@ list<Abstract_Polynomial *> f4_control(
               winning_lm = s.head_monomial_index(i, static_algorithm);
             }
           }
+cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
           s.normalize(winning_row, winning_lm);
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
-          all_completed_rows.insert(winning_row);
-          Polynomial_Hashed * r = s.finalize(winning_row, finalized_monomials, finalized_hash);
-          if (ordering_changed) {
-            r->set_monomial_ordering(curr_ord);
-            if (r->leading_coefficient().value() != 1) {
-              cout << "ERROR HERE\n";
-            }
-          }
-          cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << winning_row << endl;
-          very_verbose = false;
-          if (very_verbose) { cout << "\tadded "; r->println(); }
-          start_time = time(nullptr);
-          gm_update_dynamic(P, G, r, this_strategy, curr_ord);
-          end_time = time(nullptr);
-          gm_time += difftime(end_time, start_time);
+          auto loc = unfinalized.begin();
+          while (loc != unfinalized.end() and s.head_monomial_index(*loc, static_algorithm) > winning_lm) ++loc;
+          if (loc == unfinalized.end()) unfinalized.push_back(winning_row);
+          else unfinalized.insert(loc, winning_row);
         }
         unprocessed.erase(winning_row);
       }
-      for (auto completed_row : all_completed_rows) {
-        if (s.number_of_nonzero_entries(completed_row) != 0) {
-          if (ordering_changed) {
-            for (auto p : P)
-              p->change_ordering(curr_ord);
-            for (auto & t : T)
-              t.set_monomial_ordering(curr_ord);
+      for (auto row : unfinalized) {
+        all_completed_rows.insert(row);
+        Polynomial_Hashed * r = s.finalize(row, finalized_monomials, finalized_hash);
+        //log_file << " new poly ( " << operating_degree << " , " << r->leading_monomial().total_degree() << " ): " << *r << endl;// r->println(log_file);
+        if (ordering_changed) {
+          r->set_monomial_ordering(curr_ord);
+          if (r->leading_coefficient().value() != 1) {
+            cout << "ERROR HERE\n";
           }
-          //r->printlncout();
-          //cout << "SANITY CHECK: ordering changed? " << ordering_changed << "; " << curr_ord << endl;
-          //for (auto t : T) cout << t << " "; cout << endl;
-          //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
-          //for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
-          cout << "continuing\n";
         }
+        cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " ( " << r->leading_monomial().total_degree() << " ) from row " << row << endl;
+        very_verbose = false;
+        if (very_verbose) { cout << "\tadded "; r->println(); }
+        start_time = time(nullptr);
+        gm_update_dynamic(P, G, r, this_strategy, curr_ord);
+        end_time = time(nullptr);
+        gm_time += difftime(end_time, start_time);
+      }
+      if (ordering_changed) {
+        for (auto p : P)
+          p->change_ordering(curr_ord);
+        for (auto & t : T)
+          t.set_monomial_ordering(curr_ord);
       }
     }
     /*list<Polynomial_Hashed *> B;

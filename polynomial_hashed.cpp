@@ -45,16 +45,38 @@ Polynomial_Hashed::Polynomial_Hashed(
 {
   terms.reserve(from_row.size());
   auto & F = R.ground_field();
+//auto d = row_monomials[from_row[0].first]->total_degree();
   for (const auto & p : from_row) {
     const auto t = row_monomials[p.first];
-    if ((not hash.contains(t)) and p.second != 0) {
-      monomials.emplace_back(new Monomial(*t));
-      hash.add_monomial(t, monomials.size() - 1);
+//if (t->total_degree() != d) cout << "ERROR 1 adding " << *row_monomials[from_row[0].first] << " 's monomial " << *t << endl;
+    if (p.second == 0)
+      cout << "error: trying to save a monomial w/coefficient 0: " << *t << "\n";
+    else {
+      if (not hash.contains(t)) {
+        monomials.emplace_back(new Monomial(*t));
+//cout << "emplacing " << *t << " in " << &hash << " at " << monomials.size() - 1 << endl;
+        auto where = monomials.size() - 1;
+        hash.add_monomial(monomials[where], where);
+      }
+//else {
+//  cout << "found " << *t << " in " << &hash << endl;
+//}
+/*if (not monomials[hash[*t]]->is_like(*t)) {
+  cout << "hashing error: " << *t << " ( " << t << " ) is not " << *monomials[hash[*t]] << " ( " << monomials[hash[*t]] << " )\n";
+  cout << "hash is " << hash[*t] << " ; length is " << monomials.size() << endl;
+  cout << "hash reports that it contains " << *t << " ? " << hash.contains(t) << endl;
+  hash.vomit(*t);
+  cout << "hash reports that it contains " << *monomials[hash[*t]] << " ? " << hash.contains(monomials[hash[*t]])<< "\n";
+  hash.vomit(*monomials[hash[*t]]);
+}*/
+      terms.emplace_back(
+          hash[*t],
+          Prime_Field_Element( p.second , &F )
+      );
+/*if (monomials[terms[terms.size() - 1].first]->total_degree() != d) {
+   cout << "ERROR 2 adding " << *row_monomials[from_row[0].first] << " 's monomial " << *t << " as " << *monomials[terms[terms.size() - 1].first] << endl;
+}*/
     }
-    terms.emplace_back(
-        hash[*t],
-        Prime_Field_Element( p.second , &F )
-    );
   }
 }
 

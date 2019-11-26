@@ -186,6 +186,8 @@ public:
   unsigned number_of_compatibles(unsigned row) {
     return compatible_pps[row].size();
   }
+  /** @brief return the indicated monomial */
+  const Monomial & monomial(unsigned i) { return *M[i]; }
   /** @brief find the index of the monomial of greatest weight in this row */
   unsigned head_monomial_index(unsigned i, bool static_algorithm = false) {
     const auto & Ai = A[i];

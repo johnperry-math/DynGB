@@ -21,6 +21,8 @@
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
+using std::cerr;
+
 #include <future>
 using std::future; using std::async;
 
@@ -132,13 +134,14 @@ F4_Reduction_Data::F4_Reduction_Data(
         delete [] p2log;
       }
     }
+auto pdeg = p->first_multiplier().total_degree() + p->first()->leading_monomial().total_degree();
+if (pdeg >= 10 and pdeg <= 16) { cerr << "start spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cerr); cerr << " )\n"; }
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
+if (pdeg >= 10 and pdeg <= 16) { cerr << "stop spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cerr); cerr << " )\n"; }
     if (p->second() != nullptr) {
-      /*cout << "for " << **mi << " selected " << p->second()->leading_monomial() << endl;
-      cout << '\t' << p->lcm() << endl;
-      cout << '\t' << p->first()->leading_monomial() << ", " << p->first_multiplier() << endl;
-      cout << '\t' << p->second()->leading_monomial() << ", " << p->second_multiplier() << endl;*/
+if (pdeg >= 10 and pdeg <= 16) { cerr << "start spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cerr); cerr << " )\n"; }
       add_monomials(curr_ord, p->second(), p->second_multiplier());
+if (pdeg >= 10 and pdeg <= 16) { cerr << "stop spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cerr); cerr << " )\n"; }
       M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
@@ -155,7 +158,10 @@ F4_Reduction_Data::F4_Reduction_Data(
         Monomial u(*(mi->first));
         u /= (*g)->leading_monomial();
         time_t astart = time(nullptr);
+auto gdeg = (*g)->leading_monomial().total_degree() + u.total_degree();
+if (gdeg >= 10 and gdeg <= 16) { cerr << "start reducer " << u << " * ( "; (*g)->print(cerr); cerr << " )\n"; }
         add_monomials(curr_ord, *g, u);
+if (gdeg >= 10 and gdeg <= 16) { cerr << "stop reducer " << u << " * ( "; (*g)->print(cerr); cerr << " )\n"; }
         time_t aend = time(nullptr);
         adding_time += difftime(aend, astart);
         g = G.end();
@@ -298,7 +304,6 @@ void F4_Reduction_Data::add_monomials(
       Monomial * t = new Monomial(pi->currMonomial());
       t->set_monomial_ordering(curr_ord);
       (*t) *= u;
-      //cout << "adding " << pi->currMonomial() << " * " << u << " = " << *t << endl;
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
@@ -1459,7 +1464,7 @@ list<Abstract_Polynomial *> f4_control(
       for (unsigned i = 0; i < s.number_of_rows(); ++i)
         if (s.number_of_nonzero_entries(i) != 0)
           unprocessed.insert(i);
-      set<unsigned> all_completed_rows;
+      list<unsigned> all_completed_rows;
       bool ordering_changed = false;
       if (not static_algorithm) {
         const unsigned max_comparisons
@@ -1476,7 +1481,7 @@ list<Abstract_Polynomial *> f4_control(
           dynamic_time += difftime(end_time, start_time);
           if (s.number_of_compatibles(completed_row) > 1) ++comparisons;
           cout << comparisons << " refinements\n";
-          all_completed_rows.insert(completed_row);
+          all_completed_rows.push_back(completed_row);
           Ray w(ray_sum(skel->get_rays()));
           bool ordering_changed_now = false;
           for (unsigned i = 0; (not ordering_changed_now) and (i < w.get_dimension()); ++i)
@@ -1510,7 +1515,10 @@ list<Abstract_Polynomial *> f4_control(
             }
           }
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
-          all_completed_rows.insert(winning_row);
+          auto loc = all_completed_rows.begin();
+          while (loc != all_completed_rows.end() and s.head_monomial_index(*loc, static_algorithm) > winning_lm) ++loc;
+          if (loc == all_completed_rows.end()) all_completed_rows.push_back(winning_row);
+          else all_completed_rows.insert(loc, winning_row);
         }
         unprocessed.erase(winning_row);
       }
@@ -1536,7 +1544,6 @@ list<Abstract_Polynomial *> f4_control(
           gm_time += difftime(end_time, start_time);
           //for (auto g : G) cout << g->leading_monomial() << " "; cout << endl;
           //for (auto p : P) cout << p->how_ordered() << ' '; cout << endl;
-          cout << "continuing\n";
         }
       }
     }

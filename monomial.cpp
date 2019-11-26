@@ -819,14 +819,14 @@ bool Monomial::larger_than(const Monomial & u) const {
 
 void Monomial::print(bool add_newline, ostream & os, const string * names) const
 {
-  if (is_one()) cout << "1 ";
+  if (is_one()) os << "1 ";
   else {
     bool first_printed = false;
     for (NVAR_TYPE i = 0; i < last; i += 2)
       if (exponents[i+1] != 0)
       {
         if (first_printed)
-          cout << "* ";
+          os << "* ";
         else
           first_printed = true;
         if (names == nullptr)
