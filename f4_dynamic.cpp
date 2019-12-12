@@ -136,14 +136,9 @@ F4_Reduction_Data::F4_Reduction_Data(
         delete [] p2log;
       }
     }
-//auto pdeg = p->first()->leading_monomial().total_degree() + p->first_multiplier().total_degree();
-//if (pdeg >= 9 and pdeg <= 10) { cout << "start spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cout); cout << " )\n"; }
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
-//if (pdeg >= 9 and pdeg <= 10) { cout << "stop spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cout); cout << " )\n"; }
     if (p->second() != nullptr) {
-//if (pdeg >= 9 and pdeg <= 10) { cout << "start spoly 1 " << p->second_multiplier() << " * ( "; p->second()->print(cout); cout << " )\n"; }
       add_monomials(curr_ord, p->second(), p->second_multiplier());
-//if (pdeg >= 9 and pdeg <= 10) { cout << "stop spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cout); cout << " )\n"; }
       M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
@@ -157,13 +152,9 @@ F4_Reduction_Data::F4_Reduction_Data(
         found = true;
         //cout << " selected " << (*g)->leading_monomial() << endl;
         mi->second = *g;
-        Monomial u(*(mi->first));
-        u /= (*g)->leading_monomial();
+        Monomial u(*(mi->first), (*g)->leading_monomial(), false);
         time_t astart = time(nullptr);
-//auto gdeg = (*g)->leading_monomial().total_degree() + u.total_degree();
-//if (gdeg >= 9 and gdeg <= 10) { cout << "start reducer " << u << " * ( "; (*g)->print(cout); cout << " )\n"; }
         add_monomials(curr_ord, *g, u);
-//if (gdeg >= 9 and gdeg <= 10) { cout << "stop reducer " << u << " * ( "; (*g)->print(cout); cout << " )\n"; }
         time_t aend = time(nullptr);
         adding_time += difftime(aend, astart);
         g = G.end();
@@ -297,14 +288,11 @@ void F4_Reduction_Data::add_monomials(
 ) {
   Polynomial_Iterator * pi = g->new_iterator();
   if (not new_row) pi->moveRight();
-//auto deg = u.total_degree() + g->leading_monomial().total_degree();
   while (not (pi->fellOff())) {
     bool already_there = M_table.contains_product(pi->currMonomial(), u);
     if (not already_there) {
-      Monomial * t = new Monomial(pi->currMonomial());
+      Monomial * t = new Monomial(pi->currMonomial(), u);
       t->set_monomial_ordering(curr_ord);
-      (*t) *= u;
-//if (deg != t->total_degree()) cout << "\tadded " << u << " * " << pi->currMonomial() << " = " << *t << " from " << g->leading_monomial() << " ERROR\n";
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }

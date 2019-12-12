@@ -45,7 +45,7 @@ const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE )1) << 31;
 #define RAYENT_TYPE uint64_t
 
 // entries in a constraint
-#define CONSTR_TYPE int64_t
+#define CONSTR_TYPE int32_t
 
 // size of dot product
 #define DOTPROD_TYPE int64_t
