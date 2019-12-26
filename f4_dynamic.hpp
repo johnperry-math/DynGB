@@ -456,6 +456,16 @@ protected:
     bool & stop,
     vector<bool> & completed
   );
+  friend void divisibility_tests(
+    list<int> & allPPs,
+    F4_Reduction_Data & F4,
+    bool & stop
+  );
+  friend void divisibility_tests_new(
+    list<int> & allPPs,
+    F4_Reduction_Data & F4,
+    bool & stop
+  );
 
 };
 

@@ -440,6 +440,25 @@ bool Monomial::operator |(const Monomial &other) const {
   return other.divisible_by(*this);
 }
 
+bool Monomial::divisible_by_power(const Monomial &other, unsigned power) const {
+  bool result = (n == other.n);
+  NVAR_TYPE i = 0, j = 0;
+  auto oe = other.exponents;
+  for (/* already initialized */; result and i < last and j < other.last; /* */)
+  {
+    if (exponents[i] == oe[j]) {
+      result = exponents[i+1] >= oe[j+1]*power;
+      i += 2;
+      j += 2;
+    } else if (exponents[i] < oe[j])
+      i += 2;
+    else
+      result = false;
+  }
+  result = result and j == other.last;
+  return result;
+}
+
 bool Monomial::divides_lcm(const Monomial &t, const Monomial &u) const {
   bool result = (n == t.n) and (n == u.n);
   NVAR_TYPE i = 0, j = 0, k = 0;
@@ -774,6 +793,23 @@ Monomial Monomial::gcd(const Monomial & u) const {
      j += 2;
    result.last = k;
    ordering->set_data(result);
+   return result;
+}
+
+DEG_TYPE Monomial::gcd_degree(const Monomial & u) const {
+   DEG_TYPE result;
+   NVAR_TYPE i = 0, j = 0, k = 0;
+   auto ue = u.exponents;
+   for (/* already initialized */; i < last and j < u.last; /* */)
+   if (exponents[i] == ue[j]) {
+     result += (exponents[i+1] < ue[j+1]) ? exponents[i+1] : ue[j+1];
+     i += 2;
+     j += 2;
+     k += 2;
+   } else if (exponents[i] < ue[j])
+     i += 2;
+   else
+     j += 2;
    return result;
 }
 

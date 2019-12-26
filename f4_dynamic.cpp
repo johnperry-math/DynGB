@@ -707,6 +707,184 @@ void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
   for (auto i : removed) in_use.erase(i);
 }
 
+unsigned divisible_incompatible = 0;
+unsigned old_divisibile_incompatible = 0;
+
+void divisibility_tests(
+  list<int> & allPPs,
+  F4_Reduction_Data & F4,
+  bool & stop
+) {
+  bool verbose = false;
+  if (verbose) {
+    cout << "checking divisibility criterion for ";
+    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    cout << endl;
+  }
+  auto it = allPPs.begin();
+  auto n = F4.M.front()->num_vars();
+  while ((not stop) and it != allPPs.end()) {
+    bool incompatible = false, new_incompatible = false;
+    auto & u = F4.M[*it];
+    set<Monomial *> T;
+    Monomial Tt(n, F4.M.front()->monomial_ordering());
+    for (auto j : allPPs) {
+      if (stop or incompatible) break;
+      if (j != *it) {
+        auto & t = F4.M[j];
+        if (t->divisible_by(*u)) {
+          incompatible = true;
+          ++old_divisibile_incompatible;
+          if (verbose)
+            cout << "detected incompatible monomial " << *u
+                 << " through divisibility by " << *t << "\n";
+        }
+        else if (not t->is_coprime(*u)) {
+          T.insert(t);
+          Tt *= *t;
+          if (Tt.divisible_by_power(*u, T.size())) {
+            new_incompatible = incompatible = true;
+            if (verbose)
+              cout << "detected incompatible monomial " << *u
+                   << " through divisibility by " << Tt << "(" << T.size() << ")\n";
+          }
+        }
+      }
+    }
+    while ((not incompatible) and T.size() > 1) {
+      int j = 0, d = (*u)[0]*T.size() - Tt[0];
+      for (unsigned k = 1; k < n; ++k)
+        if ((*u)[k]*T.size() > Tt[k] + d) j = k;
+      auto ti = T.begin();
+      d = u->gcd_degree(**ti);
+      auto remove_me = ti; ++ti;
+      for (/* */; ti != T.end(); ++ti) {
+        if (((**ti)[j] < (**remove_me)[j]) or u->gcd_degree(**ti) < d)
+          remove_me = ti;
+      }
+      Tt /= **remove_me;
+      T.erase(remove_me);
+      if (Tt.divisible_by_power(*u, T.size())) {
+        if (verbose) {
+          cout << "detected incompatible monomial " << *u
+               << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+          cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+        }
+        new_incompatible = incompatible = true;
+      }
+    }
+    auto next_it(it); ++next_it;
+    if (incompatible) {
+      ++divisible_incompatible;
+      allPPs.erase(it);
+    }
+    it = next_it;
+  }
+}
+
+void divisibility_tests_new(
+  list<int> & allPPs,
+  F4_Reduction_Data & F4,
+  bool & stop
+) {
+  bool verbose = false;
+  bool very_verbose = false;
+  if (very_verbose) {
+    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    cout << endl;
+  }
+  // build monomial for multi-divisibility criterion
+  auto n = F4.M.front()->num_vars();
+  Monomial Ttall(n, F4.M.front()->monomial_ordering());
+  for (auto j : allPPs) {
+    if (stop) break;
+    auto & t = F4.M[j];
+    Ttall *= *t;
+  }
+  auto it = allPPs.begin();
+  while ((not stop) and it != allPPs.end()) {
+    // check for simple divisibility
+    bool incompatible = false, new_incompatible = false;
+    auto & u = F4.M[*it];
+    for (auto j : allPPs) {
+      if (stop or incompatible) break;
+      if (j != *it) {
+        auto & t = F4.M[j];
+        if (t->divisible_by(*u)) {
+          incompatible = true;
+          if (verbose)
+            cout << "detected incompatible monomial " << *u
+                 << " through old divisibility by " << *t << "\n";
+        }
+      }
+    }
+    // now check for multi-divisibility
+    if (not (stop or incompatible)) {
+      set<Monomial *> T;
+      for (auto set_it = allPPs.begin(); set_it != allPPs.end(); ++set_it) {
+        if (it != set_it) {
+          T.insert(F4.M[*set_it]);
+        }
+      }
+      Monomial Tt(Ttall); Tt /= *u;
+      for (auto new_it = T.begin(); new_it != T.end(); ) {
+        if (not u->is_coprime(**new_it)) {
+          ++new_it;
+        } else {
+          Tt /= **new_it;
+          auto next_it = new_it; ++next_it; T.erase(new_it); new_it = next_it;
+        } 
+      }
+      if (Tt.divisible_by_power(*u, T.size())) {
+        if (verbose) {
+          cout << "detected incompatible monomial " << *u
+               << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+          cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+        }
+        new_incompatible = incompatible = true;
+      } else {
+        if (very_verbose)
+          cout << "( " << *u << " )^" << T.size() << " does not divide " << Tt << endl;
+      }
+      while ((not stop) and (not incompatible) and T.size() > 2) {
+        int j = 0, d = (*u)[0]*T.size() - Tt[0];
+        for (unsigned k = 1; k < n; ++k) {
+          if ((*u)[k]*T.size() > Tt[k] + d) j = k;
+        }
+        auto ti = T.begin();
+        auto remove_me = T.end();
+        for (/* */; ti != T.end(); ++ti) {
+          if (remove_me == T.end()) remove_me = ti;
+          else if ((**ti)[j] < (**remove_me)[j] /*or (u->gcd(**ti).total_degree() < u->gcd(**remove_me).total_degree())*/)
+            remove_me = ti;
+        }
+        if (very_verbose) cout << "divide " << Tt << " by " << **remove_me << " to get ";
+        Tt /= **remove_me;
+        T.erase(remove_me);
+        if (very_verbose) cout << Tt << endl;
+        if (Tt.divisible_by_power(*u, T.size())) {
+          if (verbose) {
+            cout << "detected incompatible monomial " << *u
+                 << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+            cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+          }
+          new_incompatible = incompatible = true;
+        } else {
+          if (very_verbose)                    
+            cout << "( " << *u << " )^" << T.size() << " does not divide " << Tt << endl;
+        }
+      }
+    }
+    auto next_it(it); ++next_it;
+    if (incompatible) {
+      ++divisible_incompatible;
+      Ttall /= *F4.M[*it];
+      allPPs.erase(it);
+    }
+    it = next_it;
+  }
+}
+
 /**
   @ingroup GBComputation
   @author John Perry
@@ -745,6 +923,7 @@ void compatible_pp(
   if (not stop) {
 
     F4.monomials_in_row(my_row, allPPs);
+    //divisibility_tests(allPPs, F4, stop);
     for (const int b : allPPs) {
       if (stop) break;
       const Monomial & u(*F4.M[b]);
@@ -765,9 +944,10 @@ void compatible_pp(
     for (auto b : initial_candidates) cout << *F4.M[b] << ", ";
     cout << endl;*/
 
+    list<int> & result = F4.compatible_pps[my_row];
+
     if (not stop) {
   
-      list<int> & result = F4.compatible_pps[my_row];
       for (int b : initial_candidates)
       {
         if (stop) break;
@@ -805,6 +985,9 @@ void compatible_pp(
       if (result.size() == 1) stop = true;
 
     }
+
+    if (not stop)
+      divisibility_tests(result, F4, stop);
 
   }
 
@@ -1601,6 +1784,8 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << dynamic_time << " seconds were spent in dynamic overhead\n";
   cout << creation_time << " seconds were spent creating the matrices\n";
   cout << gm_time << " seconds were spent analyzing critical pairs\n";
+  cout << divisible_incompatible << " monomials detected as incompatible via divisibility\n";
+  cout << '(' << old_divisibile_incompatible << " of these were simple divisibility)\n";
   return B;
 }
 

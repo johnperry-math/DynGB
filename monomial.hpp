@@ -300,6 +300,8 @@ public:
   ) const;
   /** @brief Divisible by <c>other</c>? */
   bool divisible_by(const Monomial &other) const;
+  /** @brief Divisible by @p power of @p other ? */
+  bool divisible_by_power(const Monomial &other, unsigned power) const;
   /** @brief operator for divisibility */
   bool operator |(const Monomial &other) const;
   /** @brief divides the lcm of the other two */
@@ -335,6 +337,8 @@ public:
   Monomial lcm(const Monomial & u) const;
   /** @brief Greatest common divisor: smallest exponents. */
   Monomial gcd(const Monomial & u) const;
+  /** @brief Degree of greatest common divisor: smallest exponents. */
+  DEG_TYPE gcd_degree(const Monomial & u) const;
   /**
     @brief colon operator: exponents needed to make @f$u@f$ divisible by @c this
   */
