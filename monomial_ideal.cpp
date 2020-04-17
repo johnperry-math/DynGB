@@ -22,20 +22,20 @@
 
 ostream & operator << (ostream & os, const Monomial_Ideal & I) {
   os << "[ ";
-  for (
+  /*for (
         list<Monomial>::const_iterator ti = I.gens.begin();
         ti != I.gens.end();
         ++ti
   ) {
     os << *ti << ',';
-  }
+  } */
   os << " ] (";
-  if (I.hNum == nullptr) os << I.hNum << ", ";
+  /*if (I.hNum == nullptr) os << I.hNum << ", ";
   else os << *(I.hNum) << ", ";
   if (I.hRedNum == nullptr) os << I.hRedNum << ", ";
   else os << *(I.hRedNum) << ", ";
   if (I.hPol == nullptr) os << I.hPol << ")";
-  else os << *(I.hPol) << ")";
+  else os << *(I.hPol) << ")";*/
   return os;
 }
 

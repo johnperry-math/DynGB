@@ -285,7 +285,7 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
   ++level;
   auto this_level = level;
   bool verbose = false;
-  if (verbose) {
+  /*if (verbose) {
     cout << "level " << this_level << " T = { ";
     for (const Monomial & t : T) cout << '(' << t << " ," << t.monomial_ordering() << ") ";
     cout << "}\n";
@@ -295,30 +295,30 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
         cout << grading[i] << ", ";
       cout << "}\n";
     }
-  }
+  }*/
   Dense_Univariate_Integer_Polynomial * result;
   list<Monomial>::const_iterator ti;
   list<std::list<Monomial>::const_iterator> U_split, V_split;
   if (T.size() == 1) {
-    if (verbose) cout << "level " << this_level << " one monomial\n";
+    //if (verbose) cout << "level " << this_level << " one monomial\n";
     result = solve_one_monomial_case(T, grading);
   } else if (is_zero_base_case(T)) {
-    if (verbose) cout << "level " << this_level << " 0-base\n";
+    //if (verbose) cout << "level " << this_level << " 0-base\n";
     result = solve_zero_base_case(T, grading);
   } else if ((ti = is_one_base_case(T)) != T.end()) {
-    if (verbose) cout << "level " << this_level << " 1-base " << *ti << endl;
+    //if (verbose) cout << "level " << this_level << " 1-base " << *ti << endl;
     result = solve_one_base_case(T, ti, grading);
   } else if ((is_splitting_case(T, U_split, V_split))) {
-    if (verbose) {
+    /*if (verbose) {
       cout << "level " << this_level << " splitting\n";
       for (auto t : T) { cout << t << ", "; } cout << endl << "into:\n";
       for (auto ui : U_split) { cout << *ui << ", "; } cout << endl;
       for (auto vi : V_split) { cout << *vi << ", "; } cout << endl;
-    }
+    }*/
     result = solve_splitting_case(T, U_split, V_split, grading);
   } else {
     Monomial p = choose_hilbert_pivot(T);
-    if (verbose) cout << "level " << this_level << " pivot = " << p << endl;
+    //if (verbose) cout << "level " << this_level << " pivot = " << p << endl;
     // find pivot precisely
     unsigned pi = 0;
     while (p.degree(pi) == 0) { ++pi; }
@@ -329,7 +329,7 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
     }
     V = colon_ideal_without_ideals(T, p);
     U.push_back(p);
-    if (verbose) {
+    /*if (verbose) {
       cout << "U(" << this_level << ") = { ";
       for (const Monomial & u : U) cout << u << " ,";
       cout << "}\n";
@@ -338,17 +338,17 @@ Dense_Univariate_Integer_Polynomial * hilbert_numerator_bigatti(
       cout << "V(" << this_level << ") = { ";
       for (const Monomial & v : V) cout << v << " ,";
       cout << "}\n";
-    }
+    }*/
     result = hilbert_numerator_bigatti(V, grading);
-    if (verbose) cout << "result from V(" << this_level << "): " << *result << endl;
+    //if (verbose) cout << "result from V(" << this_level << "): " << *result << endl;
     result->multiply_by_monomial_of_degree(p.weighted_degree(grading));
     Dense_Univariate_Integer_Polynomial * other
         = hilbert_numerator_bigatti(U, grading);
-    if (verbose) cout << "result from U(" << this_level << "): " << *other << endl;
+    //if (verbose) cout << "result from U(" << this_level << "): " << *other << endl;
     *result += *other;
     delete other;
   }
-  if (verbose) cout << "result from level " << this_level << *result << endl;
+  //if (verbose) cout << "result from level " << this_level << *result << endl;
   verbose = false;
   return result;
 }

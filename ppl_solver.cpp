@@ -152,9 +152,9 @@ ostream & operator << (ostream & ostr, const PPL_Solver &skel)
 {
   // header, start constraints
   ostr << "Skeleton defined by constraints" << endl;
-  for (auto & c : skel.lp->constraints()) {
+  /*for (auto & c : skel.lp->constraints()) {
     c.ascii_dump(ostr);
-  }
+  }*/
   ostr << "has " << skel.rays.size() << " rays" << endl;
   for (auto & r : skel.rays) {
     ostr << '\t' << r << endl;

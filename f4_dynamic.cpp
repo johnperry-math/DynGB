@@ -218,6 +218,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   num_rows = P.size();
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   dirty.resize(num_rows, true);
+  last_compatible_ordering.resize(num_rows, nullptr);
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
@@ -486,6 +487,8 @@ void condense(
   }
 }
 
+unsigned long long reduced_by_old = 0;
+
 void F4_Reduction_Data::reduce_my_rows(
     const vector<int> & my_rows, vector<COEF_TYPE> & B,
     vector<unsigned> & prev, vector<unsigned> & next
@@ -516,6 +519,7 @@ void F4_Reduction_Data::reduce_my_rows(
         j = reduce_monomial(
             B, r, a, mod, j, head, prev, next, nonzero_entries[i]
         );
+        reduced_by_old += 1;
       }
     }
     condense(A[i], head, B, next, nonzero_entries[i]);
@@ -575,6 +579,8 @@ unsigned location_of_monomial_index(
   return row.size();
 }
 
+unsigned long long reduced_by_new = 0;
+
 void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
@@ -600,6 +606,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
       start = new_start;
     }
     reduce_monomial(B, Ai, a, mod, start, head, prev, next, nonzero_entries[j]);
+    reduced_by_new += 1;
     condense(Aj, head, B, next, nonzero_entries[j]);
   }
 }
@@ -903,11 +910,14 @@ void divisibility_tests_new(
 void compatible_pp(
   int my_row,
   F4_Reduction_Data & F4,
+  WGrevlex * curr_ord,
   const LP_Solver * skel,
   bool & stop,
   vector<bool> & completed
 )
 {
+
+  F4.last_compatible_ordering[my_row] = curr_ord;
 
   int currentLPP_index = F4.A[my_row][0].first;
 
@@ -986,8 +996,8 @@ void compatible_pp(
 
     }
 
-    if (not stop)
-      divisibility_tests(result, F4, stop);
+    //if (not stop)
+    //  divisibility_tests(result, F4, stop);
 
   }
 
@@ -1324,6 +1334,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     const list<Critical_Pair_Dynamic *> & P,
     WGrevlex * curr_ord,
     LP_Solver * & skel,
+    Monomial * & expected_result,
     const Analysis & style
 ) {
   bool ordering_changed = false;
@@ -1359,7 +1370,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     cout << "sequential analysis\n";
 
     unsigned first_row = *unprocessed.begin();
-    compatible_pp(first_row, *this, skel, found_single, completed);
+    compatible_pp(first_row, *this, curr_ord, skel, found_single, completed);
   
     create_and_sort_ideals(
         first_row, U, current_hilbert_numerator, G, P, w, heur
@@ -1384,17 +1395,22 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
     for (unsigned i: unprocessed) {
       if (nonzero_entries[i] > 0) {
-        if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
-        else {
+        /*if (
+            (compatible_pps[i].size() > 0) and
+            (not dirty[i]) and
+            (last_compatible_ordering[i] == curr_ord)
+        ) {
+          completed[i] = true;
+        } else {*/
           compatible_pps[i].clear();
           //compatible_pp(i, *this, skel, found_single, completed);
           waiters.push_back( std::move(
               async(
-                  compatible_pp, i, std::ref(*this), skel,
+                  compatible_pp, i, std::ref(*this), curr_ord, skel,
                   std::ref(found_single), std::ref(completed)
               )
           ) );
-        }
+        //}
       }
     }
   
@@ -1478,6 +1494,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
   pref_head[winning_row] = j;
+  expected_result = M[j];
   cout << "selected " << *M[j] << " from row " << winning_row << endl;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
@@ -1648,8 +1665,9 @@ list<Abstract_Polynomial *> f4_control(
         while (unprocessed.size() != 0 and comparisons < max_comparisons) {
           time_t start_time = time(nullptr);
           //LP_Solver * old_skel = skel;
+          Monomial * expected_result;
           unsigned completed_row = s.select_dynamic_single(
-              unprocessed, T, G, P, curr_ord, skel, style
+              unprocessed, T, G, P, curr_ord, skel, expected_result, style
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);
@@ -1677,6 +1695,9 @@ list<Abstract_Polynomial *> f4_control(
             }
           }
           cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << completed_row << endl;
+          if (r->leading_monomial() != *expected_result) {
+            cout << "DID NOT ORDER PROPERLY\n";
+          }
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
@@ -1769,6 +1790,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
     delete g;
   }
   cout << num_mons << " monomials in basis (possibly counting multiple times)\n";
+  cout << "final ordering: " << *curr_ord << endl;
   // first one should be curr_ord; we do not want to delete that!
   while (all_orderings_used.size() != 0) {
     ORDERING_TYPE * bye_bye_ordering = all_orderings_used.front();
@@ -1781,6 +1803,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << "computation ended at " << asctime(localtime(&end_f4)) << endl;
   cout << "parallel f4 took " << duration << " seconds\n";
   cout << "parallel f4 spent " << reduce_old_time << " seconds in reducing by old polynomials\n";
+  cout << reduced_by_new + reduced_by_old << " row reductions performed\n";
   cout << dynamic_time << " seconds were spent in dynamic overhead\n";
   cout << creation_time << " seconds were spent creating the matrices\n";
   cout << gm_time << " seconds were spent analyzing critical pairs\n";

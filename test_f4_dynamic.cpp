@@ -75,6 +75,8 @@ int main(int argc, char *argv[]) {
       cout << '\t' << *(*g) << endl;*/
     Polynomial_Ring * R = & (G.front()->base_ring());
     auto mord = G.front()->monomial_ordering();
+    cout << "checking basis\n";
+    
     cout << G.size() << " leading monomials:\n";
     for (Abstract_Polynomial * g : G) {
       cout << g->leading_monomial() << ", ";

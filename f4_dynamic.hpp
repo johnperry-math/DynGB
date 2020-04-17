@@ -315,7 +315,8 @@ public:
     @param P list of current critical pairs
     @param curr_ord current monomial ordering
     @param skel the current LP_Solver that defines the term ordering
-    @param row_option which approach to take to selecting a row
+    @param expected_result used for debugging
+    @param style which approach to take to selecting a row
     @return the row with the recommended new ordering
   */
   unsigned select_dynamic_single(
@@ -325,6 +326,7 @@ public:
       const list<Critical_Pair_Dynamic *> & P,
       WGrevlex * curr_ord,
       LP_Solver * & skel,
+      Monomial * & expected_result,
       const Analysis & style = Analysis::row_sequential
   );
   /**
@@ -414,6 +416,8 @@ protected:
   vector< vector < pair < unsigned, COEF_TYPE > > > A;
   /** @brief whether the row was modified during reduction */
   vector<bool> dirty;
+  /** @brief ordering this row's compatibility was last checked */
+  vector<WGrevlex *> last_compatible_ordering;
   /** @brief index of the preferred head term of this row (absolute index) */
   vector<unsigned> pref_head;
   /** @brief number of nonzero entries of each expanded row of A */
@@ -452,6 +456,7 @@ protected:
   friend void compatible_pp(
     int my_row,
     F4_Reduction_Data & F4,
+    WGrevlex * curr_ord,
     const LP_Solver * skel,
     bool & stop,
     vector<bool> & completed

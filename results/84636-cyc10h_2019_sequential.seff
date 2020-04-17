@@ -1,0 +1,10 @@
+Job ID: 84636
+Cluster: cluster
+User/Group: jperry/users
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 188-12:50:09
+CPU Efficiency: 77.49% of 243-07:19:20 core-walltime
+Memory Utilized: 165.95 GB
+Memory Efficiency: 33.19% of 500.00 GB
