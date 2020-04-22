@@ -30,6 +30,12 @@ Polynomial_Ring::Polynomial_Ring(NVAR_TYPE num_vars,
   names = nullptr;
   if (new_names != nullptr)
     set_names(new_names, n);
+  else {
+    names = new string[n];
+    for (NVAR_TYPE i = 0; i < n; ++i) {
+      names[i] = "xi"; names[i][1] = '0' + i;
+    }
+  }
 }
 
 Polynomial_Ring::~Polynomial_Ring() {

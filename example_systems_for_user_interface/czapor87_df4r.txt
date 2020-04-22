@@ -1,0 +1,12 @@
+f4
+32003
+13
+y
+c1 c2 c3 c4 d1 d2 d3 d4 x y z w h
+4
+x^2 d4 + 9 x y + y^2 c4 - 3 y z - 2 z^2 - 6 x w + 4 y w + 10 z w + 2 w^2 + 3 x h + 8 y h + 3 z h + 9 w h - 7 h^2
+x^2 d3 + 7 x y + y^2 c3 - 9 x z - 2 y z + 10 z^2 + 3 x w - 2 y w + 8 z w + 10 w^2 - 2 x h - 3 y h - 9 z h - 2 w h - 9 h^2
+x^2 d2 - 8 x y + y^2 c2 - 4 x z - 2 y z - 5 z^2 - 8 x w + y w + 10 z w + 6 w^2 - 9 x h + 7 y h - 2 z h - 6 w h + 9 h^2
+x^2 d1 - 4 x y + y^2 c1 - 2 x z + 2 y z - 3 z^2 + 5 x w + 6 y w + 7 z w - 10 w^2 - 9 x h - 3 y h - 10 z h + 8 w h + 4 h^2
+d
+row

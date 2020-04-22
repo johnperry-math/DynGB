@@ -41,13 +41,14 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 extern Grading_Order_Data_Allocator<Monomial_Node> * monododa;
 
 // Forward declarations
-bool meaningful_arguments(int, char **, bool &, bool &, int &, int &, int &, Analysis &);
+bool meaningful_arguments(int, char **, bool &, bool &, COEF_TYPE &, int &, int &, Analysis &);
 
 void give_help();
 
 int main(int argc, char *argv[]) {
   bool homog, traditional = false;
-  int modulus, numvars, refinements = 0;
+  COEF_TYPE modulus;
+  int numvars, refinements = 0;
   Analysis style = Analysis::row_sequential;
   if (
       not meaningful_arguments(
@@ -106,7 +107,7 @@ enum order_flags { GENERIC_GREVLEX = 0, GREVLEX, LEX, WGREVLEX };
 bool meaningful_arguments(
     int argc, char *argv[],
     bool & traditional, bool & homogeneous,
-    int & modulus, int & numvars, int & refinements,
+    COEF_TYPE & modulus, int & numvars, int & refinements,
     Analysis & style
 ) {
   modulus = 43;

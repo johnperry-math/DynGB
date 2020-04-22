@@ -408,6 +408,8 @@ void expand(
   }
 }
 
+COEF_TYPE max_entry_value = 0;
+
 // always reduces the monomial at start
 unsigned reduce_monomial(
     vector<COEF_TYPE> & B,
@@ -430,7 +432,9 @@ unsigned reduce_monomial(
       prev_i = i; 
       i = next[i];
     } else if (i == k) {
-      B[i] -= a*r[j].second; B[i] %= mod;
+      B[i] -= a*r[j].second;
+      if (B[i] >= max_entry_value) max_entry_value = B[i];
+      B[i] %= mod;
       if (B[i] < 0) B[i] += mod;
       if (B[i] != 0)
         prev_i = i;
@@ -446,7 +450,9 @@ unsigned reduce_monomial(
     } else {
       ++nonzero_entries;
       if (k < start) start = k;
-      B[k] = (- r[j].second * a) % mod + mod;
+      B[k] = (- r[j].second * a) % mod;
+      if (-B[k] > max_entry_value) max_entry_value = -B[k];
+      B[k] += mod;
       if (head > k) { // inserting new head
         prev[k] = num_cols;
         next[k] = head;
@@ -1809,6 +1815,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << gm_time << " seconds were spent analyzing critical pairs\n";
   cout << divisible_incompatible << " monomials detected as incompatible via divisibility\n";
   cout << '(' << old_divisibile_incompatible << " of these were simple divisibility)\n";
+  cout << "maximum coefficient size: " << max_entry_value << endl;
   return B;
 }
 
