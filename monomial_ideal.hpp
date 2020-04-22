@@ -355,19 +355,21 @@ public:
   }
   /** @brief adds @c t to the basis */
   void add_generator(const Monomial & t) {
-    if (hNum != nullptr) {
-      Monomial_Ideal J(t.num_vars(), colon_ideal_without_ideals(gens, t));
-      Dense_Univariate_Integer_Polynomial * hn_new = J.hilbert_numerator();
-      J.forget_hilbert_numerator();
-      hn_new->multiply_by_monomial_of_degree(t.total_degree());
-      hn_new->negate();
-      hn_new->add(*hNum);
-      delete hNum;
-      hNum = hn_new;
-      if (hRedNum != nullptr) delete hRedNum;
-      if (hPol != nullptr) delete hPol;
+    if (not (any_of(gens.begin(), gens.end(), [&t](auto & u){ return t.divisible_by(u); }))) {
+      if (hNum != nullptr) {
+        Monomial_Ideal J(t.num_vars(), colon_ideal_without_ideals(gens, t));
+        Dense_Univariate_Integer_Polynomial * hn_new = J.hilbert_numerator();
+        J.forget_hilbert_numerator();
+        hn_new->multiply_by_monomial_of_degree(t.total_degree());
+        hn_new->negate();
+        hn_new->add(*hNum);
+        delete hNum;
+        hNum = hn_new;
+        if (hRedNum != nullptr) delete hRedNum;
+        if (hPol != nullptr) delete hPol;
+      }
+      gens.push_back(t);
     }
-    gens.push_back(t);
   }
   /** @brief removes the newest monomial from the basis */
   void remove_newest() { gens.pop_back(); }
