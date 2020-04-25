@@ -125,6 +125,15 @@ public:
   ///@{
   /** @brief sets the s-polynomial to @c p, for explorer methods*/
   virtual void set_spoly(Mutable_Polynomial * p) { s = p; }
+  /** @brief in case you want to swap the polynomials, for whatever reason */
+  void swap() {
+    auto temp = p;
+    p = q;
+    q = temp;
+    auto temp_t = tp;
+    tp = tq;
+    tq = temp_t;
+  }
   ///@}
   /** @name I/O */
   ///@{

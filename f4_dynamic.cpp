@@ -126,6 +126,9 @@ F4_Reduction_Data::F4_Reduction_Data(
   strategies.clear();
   NVAR_TYPE n = Rx.number_of_variables();
   for (auto p : P) {
+    //
+    if (p->first()->length() == 1 and p->second() != nullptr) p->swap();
+    //
     Poly_Sugar_Data * new_sugar = new Poly_Sugar_Data(p->first());
     strategies.push_back(new_sugar);
     if (strategies.back() != nullptr) {
@@ -439,7 +442,7 @@ unsigned reduce_monomial(
       if (B[i] != 0)
         prev_i = i;
       else {
-        if (i == start) start = next[start];
+        if ((i == start) and (start < num_cols)) start = next[start];
         --nonzero_entries;
         if (i == head) head = next[i];
         if (next[i] < num_cols) prev[next[i]] = prev[i];
@@ -456,7 +459,7 @@ unsigned reduce_monomial(
       if (head > k) { // inserting new head
         prev[k] = num_cols;
         next[k] = head;
-        prev[head] = k;
+        if (head < num_cols) prev[head] = k;
         i = head;
         head = k;
       } else { // head < k < i
@@ -466,11 +469,11 @@ unsigned reduce_monomial(
           prev[i] = k;
         } else {
           prev[k] = prev_i;
-          next[prev_i] = k;
+          if (prev_i < num_cols) next[prev_i] = k;
         }
-        prev_i = k;
         next[k] = i;
       }
+      prev_i = k;
       ++j;
     }
   }
@@ -1600,10 +1603,12 @@ list<Abstract_Polynomial *> f4_control(
     Critical_Pair_Dynamic * p = P.front();
     operating_degree = p->lcm().total_degree();
     cout << "\tdegree: " << operating_degree << endl;
+    unsigned pair_number = 0;
     while (Pnew.empty() and not P.empty()) {
       for (auto pi = P.begin(); pi != P.end(); /* */) {
         p = *pi;
         if (p->lcm().total_degree() <= operating_degree) {
+          cout << pair_number++ << " ";
           report_front_pair(p, this_strategy);
           Pnew.push_back(p);
           auto qi = pi;
