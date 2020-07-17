@@ -111,31 +111,34 @@ bool less_by_largest_max_component (PP_With_Ideal &a, PP_With_Ideal &b) {
   return a.get_difference_in_degree() < b.get_difference_in_degree();
 }
 
+vector<bool> keepers, has_coprime;
+
 void PP_With_Ideal::compute_number_new_pairs() const {
   int n = t.num_vars();
   int m = I.size();
-  const list<Monomial> T = I.generators();
-  const vector<Monomial> I(T.begin(), T.end());
+  const vector<Monomial> & U = I.generators_vector();
   num_new_pairs = min_deg = 0;
-  bool keepers[m], coprimes[m];
-  for (int i = 0; i < m; ++i) keepers[i] = true;
+  if (has_coprime.size() < m) { has_coprime.resize(m); }
+  keepers.assign(m, true);
   // first main loop: apply Buchberger's lcm criterion to new pairs
   for (int i = 0; i < m; ++i)
   {
+    const auto & ui = U[i];
     // if gcd(t,Ii) == 1 then skip i for the time being
-    if (not (coprimes[i] = t.is_coprime(I[i]) ) )
+    if (not (has_coprime[i] = t.is_coprime(ui) ) )
     {
       bool has_divisor = false;
-      for (int j=0; (not has_divisor) and j < m; ++j)
+      for (int j=0; (not has_divisor) and j < i; ++j)
       {
         if (i != j and keepers[j])
         {
           // if some j satisfies lcm(t,Ij) | lcm(t,Ii) then do not count i
           has_divisor = true;
+          const auto & uj = U[j];
           for (int k=1; has_divisor and k <= n; ++k)
-            if // deg(lcm(t,lm(Ii))) <  deg(lcm(t,lm(Ij))) ?
-               (((t[k] > I[i][k]) ? t[k] : I[i][k])
-                 < ((t[k] > I[j][k]) ? t[k] : I[j][k]))
+            if // deg_xk(lcm(t,ui)) <  deg_xk(lcm(t,uj)) ?
+               (((t[k] > ui[k]) ? t[k] : ui[k])
+                 < ((t[k] > uj[k]) ? t[k] : uj[k]))
               has_divisor = false;
         }
       }
@@ -145,31 +148,18 @@ void PP_With_Ideal::compute_number_new_pairs() const {
   // second main loop: apply Buchberger's gcd criterion to new pairs, count survivors
   for (int i = 0; i < m; ++i)
   {
-    if (keepers[i] and not coprimes[i])
+    if (keepers[i] and not has_coprime[i])
     {
-      int new_deg = 0;
-      // determine deg(lcm(t,Si))
-      for (int k=1; k <= n; ++k)
-        new_deg += (t[k] > I[i][k]) ? t[k] : I[i][k];
-      if (min_deg == 0 or min_deg > new_deg)
-      {
-        min_deg = new_deg; num_new_pairs = 1;
-      }
-      else if (min_deg == new_deg)
-      {
-        ++num_new_pairs;
-        //cout << '\t'; pWrite(pHead(strat->S[i]));
-      }
+      ++num_new_pairs;
+      //cout << '\t' << num_new_pairs << ": " << t << " , " << U[i] << endl;
     }
   }
-  // cout << "we get " << num_new_pairs << " from "; pWrite(t);
   // third main loop: apply Buchberger's lcm criterion to old pairs, UNLESS
   // all three lcm's are equal
   for (Critical_Pair_Dynamic * p : pairs) {
       const Monomial & u = p->lcm();
       int new_deg = 0;
       for (int k=1; k <= n; ++k) new_deg += u[k];
-      // for (int k=1; k <= n; ++k) new_deg += pGetExp(u,k) * Rx->wvhdl[0][k];
       // no point continuing if it wouldn't change min_deg
       if (min_deg == 0 or new_deg <= min_deg)
       {
@@ -189,24 +179,18 @@ void PP_With_Ideal::compute_number_new_pairs() const {
             // check lcm(t,lm(p1)) == lcm(t,lm(p2)) == lcm(lm(p1),lm(p2)) in xk
             int a = (t[k] > p1[k]) ? t[k] : p1[k];
             int b = (t[k] > p2[k]) ? t[k] : p2[k];
-            int c = (p1[k] > p2[k]) ? p1[k] : p2[k];
-            all_equal = (a == c) and (b == c);
+            //int c = (p1[k] > p2[k]) ? p1[k] : p2[k];
+            all_equal = (a == b) and (b == u[k]);
           }
         }
-        if (not has_divisor or all_equal)
+        if ( ( not has_divisor ) or all_equal )
         {
-          if (min_deg == 0 or min_deg > new_deg)
-          {
-            min_deg = new_deg; num_new_pairs = 1;
-          }
-          else // the only reason we'd be here is if min_deg == new_deg
-          {
-            ++num_new_pairs;
-            //cout << '\t'; pWrite(u);
-          }
+          ++num_new_pairs;
+          //cout << '\t' << num_new_pairs << ": " << t << " , " << u << endl;
         }
       }
   }
+  //cout << '\t' << num_new_pairs << endl;
   // cout << " which makes " << num_new_pairs << " pairs total at degree " << min_deg << ".\n";
 }
 
@@ -216,17 +200,24 @@ bool less_by_num_crit_pairs (PP_With_Ideal &a, PP_With_Ideal &b)
   // first check if the number of critical pairs has been computed
   if (a.how_many_new_pairs() < 0) a.compute_number_new_pairs();
   if (b.how_many_new_pairs() < 0) b.compute_number_new_pairs();
+  //cout << "comparing " << a.get_pp() << " , " << b.get_pp() << ":\n";
+  //cout << '\t' << a.how_many_new_pairs() << " , " << b.how_many_new_pairs() << endl;
+  //cout << '\t' << *a.get_hilbert_polynomial() << "\n\t\t" << *b.get_hilbert_polynomial() << endl;
   /*if (a.degOfNewPairs() < b.degOfNewPairs())
     result = true;
   else if (a.degOfNewPairs() > b.degOfNewPairs())
     result = false;*/
   // at this point, the degrees of the new pairs will be equal
-  /*else*/ if (a.how_many_new_pairs() > b.how_many_new_pairs())
+  /*else*/ if (a.how_many_new_pairs() < b.how_many_new_pairs())
     result = true;
-  else if (a.how_many_new_pairs() < b.how_many_new_pairs())
+  else if (a.how_many_new_pairs() > b.how_many_new_pairs())
     result = false;
-  else // the numerators are equal; break tie via monomial ordering
-    result = a.get_pp() < b.get_pp();
+  //else // the number of pairs are equal; break tie via monomial ordering
+  //  result = a.get_pp() < b.get_pp();
+  else // the number of pairs are equal; break tie via hilbert, then degree
+    result = less_by_hilbert_then_degree(a, b);
+  //else // the number of pairs are equal; break tie via degree, then hilbert
+    //result = less_by_degree_then_hilbert(a, b);
   //cout << "\tfirst less than second? " << result << endl;
   return result;
 };

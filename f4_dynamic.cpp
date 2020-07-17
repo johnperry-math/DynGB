@@ -21,7 +21,7 @@
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
-#define USE_DOMINATORS 0
+#define USE_DOMINATORS 1
 
 using std::cerr;
 

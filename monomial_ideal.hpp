@@ -369,10 +369,11 @@ public:
         if (hPol != nullptr) delete hPol;
       }
       gens.push_back(t);
+      gens_vector.push_back(t);
     }
   }
   /** @brief removes the newest monomial from the basis */
-  void remove_newest() { gens.pop_back(); }
+  void remove_newest() { gens.pop_back(); gens_vector.pop_back(); }
   /** @brief sets numerator to @c nullptr */
   void forget_hilbert_numerator() { hNum = nullptr; }
   /** @brief sets numerator to given value; only use when you know this is true! */
