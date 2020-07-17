@@ -21,6 +21,8 @@
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
+#define USE_DOMINATORS 0
+
 using std::cerr;
 
 #include <fstream>
@@ -242,6 +244,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   pp_weights.resize(M.size());
   compatible_pps.resize(P.size());
   potential_ideals.resize(P.size());
+  dominators.resize(M.size());
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   list<Critical_Pair_Dynamic *> * thread_rows
@@ -679,7 +682,7 @@ Polynomial_Hashed * F4_Reduction_Data::finalize(
   return result;
 }
 
-void F4_Reduction_Data::monomials_in_row(unsigned i, list<int> & result) const {
+void F4_Reduction_Data::monomials_in_row(unsigned i, list<unsigned> & result) const {
   unsigned processed = 0;
   auto & Ai = A[i];
   for (unsigned k = 0; k < Ai.size(); ++k)
@@ -901,6 +904,44 @@ void divisibility_tests_new(
   }
 }
 
+void F4_Reduction_Data::prune_dominators(list< unsigned > & all_pps, unsigned i) {
+  /*cout << "dominators: ";
+  for (auto i = 1; i < dominators.size(); ++i)
+    if (dominators[i] != dominators.size())
+      cout << i << ":" << dominators[i] << " ";
+  cout << endl;
+  cout << "pruning ";
+  print_row(i, true);
+  print_row(i, false);*/
+  auto & Ai = A[i];
+  auto Ai_size = Ai.size();
+  unsigned pruned = 0, original_number = all_pps.size();
+  for (auto li = all_pps.begin(); li != all_pps.end(); ) {
+    auto k = *li;
+    //cout << k << ": " << dominators[k] << " " << "( " << location_of_monomial_index(A[i], dominators[k]) << " ) ";
+    unsigned l = Ai_size;
+    while (dominators[k] != M.size()) {
+      l = location_of_monomial_index(Ai, dominators[k]);
+      //cout << k << " ( " << l << " ) ";
+      if (l == Ai_size) k = dominators[ k ];
+      else break;
+    }
+    //cout << endl;
+    if (l == Ai_size) ++li; 
+    else { // dominator found
+      //cout << "pruning " << *li << " because of column " << k << endl;
+      auto tmp(li); ++tmp;
+      all_pps.erase(li);
+      li = tmp;
+      ++pruned;
+    }
+  }
+  cout << "pruned " << pruned << " monomials of " << original_number
+       << " from row " << i << " leaving " << all_pps.size() << endl;
+}
+
+unsigned total_terms_considered = 0;
+
 /**
   @ingroup GBComputation
   @author John Perry
@@ -937,11 +978,14 @@ void compatible_pp(
   initial_candidates.push_back(currentLPP_index);
 
   // compare other monomials with LPP
-  list<int> allPPs;
+  list<unsigned> allPPs;
 
   if (not stop) {
 
     F4.monomials_in_row(my_row, allPPs);
+    if (USE_DOMINATORS) F4.prune_dominators(allPPs, my_row);
+    total_terms_considered += allPPs.size();
+ 
     //divisibility_tests(allPPs, F4, stop);
     for (const int b : allPPs) {
       if (stop) break;
@@ -1545,13 +1589,43 @@ void hash_integrity_check(
   }
 }
 
+time_t domination_search_time = 0;
+
+void F4_Reduction_Data::determine_dominators(const LP_Solver * skel) {
+  time_t start = time(nullptr);
+  unsigned dominators_found = 0;
+  dominators[0] = M.size();
+  for (auto i = 1; i < M.size(); ++i) {
+    dominators[i] = M.size();
+    for (auto j = i - 1; j > 0; --j) {
+      if (not skel->makes_consistent_constraint(*M[i], *M[j])) {
+        dominators[i] = j;
+        ++dominators_found;
+        break;
+      }
+    }
+  }
+  time_t stop = time(nullptr);
+  domination_search_time += difftime(stop, start);
+  // if you want information
+  /*
+  cout << "found " << dominators_found << " dominators:\n\t";
+  for (auto i = 1; i < dominators.size(); ++i) {
+    cout << i << ":" << dominators[i] << " ";
+  }
+  cout << endl;
+  */
+  cout << domination_search_time << " seconds spent computing dominators\n";
+}
+
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     vector< Monomial * > & finalized_monomials,
     F4_Hash & finalized_hash,
     const bool static_algorithm,
     const unsigned max_refinements,
-    const Analysis style
+    const Analysis style,
+    const Dynamic_Heuristic heur
 ) {
   //ofstream log_file("debugging report", std::ofstream::out);
   // butcher85 goes terribly awry if we use the normal strategy
@@ -1565,8 +1639,6 @@ list<Abstract_Polynomial *> f4_control(
   LP_Solver * skel = new PPL_Solver(n);
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
-  Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-  //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;
   double reduce_old_time = 0;
@@ -1649,6 +1721,7 @@ list<Abstract_Polynomial *> f4_control(
     // make s-poly
     time_t start_time = time(nullptr);
     F4_Reduction_Data s(curr_ord, Pnew, G, heur);
+    if (USE_DOMINATORS) s.determine_dominators(skel);
     time_t end_time = time(nullptr);
     creation_time += difftime(end_time, start_time);
     number_of_spolys += Pnew.size();
@@ -1820,6 +1893,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << gm_time << " seconds were spent analyzing critical pairs\n";
   cout << divisible_incompatible << " monomials detected as incompatible via divisibility\n";
   cout << '(' << old_divisibile_incompatible << " of these were simple divisibility)\n";
+  cout << total_terms_considered << " terms considered\n";
   cout << "maximum coefficient size: " << max_entry_value << endl;
   return B;
 }

@@ -117,13 +117,13 @@ void PP_With_Ideal::compute_number_new_pairs() const {
   const list<Monomial> T = I.generators();
   const vector<Monomial> I(T.begin(), T.end());
   num_new_pairs = min_deg = 0;
-  bool * keepers = new bool [m];
+  bool keepers[m], coprimes[m];
   for (int i = 0; i < m; ++i) keepers[i] = true;
   // first main loop: apply Buchberger's lcm criterion to new pairs
   for (int i = 0; i < m; ++i)
   {
     // if gcd(t,Ii) == 1 then skip i for the time being
-    if (not t.is_coprime(I[i]))
+    if (not (coprimes[i] = t.is_coprime(I[i]) ) )
     {
       bool has_divisor = false;
       for (int j=0; (not has_divisor) and j < m; ++j)
@@ -145,7 +145,7 @@ void PP_With_Ideal::compute_number_new_pairs() const {
   // second main loop: apply Buchberger's gcd criterion to new pairs, count survivors
   for (int i = 0; i < m; ++i)
   {
-    if (keepers[i] and not t.is_coprime(I[i]))
+    if (keepers[i] and not coprimes[i])
     {
       int new_deg = 0;
       // determine deg(lcm(t,Si))
@@ -162,7 +162,6 @@ void PP_With_Ideal::compute_number_new_pairs() const {
       }
     }
   }
-  delete [] keepers;
   // cout << "we get " << num_new_pairs << " from "; pWrite(t);
   // third main loop: apply Buchberger's lcm criterion to old pairs, UNLESS
   // all three lcm's are equal

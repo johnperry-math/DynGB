@@ -33,6 +33,7 @@ using std::cout; using std::endl;
 #include "polynomial_linked_list.hpp"
 #include "f4_hash.hpp"
 #include "f4_dynamic.hpp"
+#include "dynamic_engine.hpp"
 
 extern Monomial_Ordering * generic_grevlex_ptr;
 extern Grading_Order_Data_Allocator<WT_TYPE> * goda;
@@ -41,7 +42,10 @@ extern Grading_Order_Data_Allocator<Monomial> * monoda;
 extern Grading_Order_Data_Allocator<Monomial_Node> * monododa;
 
 // Forward declarations
-bool meaningful_arguments(int, char **, bool &, bool &, COEF_TYPE &, int &, int &, Analysis &);
+bool meaningful_arguments(
+    int, char **, bool &, bool &, COEF_TYPE &, int &, int &,
+    Analysis &, Dynamic_Heuristic &
+);
 
 void give_help();
 
@@ -50,9 +54,11 @@ int main(int argc, char *argv[]) {
   COEF_TYPE modulus;
   int numvars, refinements = 0;
   Analysis style = Analysis::row_sequential;
+  Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
   if (
       not meaningful_arguments(
-          argc, argv, traditional, homog, modulus, numvars, refinements, style
+          argc, argv, traditional, homog, modulus, numvars, refinements,
+          style, heur
       )
   ) {
     give_help();
@@ -68,7 +74,9 @@ int main(int argc, char *argv[]) {
     // compute basis
     vector< Monomial * > monomials;
     F4_Hash hash_table(true_numvars);
-    list<Abstract_Polynomial *> G { f4_control(F, monomials, hash_table, traditional, refinements, style) } ;
+    list<Abstract_Polynomial *> G {
+      f4_control(F, monomials, hash_table, traditional, refinements, style, heur)
+    } ;
     //list<Abstract_Polynomial *> G { f4_control(F, traditional, refinements, style) } ;
     // display basis
     cout << G.size() << " polynomials in basis:\n";
@@ -108,7 +116,7 @@ bool meaningful_arguments(
     int argc, char *argv[],
     bool & traditional, bool & homogeneous,
     COEF_TYPE & modulus, int & numvars, int & refinements,
-    Analysis & style
+    Analysis & style, Dynamic_Heuristic & heuristic
 ) {
   modulus = 43;
   homogeneous = false;
@@ -129,12 +137,22 @@ bool meaningful_arguments(
           } else if (!strcmp(argv[i+1], "matrix")) {
             style = Analysis::whole_matrix;
           } else {
-            cout << "invalid analysis: choose 'row' or 'matrix'";
+            cout << "invalid analysis: choose 'row' or 'matrix'\n";
             good_args = false;
           }
           i += 1;
         } else good_args = false;
-      } else {
+      } else if (!strcmp(argv[i], "heur") or !strcmp(argv[i], "heuristic")) {
+        if (!strcmp(argv[i+1], "hilb") or !strcmp(argv[i+1], "hilbert")) {
+          heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+        } else if (!strcmp(argv[i+1], "betti") or !strcmp(argv[i+1], "spoly")) {
+          heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
+        } else {
+          cout << "invalid heuristic: choose 'hilbert' or 'betti'\n";
+          good_args = false;
+        }
+        i += 1;
+      }else {
         int j = 0;
         for (/* */; argv[i][j] != '=' and argv[i][j] != '\0'; ++j) { /* */ }
         if (argv[i][j] != '=') {
@@ -178,7 +196,7 @@ bool meaningful_arguments(
 }
 
 void give_help() {
-  cout << "Call with options n=<num> m=<mod> [static] [hom]\n";
+  cout << "Call with options n=<num> m=<mod> [static] [hom] [analyze <type>] [heur <choice>]\n";
   cout << "You *must* specify <num> vars, an integer greater than 2.\n";
   cout << "You can add optional <mod>ulus (please make it prime).\n";
   cout << "The option <static> will perform a traditional computation;\n";
@@ -186,4 +204,9 @@ void give_help() {
   cout << "The option <hom>ogenize will give you a homogenized ideal.\n";
   cout << "So 'test_f4 n=6 m=43' would compute the Groebner basis\n";
   cout << "of the Cyclic-n ideal in 6 variables, modulo 43.";
+  cout << "For dynamic methods only:\n";
+  cout << "- Ordinarily this performs a sequential row analysis,\n";
+  cout << "  but you can specify <matrix> analysis.\n";
+  cout << "- The default heuristic is by Hilbert function,\n";
+  cout << "  but you can specify the <betti> heuristic to minimize s-polynomials.\n";
 }

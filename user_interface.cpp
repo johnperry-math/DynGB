@@ -260,7 +260,7 @@ void user_interface() {
       );
     }
   }
-  //check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
+  check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
   cout << "have basis with " << B.size() << " elements:\n";
   for (auto b : B) {
     cout << b->leading_monomial() << ", ";
