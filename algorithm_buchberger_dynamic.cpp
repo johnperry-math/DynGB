@@ -119,10 +119,12 @@ void gm_update_dynamic(
         )
       D.push_back(p);
     else {
-      //cout << "triplet prunes " << *p << endl;
+      //cout << "triplet prunes " << p->lcm() << endl;
       delete p;
     }
   }
+  //cout << "new pairs so far:\n";
+  //for (auto g : D) cout << '\t' << *g << endl;
   // apply Buchberger's gcd criterion
   list<Critical_Pair_Dynamic *> E;
   while (D.size() != 0) {
@@ -147,7 +149,7 @@ void gm_update_dynamic(
        )
       Q.push_back(p);
     else {
-      //cout << "triplet prunes " << *p << endl;
+      //cout << "triplet with " << r->leading_monomial() << " prunes " << p->lcm() << endl;
       delete p;
     }
   }
@@ -370,9 +372,10 @@ list<Abstract_Polynomial *> buchberger_dynamic(
     //cout << "current basis: ";
     //for (auto g : G) cout << g->leading_monomial() << ',';
     //cout << endl;
-    cout << "current ordering: " << *curr_ord << endl;
+    //cout << "current ordering: " << *curr_ord << endl;
     sort_pairs_by_strategy<Critical_Pair_Dynamic>(P);
     report_critical_pairs(P);
+    //report_critical_pairs(P, true);
     Critical_Pair_Dynamic * p = P.front();
     P.pop_front();
     report_front_pair(p, strategy);

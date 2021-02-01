@@ -1,0 +1,16 @@
+buchberger
+32003
+7
+y
+t u v x y z h
+6
+t + 2*u + 2*v + 2*x + 2*y + 2*z - h
+t^2 + 2*u^2 + 2*v^2 + 2*x^2 + 2*y^2 + 2*z^2 - t*h
+2*t*u + 2*u*v + 2*v*x + 2*x*y + 2*y*z - u*h
+u^2 + 2*t*v + 2*u*x + 2*v*y + 2*x*z - v*h
+2*u*v + 2*t*x + 2*u*y + 2*v*z - x*h
+v^2 + 2*u*x + 2*t*y + 2*u*z - y*h
+d
+ppl
+h
+n

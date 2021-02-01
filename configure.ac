@@ -8,6 +8,7 @@ AC_PROG_CXX
 # search_libs fails to include headers, while it does for C!?!?
 # so pretty much everything from here on is hacked together
 AC_LANG([C++])
+AC_CHECK_LIB(pthread, pthread_create, [PTHREAD_LIBS+=-lpthread])
 #m4_include([ppl.m4])
 #AM_PATH_PPL(1.1)
 AC_CHECK_LIB([glpk], [glp_create_prob])

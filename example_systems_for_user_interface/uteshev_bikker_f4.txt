@@ -1,0 +1,11 @@
+f4
+32003
+5
+y
+x y z t h
+4
+x^2 + xy + y^2 - 2 * xz - 4 * yz + 3 * z^2 - 3 * xt + 2 * yt + t^2 - 3 * xh - 2 * yh + 3 * zh - 2 * th - 2 * h^2
+2 * x^2 - xy + y^2 - xz - yz - 6 * z^2 - xt + yt - 5 * zt - 3 * t^2 - 5 * xh + yh + 5 * zh + 2 * th + 5 * h^2
+x^3 + y^3 - x^2 z + xyz - 5 * y^2 z - 5 * xz^2 + 7 * yz^2 - 3 * z^3 + xyt - 5 * z^2 t + xt^2 + 2 * t^3 + x^2 h - 3 * xyh - y^2 h + 2 * xzh + 2 * z^2 h - 3 * xth - 2 * zth - 3 * t^2 h - xh^2 + yh^2 + 1^1 * zh^2 - 2 * th^2 - 3 * h^3
+-x^3 + 6 * x^2 y - 1^2 * xy^2 + 6 * y^3 - x^2 z - 4 * xyz + 6 * y^2 z + 5 * xz^2 + 4 * yz^2 + 1^5 * z^3 + 6 * xyt - 7 * y^2 t - xzt + 1^1 * xt^2 + 4 * t^3 + 3 * x^2 h + 2 * xyh + 2 * y^2 h - z^2 h + 2 * yth - zth + 5 * t^2 h - 3^5 * xh^2 - 1^4 * yh^2 + 4 * zh^2 - 1^0 * th^2 - 1^5 * h^3
+s

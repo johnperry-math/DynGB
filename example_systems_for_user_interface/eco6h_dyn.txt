@@ -1,0 +1,16 @@
+buchberger
+32003
+7
+y
+x1 x2 x3 x4 x5 x6 h
+6
+ x1*h^2 + x1*x2*x6 + x2*x3*x6 + x3*x4*x6 + x4*x5*x6 - h^3
+         x2*x6*h + x1*x3*x6 + x2*x4*x6 + x3*x5*x6 - 2*h^3
+                    x3*x6*h + x1*x4*x6 + x2*x5*x6 - 3*h^3
+                               x4*x6*h + x1*x5*x6 - 4*h^3
+                                          x5*x6*h - 5*h^3
+                         x1 + x2 + x3 + x4 + x5 + h
+d
+ppl
+h
+n

@@ -389,11 +389,29 @@ void F4_Reduction_Data::build_reducer(unsigned mi) {
 
 void expand(
     vector< pair< unsigned, COEF_TYPE > > & row,
-    vector< COEF_TYPE > & B
+    vector< COEF_TYPE > & B,
+    vector< unsigned > & prev,
+    vector< unsigned > & next
 ) {
-  B.assign(B.size(), 0);
-  for (unsigned i = 0; i < row.size(); ++i)
+  auto k = row[0].first;
+  B[k] = row[0].second;
+  prev[k] = B.size();
+  next[k] = row[1].first;
+  unsigned i = 1, n = row.size() - 1;
+  while (i < n) {
+    k = row[i].first;
+    B[k] = row[i].second;
+    next[k] = row[i+1].first;
+    prev[k] = row[i-1].first;
+    ++i;
+  }
+  if (i < row.size()) { 
     B[row[i].first] = row[i].second;
+    prev[row[i].first] = k;
+    next[row[i].first] = B.size();
+  } else { // happens only if B.size() == 1
+    next[k] = B.size();
+  }
 }
 
 COEF_TYPE max_entry_value = 0;
@@ -404,71 +422,115 @@ unsigned reduce_monomial(
     const vector< pair< unsigned, COEF_TYPE> > & r,
     COEF_TYPE a,
     COEF_TYPE mod,
-    unsigned start
+    unsigned start, unsigned & head,
+    vector<unsigned> & prev, vector<unsigned> & next,
+    unsigned & nonzero_entries
 ) {
   auto num_cols = B.size();
+  unsigned i = head, j = 0;
+  start = next[start];
+  while (i < r[j].first) i = next[i];
+  unsigned prev_i = prev[i];
   auto mod_square = mod * mod;
   // add until we run out of monomials in reductee
-  for (unsigned j = 0; j < r.size(); ++j) {
+  while (j < r.size()) {
     auto k = r[j].first;
-    B[k] -= a*r[j].second;
-    //if (B[k] >= max_entry_value) max_entry_value = B[i];
-    //B[k] %= mod;
-    B[k] += ( B[k] >> 31 ) & ( mod_square );
+    if (i < k) {
+      prev_i = i; 
+      i = next[i];
+    } else if (i == k) {
+      B[i] -= a*r[j].second;
+      //if (B[i] >= max_entry_value) max_entry_value = B[i];
+      //B[i] %= mod;
+      B[i] += ( B[i] >> 31 ) & ( mod_square );
+      //if (B[i] < 0) B[i] += mod;
+      if (B[i] != 0)
+        prev_i = i;
+      else {
+        if ((i == start) and (start < num_cols)) start = next[start];
+        --nonzero_entries;
+        if (i == head) head = next[i];
+        if (next[i] < num_cols) prev[next[i]] = prev[i];
+        if (prev[i] < num_cols) next[prev[i]] = next[i];
+        prev_i = prev[i];
+      }
+      i = next[i]; ++j;
+    } else {
+      ++nonzero_entries;
+      if (k < start) start = k;
+      //B[k] = (- r[j].second * a) % mod;
+      B[k] = - r[j].second * a;
+      B[k] += ( B[k] >> 31 ) & ( mod_square );
+      if (-B[k] > max_entry_value) max_entry_value = -B[k];
+      //B[k] += mod;
+      if (head > k) { // inserting new head
+        prev[k] = num_cols;
+        next[k] = head;
+        if (head < num_cols) prev[head] = k;
+        i = head;
+        head = k;
+      } else { // head < k < i
+        if (i < num_cols) {
+          prev[k] = prev[i];
+          if (prev[i] < num_cols) next[prev[i]] = k;
+          prev[i] = k;
+        } else {
+          prev[k] = prev_i;
+          if (prev_i < num_cols) next[prev_i] = k;
+        }
+        next[k] = i;
+      }
+      prev_i = k;
+      ++j;
+    }
   }
-  while (start < num_cols && B[start] == 0) ++start;
   return start;
 }
 
 void condense(
     vector< pair< unsigned, COEF_TYPE > > & row,
     unsigned head,
-    vector< COEF_TYPE > & B,
+    const vector< COEF_TYPE > & B, const vector< unsigned > & next,
     unsigned & nonzero_entries,
     UCOEF_TYPE mod
 ) {
-  nonzero_entries = 0;
-  unsigned n = B.size();
-  for (unsigned k = head; k < n; ++k) {
-    if (B[k] != 0) {
-      B[k] %= mod;
-      if (B[k] != 0)
-        ++nonzero_entries;
-    }
-  }
-  if (row.size() != nonzero_entries)
-    row.resize(nonzero_entries);
+  if (row.size() != nonzero_entries) row.resize(nonzero_entries);
   unsigned i = 0;
-  for (unsigned k = head; k < n; ++k) {
-    if (B[k] != 0) {
+  unsigned n = B.size();
+  for (unsigned k = head; k < n; k = next[k]) {
+    if (B[k] % mod != 0) {
       row[i].first = k;
       row[i].second = B[k] % mod;
       ++i;
-    }
+    } else --nonzero_entries;
   }
+  row.resize(nonzero_entries);
 }
 
 unsigned long long reduced_by_old = 0;
 
 void F4_Reduction_Data::reduce_my_rows(
-    const vector<int> & my_rows, vector<COEF_TYPE> & B
+    const vector<int> & my_rows, vector<COEF_TYPE> & B,
+    vector<unsigned> & prev, vector<unsigned> & next
 ) {
   NVAR_TYPE n = Rx.number_of_variables();
   const Prime_Field & F = Rx.ground_field();
   auto mod = F.modulus();
   Monomial u(n);
   B.resize(num_cols);
+  prev.resize(num_cols);
+  next.resize(num_cols);
   // expand, reduce, condense each row
   for (unsigned i : my_rows) {
-    expand(A[i], B);
+    expand(A[i], B, prev, next);
     unsigned head = A[i][0].first;
     for (unsigned j = head; j < num_cols; /* */) {
       const Abstract_Polynomial * g = R[j];
       auto a = B[j] % mod;
-      if ( (g == nullptr) || (a == 0) ) {
-        ++j;
-        while (j < num_cols && B[j] == 0) ++j;
-      } else {
+      if ( (g == nullptr) || (a == 0) )
+        j = next[j];
+      else {
+        //auto a = B[j] % mod;
         red_mutex[j].lock();
         auto & r = R_built[j];
         if (r.size() == 0) build_reducer(j);
@@ -476,12 +538,12 @@ void F4_Reduction_Data::reduce_my_rows(
         auto si = strategies[i];
         si->pre_reduction_tasks(u, *g);
         j = reduce_monomial(
-            B, r, a, mod, j
+            B, r, a, mod, j, head, prev, next, nonzero_entries[i]
         );
         reduced_by_old += 1;
       }
     }
-    condense(A[i], head, B, nonzero_entries[i], mod);
+    condense(A[i], head, B, next, nonzero_entries[i], mod);
     print_lock.lock(); cout << "row " << i << " completed\n"; print_lock.unlock();
   }
 }
@@ -497,6 +559,7 @@ void F4_Reduction_Data::reduce_by_old() {
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   vector<COEF_TYPE> buffer[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   vector<int> * thread_rows = new vector<int>[num_threads];
   // loop through num_rows
   for (unsigned k = 0; k < num_rows; ++k)
@@ -505,7 +568,7 @@ void F4_Reduction_Data::reduce_by_old() {
   for (unsigned c = 0; c < num_threads; ++c) {
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_rows, this, std::cref(thread_rows[c]),
-        std::ref(buffer[c])
+        std::ref(buffer[c]), std::ref(prev[c]), std::ref(next[c])
     );
   }
   for (unsigned c = 0; c < num_threads; ++c)
@@ -543,23 +606,31 @@ void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
     vector< COEF_TYPE > & B,
+    vector< unsigned > & prev, vector< unsigned > & next,
     const set<unsigned> & to_reduce,
     unsigned mod
 ) {
   auto & Ai = A[i];
-  auto start = Ai[0].first;
   B.resize(num_cols);
+  prev.resize(num_cols);
+  next.resize(num_cols);
   for (auto j : to_reduce) {
     auto & Aj = A[j];
+    expand(Aj, B, prev, next);
     unsigned k = location_of_monomial_index(Aj, lhead_i);
-    COEF_TYPE a = Aj[k].second;
+    COEF_TYPE a = Aj[k].second % mod;
+    unsigned head = Aj[0].first;
     if (a != 0) {
-      expand(Aj, B);
-      reduce_monomial(B, Ai, a, mod, start);
+      auto start = Ai[0].first;
+      if (B[start] == 0) {
+        auto new_start = head;
+        while (next[new_start] < start) new_start = next[new_start];
+        start = new_start;
+      }
+      reduce_monomial(B, Ai, a, mod, start, head, prev, next, nonzero_entries[j]);
       reduced_by_new += 1;
     }
-    unsigned head = ( Aj[0].first < start ) ? Aj[0].first : start;
-    condense(Aj, head, B, nonzero_entries[j], mod);
+    condense(Aj, head, B, next, nonzero_entries[j], mod);
   }
 }
 
@@ -576,6 +647,7 @@ void F4_Reduction_Data::reduce_by_new(
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   set<unsigned> * thread_rows = new set<unsigned>[num_threads];
   vector<COEF_TYPE> B[num_threads];
+  vector<unsigned> prev[num_threads], next[num_threads];
   thread * workers = new thread[num_threads];
   for (unsigned j = 0; j < num_threads; ++j)
     thread_rows[j].clear();
@@ -596,7 +668,7 @@ void F4_Reduction_Data::reduce_by_new(
     workers[c] = thread(
         &F4_Reduction_Data::reduce_my_new_rows, this,
         i, lhead_i,
-        std::ref(B[c]),
+        std::ref(B[c]), std::ref(prev[c]), std::ref(next[c]),
         std::cref(thread_rows[c]), mod
     );
   for (unsigned c = 0; c < num_threads; ++c)

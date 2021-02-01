@@ -1,0 +1,12 @@
+f4
+32003
+9
+y
+a b c d e f g h t
+3
+a^2 c^4 + b^2 d^4 + a b c^2 e^2 + a b d^2 f^2 + a b c d e g + a b c d f h
+b^6
+a^6
+d
+matrix
+0

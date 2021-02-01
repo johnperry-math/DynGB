@@ -21,6 +21,8 @@
 #include "f4_dynamic.hpp"
 #include "algorithm_buchberger_basic.hpp"
 
+#define USE_DOMINATORS 1
+
 using std::cerr;
 
 #include <fstream>
@@ -126,6 +128,9 @@ F4_Reduction_Data::F4_Reduction_Data(
   strategies.clear();
   NVAR_TYPE n = Rx.number_of_variables();
   for (auto p : P) {
+    //
+    if (p->first()->length() == 1 and p->second() != nullptr) p->swap();
+    //
     Poly_Sugar_Data * new_sugar = new Poly_Sugar_Data(p->first());
     strategies.push_back(new_sugar);
     if (strategies.back() != nullptr) {
@@ -136,14 +141,9 @@ F4_Reduction_Data::F4_Reduction_Data(
         delete [] p2log;
       }
     }
-auto pdeg = p->first()->leading_monomial().total_degree() + p->first_multiplier().total_degree();
-if (pdeg >= 10 and pdeg <= 16) { cerr << "start spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cerr); cerr << " )\n"; }
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
-if (pdeg >= 10 and pdeg <= 16) { cerr << "stop spoly 1 " << p->first_multiplier() << " * ( "; p->first()->print(cerr); cerr << " )\n"; }
     if (p->second() != nullptr) {
-if (pdeg >= 10 and pdeg <= 16) { cerr << "start spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cerr); cerr << " )\n"; }
       add_monomials(curr_ord, p->second(), p->second_multiplier());
-if (pdeg >= 10 and pdeg <= 16) { cerr << "stop spoly 2 " << p->second_multiplier() << " * ( "; p->second()->print(cerr); cerr << " )\n"; }
       M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
@@ -157,13 +157,9 @@ if (pdeg >= 10 and pdeg <= 16) { cerr << "stop spoly 2 " << p->second_multiplier
         found = true;
         //cout << " selected " << (*g)->leading_monomial() << endl;
         mi->second = *g;
-        Monomial u(*(mi->first));
-        u /= (*g)->leading_monomial();
+        Monomial u(*(mi->first), (*g)->leading_monomial(), false);
         time_t astart = time(nullptr);
-auto gdeg = (*g)->leading_monomial().total_degree() + u.total_degree();
-if (gdeg >= 10 and gdeg <= 16) { cerr << "start reducer " << u << " * ( "; (*g)->print(cerr); cerr << " )\n"; }
         add_monomials(curr_ord, *g, u);
-if (gdeg >= 10 and gdeg <= 16) { cerr << "stop reducer " << u << " * ( "; (*g)->print(cerr); cerr << " )\n"; }
         time_t aend = time(nullptr);
         adding_time += difftime(aend, astart);
         g = G.end();
@@ -227,6 +223,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   num_rows = P.size();
   cout << "Initializing " << num_rows << " x " << num_cols << " basic matrix\n";
   dirty.resize(num_rows, true);
+  last_compatible_ordering.resize(num_rows, nullptr);
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
@@ -247,6 +244,7 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   pp_weights.resize(M.size());
   compatible_pps.resize(P.size());
   potential_ideals.resize(P.size());
+  dominators.resize(M.size());
   unsigned cores = std::thread::hardware_concurrency();
   unsigned num_threads = (cores < num_rows) ? cores : num_rows;
   list<Critical_Pair_Dynamic *> * thread_rows
@@ -300,9 +298,8 @@ void F4_Reduction_Data::add_monomials(
   while (not (pi->fellOff())) {
     bool already_there = M_table.contains_product(pi->currMonomial(), u);
     if (not already_there) {
-      Monomial * t = new Monomial(pi->currMonomial());
+      Monomial * t = new Monomial(pi->currMonomial(), u);
       t->set_monomial_ordering(curr_ord);
-      (*t) *= u;
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
@@ -417,6 +414,8 @@ void expand(
   }
 }
 
+COEF_TYPE max_entry_value = 0;
+
 // always reduces the monomial at start
 unsigned reduce_monomial(
     vector<COEF_TYPE> & B,
@@ -439,12 +438,14 @@ unsigned reduce_monomial(
       prev_i = i; 
       i = next[i];
     } else if (i == k) {
-      B[i] -= a*r[j].second; B[i] %= mod;
+      B[i] -= a*r[j].second;
+      if (B[i] >= max_entry_value) max_entry_value = B[i];
+      B[i] %= mod;
       if (B[i] < 0) B[i] += mod;
       if (B[i] != 0)
         prev_i = i;
       else {
-        if (i == start) start = next[start];
+        if ((i == start) and (start < num_cols)) start = next[start];
         --nonzero_entries;
         if (i == head) head = next[i];
         if (next[i] < num_cols) prev[next[i]] = prev[i];
@@ -455,11 +456,13 @@ unsigned reduce_monomial(
     } else {
       ++nonzero_entries;
       if (k < start) start = k;
-      B[k] = (- r[j].second * a) % mod + mod;
+      B[k] = (- r[j].second * a) % mod;
+      if (-B[k] > max_entry_value) max_entry_value = -B[k];
+      B[k] += mod;
       if (head > k) { // inserting new head
         prev[k] = num_cols;
         next[k] = head;
-        prev[head] = k;
+        if (head < num_cols) prev[head] = k;
         i = head;
         head = k;
       } else { // head < k < i
@@ -469,11 +472,11 @@ unsigned reduce_monomial(
           prev[i] = k;
         } else {
           prev[k] = prev_i;
-          next[prev_i] = k;
+          if (prev_i < num_cols) next[prev_i] = k;
         }
-        prev_i = k;
         next[k] = i;
       }
+      prev_i = k;
       ++j;
     }
   }
@@ -495,6 +498,8 @@ void condense(
     ++i;
   }
 }
+
+unsigned long long reduced_by_old = 0;
 
 void F4_Reduction_Data::reduce_my_rows(
     const vector<int> & my_rows, vector<COEF_TYPE> & B,
@@ -526,6 +531,7 @@ void F4_Reduction_Data::reduce_my_rows(
         j = reduce_monomial(
             B, r, a, mod, j, head, prev, next, nonzero_entries[i]
         );
+        reduced_by_old += 1;
       }
     }
     condense(A[i], head, B, next, nonzero_entries[i]);
@@ -585,6 +591,8 @@ unsigned location_of_monomial_index(
   return row.size();
 }
 
+unsigned long long reduced_by_new = 0;
+
 void F4_Reduction_Data::reduce_my_new_rows(
     unsigned i,
     unsigned lhead_i,
@@ -610,6 +618,7 @@ void F4_Reduction_Data::reduce_my_new_rows(
       start = new_start;
     }
     reduce_monomial(B, Ai, a, mod, start, head, prev, next, nonzero_entries[j]);
+    reduced_by_new += 1;
     condense(Aj, head, B, next, nonzero_entries[j]);
   }
 }
@@ -673,7 +682,7 @@ Polynomial_Hashed * F4_Reduction_Data::finalize(
   return result;
 }
 
-void F4_Reduction_Data::monomials_in_row(unsigned i, list<int> & result) const {
+void F4_Reduction_Data::monomials_in_row(unsigned i, list<unsigned> & result) const {
   unsigned processed = 0;
   auto & Ai = A[i];
   for (unsigned k = 0; k < Ai.size(); ++k)
@@ -717,6 +726,222 @@ void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
   for (auto i : removed) in_use.erase(i);
 }
 
+unsigned divisible_incompatible = 0;
+unsigned old_divisibile_incompatible = 0;
+
+void divisibility_tests(
+  list<int> & allPPs,
+  F4_Reduction_Data & F4,
+  bool & stop
+) {
+  bool verbose = false;
+  if (verbose) {
+    cout << "checking divisibility criterion for ";
+    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    cout << endl;
+  }
+  auto it = allPPs.begin();
+  auto n = F4.M.front()->num_vars();
+  while ((not stop) and it != allPPs.end()) {
+    bool incompatible = false, new_incompatible = false;
+    auto & u = F4.M[*it];
+    set<Monomial *> T;
+    Monomial Tt(n, F4.M.front()->monomial_ordering());
+    for (auto j : allPPs) {
+      if (stop or incompatible) break;
+      if (j != *it) {
+        auto & t = F4.M[j];
+        if (t->divisible_by(*u)) {
+          incompatible = true;
+          ++old_divisibile_incompatible;
+          if (verbose)
+            cout << "detected incompatible monomial " << *u
+                 << " through divisibility by " << *t << "\n";
+        }
+        else if (not t->is_coprime(*u)) {
+          T.insert(t);
+          Tt *= *t;
+          if (Tt.divisible_by_power(*u, T.size())) {
+            new_incompatible = incompatible = true;
+            if (verbose)
+              cout << "detected incompatible monomial " << *u
+                   << " through divisibility by " << Tt << "(" << T.size() << ")\n";
+          }
+        }
+      }
+    }
+    while ((not incompatible) and T.size() > 1) {
+      int j = 0, d = (*u)[0]*T.size() - Tt[0];
+      for (unsigned k = 1; k < n; ++k)
+        if ((*u)[k]*T.size() > Tt[k] + d) j = k;
+      auto ti = T.begin();
+      d = u->gcd_degree(**ti);
+      auto remove_me = ti; ++ti;
+      for (/* */; ti != T.end(); ++ti) {
+        if (((**ti)[j] < (**remove_me)[j]) or u->gcd_degree(**ti) < d)
+          remove_me = ti;
+      }
+      Tt /= **remove_me;
+      T.erase(remove_me);
+      if (Tt.divisible_by_power(*u, T.size())) {
+        if (verbose) {
+          cout << "detected incompatible monomial " << *u
+               << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+          cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+        }
+        new_incompatible = incompatible = true;
+      }
+    }
+    auto next_it(it); ++next_it;
+    if (incompatible) {
+      ++divisible_incompatible;
+      allPPs.erase(it);
+    }
+    it = next_it;
+  }
+}
+
+void divisibility_tests_new(
+  list<int> & allPPs,
+  F4_Reduction_Data & F4,
+  bool & stop
+) {
+  bool verbose = false;
+  bool very_verbose = false;
+  if (very_verbose) {
+    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    cout << endl;
+  }
+  // build monomial for multi-divisibility criterion
+  auto n = F4.M.front()->num_vars();
+  Monomial Ttall(n, F4.M.front()->monomial_ordering());
+  for (auto j : allPPs) {
+    if (stop) break;
+    auto & t = F4.M[j];
+    Ttall *= *t;
+  }
+  auto it = allPPs.begin();
+  while ((not stop) and it != allPPs.end()) {
+    // check for simple divisibility
+    bool incompatible = false, new_incompatible = false;
+    auto & u = F4.M[*it];
+    for (auto j : allPPs) {
+      if (stop or incompatible) break;
+      if (j != *it) {
+        auto & t = F4.M[j];
+        if (t->divisible_by(*u)) {
+          incompatible = true;
+          if (verbose)
+            cout << "detected incompatible monomial " << *u
+                 << " through old divisibility by " << *t << "\n";
+        }
+      }
+    }
+    // now check for multi-divisibility
+    if (not (stop or incompatible)) {
+      set<Monomial *> T;
+      for (auto set_it = allPPs.begin(); set_it != allPPs.end(); ++set_it) {
+        if (it != set_it) {
+          T.insert(F4.M[*set_it]);
+        }
+      }
+      Monomial Tt(Ttall); Tt /= *u;
+      for (auto new_it = T.begin(); new_it != T.end(); ) {
+        if (not u->is_coprime(**new_it)) {
+          ++new_it;
+        } else {
+          Tt /= **new_it;
+          auto next_it = new_it; ++next_it; T.erase(new_it); new_it = next_it;
+        } 
+      }
+      if (Tt.divisible_by_power(*u, T.size())) {
+        if (verbose) {
+          cout << "detected incompatible monomial " << *u
+               << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+          cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+        }
+        new_incompatible = incompatible = true;
+      } else {
+        if (very_verbose)
+          cout << "( " << *u << " )^" << T.size() << " does not divide " << Tt << endl;
+      }
+      while ((not stop) and (not incompatible) and T.size() > 2) {
+        int j = 0, d = (*u)[0]*T.size() - Tt[0];
+        for (unsigned k = 1; k < n; ++k) {
+          if ((*u)[k]*T.size() > Tt[k] + d) j = k;
+        }
+        auto ti = T.begin();
+        auto remove_me = T.end();
+        for (/* */; ti != T.end(); ++ti) {
+          if (remove_me == T.end()) remove_me = ti;
+          else if ((**ti)[j] < (**remove_me)[j] /*or (u->gcd(**ti).total_degree() < u->gcd(**remove_me).total_degree())*/)
+            remove_me = ti;
+        }
+        if (very_verbose) cout << "divide " << Tt << " by " << **remove_me << " to get ";
+        Tt /= **remove_me;
+        T.erase(remove_me);
+        if (very_verbose) cout << Tt << endl;
+        if (Tt.divisible_by_power(*u, T.size())) {
+          if (verbose) {
+            cout << "detected incompatible monomial " << *u
+                 << " through divisibility by " << Tt << " (" << T.size() << ")\n";
+            cout << "\t[ "; for (auto t : T) cout << *t << ", "; cout << " ]\n";
+          }
+          new_incompatible = incompatible = true;
+        } else {
+          if (very_verbose)                    
+            cout << "( " << *u << " )^" << T.size() << " does not divide " << Tt << endl;
+        }
+      }
+    }
+    auto next_it(it); ++next_it;
+    if (incompatible) {
+      ++divisible_incompatible;
+      Ttall /= *F4.M[*it];
+      allPPs.erase(it);
+    }
+    it = next_it;
+  }
+}
+
+void F4_Reduction_Data::prune_dominators(list< unsigned > & all_pps, unsigned i) {
+  /*cout << "dominators: ";
+  for (auto i = 1; i < dominators.size(); ++i)
+    if (dominators[i] != dominators.size())
+      cout << i << ":" << dominators[i] << " ";
+  cout << endl;
+  cout << "pruning ";
+  print_row(i, true);
+  print_row(i, false);*/
+  auto & Ai = A[i];
+  auto Ai_size = Ai.size();
+  unsigned pruned = 0, original_number = all_pps.size();
+  for (auto li = all_pps.begin(); li != all_pps.end(); ) {
+    auto k = *li;
+    //cout << k << ": " << dominators[k] << " " << "( " << location_of_monomial_index(A[i], dominators[k]) << " ) ";
+    unsigned l = Ai_size;
+    while (dominators[k] != M.size()) {
+      l = location_of_monomial_index(Ai, dominators[k]);
+      //cout << k << " ( " << l << " ) ";
+      if (l == Ai_size) k = dominators[ k ];
+      else break;
+    }
+    //cout << endl;
+    if (l == Ai_size) ++li; 
+    else { // dominator found
+      //cout << "pruning " << *li << " because of column " << k << endl;
+      auto tmp(li); ++tmp;
+      all_pps.erase(li);
+      li = tmp;
+      ++pruned;
+    }
+  }
+  cout << "pruned " << pruned << " monomials of " << original_number
+       << " from row " << i << " leaving " << all_pps.size() << endl;
+}
+
+unsigned total_terms_considered = 0;
+
 /**
   @ingroup GBComputation
   @author John Perry
@@ -735,11 +960,14 @@ void F4_Reduction_Data::simplify_identical_rows(set<unsigned> & in_use) {
 void compatible_pp(
   int my_row,
   F4_Reduction_Data & F4,
+  WGrevlex * curr_ord,
   const LP_Solver * skel,
   bool & stop,
   vector<bool> & completed
 )
 {
+
+  F4.last_compatible_ordering[my_row] = curr_ord;
 
   int currentLPP_index = F4.A[my_row][0].first;
 
@@ -750,11 +978,15 @@ void compatible_pp(
   initial_candidates.push_back(currentLPP_index);
 
   // compare other monomials with LPP
-  list<int> allPPs;
+  list<unsigned> allPPs;
 
   if (not stop) {
 
     F4.monomials_in_row(my_row, allPPs);
+    if (USE_DOMINATORS) F4.prune_dominators(allPPs, my_row);
+    total_terms_considered += allPPs.size();
+ 
+    //divisibility_tests(allPPs, F4, stop);
     for (const int b : allPPs) {
       if (stop) break;
       const Monomial & u(*F4.M[b]);
@@ -775,9 +1007,10 @@ void compatible_pp(
     for (auto b : initial_candidates) cout << *F4.M[b] << ", ";
     cout << endl;*/
 
+    list<int> & result = F4.compatible_pps[my_row];
+
     if (not stop) {
   
-      list<int> & result = F4.compatible_pps[my_row];
       for (int b : initial_candidates)
       {
         if (stop) break;
@@ -815,6 +1048,9 @@ void compatible_pp(
       if (result.size() == 1) stop = true;
 
     }
+
+    //if (not stop)
+    //  divisibility_tests(result, F4, stop);
 
   }
 
@@ -1151,6 +1387,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     const list<Critical_Pair_Dynamic *> & P,
     WGrevlex * curr_ord,
     LP_Solver * & skel,
+    Monomial * & expected_result,
     const Analysis & style
 ) {
   bool ordering_changed = false;
@@ -1186,7 +1423,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     cout << "sequential analysis\n";
 
     unsigned first_row = *unprocessed.begin();
-    compatible_pp(first_row, *this, skel, found_single, completed);
+    compatible_pp(first_row, *this, curr_ord, skel, found_single, completed);
   
     create_and_sort_ideals(
         first_row, U, current_hilbert_numerator, G, P, w, heur
@@ -1211,17 +1448,22 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
     for (unsigned i: unprocessed) {
       if (nonzero_entries[i] > 0) {
-        if (compatible_pps[i].size() > 0 and (not dirty[i])) completed[i] = true;
-        else {
+        /*if (
+            (compatible_pps[i].size() > 0) and
+            (not dirty[i]) and
+            (last_compatible_ordering[i] == curr_ord)
+        ) {
+          completed[i] = true;
+        } else {*/
           compatible_pps[i].clear();
           //compatible_pp(i, *this, skel, found_single, completed);
           waiters.push_back( std::move(
               async(
-                  compatible_pp, i, std::ref(*this), skel,
+                  compatible_pp, i, std::ref(*this), curr_ord, skel,
                   std::ref(found_single), std::ref(completed)
               )
           ) );
-        }
+        //}
       }
     }
   
@@ -1305,6 +1547,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 
   unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
   pref_head[winning_row] = j;
+  expected_result = M[j];
   cout << "selected " << *M[j] << " from row " << winning_row << endl;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
@@ -1333,15 +1576,58 @@ unsigned F4_Reduction_Data::select_dynamic_single(
 extern Grading_Order_Data_Allocator<EXP_TYPE> * moda;
 extern Grading_Order_Data_Allocator<Monomial> * monoda;
 
+void hash_integrity_check(
+  F4_Hash & hash,
+  vector< Monomial * > & mons
+) {
+  cout << "integrity check\n";
+  for (auto mp : mons) {
+    if (not hash.contains(mp)) {
+      cout << "hash lost " << *mp << " from " << hash.get_index(*mp) << endl;
+      hash.vomit(*mp);
+    }
+  }
+}
+
+time_t domination_search_time = 0;
+
+void F4_Reduction_Data::determine_dominators(const LP_Solver * skel) {
+  time_t start = time(nullptr);
+  unsigned dominators_found = 0;
+  dominators[0] = M.size();
+  for (auto i = 1; i < M.size(); ++i) {
+    dominators[i] = M.size();
+    for (auto j = i - 1; j > 0; --j) {
+      if (not skel->makes_consistent_constraint(*M[i], *M[j])) {
+        dominators[i] = j;
+        ++dominators_found;
+        break;
+      }
+    }
+  }
+  time_t stop = time(nullptr);
+  domination_search_time += difftime(stop, start);
+  // if you want information
+  /*
+  cout << "found " << dominators_found << " dominators:\n\t";
+  for (auto i = 1; i < dominators.size(); ++i) {
+    cout << i << ":" << dominators[i] << " ";
+  }
+  cout << endl;
+  */
+  cout << domination_search_time << " seconds spent computing dominators\n";
+}
+
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     vector< Monomial * > & finalized_monomials,
     F4_Hash & finalized_hash,
     const bool static_algorithm,
     const unsigned max_refinements,
-    const Analysis style
+    const Analysis style,
+    const Dynamic_Heuristic heur
 ) {
-  ofstream log_file("debugging report", std::ofstream::out);
+  //ofstream log_file("debugging report", std::ofstream::out);
   // butcher85 goes terribly awry if we use the normal strategy
   // so set this to sugar strategy until we add an option to choose strategy
   // with inputs
@@ -1353,8 +1639,6 @@ list<Abstract_Polynomial *> f4_control(
   LP_Solver * skel = new PPL_Solver(n);
   //LP_Solver * skel = new GLPK_Solver(n);
   time_t start_f4 = time(nullptr);
-  Dynamic_Heuristic heur = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-  //Dynamic_Heuristic heur = Dynamic_Heuristic::BETTI_HILBERT_DEG;
   cout << "computation started at " << asctime(localtime(&start_f4)) << endl;
   unsigned number_of_spolys = 0;
   double reduce_old_time = 0;
@@ -1391,10 +1675,12 @@ list<Abstract_Polynomial *> f4_control(
     Critical_Pair_Dynamic * p = P.front();
     operating_degree = p->lcm().total_degree();
     cout << "\tdegree: " << operating_degree << endl;
+    unsigned pair_number = 0;
     while (Pnew.empty() and not P.empty()) {
       for (auto pi = P.begin(); pi != P.end(); /* */) {
         p = *pi;
         if (p->lcm().total_degree() <= operating_degree) {
+          cout << pair_number++ << " ";
           report_front_pair(p, this_strategy);
           Pnew.push_back(p);
           auto qi = pi;
@@ -1435,6 +1721,7 @@ list<Abstract_Polynomial *> f4_control(
     // make s-poly
     time_t start_time = time(nullptr);
     F4_Reduction_Data s(curr_ord, Pnew, G, heur);
+    if (USE_DOMINATORS) s.determine_dominators(skel);
     time_t end_time = time(nullptr);
     creation_time += difftime(end_time, start_time);
     number_of_spolys += Pnew.size();
@@ -1462,8 +1749,9 @@ list<Abstract_Polynomial *> f4_control(
         while (unprocessed.size() != 0 and comparisons < max_comparisons) {
           time_t start_time = time(nullptr);
           //LP_Solver * old_skel = skel;
+          Monomial * expected_result;
           unsigned completed_row = s.select_dynamic_single(
-              unprocessed, T, G, P, curr_ord, skel, style
+              unprocessed, T, G, P, curr_ord, skel, expected_result, style
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);
@@ -1491,6 +1779,9 @@ list<Abstract_Polynomial *> f4_control(
             }
           }
           cout << "\tadded " << r->leading_coefficient() << " " << r->leading_monomial() << " from row " << completed_row << endl;
+          if (r->leading_monomial() != *expected_result) {
+            cout << "DID NOT ORDER PROPERLY\n";
+          }
           very_verbose = false;
           if (very_verbose) { cout << "\tadded "; r->println(); }
           start_time = time(nullptr);
@@ -1530,7 +1821,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
       for (auto row : unfinalized) {
         all_completed_rows.insert(row);
         Polynomial_Hashed * r = s.finalize(row, finalized_monomials, finalized_hash);
-        log_file << " new poly ( " << operating_degree << " , " << r->leading_monomial().total_degree() << " ): " << *r << endl;// r->println(log_file);
+        //log_file << " new poly ( " << operating_degree << " , " << r->leading_monomial().total_degree() << " ): " << *r << endl;// r->println(log_file);
         if (ordering_changed) {
           r->set_monomial_ordering(curr_ord);
           if (r->leading_coefficient().value() != 1) {
@@ -1583,6 +1874,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
     delete g;
   }
   cout << num_mons << " monomials in basis (possibly counting multiple times)\n";
+  cout << "final ordering: " << *curr_ord << endl;
   // first one should be curr_ord; we do not want to delete that!
   while (all_orderings_used.size() != 0) {
     ORDERING_TYPE * bye_bye_ordering = all_orderings_used.front();
@@ -1595,9 +1887,14 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << "computation ended at " << asctime(localtime(&end_f4)) << endl;
   cout << "parallel f4 took " << duration << " seconds\n";
   cout << "parallel f4 spent " << reduce_old_time << " seconds in reducing by old polynomials\n";
+  cout << reduced_by_new + reduced_by_old << " row reductions performed\n";
   cout << dynamic_time << " seconds were spent in dynamic overhead\n";
   cout << creation_time << " seconds were spent creating the matrices\n";
   cout << gm_time << " seconds were spent analyzing critical pairs\n";
+  cout << divisible_incompatible << " monomials detected as incompatible via divisibility\n";
+  cout << '(' << old_divisibile_incompatible << " of these were simple divisibility)\n";
+  cout << total_terms_considered << " terms considered\n";
+  cout << "maximum coefficient size: " << max_entry_value << endl;
   return B;
 }
 
