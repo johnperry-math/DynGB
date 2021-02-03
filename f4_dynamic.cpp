@@ -44,6 +44,10 @@ using std::fill;
 #include <cstdlib>
 using std::srand; using std::rand;
 
+#include <chrono>
+using std::chrono::duration; using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
+
 #include "lp_solver.hpp"
 using LP_Solvers::LP_Solver;
 #include "skeleton.hpp"
@@ -84,6 +88,8 @@ extern template void sort_pairs_by_strategy<Critical_Pair_Basic>(
     list<Critical_Pair_Basic *> &
 );
 
+double adding_time = 0;
+
 F4_Reduction_Data::F4_Reduction_Data(
     WGrevlex * curr_ord,
     const list<Critical_Pair_Dynamic *> & P,
@@ -95,7 +101,6 @@ F4_Reduction_Data::F4_Reduction_Data(
     mord(curr_ord)
 {
   static double overall_time = 0;
-  static double adding_time = 0;
   static double initializing_time = 0;
   time_t ostart = time(nullptr);
   auto mod = Rx.ground_field().modulus();
@@ -285,7 +290,9 @@ void F4_Reduction_Data::print_builder() {
   cout << "]\n";
 }
 
-double emplace_time;
+double emplace_time = 0, move_time = 0;
+extern double caching_time;
+double get_index_time = 0;
 
 void F4_Reduction_Data::add_monomials(
     const WGrevlex * curr_ord,
@@ -296,14 +303,20 @@ void F4_Reduction_Data::add_monomials(
   Polynomial_Iterator * pi = g->new_iterator();
   if (not new_row) pi->moveRight();
   while (not (pi->fellOff())) {
+    //high_resolution_clock::time_point start = high_resolution_clock::now();
     bool already_there = M_table.contains_product(pi->currMonomial(), u);
+    //high_resolution_clock::time_point stop = high_resolution_clock::now();
+    //emplace_time += duration_cast<duration<double> >(stop - start).count();
     if (not already_there) {
       Monomial * t = new Monomial(pi->currMonomial(), u);
       t->set_monomial_ordering(curr_ord);
       M_table.add_monomial(t);
       M_builder.emplace(t, nullptr);
     }
+    //start = high_resolution_clock::now();
     pi->moveRight();
+    //stop = high_resolution_clock::now();
+    //move_time += duration_cast<duration<double> >(stop - start).count();
   }
   //cout << "processed " << monomials_processed << " monomials\n";
   delete pi;
@@ -1557,6 +1570,8 @@ void F4_Reduction_Data::determine_dominators(const LP_Solver * skel) {
   cout << domination_search_time << " seconds spent computing dominators\n";
 }
 
+extern unsigned monomial_cache_hits, monomial_cache_misses;
+
 list<Abstract_Polynomial *> f4_control(
     const list<Abstract_Polynomial *> &F,
     vector< Monomial * > & finalized_monomials,
@@ -1834,6 +1849,13 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << '(' << old_divisibile_incompatible << " of these were simple divisibility)\n";
   cout << total_terms_considered << " terms considered\n";
   cout << "maximum coefficient size: " << max_entry_value << endl;
+  cout << "monomial cache hits: " << monomial_cache_hits << endl;
+  cout << "monomial cache misses: " << monomial_cache_misses << endl;
+  cout << "time spent emplacing: " << emplace_time << endl;
+  cout << "time spent moving right: " << move_time << endl;
+  cout << "time spent adding monomials: " << adding_time << endl;
+  cout << "time spent caching weighted degree: " << caching_time << endl;
+  cout << "time spent getting indices: " << get_index_time << endl;
   return B;
 }
 

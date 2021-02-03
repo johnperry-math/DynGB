@@ -316,6 +316,36 @@ const {
   return result;
 }
 
+unsigned monomial_cache_hits = 0;
+unsigned monomial_cache_misses = 0;
+
+#include <chrono>
+using std::chrono::duration; using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
+
+double caching_time = 0;
+
+DEG_TYPE Monomial::cached_weighted_degree(const WT_TYPE *weights, WT_TYPE signature) const {
+  //high_resolution_clock::time_point start = high_resolution_clock::now();
+  DEG_TYPE result = 0;
+  if ( cached_signature == signature ) {
+    result = cached_degree;
+    ++monomial_cache_hits;
+  } else {
+    ++monomial_cache_misses;
+    if (weights == nullptr)
+      result = total_degree();
+    else
+      for (NVAR_TYPE i = 0; i < last; i += 2)
+        result += weights[exponents[i]]*exponents[i + 1];
+    cached_degree = result;
+    cached_signature = signature;
+  }
+  //high_resolution_clock::time_point stop = high_resolution_clock::now();
+  //caching_time += duration_cast<duration<double> >(stop - start).count();
+  return result;
+}
+
 void Monomial::set_monomial_ordering(const Monomial_Ordering * mord) {
   if (ordering != mord) {
     ordering = mord;

@@ -367,6 +367,7 @@ public:
   /** @brief returns data to Monomial's Grading_Order_Data_Allocator */
   void operator delete(void *);
   ///@}
+  DEG_TYPE cached_weighted_degree(const WT_TYPE * w, WT_TYPE s) const;
 protected:
   /**
     @brief locate the indicated exponent
@@ -398,6 +399,9 @@ protected:
   const Monomial_Ordering * ordering;
   /** @brief optional data for a monomial ordering */
   Monomial_Order_Data * ordering_data;
+  /** @brief trying to speed up hashing */
+  mutable DEG_TYPE cached_degree = 0;
+  mutable WT_TYPE cached_signature = 0;
 };
 
 #endif
