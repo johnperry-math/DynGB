@@ -93,7 +93,7 @@ class F4_Hash {
       @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
-      DEG_TYPE index = t.cached_weighted_degree(weights, signature) + u.weighted_degree(weights, signature);
+      DEG_TYPE index = t.cached_weighted_degree(weights, signature) + u.cached_weighted_degree(weights, signature);
       return index % MAXIMUM;
     }
 
