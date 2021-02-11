@@ -328,8 +328,6 @@ F4_Reduction_Data::~F4_Reduction_Data() {
       delete strat;
   }
   for (auto t : M_builder) delete t.first;
-  cout << "there were at most " << M_table.max_size << " monomials in any list of hash table\n";
-  cout << "we spend " << emplace_time << " seconds emplacing\n";
 }
 
 void F4_Reduction_Data::print_row(unsigned i, bool as_poly) {

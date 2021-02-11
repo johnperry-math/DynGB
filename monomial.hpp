@@ -57,7 +57,7 @@ struct Exponent_Location_Struct {
     @brief @c true if and only if the degree of this exponent has been set
     @warning Ignore the value of @c loc if @c already_set is @c false!
   */
-  bool already_set;
+  bool already_set = false;
 };
 
 typedef struct Exponent_Location_Struct Exponent_Location;

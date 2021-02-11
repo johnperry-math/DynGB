@@ -35,11 +35,11 @@ class F4_Hash {
     WT_TYPE * weights; /**< @brief randomized weighting for each exponent */
     static const size_t MAXIMUM = 1 << 18; /**< @brief number of entries in table */
     vector< vector<pair<const Monomial *, size_t> > > table; /**< @brief the actual table */
+    DEG_TYPE signature;
 
   public:
 
     /** @brief maximum length of a list in the table; currently for info only */
-    size_t max_size = 0;
     /**
       @brief allocates the table and sets up randomized hash function
       @param num_vars number of variables in the monomials this table will check
@@ -50,9 +50,14 @@ class F4_Hash {
       default_random_engine generator(
           std::chrono::system_clock::now().time_since_epoch().count()
       );
-      uniform_int_distribution<int> rand(0, MAXIMUM - 1);
-      for (NVAR_TYPE i = 0; i < n; ++i)
+      uniform_int_distribution<int> rand(0, MAXIMUM / n - 1 );
+      for (NVAR_TYPE i = 0; i < n; ++i) {
         weights[i] = rand(generator);
+        for (NVAR_TYPE j = 0; j < i; ++j) {
+          weights[i] = weights[i] * ( MAXIMUM / n - 1 );
+        }
+      }
+      signature = ( rand(generator) * rand(generator) ) % MAXIMUM;
     }
 
     /**
@@ -60,6 +65,15 @@ class F4_Hash {
     */
     ~F4_Hash() {
       delete [] weights;
+      unsigned unused = 0, max_length = 0;
+      for ( auto i = 0; i < table.size(); ++i ) {
+        if ( table[i].size() == 0 )
+          ++unused;
+        else if ( table[i].size() > max_length )
+          max_length = table[i].size();
+      }
+      cout << "unused " << unused << " of " << table.size() << endl;
+      cout << "maximum length is " << max_length << endl;
     }
 
     /**
@@ -68,7 +82,7 @@ class F4_Hash {
       @return which table entry contains the list that contains @p t
     */
     size_t get_index(const Monomial & t) {
-      DEG_TYPE index = t.weighted_degree(weights);
+      DEG_TYPE index = t.cached_weighted_degree(weights, signature);
       return index % MAXIMUM;
     }
 
@@ -79,7 +93,7 @@ class F4_Hash {
       @return which table entry contains the list that contains \f$tu\f$
     */
     size_t get_index(const Monomial & t, const Monomial & u) {
-      DEG_TYPE index = t.weighted_degree(weights) + u.weighted_degree(weights);
+      DEG_TYPE index = t.cached_weighted_degree(weights, signature) + u.weighted_degree(weights, signature);
       return index % MAXIMUM;
     }
 
@@ -155,7 +169,6 @@ class F4_Hash {
     void add_monomial(const Monomial * t) {
       auto & list = table[get_index(*t)];
       list.emplace_back(t, 0);
-      if (list.size() > max_size) max_size = list.size();
     }
 
     /**
@@ -169,7 +182,6 @@ class F4_Hash {
     void add_monomial(const Monomial * t, const size_t location) {
       auto & list = table[get_index(*t)];
       list.emplace_back(t, location);
-      if (list.size() > max_size) max_size = list.size();
     }
 
     /**

@@ -74,11 +74,7 @@ void Monomial::deinitialize() {
 
 Exponent_Location Monomial::find_exponent(NVAR_TYPE i) const {
   Exponent_Location result;
-  if (not valid_exponents()) {
-    // no exponents have been initialized, so it is not already set
-    result.loc = 0;
-    result.already_set = false;
-  } else {
+  if (valid_exponents()) {
     result.loc = last;
     result.already_set = false;
     NVAR_TYPE k = 0;
@@ -360,6 +356,12 @@ void Monomial::set_ordering_data(Monomial_Order_Data * mordat) {
 }
 
 bool Monomial::operator ==(const Monomial &other) const {
+  if (
+      ( cached_signature != 0 ) &&
+      ( cached_signature == other.cached_signature ) &&
+      ( cached_degree != other.cached_degree )
+  )
+    return false;
   bool result = (n == other.n) and (last == other.last);
   for (NVAR_TYPE i = 0; result and i < last; i += 2)
     result = exponents[i] == other.exponents[i]
@@ -398,6 +400,12 @@ bool Monomial::like_multiple(const EXP_TYPE * e, const Monomial & v) const {
 }
 
 bool Monomial::like_multiple(const Monomial &u, const Monomial &v) const {
+  if (
+      ( cached_signature != 0 ) && ( cached_signature == u.cached_signature ) &&
+      ( cached_signature == v.cached_signature ) &&
+      ( cached_degree != u.cached_degree + v.cached_degree )
+     )
+    return false;
   bool result = (n == u.n and n == v.n);
   auto ue = u.exponents, ve = v.exponents;
   NVAR_TYPE i = 0, j = 0, k = 0;
