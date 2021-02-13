@@ -139,7 +139,10 @@ public:
       WGrevlex * curr_ord,
       const list<Critical_Pair_Dynamic *> & P,
       const list<Abstract_Polynomial *> & B,
-      Dynamic_Heuristic method
+      Dynamic_Heuristic method,
+      vector<Monomial *> & mon_archive,
+      F4_Hash & hasher,
+      unsigned matrix_id
   );
   /**
     @brief adds monomials of @f$ ug @f$ to @c M_builder
@@ -191,17 +194,17 @@ public:
     return compatible_pps[row].size();
   }
   /** @brief return the indicated monomial */
-  const Monomial & monomial(unsigned i) { return *M[i]; }
+  const Monomial & monomial(unsigned i) { return *M_reference[M[i]]; }
   /** @brief find the index of the monomial of greatest weight in this row */
   unsigned head_monomial_index(unsigned i, bool static_algorithm = false) {
     const auto & Ai = A[i];
     unsigned result = Ai[0].first;
     if (not static_algorithm) { 
-      auto & t = *M[result];
+      auto & t = *M_reference[M[result]];
       for (unsigned k = 1; k < Ai.size(); ++k) {
-        if (mord->first_smaller(t, *M[Ai[k].first])) {
+        if (mord->first_smaller(t, *M_reference[M[Ai[k].first]])) {
           result = Ai[k].first;
-          t = *M[result];
+          t = *M_reference[M[result]];
         }
       }
     }
@@ -213,7 +216,7 @@ public:
   /**
     @brief converts indicated row to a Polynomial_Hashed, returns result
   */
-  Polynomial_Hashed * finalize(unsigned, vector< Monomial * > &, F4_Hash &);
+  Polynomial_Hashed * finalize(unsigned);
   ///@}
   /** @name Modification */
   ///@{
@@ -415,14 +418,16 @@ protected:
       const set<unsigned> & to_reduce,
       unsigned mod
   );
+  /** @brief which matrix we're computing */
+  unsigned matrix_id;
   /** @brief number of columns in the polynomial */
   unsigned num_cols;
   /** @brief number of rows in the matrix */
   unsigned num_rows;
   /** @brief monomials for each matrix */
-  vector< Monomial * > M;
+  vector< Monomial * > & M_reference;
   /** @brief hash table of the monomials in @c M */
-  F4_Hash M_table;
+  F4_Hash & M_table;
   /** @brief locks on the reducers */
   vector<mutex> red_lock;
   /**
@@ -446,6 +451,8 @@ protected:
   vector< list<PP_With_Ideal> > potential_ideals;
   /** @brief storage of monomials and reducers while preprocessing */
   map<Monomial *, Abstract_Polynomial *, MonCmp> M_builder;
+  /** @brief monomials for the current matrix; value refers to index in M_reference */
+  vector<size_t> M;
   /** @brief finalized list of indices of reducers for the corresponding monomials of @c f */
   vector<Abstract_Polynomial *> R;
   /** @brief mutexes for building rows of @c R */

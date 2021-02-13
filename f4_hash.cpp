@@ -5,7 +5,9 @@ ostream & operator << (ostream & os, const F4_Hash & ht) {
     if (ht.table[i].size() != 0) {
       os << i << ": ";
       for (auto iter = ht.table[i].begin(); iter != ht.table[i].end(); ++iter)
-        os << '(' << *(iter->first) << ',' << iter->second << ") ";
+        os << '(' << *(iter->first)
+            << ", {" << iter->second.location << ", " << iter->second.matrix_id
+            << "} ) ";
       os << endl;
     }
   }

@@ -41,10 +41,6 @@ using std::initializer_list;
 using std::endl;
 using std::string;
 
-#define EPACK false /** whether to pack exponents */
-#define PACKSIZE uint8_t /** size of packed exponent -- do not change unless you are willing to change MASKALL in <c>.cpp</c> file (and maybe more) */
-#define NPACK sizeof(unsigned long long)/sizeof(PACKSIZE)    /** number of exponents to pack */
-
 /** @brief used to locate a variable's exponent in the Monomial data structure */
 struct Exponent_Location_Struct {
   /**
@@ -95,6 +91,7 @@ public:
   /** @brief things all @c Monomial initializers must do */
   inline void common_initialization(const Monomial_Ordering * ord = nullptr) {
     exponents = nullptr; ordering_data = nullptr; ordering = ord;
+    exponent_mask = 0;
   }
   /** @brief clears ordering data */
   inline void clear_ordering_data() { ordering_data = nullptr; }
@@ -225,6 +222,9 @@ public:
       result[exponents[i]] = 1;
     return result;
   }
+  long long unsigned get_exponent_mask() const {
+    return exponent_mask;
+  }
   ///@}
   /**
     @name Comparison
@@ -260,11 +260,7 @@ public:
   /** @brief Have same variables, same powers? Synonymous with operator==(). */
   bool is_like(const Monomial &other) const;
   /** @brief Have same variables, same powers? Comparison of exponent vectors. */
-  bool is_like(const EXP_TYPE * e) const {
-    bool result = true;
-    for (unsigned i = 0; result and i < n; ++i) result = exponents[i] == e[i];
-    return result;
-  }
+  bool is_like(const EXP_TYPE * e) const;
   /** @brief is <c>this</c> like @f$uv@f$? */
   bool like_multiple(const Monomial &u, const Monomial &v) const;
   /**
@@ -367,7 +363,10 @@ public:
   /** @brief returns data to Monomial's Grading_Order_Data_Allocator */
   void operator delete(void *);
   ///@}
-  DEG_TYPE cached_weighted_degree(const WT_TYPE * w, WT_TYPE s) const;
+  DEG_TYPE cached_weighted_degree(const WT_TYPE * w) const;
+  void fix_mask() const;
+  bool same_mask(const Monomial &) const;
+  bool same_mask(const Monomial &, const Monomial &) const;
 protected:
   /**
     @brief locate the indicated exponent
@@ -389,6 +388,8 @@ protected:
   NVAR_TYPE n;
   /** @brief has size n */
   EXP_TYPE * exponents;
+  /** @brief mask to speed comparisons */
+  mutable long long unsigned exponent_mask;
   /** @brief last valid exponent */
   NVAR_TYPE last = 0;
   /**
@@ -401,7 +402,7 @@ protected:
   Monomial_Order_Data * ordering_data;
   /** @brief trying to speed up hashing */
   mutable DEG_TYPE cached_degree = 0;
-  mutable WT_TYPE cached_signature = 0;
+  mutable bool cached_signature = false;
 };
 
 #endif

@@ -20,6 +20,19 @@ using std::pair;
 #include "monomial.hpp"
 #include "polynomial_hashed.hpp"
 
+extern double get_index_time;
+
+/**
+  information for the monomial: location in the table, when last used
+*/
+struct usage_information {
+  size_t location = 0;
+  size_t matrix_location = 0;
+  unsigned matrix_id = -1;
+};
+
+const usage_information NOT_FOUND;
+
 /**
   @ingroup GBComputation
   @brief hash table class, based on discussions with Christian Eder
@@ -33,13 +46,23 @@ class F4_Hash {
 
     NVAR_TYPE n; /**< @brief number of variables in the monomials stored */
     WT_TYPE * weights; /**< @brief randomized weighting for each exponent */
-    static const size_t MAXIMUM = 1 << 18; /**< @brief number of entries in table */
-    vector< vector<pair<const Monomial *, size_t> > > table; /**< @brief the actual table */
-    DEG_TYPE signature;
+    /**
+      @brief number of entries in table
+    */
+    static const size_t MAXIMUM = 1 << 18;
+    /**
+      @brief the actual table
+    */
+    vector< vector<pair<const Monomial *, usage_information> > > table;
+    /**
+      @brief signature for the table, to help with caching computations
+    */
+    WT_TYPE signature;
 
   public:
 
     /** @brief maximum length of a list in the table; currently for info only */
+    size_t max_size = 0;
     /**
       @brief allocates the table and sets up randomized hash function
       @param num_vars number of variables in the monomials this table will check
@@ -53,11 +76,8 @@ class F4_Hash {
       uniform_int_distribution<int> rand(0, MAXIMUM / n - 1 );
       for (NVAR_TYPE i = 0; i < n; ++i) {
         weights[i] = rand(generator);
-        for (NVAR_TYPE j = 0; j < i; ++j) {
-          weights[i] = weights[i] * ( MAXIMUM / n - 1 );
-        }
       }
-      signature = ( rand(generator) * rand(generator) ) % MAXIMUM;
+      signature = ( rand(generator) + rand(generator) ) % MAXIMUM;
     }
 
     /**
@@ -81,8 +101,8 @@ class F4_Hash {
       @param t @c Monomial
       @return which table entry contains the list that contains @p t
     */
-    size_t get_index(const Monomial & t) {
-      DEG_TYPE index = t.cached_weighted_degree(weights, signature);
+    size_t get_index(const Monomial & t) const {
+      DEG_TYPE index = t.cached_weighted_degree(weights);
       return index % MAXIMUM;
     }
 
@@ -92,8 +112,8 @@ class F4_Hash {
       @param u @c Monomial
       @return which table entry contains the list that contains \f$tu\f$
     */
-    size_t get_index(const Monomial & t, const Monomial & u) {
-      DEG_TYPE index = t.cached_weighted_degree(weights, signature) + u.cached_weighted_degree(weights, signature);
+    size_t get_index(const Monomial & t, const Monomial & u) const {
+      DEG_TYPE index = t.cached_weighted_degree(weights) + u.cached_weighted_degree(weights);
       return index % MAXIMUM;
     }
 
@@ -103,12 +123,12 @@ class F4_Hash {
       @param u @c exponent vector
       @return which table entry contains the list that contains \f$tu\f$
     */
-    size_t get_index(const Monomial & t, const EXP_TYPE * u) {
-      DEG_TYPE index = 0;
-      for (NVAR_TYPE i = 0; i < n; ++i)
-        index += ((t[i] + u[i]) * weights[i]);
-      return index % MAXIMUM;
-    }
+    //size_t get_index(const Monomial & t, const EXP_TYPE * u) {
+    //  DEG_TYPE index = 0;
+    //  for (NVAR_TYPE i = 0; i < n; ++i)
+    //    index += ((t[i] + u[i]) * weights[i]);
+    //  return index % MAXIMUM;
+    //}
 
     /**
       @brief modifies the location of the specified monomial in the lookup table
@@ -120,20 +140,30 @@ class F4_Hash {
         appears in the table, so if the monomial hasn't been added there will
         be errors and probably termination.
       @param t @c Monomial that has already been added to the table
+      @param matrix which matrix the location applies to
       @param location column for coefficients of @c t
     */
-    void update_location(const Monomial * t, size_t location) {
+    void update_location(const Monomial * t, unsigned matrix, size_t location) {
       auto & list = table[get_index(*t)];
       auto curr = list.begin();
       while (not t->is_like(*(curr->first))) ++curr;
-      curr->second = location;
+      curr->second = { curr->second.location, location, matrix };
     }
 
     /**
       @brief indicates whether a monomial has been added to the table
       @return @c true if and only if @p t has been added to the table
       @param t @c Monomial whose presence we'd like to determine
+      @param matrix which matrix we want @c t to be in
     */
+    //usage_information contains_in_matrix(const Monomial * t, unsigned matrix) {
+    //  auto & list = table[get_index(*t)];
+    //  auto curr = list.begin();
+    //  while (curr != list.end() and not curr->first->is_like(*t)) ++curr;
+    //  if (curr == list.end()) return NOT_FOUND;
+    //  else return curr->second;
+    //}
+
     bool contains(const Monomial * t) {
       auto & list = table[get_index(*t)];
       auto curr = list.begin();
@@ -146,11 +176,29 @@ class F4_Hash {
       @return @c true if and only if \f$ tu \f$ has been added to the table
       @param t monomial whose product we're checking
       @param u monomial whose product we're checking
+      @param matrix which matrix we want @c tu to be in
     */
+    usage_information contains_product_in_matrix(
+        const Monomial & t, const Monomial & u, unsigned matrix
+    ) {
+      //std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+      auto idx = get_index(t,u);
+      //std::chrono::high_resolution_clock::time_point stop = std::chrono::high_resolution_clock::now();
+      //get_index_time += std::chrono::duration_cast<std::chrono::duration<double> >(stop - start).count();
+      auto & list = table[idx];
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->like_multiple(t, u)) ++curr;
+      if (curr == list.end()) return NOT_FOUND;
+      else return curr->second;
+    }
+
     bool contains_product(const Monomial & t, const Monomial & u) {
       auto & list = table[get_index(t, u)];
       auto curr = list.begin();
-      while (curr != list.end() and not curr->first->like_multiple(t, u)) ++curr;
+      //std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+      while (curr != list.end() and not ( curr->first->like_multiple(t, u)) ) ++curr;
+      //std::chrono::high_resolution_clock::time_point stop = std::chrono::high_resolution_clock::now();
+      //get_index_time += std::chrono::duration_cast<std::chrono::duration<double> >(stop - start).count();
       return curr != list.end();
     }
 
@@ -165,10 +213,22 @@ class F4_Hash {
         Essentially, this function merely indicates that such an object
         needs to be tracked, and will eventually be updated for the table.
       @param t @c Monomial for future lookup
+      @param matrix which matrix the monomial is for
     */
-    void add_monomial(const Monomial * t) {
+    void add_monomial_for_matrix(
+        const Monomial * t, size_t location, unsigned matrix = 0
+    ) {
       auto & list = table[get_index(*t)];
-      list.emplace_back(t, 0);
+      auto curr = list.begin();
+      while (curr != list.end() and not curr->first->is_like(*t)) ++curr;
+      if (curr != list.end()) {
+        curr->second.location = location;
+        curr->second.matrix_id = matrix;
+      } else {
+        usage_information new_value { location, 0, matrix };
+        list.emplace_back(t, new_value );
+      }
+      if (list.size() > max_size) max_size = list.size();
     }
 
     /**
@@ -181,7 +241,9 @@ class F4_Hash {
     */
     void add_monomial(const Monomial * t, const size_t location) {
       auto & list = table[get_index(*t)];
-      list.emplace_back(t, location);
+      usage_information new_value { location, 0, 0 };
+      list.emplace_back(t, new_value);
+      if (list.size() > max_size) max_size = list.size();
     }
 
     /**
@@ -198,7 +260,7 @@ class F4_Hash {
       auto curr = list.begin();
       while (curr != list.end() and not curr->first->like_multiple(t, u))
         ++curr;
-      return curr->second;
+      return curr->second.matrix_location;
     }
 
     /**
@@ -210,24 +272,31 @@ class F4_Hash {
       @param u @c exponent vector
       @return location of \f$tu\f$ in the array
     */
-    size_t lookup_product(const Monomial & t, const EXP_TYPE * u) {
-      auto & list = table[get_index(t, u)];
-      auto curr = list.begin();
-      while (curr != list.end() and not curr->first->like_multiple(u, t))
-        ++curr;
-      return curr->second;
-    }
+    //size_t lookup_product(const Monomial & t, const EXP_TYPE * u) {
+    //  auto & list = table[get_index(t, u)];
+    //  auto curr = list.begin();
+    //  while (curr != list.end() and not curr->first->like_multiple(u, t))
+    //    ++curr;
+    //  return curr->second.matrix_location;
+    //}
 
     /**
       @brief indicates which location is associated with @p t
       @param t @c Monomial
       @return location of @p t in the array
     */
-    unsigned operator[](const Monomial & t) {
+    unsigned operator[](const Monomial & t) const {
       auto & list = table[get_index(t)];
       auto curr = list.begin();
       while (not curr->first->is_like(t)) ++curr;
-      return curr->second;
+      return curr->second.location;
+    }
+
+    unsigned matrix_location(const Monomial & t) const {
+      auto & list = table[get_index(t)];
+      auto curr = list.begin();
+      while (not curr->first->is_like(t)) ++curr;
+      return curr->second.matrix_location;
     }
 
     /** @brief list the monomials stored at this monomial's index */
@@ -235,11 +304,30 @@ class F4_Hash {
       auto & list = table[get_index(t)];
       cout << "bucket " << get_index(t) << endl;
       for (auto storage : list) {
-        cout << "\t( " << *storage.first << " , " << storage.second << " )\n";
+        cout << "\t( " << *storage.first << " , { " << storage.second.location
+              << ", " << storage.second.matrix_id << " } )\n";
       }
     }
 
     friend ostream & operator << (ostream &, const F4_Hash &);
+
+    unsigned num_unused() {
+      unsigned result = 0;
+      for (auto entry : table) {
+        if (entry.size() == 0) ++result;
+      }
+      return result;
+    }
+    
+    unsigned num_total() { return table.size(); }
+    
+    unsigned load() {
+      unsigned result = 0;
+      for (auto entry : table) {
+        result += entry.size();
+      }
+      return result / table.size();
+    }
 
 };
 

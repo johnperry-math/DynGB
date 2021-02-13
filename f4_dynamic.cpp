@@ -94,11 +94,15 @@ F4_Reduction_Data::F4_Reduction_Data(
     WGrevlex * curr_ord,
     const list<Critical_Pair_Dynamic *> & P,
     const list<Abstract_Polynomial *> & B,
-    Dynamic_Heuristic method
+    Dynamic_Heuristic method,
+    vector<Monomial *> & mon_archive,
+    F4_Hash & hasher,
+    unsigned id_number
 ) :
     G(B), Rx(P.front()->first()->base_ring()), heur(method),
-    M_table(P.front()->first()->base_ring().number_of_variables()),
-    mord(curr_ord)
+    M_reference { mon_archive }, M_table { hasher },
+    mord(curr_ord),
+    matrix_id(id_number)
 {
   static double overall_time = 0;
   static double initializing_time = 0;
@@ -149,7 +153,8 @@ F4_Reduction_Data::F4_Reduction_Data(
     add_monomials(curr_ord, p->first(), p->first_multiplier(), true);
     if (p->second() != nullptr) {
       add_monomials(curr_ord, p->second(), p->second_multiplier());
-      M_builder[const_cast<Monomial *>(&(p->lcm()))] = const_cast<Abstract_Polynomial *>(p->second());
+      M_builder[const_cast<Monomial *>(&(p->lcm()))]
+          = const_cast<Abstract_Polynomial *>(p->second());
     }
   }
   // for each monomial, find an appropriate reducer
@@ -232,16 +237,16 @@ void F4_Reduction_Data::initialize_many(const list<Critical_Pair_Dynamic *> & P)
   strategies.resize(num_rows);
   nonzero_entries.resize(num_rows);
   R_built.resize(num_cols);
-  for (auto m : M) delete m;
+  //for (auto m : M) delete m;
   M.clear(); M.resize(M_builder.size());
   R.clear(); R.resize(M_builder.size());
   vector<mutex> new_red_mutex(M_builder.size());
   red_mutex.swap(new_red_mutex);
   size_t m = 0;
   for (auto mi = M_builder.rbegin(); mi != M_builder.rend(); ++mi) {
-    M[m] = mi->first;
+    M_table.update_location(mi->first, matrix_id, m);
+    M[m] = M_table[*(mi->first)];
     R[m] = mi->second;
-    M_table.update_location(mi->first, m);
     ++m;
   }
   A.resize(P.size());
@@ -304,13 +309,22 @@ void F4_Reduction_Data::add_monomials(
   if (not new_row) pi->moveRight();
   while (not (pi->fellOff())) {
     //high_resolution_clock::time_point start = high_resolution_clock::now();
-    bool already_there = M_table.contains_product(pi->currMonomial(), u);
+    usage_information product_location
+        = M_table.contains_product_in_matrix(pi->currMonomial(), u, matrix_id);
     //high_resolution_clock::time_point stop = high_resolution_clock::now();
     //emplace_time += duration_cast<duration<double> >(stop - start).count();
-    if (not already_there) {
-      Monomial * t = new Monomial(pi->currMonomial(), u);
-      t->set_monomial_ordering(curr_ord);
-      M_table.add_monomial(t);
+    unsigned matrix_found = product_location.matrix_id;
+    if (matrix_found != matrix_id) {
+      Monomial * t;
+      if (matrix_found != -1) {
+        t = M_reference[product_location.location];
+        //M_table.add_monomial_for_matrix(t, matrix_id);
+      } else {
+        t = new Monomial(pi->currMonomial(), u);
+        t->set_monomial_ordering(curr_ord);
+        M_reference.push_back(t);
+        M_table.add_monomial_for_matrix(t, M_reference.size() - 1, matrix_id);
+      }
       M_builder.emplace(t, nullptr);
     }
     //start = high_resolution_clock::now();
@@ -327,14 +341,16 @@ F4_Reduction_Data::~F4_Reduction_Data() {
     if (strat != nullptr)
       delete strat;
   }
-  for (auto t : M_builder) delete t.first;
+  //for (auto t : M_builder) delete t.first;
+  cout << "there were at most " << M_table.max_size << " monomials in any list of hash table\n";
+  cout << "we spend " << emplace_time << " seconds emplacing\n";
 }
 
 void F4_Reduction_Data::print_row(unsigned i, bool as_poly) {
   auto & Ai = A[i];
   for (unsigned j = 0; j < Ai.size(); ++j) {
     if (as_poly) {
-      cout << " + " << Ai[j].second << " " << *M[Ai[j].first];
+      cout << " + " << Ai[j].second << " " << *M_reference[M[Ai[j].first]];
     } else {
       cout << Ai[j].second << " (" << Ai[j].first << "), ";
     }
@@ -345,7 +361,7 @@ void F4_Reduction_Data::print_row(unsigned i, bool as_poly) {
 void F4_Reduction_Data::print_matrix(bool show_data) {
   if (show_data) { // print monomials
     for (auto m : M)
-      cout << *m << ", ";
+      cout << *M_reference[m] << ", ";
     cout << endl;
   }
   for (unsigned i = 0; i < num_rows; ++i) { // print entries
@@ -365,7 +381,7 @@ void F4_Reduction_Data::print_matrix(bool show_data) {
 
 void F4_Reduction_Data::list_reducers() {
   for (unsigned i = 0; i < num_cols; ++i) {
-    cout << *(M[i]) << " to be reduced by ";
+    cout << *(M_reference[M[i]]) << " to be reduced by ";
     if (R[i] == nullptr)
       cout << "none\n";
     else
@@ -385,7 +401,7 @@ void F4_Reduction_Data::build_reducer(unsigned mi) {
   Polynomial_Iterator * gi = g->new_iterator();
   auto & r = R_built[mi];
   r.resize(g->length());
-  Monomial u(*M[mi], g->leading_monomial(), false);
+  Monomial u(*M_reference[M[mi]], g->leading_monomial(), false);
   unsigned k = 0;
   while (not gi->fellOff()) {
     const Monomial & t = gi->currMonomial();
@@ -619,14 +635,11 @@ void F4_Reduction_Data::reduce_by_new(
   //print_matrix(false);
 }
 
-Polynomial_Hashed * F4_Reduction_Data::finalize(
-    unsigned i, vector< Monomial * > & final_monomials, F4_Hash & final_hash
-) {
+Polynomial_Hashed * F4_Reduction_Data::finalize(unsigned i) {
   Polynomial_Hashed * result;
   const Prime_Field & F = Rx.ground_field();
   UCOEF_TYPE mod = F.modulus();
-  NVAR_TYPE n = M[0]->num_vars();
-  result = new Polynomial_Hashed(Rx, final_monomials, final_hash, A[i], M, mord);
+  result = new Polynomial_Hashed(Rx, M_reference, M_table, A[i], M, mord);
   result->set_strategy(strategies[i]);
   strategies[i] = nullptr;
   return result;
@@ -687,20 +700,20 @@ void divisibility_tests(
   bool verbose = false;
   if (verbose) {
     cout << "checking divisibility criterion for ";
-    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    for (auto i : allPPs) cout << *F4.M_reference[F4.M[i]] << ", ";
     cout << endl;
   }
   auto it = allPPs.begin();
-  auto n = F4.M.front()->num_vars();
+  auto n = F4.M_reference[F4.M.front()]->num_vars();
   while ((not stop) and it != allPPs.end()) {
     bool incompatible = false, new_incompatible = false;
-    auto & u = F4.M[*it];
+    auto & u = F4.M_reference[F4.M[*it]];
     set<Monomial *> T;
-    Monomial Tt(n, F4.M.front()->monomial_ordering());
+    Monomial Tt(n, F4.M_reference[F4.M.front()]->monomial_ordering());
     for (auto j : allPPs) {
       if (stop or incompatible) break;
       if (j != *it) {
-        auto & t = F4.M[j];
+        auto & t = F4.M_reference[F4.M[j]];
         if (t->divisible_by(*u)) {
           incompatible = true;
           ++old_divisibile_incompatible;
@@ -759,26 +772,26 @@ void divisibility_tests_new(
   bool verbose = false;
   bool very_verbose = false;
   if (very_verbose) {
-    for (auto i : allPPs) cout << *F4.M[i] << ", ";
+    for (auto i : allPPs) cout << *F4.M_reference[F4.M[i]] << ", ";
     cout << endl;
   }
   // build monomial for multi-divisibility criterion
-  auto n = F4.M.front()->num_vars();
-  Monomial Ttall(n, F4.M.front()->monomial_ordering());
+  auto n = F4.M_reference[F4.M.front()]->num_vars();
+  Monomial Ttall(n, F4.M_reference[F4.M.front()]->monomial_ordering());
   for (auto j : allPPs) {
     if (stop) break;
-    auto & t = F4.M[j];
+    auto & t = F4.M_reference[F4.M[j]];
     Ttall *= *t;
   }
   auto it = allPPs.begin();
   while ((not stop) and it != allPPs.end()) {
     // check for simple divisibility
     bool incompatible = false, new_incompatible = false;
-    auto & u = F4.M[*it];
+    auto & u = F4.M_reference[F4.M[*it]];
     for (auto j : allPPs) {
       if (stop or incompatible) break;
       if (j != *it) {
-        auto & t = F4.M[j];
+        auto & t = F4.M_reference[F4.M[j]];
         if (t->divisible_by(*u)) {
           incompatible = true;
           if (verbose)
@@ -792,7 +805,7 @@ void divisibility_tests_new(
       set<Monomial *> T;
       for (auto set_it = allPPs.begin(); set_it != allPPs.end(); ++set_it) {
         if (it != set_it) {
-          T.insert(F4.M[*set_it]);
+          T.insert(F4.M_reference[F4.M[*set_it]]);
         }
       }
       Monomial Tt(Ttall); Tt /= *u;
@@ -847,7 +860,7 @@ void divisibility_tests_new(
     auto next_it(it); ++next_it;
     if (incompatible) {
       ++divisible_incompatible;
-      Ttall /= *F4.M[*it];
+      Ttall /= *F4.M_reference[F4.M[*it]];
       allPPs.erase(it);
     }
     it = next_it;
@@ -922,7 +935,7 @@ void compatible_pp(
   int currentLPP_index = F4.A[my_row][0].first;
 
   // get the exponent vector of the current LPP, insert it
-  const Monomial & currentLPP(*F4.M[currentLPP_index]);
+  const Monomial & currentLPP(*F4.M_reference[F4.M[currentLPP_index]]);
   NVAR_TYPE n = currentLPP.num_vars();
   list<int> initial_candidates;
   initial_candidates.push_back(currentLPP_index);
@@ -939,7 +952,7 @@ void compatible_pp(
     //divisibility_tests(allPPs, F4, stop);
     for (const int b : allPPs) {
       if (stop) break;
-      const Monomial & u(*F4.M[b]);
+      const Monomial & u(*F4.M_reference[F4.M[b]]);
       auto & F4b = F4.pp_weights[b];
       auto m = F4b.size();
       //if (currentLPP_index != b and skel->makes_consistent_constraint(u, currentLPP))
@@ -966,7 +979,7 @@ void compatible_pp(
         if (stop) break;
         auto & F4b = F4.pp_weights[b];
         auto m = F4b.size();
-        const Monomial & u(*F4.M[b]);
+        const Monomial & u(*F4.M_reference[F4.M[b]]);
         bool good_constraints = true;
         for (int c : initial_candidates) {
           if (b != c) {
@@ -1023,7 +1036,7 @@ void F4_Reduction_Data::constraints_for_new_pp(
   // loop through exponent vectors of other 
   for (const int ti : monomials_for_comparison)
   {
-    const Monomial & t{*M[ti]};
+    const Monomial & t{*M_reference[M[ti]]};
     // insert only different PPs (since I->t should also be in that set)
     if (t != I.get_pp())
     {
@@ -1229,7 +1242,7 @@ void F4_Reduction_Data::create_and_sort_ideals(
   possibleIdealsBasic.clear();
   for (const int ti : row_compatibles)
   {
-    PP_With_Ideal newIdeal(*M[ti], CurrentLPPs, w, crit_pairs, current_hilbert_numerator);
+    PP_With_Ideal newIdeal(*M_reference[M[ti]], CurrentLPPs, w, crit_pairs, current_hilbert_numerator);
     possibleIdealsBasic.push_back(newIdeal);
     /*cout << "pushed back " << *M[ti]
          << " with hilbert poly " << *newIdeal.get_hilbert_polynomial()
@@ -1316,7 +1329,7 @@ void F4_Reduction_Data::recache_weights(LP_Solver * skel) {
 
   for (unsigned i = 0; i < pp_weights.size(); ++i) {
     auto & cache = pp_weights[i];
-    auto & t = *M[i];
+    auto & t = *M_reference[M[i]];
     for (unsigned j = 0; j < rays.size(); ++j) {
       cache[j] = 0;
       for (unsigned k = 0; k < n; ++k)
@@ -1495,10 +1508,11 @@ unsigned F4_Reduction_Data::select_dynamic_single(
     );
   }
 
-  unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
+  //unsigned j = M_table[potential_ideals[winning_row].front().get_pp()];
+  unsigned j = M_table.matrix_location(potential_ideals[winning_row].front().get_pp());
   pref_head[winning_row] = j;
-  expected_result = M[j];
-  cout << "selected " << *M[j] << " from row " << winning_row << endl;
+  expected_result = M_reference[M[j]];
+  cout << "selected " << *M_reference[j] << " from row " << winning_row << endl;
   static double new_reduction_time = 0;
   time_t start_time = time(nullptr);
   auto & Ai = A[winning_row];
@@ -1512,7 +1526,7 @@ unsigned F4_Reduction_Data::select_dynamic_single(
   time_t end_time = time(nullptr);
   new_reduction_time += difftime(end_time, start_time);
   cout << "spent " << new_reduction_time << " seconds in reducing by new polys\n";
-  U.push_back(*M[j]);
+  U.push_back(*M_reference[M[j]]);
   unprocessed.erase(winning_row);
   for (unsigned i = 0; i < number_of_rows(); ++i)
     if (unprocessed.count(i) > 0)
@@ -1548,7 +1562,7 @@ void F4_Reduction_Data::determine_dominators(const LP_Solver * skel) {
   for (auto i = 1; i < M.size(); ++i) {
     dominators[i] = M.size();
     for (auto j = i - 1; j > 0; --j) {
-      if (not skel->makes_consistent_constraint(*M[i], *M[j])) {
+      if (not skel->makes_consistent_constraint(*M_reference[M[i]], *M_reference[M[j]])) {
         dominators[i] = j;
         ++dominators_found;
         break;
@@ -1620,8 +1634,10 @@ list<Abstract_Polynomial *> f4_control(
   // main loop
   bool verbose = false;
   bool very_verbose = false;
+  unsigned matrix_number = 0;
   list<Critical_Pair_Dynamic *> Pnew;
   while (not P.empty()) {
+    ++matrix_number;
     sort_pairs_by_strategy(P);
     report_critical_pairs(P);
     Critical_Pair_Dynamic * p = P.front();
@@ -1672,7 +1688,7 @@ list<Abstract_Polynomial *> f4_control(
     }
     // make s-poly
     time_t start_time = time(nullptr);
-    F4_Reduction_Data s(curr_ord, Pnew, G, heur);
+    F4_Reduction_Data s(curr_ord, Pnew, G, heur, finalized_monomials, finalized_hash, matrix_number);
     if (USE_DOMINATORS) s.determine_dominators(skel);
     time_t end_time = time(nullptr);
     creation_time += difftime(end_time, start_time);
@@ -1707,7 +1723,7 @@ list<Abstract_Polynomial *> f4_control(
           );
           time_t end_time = time(nullptr);
           dynamic_time += difftime(end_time, start_time);
-          Polynomial_Hashed * r = s.finalize(completed_row, finalized_monomials, finalized_hash);
+          Polynomial_Hashed * r = s.finalize(completed_row);
           if (s.number_of_compatibles(completed_row) > 1) ++comparisons;
           cout << comparisons << " refinements\n";
           all_completed_rows.insert(completed_row);
@@ -1760,7 +1776,7 @@ list<Abstract_Polynomial *> f4_control(
               winning_lm = s.head_monomial_index(i, static_algorithm);
             }
           }
-cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
+          cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
           s.normalize(winning_row, winning_lm);
           s.reduce_by_new(winning_row, winning_lm, unprocessed);
           auto loc = unfinalized.begin();
@@ -1772,7 +1788,7 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
       }
       for (auto row : unfinalized) {
         all_completed_rows.insert(row);
-        Polynomial_Hashed * r = s.finalize(row, finalized_monomials, finalized_hash);
+        Polynomial_Hashed * r = s.finalize(row);
         //log_file << " new poly ( " << operating_degree << " , " << r->leading_monomial().total_degree() << " ): " << *r << endl;// r->println(log_file);
         if (ordering_changed) {
           r->set_monomial_ordering(curr_ord);
@@ -1854,6 +1870,9 @@ cout << "row " << winning_row << " selects " << s.monomial(winning_lm) << endl;
   cout << "time spent adding monomials: " << adding_time << endl;
   cout << "time spent caching weighted degree: " << caching_time << endl;
   cout << "time spent getting indices: " << get_index_time << endl;
+  cout << "hash table entries unused: " << finalized_hash.num_unused()
+        << " of " << finalized_hash.num_total() << endl;
+  cout << "hash table load: " << finalized_hash.load() << endl;
   return B;
 }
 

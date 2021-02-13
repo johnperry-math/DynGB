@@ -38,7 +38,36 @@ Polynomial_Hashed::Polynomial_Hashed(
     vector< Monomial * > & monomials,
     F4_Hash & monomial_hash,
     const vector< pair< unsigned, COEF_TYPE > > & from_row,
-    const vector< Monomial * > & row_monomials,
+    Monomial_Ordering * mord
+)
+  : Abstract_Polynomial(R, mord), M(monomials), hash(monomial_hash), mord(mord)
+{
+  terms.reserve(from_row.size());
+  auto & F = R.ground_field();
+  for (const auto & p : from_row) {
+    const auto t = monomials[ p.first ];
+    if (p.second == 0)
+      cout << "error: trying to save a monomial w/coefficient 0: " << *t << "\n";
+    else {
+      if (not hash.contains(t)) {
+        monomials.emplace_back(new Monomial(*t));
+        auto where = monomials.size() - 1;
+        hash.add_monomial(monomials[where], where);
+      }
+      terms.emplace_back(
+          hash[*t],
+          Prime_Field_Element( p.second , &F )
+      );
+    }
+  }
+}
+
+Polynomial_Hashed::Polynomial_Hashed(
+    Polynomial_Ring & R,
+    vector< Monomial * > & monomials,
+    F4_Hash & monomial_hash,
+    const vector< pair< unsigned, COEF_TYPE > > & from_row,
+    const vector< size_t > & row_monomials,
     Monomial_Ordering * mord
 )
   : Abstract_Polynomial(R, mord), M(monomials), hash(monomial_hash), mord(mord)
@@ -47,7 +76,7 @@ Polynomial_Hashed::Polynomial_Hashed(
   auto & F = R.ground_field();
 //auto d = row_monomials[from_row[0].first]->total_degree();
   for (const auto & p : from_row) {
-    const auto t = row_monomials[p.first];
+    const auto t = monomials[ row_monomials[p.first] ];
 //if (t->total_degree() != d) cout << "ERROR 1 adding " << *row_monomials[from_row[0].first] << " 's monomial " << *t << endl;
     if (p.second == 0)
       cout << "error: trying to save a monomial w/coefficient 0: " << *t << "\n";
@@ -146,7 +175,7 @@ bool Polynomial_Hashed::is_zero() const {
 
 Polynomial_Hashed * Polynomial_Hashed::zero_polynomial() const {
   vector< pair< unsigned, COEF_TYPE> > new_terms;
-  return new Polynomial_Hashed(R, M, hash, new_terms, M, mord);
+  return new Polynomial_Hashed(R, M, hash, new_terms, mord);
 }
 
 Polynomial_Hashed * Polynomial_Hashed::monomial_multiple(
@@ -165,7 +194,7 @@ Polynomial_Hashed * Polynomial_Hashed::monomial_multiple(
       new_terms.emplace_back(M.size() - 1, p.second.value());
     }
   }
-  return new Polynomial_Hashed(R, M, hash, new_terms, M, mord);
+  return new Polynomial_Hashed(R, M, hash, new_terms, mord);
 }
 
 Polynomial_Hashed * Polynomial_Hashed::scalar_multiple(
@@ -179,7 +208,7 @@ Polynomial_Hashed * Polynomial_Hashed::scalar_multiple(
         p.first, p.second.value() * a0 % mod
     );
   }
-  return new Polynomial_Hashed(R, M, hash, new_terms, M, mord);
+  return new Polynomial_Hashed(R, M, hash, new_terms, mord);
 }
 
 Hashed_Polynomial_Iterator * Polynomial_Hashed::new_iterator() const {

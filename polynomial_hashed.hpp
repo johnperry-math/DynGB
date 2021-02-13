@@ -68,7 +68,7 @@ public:
       vector< Monomial * > & monomials,
       F4_Hash & monomial_hash,
       const vector< pair< unsigned, COEF_TYPE > > & from_row,
-      const vector< Monomial * > & row_monomials,
+      const vector< size_t > & row_monomials,
       Monomial_Ordering * mord
   );
   Polynomial_Hashed(
@@ -108,6 +108,13 @@ protected:
   bool sort_indirect(
       pair< unsigned, Prime_Field_Element > & first,
       pair< unsigned, Prime_Field_Element > & second
+  );
+  Polynomial_Hashed(
+      Polynomial_Ring & R,
+      vector< Monomial * > & monomials,
+      F4_Hash & monomial_hash,
+      const vector< pair< unsigned, COEF_TYPE > > & from_row,
+      Monomial_Ordering * mord
   );
   Poly_Strategy_Data * strat = nullptr;
   vector< pair< unsigned, Prime_Field_Element > > terms;

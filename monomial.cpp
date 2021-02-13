@@ -118,6 +118,7 @@ void Monomial::compress() {
 }
 
 void Monomial::set_exponent(NVAR_TYPE i, DEG_TYPE e) {
+  //if (e != 0) exponent_mask |= 1 << i; else exponent_mask &= !(1 << i);
   if (not valid_exponents()) {
     last = 2;
     exponents[0] = i;
@@ -134,11 +135,27 @@ void Monomial::set_exponent(NVAR_TYPE i, DEG_TYPE e) {
   }
 }
 
+void Monomial::fix_mask() const {
+  exponent_mask = 0;
+  for (NVAR_TYPE i = 0; i < last; i += 2)
+    if (exponents[i + 1] != 0) exponent_mask |= ( 1 << exponents[i] );
+    else exponent_mask &= !( 1 << exponents[i] );
+}
+
+bool Monomial::same_mask(const Monomial & t) const {
+  return exponent_mask == t.exponent_mask;
+}
+
+bool Monomial::same_mask(const Monomial & t, const Monomial & u) const {
+  return exponent_mask == ( t.exponent_mask | u.exponent_mask );
+}
+
 Monomial::Monomial(
     NVAR_TYPE number_of_vars, const Monomial_Ordering * order
 ) {
   common_initialization(order);
   initialize_exponents(number_of_vars);
+  //fix_mask();
   ordering->set_data(*this);
 }
 
@@ -209,6 +226,7 @@ void Monomial::make_product_or_quotient(
     }
     compress();
   }
+  //fix_mask();
   ordering->set_data(*this); 
 }
 
@@ -222,6 +240,7 @@ Monomial::Monomial(const Monomial &other) {
   common_initialization(other.ordering);
   n = other.n;
   last = other.last;
+  //exponent_mask = other.exponent_mask;
   //moda_mutex.lock();
   exponents = moda->get_new_block();
   //moda_mutex.unlock();
@@ -250,6 +269,7 @@ Monomial::Monomial(
     }
     ++i;
   }
+  //fix_mask();
   ordering->set_data(*this);
 }
 
@@ -270,6 +290,7 @@ Monomial::Monomial(
       last += 2;
     }
   }
+  //fix_mask();
   ordering->set_data(*this);
 }
 
@@ -300,8 +321,7 @@ DEG_TYPE Monomial::total_degree(NVAR_TYPE m) const {
   return result;
 };
 
-DEG_TYPE Monomial::weighted_degree(const WT_TYPE *weights, NVAR_TYPE m)
-const {
+DEG_TYPE Monomial::weighted_degree(const WT_TYPE *weights, NVAR_TYPE m) const {
   DEG_TYPE result = 0;
   if (m == 0) m = n;
   if (weights == nullptr)
@@ -321,21 +341,23 @@ using std::chrono::high_resolution_clock;
 
 double caching_time = 0;
 
-DEG_TYPE Monomial::cached_weighted_degree(const WT_TYPE *weights, WT_TYPE signature) const {
+DEG_TYPE Monomial::cached_weighted_degree(const WT_TYPE *weights) const {
   //high_resolution_clock::time_point start = high_resolution_clock::now();
   DEG_TYPE result = 0;
-  if ( cached_signature == signature ) {
+  if ( cached_signature ) {
     result = cached_degree;
     ++monomial_cache_hits;
   } else {
     ++monomial_cache_misses;
     if (weights == nullptr)
       result = total_degree();
-    else
+    else {
       for (NVAR_TYPE i = 0; i < last; i += 2)
         result += weights[exponents[i]]*exponents[i + 1];
+      //result += total_degree();
+    }
     cached_degree = result;
-    cached_signature = signature;
+    cached_signature = true;
   }
   //high_resolution_clock::time_point stop = high_resolution_clock::now();
   //caching_time += duration_cast<duration<double> >(stop - start).count();
@@ -356,12 +378,13 @@ void Monomial::set_ordering_data(Monomial_Order_Data * mordat) {
 }
 
 bool Monomial::operator ==(const Monomial &other) const {
-  if (
-      ( cached_signature != 0 ) &&
-      ( cached_signature == other.cached_signature ) &&
-      ( cached_degree != other.cached_degree )
-  )
-    return false;
+  //if (
+  //    ( cached_signature != 0 ) &&
+  //    ( cached_signature == other.cached_signature ) &&
+  //    ( cached_degree != other.cached_degree )
+  //)
+  //  return false;
+  //if (exponent_mask != other.exponent_mask) return false;
   bool result = (n == other.n) and (last == other.last);
   for (NVAR_TYPE i = 0; result and i < last; i += 2)
     result = exponents[i] == other.exponents[i]
@@ -374,6 +397,7 @@ bool Monomial::operator !=(const Monomial &other) const {
 }
 
 bool Monomial::is_coprime(const Monomial &other) const {
+  //if ( exponent_mask & other.exponent_mask ) return false;
   bool result = true;
   NVAR_TYPE i = 0, j = 0;
   auto oe = other.exponents;
@@ -388,11 +412,24 @@ bool Monomial::is_coprime(const Monomial &other) const {
   return result;
 }
 
-bool Monomial::is_like(const Monomial &other) const { return *this == other; }
+bool Monomial::is_like(const EXP_TYPE * e) const {
+  bool result = true;
+  for (unsigned i = 0; result and i < n; ++i) result = exponents[i] == e[i];
+  return result;
+}
+
+bool Monomial::is_like(const Monomial &other) const {
+  bool result = (n == other.n) and (last == other.last);
+  //bool result = exponent_mask == other.exponent_mask;
+  auto & oe = other.exponents;
+  for (NVAR_TYPE i = 0; result and i < last; i += 2)
+    result = exponents[i] == oe[i] and exponents[i+1] == oe[i+1];
+  return result;
+}
 
 bool Monomial::like_multiple(const EXP_TYPE * e, const Monomial & v) const {
   bool result = (n == v.n) and (last == v.last);
-  auto ve = v.exponents;
+  auto & ve = v.exponents;
   for (NVAR_TYPE i = 0; result and i < last; i += 2)
     result = exponents[i] == ve[i]
         and exponents[i+1] == ve[i+1] + e[exponents[i]];
@@ -400,12 +437,13 @@ bool Monomial::like_multiple(const EXP_TYPE * e, const Monomial & v) const {
 }
 
 bool Monomial::like_multiple(const Monomial &u, const Monomial &v) const {
-  if (
-      ( cached_signature != 0 ) && ( cached_signature == u.cached_signature ) &&
-      ( cached_signature == v.cached_signature ) &&
-      ( cached_degree != u.cached_degree + v.cached_degree )
-     )
-    return false;
+  //if (
+  //    ( cached_signature != 0 ) && ( cached_signature == u.cached_signature ) &&
+  //    ( cached_signature == v.cached_signature ) &&
+  //    ( cached_degree != u.cached_degree + v.cached_degree )
+  //   )
+  //  return false;
+  //if ( exponent_mask != ( u.exponent_mask | v.exponent_mask ) ) return false;
   bool result = (n == u.n and n == v.n);
   auto ue = u.exponents, ve = v.exponents;
   NVAR_TYPE i = 0, j = 0, k = 0;
@@ -456,6 +494,7 @@ bool Monomial::larger_than_multiple(
 }
 
 bool Monomial::divisible_by(const Monomial &other) const {
+  //if ( (!exponent_mask) & other.exponent_mask ) return false; 
   bool result = (n == other.n);
   NVAR_TYPE i = 0, j = 0;
   auto oe = other.exponents;
@@ -479,6 +518,7 @@ bool Monomial::operator |(const Monomial &other) const {
 }
 
 bool Monomial::divisible_by_power(const Monomial &other, unsigned power) const {
+  //if ( (!exponent_mask) & other.exponent_mask ) return false;
   bool result = (n == other.n);
   NVAR_TYPE i = 0, j = 0;
   auto oe = other.exponents;
@@ -498,6 +538,7 @@ bool Monomial::divisible_by_power(const Monomial &other, unsigned power) const {
 }
 
 bool Monomial::divides_lcm(const Monomial &t, const Monomial &u) const {
+  //if ( ( !exponent_mask ) & ( t.exponent_mask | u.exponent_mask ) ) return false;
   bool result = (n == t.n) and (n == u.n);
   NVAR_TYPE i = 0, j = 0, k = 0;
   auto te = t.exponents, ue = u.exponents;
@@ -566,6 +607,7 @@ bool Monomial::divides_lcm(const Monomial &t, const Monomial &u) const {
 }
 
 bool Monomial::like_lcm(const Monomial &t, const Monomial &u) const {
+  //if ( exponent_mask != ( t.exponent_mask | u.exponent_mask ) ) return false;
   bool result = (n == t.n) and (n == u.n);
   NVAR_TYPE i = 0, j = 0, k = 0;
   auto te = t.exponents, ue = u.exponents;
@@ -625,6 +667,7 @@ bool Monomial::like_lcm(const Monomial &t, const Monomial &u) const {
 Monomial & Monomial::operator =(const Monomial &other) {
   if (this != &other)
   {
+    //exponent_mask = other.exponent_mask;
     last = other.last;
     if (other.n > n) {
       moda->return_used_block(exponents);
@@ -648,6 +691,7 @@ Monomial & Monomial::operator =(const Monomial &other) {
 }
 
 Monomial & Monomial::operator *=(const Monomial &other) {
+  //exponent_mask |= other.exponent_mask;
   static EXP_TYPE * buffer = nullptr;
   if (buffer == nullptr) buffer = moda->get_new_block();
   NVAR_TYPE i = 0, j = 0, k = 0;
@@ -693,6 +737,7 @@ Monomial & Monomial::operator *=(const Monomial &other) {
 
 Monomial Monomial::operator *(const Monomial & other) const {
   Monomial u(n);
+  //u.exponent_mask = exponent_mask | other.exponent_mask;
   NVAR_TYPE i = 0, j = 0, k = 0;
   auto oe = other.exponents, ue = u.exponents;
   for (/* already initialized */; i < last and j < other.last; /* */) {
@@ -734,6 +779,7 @@ Monomial Monomial::operator *(const Monomial & other) const {
 Monomial Monomial::operator *(const Indeterminate & other) const {
   Monomial u(n);
   auto i = other.index_in_ring();
+  //u.exponent_mask = exponent_mask | ( 1 << i );
   auto ue = u.exponents;
   NVAR_TYPE k = 0;
   for (/* already initialized */; k < last and exponents[k] < i; k += 2) {
@@ -772,11 +818,13 @@ bool Monomial::operator /=(const Monomial &other) {
   }
   compress();
   ordering->set_data(*this);
+  //fix_mask();
   return result;
 }
 
 Monomial Monomial::lcm(const Monomial & u) const {
    Monomial result(n, monomial_ordering());
+   //result.exponent_mask = exponent_mask | u.exponent_mask;
    result.set_monomial_ordering(monomial_ordering());
    NVAR_TYPE i = 0, j = 0, k = 0;
    auto ue = u.exponents, re = result.exponents;
@@ -815,6 +863,7 @@ Monomial Monomial::lcm(const Monomial & u) const {
 
 Monomial Monomial::gcd(const Monomial & u) const {
    Monomial result(n, monomial_ordering());
+   //result.exponent_mask = exponent_mask & u.exponent_mask;
    result.set_monomial_ordering(monomial_ordering());
    NVAR_TYPE i = 0, j = 0, k = 0;
    auto ue = u.exponents, re = result.exponents;
@@ -879,6 +928,7 @@ Monomial Monomial::colon(const Monomial & u) const {
   }
   result.last = k;
   ordering->set_data(result);
+  //result.fix_mask();
   return result;
 }
 
@@ -912,6 +962,7 @@ void Monomial::print(bool add_newline, ostream & os, const string * names) const
         os << ' ';
       }
   }
+  //os << " << " << exponent_mask << " >> ";
   if (add_newline)
     os << endl;
 }
