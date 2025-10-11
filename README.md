@@ -18,7 +18,10 @@ Depending on what I'm working on at the moment, some older stuff may not actuall
 
 You will need
 
-   - a C++ compiler for C++14, with standard libraries
+   - a C++ compiler for C++17, with standard libraries
+
+     (this used to be C++14, but as of 2025 I am modernizing this somewhat)
+   - the [Guidelines Support Library](https://github.com/microsoft/GSL)
    - the [Gnu Multiple Precision Arithmetic library](https://gmplib.org)
    - the [Gnu Linear Programming Kit](https://www.gnu.org/software/glpk/)
    - the [Parma Polyhedra Library](https://www.bugseng.com/parma-polyhedra-library)
@@ -57,11 +60,16 @@ Now (re-)invoke `make`.
 
 ## Usage
 
+### Executables that currently do not build
+
+  - [`test_cyclicn`](#test_cyclicn): an interface to a static Buchberger algorithm that runs on the Cyclic-n systems. i want to fix this one.
+  - [`test_f4`](#test_f4): an earlier interface to a static F4 algorithm. it is unlikely i will ever make this work, as it is now superseded by [`test_f4_dynamic`](#test_f4_dynamic), which _does_ work, at least usually, and also has an option to run statically.
+
 ### Executables that should build
 
 For `some_executable` I generally make sure the following build:
 
-  - [`test_cyclicn`](#test_cyclicn): an interface to a static Buchberger algorithm that runs on the Cyclic-n systems
+  - `test_cab_es...`: examples taken from a paper by Caboara
   - [`test_dynamic`](#test_dynamic): an interface to a dynamic Buchberger algorithm that runs on the Cyclic-n systems
   - [`test_f4_dynamic`](#test_f4_dynamic): an interface to an F4 algorithm, either static or dynamic, that runs on the Cyclic-n systems
   - [`user_interface`](#user_interface): a program that runs any of the above
