@@ -1,5 +1,5 @@
-#ifndef __MONOMIAL_H_
-#define __MONOMIAL_H_
+#ifndef MONOMIAL_H_
+#define MONOMIAL_H_
 
 /*****************************************************************************\
 * This file is part of DynGB.                                                 *
@@ -24,6 +24,7 @@ using std::bitset;
 #include <cstdlib>
 #include <iostream>
 #include <initializer_list>
+#include <vector>
 
 #include "system_constants.hpp"
 
@@ -33,15 +34,17 @@ using std::bitset;
 
 class Indeterminate;
 
-extern Monomial_Ordering * generic_grevlex_ptr;
+extern Monomial_Ordering *generic_grevlex_ptr;
 
-using std::ostream;
 using std::cout;
-using std::initializer_list;
 using std::endl;
+using std::initializer_list;
+using std::ostream;
 using std::string;
+using std::vector;
 
-/** @brief used to locate a variable's exponent in the Monomial data structure */
+/** @brief used to locate a variable's exponent in the Monomial data structure
+ */
 struct Exponent_Location_Struct {
   /**
     @brief location of the desired exponent, if already set
@@ -56,7 +59,7 @@ struct Exponent_Location_Struct {
   bool already_set = false;
 };
 
-typedef struct Exponent_Location_Struct Exponent_Location;
+using Exponent_Location = struct Exponent_Location_Struct;
 
 /**
   @class Monomial
@@ -64,7 +67,7 @@ typedef struct Exponent_Location_Struct Exponent_Location;
   @date 2015
   @brief Implementation of monomials.
   @ingroup polygroup
-  
+
   @details A monomial is a product of powers, for instance @f$x_1^2x_3@f$.
   (We do not include coefficients in our definition of monomials.)
   This class encapsulates basic monomial functionality necessary
@@ -72,7 +75,7 @@ typedef struct Exponent_Location_Struct Exponent_Location;
 
   @warning When initializing an array of @c Monomial , be sure to use the
   initialization functions to format and allocate space.
-  
+
   @warning Any monomial requires that you specify a number of variables.
   At the present time, the limit on this is 64 (for the sake of masking;
   though an earlier verison of the code did not have this limit).
@@ -82,15 +85,17 @@ typedef struct Exponent_Location_Struct Exponent_Location;
   but if you intend to work with monomials
   that contain a different number of variables,
   check to make sure that any monomial arithmetic involves monomials
-  with the same number of variables. 
+  with the same number of variables.
 */
 class Monomial {
 public:
   /** @name Construction */
   ///@{
   /** @brief things all @c Monomial initializers must do */
-  inline void common_initialization(const Monomial_Ordering * ord = nullptr) {
-    exponents = nullptr; ordering_data = nullptr; ordering = ord;
+  inline void common_initialization(const Monomial_Ordering *ord = nullptr) {
+    exponents = nullptr;
+    ordering_data = nullptr;
+    ordering = ord;
     exponent_mask = 0;
   }
   /** @brief clears ordering data */
@@ -108,26 +113,23 @@ public:
   /** @brief change @f$i@f$th exponent to @f$e@f$ */
   void set_exponent(NVAR_TYPE i, DEG_TYPE e);
   /** @brief The first constructor is equivalent to instantiating 1. */
-  Monomial(
-      NVAR_TYPE number_of_vars,
-      const Monomial_Ordering * order = generic_grevlex_ptr
-  );
+  Monomial(NVAR_TYPE number_of_vars,
+           const Monomial_Ordering *order = generic_grevlex_ptr);
   /**
     @brief "product" constructor when monomial's expoennts already initialized
     @param product @c true if and only if we want a product
     @param t @c Monomial to multiply
     @param u @c Monomial to multiply
   */
-  void make_product_or_quotient(
-      const Monomial & t, const Monomial & u, bool product = true
-  );
+  void make_product_or_quotient(const Monomial &t, const Monomial &u,
+                                bool product = true);
   /**
     @brief "Product" constructor: constructs a product or quotient
     @param product @c true if and only if we want a product
     @param t @c Monomial to multiply
     @param u @c Monomial to multiply
   */
-  Monomial(const Monomial & t, const Monomial & u, bool product = true);
+  Monomial(const Monomial &t, const Monomial &u, bool product = true);
   /** @brief Copy constructor, allocates new space for exponents. */
   Monomial(const Monomial &other);
   /**
@@ -136,10 +138,8 @@ public:
     @param order a Monomial_Ordering in the appropriate number of variables
     @details The list should contains the powers of the exponents, in order.
   */
-  Monomial(
-      initializer_list<EXP_TYPE> powers,
-      const Monomial_Ordering * order = generic_grevlex_ptr
-  );
+  Monomial(initializer_list<EXP_TYPE> powers,
+           const Monomial_Ordering *order = generic_grevlex_ptr);
   /**
     @brief Constructor from array of exponents.
     @param size number of variables in the Monomial
@@ -148,10 +148,8 @@ public:
     @param order a Monomial_Ordering for @p n variables
     @details Copies exponents so you can reuse yours.
   */
-  Monomial(
-      NVAR_TYPE size, const EXP_TYPE *powers,
-      const Monomial_Ordering * order = generic_grevlex_ptr
-  );
+  Monomial(NVAR_TYPE size, const EXP_TYPE *powers,
+           const Monomial_Ordering *order = generic_grevlex_ptr);
   ///@}
   /** @name Destruction */
   ///@{
@@ -164,13 +162,13 @@ public:
   */
   ///@{
   /** @brief number of variables */
-  inline NVAR_TYPE num_vars() const { return n; }
+  inline auto num_vars() const -> NVAR_TYPE { return n; }
   /** @brief all exponents 0? */
-  bool is_one() const;
+  auto is_one() const -> bool;
   /** @brief Degree of @f$i@f$th variable. */
-  DEG_TYPE degree(NVAR_TYPE i) const;
+  auto degree(NVAR_TYPE i) const -> DEG_TYPE;
   /** @brief Degree of @f$i@f$th variable. Synonymous with degree().*/
-  DEG_TYPE operator[](NVAR_TYPE i) const;
+  auto operator[](NVAR_TYPE i) const -> DEG_TYPE;
   /**
     @brief Sum of exponents of the first @p m variables.
     @details If @c m is zero (default), computes for all variables.
@@ -178,7 +176,7 @@ public:
         all
     @return total standard degree of this Monomial
   */
-  DEG_TYPE total_degree(NVAR_TYPE m=0) const;
+  auto total_degree(NVAR_TYPE m = 0) const -> DEG_TYPE;
   /**
     @return weighted sum of first @p m exponents, using given @p weights
     @param weights the weights for each indeterminate: the first weight will
@@ -189,7 +187,8 @@ public:
     @details If @p weights is @c nullptr then returns total_degree(m).
         If @c m is zero (default), computes for all indeterminates.
   */
-  DEG_TYPE weighted_degree(const WT_TYPE *weights, NVAR_TYPE m=0) const;
+  auto weighted_degree(const WT_TYPE *weights, NVAR_TYPE m = 0) const
+      -> DEG_TYPE;
   /**
     @brief access to the exponents, for whatever reason.
     @return an exponent vector @c e where <c>e[i]</c> is
@@ -197,34 +196,31 @@ public:
     @details This is a new array.
       Clients should delete it once they are done using it.
   */
-  EXP_TYPE * log() const {
-    EXP_TYPE * result = new EXP_TYPE[n] { 0 };
+  auto log() const -> EXP_TYPE * {
+    auto result = new EXP_TYPE[n]{0};
     for (NVAR_TYPE i = 0; i < last; i += 2)
       result[exponents[i]] = exponents[i + 1];
     return result;
   }
   /**
-    @brief access to the exponents, packed; use in conjunction with @c packed_size()
+    @brief access to the exponents, packed; use in conjunction with @c
+    packed_size()
     @return array of exponents in the form @f$(i_1,e_1,\ldots,i_k,e_k)@f$
       such that @f$ x_{i_j}^e_{i_j} @f$ divides @c this
     @warning In the current implementation, this provides direct access to the
       underlying data structure. <b>Do not modify or delete.</b>
   */
-  const EXP_TYPE * packed_log() const {
-    return exponents;
-  }
+  auto packed_log() const -> const EXP_TYPE * { return exponents; }
   /** @brief indicates the size of the result of @c packed_log() */
-  NVAR_TYPE packed_size() const { return last; }
+  auto packed_size() const -> NVAR_TYPE { return last; }
   /** @brief exponent mask */
-  const bitset<MASK_SIZE> mask() const {
+  auto mask() const -> const bitset<MASK_SIZE> {
     bitset<MASK_SIZE> result;
     for (NVAR_TYPE i = 0; i < last; i += 2)
       result[exponents[i]] = 1;
     return result;
   }
-  long long unsigned get_exponent_mask() const {
-    return exponent_mask;
-  }
+  auto get_exponent_mask() const -> long long unsigned { return exponent_mask; }
   ///@}
   /**
     @name Comparison
@@ -232,78 +228,79 @@ public:
   */
   ///@{
   /** @brief the Monomial_Ordering associated with this Monomial */
-  inline const Monomial_Ordering * monomial_ordering() const { return ordering; }
+  inline auto monomial_ordering() const -> const Monomial_Ordering * {
+    return ordering;
+  }
   /** @brief the Monomial_Order_Data associated with this Monomial */
-  inline Monomial_Order_Data * monomial_ordering_data() const {
+  inline auto monomial_ordering_data() const -> Monomial_Order_Data * {
     return ordering_data;
   }
   /** @brief sets the Monomial_Ordering associated with this Monomial */
-  void set_monomial_ordering(const Monomial_Ordering * mord);
+  void set_monomial_ordering(const Monomial_Ordering *mord);
   /** @brief sets the Monomial_Order_Data associated with this Monomial */
-  void set_ordering_data(Monomial_Order_Data * mordat);
+  void set_ordering_data(Monomial_Order_Data *mordat);
   /** @brief sets the ordering degree for this Monomial */
   inline void set_ordering_degree(DEG_TYPE d) { ord_degree = d; }
   /** @brief returns the ordering degree for this Monomial */
-  inline DEG_TYPE ordering_degree() const { return ord_degree; }
+  inline auto ordering_degree() const -> DEG_TYPE { return ord_degree; }
   /** @brief equal/alike? */
-  bool operator ==(const Monomial &other) const;
+  auto operator==(const Monomial &other) const -> bool;
   /** @brief unequal/unlike? */
-  bool operator !=(const Monomial &other) const;
+  auto operator!=(const Monomial &other) const -> bool;
   /**
     @brief <c>true</c> iff <c>this</c> has no common factor with <c>other</c>.
   */
-  bool is_coprime(const Monomial &other) const;
+  auto is_coprime(const Monomial &other) const -> bool;
   /** @brief Returns 0 if like, negative if smaller */
-  int cmp(const Monomial & u) const {
+  auto cmp(const Monomial &u) const -> int {
     return monomial_ordering()->cmp(*this, u);
   }
   /** @brief Have same variables, same powers? Synonymous with operator==(). */
-  bool is_like(const Monomial &other) const;
-  /** @brief Have same variables, same powers? Comparison of exponent vectors. */
-  bool is_like(const EXP_TYPE * e) const;
+  auto is_like(const Monomial &other) const -> bool;
+  /** @brief Have same variables, same powers? Comparison of exponent vectors.
+   */
+  auto is_like(const EXP_TYPE *e) const -> bool;
   /** @brief is <c>this</c> like @f$uv@f$? */
-  bool like_multiple(const Monomial &u, const Monomial &v) const;
+  auto like_multiple(const Monomial &u, const Monomial &v) const -> bool;
   /**
     @brief is <c>this</c> like @f$uv@f$?
       (where @f$u@f$ is a monomial whose exponents are those of <c>e</c>
   */
-  bool like_multiple(const EXP_TYPE * e, const Monomial & v) const;
+  auto like_multiple(const EXP_TYPE *e, const Monomial &v) const -> bool;
   /**
     @brief compares monomial with @f$u@f$ according to monomial ordering
   */
-  bool larger_than(const Monomial &) const;
+  auto larger_than(const Monomial &) const -> bool;
   /**
     @brief Compares monomial with @f$u@f$ according to monomial ordering.
   */
-  bool operator >(const Monomial & u) const;
+  auto operator>(const Monomial &u) const -> bool;
   /**
     @brief Compares monomial with @f$u@f$ according to monomial ordering.
   */
-  bool operator >=(const Monomial & u) const;
+  auto operator>=(const Monomial &u) const -> bool;
   /**
     @brief Compares monomial with @f$u@f$ according to monomial ordering.
   */
-  bool operator <(const Monomial & u) const;
+  auto operator<(const Monomial &u) const -> bool;
   /**
     @brief Compares monomial with @f$u@f$ according to monomial ordering.
   */
-  bool operator <=(const Monomial & u) const;
+  auto operator<=(const Monomial &u) const -> bool;
   /**
     @brief Compares monomial with @f$uv@f$ according to monomial ordering.
   */
-  bool larger_than_multiple(
-      const Monomial & u, const Monomial &v
-  ) const;
+  auto larger_than_multiple(const Monomial &u, const Monomial &v) const -> bool;
   /** @brief Divisible by <c>other</c>? */
-  bool divisible_by(const Monomial &other) const;
+  auto divisible_by(const Monomial &other) const -> bool;
   /** @brief Divisible by @p power of @p other ? */
-  bool divisible_by_power(const Monomial &other, unsigned power) const;
+  auto divisible_by_power(const Monomial &other, unsigned power) const -> bool;
   /** @brief operator for divisibility */
-  bool operator |(const Monomial &other) const;
+  auto operator|(const Monomial &other) const -> bool;
   /** @brief divides the lcm of the other two */
-  bool divides_lcm(const Monomial &, const Monomial &) const;
+  auto divides_lcm(const Monomial &, const Monomial &) const -> bool;
   /** @brief is like the lcm of the other two */
-  bool like_lcm(const Monomial &, const Monomial &) const;
+  auto like_lcm(const Monomial &, const Monomial &) const -> bool;
   ///@}
   /**
     @name Computation
@@ -313,13 +310,13 @@ public:
   /** @brief remove zero exponents */
   void compress();
   /** @brief assignment */
-  Monomial & operator =(const Monomial &other);
+  auto operator=(const Monomial &other) -> Monomial &;
   /** @brief Multiply <c>this</c> by <c>other</c>. */
-  Monomial & operator *=(const Monomial &other);
+  auto operator*=(const Monomial &other) -> Monomial &;
   /** @brief Return result of <c>this</c> by <c>other</c>. */
-  Monomial operator *(const Monomial &other) const;
+  auto operator*(const Monomial &other) const -> Monomial;
   /** @brief Return result of <c>this</c> by <c>other</c>. */
-  Monomial operator *(const Indeterminate &other) const;
+  auto operator*(const Indeterminate &other) const -> Monomial;
   /**
     @brief divide @c this by @p other
     @param other Monomial to divide @c this by
@@ -328,17 +325,17 @@ public:
     @return @c true if and only if @c this and @p other have the same number
       of variables
   */
-  bool operator /=(const Monomial &other);
+  auto operator/=(const Monomial &other) -> bool;
   /** @brief Least common multiple: largest exponents. */
-  Monomial lcm(const Monomial & u) const;
+  auto lcm(const Monomial &u) const -> Monomial;
   /** @brief Greatest common divisor: smallest exponents. */
-  Monomial gcd(const Monomial & u) const;
+  auto gcd(const Monomial &u) const -> Monomial;
   /** @brief Degree of greatest common divisor: smallest exponents. */
-  DEG_TYPE gcd_degree(const Monomial & u) const;
+  auto gcd_degree(const Monomial &u) const -> DEG_TYPE;
   /**
     @brief colon operator: exponents needed to make @f$u@f$ divisible by @c this
   */
-  Monomial colon(const Monomial & u) const;
+  auto colon(const Monomial &u) const -> Monomial;
   ///@}
   /** @name I/O */
   ///@{
@@ -346,7 +343,8 @@ public:
     @brief prints the monomial with the given names; adds
       a newline if the boolean is true
   */
-  void print(bool=true, ostream & = cout, const string * names = nullptr) const;
+  void print(bool = true, ostream & = cout,
+             const vector<string> &names = vector<string>()) const;
   /**
     @brief equivalent to @c print() with default values
   */
@@ -354,25 +352,27 @@ public:
   /**
     @brief essentially <c>u.print(false, ostream)</c>
   */
-  friend ostream & operator << (ostream &, const Monomial & u);
+  friend auto operator<<(ostream &, const Monomial &u) -> ostream &;
   ///@}
   /** @name Memory management */
   ///@{
   /** @brief requests memory form Monomial's Grading_Order_Data_Allocator */
-  void * operator new(size_t);
+  auto operator new(size_t) -> void *;
   /** @brief returns data to Monomial's Grading_Order_Data_Allocator */
   void operator delete(void *);
   ///@}
-  DEG_TYPE cached_weighted_degree(const WT_TYPE * w) const;
+  auto cached_weighted_degree(const WT_TYPE *w) const -> DEG_TYPE;
   void fix_mask() const;
-  bool same_mask(const Monomial &) const;
-  bool same_mask(const Monomial &, const Monomial &) const;
-protected:
+  auto same_mask(const Monomial &) const -> bool;
+  auto same_mask(const Monomial &, const Monomial &) const -> bool;
+
+private:
   /**
     @brief locate the indicated exponent
-    @return information on the exponent's location; @see Exponent_Location_Struct
+    @return information on the exponent's location; @see
+    Exponent_Location_Struct
   */
-  Exponent_Location find_exponent(NVAR_TYPE) const;
+  auto find_exponent(NVAR_TYPE) const -> Exponent_Location;
   /** @brief make the last variable invalid */
   void make_last_invalid() { last = 0; }
   /**
@@ -381,25 +381,26 @@ protected:
     @details Currently this is a test to see if the polynomial has any exponents
     defined at all. It will in fact give the opposite result of @c is_one().
   */
-  bool valid_exponents() const { return last > 0; }
+  auto valid_exponents() const -> bool { return last > 0; }
   /** @brief make space for a new exponent, starting at given position */
   void shift_exponents_right(NVAR_TYPE);
   /** @brief number of variables */
   NVAR_TYPE n;
   /** @brief has size n */
-  EXP_TYPE * exponents;
+  EXP_TYPE *exponents;
   /** @brief mask to speed comparisons */
   mutable long long unsigned exponent_mask;
   /** @brief last valid exponent */
   NVAR_TYPE last = 0;
   /**
-    @brief degree associated with monomial ordering (used for faster comparisons)
+    @brief degree associated with monomial ordering (used for faster
+    comparisons)
   */
   DEG_TYPE ord_degree;
   /** @brief Monomial_Ordering associated with this polynomial */
-  const Monomial_Ordering * ordering;
+  const Monomial_Ordering *ordering;
   /** @brief optional data for a monomial ordering */
-  Monomial_Order_Data * ordering_data;
+  Monomial_Order_Data *ordering_data;
   /** @brief trying to speed up hashing */
   mutable DEG_TYPE cached_degree = 0;
   mutable bool cached_signature = false;

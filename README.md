@@ -238,30 +238,30 @@ What you place in the file depends on whether you want a static, dynamic, Buchbe
 
 The `results` directory contains the output of some larger and/or more interesting systems I have used. At the present time, interpret "more interesting" as, "non-deterministic results with DF4M." Some highlights: (all characteristic 32003 unless stated otherwise)
 
-date | computation type | output size | time | mem | remarks
--|-|-|-|-|-|-
-**Cyclic-9 homogeneous**|
-14 April | DF4R | 1991 | 3975sec (1h 5m) | 2.6GB | 
-14 April | DF4M | 2005 | 6050sec (1h 41m) | 4.0GB | 
-14 April | Static | 5602 | 12757sec (3h 32m) | 3.6GB | 
-**Cyclic-10 homogeneous** |
-27 December | DF4R | 14200 | 12d 3h 58m | 166GB | characteristic 43, USM Magnolia cluster
-27 December | Static | ? | ? | ? | characteristic 43, USM magnolia cluster, not reported in paper ,static still incomplete after 3+ months
-**Eco-8** | | | | | example of nondeterminism in DF4M
-8 April | DF4M | 33 (x4) | ~1sec | 93MB |
-8 April | DF4M | 43 | ~1sec | 93MB |
-8 April | DF4M | 38 | ~1sec | 93MB |
-**Katsura-10** | | | | | example of nondeterminism in DF4M
-9 April | DF4M | 423 | 1646sec (27m) | 345MB |
-9 April | DF4M | 423 | 1399sec (23m) | 358MB |
-9 April | DF4M | 423 | 419sec (7m) | 334MB |
-**Kotsireas**  | | | | | example of nondeterminism in DF4M
-8 April | DF4M | 17 | 3sec | 91MB |
-8 April | DF4M | 17 | 3sec | 92MB |
-8 April | DF4M | 18 | 2sec | 89MB |
-8 April | DF4M | 17 | 4sec | 97MB |
-8 April | DF4M | 17 | 3sec | 110MB |
-8 April | DF4M | 17 | 4sec | 95MB |
+| date | computation type | output size | time | mem | remarks |
+|-|-|-|-|-|-|
+| 14 April | DF4R | 1991 | 3975sec (1h 5m) | 2.6GB | |
+| **Cyclic-9 homogeneous** |
+| 14 April | DF4M | 2005 | 6050sec (1h 41m) | 4.0GB | |
+| 14 April | Static | 5602 | 12757sec (3h 32m) | 3.6GB | |
+| **Cyclic-10 homogeneous** |
+| 27 December | DF4R | 14200 | 12d 3h 58m | 166GB | characteristic 43, USM Magnolia cluster |
+| 27 December | Static | ? | ? | ? | characteristic 43, USM magnolia cluster, not reported in paper ,static still incomplete after 3+ months |
+| **Eco-8** | | | | | example of nondeterminism in DF4M |
+| 8 April | DF4M | 33 (x4) | ~1sec | 93MB |
+| 8 April | DF4M | 43 | ~1sec | 93MB |
+| 8 April | DF4M | 38 | ~1sec | 93MB |
+| **Katsura-10** | | | | | example of nondeterminism in DF4M |
+| 9 April | DF4M | 423 | 1646sec (27m) | 345MB |
+| 9 April | DF4M | 423 | 1399sec (23m) | 358MB |
+| 9 April | DF4M | 423 | 419sec (7m) | 334MB |
+| **Kotsireas**  | | | | | example of nondeterminism in DF4M|
+| 8 April | DF4M | 17 | 3sec | 91MB |
+| 8 April | DF4M | 17 | 3sec | 92MB |
+| 8 April | DF4M | 18 | 2sec | 89MB |
+| 8 April | DF4M | 17 | 4sec | 97MB |
+| 8 April | DF4M | 17 | 3sec | 110MB |
+| 8 April | DF4M | 17 | 4sec | 95MB |
 
 ## Additional details
 

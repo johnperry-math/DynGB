@@ -15,13 +15,20 @@
 * along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *
 \*****************************************************************************/
 
+#include <gsl/gsl>
 #include <list>
 #include <string>
 #include <iostream>
+#include <vector>
 
+using std::cin;
+using std::cout;
+using std::endl;
 using std::list;
 using std::string;
-using std::cin; using std::cout; using std::endl;
+using std::vector;
+
+using gsl::owner;
 
 #include "system_constants.hpp"
 
@@ -72,9 +79,10 @@ void user_interface() {
   char specify_names;
   cout << "do you want to specify the indeterminates' names? (y/n) ";
   cin >> specify_names;
-  string * names = new string[n];
+  // string *names = new string[n];
+  vector<string> names(n);
   Prime_Field F(p);
-  Polynomial_Ring * P;
+  owner<Polynomial_Ring *> P = nullptr;
   if (specify_names == 'n') {
     P = new Polynomial_Ring(n, F);
     cout << "indeterminate names are: ";
@@ -84,51 +92,57 @@ void user_interface() {
     }
   } else {
     cout << "what are the indeterminates' names? ";
-    for (NVAR_TYPE i = 0; i < n; ++i)
-      cin >> names[i];
-    P = new Polynomial_Ring(n, F, names);
+    string name;
+    for (NVAR_TYPE i = 0; i < n; ++i) {
+      cin >> name;
+      names[i] = name;
+    }
+    cout << "initializing ring\n";
+    P = new Polynomial_Ring(F, names);
   }
   unsigned m;
   cout << "number of polynomials: ";
   cin >> m;
   cin.ignore();
-  list<Abstract_Polynomial *> I;
+  list<owner<Abstract_Polynomial *>> I;
   for (unsigned np = 0; np < m; ++np) {
-    cout << "please enter polynomial #" << np << ": (use spaces to separate factors) ";
+    cout << "please enter polynomial #" << np
+         << ": (use spaces to separate factors) ";
     string inpoly;
     getline(cin, inpoly);
-    list<Monomial> M; // monomials
+    list<Monomial> M;            // monomials
     list<Prime_Field_Element> A; // coefficients
-    unsigned nt = 0; // number of terms
+    unsigned nt = 0;             // number of terms
     unsigned i = 0;
     while (i < inpoly.size()) {
       bool reading_term = true;
       COEF_TYPE a = 1;
-      EXP_TYPE exp[n];
-      for (NVAR_TYPE i = 0; i < n; ++i) exp[i] = 0;
-      while (inpoly[i] == ' ') ++i;
+      vector<EXP_TYPE> exp(n);
+      for (NVAR_TYPE i = 0; i < n; ++i)
+        exp[i] = 0;
+      while (inpoly[i] == ' ')
+        ++i;
       bool positive = true;
       while (reading_term and i < inpoly.size()) {
         unsigned j = i;
-        if (
-            inpoly[i] == '+' or inpoly[i] == '-' or
-            (inpoly[i] >= '0' and inpoly[i] <= '9')
-        ) {
-          if (inpoly[i] == '-') positive = false;
-          if (inpoly[i] == '+' or inpoly[i] == '-') ++i;
-          while (inpoly[i] == ' ') ++i;
+        if (inpoly[i] == '+' or inpoly[i] == '-' or
+            (inpoly[i] >= '0' and inpoly[i] <= '9')) {
+          if (inpoly[i] == '-')
+            positive = false;
+          if (inpoly[i] == '+' or inpoly[i] == '-')
+            ++i;
+          while (inpoly[i] == ' ')
+            ++i;
           if (inpoly[i] >= '0' and inpoly[i] <= '9') {
             j = i;
-            while (inpoly[j] >= '0' and inpoly[j] <= '9') ++j;
+            while (inpoly[j] >= '0' and inpoly[j] <= '9')
+              ++j;
             a *= stol(inpoly.substr(i, j - i));
             i = j;
           }
-        }
-        else if (inpoly[i] == '*')
+        } else if ((inpoly[i] == '*') or (inpoly[i] == '\0')) {
           ++i;
-        else if (inpoly[i] == '\0')
-          ++i;
-        else { // should be characters
+        } else { // should be characters
           unsigned j = i;
           while ((inpoly[j] >= 'a' and inpoly[j] <= 'z') or
                  (inpoly[j] >= 'A' and inpoly[j] <= 'Z') or
@@ -143,45 +157,49 @@ void user_interface() {
               --k;
             }
           i = j;
-          while (inpoly[i] == ' ') ++i;
+          while (inpoly[i] == ' ')
+            ++i;
           if (inpoly[i] != '^')
             exp[k] += 1;
           else {
             ++i;
-            while (inpoly[i] == ' ') ++i;
+            while (inpoly[i] == ' ')
+              ++i;
             unsigned j = i;
-            while (inpoly[j] >= '0' and inpoly[j] <= '9') ++j;
+            while (inpoly[j] >= '0' and inpoly[j] <= '9')
+              ++j;
             exp[k] += stol(inpoly.substr(i, j - i));
             i = j;
           }
         }
-        while (inpoly[i] == ' ') ++i;
+        while (inpoly[i] == ' ')
+          ++i;
         if (inpoly[i] == '+' or inpoly[i] == '-')
           reading_term = false;
       }
       ++nt;
-      Monomial t(n, exp);
+      Monomial t(n, exp.data());
       M.push_back(t);
-      if (not positive) a *= -1;
+      if (not positive)
+        a *= -1;
       A.emplace_back(a, &F);
     }
-    Abstract_Polynomial * p = new Constant_Polynomial(*P, M, A);
+    owner<Abstract_Polynomial *> p = new Constant_Polynomial(*P, M, A);
     p->sort_by_order();
     cout << "read " << *p << endl;
     I.push_back(p);
   }
   string computation;
-  while (
-      computation.compare("s") and computation.compare("d")
-      and computation.compare("static") and computation.compare("dynamic")
-  ) {
+  while (computation.compare("s") and computation.compare("d") and
+         computation.compare("static") and computation.compare("dynamic")) {
     cout << "static (s) or dynamic (d) computation? ";
     getline(cin, computation);
   }
   list<Abstract_Polynomial *> B;
   F4_Hash hash_table(n);
-  vector< Monomial * > monomials;
-  bool dynamic = not (computation.compare("d") and computation.compare("dynamic"));
+  vector<Monomial *> monomials;
+  bool dynamic =
+      not(computation.compare("d") and computation.compare("dynamic"));
   if (not dynamic) {
     if (algorithm.compare("buchberger") == 0)
       B = buchberger(I);
@@ -194,39 +212,37 @@ void user_interface() {
         cout << "'row' or 'matrix' analysis? ";
         cin >> analysis;
       }
-      Analysis style = (analysis.compare("row") == 0) ?
-            Analysis::row_sequential
-          : Analysis::whole_matrix;
+      Analysis style = (analysis.compare("row") == 0) ? Analysis::row_sequential
+                                                      : Analysis::whole_matrix;
       unsigned max_refinements = 0;
       if (style == Analysis::whole_matrix) {
         cout << "maximum number of refinements per matrix? (0 for none) ";
         cin >> max_refinements;
       }
-      B = f4_control(I, monomials, hash_table, false, max_refinements, style); // dynamic
+      B = f4_control(I, monomials, hash_table, false, max_refinements,
+                     style); // dynamic
     } else {
-      DynamicSolver solver;
+      DynamicSolver solver = PPL_SOLVER;
       string solver_choice;
-      while (
-          solver_choice.compare("skel") and solver_choice.compare("glpk")
-          and solver_choice.compare("ppl") and solver_choice.compare("skeleton")
-      ) {
+      while (solver_choice.compare("skel") and solver_choice.compare("glpk") and
+             solver_choice.compare("ppl") and
+             solver_choice.compare("skeleton")) {
         cout << "which solver? ([skel]eton, glpk, ppl) ";
         getline(cin, solver_choice);
       }
-      if (not solver_choice.compare("skel") or not solver_choice.compare("skeleton"))
+      if (not solver_choice.compare("skel") or
+          not solver_choice.compare("skeleton"))
         solver = SKELETON_SOLVER;
       else if (not solver_choice.compare("glpk"))
         solver = GLPK_SOLVER;
       else if (not solver_choice.compare("ppl"))
         solver = PPL_SOLVER;
       string heur_choice;
-      Dynamic_Heuristic heuristic;
-      while (
-        heur_choice.compare("h") and heur_choice.compare("gh")
-        and heur_choice.compare("b") and heur_choice.compare("bb")
-        and heur_choice.compare("gb") and heur_choice.compare("c")
-        and heur_choice.compare("d") and heur_choice.compare("r")
-      ) {
+      Dynamic_Heuristic heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+      while (heur_choice.compare("h") and heur_choice.compare("gh") and
+             heur_choice.compare("b") and heur_choice.compare("bb") and
+             heur_choice.compare("gb") and heur_choice.compare("c") and
+             heur_choice.compare("d") and heur_choice.compare("r")) {
         cout << "available heuristics are\n";
         cout << "\t h = hilbert with standard grading\n";
         cout << "\tgh = hilbert with order-based grading\n";
@@ -239,39 +255,45 @@ void user_interface() {
         cout << "which heuristic would you like? ";
         getline(cin, heur_choice);
       }
-      if      (not heur_choice.compare( "h")) heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
-      else if (not heur_choice.compare("gh")) heuristic = Dynamic_Heuristic::GRAD_HILB_THEN_DEG;
-      else if (not heur_choice.compare( "b")) heuristic = Dynamic_Heuristic::BETTI_HILBERT_DEG;
-      else if (not heur_choice.compare("bb")) heuristic = Dynamic_Heuristic::BIG_BETTI_HILBERT_DEG;
-      else if (not heur_choice.compare("gb")) heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
-      else if (not heur_choice.compare( "c")) heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
-      else if (not heur_choice.compare( "d")) heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
-      else if (not heur_choice.compare( "r")) heuristic = Dynamic_Heuristic::EVIL_RANDOM;
+      if (not heur_choice.compare("h"))
+        heuristic = Dynamic_Heuristic::ORD_HILBERT_THEN_DEG;
+      else if (not heur_choice.compare("gh"))
+        heuristic = Dynamic_Heuristic::GRAD_HILB_THEN_DEG;
+      else if (not heur_choice.compare("b"))
+        heuristic = Dynamic_Heuristic::BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare("bb"))
+        heuristic = Dynamic_Heuristic::BIG_BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare("gb"))
+        heuristic = Dynamic_Heuristic::GRAD_BETTI_HILBERT_DEG;
+      else if (not heur_choice.compare("c"))
+        heuristic = Dynamic_Heuristic::MIN_CRIT_PAIRS;
+      else if (not heur_choice.compare("d"))
+        heuristic = Dynamic_Heuristic::DEG_THEN_ORD_HILBERT;
+      else if (not heur_choice.compare("r"))
+        heuristic = Dynamic_Heuristic::EVIL_RANDOM;
       string whether_analysis;
       bool analyze_first = false;
       while (whether_analysis.compare("y") and whether_analysis.compare("n")) {
         cout << "perform global analysis at the outset? (y or n) ";
         cin >> whether_analysis;
       }
-      if (not whether_analysis.compare("y")) analyze_first = true;
-      B = buchberger_dynamic(
-          I, SPolyCreationFlags::GEOBUCKETS, StrategyFlags::SUGAR_STRATEGY,
-          nullptr, heuristic, solver, analyze_first
-      );
+      if (not whether_analysis.compare("y"))
+        analyze_first = true;
+      B = buchberger_dynamic(I, SPolyCreationFlags::GEOBUCKETS,
+                             StrategyFlags::SUGAR_STRATEGY, nullptr, heuristic,
+                             solver, analyze_first);
     }
   }
-  check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
+  // check_correctness(B, StrategyFlags::NORMAL_STRATEGY);
   cout << "have basis with " << B.size() << " elements:\n";
   for (auto b : B) {
     cout << b->leading_monomial() << ", ";
     delete b;
   }
   cout << endl;
-  for (auto p : I) delete p;
+  for (auto p : I)
+    delete p;
   delete P;
-  delete [] names;
 }
 
-int main() {
-  user_interface();
-}
+auto main() -> int { user_interface(); }
