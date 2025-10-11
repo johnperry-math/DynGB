@@ -1,5 +1,5 @@
-#ifndef __FIELDS_H_
-#define __FIELDS_H_
+#ifndef FIELDS_H_
+#define FIELDS_H_
 
 /*****************************************************************************\
 * This file is part of DynGB.                                                 *
@@ -39,17 +39,17 @@ class Prime_Field_Element;
   @date 2015
   @brief Information necessary for a field modulo a prime.
   @ingroup FieldsGroup
-  
-  @details This class encapsulates the information necessary for a field modulo a prime:
-  both the modulus @f$m@f$ and a list of inverses of non-zero elements.
+
+  @details This class encapsulates the information necessary for a field modulo
+  a prime: both the modulus @f$m@f$ and a list of inverses of non-zero elements.
   The constructors do not verify that @f$m@f$ is prime,
   but expect misbehavior if not.
 
   @warning The constructor does not check whether the supplied modulus is prime.
-  If @f$m@f$ is not prime, behavior is undefined, and probably spectacularly bad.
+  If @f$m@f$ is not prime, behavior is undefined, and probably spectacularly
+  bad.
 */
-class Prime_Field
-{
+class Prime_Field {
 public:
   /** @name Construction */
   ///@{
@@ -71,11 +71,15 @@ public:
 
     Allocates new data, so you can discard <c>F</c> later if you want.
   */
-  explicit Prime_Field(const Prime_Field & F);
+  explicit Prime_Field(const Prime_Field &F);
   ///@}
   /** @name Destruction */
   ///@{
-  ~Prime_Field();
+  ~Prime_Field() = default;
+  ///@}
+  ///@{
+  /** @name Moving */
+  Prime_Field(const Prime_Field &&F) noexcept;
   ///@}
   /**
     @name Basic properties
@@ -84,36 +88,32 @@ public:
   */
   ///@{
   /** @brief Returns the field's modulus. */
-  COEF_TYPE modulus() const { return m; }
+  [[nodiscard]] auto modulus() const -> COEF_TYPE { return m; }
   /**
     @brief Returns the inverse of @f$a@f$, modulo @f$m@f$.
     @param a the element of this field whose inverse we desire
     @return @f$ a^{-1} @f$
     @details Looks up the inverse in a table.
   */
-  COEF_TYPE inverse(COEF_TYPE a) const { return Fi[a]; };
+  [[nodiscard]] auto inverse(COEF_TYPE a) const -> COEF_TYPE { return Fi[a]; };
   /** @brief &ldquo;unity&rdquo; is the multiplicative identity. */
-  Prime_Field_Element unity() const;
+  [[nodiscard]] auto unity() const -> Prime_Field_Element;
   /** @brief &ldquo;zero&rdquo; is the additive identity. */
-  Prime_Field_Element zero() const;
+  [[nodiscard]] auto zero() const -> Prime_Field_Element;
   ///@}
   /** \name I/O */
   ///@{
   /** @brief determines whether to print the modulus */
   void set_print_modulus(bool b);
   /** @brief indicates whether to print the modulus */
-  bool get_print_modulus() const;
+  [[nodiscard]] auto get_print_modulus() const -> bool;
   ///@}
   /** @name Modification */
-  Prime_Field & operator = (const Prime_Field & other) {
-    m = other.m;
-    print_modulus = other.print_modulus;
-    Fi = other.Fi;
-    return *this;
-  }
+  auto operator=(const Prime_Field &other) -> Prime_Field & = default;
+  auto operator=(Prime_Field &&other) -> Prime_Field & = default;
   ///@{
   ///@}
-protected:
+private:
   /** @brief characteristic/modulus of the field */
   COEF_TYPE m;
   /**
@@ -143,8 +143,7 @@ protected:
   as the field is necessary for some record keeping, e.g.,
   to look up multiplicative inverses.
 */
-class Prime_Field_Element
-{
+class Prime_Field_Element {
 public:
   /** @name Construction */
   ///@{
@@ -170,40 +169,47 @@ public:
   */
   Prime_Field_Element(COEF_TYPE value, const Prime_Field *field);
   /** @brief constructs a prime field element from another */
-  Prime_Field_Element(const Prime_Field_Element & other) {
-    a = other.a; F = other.F; m = other.m;
-  }
+  Prime_Field_Element(const Prime_Field_Element &other) = default;
+  /** @brief constructs a prime field element by moving from another */
+  Prime_Field_Element(Prime_Field_Element &&other) = default;
+  ///@}
+  /** @name Destruction */
+  ///@{
+  ~Prime_Field_Element() = default;
   ///@}
   /** @name Basic properties
     The following functions give information about the monomial,
     but do not modify it.
   */
   ///@{
-  /** @brief The value of the element. This always satisfies @f$0\leq a\leq m@f$. */
-  COEF_TYPE value() const;
+  /** @brief The value of the element. This always satisfies @f$0\leq a\leq
+   * m@f$. */
+  [[nodiscard]] auto value() const -> COEF_TYPE;
   /** @brief The field's modulus. */
-  COEF_TYPE modulus() const;
+  [[nodiscard]] auto modulus() const -> COEF_TYPE;
   /** @brief The field this element lies in. */
-  const Prime_Field * field() const;
+  [[nodiscard]] auto field() const -> const Prime_Field *;
   /** @brief <c>true</c> iff <c>this</c> and <c>b</c> have the same modulus. */
-  bool like(const Prime_Field_Element & b) const;
+  [[nodiscard]] auto like(const Prime_Field_Element &b) const -> bool;
   /** @brief Returns the multiplicative inverse of <c>this</c>. */
-  COEF_TYPE inverse() const;
+  [[nodiscard]] auto inverse() const -> COEF_TYPE;
   /** @brief Is <c>this</c> the additive identity? */
-  inline bool is_zero() const { return a == 0; };
+  [[nodiscard]] inline auto is_zero() const -> bool { return a == 0; };
   /** @brief Is <c>this</c> the multiplicative identity? */
-  bool is_one() const;
+  [[nodiscard]] auto is_one() const -> bool;
   ///@}
   /** @name Modification */
   ///@{
   /** @brief assignment to other */
-  Prime_Field_Element & operator = (const Prime_Field_Element & other) {
-    a = other.a; F = other.F; m = other.m;
-    return *this;
-  }
+  auto operator=(const Prime_Field_Element &other)
+      -> Prime_Field_Element & = default;
+  auto operator=(Prime_Field_Element &&other)
+      -> Prime_Field_Element & = default;
   /** @brief for initializing arrays of Prime_Field_Element */
-  void assign(COEF_TYPE val, const Prime_Field * K) {
-    a = val; F = K; m = F->modulus();
+  void assign(COEF_TYPE val, const Prime_Field *K) {
+    a = val;
+    F = K;
+    m = F->modulus();
   }
   ///@}
   /**
@@ -217,62 +223,65 @@ public:
     @brief increases the value of <c>this</c>.
     @param other element to add
   */
-  void operator +=(const Prime_Field_Element &other);
+  void operator+=(const Prime_Field_Element &other);
   /**
     @brief decreases the value of <c>this</c>.
     @param other element to subtract
   */
-  void operator -=(const Prime_Field_Element &other);
+  void operator-=(const Prime_Field_Element &other);
   /**
     @brief multiply the value of <c>this</c> by @p other
     @param other element to multiply
   */
-  void operator *=(const Prime_Field_Element &other);
+  void operator*=(const Prime_Field_Element &other);
   /**
     @brief Changes the value of <c>this</c>.
     @param b scalar to multiply
     @details This function is useful for avoiding the construction
     of a prime field element when you know what you want to multiply.
   */
-  void operator *=(const COEF_TYPE b);
+  void operator*=(const COEF_TYPE b);
   /**
     @brief Changes the value of <c>this</c>.
     @param other element to multiply
     @details Multiplies by multiplicative inverse of <c>other</c>. */
-  void operator /=(const Prime_Field_Element &other);
+  void operator/=(const Prime_Field_Element &other);
   ///@}
   /** @name Friend functions for computation
     Will not modify <c>this</c>.
   */
   ///@{
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator+(const Prime_Field_Element &,
-                                        const Prime_Field_Element &);
+  friend auto operator+(const Prime_Field_Element &,
+                        const Prime_Field_Element &) -> Prime_Field_Element;
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator-(const Prime_Field_Element &,
-                                        const Prime_Field_Element &);
+  friend auto operator-(const Prime_Field_Element &,
+                        const Prime_Field_Element &) -> Prime_Field_Element;
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator*(const Prime_Field_Element &,
-                                        const Prime_Field_Element &);
+  friend auto operator*(const Prime_Field_Element &,
+                        const Prime_Field_Element &) -> Prime_Field_Element;
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator+(const Prime_Field_Element &, const int);
+  friend auto operator+(const Prime_Field_Element &, const int)
+      -> Prime_Field_Element;
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator-(const Prime_Field_Element &, const int);
+  friend auto operator-(const Prime_Field_Element &, const int)
+      -> Prime_Field_Element;
   /** @brief Does not modify <c>this</c>. */
-  friend Prime_Field_Element operator*(const Prime_Field_Element &, const int);
+  friend auto operator*(const Prime_Field_Element &, const int)
+      -> Prime_Field_Element;
   /**
     @brief Does not modify <c>this</c>. If you want to modify <c>this</c>,
     see negate().
   */
-  friend Prime_Field_Element operator-(const Prime_Field_Element &);
+  friend auto operator-(const Prime_Field_Element &) -> Prime_Field_Element;
   ///@}
   /** @name I/O
     @brief Will not modify <c>this</c>.
   */
   ///@{
-  friend ostream & operator << (ostream &, const Prime_Field_Element &);
+  friend auto operator<<(ostream &, const Prime_Field_Element &) -> ostream &;
   ///@}
-protected:
+private:
   /** @brief the field this element lives in; used to find inverses */
   const Prime_Field *F;
   /**

@@ -1,5 +1,5 @@
-#ifndef __CONSTANTS_HPP_
-#define __CONSTANTS_HPP_
+#ifndef CONSTANTS_HPP_
+#define CONSTANTS_HPP_
 
 /*****************************************************************************\
 * This file is part of DynGB.                                                 *
@@ -31,12 +31,12 @@
 #define MPZCOEF_TYPE mpz_class
 
 // to catch overflow; this should be the same size as UCOEF_TYPE
-const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE )1) << 31;
+const UCOEF_TYPE OVERFLOW_MASK = ((UCOEF_TYPE)1) << 31;
 
 // for monomials
 #define EXP_TYPE uint16_t
 #define NVAR_TYPE uint16_t
-#define MASK_SIZE 256
+constexpr uint16_t MASK_SIZE = 256;
 
 // size of a degree
 #define DEG_TYPE uint64_t

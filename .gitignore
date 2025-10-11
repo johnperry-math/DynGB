@@ -1,0 +1,14 @@
+*.o
+*.Po
+*.cache
+debug
+a.out
+*~
+aclocal.m4
+config.h.in
+configure
+compile
+depcomp
+install-sh
+Makefile.in
+missing

@@ -1,5 +1,6 @@
 #include <iostream>
-using std::cout; using std::endl;
+using std::cout;
+using std::endl;
 
 /*****************************************************************************\
 * This file is part of DynGB.                                                 *
@@ -18,23 +19,37 @@ using std::cout; using std::endl;
 * along with DynGB. If not, see <http://www.gnu.org/licenses/>.               *
 \*****************************************************************************/
 
+#include "system_constants.hpp"
+
 #include "fields.hpp"
 
-int main()
-{
-  Prime_Field F7(7);
-  Prime_Field_Element one_mod_7(1, &F7);
-  cout << one_mod_7 << ":\t" << one_mod_7.inverse() << endl;
-  unsigned p = 11;
-  Prime_Field Fp(p);
-  Prime_Field_Element sixteen_mod_p(16, &Fp);
-  Prime_Field_Element sixteen_mod_p_inverse(sixteen_mod_p.inverse(), &Fp);
-  cout << sixteen_mod_p << ":\t" << sixteen_mod_p_inverse << endl;
-  cout << "verification: " << sixteen_mod_p * sixteen_mod_p_inverse << endl;
-  p = 21;
-  Prime_Field Fq(p);
-  Prime_Field_Element nineteen_mod_p(19, &Fq);
-  Prime_Field_Element nineteen_mod_p_inverse(nineteen_mod_p.inverse(), &Fq);
-  cout << nineteen_mod_p << ":\t" << nineteen_mod_p_inverse << endl;
-  cout << "verification: " << nineteen_mod_p * nineteen_mod_p_inverse << endl;
+auto main() -> int {
+  {
+    constexpr UCOEF_TYPE m = 7;
+    Prime_Field F7(m);
+    Prime_Field_Element one_mod_7(1, &F7);
+    cout << one_mod_7 << ":\t" << one_mod_7.inverse()
+         << endl; // NOLINT(performance-avoid-endl)
+  }
+  {
+    constexpr UCOEF_TYPE p = 11;
+    Prime_Field Fp(p);
+    Prime_Field_Element sixteen_mod_p(16, &Fp); // NOLINT(*-magic-*)
+    Prime_Field_Element sixteen_mod_p_inverse(sixteen_mod_p.inverse(), &Fp);
+    cout << sixteen_mod_p << ":\t" << sixteen_mod_p_inverse
+         << endl; // NOLINT(performance-avoid-endl)
+    cout << "verification: " << sixteen_mod_p * sixteen_mod_p_inverse
+         << endl; // NOLINT(performance-avoid-endl)
+  }
+  {
+    constexpr UCOEF_TYPE p = 21;
+    Prime_Field Fq(p);
+
+    Prime_Field_Element nineteen_mod_p(19, &Fq); // NOLINT(*-magic-*)
+    Prime_Field_Element nineteen_mod_p_inverse(nineteen_mod_p.inverse(), &Fq);
+    cout << nineteen_mod_p << ":\t" << nineteen_mod_p_inverse
+         << endl; // NOLINT(performance-avoid-endl)
+    cout << "verification: " << nineteen_mod_p * nineteen_mod_p_inverse
+         << endl; // NOLINT(performance-avoid-endl)
+  }
 }

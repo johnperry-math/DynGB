@@ -1,4 +1,4 @@
-AC_INIT([dyngb], [2.0], [john.perry@usm.edu])
+AC_INIT([dyngb],[2.0],[john.perry@usm.edu])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC([clang++ gcc])
 AC_CONFIG_HEADERS([config.h])
